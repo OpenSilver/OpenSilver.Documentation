@@ -19,6 +19,8 @@ The pages will be uploaded on your port 8080 by default (http://localhost:8080),
 finally, you can merge the 2 commands with :
 `docfx docfx.json --serve`
 
+Apply a template :
+`docfx build docfx.json -t templates\<template folder name>`
 
 
 [Docfx Documentation](https://dotnet.github.io/docfx/tutorial/walkthrough/walkthrough_create_a_docfx_project.html)
@@ -29,6 +31,8 @@ To modify the current documentation, one needs to edit the .md file in the maste
 
 [Docfx Markdown](https://daringfireball.net/projects/markdown/basics)
 [.MD Markdown](https://markdownmonster.west-wind.com/docs/_53e0pnhea.htm)
+
+To change
 
 ## Update Github Pages
 
