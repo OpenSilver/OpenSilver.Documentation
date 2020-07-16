@@ -1,7 +1,7 @@
 # OpenSilver.Documentation
 
 ## Set up
-Download [docfx](http://dotnet.github.io/docfx/. Getting Started with docfx)
+Download [docfx](https://github.com/dotnet/docfx/releases)
 
 Add docfx to Path in order to call the command from everywhere with the console :
  `set PATH=%PATH%;D:\docfx\`
