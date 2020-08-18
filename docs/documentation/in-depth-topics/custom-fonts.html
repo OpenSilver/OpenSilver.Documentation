@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Using Custom Fonts in your app </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Using Custom Fonts in your app ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="using-custom-fonts-in-your-app">Using Custom Fonts in your app</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>In an OpenSilver application you can use 3 types of fonts:</p>
+<ul>
+<li><em>&quot;Web safe&quot; browser fonts:</em> those are fonts that are built into most browsers, so you can use them directly. The most common ones are: Arial, Helvetica, Times New Roman, Times, Courier New, Courier, Verdana, Georgia, Palatino, Garamond, Bookman, Comic Sans MS, Trebuchet MS, Arial Black, Impact</li>
+</ul>
+<p>Here is an example of use:
+<code>&lt;TextBlock FontFamily=&quot;Helvetica&quot; Text=&quot;Hello World&quot;/&gt;</code></p>
+<ul>
+<li><em>System fonts:</em> those are fonts that may be present on the user's machine so you can attempt to use them directly, but you have no guarantee that they will display properly on all machines. A common example is &quot;Segoe UI&quot;, which is bundled in recent versions of Windows but not older ones. If you choose to use such a font, it is recommended that you specify a &quot;fallback&quot; font in case that the font is not available. To do so, just provide a list of fonts separated by a comma.</li>
+</ul>
+<p>Here is an example of use, where we fallback to &quot;Helvetica&quot; if &quot;Segoe UI&quot; is not found:
+<code>&lt;TextBlock FontFamily=&quot;Segoe UI,Helvetica&quot; Text=&quot;Hello World&quot;/&gt;</code></p>
+<ul>
+<li><em>Custom fonts:</em> those are fonts for which you must provide a &quot;.ttf&quot; or &quot;.woff&quot; file. Those types of files can be downloaded from online fonts galleries such as <a href="https://www.dafont.com/fr/">DaFont.com</a> or <a href="https://fonts.google.com/">Google Fonts</a>. Those fonts get embedded/distributed with your application. The section below explains how to use custom fonts.</li>
+</ul>
+<h2 id="how-to-use-custom-fonts">How to use custom fonts</h2>
+<p>Here is how to use custom fonts in a OpenSilver application:</p>
+<ol>
+<li><p>Add a &quot;.ttf&quot; or &quot;.woff&quot; font file to your OpenSilver project. (You can download such a file from online fonts galleries such as <a href="https://www.dafont.com/fr/">DaFont.com</a> or <a href="https://fonts.google.com/">Google Fonts</a>)</p>
+</li>
+<li><p>Set its <em>&quot;Build Action&quot;</em> to <em>&quot;Content&quot;</em>. (To do so, select the font file in the Solution Explorer, press F4, and change the &quot;Build Action&quot; property)</p>
+</li>
+<li><p>Reference the font in your XAML using one of the two following syntaxes:</p>
+</li>
+</ol>
+<p><code>&lt;TextBlock FontFamily=&quot;ms-appx:///AssemblyName/Folder/MyFontFileName.ttf&quot; Text=&quot;Hello World&quot;/&gt;</code></p>
+<p>or</p>
+<p><code>&lt;TextBlock FontFamily=&quot;/AssemblyName;component/Folder/MyFontFileName.ttf&quot; Text=&quot;Hello World&quot;/&gt;</code></p>
+<h2 id="notes">Notes</h2>
+<ul>
+<li><p>For best cross-browser compatibility, use .WOFF fonts (see the <a href="https://caniuse.com/#feat=woff">WOFF browser compatibility table</a>).
+.TTF fonts do not work in Internet Explorer unless they are marked as &quot;installable&quot; (see the <a href="https://caniuse.com/#feat=ttf">TTF browser compatibility table</a>).</p>
+</li>
+<li><p>Fonts <em>don't get previewed</em> in the XAML editor.</p>
+</li>
+<li><p>The <em>default font</em> of a OpenSilver application is defined in the file &quot;opensilver.css&quot; and is equal to the following fallback chain:</p>
+<p>'Segoe UI', Verdana, 'DejaVu Sans', Lucida, 'MS Sans Serif', sans-serif;</p>
+</li>
+<li><p>If your font is used in multiple locations, you can declare a <fontfamily> element such as:<p>
+</fontfamily></li>
+</ul>
+<p><code>&lt;FontFamily x:Key=&quot;MyFontKey&quot;&gt;ms-appx:///AssemblyName/Folder/MyFontFileName.ttf&lt;/FontFamily&gt;</code></p>
+<p>You should declare it in a shared XAML location, such as the &lt;App.Resources&gt; section of the file &quot;App.xaml&quot;, or a merged XAML resource dictionary.</p>
+<p>Then, you can reference it anywhere in your app using the &quot;StaticResource&quot; markupe extensions, like this:</p>
+<p><code>&lt;TextBlock FontFamily=&quot;{StaticResource MyFontKey}&quot; Text=&quot;Hello World&quot;/&gt;</code></p>
+<h2 id="contact-us">Contact Us</h2>
+<p>Please <a href="https://opensilver.net/contact.aspx">click here</a> for contact information.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/in-depth-topics/custom-fonts.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

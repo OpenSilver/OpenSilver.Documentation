@@ -1,0 +1,557 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class CSHTML5_ClientBase&lt;TChannel&gt;
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class CSHTML5_ClientBase&lt;TChannel&gt;
+   ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="System.ServiceModel.CSHTML5_ClientBase`1">
+  
+  
+  <h1 id="System_ServiceModel_CSHTML5_ClientBase_1" data-uid="System.ServiceModel.CSHTML5_ClientBase`1" class="text-break">Class CSHTML5_ClientBase&lt;TChannel&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>Provides the base implementation used to create Windows Communication Foundation
+(WCF) client objects that can call services.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">CSHTML5_ClientBase&lt;TChannel&gt;</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="System.ServiceModel.html">System.ServiceModel</a></h6>
+  <h6><strong>Assembly</strong>: OpenSilver.dll</h6>
+  <h5 id="System_ServiceModel_CSHTML5_ClientBase_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class CSHTML5_ClientBase&lt;TChannel&gt;
+    where TChannel : class</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TChannel</span></td>
+        <td><p>The channel to be used to connect to the service.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="System_ServiceModel_CSHTML5_ClientBase_1_examples"><strong>Examples</strong></h5>
+  <p>Here is an example on how you can use a WebService to receive data:</p>
+<pre><code>//We create a new instance of the ServiceClient
+MyServiceClient soapClient =
+    new MyServiceClient(
+        new BasicHttpBinding(),
+        new EndpointAddress(
+            new Uri(&quot;http://MyServiceAddress.com/MyService.svc&quot;)));
+
+//We call the method that will give us the data we want:
+var result = await soapClient.GetToDosAsync(_ownerId);
+//We get the data from the response:
+ToDoItem[] todos = result.Body.GetToDosResult;</code></pre>
+<p>Here is another example that shows how you can send data to a WebService:</p>
+<pre><code>//We create an item to send to the WebService:
+ToDoItem todo = new ToDoItem()
+{
+    Description = MyTextBox.Text,
+    Id = Guid.NewGuid(),
+};
+
+//We create a new instance of the ServiceClient
+MyServiceClient soapClient =
+    new MyServiceClient(
+        new BasicHttpBinding(),
+        new EndpointAddress(
+            new Uri(&quot;http://MyServiceAddress.com/MyService.svc&quot;)));
+
+//We send the data by calling a method implemented for that purpose in the WebService:
+await soapClient.AddOrUpdateToDoAsync(todo);</code></pre>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1__ctor.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L286">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1__ctor" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor">CSHTML5_ClientBase()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the System.ServiceModel.ClientBase`1
+class using the default target endpoint from the application configuration
+file.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CSHTML5_ClientBase()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_ServiceModel_Channels_Binding_System_ServiceModel_EndpointAddress_.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.%23ctor(System.ServiceModel.Channels.Binding%2CSystem.ServiceModel.EndpointAddress)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L426">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_ServiceModel_Channels_Binding_System_ServiceModel_EndpointAddress_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)">CSHTML5_ClientBase(Binding, EndpointAddress)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the System.ServiceModel.ClientBase`1
+class using the specified binding and target address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CSHTML5_ClientBase(Binding binding, EndpointAddress remoteAddress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ServiceModel.Channels.Binding</span></td>
+        <td><span class="parametername">binding</span></td>
+        <td><p>The binding with which to make calls to the service.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ServiceModel.EndpointAddress</span></td>
+        <td><span class="parametername">remoteAddress</span></td>
+        <td><p>The address of the service endpoint.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_String_.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L406">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_String_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String)">CSHTML5_ClientBase(String)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the System.ServiceModel.ClientBase`1
+class using the configuration information specified in the application configuration
+file by endpointConfigurationName.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CSHTML5_ClientBase(string endpointConfigurationName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">endpointConfigurationName</span></td>
+        <td><p>The name of the endpoint in the application configuration file.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_String_System_ServiceModel_EndpointAddress_.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.%23ctor(System.String%2CSystem.ServiceModel.EndpointAddress)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L450">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_String_System_ServiceModel_EndpointAddress_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.ServiceModel.EndpointAddress)">CSHTML5_ClientBase(String, EndpointAddress)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the System.ServiceModel.ClientBase`1
+class using the specified target address and endpoint information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CSHTML5_ClientBase(string endpointConfigurationName, EndpointAddress remoteAddress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">endpointConfigurationName</span></td>
+        <td><p>The name of the endpoint in the application configuration file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ServiceModel.EndpointAddress</span></td>
+        <td><span class="parametername">remoteAddress</span></td>
+        <td><p>The address of the service.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_String_System_String_.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.%23ctor(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L473">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1__ctor_System_String_System_String_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.String)">CSHTML5_ClientBase(String, String)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the System.ServiceModel.ClientBase`1
+class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CSHTML5_ClientBase(string endpointConfigurationName, string remoteAddress)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">endpointConfigurationName</span></td>
+        <td><p>The name of the endpoint in the application configuration file.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">remoteAddress</span></td>
+        <td><p>The address of the service.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1_Channel.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.Channel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L106">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1_Channel_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.Channel*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1_Channel" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.Channel">Channel</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TChannel Channel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TChannel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1_ClientCredentials.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.ClientCredentials%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L101">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1_ClientCredentials_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.ClientCredentials*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1_ClientCredentials" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.ClientCredentials">ClientCredentials</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ClientCredentials ClientCredentials { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ServiceModel.Description.ClientCredentials</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1_Endpoint.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.Endpoint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L100">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1_Endpoint_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.Endpoint*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1_Endpoint" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.Endpoint">Endpoint</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ServiceEndpoint Endpoint { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ServiceModel.Description.ServiceEndpoint</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1_INTERNAL_RemoteAddressAsString.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.INTERNAL_RemoteAddressAsString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L264">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1_INTERNAL_RemoteAddressAsString_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.INTERNAL_RemoteAddressAsString*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1_INTERNAL_RemoteAddressAsString" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.INTERNAL_RemoteAddressAsString">INTERNAL_RemoteAddressAsString</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string INTERNAL_RemoteAddressAsString { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1_InvokeAsync_System_ServiceModel_CSHTML5_ClientBase__0__BeginOperationDelegate_System_Object___System_ServiceModel_CSHTML5_ClientBase__0__EndOperationDelegate_System_Threading_SendOrPostCallback_System_Object_.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase%7B%600%7D.BeginOperationDelegate%2CSystem.Object%5B%5D%2CSystem.ServiceModel.CSHTML5_ClientBase%7B%600%7D.EndOperationDelegate%2CSystem.Threading.SendOrPostCallback%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L125">View Source</a>
+  </span>
+  <a id="System_ServiceModel_CSHTML5_ClientBase_1_InvokeAsync_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync*"></a>
+  <h4 id="System_ServiceModel_CSHTML5_ClientBase_1_InvokeAsync_System_ServiceModel_CSHTML5_ClientBase__0__BeginOperationDelegate_System_Object___System_ServiceModel_CSHTML5_ClientBase__0__EndOperationDelegate_System_Threading_SendOrPostCallback_System_Object_" data-uid="System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,System.Threading.SendOrPostCallback,System.Object)">InvokeAsync(CSHTML5_ClientBase&lt;TChannel&gt;.BeginOperationDelegate, Object[], CSHTML5_ClientBase&lt;TChannel&gt;.EndOperationDelegate, SendOrPostCallback, Object)</h4>
+  <div class="markdown level1 summary"><p>Provides support for implementing the event-based asynchronous pattern.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void InvokeAsync(CSHTML5_ClientBase&lt;TChannel&gt;.BeginOperationDelegate beginOperationDelegate, object[] inValues, CSHTML5_ClientBase&lt;TChannel&gt;.EndOperationDelegate endOperationDelegate, SendOrPostCallback operationCompletedCallback, object userState)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.ServiceModel.CSHTML5_ClientBase-1.BeginOperationDelegate.html">CSHTML5_ClientBase.BeginOperationDelegate</a>&lt;&gt;</td>
+        <td><span class="parametername">beginOperationDelegate</span></td>
+        <td><p>A delegate that is used for calling the asynchronous operation.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span>[]</td>
+        <td><span class="parametername">inValues</span></td>
+        <td><p>The input values to the asynchronous call.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="System.ServiceModel.CSHTML5_ClientBase-1.EndOperationDelegate.html">CSHTML5_ClientBase.EndOperationDelegate</a>&lt;&gt;</td>
+        <td><span class="parametername">endOperationDelegate</span></td>
+        <td><p>A delegate that is used to end the asynchronous call after it has completed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.SendOrPostCallback</span></td>
+        <td><span class="parametername">operationCompletedCallback</span></td>
+        <td><p>A client-supplied callback that is invoked when the asynchronous method is
+complete. The callback is passed to the BeginOperationDelegate.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">userState</span></td>
+        <td><p>The userState object to associate with the asynchronous call.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.html#ToJavaScriptObjectExtender_ToJavaScriptObjectExtender_ToJavaScriptObject_System_Object_">ToJavaScriptObjectExtender.ToJavaScriptObject(Object)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_ServiceModel_CSHTML5_ClientBase_1.md&amp;value=---%0Auid%3A%20System.ServiceModel.CSHTML5_ClientBase%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs/#L95" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

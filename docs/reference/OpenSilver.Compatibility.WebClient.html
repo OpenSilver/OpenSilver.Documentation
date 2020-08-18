@@ -1,0 +1,1192 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class WebClient
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class WebClient
+   ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="OpenSilver.Compatibility.WebClient">
+  
+  
+  <h1 id="OpenSilver_Compatibility_WebClient" data-uid="OpenSilver.Compatibility.WebClient" class="text-break">Class WebClient
+  </h1>
+  <div class="markdown level0 summary"><p>Provides common methods for sending data to and receiving data from a resource
+identified by a URI.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">WebClient</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="OpenSilver.Compatibility.html">OpenSilver.Compatibility</a></h6>
+  <h6><strong>Assembly</strong>: OpenSilver.dll</h6>
+  <h5 id="OpenSilver_Compatibility_WebClient_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class WebClient</code></pre>
+  </div>
+  <h5 id="OpenSilver_Compatibility_WebClient_examples"><strong>Examples</strong></h5>
+  <p>Here is an example of a use of the WebClient to receive data:</p>
+<pre><code>//We create the WebClient with the right encoding and headers:
+var webClient = new WebClient();
+webClient.Encoding = Encoding.UTF8;
+webClient.Headers[HttpRequestHeader.Accept] = &quot;application/xml&quot;;
+
+//We submit the request to the server and wait for its response:
+string response = await webClient.DownloadStringTaskAsync(&quot;http://someAddress.com&quot;);
+
+//We modify the response so that it can be deserialized (deserialization is not perfect yet):
+response = response.Replace(@&quot;xmlns=&quot;&quot;http://NameSpaceOfTheDeserialization&quot;&quot;&quot;, &quot;&quot;);
+response = &quot;&lt;ToDoItemsWrapper>&quot; + response.Replace(&quot;ArrayOfToDoItem&quot;, &quot;ToDoItems&quot;) + &quot;&lt;/ToDoItemsWrapper>&quot;; // Workaround for the fact that &quot;ArrayOf&quot; types cannot be directly deserialized by the XmlSerializer in this Beta version.
+
+//We create the Deserializer:
+var deserializer = new XmlSerializer(typeof(ToDoItemsWrapper));
+var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(response));
+var xmlReader = XmlReader.Create(memoryStream);
+
+//We deserialize:
+ToDoItemsWrapper items = (ToDoItemsWrapper)deserializer.Deserialize(xmlReader);</code></pre>
+<p>Here is what the ToDoItemsWrapper class looks like (with ToDoItem a Serializable class) :</p>
+<pre><code>// Workaround for the fact that &quot;ArrayOf&quot; types cannot directly be deserialized by the XmlSerializer in this Beta version:
+[DataContract]
+public partial class ToDoItemsWrapper
+{
+    public List&lt;ToDoItem> ToDoItems { get; set; }
+}</code></pre>
+<p>Here is another example that shows how you can use the WebClient to send data:</p>
+<pre><code>//We parse the data in a string:
+string data = string.Format(@&quot;{{&quot;&quot;Id&quot;&quot;: &quot;&quot;{0}&quot;&quot;,&quot;&quot;Description&quot;&quot;: &quot;&quot;{1}&quot;&quot;}}&quot;Guid.NewGuid(), MyTextBox.Text.Replace(&quot;\&quot;&quot;, &quot;&apos;&quot;));
+//We create the WebClient:
+var webClient = new WebClient();
+We set the encoding and Headers (note: our data is formatted in json so we set the HttpRequestHeader.ContentType header accordingly) 
+webClient.Headers[HttpRequestHeader.ContentType] = &quot;application/json&quot;;
+webClient.Encoding = Encoding.UTF8;
+string response = await webClient.UploadStringTaskAsync(&quot;http://cshtml5-rest-sample.azurewebsites.net/api/Todo/&quot;, &quot;POST&quot;, data);</code></pre>
+
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient__ctor.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L127">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient__ctor_" data-uid="OpenSilver.Compatibility.WebClient.#ctor*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient__ctor" data-uid="OpenSilver.Compatibility.WebClient.#ctor">WebClient()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the System.Net.WebClient class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WebClient()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_Encoding.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.Encoding%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L106">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_Encoding_" data-uid="OpenSilver.Compatibility.WebClient.Encoding*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_Encoding" data-uid="OpenSilver.Compatibility.WebClient.Encoding">Encoding</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the System.Text.Encoding used to upload and download strings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Encoding Encoding { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_Headers.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.Headers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L116">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_Headers_" data-uid="OpenSilver.Compatibility.WebClient.Headers*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_Headers" data-uid="OpenSilver.Compatibility.WebClient.Headers">Headers</h4>
+  <div class="markdown level1 summary"><p>Gets or sets a collection of header name/value pairs associated with the
+request.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WebHeaderCollection Headers { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Net.WebHeaderCollection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_ResponseHeaders.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.ResponseHeaders%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L400">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_ResponseHeaders_" data-uid="OpenSilver.Compatibility.WebClient.ResponseHeaders*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_ResponseHeaders" data-uid="OpenSilver.Compatibility.WebClient.ResponseHeaders">ResponseHeaders</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WebHeaderCollection ResponseHeaders { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Net.WebHeaderCollection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_DownloadString_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.DownloadString(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L161">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_DownloadString_" data-uid="OpenSilver.Compatibility.WebClient.DownloadString*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_DownloadString_System_String_" data-uid="OpenSilver.Compatibility.WebClient.DownloadString(System.String)">DownloadString(String)</h4>
+  <div class="markdown level1 summary"><p>Downloads the requested resource as a System.String. The resource to download
+is specified as a System.String containing the URI.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DownloadString(string address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>A System.String containing the URI to download.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A System.String containing the requested resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_DownloadString_System_Uri_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.DownloadString(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L182">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_DownloadString_" data-uid="OpenSilver.Compatibility.WebClient.DownloadString*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_DownloadString_System_Uri_" data-uid="OpenSilver.Compatibility.WebClient.DownloadString(System.Uri)">DownloadString(Uri)</h4>
+  <div class="markdown level1 summary"><p>Downloads the requested resource as a System.String. The resource to download
+is specified as a System.Uri.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DownloadString(Uri address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>A System.Uri object containing the URI to download.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A System.String containing the requested resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_DownloadStringAsync_System_Uri_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.DownloadStringAsync(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L227">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_DownloadStringAsync_" data-uid="OpenSilver.Compatibility.WebClient.DownloadStringAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_DownloadStringAsync_System_Uri_" data-uid="OpenSilver.Compatibility.WebClient.DownloadStringAsync(System.Uri)">DownloadStringAsync(Uri)</h4>
+  <div class="markdown level1 summary"><p>Downloads the resource specified as a System.Uri. This method does not block
+the calling thread.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DownloadStringAsync(Uri address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>A System.Uri containing the URI to download.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_DownloadStringTaskAsync_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L318">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_DownloadStringTaskAsync_" data-uid="OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_DownloadStringTaskAsync_System_String_" data-uid="OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.String)">DownloadStringTaskAsync(String)</h4>
+  <div class="markdown level1 summary"><p>Downloads the resource as a String from the URI specified as an asynchronous operation using a task object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; DownloadStringTaskAsync(string address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>A System.Uri containing the URI to download.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>Returns the resource as <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_DownloadStringTaskAsync_System_Uri_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L330">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_DownloadStringTaskAsync_" data-uid="OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_DownloadStringTaskAsync_System_Uri_" data-uid="OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.Uri)">DownloadStringTaskAsync(Uri)</h4>
+  <div class="markdown level1 summary"><p>Downloads the resource as a String from the URI specified as an asynchronous operation using a task object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; DownloadStringTaskAsync(Uri address)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>A System.Uri containing the URI to download.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>Returns the resource as <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadString_System_String_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadString(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L439">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadString_" data-uid="OpenSilver.Compatibility.WebClient.UploadString*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadString_System_String_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadString(System.String,System.String)">UploadString(String, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource, using the POST method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UploadString(string address, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the string. For Http resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A System.String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadString_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadString(System.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L489">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadString_" data-uid="OpenSilver.Compatibility.WebClient.UploadString*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadString_System_String_System_String_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadString(System.String,System.String,System.String)">UploadString(String, String, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource, using the specified
+method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UploadString(string address, string method, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the file. This URI must identify a resource
+that can accept a request sent with the method method.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The HTTP method used to send the string to the resource. If null, the default
+is POST for http and STOR for ftp.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A System.String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadString_System_Uri_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadString(System.Uri%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L462">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadString_" data-uid="OpenSilver.Compatibility.WebClient.UploadString*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadString_System_Uri_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String)">UploadString(Uri, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource, using the POST method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UploadString(Uri address, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the string. For Http resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A System.String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadString_System_Uri_System_String_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadString(System.Uri%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L516">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadString_" data-uid="OpenSilver.Compatibility.WebClient.UploadString*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadString_System_Uri_System_String_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String,System.String)">UploadString(Uri, String, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource, using the specified
+method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string UploadString(Uri address, string method, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the file. This URI must identify a resource
+that can accept a request sent with the method method.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The HTTP method used to send the string to the resource. If null, the default
+is POST for http and STOR for ftp.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A System.String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadStringAsync_System_Uri_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L611">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadStringAsync_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadStringAsync_System_Uri_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String)">UploadStringAsync(Uri, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource. This method does
+not block the calling thread.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UploadStringAsync(Uri address, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the file. For HTTP resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadStringAsync_System_Uri_System_String_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L637">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadStringAsync_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadStringAsync_System_Uri_System_String_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String,System.String)">UploadStringAsync(Uri, String, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource. This method does
+not block the calling thread.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UploadStringAsync(Uri address, string method, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the file. For HTTP resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The HTTP method used to send the file to the resource. If null, the default
+is POST for http and STOR for ftp.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_String_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L661">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_String_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String,System.String)">UploadStringTaskAsync(String, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource as an asynchronous operation using a task object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; UploadStringTaskAsync(string address, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the string. For HTTP resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>Returns <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.
+The task object representing the asynchronous operation. The Result property
+on the task object returns a String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L703">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_String_System_String_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String,System.String,System.String)">UploadStringTaskAsync(String, String, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource as an asynchronous operation using a task object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; UploadStringTaskAsync(string address, string method, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the string. For HTTP resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The HTTP method used to send the file to the resource. If null, the default
+is POST for http and STOR for ftp.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>Returns <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.
+The task object representing the asynchronous operation. The Result property
+on the task object returns a String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_Uri_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L680">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_Uri_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String)">UploadStringTaskAsync(Uri, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource as an asynchronous operation using a task object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; UploadStringTaskAsync(Uri address, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the string. For HTTP resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>Returns <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.
+The task object representing the asynchronous operation. The Result property
+on the task object returns a String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_Uri_System_String_System_String_.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L726">View Source</a>
+  </span>
+  <a id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*"></a>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadStringTaskAsync_System_Uri_System_String_System_String_" data-uid="OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String,System.String)">UploadStringTaskAsync(Uri, String, String)</h4>
+  <div class="markdown level1 summary"><p>Uploads the specified string to the specified resource as an asynchronous operation using a task object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; UploadStringTaskAsync(Uri address, string method, string data)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">address</span></td>
+        <td><p>The URI of the resource to receive the string. For HTTP resources, this URI
+must identify a resource that can accept a request sent with the POST method,
+such as a script or ASP page.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">method</span></td>
+        <td><p>The HTTP method used to send the file to the resource. If null, the default
+is POST for http and STOR for ftp.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">data</span></td>
+        <td><p>The string to be uploaded.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>Returns <span class="xref">System.Threading.Tasks.Task&lt;TResult&gt;</span>.
+The task object representing the asynchronous operation. The Result property
+on the task object returns a String containing the response sent by the server.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_DownloadStringCompleted.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.DownloadStringCompleted%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L134">View Source</a>
+  </span>
+  <h4 id="OpenSilver_Compatibility_WebClient_DownloadStringCompleted" data-uid="OpenSilver.Compatibility.WebClient.DownloadStringCompleted">DownloadStringCompleted</h4>
+  <div class="markdown level1 summary"><p>Occurs when an asynchronous resource-download operation completes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event DownloadStringCompletedEventHandler DownloadStringCompleted</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="OpenSilver.Compatibility.DownloadStringCompletedEventHandler.html">DownloadStringCompletedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient_UploadStringCompleted.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient.UploadStringCompleted%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L801">View Source</a>
+  </span>
+  <h4 id="OpenSilver_Compatibility_WebClient_UploadStringCompleted" data-uid="OpenSilver.Compatibility.WebClient.UploadStringCompleted">UploadStringCompleted</h4>
+  <div class="markdown level1 summary"><p>Occurs when an asynchronous string-upload operation completes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event UploadStringCompletedEventHandler UploadStringCompleted</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="OpenSilver.Compatibility.UploadStringCompletedEventHandler.html">UploadStringCompletedEventHandler</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.html#ToJavaScriptObjectExtender_ToJavaScriptObjectExtender_ToJavaScriptObject_System_Object_">ToJavaScriptObjectExtender.ToJavaScriptObject(Object)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=OpenSilver_Compatibility_WebClient.md&amp;value=---%0Auid%3A%20OpenSilver.Compatibility.WebClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Net/WebClient.cs/#L94" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

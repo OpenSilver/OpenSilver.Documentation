@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Importing TypeScript Definitions </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Importing TypeScript Definitions ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="importing-typescript-definitions">Importing TypeScript Definitions</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>This feature lets you import and use thousands of JavaScript libraries as if they were written in C#.</p>
+<p>Any JavaScript library that comes with a &quot;TypeScript Definition&quot; file can now be used from within a C#/XAML project without writing JavaScript code.</p>
+<p>&quot;TypeScript Definition&quot; files are files that have the &quot;.d.ts&quot; extension. Their purpose is to provide strong typing (aka &quot;type safety&quot;) to existing JavaScript libraries.</p>
+<p>A repository of &quot;TypeScript Definition&quot; files for popular libraries can be found at: <a href="https://github.com/DefinitelyTyped/DefinitelyTyped">https://github.com/DefinitelyTyped/DefinitelyTyped</a></p>
+<h2 id="understanding-what-a-typescript-definition-file-is">Understanding what a &quot;TypeScript Definition&quot; file is</h2>
+<p>Let's consider for example the JavaScript library <a href="https://github.com/lgarron/clipboard-polyfill">&quot;clipboard.js&quot; by lgarron</a>.</p>
+<p>Its goal is let JavaScript developers easily interact with the system clipboard by providing programmatic Copy/Paste functionality.</p>
+<p>The library comes in the form of a JS file named &quot;clipboard.js&quot; that looks like this:</p>
+<p>(note: what you see below is only a small extract of the much larger original library)</p>
+<pre><code>// JavaScript library clipboard-js 0.3.1 (extract)
+
+(function (name, definition) {
+
+    var clipboard = {};
+
+    clipboard.copy = function (data) {
+        return new Promise(function (resolve, reject) {
+            if (typeof data !== &quot;string&quot; &amp;&amp; !(&quot;text/plain&quot; in data)) {
+                throw new Error(&quot;You must provide a text/plain type.&quot;);
+            }
+            var strData = (typeof data === &quot;string&quot; ? data : data[&quot;text/plain&quot;]);
+            var copySucceeded = window.clipboardData.setData(&quot;Text&quot;, strData);
+            if (copySucceeded) {
+                resolve();
+            } else {
+                reject(new Error(&quot;Copying was rejected.&quot;));
+            }
+        });
+    };
+
+    clipboard.paste = function () {
+        return new Promise(function (resolve, reject) {
+            var strData = window.clipboardData.getData(&quot;Text&quot;);
+            if (strData) {
+                resolve(strData);
+            } else {
+                // The user rejected the paste request.
+                reject(new Error(&quot;Pasting was rejected.&quot;));
+            }
+        });
+    };
+
+    return clipboard;
+}));
+</code></pre>
+<p>By looking at the code above, you can see that the JavaScript library creates an object named &quot;clipboard&quot; that contains the methods &quot;copy(data)&quot; and &quot;paste()&quot;.</p>
+<p>As you can see in the code above, the object is not strongly typed, meaning that the compiler has no way to know what type is expected by the &quot;copy&quot; method, and what type is returned by the &quot;paste&quot; method.</p>
+<p>It is possible to use the above library directly &quot;as is&quot;, but you will get no intellisense, and no compile-time errors in case of mistakes. Furthermore, if you want to use the above library from your C# code in your OpenSilver project, you will need to make a lot of calls to <a href="call-javascript-from-csharp.html">&quot;Interop.ExecuteJavaScript(...)&quot;</a>) because no C# objects exist.</p>
+<p>However, if the library comes with a &quot;TypeScript Definition&quot; file, or if you can create one, those issues are solved. In fact, the &quot;TypeScript Definition&quot; file will add strong-typing to the library, making it possible to have intellisense, compile-time error checking, and even direct calls to the library from C# thanks to the OpenSilver processing explained below.</p>
+<p>The &quot;TypeScript Definition&quot; file for the library mentioned above does exist, it is named &quot;clipboad-js.d.ts&quot;, and it can be downloaded from: <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/clipboard-js/index.d.ts">https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/clipboard-js/index.d.ts</a></p>
+<p>This is what it looks like:</p>
+<pre><code>// Type definitions for clipboard-js 0.3.1
+
+declare namespace clipboard {
+
+    interface IClipboardJsStatic {
+        copy(val: string | Element): Promise&lt;void&gt;;
+        paste(): Promise&lt;string&gt;;
+    }
+}
+
+declare var clipboard: clipboard.IClipboardJsStatic;
+
+declare module 'clipboard-js' {
+    export = clipboard;
+}
+</code></pre>
+<p>By looking at the code above, you can see that the &quot;TypeScript Definition&quot; file tells the compiler that the &quot;clipboard&quot; object has two methods, that the method &quot;Copy&quot; expects a string, and that the &quot;Paste&quot; method returns a Promise<string>.<p>
+<p>Note: to understand what the word &quot;Promise&quot; means in JavaScript, you can read <a href="https://web.dev/promises/">this guide</a>.</p>
+<h2 id="how-can-i-use-a-typescript-definition-file-in-my-opensilver-project">How can I use a TypeScript Definition file in my OpenSilver project?</h2>
+<p>Simply add the TypeScript Definition file to your OpenSilver project and the compiler will automatically take it into account.</p>
+<p>Usually you want to add both:</p>
+<ul>
+<li>the original JavaScript library (for example &quot;clipboard.js&quot;)</li>
+<li>AND the corresponding TypeScript Definition file (for example &quot;clipboard-js.d.ts&quot;)</li>
+</ul>
+<h2 id="sample-project">Sample project</h2>
+<p>Let's create a sample project to demonstrate the use of the &quot;clipboard.js&quot; and &quot;clipboard-js.d.ts&quot; files, as explained above.</p>
+<p>This is what the sample project looks like:
+<br></p>
+<p><img src="../../images/typescript_importer_solution_explorer.png" alt="solutionExplorer" title="Screenshot of Solution Explorer"></p>
+<p>This is the content of MainPage.xaml:</p>
+<pre><code>&lt;Page
+    x:Class=&quot;TestOpenSilverTypeScriptClipboard.MainPage&quot;
+    xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+    &lt;StackPanel&gt;
+        &lt;Button
+            Content=&quot;Click to copy some text to the clipboard&quot;
+            Click=&quot;ButtonCopy_Click&quot;
+            Margin=&quot;5&quot;
+            HorizontalAlignment=&quot;Left&quot;/&gt;
+        &lt;Button
+            Content=&quot;Click to paste from the clipboard&quot;
+            Click=&quot;ButtonPaste_Click&quot;
+            Margin=&quot;5&quot;
+            HorizontalAlignment=&quot;Left&quot;/&gt;
+    &lt;/StackPanel&gt;
+&lt;/Page&gt;
+</code></pre>
+<p>And this is the content of MainPage.xaml.cs:</p>
+<pre><code>using CSHTML5;
+using System.Windows;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+namespace TestOpenSilverTypeScriptClipboard
+{
+    public partial class MainPage : Page
+    {
+        public MainPage()
+        {
+            this.InitializeComponent();
+            this.Loaded += MainPage_Loaded;
+        }
+        async void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Load the JavaScript library:
+            await Interop.LoadJavaScriptFile(&quot;ms-appx:///TestOpenSilverTypeScriptClipboard/clipboard.js&quot;);
+        }
+        private void ButtonCopy_Click(object sender, RoutedEventArgs e)
+        {
+            // Copy (may not function in the Simulator):
+            clipboard_js.clipboard_jsClass.clipboard.copy(&quot;copy succeeded&quot;);
+        }
+        private void ButtonPaste_Click(object sender, RoutedEventArgs e)
+        {
+            // Paste (may not function in the Simulator):
+            clipboard_js.clipboard_jsClass.clipboard.paste().then(
+                onFulfilled: (result) =&gt;
+                {
+                    MessageBox.Show(&quot;The text pasted from the clipboard is the following: &quot; + result);
+                },
+                onRejected: (error) =&gt;
+                {
+                    MessageBox.Show(error.ToString());
+                });
+        }
+    }
+}
+</code></pre>
+<p>As you can see, the JavaScript-based clipboard library is being used as if it was a C#-based library.</p>
+<h2 id="i-have-a-javascript-library-that-needs-a-div-or-another-dom-element-in-order-to-render-stuff-how-can-i-obtain-it">&quot;I have a JavaScript library that needs a &lt;div&gt; or another DOM element in order to render stuff. How can I obtain it?&quot;</h2>
+<p>You can use the method <a href="call-javascript-from-csharp.html#interopgetdivframeworkelement-fe">CHSTML5.Interop.GetDiv(FrameworkElement)</a> in order to get the DIV associated to a XAML element. For this method to succeed, the XAML element must be in the Visual Tree. To ensure that it is in the Visual Tree, you can read the <a href="call-javascript-from-csharp.html#frameworkelementisloaded">IsLoaded</a> property, or you can place your code in the &quot;Loaded&quot; event handler. This approach works best with simple XAML elements, such as Border or Canvas.</p>
+<p>Alternatively, you can use the <a href="html-presenter.html">HtmlPresenter control</a> to put arbitrary HTML/CSS code in your XAML, and then read the &quot;.DomElement&quot; property of the HtmlPresenter control to get a reference to the instantiated DOM element in order to pass it to the JavaScript library.</p>
+<h2 id="what-happens-exactly-when-i-add-a-typescript-definition-file-to-my-opensilver-project">What happens exactly when I add a TypeScript Definition file to my OpenSilver project?</h2>
+<p>When you add a &quot;TypeScript Definition&quot; file to your OpenSilver project, the compiler will automatically analyze it and generate some hidden C# classes that provide a strongly-typed bridge to the JavaScript library.</p>
+<p>The generated C# classes are located in the folder &quot;obj\Debug\FILENAME&quot; (where &quot;FILENAME&quot; is the name of the TypeScript Definition file).</p>
+<p>Here is an example of hidden C# file that is automatically generated from the TypeScript Definition file &quot;clipboard-js.d.ts&quot; mentioned above:</p>
+<pre><code>//------------------------------------------------------------------------------
+// &lt;auto-generated&gt;
+//     Changes to this file will be
+//     lost if the code is regenerated.
+// &lt;/auto-generated&gt;
+//------------------------------------------------------------------------------
+
+namespace clipboard_js
+{
+    public static class clipboard_jsClass
+    {
+        public static clipboard.IClipboardJsStatic clipboard
+        {
+            get
+            {
+                var jsObj = CSHTML5.Interop.ExecuteJavaScript(&quot;clipboard&quot;);
+                return new clipboard.IClipboardJsStatic(jsObj);
+            }
+        }
+    }
+}
+
+namespace clipboard_js.clipboard
+{
+    public class IClipboardJsStatic
+    {
+        private object _jsInstance { get; set; }
+        public IClipboardJsStatic()
+        {
+            this._jsInstance = CSHTML5.Interop.ExecuteJavaScript(&quot;new clipboard.IClipboardJsStatic()&quot;);
+        }
+        public IClipboardJsStatic(object jsObj)
+        {
+            this._jsInstance = jsObj;
+        }
+        public object ToJavaScriptObject()
+        {
+            return this._jsInstance;
+        }
+        public Promise copy(MultiType&lt;string, object&gt; val)
+        {
+            return new Promise(CSHTML5.Interop.ExecuteJavaScript(&quot;$0.copy($1)&quot;, this._jsInstance, val.ToJavaScriptObject()));
+        }
+        public Promise&lt;string&gt; paste()
+        {
+            return new Promise&lt;string&gt;(CSHTML5.Interop.ExecuteJavaScript(&quot;$0.paste()&quot;, this._jsInstance));
+        }
+    }
+}
+</code></pre>
+<p>As you can see, the generated code encapsulates the JavaScript library and provides a sort of &quot;wrap&quot; that redirects every C# call to the underlying JavaScript library.</p>
+<p>You can read more about the method &quot;Interop.ExecuteJavaScript&quot; at: <a href="call-javascript-from-csharp.html">How to call JavaScript from C#</a>.</p>
+<h2 id="notes-and-tips">Notes and Tips</h2>
+<ul>
+<li><p>To force re-generate the C# files from the TypeScript Definition, manually delete the file &quot;TypeScriptDefInfos.xml&quot; that is located in the &quot;obj\Debug&quot; sub-folder of your project folder, and re-build the project.</p>
+</li>
+<li><p>If the TypeScript Definition file is very big, it may take several minutes to compile. This is normal and only happens during the first compilation. You can comment out unused portions of the file to speed the compilation up.</p>
+</li>
+<li><p>When a TypeScript Definition file is open in a tab in Visual Studio, many misleading errors may be displayed, and some TypeScript code may be underlined even though it is perfectly correct. To see only the &quot;real&quot; compilation errors, be sure to always close the TypeScript Definition file and re-compile.</p>
+</li>
+<li><p>If you encounter any issues during the compilation of a TypeScript Definition file, please contact support. As a temporary workaround, you can comment out the portions of the TypeScript Definition file that do not compile properly, and try again.</p>
+</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><p><a href="call-javascript-from-csharp.html">How to call JavaScript from C#</a></p>
+</li>
+<li><p><a href="html-presenter.html">How to use the HtmlPresenter to put HTML/CSS in your XAML</a></p>
+</li>
+</ul>
+<h2 id="contact-us">Contact Us</h2>
+<p>Please <a href="https://opensilver.net/contact.aspx">click here</a> for contact information.</p>
+</string></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/in-depth-topics/importing-typescript-definitions.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
