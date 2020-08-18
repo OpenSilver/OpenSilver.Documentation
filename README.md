@@ -43,7 +43,28 @@ The files used are referenced in the .json which is at the base of the folder. E
 * the toc file at the base of the project is slightly different because it is used to build the navbar and the sidebar. Name will be the navbar tab name, the homepage will be the .md file linked to the navbar and finally, the href will be where the sidebar (menu) is generated.
 
 
-## Update Github Pages
+## Organize your project for github Pages
+In order to facilitate your commit, it's better to have the master branch in the root folder and clone the gh-pages branch in the _site folder. This will allows you to push both branches without going back and forth.
+
+## How to push the documentation
+1. Generate the documentation (default command) :
+
+```
+docfx build docfx.json -t templates\default --serve // add --serve if you want to check it on localhost before pushing it
+```
+
+2. Check on http://localhost:8080/ if everything is working properly
+
+3. If you want to update the GitHub Pages, run "GitHubPagesFixer.exe"
+
+4. Enter the file path of the documentation (.../OpenSilver.Documentation/_site/documentation) by default
+
+5. Enter the name of the repositories on Github : https://github.com/OpenSilver/OpenSilver.Documentation/ (here it's Opensilver.Documentation)
+
+6. Process the files, if it worked properly src="/images/fileName.png" should be now "src=/OpenSilver.Documentation/images/fileName.png"
+
+7. Push the solution on the branch gh-pages
+
 
 ## Markdown exemples
 Create a title
