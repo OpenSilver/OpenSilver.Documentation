@@ -1,1 +1,1 @@
-# Welcome to the OpenSilver documentation
+# Click [here](documentation/general/overview.md) to access the OpenSilver documentation

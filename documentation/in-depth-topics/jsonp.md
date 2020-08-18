@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Until the introduction of [Cross-Origin Resource Sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (see also: [Adding support for cross-domain calls (CORS) in a client/server OpenSilver solution)](WCF-WebClient-Limitations-Tutorials.html#adding-support-for-cross-domain-calls-cors), web service calls from the browser were limited to accessing resources and services that were hosted on the same domain as the webpage requesting them. CORS is now supported in most modern browsers and became a W3C standard in Janaury 2014 but it also needs to be enabled on the server of the service.
+Until the introduction of [Cross-Origin Resource Sharing (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) (see also: [Adding support for cross-domain calls (CORS) in a client/server OpenSilver solution)](wcf-and-webclient.md#adding-support-for-cross-domain-calls-cors), web service calls from the browser were limited to accessing resources and services that were hosted on the same domain as the webpage requesting them. CORS is now supported in most modern browsers and became a W3C standard in Janaury 2014 but it also needs to be enabled on the server of the service.
 
 Older web services (such as [Bing Maps REST API](https://blogs.bing.com/maps/2015/03/05/accessing-the-bing-maps-rest-services-from-various-javascript-frameworks)), which were released before CORS, used a different technique to make cross-domain calls to services. This technique is named JSONP and circumvents the Same Origin Policy by taking advantage of the fact that web browsers do not enforce the same-origin policy on script tags.
 
@@ -11,7 +11,7 @@ Here is how it works: when using JSONP, we usually add a parameter to the reques
 In other words, instead of returning simple JSON (for example: {"id":"mydomelementid","message": "Yeah!"}), the JSONP request returns a JSON-formatted object wrapped inside a function call (for example: myCallback({"id":"mydomelementid","message": "Yeah!"}))
 
 ## How to make JSONP calls using OpenSilver:
-Normally, to make JSON calls (not JSONP calls) you use the standard WebClient control (see: [Tutorial to create a REST-based client/server app in OpenSilver (Web API))](WCF-WebClient-Limitations-Tutorials.html#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api).
+Normally, to make JSON calls (not JSONP calls) you use the standard WebClient control (see: [Tutorial to create a REST-based client/server app in OpenSilver (Web API))](wcf-and-webclient.md#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api).
 However, the standard WebClient control won't work with JSONP because:
 
 It makes the call using an XMLHttpRequest object instead of adding a script tag to the page as described above.

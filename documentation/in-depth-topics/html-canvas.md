@@ -1,6 +1,6 @@
 # How to use the native HTML5 canvas for high performance
 
-## Why use the native HTML5 canvas
+## Why use the native HTML5 canvas?
 
 OpenSilver usually renders each XAML object as one or more <div> elements in the HTML page. This enables to achieve most of the layout features of the Microsoft XAML language, including the Horizontal/Vertical alignment, sizing, panels such as StackPanel, Grid, WrapPanel, and more. Furthermore, OpenSilver provides a full implementation of the Dependency Properties system, supporting features such as properties metadata, default values, styles, locally set values, bindings, static resources, "property changed" callbacks, metadata override, value coercion, and more.
 
@@ -12,7 +12,7 @@ This document explains what it is and how to use it.
 
 
 
-## What is the HtmlCanvas control and how to use it
+## What is the HtmlCanvas control and how to use it?
 The "HtmlCanvas" control is a high performance control that renders all its children as a single native HTML5 &lt;canvas&gt; element. Instead of ending up with thousands of HTML elements, you end up only with a single HTML element.
 
 *IMPORTANT:* The rendering is done when you call the Draw() method.
@@ -90,10 +90,10 @@ Example3 (full project)
 ![canvasDemo](../../images/htmlcanvasdemo1_screenshot.png "HtmlCanvas Demo 1 Screenshot")
 
 
-You can run the sample online [here](http://cshtml5.com/samples/htmlcanvas1/index.html?20170316).
+<!--You can run the sample online [here](http://cshtml5.com/samples/htmlcanvas1/index.html?20170316).
 
 You can download the full source code from GitHub at the following URL (just click the green button named "Clone or download"):
-https://github.com/cshtml5/CSHTML5.Demos.HtmlCanvasPerformance1
+https://github.com/cshtml5/CSHTML5.Demos.HtmlCanvasPerformance1 -->
 
 
 
@@ -203,8 +203,7 @@ Please note that, if you make changes to the UI of the HtmlCanvas, you need to c
 
 
 ## See Also
-* [How to profile performance](How-to-use-htmlPresenter.html)
-* [How to use the HtmlPresenter control](#)
+* [How to use the HtmlPresenter control](htmp-presenter.md)
 
 ## Contact Us
 Please [click here](https://opensilver.net/contact.aspx) for contact information.

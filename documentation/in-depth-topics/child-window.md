@@ -2,7 +2,7 @@
 
 ## How to create and display a ChildWindow
 
-1. Create a new ChildWindow by right-clicking on your project in the Solution Explorer, and clicking Add => New Item => C# XAML for HTML5 => Child Window.
+1. Create a new ChildWindow by right-clicking on your project in the Solution Explorer, and clicking Add => New Item => OpenSilver => Child Window.
 
 2. To make the ChildWindow appear, use the following code:
 ```

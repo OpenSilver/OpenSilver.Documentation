@@ -1,7 +1,7 @@
 # Printing with OpenSilver
 
 ## Introduction
-C#/XAML for HTML5 provides a "PrintManager" class that lets you print from within your app.
+OpenSilver provides a "PrintManager" class that lets you print from within your app.
 
 You can print either the whole window or a specific UI Element of your app.
 

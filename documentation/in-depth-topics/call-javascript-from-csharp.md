@@ -1,14 +1,14 @@
 # How to Call JavaScript from C#
 ## General Concepts
 
-* A OpenSilver project is mainly written in OpenSilver. When you compile the project, your OpenSilver code gets automatically compiled into JavaScript and HTML.
+* A OpenSilver project is mainly written in C# and XAMP. When you compile the project, your OpenSilver code gets automatically compiled into WebAssembly.
 
-* If you want, you can place JavaScript code directly inside your C# code by calling the "Interop.ExecuteJavaScript" method. Such JavaScript code is copied "as is" when the project is compiled.
+* If you want, you can place JavaScript code directly inside your C# code by calling the "Interop.ExecuteJavaScript" method.
 
-* For example, the following C# code:
+<!--* For example, the following C# code:
 `MessageBox.Show("The current URL is: " + CSHTML5.Interop.ExecuteJavaScript("location.toString()"));`
 gets compiled into the following JavaScript code:
-`alert('The current URL is: ' + location.toString());`
+`alert('The current URL is: ' + location.toString());`-->
 
 * The following C# example shows how to retrieve the current Width of the browser window by reading the JavaScript "screen.width" property:
 `double screenWidth = Convert.ToDouble(CSHTML5.Interop.ExecuteJavaScript("screen.width"));`
@@ -20,19 +20,6 @@ void DisplayAMessage(string messageToDisplay)
    CSHTML5.Interop.ExecuteJavaScript("alert($0)", messageToDisplay);
 }
 ```
-
-*IMPORTANT:* creating JavaScript code by concatenating strings such as in "alert(" + messageToDisplay + ")" or by using String.Format *will NOT work*, because the JavaScript code needs to exist at compile-time rather than at runtime. In other words, the first argument of the "ExecuteJavaScript" method must be a string literal.
-
-For example, the following code will *NOT* work:
-`CSHTML5.Interop.ExecuteJavaScript("alert('" + messageToDisplay + "')");`
-
-The following code will also *NOT* work:
-`CSHTML5.Interop<.ExecuteJavaScript(String.Format("alert({0})", messageToDisplay));`
-
-However, the following code *WILL* work:
-`CSHTML5.Interop.ExecuteJavaScript("alert($0)", messageToDisplay);`
-
-The reason is that the compiler needs to know the string at compile-time, whereas the "String.Format" method is only executed at runtime.
 
 * You can also do it the other way round, that is, call C# from within your JavaScript code.
 
@@ -68,11 +55,11 @@ You can then load them by calling ["Interop.LoadJavaScriptFile()"](#await-intero
 
 
 
-## "I have a JavaScript library that needs a <div> or another DOM element in order to render stuff. How can I obtain it?"
+## "I have a JavaScript library that needs &lt;div&gt; or another DOM element in order to render stuff. How can I obtain it?"
 
 You can use the method [CHSTML5.Interop.GetDiv(FrameworkElement)](#interopgetdivframeworkelement-fe) in order to get the DIV associated to a XAML element. For this method to succeed, the XAML element must be in the Visual Tree. To ensure that it is in the Visual Tree, you can read the IsLoaded property, or you can place your code in the "Loaded" event handler. This approach works best with simple XAML elements, such as Border or Canvas.
 
-Alternatively, you can use the [HtmlPresenter control](How-to-use-htmlPresenter.html)  to put arbitrary HTML/CSS code in your XAML, and then read the ".DomElement" property of the HtmlPresenter control to get a reference to the instantiated DOM element in order to pass it to the JavaScript library.
+Alternatively, you can use the [HtmlPresenter control](html-presenter.md)  to put arbitrary HTML/CSS code in your XAML, and then read the ".DomElement" property of the HtmlPresenter control to get a reference to the instantiated DOM element in order to pass it to the JavaScript library.
 
 
 
@@ -156,8 +143,6 @@ void DisplayAMessage(string messageToDisplay)
    CSHTML5.Interop.ExecuteJavaScript("alert($0)", messageToDisplay);
 }
 ```
-Note that creating JavaScript code by concatenating strings such as in "alert(" + messageToDisplay + ")" would NOT work, because the JavaScript code needs to exist at compile-time rather than at runtime.
-
 You can also do it the other way round, that is, call C# from within your JavaScript code
 
 To call C# from JavaScript, you need to pass a C#-based callback to your "ExecuteJavaScript" code, like in the following C# example:
@@ -200,8 +185,6 @@ Here is an example:
 
 `await CSHTML5.Interop.LoadJavaScriptFile("ms-appx:///MyProject/FileSaver.min.js");`
 
-*Important note:* in the current version, you must take care by yourself of ensuring that the same file does not get loaded twice. You can do that for example by creating a static boolean variable that remembers whether the JavaScript file was already loaded or not.
-
 
 
 ## Interop.LoadJavaScriptFilesAsync(IEnumerable<string> urls, Action callback)
@@ -227,8 +210,6 @@ To load a file that you have added locally to your OpenSilver project, use any o
 * ms-appx:///AssemblyName/Folder/FileName.js
 
 * /AssemblyName;component/Folder/FileName.js
-
-*Important note:* in the current version, you must take care by yourself of ensuring that the same file does not get loaded twice. You can do that for example by creating a static boolean variable that remembers whether the JavaScript file was already loaded or not.
 
 
 ## await Interop.LoadCssFile(string url)
@@ -265,12 +246,12 @@ public partial class MainPage : Page
 ```
 You can see a more advanced example by looking at the source code of the [File Open Dialog extension](http://forums.cshtml5.com/viewtopic.php?f=7&t=522).
 
-You may also be interested by the [HtmlPresenter control](How-to-use-htmlPresenter.html).
+You may also be interested by the [HtmlPresenter control](html-presenter.md).
 
 
 
 ## Interop.IsRunningInTheSimulator
-Returns "True" if the application is running in C# inside the Simulator, and "False" if the application is running in JavaScript in the web browser.
+Returns "True" if the application is running in C# inside the Simulator, and "False" if the application is running in the web browser.
 
 This property is useful when you need to do something different depending on whether the application is running in the browser or in the Simulator, due to the fact that some JavaScript features are not possible in the Simulator.
 
@@ -290,7 +271,7 @@ Note: you can listen to the Loaded and Unloaded events to be notified when this 
 
 
 ## See Also
-* [How to use the HtmlPresenter to put HTML/CSS in your XAML](How-to-use-htmlPresenter.html)
+* [How to use the HtmlPresenter to put HTML/CSS in your XAML](html-presenter.md)
 * [Importing TypeScript Definitions](Importing-typescript-definitions.html)
 
 ## Contact Us

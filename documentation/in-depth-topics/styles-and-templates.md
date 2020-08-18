@@ -137,7 +137,7 @@ Below you will find a sample Style and ControlTemplate for the Button control. T
 </Style>
 ```
 
-" Styling the ToggleButton
+## Styling the ToggleButton
 
 To easily customize the appearance of the ToggleButton control, you can set ToggleButton properties such as: Background, Foreground, Padding, BorderBrush, BorderThickness, Cursor, HorizontalContentAlignment, and VerticalContentAlignment.
 
@@ -1041,5 +1041,6 @@ Below you will find a sample Style and ControlTemplate for the HyperlinkButton c
 
 
 
-Contact Us
+## Contact Us
+
 Please [click here](https://opensilver.net/contact.aspx) for contact information.

@@ -1,51 +1,50 @@
-# WCF and WebClient Limitations and Tutorials
+# WCF and WebClient
 
 ## Introduction
 
 OpenSilver provides support for web services and HTTP calls in multiple ways, including:
 
-* The *"Add Service Reference"* feature of Visual Studio. Use this feature to easily communicate with SOAP / WCF web services. See below for [limitations](#limitations-of-the-add-service-reference-support-soap) and a [Tutorial](#tutorial-to-easily-create-a-soap-based-clientserver-app-in-cshtml5-wcf).
-Note: to enable passing cookies (for credentials/authentication), put the following code in your App.xaml.cs constructor:
+* The *"Add Service Reference"* feature of Visual Studio. Use this feature to easily communicate with SOAP / WCF web services. See below for [limitations](#limitations-of-the-add-service-reference-support-soap) and a [Tutorial](#tutorial-to-easily-create-a-soap-based-clientserver-app-in-opensilver-wcf).
+> :warning: **Important limitation of the current release**: When adding a WCF Service Reference, please be sure to uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.7.
+* The *"WebClient"* class. Use this classs to download strings from the web, as well as to communicate with REST / Web API web services. See below for a [Tutorial](#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api).
+> **Note**: to enable passing cookies (for credentials/authentication), put the following code in your App.xaml.cs constructor:
 ```
 Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.CredentialsMode.Enabled;
 ```
-
-* The *"WebClient"* and *"WebClientWithCredentials"* classes. Use these classs to download strings from the web, as well as to communicate with REST / Web API web services. The *"WebClientWithCredentials"* has a *"CredentialsMode"* property that you can set to "Enabled" to automatically read the authentication cookie and send it back to all further requests. See below for a [Tutorial](#tutorial-to-easily-create-a-soap-based-clientserver-app-in-opensilver-wcf).
 * [WebSockets](http://forums.cshtml5.com/viewtopic.php?f=7&t=276)
 * [SignalR](http://forums.cshtml5.com/viewtopic.php?f=7&t=8121)
-* [JSONP](Circumventing-cross-domain-policies-using-JSONP.html)
+* [JSONP](jsonp.md)
 
 ## Sample application
 
-
 You can download a sample SOAP-based client/server application from the following URL:
 
-http://cshtml5.com/downloads/TestCshtml5WCF.zip
+https://github.com/cshtml5/TestCshtml5WCF
+
+> :warning: **Note**: The sample is made with [CSHTML5](http://cshtml5.com) rather than OpenSilver, but the concepts are the same.
 
 The sample shows a basic To-Do management application.
 
 ## Limitations of the "Add Service Reference" support (SOAP)
 
-In the current version, C#/XAML for HTML5 has the following limitations regarding the "Add Service Reference" (SOAP) feature:
+In the current version, OpenSilver has the following limitations regarding the "Add Service Reference" (SOAP) feature:
 
 * Due to JavaScript restrictions in the browser, *cross-domain calls require the server to [implement CORS](#adding-support-for-cross-domain-calls-cors)*. In other words, if your client application is not hosted on the same domain as your WCF web service, you need to add CORS to the web service (or you can use [JSONP](Circumventing-cross-domain-policies-using-JSONP.html) as an alternative to CORS, but it is not recommended for modern services). To add CORS to your web service, follow this [tutorial](#adding-support-for-cross-domain-calls-cors).
 
-* When adding a WCF Service Reference via the "Add Service Reference" command of VS, VS may add unwanted references to your project, such as the "System" reference. *You need to manually remove those references in order to be able to compile the project.*
+* When adding a WCF Service Reference via the "Add Service Reference" command of VS, please be sure to uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.7.
 
-![Remove reference System](../../images/RemoveSystemreference.png "Remove System.* refere,ces")
+* With the current version of OpenSilver, configuring a WCF Service Reference requires temporarily adding a reference to the "System.dll" assembly. You should add this reference only while configuring the service, and then you should remove it once the service has been configured.
 
-* When using OpenSilver, configuring a WCF Service Reference requires temporarily adding a reference to the "System.dll" assembly. You should add this reference only while configuring the service, and then you should remove it once the service has been configured.
-
-Furthermore, please note that the following features are NOT yet supported:
+<!--Furthermore, please note that the following features are NOT yet supported:
 
 * Non-http bindings (only BasicHttpBinding and HTTPS/SSL are currently supported)
 * The generic type "FaultException<T>" (only the non-generic FaultException type is currently supported)
 
-We are working to add support for all of the above features as soon as possible. Please make sure to vote for your most wanted features on http://cshtml5.uservoice.com
+We are working to add support for all of the above features as soon as possible. Please make sure to vote for your most wanted features on http://cshtml5.uservoice.com -->
 
 ## Adding support for cross-domain calls (CORS)
 
-Due to the JavaScript restrictions in the browser, cross-domain calls require the server to implement CORS. In other words, if your client application is not hosted on the same domain as your WCF web service, you need to add CORS to the web service (or you can use [JSONP](Circumventing-cross-domain-policies-using-JSONP.html) as an alternative to CORS, but it is not recommended for modern services).
+Due to the JavaScript restrictions in the browser, cross-domain calls require the server to implement CORS. In other words, if your client application is not hosted on the same domain as your WCF web service, you need to add CORS to the web service (or you can use [JSONP](jsonp.md) as an alternative to CORS, but it is not recommended for modern services).
 
 If you see the error *"No 'Access-Control-Allow-Origin' header is present on the requested resource"* in the browser Console window (F12), it is likely that CORS has not been properly configured.
 
@@ -127,15 +126,13 @@ To see this code in action, follow the REST [tutorial below](#tutorial-to-easily
 Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.CredentialsMode.Enabled;
 You may also be interested to read the [SOAP limitations](#limitations-of-the-add-service-reference-support-soap) and a [SOAP tutorial](#tutorial-to-easily-create-a-soap-based-clientserver-app-in-opensilver-wcf).
 
-* *REST:* to enable passing cookies (for credentials/authentication) in REST calls, use the *"WebClientWithCredentials"* class. The *"WebClientWithCredentials"* is similar to the *"WebClient"* class, except that it also has a *"CredentialsMode"* property that can be set to *"Enabled"* to automatically read the authentication cookie and send it back to all further requests. For a tutorial on how to use the *"WebClient"* class, click [here](#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api).
+<!--* *REST:* to enable passing cookies (for credentials/authentication) in REST calls, use the *"WebClientWithCredentials"* class. The *"WebClientWithCredentials"* is similar to the *"WebClient"* class, except that it also has a *"CredentialsMode"* property that can be set to *"Enabled"* to automatically read the authentication cookie and send it back to all further requests. For a tutorial on how to use the *"WebClient"* class, click [here](#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api).-->
 
 ## Tips for debugging WCF services
 
-* If you get a Script error when running your C#/XAML for HTML5 application inside the browser, go to the browser "Developer Tools" (usually F12 key) and look at the JavaScript console output to see if there are any error details. If you are using Chrome to debug the JavaScript code, you can check the option "Pause On Caught Exceptions" for easier debugging.
+* In Visual Studio, create a standard C#-based "Console" project (based on the latest .NET Framework) and try to reference your web service from that project. This is useful to know if the error is related to OpenSilver or if it is a generic WCF error.
 
-* In Visual Studio, create a standard C#-based "Console" project (based on the latest .NET Framework) and try to reference your web service from that project. This is useful to know if the error is related to C#/XAML for HTML5 or if it is a generic WCF error.
-
-* Install and launch the freeware ["Fiddler"](https://www.telerik.com/fiddler) application to see what information is sent between the client and the server. You can compare this information with the information that is sent to/from the test Console application created above. This is useful to see if there are any differences between the C#/XAML for HTML5 implementation of WCF, and the pure .NET implementation.
+* Install and launch the freeware ["Fiddler"](https://www.telerik.com/fiddler) application to see what information is sent between the client and the server. You can compare this information with the information that is sent to/from the test Console application created above. This is useful to see if there are any differences between the OpenSilver implementation of WCF, and the pure .NET implementation.
 
 ## Common issues and solutions
 
@@ -144,9 +141,7 @@ You may also be interested to read the [SOAP limitations](#limitations-of-the-ad
 
 ## Tutorial to easily create a SOAP-based client/server app in OpenSilver (WCF)
 
-In this tutorial we are going to create a simple client/server application for managing To-Do items. If you have any feedback regarding this tutorial, please send us an email to support@cshtml5.com
-
-Note: a sample project source code is available [here](#limitations-of-the-add-service-reference-support-soap).
+In this tutorial we are going to create a simple client/server application for managing To-Do items. If you have any feedback regarding this tutorial, please send us an email to contact@opensilver.net
 
 1) Create a new project of type "WCF -> *WCF Service Application"*. Let's call it "WcfService1"
 
@@ -237,11 +232,11 @@ protected void Application_BeginRequest(object sender, EventArgs e)
 5) Click "Start Debugging" (F5) and take note of the URL of the service. It should be something like: http://localhost:4598/Service1.svc
 Keep the project running.
 
-6) In a new instance of Visual Studio, create a new project of type *C#/XAML for HTML5 -> Empty Application*.
+6) In a new instance of Visual Studio, create a new project of type *OpenSilver -> Empty Application*.
 
 7) Click Project -> *Add Service Reference*, and paste the URL of the service that you created above.  It should be something like: http://localhost:4598/Service1.svc where you must replace 4958 with your port number. Click GO and then OK (leave the default name "ServiceReference1").
 
-8) Manually *remove the following references* from the project references: System, System.Runtime.Serialization, System.ServiceModel, System.Xml (and any other DLL that starts with "System.").
+8) Manually update the NuGet packages from v4.4 to v4.7.
 
 9) Modify the page *MainPage.XAML* by removing the default TextBlock and replacing it with the following code:
 ```
@@ -265,7 +260,7 @@ Keep the project running.
     <Button Content="Refresh the list" Foreground="White" Background="#FFE44D26" Click="ButtonRefreshSoapToDos_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
 </StackPanel>
 ```
-10) Add the following code to MainPage.xaml.cs (IMPORTANT: be sure to *replace the URL in orannge* with the correct one - ie. use the same URL as above):
+10) Add the following code to MainPage.xaml.cs (IMPORTANT: be sure to *replace the URL in orange* with the correct one - ie. use the same URL as above):
 ```
 ServiceReference1.Service1Client _soapClient =
         new ServiceReference1.Service1Client(
@@ -305,11 +300,11 @@ void ButtonDeleteSoapToDo_Click(object sender, RoutedEventArgs e)
     }
 }
 ```
-11) Click "Start Debugging" to test your client/server To-Do items application.
+11) Launch the project to test your client/server To-Do items application.
 
 ## Tutorial to easily create a REST-based client/server app in OpenSilver (Wep API)
 
-In this tutorial we are going to create a simple client/server application for managing To-Do items. If you have any feedback regarding this tutorial, please send us an email to support@cshtml5.com
+In this tutorial we are going to create a simple client/server application for managing To-Do items. If you have any feedback regarding this tutorial, please send us an email to contact@opensilver.net
 
 1) Create a new project of type *"Web -> ASP.NET MVC 4 Web Application"* (or newer). Let's call it "MvcApplication1".
 
@@ -435,7 +430,7 @@ namespace MvcApplication1.Controllers
 5) Click "Start Debugging" (F5) and take note of the URL of the service. It should be something like: http://localhost:4858
 Keep the project running.
 
-6) In a new instance of Visual Studio, create a new project of type *C#/XAML for HTML5 -> Empty Application*.
+6) In a new instance of Visual Studio, create a new project of type *OpenSilver -> Empty Application*.
 
 7) Modify the page MainPage.XAML by removing the default TextBlock and replacing it with the following code:
 ```
@@ -499,13 +494,13 @@ public class ToDoItem
     public string Description { get; set; }
 }
 ```
-9) Click "Start Debugging" to test your client/server To-Do items application.
+9) Launch the project to test your client/server To-Do items application.
 
 
 
 ## See Also
-* [Accessing a database](Accessing-database.html)
-* [Circumventing cross-domain policies using JSONP](Circumventing-cross-domain-policies-using-JSONP.html)
+* [Accessing a database](accessing-database.md)
+* [Circumventing cross-domain policies using JSONP](jsonp.md)
 
 
 ## Contact Us

@@ -197,7 +197,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
 
 </Page>
 ```
-3. Start the project to see the result.
+3. Start the project with the .Simulator suffix to see the result.
 
 
 Here is a screenshot of the result:
@@ -207,7 +207,7 @@ Here is a screenshot of the result:
 
 ## Example 2: Creating a NumericTextBox control with &lt;input type='number'&gt;
 
-1. Create a new project of type OpenSilver - Empty Application. Let's name it "Application1".
+1. Create a new project of type OpenSilver -> Empty Application. Let's name it "Application1".
 
 2. Add a new class named "NumericTextBox", and copy/paste the following code:
 ```
@@ -313,11 +313,11 @@ Here is a screenshot of the result:
 
 
 ## See Also
-* [How to use the HtmlCanvas control](HTML5-canvas-for-high-performance.html)
+* [How to use the HtmlCanvas control](html-canvas.md)
 
-* [How to call JavaScript from C#](call-javascript-from-csharp.html)
+* [How to call JavaScript from C#](call-javascript-from-csharp.md)
 
-* [Importing TypeScript Definitions](Importing-typescript-definitions.html)
+* [Importing TypeScript Definitions](importing-typescript-definitions.md)
 
 ## Contact Us
 Please [click here](https://opensilver.net/contact.aspx) for contact information.

@@ -53,6 +53,5 @@ Then, you can reference it anywhere in your app using the "StaticResource" marku
 
 `<TextBlock FontFamily="{StaticResource MyFontKey}" Text="Hello World"/>`
 
-
-## Support
-For any question, please post a message on the [forums](http://forums.cshtml5.com/) or contact us at support@cshtml5.com
+## Contact Us
+Please [click here](https://opensilver.net/contact.aspx) for contact information.

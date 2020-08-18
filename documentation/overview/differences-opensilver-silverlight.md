@@ -1,7 +1,0 @@
-# What are the differences between OpenSilver and Silverlight?
-
-On the user side, Silverlight requires the installation of a plugin in order to work in Internet browsers. OpenSilver on the contrary exploits modern and standardized technologies integrated into browsers, in particular HTML5, CSS3 and WebAssembly, to be able to run on all current browsers: Chrome, Edge, Firefox, Safari… with the notable exception of Internet Explorer, which doesn’t offer support for WebAssembly.
-
-On the developer side, OpenSilver supports .NET Standard 2.0 and C # up to version 7.3, where Silverlight only supports C # 6 and is not compatible with .NET Standard. However, some advanced features of Silverlight are not yet supported, such as XNA or Smooth Streaming, and some third-party UI components, such as Telerik UI, are still being adapted by Userware. Furthermore, while OpenSilver lets developers directly reference .NET Standard assemblies without recompiling them, it is not possible to reference a Silverlight assembly directly from an OpenSilver project: it must be recompiled with OpenSilver from its source code.
-
-Internally, the implementation of OpenSilver is completely different from that of Silverlight. For example, Silverlight uses Windows technologies for rendering, while OpenSilver creates an HTML element and applies CSS styles for each element of the XAML. The end result is almost identical, but the approach is very different.

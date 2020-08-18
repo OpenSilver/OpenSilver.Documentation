@@ -101,9 +101,9 @@ Simply add the TypeScript Definition file to your OpenSilver project and the com
 
 
 ## Sample project
-Click HERE to download a sample OpenSilver project that demonstrates the use of the "clipboard.js" and "clipboard-js.d.ts" files, as explained above.
+Let's create a sample project to demonstrate the use of the "clipboard.js" and "clipboard-js.d.ts" files, as explained above.
 
-This is what the project looks like:
+This is what the sample project looks like:
 <br>
 
 ![solutionExplorer](../../images/typescript_importer_solution_explorer.png "Screenshot of Solution Explorer")
@@ -130,12 +130,12 @@ This is the content of MainPage.xaml:
 ```
 And this is the content of MainPage.xaml.cs:
 ```
-using OpenSilver;
+using CSHTML5;
 using System.Windows;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace TestOpenSilver5TypeScriptClipboard
+namespace TestOpenSilverTypeScriptClipboard
 {
     public partial class MainPage : Page
     {
@@ -147,7 +147,7 @@ namespace TestOpenSilver5TypeScriptClipboard
         async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             // Load the JavaScript library:
-            await Interop.LoadJavaScriptFile("ms-appx:///TestCshtml5TypeScriptClipboard/clipboard.js");
+            await Interop.LoadJavaScriptFile("ms-appx:///TestOpenSilverTypeScriptClipboard/clipboard.js");
         }
         private void ButtonCopy_Click(object sender, RoutedEventArgs e)
         {
@@ -174,11 +174,11 @@ As you can see, the JavaScript-based clipboard library is being used as if it wa
 
 
 
-## I have a JavaScript library that needs a <div> or another DOM element in order to render stuff. How can I obtain it?
+## "I have a JavaScript library that needs a &lt;div&gt; or another DOM element in order to render stuff. How can I obtain it?"
 
 You can use the method [CHSTML5.Interop.GetDiv(FrameworkElement)](call-javascript-from-csharp.html#interopgetdivframeworkelement-fe) in order to get the DIV associated to a XAML element. For this method to succeed, the XAML element must be in the Visual Tree. To ensure that it is in the Visual Tree, you can read the [IsLoaded](call-javascript-from-csharp.html#frameworkelementisloaded) property, or you can place your code in the "Loaded" event handler. This approach works best with simple XAML elements, such as Border or Canvas.
 
-Alternatively, you can use the [HtmlPresenter control](How-to-use-htmlPresenter.html) to put arbitrary HTML/CSS code in your XAML, and then read the ".DomElement" property of the HtmlPresenter control to get a reference to the instantiated DOM element in order to pass it to the JavaScript library.
+Alternatively, you can use the [HtmlPresenter control](html-presenter.md) to put arbitrary HTML/CSS code in your XAML, and then read the ".DomElement" property of the HtmlPresenter control to get a reference to the instantiated DOM element in order to pass it to the JavaScript library.
 
 
 
@@ -251,17 +251,17 @@ You can read more about the method "Interop.ExecuteJavaScript" at: [How to call 
 ## Notes and Tips
 * To force re-generate the C# files from the TypeScript Definition, manually delete the file "TypeScriptDefInfos.xml" that is located in the "obj\Debug" sub-folder of your project folder, and re-build the project.
 
-* If the TypeScript Definition file is very big, it may take several minutes to compile. This is normal and only happens during the first compilation. You can comment out unused portions of the file to speed the compilation up. We plan to add a progress bar in a future version.
+* If the TypeScript Definition file is very big, it may take several minutes to compile. This is normal and only happens during the first compilation. You can comment out unused portions of the file to speed the compilation up.
 
 * When a TypeScript Definition file is open in a tab in Visual Studio, many misleading errors may be displayed, and some TypeScript code may be underlined even though it is perfectly correct. To see only the "real" compilation errors, be sure to always close the TypeScript Definition file and re-compile.
 
-* If you encounter any issues during the compilation of a TypeScript Definition file, please contact us. As a temporary workaround, you can comment out the portions of the TypeScript Definition file that do not compile properly, and try again.
+* If you encounter any issues during the compilation of a TypeScript Definition file, please contact support. As a temporary workaround, you can comment out the portions of the TypeScript Definition file that do not compile properly, and try again.
 
 
 ## See Also
 * [How to call JavaScript from C#](call-javascript-from-csharp.html)
 
-* [How to use the HtmlPresenter to put HTML/CSS in your XAML](How-to-use-htmlPresenter.html)
+* [How to use the HtmlPresenter to put HTML/CSS in your XAML](html-presenter.md)
 
 ## Contact Us
 Please [click here](https://opensilver.net/contact.aspx) for contact information.

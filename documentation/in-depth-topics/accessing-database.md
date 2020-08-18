@@ -1,12 +1,12 @@
-# Accessing a database
+# Accessing a Database
 ## Overview
 
 For security reasons, accessing a database is always done on the server-side, not the client-side. In fact, the "Connection String", which includes the URL and password of the database, should not be visible to the end-user.
 
 The client-side (ie. the OpenSilver-based front-end) communicates with the server (for example an ASP.NET / WCF Service application) via one of the following:
 
-* [SOAP](WCF-WebClient-Limitations-Tutorials.html)
-* [REST](WCF-WebClient-Limitations-Tutorials.html)
+* [SOAP](wcf-and-webclient.md)
+* [REST](wcf-and-webclient.md)
 * [WebSockets](http://forums.cshtml5.com/viewtopic.php?f=7&t=276)
 * [SignalR](http://forums.cshtml5.com/viewtopic.php?f=7&t=8121)
 
@@ -14,7 +14,9 @@ The client-side (ie. the OpenSilver-based front-end) communicates with the serve
 ## Example
 You can download a sample client/server application from the following URL:
 
-http://cshtml5.com/downloads/TestCshtml5WCF.zip
+https://github.com/cshtml5/TestCshtml5WCF
+
+> :warning: **Note**: The sample is made with [CSHTML5](http://cshtml5.com) rather than OpenSilver, but the concepts are the same.
 
 The sample demonstrates how to pass entities between the client and the server.
 

@@ -1,10 +1,10 @@
-# Guided tour – Creation of a new OpenSilver application
+# Getting Started - Guided tour of the creation of a new OpenSilver application
 
 The development experience with OpenSilver is very similar to that of Silverlight, WPF and Universal Platform.
 
-OpenSilver is distributed as a NuGet package (on NuGet.org) and as a VSIX extension for Visual Studio 2019 (or higher) containing the project templates.
+OpenSilver is distributed as a NuGet package (on [NuGet.org](https://www.nuget.org/packages/OpenSilver)) and as a [VSIX extension](https://www.opensilver.net/download.aspx) for Visual Studio 2019 (or higher) containing the project templates.
 
-To create a new OpenSilver-type project, it is recommended to download the project templates first. To do this, go to https://OpenSilver.NET , click Download, log in with your Microsoft account and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.
+To create a new OpenSilver-type project, it is recommended to download the project templates first. To do that, go to https://OpenSilver.NET , click Download, log in with your Microsoft account and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.
 
 ![OpenSilver Website](/images/1.OpenSilverWebsite.png "The OpenSilver.NET site")
 
@@ -18,7 +18,7 @@ Once the solution is created, you will see that it has three projects.
 
 The first is where you will place the files for your application. Its structure is identical to that of a new Silverlight project: it notably contains the files App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs.
 
-The second project, named with the suffix ".Browser", is the one you will have to launch to test your application in the browser. It plays a role similar to the ".Web" project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.
+The second project, named with the suffix ".Browser" or ".Web", is the one you will have to launch to test your application in the browser. It plays a role similar to the ".Web" project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.
 
 Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator below. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C # code at runtime in the "Immediate" window, things that are not possible in the browser.
 
@@ -45,7 +45,7 @@ void Button_Click(object sender, RoutedEventArgs e)
 
 ![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
 
-Let's recompile the solution and launch the project with the suffix ".Browser". The default browser launches and the application runs.
+Let's recompile the solution and launch the project with the suffix ".Browser" (or ".Web"). The default browser launches and the application runs.
 
 ![application displaying a message in the browser](/images/6.AppBrowser.png "The application running in the browser")
 
