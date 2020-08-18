@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>RelativeSource </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="RelativeSource ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="relativesource">RelativeSource</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>The &quot;RelativeSource&quot; keyword is used in XAML to specify the source of a binding.</p>
+<p>The following RelativeSource modes are currently supported:</p>
+<ul>
+<li><a href="#relativesourcemodeself">RelativeSourceMode.Self</a></li>
+<li><a href="#relativesourcemodetemplatedparent">RelativeSourceMode.TemplatedParent</a></li>
+</ul>
+<h2 id="relativesourcemodeself">RelativeSourceMode.Self</h2>
+<p>Use &quot;Self&quot; if you want to bind one property of an element to another property on the same element. With this mode, the element on which the binding is applied will be the source of the binding.</p>
+<p>Here is an example:</p>
+<p><code>&lt;TextBlock Text=&quot;{Binding Width, RelativeSource={RelativeSource Mode=Self}}&quot; x:Name=&quot;TextBlock1&quot; Width=&quot;200&quot;/&gt;</code></p>
+<p>In this example, the TextBlock will display the text &quot;200&quot;, because the Text property is bound to the Width property.</p>
+<p>Please note that this is <em>NOT the same as</em>:</p>
+<p><code>&lt;TextBlock Text=&quot;{Binding Width}&quot; x:Name=&quot;TextBlock1&quot; Width=&quot;200&quot;/&gt;</code></p>
+<p>The line above will NOT work because it will be looking for a property &quot;Width&quot; on the DataContext. By <em>&quot;DataContext&quot;</em> we mean the content of the property &quot;TextBlock1.DataContext&quot;. The DataContext is an inherited property, which means that &quot;TextBlock1.DataContext&quot; will have the same value as the DataContext property of the parent of the TextBlock.</p>
+<p>An alternative way to achieve the same result as &quot;Selft&quot; is to use &quot;ElementName&quot;. With <em>&quot;ElementName&quot;</em> you can tell it to use the element itself as the source of the binding. Here is an example:</p>
+<textblock text="{Binding Width, ElementName=TextBlock1}" x:name="TextBlock1" width="200"></textblock>
+<h2 id="relativesourcemodetemplatedparent">RelativeSourceMode.TemplatedParent</h2>
+<p>Use &quot;TemplatedParent&quot; if you are <em>inside a ControlTemplate</em> and you want to <em>bind a property of an element to a property of the templated control.</em></p>
+<p>For example, consider the following XAML code:</p>
+<pre><code>&lt;Border&gt;
+    &lt;Border.Resources&gt;
+        &lt;Style x:Key=&quot;MyRoundButtonStyle&quot; TargetType=&quot;Button&quot;&gt;
+
+            &lt;!-- Set the default value for some properties of the button: --&gt;
+            &lt;Setter Property=&quot;Background&quot; Value=&quot;Gray&quot;/&gt;
+            &lt;Setter Property=&quot;Foreground&quot; Value=&quot;Black&quot;/&gt;
+            &lt;Setter Property=&quot;Padding&quot; Value=&quot;12&quot;/&gt;
+            &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+            &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+            &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+
+            &lt;!-- Define how the button will be rendered: --&gt;
+            &lt;Setter Property=&quot;Template&quot;&gt;
+                &lt;Setter.Value&gt;
+                    &lt;ControlTemplate TargetType=&quot;Button&quot;&gt;
+                        &lt;Grid&gt;
+                            &lt;Ellipse
+                                Fill=&quot;{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}&quot;
+                                HorizontalAlignment=&quot;Stretch&quot;
+                                VerticalAlignment=&quot;Stretch&quot;/&gt;
+                            &lt;ContentPresenter
+                                Content=&quot;{Binding Content, RelativeSource={RelativeSource Mode=TemplatedParent}}&quot;
+                                HorizontalAlignment=&quot;{Binding HorizontalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}&quot;
+                                VerticalAlignment=&quot;{Binding VerticalContentAlignment, RelativeSource={RelativeSource Mode=TemplatedParent}}&quot;/&gt;
+                        &lt;/Grid&gt;
+                    &lt;/ControlTemplate&gt;
+                &lt;/Setter.Value&gt;
+            &lt;/Setter&gt;
+        &lt;/Style&gt;
+    &lt;/Border.Resources&gt;
+    &lt;Button x:Name=&quot;MyTemplatedButton&quot;
+            Content=&quot;OK&quot;
+            Style=&quot;{StaticResource MyRoundButtonStyle}&quot;
+            Width=&quot;50&quot;
+            Height=&quot;50&quot;
+            Background=&quot;Blue&quot;
+            Foreground=&quot;White&quot;/&gt;
+&lt;/Border&gt;
+</code></pre>
+<p>In the code above, we create a round button by creating a new style using a ControlTemplate. The &quot;Fill&quot; property of the ellipse has a binding to the &quot;Background&quot; property of the templated button.</p>
+<p>Please note that the two following lines are strictly equivalent:</p>
+<p><code>&lt;Ellipse Fill=&quot;{Binding Background, RelativeSource={RelativeSource Mode=TemplatedParent}}&quot;/&gt;</code></p>
+<p>and</p>
+<p><code>&lt;Ellipse Fill=&quot;{TemplateBinding Background}&quot;/&gt;</code></p>
+<p>The main advantage of the &quot;Binding&quot; syntax compared to the &quot;TemplateBinding&quot; syntax is that the former allows you to specify a &quot;Converter&quot; to convert the bound value via a class that inherits from <em>IValueConverter</em>.</p>
+<h2 id="contact-us">Contact Us</h2>
+<p>Please <a href="https://opensilver.net/contact.aspx">click here</a> for contact information.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

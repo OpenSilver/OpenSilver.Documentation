@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Kendo UI wrappers for OpenSilver </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Kendo UI wrappers for OpenSilver ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="kendo-ui-wrappers-for-opensilver">Kendo UI wrappers for OpenSilver</h1>
+
+<h2 id="how-to-use-the-kendo-ui-grid-in-an-opensilver-project">How to use the Kendo UI Grid in an OpenSilver project</h2>
+<ol>
+<li><p>Reference the NuGet package <em>&quot;CSHTML5.Wrappers.KendoUI.Grid&quot;</em> (or &quot;CSHTML5.Migration.Wrappers.KendoUI.Grid&quot; if you are migrating from Silverlight or WPF)</p>
+</li>
+<li><p>Download the <em>&quot;Kendo UI for jQuery&quot;</em> libraries from the Telerik website at: <a href="http://www.telerik.com/download/kendo-ui">http://www.telerik.com/download/kendo-ui</a></p>
+</li>
+</ol>
+<p>You should now have downloaded a file with a name similar to &quot;kendoui.for.jquery.2019.1.220.trial.zip&quot;.</p>
+<ol start="3">
+<li><p><em>Extract the libraries</em> that you have downloaded at the previous step and place them <em>into a subfolder of your project.</em> Note: while you can always extract all the files, only a few files are actually required. Here is a screenshot that shows which files are required:
+<br>
+<img src="../../images/kendo-ui-for-cshtml5-libraries1.png" alt="Kendorequirement" title="Kendo UI for CSHTML5"></p>
+</li>
+<li><p>Make sure that the <em>&quot;Build Action&quot;</em> of the files that you have added is <em>&quot;Content&quot;</em> (in particular, the default build action of the .ttf and .woff files is usually &quot;none&quot;, so you need to change it to &quot;Content&quot;). To do so, select a file in the Solution Explorer and press F4 to see its properties.</p>
+</li>
+<li><p>Add some lines of code to specify the location where you have placed the libraries in your project (ie. the files that you have added at the previous step #3). To do so, copy/paste the following code anywhere in your app (preferably in App.xaml.cs):
+<br>
+kendo_ui_grid.kendo.ui.Grid.Configuration.LocationOfKendoAllJS = &quot;ms-appx:///<em>YourProjectName</em>/Telerik_KendoUI/scripts/kendo.all.min.js&quot;;
+</br>
+kendo_ui_grid.kendo.ui.Grid.Configuration.LocationOfKendoCommonMaterialCSS = &quot;ms-appx:///<em>YourProjectName</em>/Telerik_KendoUI/Telerik_KendoUI/styles/kendo.common-material.min.css&quot;;
+<br>
+kendo_ui_grid.kendo.ui.Grid.Configuration.LocationOfKendoMaterialCSS = &quot;ms-appx:///<em>YourProjectName</em>/Telerik_KendoUI/Telerik_KendoUI/styles/kendo.material.min.css&quot;;
+</br>
+kendo_ui_grid.kendo.ui.Grid.Configuration.LocationOfKendoMaterialMobileCSS = &quot;ms-appx:///<em>YourProjectName</em>/Telerik_KendoUI/Telerik_KendoUI/styles/kendo.material.mobile.min.css&quot;;
+<br>
+kendo_ui_grid.kendo.ui.Grid.Configuration.LocationOfKendoRTLCSS = &quot;ms-appx:///<em>YourProjectName</em>/Telerik_KendoUI/Telerik_KendoUI/styles/kendo.rtl.min.css&quot;;</p>
+</li>
+<li><p>Place the Grid in your XAML. Here is an example:</p>
+</li>
+</ol>
+<pre><code>&lt;Border xmlns:kendo=&quot;clr-namespace:kendo_ui_grid.kendo.ui;assembly=CSHTML5.Wrappers.KendoUI.Grid&quot;&gt;
+    &lt;kendo:Grid x:Name=&quot;KendoGrid&quot; Height=&quot;300&quot;/&gt;
+&lt;/Border&gt;
+</code></pre>
+<ol start="7">
+<li><p>Set the ItemsSource property of the KendoGrid to populate it with data.</p>
+</li>
+<li><p>Optionally, you can change the settings of the KendoGrid. To do so, please refer to the following example (note: make sure to place this piece of code in the &quot;Loaded&quot; event of the Page or UserControl to ensure that the Kendo UI Grid has been instantiated before changing its settings):</p>
+</li>
+</ol>
+<pre><code>using kendo_ui_grid.kendo.data;
+using kendo_ui_grid.kendo.ui;
+
+private async void MainPage_Loaded(object sender, RoutedEventArgs e)
+{
+    await KendoGrid.JSInstanceLoaded; // Wait until the underlying JS instance of the Kendo UI Grid has been loaded
+    KendoGrid.setOptions(new GridOptions() { pageable = new GridPageable() { refresh = true, pageSizes = true, buttonCount = 5 }, editable = true });
+    KendoGrid.dataSource.pageSize(4);
+}
+</code></pre>
+<h2 id="sample-application">Sample application</h2>
+<p>For a sample application, please view the branch named <em>&quot;bridge-third-party-demos&quot;</em> of the <em>&quot;CSHTML5.Samples.Showcase&quot;</em> application, at:</p>
+<p><a href="https://github.com/cshtml5/CSHTML5.Samples.Showcase/tree/bridge-third-party-demos">https://github.com/cshtml5/CSHTML5.Samples.Showcase/tree/bridge-third-party-demos</a></p>
+<p>Please note that, for legal reasons, the JavaScript libraries of Kendo UI are not included in the sample application, so you still need to copy them manually using the steps described above.</p>
+<p>To see the C# and XAML files that use the Kendo UI controls, please visit:</p>
+<p><a href="https://github.com/cshtml5/CSHTML5.Samples.Showcase/tree/bridge-third-party-demos/CSHTML5.Samples.Showcase/Samples/Third_Party/Telerik_KendoUI">https://github.com/cshtml5/CSHTML5.Samples.Showcase/tree/bridge-third-party-demos/CSHTML5.Samples.Showcase/Samples/Third_Party/Telerik_KendoUI</a></p>
+<h2 id="source-code">Source code</h2>
+<p>You can view and fork the source code of the Kendo UI wrappers for OpenSilver on <em>GitHub</em> at:</p>
+<p><a href="https://github.com/cshtml5/CSHTML5.Wrappers.KendoUI">https://github.com/cshtml5/CSHTML5.Wrappers.KendoUI</a></p>
+<h2 id="contact-us">Contact Us</h2>
+<p>Please <a href="https://opensilver.net/contact.aspx">click here</a> for contact information.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1065 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Styles and Templates </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Styles and Templates ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="styles-and-templates">Styles and Templates</h1>
+
+<h2 id="general-concepts">General Concepts</h2>
+<ul>
+<li><p>The way styling works in OpenSilver is the same as in other recent XAML-based platforms such as UWP, Silverlight, WinRT, and Windows Phone.</p>
+</li>
+<li><p>Please note that WPF uses Triggers by default (for historical reasons), which are not yet supported. You can easily convert a WPF-like style into a style that uses only the VisualStateManager states. Read below for examples.</p>
+</li>
+<li><p>You can use ResourceDictionaries if you wish to organize styles into their own files. You can easily reference a ResourceDictionary by using the &quot;MergedDictionaries&quot; property, as show in the following example (in &quot;App.xaml&quot;):</p>
+</li>
+</ul>
+<pre><code>&lt;Application
+    x:Class=&quot;MyApplication1.App&quot;
+    xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+
+    &lt;Application.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source=&quot;MyResourceDictionary1.xaml&quot;/&gt;
+                &lt;ResourceDictionary Source=&quot;Themes/Generic.xaml&quot;/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Application.Resources&gt;
+&lt;/Application&gt;
+</code></pre>
+<ul>
+<li>Here is a short example that demonstrates how to define a simple &quot;round button&quot; style:</li>
+</ul>
+<pre><code>&lt;Border&gt;
+    &lt;Border.Resources&gt;
+
+        &lt;!-- Define a style for creating round buttons: --&gt;
+        &lt;Style x:Key=&quot;MyRoundButtonStyle&quot; TargetType=&quot;Button&quot;&gt;
+
+            &lt;!-- Set the default value for some properties of the button: --&gt;
+            &lt;Setter Property=&quot;Background&quot; Value=&quot;Gray&quot;/&gt;
+            &lt;Setter Property=&quot;Foreground&quot; Value=&quot;Black&quot;/&gt;
+            &lt;Setter Property=&quot;Padding&quot; Value=&quot;12&quot;/&gt;
+            &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+            &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+            &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+
+            &lt;!-- Define how the button will be rendered: --&gt;
+            &lt;Setter Property=&quot;Template&quot;&gt;
+                &lt;Setter.Value&gt;
+                    &lt;ControlTemplate TargetType=&quot;Button&quot;&gt;
+                        &lt;Grid&gt;
+                            &lt;Ellipse
+                                Fill=&quot;{TemplateBinding Background}&quot;
+                                HorizontalAlignment=&quot;Stretch&quot;
+                                VerticalAlignment=&quot;Stretch&quot;/&gt;
+                            &lt;ContentPresenter
+                                Content=&quot;{TemplateBinding Content}&quot;
+                                HorizontalAlignment=&quot;{TemplateBinding HorizontalContentAlignment}&quot;
+                                VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot;/&gt;
+                        &lt;/Grid&gt;
+                    &lt;/ControlTemplate&gt;
+                &lt;/Setter.Value&gt;
+            &lt;/Setter&gt;
+        &lt;/Style&gt;
+
+    &lt;/Border.Resources&gt;
+
+    &lt;!-- Test the above style using the following sample &quot;OK&quot; button: --&gt;
+    &lt;Button x:Name=&quot;MyTemplatedButton&quot;
+            Content=&quot;OK&quot;
+            Style=&quot;{StaticResource MyRoundButtonStyle}&quot;
+            Width=&quot;50&quot;
+            Height=&quot;50&quot;
+            Background=&quot;Blue&quot;
+            Foreground=&quot;White&quot;/&gt;
+&lt;/Border&gt;
+</code></pre>
+<h2 id="styling-the-button">Styling the Button</h2>
+<p>To easily customize the appearance of the Button control, you can set Button properties such as: Background, Foreground, Padding, BorderBrush, BorderThickness, Cursor, HorizontalContentAlignment, and VerticalContentAlignment.</p>
+<p>If you wish to further customize the Button control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the Button control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the Button parents' resources), and reference it with: &lt;Button Style={StaticResource ButtonStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ButtonStyle1&quot; TargetType=&quot;Button&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#FFE2E2E2&quot;/&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;Black&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;0&quot;/&gt;
+    &lt;Setter Property=&quot;Padding&quot; Value=&quot;12,4,12,4&quot;/&gt;
+    &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+    &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;Button&quot;&gt;
+                &lt;Border x:Name=&quot;OuterBorder&quot;
+                            Background=&quot;{TemplateBinding Background}&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState Name=&quot;Normal&quot;&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;PointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#11000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Pressed&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#22000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Disabled&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#33FFFFFF&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;Border x:Name=&quot;InnerBorder&quot;
+                                Background=&quot;{TemplateBinding Background}&quot;&gt;
+                        &lt;ContentPresenter x:Name=&quot;ContentPresenter&quot;
+                                                ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot;
+                                                Content=&quot;{TemplateBinding Content}&quot;
+                                                Margin=&quot;{TemplateBinding Padding}&quot;
+                                                HorizontalAlignment=&quot;{TemplateBinding HorizontalContentAlignment}&quot;
+                                                VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot;/&gt;
+                    &lt;/Border&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<p>&quot; Styling the ToggleButton</p>
+<p>To easily customize the appearance of the ToggleButton control, you can set ToggleButton properties such as: Background, Foreground, Padding, BorderBrush, BorderThickness, Cursor, HorizontalContentAlignment, and VerticalContentAlignment.</p>
+<p>If you wish to further customize the ToggleButton control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the ToggleButton control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the ToggleButton parents' resources), and reference it with: &lt;ToggleButton Style={StaticResource ToggleButtonStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ToggleButtonStyle1&quot; TargetType=&quot;ToggleButton&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#FFE2E2E2&quot;/&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;Black&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;0&quot;/&gt;
+    &lt;Setter Property=&quot;Padding&quot; Value=&quot;12,4,12,4&quot;/&gt;
+    &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+    &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;ToggleButton&quot;&gt;
+                &lt;Border x:Name=&quot;OuterBorder&quot;
+                            Background=&quot;{TemplateBinding Background}&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState Name=&quot;Normal&quot;&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;PointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#11000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Pressed&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#44000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Disabled&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;Transparent&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Checked&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#33000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;CheckedPointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#22000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;CheckedPressed&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#44000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;CheckedDisabled&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#33000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Indeterminate&quot;&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;IndeterminatePointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#11000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;IndeterminatePressed&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#22000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;IndeterminateDisabled&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;Transparent&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;Border x:Name=&quot;InnerBorder&quot;
+                                Background=&quot;{TemplateBinding Background}&quot;&gt;
+                        &lt;ContentPresenter x:Name=&quot;ContentPresenter&quot;
+                                                ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot;
+                                                Content=&quot;{TemplateBinding Content}&quot;
+                                                Margin=&quot;{TemplateBinding Padding}&quot;
+                                                HorizontalAlignment=&quot;{TemplateBinding HorizontalContentAlignment}&quot;
+                                                VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot;/&gt;
+                    &lt;/Border&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-expander">Styling the Expander</h2>
+<p>To easily customize the appearance of the Expander control, you can set Expander properties such as: Background, Foreground, Padding, BorderBrush, and BorderThickness.</p>
+<p>If you wish to further customize the Expander control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the Expander control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the Expander parents' resources), and reference it with: &lt;Expander Style={StaticResource ExpanderStyle1} Header=&quot;MyHeader&quot; Content=&quot;MyContent&quot; /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ExpanderStyle1&quot; TargetType=&quot;Expander&quot;&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;Expander&quot;&gt;
+                &lt;Border Background=&quot;{TemplateBinding Background}&quot;
+                                BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                                BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;
+                                CornerRadius=&quot;3&quot;&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Normal&quot;/&gt;
+                            &lt;VisualState x:Name=&quot;Disabled&quot;/&gt;
+                        &lt;/VisualStateGroup&gt;
+                        &lt;VisualStateGroup x:Name=&quot;FocusStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Focused&quot;/&gt;
+                            &lt;VisualState x:Name=&quot;Unfocused&quot;/&gt;
+                        &lt;/VisualStateGroup&gt;
+                        &lt;VisualStateGroup x:Name=&quot;ExpansionStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Collapsed&quot;/&gt;
+                            &lt;VisualState x:Name=&quot;Expanded&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Duration=&quot;0&quot; Storyboard.TargetName=&quot;ExpandSite&quot; Storyboard.TargetProperty=&quot;Visibility&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;Visible&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;StackPanel&gt;
+                        &lt;ToggleButton x:Name=&quot;ExpanderButton&quot;
+                                                Padding=&quot;{TemplateBinding Padding}&quot;
+                                                Margin=&quot;1&quot;
+                                                Content=&quot;{TemplateBinding Header}&quot;
+                                                ContentTemplate=&quot;{TemplateBinding HeaderTemplate}&quot;
+                                                Cursor=&quot;Hand&quot;&gt;
+                            &lt;ToggleButton.Template&gt;
+                                &lt;ControlTemplate TargetType=&quot;ToggleButton&quot;&gt;
+                                    &lt;Border Padding=&quot;{TemplateBinding Padding}&quot;&gt;
+                                        &lt;VisualStateManager.VisualStateGroups&gt;
+                                            &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+                                                &lt;VisualState x:Name=&quot;Normal&quot;/&gt;
+                                                &lt;VisualState x:Name=&quot;Checked&quot;&gt;
+                                                    &lt;Storyboard&gt;
+                                                        &lt;ObjectAnimationUsingKeyFrames Duration=&quot;0&quot; Storyboard.TargetName=&quot;arrow&quot; Storyboard.TargetProperty=&quot;Data&quot;&gt;
+                                                            &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;M 1,1.5 L 4.5,5 L 8,1.5&quot;/&gt;
+                                                        &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                                    &lt;/Storyboard&gt;
+                                                &lt;/VisualState&gt;
+                                            &lt;/VisualStateGroup&gt;
+                                            &lt;VisualStateGroup x:Name=&quot;FocusStates&quot;&gt;
+                                                &lt;VisualState x:Name=&quot;Focused&quot;/&gt;
+                                                &lt;VisualState x:Name=&quot;Unfocused&quot;/&gt;
+                                            &lt;/VisualStateGroup&gt;
+                                        &lt;/VisualStateManager.VisualStateGroups&gt;
+                                        &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;5,0,0,0&quot; &gt;
+                                            &lt;Path x:Name=&quot;arrow&quot; Visibility=&quot;Visible&quot; Stroke=&quot;#FF555555&quot; Width=&quot;9&quot; Height=&quot;9&quot; Margin=&quot;0,0,3,0&quot; StrokeThickness=&quot;3&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; Stretch=&quot;Fill&quot; Data=&quot;M 2,1 L 5.5,4.5 L 2,8&quot;/&gt;
+                                            &lt;ContentPresenter x:Name=&quot;header&quot; Margin=&quot;4,0,0,0&quot; HorizontalAlignment=&quot;Stretch&quot; VerticalAlignment=&quot;Center&quot; Content=&quot;{TemplateBinding Content}&quot; ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot;/&gt;
+                                        &lt;/StackPanel&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/ToggleButton.Template&gt;
+                        &lt;/ToggleButton&gt;
+                        &lt;ContentControl x:Name=&quot;ExpandSite&quot;
+                                                Visibility=&quot;Collapsed&quot;
+                                                Margin=&quot;{TemplateBinding Padding}&quot;
+                                                Content=&quot;{TemplateBinding Content}&quot;
+                                                ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot; /&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<p>#Styling the TabControl and TabItem</p>
+<p>To easily customize the appearance of the TabControl, you can:</p>
+<ul>
+<li><p>set <em>TabControl</em> properties such as: Background, Foreground, Padding, BorderBrush, BorderThickness, HorizontalContentAlignment, VerticalContentAlignment</p>
+</li>
+<li><p>set <em>TabItem</em> properties such as: Background, Foreground, SelectedBackground, SelectedForeground, SelectedAccent, Padding, BorderBrush, BorderThickness, Cursor, Margin, HorizontalContentAlignment, VerticalContentAlignment</p>
+</li>
+</ul>
+<p>If you wish to further customize the TabControl, you can apply a custom ControlTemplate to both the TabControl and the TabItem.</p>
+<p>Below you will find a sample Style and ControlTemplate for the TabControl and the TabItem controls. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the Expander parents' resources), and reference it with: &lt;TabControl Style={StaticResource TabControlStyle1}&gt; and &lt;TabItem Style={StaticResource TabItemStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;TabControlStyle1&quot; TargetType=&quot;TabControl&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;White&quot;/&gt;
+    &lt;Setter Property=&quot;BorderBrush&quot; Value=&quot;#FFDDDDDD&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;1,1,1,1&quot;/&gt;
+    &lt;Setter Property=&quot;Padding&quot; Value=&quot;5&quot;/&gt;
+    &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Stretch&quot;/&gt;
+    &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Stretch&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;TabControl&quot;&gt;
+                &lt;Border&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Normal&quot; /&gt;
+                            &lt;VisualState x:Name=&quot;Disabled&quot;&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+
+                    &lt;Grid x:Name=&quot;TemplateTop&quot; Visibility=&quot;Collapsed&quot;&gt;
+                        &lt;Grid.RowDefinitions&gt;
+                            &lt;RowDefinition Height=&quot;Auto&quot;/&gt;
+                            &lt;RowDefinition Height=&quot;*&quot;/&gt;
+                        &lt;/Grid.RowDefinitions&gt;
+
+                        &lt;TabPanel x:Name=&quot;TabPanelTop&quot; /&gt;
+
+                        &lt;Border
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;
+                            Background=&quot;{TemplateBinding Background}&quot;
+                            Grid.Row=&quot;1&quot;  
+                            CornerRadius=&quot;0,0,3,3&quot;&gt;
+                            &lt;ContentPresenter
+                                    x:Name=&quot;ContentTop&quot;
+                                    HorizontalAlignment=&quot;{TemplateBinding HorizontalContentAlignment}&quot;
+                                    VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot;/&gt;
+                        &lt;/Border&gt;
+                    &lt;/Grid&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+&lt;Style x:Key=&quot;TabItemStyle1&quot; TargetType=&quot;TabItem&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;White&quot;/&gt;
+    &lt;Setter Property=&quot;BorderBrush&quot; Value=&quot;#FFDDDDDD&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;2&quot;/&gt;
+    &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;Black&quot;/&gt;
+    &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Stretch&quot;/&gt;
+    &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Stretch&quot;/&gt;
+    &lt;Setter Property=&quot;Margin&quot; Value=&quot;0,0,5,0&quot;/&gt;
+    &lt;Setter Property=&quot;Padding&quot; Value=&quot;6,0,6,3&quot;/&gt;
+    &lt;Setter Property=&quot;SelectedBackground&quot; Value=&quot;White&quot;/&gt;
+    &lt;Setter Property=&quot;SelectedForeground&quot; Value=&quot;Black&quot;/&gt;
+    &lt;Setter Property=&quot;SelectedAccent&quot; Value=&quot;Blue&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;TabItem&quot;&gt;
+                &lt;StackPanel x:Name=&quot;Root&quot;&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Normal&quot; /&gt;
+                            &lt;VisualState x:Name=&quot;PointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Duration=&quot;0&quot; Storyboard.TargetName=&quot;PointerOverBorder&quot; Storyboard.TargetProperty=&quot;Background&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#FFCFCFCF&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState x:Name=&quot;Disabled&quot;&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                        &lt;VisualStateGroup x:Name=&quot;SelectionStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Unselected&quot;/&gt;
+                            &lt;VisualState x:Name=&quot;Selected&quot; /&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;Border
+                            x:Name=&quot;TemplateTopSelected&quot; Visibility=&quot;Collapsed&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;1,0,1,0&quot;
+                            Background=&quot;{TemplateBinding SelectedBackground}&quot;
+                            CornerRadius=&quot;3,3,0,0&quot;
+                            Cursor=&quot;Arrow&quot;&gt;
+                        &lt;StackPanel&gt;
+                            &lt;Border Height=&quot;3&quot; CornerRadius=&quot;3,3,0,0&quot; Background=&quot;{TemplateBinding SelectedAccent}&quot;/&gt;
+                            &lt;ContentControl x:Name=&quot;HeaderTopSelected&quot;
+                                        Foreground=&quot;{TemplateBinding SelectedForeground}&quot;
+                                        Margin=&quot;{TemplateBinding Padding}&quot;
+                                        /&gt;
+                        &lt;/StackPanel&gt;
+                    &lt;/Border&gt;
+                    &lt;Border x:Name=&quot;TemplateTopUnselected&quot; Visibility=&quot;Collapsed&quot;
+                                BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                                BorderThickness=&quot;1,1,1,0&quot;
+                                Background=&quot;{TemplateBinding Background}&quot;
+                                CornerRadius=&quot;3,3,0,0&quot;
+                                Cursor=&quot;{TemplateBinding Cursor}&quot;&gt;
+                        &lt;StackPanel&gt;
+                            &lt;Border x:Name=&quot;PointerOverBorder&quot; Height=&quot;2&quot; CornerRadius=&quot;3,3,0,0&quot; Background=&quot;Transparent&quot;/&gt;
+                            &lt;ContentControl x:Name=&quot;HeaderTopUnselected&quot;
+                                        Foreground=&quot;{TemplateBinding Foreground}&quot;
+                                        Margin=&quot;{TemplateBinding Padding}&quot;/&gt;
+                        &lt;/StackPanel&gt;
+                    &lt;/Border&gt;
+                &lt;/StackPanel&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-checkbox">Styling the CheckBox</h2>
+<p>By default, the CheckBox uses the native HTML appearance.</p>
+<p>If you wish to customize its appearance, you can apply a Style with a ControlTemplate.</p>
+<p>To do so, you can copy the XAML code for the ToggleButton above, and just change TargetType=&quot;ToggleButton&quot; into TargetType=&quot;CheckBox&quot; (2 occurrences!). This will work because CheckBox inherits from ToggleButton.</p>
+<h2 id="styling-the-combobox">Styling the ComboBox</h2>
+<p>By default, the ComboBox is rendered using the standard HTML appearance. This has the advantage of rendering differently depending on the browser. For example, on mobile browsers, a touch-based value picker will appear.</p>
+<p>If you want to customize the appearance of the ComboBox control, you need to <em>set the &quot;UseNativeComboBox&quot; property to &quot;False&quot;</em>. Here is an example:</p>
+<pre><code>&lt;ComboBox UseNativeComboBox=&quot;False&quot; /&gt;
+</code></pre>
+<p>You can then apply a Style and even custom ControlTemplate.</p>
+<p>Below you will find an example of Style and ControlTemplate for the ComboBox control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the ComboBox parents' resources), and reference it with: &lt;ComboBox UseNativeComboBox=&quot;False&quot; Style={StaticResource ComboBoxStyle1}/&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ComboBoxStyle1&quot; TargetType=&quot;ComboBox&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;White&quot;/&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;Black&quot;/&gt;
+    &lt;Setter Property=&quot;Padding&quot; Value=&quot;6,2,30,2&quot;/&gt;
+    &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;ComboBox&quot;&gt;
+                &lt;StackPanel&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;Border x:Name=&quot;OuterBorder&quot;
+                            Background=&quot;{TemplateBinding Background}&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;&gt;
+                        &lt;Grid&gt;
+                            &lt;ToggleButton x:Name=&quot;DropDownToggle&quot; HorizontalAlignment=&quot;Stretch&quot; VerticalAlignment=&quot;Stretch&quot; HorizontalContentAlignment=&quot;Right&quot; VerticalContentAlignment=&quot;Center&quot;&gt;
+                                &lt;Path x:Name=&quot;arrow&quot; Visibility=&quot;Visible&quot; Stroke=&quot;Black&quot; Width=&quot;13&quot; Height=&quot;9&quot; StrokeThickness=&quot;3&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; Stretch=&quot;None&quot; Data=&quot;M 1.5,2.25 L 6.75,7.5 L 12,2.25&quot;/&gt;
+                            &lt;/ToggleButton&gt;
+                            &lt;ContentPresenter x:Name=&quot;ContentPresenter&quot;
+                                              IsHitTestVisible=&quot;False&quot;
+                                              Margin=&quot;{TemplateBinding Padding}&quot;
+                                              MinHeight=&quot;24&quot;/&gt;
+                        &lt;/Grid&gt;
+                    &lt;/Border&gt;
+                    &lt;Popup x:Name=&quot;Popup&quot; IsOpen=&quot;False&quot;&gt;
+                        &lt;Border Background=&quot;White&quot; BorderBrush=&quot;Black&quot; BorderThickness=&quot;1&quot;&gt;
+                            &lt;ScrollViewer MaxHeight=&quot;{TemplateBinding MaxDropDownHeight}&quot; VerticalScrollBarVisibility=&quot;Auto&quot; HorizontalScrollBarVisibility=&quot;Disabled&quot;&gt;
+                                &lt;ItemsPresenter x:Name=&quot;ItemsHost&quot; /&gt;
+                            &lt;/ScrollViewer&gt;
+                        &lt;/Border&gt;
+                    &lt;/Popup&gt;
+                &lt;/StackPanel&gt;
+
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-childwindow">Styling the ChildWindow</h2>
+<p>To easily customize the appearance of the ChildWindow control, you can set ChildWindow properties such as: OverlayBrush, OverlayOpacity, Background, Foreground, BorderBrush, BorderThickness, HorizontalContentAlignment, and VerticalContentAlignment.</p>
+<p>If you wish to further customize the ChildWindow control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the ChildWindow control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the ChildWindow parents' resources), and reference it with: &lt;ChildWindow Style={StaticResource ChildWindowStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ChildWindowStyle1&quot; TargetType=&quot;ChildWindow&quot;&gt;
+    &lt;Setter Property=&quot;HorizontalAlignment&quot; Value=&quot;Center&quot; /&gt;
+    &lt;Setter Property=&quot;VerticalAlignment&quot; Value=&quot;Center&quot; /&gt;
+    &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Stretch&quot; /&gt;
+    &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Stretch&quot; /&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;1&quot; /&gt;
+    &lt;Setter Property=&quot;BorderBrush&quot; Value=&quot;#FFE2E2E2&quot; /&gt;
+    &lt;Setter Property=&quot;OverlayBrush&quot; Value=&quot;#7F000000&quot; /&gt;
+    &lt;Setter Property=&quot;OverlayOpacity&quot; Value=&quot;1&quot; /&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;ChildWindow&quot;&gt;
+                &lt;Grid x:Name=&quot;Root&quot;&gt;
+                    &lt;Grid x:Name=&quot;Overlay&quot; HorizontalAlignment=&quot;Stretch&quot; VerticalAlignment=&quot;Stretch&quot; Margin=&quot;0&quot; Background=&quot;{TemplateBinding OverlayBrush}&quot; Opacity=&quot;{TemplateBinding OverlayOpacity}&quot; /&gt;
+                    &lt;Border x:Name=&quot;ContentRoot&quot; HorizontalAlignment=&quot;{TemplateBinding HorizontalAlignment}&quot; VerticalAlignment=&quot;{TemplateBinding VerticalAlignment}&quot; RenderTransformOrigin=&quot;0.5,0.5&quot; Height=&quot;{TemplateBinding Height}&quot; Width=&quot;{TemplateBinding Width}&quot;&gt;
+                        &lt;Border x:Name=&quot;ContentContainer&quot; Background=&quot;#FFF6F6F6&quot; BorderThickness=&quot;{TemplateBinding BorderThickness}&quot; BorderBrush=&quot;{TemplateBinding BorderBrush}&quot; CornerRadius=&quot;2&quot;&gt;
+                            &lt;Grid&gt;
+                                &lt;Grid.RowDefinitions&gt;
+                                    &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                                    &lt;RowDefinition /&gt;
+                                &lt;/Grid.RowDefinitions&gt;
+                                &lt;Border x:Name=&quot;Chrome&quot; Width=&quot;Auto&quot; BorderBrush=&quot;#FFFFFFFF&quot; BorderThickness=&quot;0,0,0,1&quot; Background=&quot;#FFEEEEEE&quot;&gt;
+                                    &lt;Grid Height=&quot;Auto&quot; Width=&quot;Auto&quot;&gt;
+                                        &lt;Grid.ColumnDefinitions&gt;
+                                            &lt;ColumnDefinition /&gt;
+                                            &lt;ColumnDefinition Width=&quot;30&quot; /&gt;
+                                        &lt;/Grid.ColumnDefinitions&gt;
+                                        &lt;ContentControl Content=&quot;{TemplateBinding Title}&quot; FontWeight=&quot;Bold&quot; HorizontalAlignment=&quot;Stretch&quot; VerticalAlignment=&quot;Center&quot; Margin=&quot;6,0,6,0&quot; /&gt;
+                                        &lt;Button x:Name=&quot;CloseButton&quot; Content=&quot;X&quot; Grid.Column=&quot;1&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; HorizontalContentAlignment=&quot;Center&quot; VerticalContentAlignment=&quot;Center&quot; Width=&quot;15&quot; Padding=&quot;0&quot; /&gt;
+                                    &lt;/Grid&gt;
+                                &lt;/Border&gt;
+                                &lt;Border Background=&quot;{TemplateBinding Background}&quot; Margin=&quot;7&quot; Grid.Row=&quot;1&quot;&gt;
+                                    &lt;ContentPresenter x:Name=&quot;ContentPresenter&quot; Content=&quot;{TemplateBinding Content}&quot; ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot; HorizontalAlignment=&quot;{TemplateBinding HorizontalContentAlignment}&quot; VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot; /&gt;
+                                &lt;/Border&gt;
+                            &lt;/Grid&gt;
+                        &lt;/Border&gt;
+                    &lt;/Border&gt;
+                &lt;/Grid&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-tooltip">Styling the ToolTip</h2>
+<p>To easily customize the appearance of the ToolTip control, you can set ToolTip properties such as: Background, Foreground, Padding, BorderBrush, BorderThickness, and FontSize.</p>
+<p>If you wish to further customize the ToolTip control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the ToolTip control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the ToolTip parents' resources), and reference it with: &lt;ToolTip Style={StaticResource ToolTipStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ToolTipStyle1&quot; TargetType=&quot;ToolTip&quot;&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;#FF666666&quot;/&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;White&quot;/&gt;
+    &lt;Setter Property=&quot;BorderBrush&quot; Value=&quot;Gray&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;2&quot;/&gt;
+    &lt;Setter Property=&quot;FontSize&quot; Value=&quot;12&quot;/&gt;
+    &lt;Setter Property=&quot;Padding&quot; Value=&quot;10,6,10,7&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;ToolTip&quot;&gt;
+                &lt;Border x:Name=&quot;LayoutRoot&quot; BorderBrush=&quot;{TemplateBinding BorderBrush}&quot; BorderThickness=&quot;{TemplateBinding BorderThickness}&quot; Background=&quot;{TemplateBinding Background}&quot;&gt;
+                    &lt;ContentPresenter ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot; Content=&quot;{TemplateBinding Content}&quot; Margin=&quot;{TemplateBinding Padding}&quot;/&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-thumb">Styling the Thumb</h2>
+<p>To easily customize the appearance of the Thumb control, you can set Thumb properties such as: Background, BorderBrush, and BorderThickness.</p>
+<p>If you wish to further customize the Thumb control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the Thumb control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the Thumb parents' resources), and reference it with: &lt;Thumb Style={StaticResource ThumbStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ThumbStyle1&quot; TargetType=&quot;Thumb&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#FFE2E2E2&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;0&quot; /&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;Thumb&quot;&gt;
+                &lt;Grid&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Normal&quot;/&gt;
+                            &lt;VisualState x:Name=&quot;PointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;DoubleAnimation Duration=&quot;0&quot; To=&quot;1&quot; Storyboard.TargetProperty=&quot;Opacity&quot; Storyboard.TargetName=&quot;BackgroundPointerOver&quot;/&gt;
+                                    &lt;DoubleAnimation Duration=&quot;0&quot; To=&quot;0&quot; Storyboard.TargetProperty=&quot;Opacity&quot; Storyboard.TargetName=&quot;Background&quot; /&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState x:Name=&quot;Pressed&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;DoubleAnimation Duration=&quot;0&quot; To=&quot;1&quot; Storyboard.TargetProperty=&quot;Opacity&quot; Storyboard.TargetName=&quot;BackgroundPressed&quot;/&gt;
+                                    &lt;DoubleAnimation Duration=&quot;0&quot; To=&quot;0&quot; Storyboard.TargetProperty=&quot;Opacity&quot; Storyboard.TargetName=&quot;Background&quot; /&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState x:Name=&quot;Disabled&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;DoubleAnimation Duration=&quot;0&quot; To=&quot;1&quot; Storyboard.TargetProperty=&quot;Opacity&quot; Storyboard.TargetName=&quot;BackgroundDisabled&quot;/&gt;
+                                    &lt;DoubleAnimation Duration=&quot;0&quot; To=&quot;0&quot; Storyboard.TargetProperty=&quot;Opacity&quot; Storyboard.TargetName=&quot;Background&quot; /&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;Border x:Name=&quot;Background&quot;
+                            Background=&quot;{TemplateBinding Background}&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;/&gt;
+                    &lt;Border x:Name=&quot;BackgroundPointerOver&quot;
+                            Background=&quot;#11000000&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;
+                            Opacity=&quot;0&quot;/&gt;
+                    &lt;Border x:Name=&quot;BackgroundPressed&quot;
+                            Background=&quot;#22000000&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;
+                            Opacity=&quot;0&quot;/&gt;
+                    &lt;Border x:Name=&quot;BackgroundDisabled&quot;
+                            Background=&quot;#33FFFFFF&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;
+                            Opacity=&quot;0&quot;/&gt;
+                &lt;/Grid&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-scrollbar">Styling the ScrollBar</h2>
+<p>To easily customize the appearance of the ScrollBar control, you can set ScrollBar properties such as: Background and Foreground.</p>
+<p>If you wish to further customize the ScrollBar control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the ScrollBar control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the ScrollBar parents' resources), and reference it with: &lt;ScrollBar Style={StaticResource ScrollBarStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;ScrollBarStyle1&quot; TargetType=&quot;ScrollBar&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#FFF1F1F1&quot; /&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;#FF333333&quot; /&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;ScrollBar&quot;&gt;
+                &lt;Grid x:Name=&quot;Root&quot;&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup x:Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState x:Name=&quot;Normal&quot; /&gt;
+                            &lt;VisualState x:Name=&quot;PointerOver&quot; /&gt;
+                            &lt;VisualState x:Name=&quot;Disabled&quot; /&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;Canvas x:Name=&quot;HorizontalRoot&quot; Visibility=&quot;Collapsed&quot; Background=&quot;{TemplateBinding Background}&quot;&gt;
+                        &lt;Button x:Name=&quot;HorizontalSmallDecrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot;&gt;
+                            &lt;Path x:Name=&quot;ArrowLeft&quot; Fill=&quot;#FF555555&quot; Width=&quot;9&quot; Height=&quot;9&quot; Margin=&quot;0,0,3,0&quot; StrokeThickness=&quot;3&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; Stretch=&quot;Fill&quot; Data=&quot;M 2,4.5 L 5.5,1 L 5.5,8&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button x:Name=&quot;HorizontalSmallIncrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot;&gt;
+                            &lt;Path x:Name=&quot;ArrowRight&quot; Fill=&quot;#FF555555&quot; Width=&quot;9&quot; Height=&quot;9&quot; Margin=&quot;0,0,3,0&quot; StrokeThickness=&quot;3&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; Stretch=&quot;Fill&quot; Data=&quot;M 2,1 L 5.5,4.5 L 2,8&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button x:Name=&quot;HorizontalLargeDecrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot; /&gt;
+                        &lt;Button x:Name=&quot;HorizontalLargeIncrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot; /&gt;
+                        &lt;Thumb x:Name=&quot;HorizontalThumb&quot; Cursor=&quot;Arrow&quot;&gt;
+                            &lt;Thumb.Template&gt;
+                                &lt;ControlTemplate&gt;
+                                    &lt;Border Background=&quot;#FFBBBBBB&quot;/&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Thumb.Template&gt;
+                        &lt;/Thumb&gt;
+                    &lt;/Canvas&gt;
+                    &lt;Canvas x:Name=&quot;VerticalRoot&quot; Visibility=&quot;Collapsed&quot; Background=&quot;{TemplateBinding Background}&quot;&gt;
+                        &lt;Button x:Name=&quot;VerticalSmallDecrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot;&gt;
+                            &lt;Path x:Name=&quot;ArrowTop&quot; Fill=&quot;#FF555555&quot; Width=&quot;9&quot; Height=&quot;9&quot; Margin=&quot;0,0,3,0&quot; StrokeThickness=&quot;3&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; Stretch=&quot;Fill&quot; Data=&quot;M 4.5,2 L 1,5.5 L 8,5.5&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button x:Name=&quot;VerticalSmallIncrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot;&gt;
+                            &lt;Path x:Name=&quot;ArrowBottom&quot; Fill=&quot;#FF555555&quot; Width=&quot;9&quot; Height=&quot;9&quot; Margin=&quot;0,0,3,0&quot; StrokeThickness=&quot;3&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; Stretch=&quot;Fill&quot; Data=&quot;M 1,2 L 4.5,5.5 L 8,2&quot;/&gt;
+                        &lt;/Button&gt;
+                        &lt;Button x:Name=&quot;VerticalLargeDecrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot; /&gt;
+                        &lt;Button x:Name=&quot;VerticalLargeIncrease&quot; Padding=&quot;0&quot; Cursor=&quot;Arrow&quot; /&gt;
+                        &lt;Thumb x:Name=&quot;VerticalThumb&quot; Background=&quot;#FFBBBBBB&quot; Cursor=&quot;Arrow&quot;&gt;
+                            &lt;Thumb.Template&gt;
+                                &lt;ControlTemplate&gt;
+                                    &lt;Border Background=&quot;#FFBBBBBB&quot;/&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Thumb.Template&gt;
+                        &lt;/Thumb&gt;
+                    &lt;/Canvas&gt;
+                &lt;/Grid&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-menuitem">Styling the MenuItem</h2>
+<p>To easily customize the appearance of the MenuItem control, you can set MenuItem properties such as: Background, Foreground, Padding, BorderBrush, BorderThickness, HorizontalContentAlignment, and VerticalContentAlignment.</p>
+<p>If you wish to further customize the MenuItem control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the MenuItem control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the MenuItem parents' resources), and reference it with: &lt;MenuItem Style={StaticResource MenuItemStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;MenuItemStyle1&quot; TargetType=&quot;MenuItem&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#FFE2E2E2&quot;/&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;Black&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;0&quot;/&gt;
+    &lt;Setter Property=&quot;Padding&quot; Value=&quot;12,4,12,4&quot;/&gt;
+    &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+    &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;MenuItem&quot;&gt;
+                &lt;Border x:Name=&quot;OuterBorder&quot;
+                            Background=&quot;{TemplateBinding Background}&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState Name=&quot;Normal&quot;&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;PointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#11000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Pressed&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#22000000&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;Disabled&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;Background&quot; Storyboard.TargetName=&quot;InnerBorder&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;#33FFFFFF&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;Border x:Name=&quot;InnerBorder&quot;
+                                Background=&quot;{TemplateBinding Background}&quot;&gt;
+                        &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;{TemplateBinding Padding}&quot;&gt;
+                            &lt;ContentPresenter x:Name=&quot;IconPresenter&quot;
+                                                  Content=&quot;{TemplateBinding Icon}&quot;
+                                                  Margin=&quot;0,0,10,0&quot;
+                                                  VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot;
+                                                  Visibility=&quot;{TemplateBinding INTERNAL_IconVisibility}&quot;
+                                              /&gt;
+                            &lt;ContentPresenter x:Name=&quot;ContentPresenter&quot;
+                                                  ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot;
+                                                  Content=&quot;{TemplateBinding Content}&quot;
+                                                  HorizontalAlignment=&quot;{TemplateBinding HorizontalContentAlignment}&quot;
+                                                  VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot;/&gt;
+                        &lt;/StackPanel&gt;
+                    &lt;/Border&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-gridsplitter">Styling the GridSplitter</h2>
+<p>To easily customize the appearance of the GridSplitter control, you can set GridSplitter properties such as Background.</p>
+<p>If you wish to further customize the GridSplitter control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the GridSplitter control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the GridSplitter parents' resources), and reference it with: &lt;GridSplitter Style={StaticResource GridSplitterStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;GridSplitterStyle1&quot; TargetType=&quot;GridSplitter&quot;&gt;
+    &lt;Setter Property=&quot;Background&quot; Value=&quot;#FFF0F0F0&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;GridSplitter&quot;&gt;
+                &lt;Grid Background=&quot;{TemplateBinding Background}&quot;&gt;
+                    &lt;Thumb x:Name=&quot;PART_Thumb&quot; Opacity=&quot;0&quot; /&gt; &lt;!-- Note: the thumb control is here only in OpenSilver --&gt;
+                    &lt;ContentPresenter Content=&quot;{TemplateBinding Element}&quot; IsHitTestVisible=&quot;False&quot; /&gt;
+                &lt;/Grid&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-numericupdown">Styling the NumericUpDown</h2>
+<p>To customize the NumericUpDown control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the NumericUpDown control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the NumericUpDown parents' resources), and reference it with: &lt;NumericUpDown Style={StaticResource NumericUpDownStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;NumericUpDownStyle1&quot;
+    TargetType=&quot;NumericUpDown&quot;&gt;
+    &lt;Setter
+        Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate
+                TargetType=&quot;NumericUpDown&quot;&gt;
+                &lt;Border
+                    Background=&quot;{TemplateBinding Background}&quot;
+                    BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                    BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;
+                    VerticalAlignment=&quot;Top&quot;&gt;
+                    &lt;Grid&gt;
+                        &lt;Grid.ColumnDefinitions&gt;
+                            &lt;ColumnDefinition /&gt;
+                            &lt;ColumnDefinition
+                                Width=&quot;Auto&quot; /&gt;
+                            &lt;ColumnDefinition
+                                Width=&quot;Auto&quot; /&gt;
+                        &lt;/Grid.ColumnDefinitions&gt;
+                        &lt;Grid
+                            Grid.Column=&quot;0&quot;&gt;
+                            &lt;Rectangle
+                                x:Name=&quot;PART_ValueBar&quot;
+                                IsHitTestVisible=&quot;False&quot;
+                                Fill=&quot;#FFFFFFFF&quot; /&gt;
+                            &lt;UpDownTextBox
+                                x:Name=&quot;PART_ValueTextBox&quot;
+                                FontFamily=&quot;{TemplateBinding FontFamily}&quot;
+                                FontSize=&quot;{TemplateBinding FontSize}&quot;
+                                Foreground=&quot;{TemplateBinding Foreground}&quot;
+                                HorizontalAlignment=&quot;Stretch&quot;
+                                    /&gt;
+                        &lt;/Grid&gt;
+                        &lt;RepeatButton
+                            Grid.Column=&quot;1&quot;
+                            x:Name=&quot;PART_DecrementButton&quot;
+                            Margin=&quot;4,0,0,0&quot;
+                            Content=&quot;&amp;#x2796;&quot; /&gt;
+                        &lt;RepeatButton
+                            Grid.Column=&quot;2&quot;
+                            x:Name=&quot;PART_IncrementButton&quot;
+                            Margin=&quot;3,0,0,0&quot;
+                            Content=&quot;&amp;#x2795;&quot; /&gt;
+                    &lt;/Grid&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<p>Alternatively, here is a more Silverlight-like style:</p>
+<pre><code>&lt;Style x:Key=&quot;NumericUpDownSilverlightLikeStyle&quot; TargetType=&quot;NumericUpDown&quot;&gt;
+    &lt;Setter Property=&quot;Margin&quot; Value=&quot;2,0,2,0&quot;/&gt;
+    &lt;Setter
+        Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate
+                TargetType=&quot;NumericUpDown&quot;&gt;
+                &lt;Border
+                    Background=&quot;{TemplateBinding Background}&quot;
+                    BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                    BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;
+                    VerticalAlignment=&quot;Top&quot;&gt;
+                    &lt;Grid&gt;
+                        &lt;Grid.ColumnDefinitions&gt;
+                            &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+                            &lt;ColumnDefinition Width=&quot;Auto&quot; /&gt;
+                        &lt;/Grid.ColumnDefinitions&gt;
+                        &lt;Grid.RowDefinitions&gt;
+                            &lt;RowDefinition Height=&quot;0.5*&quot;/&gt;
+                            &lt;RowDefinition Height=&quot;0.5*&quot;/&gt;
+                        &lt;/Grid.RowDefinitions&gt;
+                        &lt;Grid
+                            Grid.Column=&quot;0&quot;
+                            Grid.RowSpan=&quot;2&quot;&gt;
+                            &lt;UpDownTextBox
+                                x:Name=&quot;PART_ValueTextBox&quot;
+                                FontFamily=&quot;{TemplateBinding FontFamily}&quot;
+                                FontSize=&quot;{TemplateBinding FontSize}&quot;
+                                Foreground=&quot;{TemplateBinding Foreground}&quot;
+                                HorizontalAlignment=&quot;Stretch&quot;
+                                VerticalAlignment=&quot;Top&quot;
+                                    /&gt;
+                        &lt;/Grid&gt;
+                        &lt;RepeatButton
+                            Grid.Column=&quot;1&quot;
+                            Grid.Row=&quot;0&quot;
+                            FontSize=&quot;10&quot;
+                            FontFamily=&quot;Verdana&quot;
+                            x:Name=&quot;PART_IncrementButton&quot;
+                            Content=&quot;&amp;#x2795;&quot;
+                            Interval=&quot;50&quot;
+                            Padding=&quot;2,0,3,0&quot;
+                            Margin=&quot;2,0,2,0&quot;/&gt;
+                        &lt;RepeatButton
+                            Grid.Column=&quot;1&quot;
+                            Grid.Row=&quot;1&quot;
+                            FontSize=&quot;10&quot;
+                            FontFamily=&quot;Verdana&quot;
+                            x:Name=&quot;PART_DecrementButton&quot;
+                            Content=&quot;&amp;#x2796;&quot;
+                            Interval=&quot;50&quot;
+                            Padding=&quot;2,0,3,0&quot;
+                            Margin=&quot;2,2,2,0&quot;/&gt;
+                    &lt;/Grid&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-datepicker">Styling the DatePicker</h2>
+<p>To customize the DatePicker control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the DatePicker control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the DatePicker parents' resources), and reference it with: &lt;DatePicker Style={StaticResource DatePickerStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;DatePickerStyle1&quot; TargetType=&quot;DatePicker&quot;&gt;
+    &lt;Setter Property=&quot;BorderBrush&quot; Value=&quot;Gray&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;1&quot; /&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;DatePicker&quot;&gt;
+                &lt;Grid x:Name=&quot;Root&quot;&gt;
+                    &lt;Grid.ColumnDefinitions&gt;
+                        &lt;ColumnDefinition Width=&quot;*&quot;/&gt;
+                        &lt;ColumnDefinition Width=&quot;Auto&quot;/&gt;
+                    &lt;/Grid.ColumnDefinitions&gt;
+                    &lt;TextBox x:Name=&quot;TextBox&quot; Grid.Column=&quot;0&quot; Background=&quot;{TemplateBinding Background}&quot; BorderBrush=&quot;{TemplateBinding BorderBrush}&quot; BorderThickness=&quot;{TemplateBinding BorderThickness}&quot; Padding=&quot;{TemplateBinding Padding}&quot; /&gt;
+                    &lt;Button x:Name=&quot;Button&quot; Grid.Column=&quot;1&quot; Content=&quot;▼&quot; Width=&quot;30&quot; Foreground=&quot;{TemplateBinding Foreground}&quot; BorderBrush=&quot;{TemplateBinding BorderBrush}&quot; BorderThickness=&quot;{TemplateBinding BorderThickness}&quot; Margin=&quot;2,0,2,0&quot;/&gt;
+                    &lt;Popup x:Name=&quot;Popup&quot; VerticalAlignment=&quot;Bottom&quot;/&gt;
+                &lt;/Grid&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-timepicker">Styling the TimePicker</h2>
+<p>To customize the TimePicker control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the TimePicker control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the TimePicker parents' resources), and reference it with: &lt;TimePicker Style={StaticResource TimePickerStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;TimePickerStyle1&quot; TargetType=&quot;TimePicker&quot;&gt;
+    &lt;Setter Property=&quot;BorderBrush&quot; Value=&quot;Gray&quot;/&gt;
+    &lt;Setter Property=&quot;BorderThickness&quot; Value=&quot;1&quot; /&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;TimePicker&quot;&gt;
+                &lt;Grid x:Name=&quot;Root&quot;&gt;
+                    &lt;Grid.ColumnDefinitions&gt;
+                        &lt;ColumnDefinition Width=&quot;*&quot;/&gt;
+                        &lt;ColumnDefinition Width=&quot;Auto&quot;/&gt;
+                    &lt;/Grid.ColumnDefinitions&gt;
+                    &lt;TextBox x:Name=&quot;TextBox&quot; Grid.Column=&quot;0&quot; Background=&quot;{TemplateBinding Background}&quot; BorderBrush=&quot;{TemplateBinding BorderBrush}&quot; BorderThickness=&quot;{TemplateBinding BorderThickness}&quot; Padding=&quot;{TemplateBinding Padding}&quot; /&gt;
+                    &lt;Button x:Name=&quot;Button&quot; Grid.Column=&quot;1&quot; Content=&quot;▼&quot; Width=&quot;30&quot; Foreground=&quot;{TemplateBinding Foreground}&quot; BorderBrush=&quot;{TemplateBinding BorderBrush}&quot; BorderThickness=&quot;{TemplateBinding BorderThickness}&quot; Margin=&quot;2,0,2,0&quot;/&gt;
+                    &lt;Popup x:Name=&quot;Popup&quot; VerticalAlignment=&quot;Bottom&quot;/&gt;
+                &lt;/Grid&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;
+&lt;/Style&gt;
+</code></pre>
+<h2 id="styling-the-hyperlinkbutton">Styling the HyperlinkButton</h2>
+<p>To customize the HyperlinkButton control, you can apply a custom ControlTemplate.</p>
+<p>Below you will find a sample Style and ControlTemplate for the HyperlinkButton control. To use it, you can place the code in the XAML resources (either App.xaml or anywhere in the TimePicker parents' resources), and reference it with: &lt;HyperlinkButton Style={StaticResource HyperlinkButtonStyle1} /&gt;</p>
+<pre><code>&lt;Style x:Key=&quot;HyperlinkButtonStyle1&quot; TargetType=&quot;HyperlinkButton&quot;&gt;
+    &lt;Setter Property=&quot;Foreground&quot; Value=&quot;#0000EE&quot;/&gt;
+    &lt;Setter Property=&quot;Cursor&quot; Value=&quot;Hand&quot;/&gt;
+    &lt;Setter Property=&quot;HorizontalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;VerticalContentAlignment&quot; Value=&quot;Center&quot;/&gt;
+    &lt;Setter Property=&quot;Template&quot;&gt;
+        &lt;Setter.Value&gt;
+            &lt;ControlTemplate TargetType=&quot;HyperlinkButton&quot;&gt;
+                &lt;Border x:Name=&quot;OuterBorder&quot;
+                            Background=&quot;{TemplateBinding Background}&quot;
+                            BorderBrush=&quot;{TemplateBinding BorderBrush}&quot;
+                            BorderThickness=&quot;{TemplateBinding BorderThickness}&quot;&gt;
+                    &lt;VisualStateManager.VisualStateGroups&gt;
+                        &lt;VisualStateGroup Name=&quot;CommonStates&quot;&gt;
+                            &lt;VisualState Name=&quot;Normal&quot;&gt;
+                            &lt;/VisualState&gt;
+                            &lt;VisualState Name=&quot;PointerOver&quot;&gt;
+                                &lt;Storyboard&gt;
+                                    &lt;ObjectAnimationUsingKeyFrames Storyboard.TargetProperty=&quot;FontWeight&quot; Storyboard.TargetName=&quot;ContentPresenter&quot;&gt;
+                                        &lt;DiscreteObjectKeyFrame KeyTime=&quot;0&quot; Value=&quot;Bold&quot;/&gt;
+                                    &lt;/ObjectAnimationUsingKeyFrames&gt;
+                                &lt;/Storyboard&gt;
+                            &lt;/VisualState&gt;
+                        &lt;/VisualStateGroup&gt;
+                    &lt;/VisualStateManager.VisualStateGroups&gt;
+                    &lt;ContentPresenter x:Name=&quot;ContentPresenter&quot;
+                              ContentTemplate=&quot;{TemplateBinding ContentTemplate}&quot;
+                              Content=&quot;{TemplateBinding Content}&quot;
+                              Margin=&quot;{TemplateBinding Padding}&quot;
+                              HorizontalAlignment=&quot;{TemplateBinding HorizontalContentAlignment}&quot;
+                              VerticalAlignment=&quot;{TemplateBinding VerticalContentAlignment}&quot;/&gt;
+                &lt;/Border&gt;
+            &lt;/ControlTemplate&gt;
+        &lt;/Setter.Value&gt;
+    &lt;/Setter&gt;        
+&lt;/Style&gt;
+</code></pre>
+<p>Contact Us
+Please <a href="https://opensilver.net/contact.aspx">click here</a> for contact information.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

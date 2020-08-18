@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to use the native HTML5 canvas for high performance </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to use the native HTML5 canvas for high performance ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-use-the-native-html5-canvas-for-high-performance">How to use the native HTML5 canvas for high performance</h1>
+
+<h2 id="why-use-the-native-html5-canvas">Why use the native HTML5 canvas</h2>
+<p>OpenSilver usually renders each XAML object as one or more <div> elements in the HTML page. This enables to achieve most of the layout features of the Microsoft XAML language, including the Horizontal/Vertical alignment, sizing, panels such as StackPanel, Grid, WrapPanel, and more. Furthermore, OpenSilver provides a full implementation of the Dependency Properties system, supporting features such as properties metadata, default values, styles, locally set values, bindings, static resources, &quot;property changed&quot; callbacks, metadata override, value coercion, and more.<p>
+<p>However, there are cases where all those features can lead to performance issues, especially if you are developing a very specific control that needs to render thousands of UI elements, such as a Charting or a Calendar control.</p>
+<p>To improve performance in those specific cases, it is recommended that you use the native HTML5 &lt;canvas&gt; control named &quot;HtmlCanvas&quot;, which is located in the namespace &quot;CSHTML5.Native.Html.Controls&quot;.</p>
+<p>This document explains what it is and how to use it.</p>
+<h2 id="what-is-the-htmlcanvas-control-and-how-to-use-it">What is the HtmlCanvas control and how to use it</h2>
+<p>The &quot;HtmlCanvas&quot; control is a high performance control that renders all its children as a single native HTML5 &lt;canvas&gt; element. Instead of ending up with thousands of HTML elements, you end up only with a single HTML element.</p>
+<p><em>IMPORTANT:</em> The rendering is done when you call the Draw() method.</p>
+<p>The HtmlCanvas control has a &quot;Children&quot; property that can contain any of the following elements:</p>
+<ul>
+<li>RectangleElement</li>
+<li>TextElement</li>
+<li>LineElement</li>
+<li>ImageElement</li>
+<li>ContainerElement</li>
+</ul>
+<p>Please refer to the <a href="#reference">&quot;Reference&quot;</a> section below for details on each element.</p>
+<p>Note: for performance reasons, those elements do not support binding, and they are always positioned relative to their container element, using (X,Y) coordinates.</p>
+<h2 id="example1">Example1</h2>
+<pre><code>&lt;native:HtmlCanvas x:Name=&quot;HtmlCanvas1&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;&gt;
+    &lt;native:RectangleElement X=&quot;200&quot; Y=&quot;42&quot; Width=&quot;100&quot; Height=&quot;50&quot; FillColor=&quot;Blue&quot;/&gt;
+&lt;/native:HtmlCanvas&gt;
+</code></pre>
+<p>Then, in your C# code (for example in the Page_Loaded event), be sure to call:
+<em>HtmlCanvas1.Draw();</em></p>
+<p>Note: it is important that you call the &quot;Draw()&quot; method only AFTER the HtmlCanvas has been added to the Visual Tree. To know whether the control is in the visual tree, you can read the &quot;IsLoaded&quot; property, which should be equal to &quot;true&quot;.</p>
+<h2 id="example2">Example2</h2>
+<p>Use the code below to display 10,000 colored rectangles.</p>
+<p>Note: this example is intended to be tested in the browser rather than the Simulator because the Simulator is much slower at working with the HtmlCanvas control due to underlying C#/JS interop calls.</p>
+<pre><code>private void Button_Click(object sender, RoutedEventArgs e)
+{
+    if (!CSHTML5.Interop.IsRunningInTheSimulator)
+    {
+        Random rand = new Random();
+        double x, y, w, h;
+        CSHTML5.Native.Html.Controls.RectangleElement r;
+        double canvasWidth = HtmlCanvas1.ActualWidth;
+        double canvasHeight = HtmlCanvas1.ActualHeight;
+        HtmlCanvas1.Children.Clear();
+        for (int i = 0; i &lt; 10000; i += 1)
+        {
+            w = rand.Next(10, 100);
+            h = rand.Next(10, 100);
+            x = rand.Next((int)canvasWidth - (int)w);
+            y = rand.Next((int)canvasHeight - (int)h);
+            r = new CSHTML5.Native.Html.Controls.RectangleElement(x, y, w, h);
+            HtmlCanvas1.Children.Add(r);
+            r.FillColor = Color.FromArgb((byte)rand.Next(256), (byte)rand.Next(256), (byte)rand.Next(256), (byte)rand.Next(256));
+        }
+        HtmlCanvas1.Draw();
+    }
+    else
+    {
+        System.Windows.MessageBox.Show(&quot;This demo is too slow to run in the Simulator. Please run in the browser instead.&quot;);
+    }
+}
+</code></pre>
+<p>XAML code:</p>
+<pre><code>     &lt;Grid&gt;
+        &lt;native:HtmlCanvas Name=&quot;HtmlCanvas1&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;/&gt;
+        &lt;Button Content=&quot;Click to render&quot; HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; Click=&quot;Button_Click&quot;/&gt;
+    &lt;/Grid&gt;
+</code></pre>
+<p>Example3 (full project)
+<br>
+<img src="../../images/htmlcanvasdemo1_screenshot.png" alt="canvasDemo" title="HtmlCanvas Demo 1 Screenshot"></p>
+<p>You can run the sample online <a href="http://cshtml5.com/samples/htmlcanvas1/index.html?20170316">here</a>.</p>
+<p>You can download the full source code from GitHub at the following URL (just click the green button named &quot;Clone or download&quot;):
+<a href="https://github.com/cshtml5/CSHTML5.Demos.HtmlCanvasPerformance1">https://github.com/cshtml5/CSHTML5.Demos.HtmlCanvasPerformance1</a></p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><em>HtmlCanvas:</em> this is the main XAML control that you should place in your XAML tree. Its purpose is to generate a native html &lt;canvas&gt; tag in the output html page. This control is a DependencyObject and has all the same positioning properties as the other XAML controls (HorizontalAlignment, VerticalAlignment, Width, Height, etc.).</li>
+</ul>
+<p>Example in XAML:</p>
+<pre><code>&lt;native:HtmlCanvas Width=&quot;100&quot; Height=&quot;100&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;&gt;
+     &lt;!-- Place children here --&gt;
+&lt;/native:Canvas&gt;
+</code></pre>
+<p>Example in C#:</p>
+<pre><code>HtmlCanvas myCanvas = new HtmlCanvas();
+myCanvas.Width = 100;
+myCanvas.Height = 100;
+</code></pre>
+<p>The following elements that can be added to the &quot;HtmlCanvas.Children&quot; collection:</p>
+<ul>
+<li><em>RectangleElement:</em> this will draw a rectangle at the specified (X,Y) position relative to its container, with the specified (Width, Height) and FillColor.</li>
+</ul>
+<p>Example in XAML:</p>
+<pre><code>&lt;native:HtmlCanvas Width=&quot;1000&quot; Height&quot;500&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;&gt;
+    &lt;native:RectangleElement X=&quot;200&quot; Y=&quot;42&quot; Width=&quot;100&quot; Height=&quot;50&quot; FillColor=&quot;Blue&quot;/&gt;
+&lt;/native:HtmlCanvas&gt;
+</code></pre>
+<ul>
+<li><em>TextElement:</em> this will draw some text at the specified (X,Y) position relative to its container. It contains the properties &quot;Text&quot; and &quot;Font&quot; (note: if you set the &quot;Font&quot; property, it needs to be specified in the html format).</li>
+</ul>
+<p>Example in XAML:</p>
+<pre><code>&lt;native:HtmlCanvas Width=&quot;1000&quot; Height&quot;500&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;&gt;
+    &lt;native:TextElement X=&quot;200&quot; Y=&quot;42&quot; Text=&quot;I am the text&quot; Font=&quot;20px Arial&quot;/&gt;
+&lt;/native:HtmlCanvas&gt;
+</code></pre>
+<ul>
+<li><em>LineElement:</em> this will draw a line that goes from coordinates (X1,Y1) to (X2,Y2) relative to its container.</li>
+</ul>
+<p>Example in XAML:</p>
+<pre><code>&lt;native:HtmlCanvas Width=&quot;1000&quot; Height=&quot;500&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;&gt;
+    &lt;native:LineElement X1=&quot;200&quot; Y1=&quot;42&quot; X2=&quot;100&quot; Y2=&quot;50&quot; StrokeColor=&quot;Red&quot; LineWidth=&quot;2&quot;/&gt;
+&lt;/native:HtmlCanvas&gt;
+</code></pre>
+<ul>
+<li><p><em>ImageElement:</em> this will draw an image at the specified (X,Y) position relative to its container. The image filename can be specified by setting the &quot;Source&quot; property. You can use any of the two following syntaxes:</p>
+</li>
+<li><p>ms-appx:///AssemblyName/FolderName/FileName.png</p>
+</li>
+<li><p>/AssemblyName;component/FolderName/FileName.png</p>
+</li>
+</ul>
+<p>Example in XAML:</p>
+<pre><code>&lt;native:HtmlCanvas Width=&quot;1000&quot; Height&quot;500&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;&gt;
+    &lt;native:ImageElement Source=&quot;ms-appx:///MyAssembly/MyFolder/Image.png&quot; X=&quot;200&quot; Y=&quot;42&quot; Width=&quot;100&quot; Height=&quot;50&quot;/&gt;
+&lt;/native:HtmlCanvas&gt;
+</code></pre>
+<ul>
+<li><em>ContainerElement:</em> this element is meant to contain other elements via its &quot;Children&quot; property. You can also nest ContainerElements inside other ContainerElements. The purpose of a ContainerElement is to enable its children to be positioned relative to the container, as well as to encapsulate portions of the rendering.</li>
+</ul>
+<p>Here is how this &quot;encapsulation&quot; concept works:</p>
+<p>You can create classes that inherit from the &quot;ContainerElement&quot; class in order to encapsulate and reuse portions of the rendering, such as sprites in a game or business objects in a business application. For example, if you are developing a Calendar control using a single HtmlCanvas control, you may want to create a &quot;DayElement&quot; class that is in charge of rendering a single day, by making the &quot;DayElement&quot; class inherit from the &quot;ContainerElement&quot; class. In the constructor of the &quot;DayElement&quot; class, you may create all the elements needed to render a single day - such as a &quot;TextElement&quot; for the day number - and add them to the &quot;Children&quot; collection of the &quot;DayElement&quot; class. Then, to render the whole calendar, you may instantiate as many instances of the &quot;DayElement&quot; class as there are days in the calendar, and add them to the &quot;Children&quot; collection of the &quot;HtmlCanvas&quot; control.</p>
+<p>Example in XAML:</p>
+<pre><code>&lt;native:HtmlCanvas Width=&quot;1000&quot; Height&quot;500&quot; xmlns:native=&quot;using:CSHTML5.Native.Html.Controls&quot;&gt;
+    &lt;native:ContainerElement X=&quot;200&quot; Y=&quot;42&quot; Width=&quot;100&quot; Height=&quot;50&quot; FillColor=&quot;Blue&quot;&gt;
+        &lt;!-- Place children here --&gt;
+    &lt;/native:ContainerElement&gt;
+&lt;/native:HtmlCanvas&gt;
+A more complete example of use of the ContainerElement can be found at:
+   https://github.com/cshtml5/CSHTML5.Demos.HtmlCanvasPerformance1
+</code></pre>
+<p><em>IMPORTANT: The rendering is done only when you call the &quot;HtmlCanvas.Draw()&quot; method.</em></p>
+<p>The following <em>properties</em> are available to all the elements above:</p>
+<ul>
+<li>FillColor</li>
+<li>StrokeColor</li>
+<li>ShadowColor</li>
+<li>ShadowBlur</li>
+<li>ShadowOffsetX</li>
+<li>ShadowOffsetY</li>
+<li>LineCap</li>
+<li>LineJoin</li>
+<li>MeterLimit</li>
+<li>ToolTip</li>
+<li>ContextMenu</li>
+</ul>
+<p>The following methods are available to all the elements above:</p>
+<ul>
+<li>MoveTo(X,Y): This method will position the element at the specified (X,Y) coordinates relative to its container.</li>
+<li>Move(DeltaX, DeltaY): This method will add the passed (DeltaX,DeltaY) coordinates to the current (X,Y) coordinates.</li>
+</ul>
+<p>The following <em>events</em> are available to all the elements above:</p>
+<ul>
+<li>PointerPressed</li>
+<li>PointerReleased</li>
+<li>PointerMoved</li>
+<li>PointerEntered</li>
+<li>PointerExited</li>
+<li>RightTapped</li>
+</ul>
+<p>Please note that, if you make changes to the UI of the HtmlCanvas, you need to call the &quot;Draw()&quot; method to refresh. For convenience, the class <em>&quot;HtmlCanvasPointerRoutedEventArgs&quot;</em> passed to the event handlers contains a <em>reference to the parent HtmlCanvas control</em>.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="How-to-use-htmlPresenter.html">How to profile performance</a></li>
+<li><a href="#">How to use the HtmlPresenter control</a></li>
+</ul>
+<h2 id="contact-us">Contact Us</h2>
+<p>Please <a href="https://opensilver.net/contact.aspx">click here</a> for contact information.</p>
+</div></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

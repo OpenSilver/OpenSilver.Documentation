@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to interact between HTML / JavaScript and C# / XAML? </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to interact between HTML / JavaScript and C# / XAML? ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-interact-between-html--javascript-and-c--xaml">How to interact between HTML / JavaScript and C# / XAML?</h1>
+
+<p>OpenSilver contains an easy-to-use API that allows to call JavaScript code from C# code. The opposite is also possible by exposing C# entry points to the JavaScript context.</p>
+<p>This API allows to get out of the .NET world in order to interact with the browser, to access low-level functionalities, to extend the framework, to manually manipulate HTML and CSS, and to interact with JavaScript libraries.</p>
+<p>This API is widely used for example by the &quot;OpenSilver.Runtime&quot; project, which contains the implementation of controls like TextBox via HTML and CSS.</p>
+<p>The general syntax is as follows:</p>
+<pre><code>var result = Interop.ExecuteJavaScript(&quot;any JS code&quot;, params);
+</code></pre>
+<p>Here is an example showing how to display a native browser dialog:</p>
+<pre><code>public static void DisplayAlert(string text)
+{
+    Interop.ExecuteJavaScript(&quot;alert($0)&quot;, text);
+}
+</code></pre>
+<p>$0 is replaced by the first argument, $1 is replaced by the second, etc. For strings it is the same as concatenating strings, but the purpose of this syntax is to preserve string typing in the case where the types are more complex, as we will see below.</p>
+<p>One of the functionalities supported by this API is the passage of objects from the JavaScript context to the C# context, so as to be able to chain several calls, as shown in the following example:</p>
+<pre><code>// Let's get the current URL by chaining multiple JavaScript calls in our C#:
+object jsWindow = Interop.ExecuteJavaScript(&quot;window&quot;);
+object location = Interop.ExecuteJavaScript(&quot;$0.location&quot;, jsWindow);
+string currentUrl = Interop.ExecuteJavaScript(&quot;$0.href&quot;, location).ToString();
+MessageBox.Show(&quot;The current URL is: &quot; + currentUrl);
+</code></pre>
+<p>Another feature is support for events, &quot;delegates&quot; and &quot;callbacks&quot;. Here is an example showing how to obtain, via the browser asynchronously, the GPS coordinates where the user is located:</p>
+<pre><code>void GetGpsPosition()
+{
+    Interop.ExecuteJavaScript(@&quot;navigator.geolocation.getCurrentPosition($0);&quot;, (Action&lt;object&gt;)GpsReceived);
+}
+void GpsReceived(object jsEventArgs)
+{
+    double lat = Convert.ToDouble(Interop.ExecuteJavaScript(&quot;$0.coords.latitude&quot;, jsEventArgs));
+    double lon = Convert.ToDouble(Interop.ExecuteJavaScript(&quot;$0.coords.longitude&quot;, jsEventArgs));
+    MessageBox.Show(&quot;Latitude: &quot; + lat.ToString() + &quot;  Longitude: &quot; + lon.ToString());
+}
+</code></pre>
+<p>To allow the call of C# code from JavaScript code, the developer can simply expose entry points by exposing &quot;delegates&quot;, as shown in the example above.</p>
+<p>Here is another example showing how to expose a  # method taking an argument of type String so that it can be called from JavaScript code:</p>
+<pre><code>Interop.ExecuteJavaScript(&quot;window.MyCSharpEntryPoint = $0&quot;, (Action&lt;string&gt;)MyCSharpMethod);
+</code></pre>
+<p>Furthermore, the API provides access to the HTML visual tree (the DOM) from C#, in order to manually manipulate HTML and CSS. To do this, developers can call the method &quot;Interop.GetDiv(uielement)&quot;, which gives access to the <div> corresponding to the specified XAML element.<p>
+<p>Here is an example that shows how to manually change the background color of the DataGrid XAML by manipulating the corresponding HTML and CSS (note: this is not much useful because the DataGrid already has a Background property in C#, but it shows how to use the low-level API):</p>
+<pre><code>    DataGrid xamlDataGrid = new DataGrid();
+
+    // Let’s subscribe to the “Loaded” event to ensure that the DataGrid is in the HTML tree:
+    xamlDataGrid.Loaded += (s, e) =&gt;
+    {
+        // We get the &lt;div&gt; that corresponds to the DataGrid in the HTML tree:
+        object correspondingDiv = Interop.GetDiv(xamlDataGrid);
+
+        // We change the background color via CSS:
+        Interop.ExecuteJavaScript(&quot;$0.style.backgroundColor = ‘red’ &quot;, correspondingDiv);
+    };
+</code></pre>
+<p>By the way, it is worth noting that the OpenSilver runtime contains a XAML control called &quot;HtmlPresenter&quot;, which allows to easily place and mix HTML code inside XAML code.</p>
+<p>All of these features are demonstrated in the sample open-source application called &quot;OpenSilver Showcase&quot; which is available online at <a href="https://opensilver.net/gallery/">https://opensilver.net/gallery/</a></p>
+</div></article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

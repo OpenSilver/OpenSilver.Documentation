@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Guided tour &#8211; Creation of a new OpenSilver application </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Guided tour &#8211; Creation of a new OpenSilver application ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="https://opensilver.net/">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="guided-tour--creation-of-a-new-opensilver-application">Guided tour – Creation of a new OpenSilver application</h1>
+
+<p>The development experience with OpenSilver is very similar to that of Silverlight, WPF and Universal Platform.</p>
+<p>OpenSilver is distributed as a NuGet package (on NuGet.org) and as a VSIX extension for Visual Studio 2019 (or higher) containing the project templates.</p>
+<p>To create a new OpenSilver-type project, it is recommended to download the project templates first. To do this, go to <a href="https://OpenSilver.NET">https://OpenSilver.NET</a> , click Download, log in with your Microsoft account and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.</p>
+<p><img src="/images/1.OpenSilverWebsite.png" alt="OpenSilver Website" title="The OpenSilver.NET site"></p>
+<p>Then click on New Project and choose &quot;OpenSilver Application&quot;. Note that there is also a &quot;UWP-Compatible&quot; version of OpenSilver, which uses the XAML dialect of UWP instead of that of Silverlight, allowing increased compatibility with Universal Platform.</p>
+<p><img src="/images/2.NewDialogProject.png" alt="Windows prompt for new project" title="The window for creating a new project"></p>
+<p>Once the solution is created, you will see that it has three projects.</p>
+<p><img src="/images/3.solutionExplorer.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects"></p>
+<p>The first is where you will place the files for your application. Its structure is identical to that of a new Silverlight project: it notably contains the files App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs.</p>
+<p>The second project, named with the suffix &quot;.Browser&quot;, is the one you will have to launch to test your application in the browser. It plays a role similar to the &quot;.Web&quot; project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.</p>
+<p>Finally the third project, named with the suffix &quot;.Simulator&quot; is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator below. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C # code at runtime in the &quot;Immediate&quot; window, things that are not possible in the browser.</p>
+<p>To test, let's add the following XAML code inside the MainPage.xaml file, replacing the <code>&lt;Canvas&gt;</code> element:</p>
+<pre><code>&lt;StackPanel HorizontalAlignment=&quot;Left&quot;&gt;
+  &lt;TextBlock Text=&quot;Enter some text below:&quot;/&gt;
+  &lt;TextBox x:Name=&quot;MyTextBox1&quot;/&gt;
+  &lt;Button Content=&quot;Click me&quot; Click=&quot;Button_Click&quot;/&gt;
+&lt;/StackPanel&gt;
+</code></pre>
+<p><img src="/images/4.MainPage.xaml.png" alt="MainPage.xaml" title="The modified MainPage.xaml page"></p>
+<p>And C# code inside the MainPage.xaml.cs file:</p>
+<pre><code>void Button_Click(object sender, RoutedEventArgs e)
+{
+    MessageBox.Show(&quot;You entered the following text: &quot; + MyTextBox1.Text);
+}
+</code></pre>
+<p><img src="/images/5.MainPage.xaml.cs.png" alt="MainPage.xaml.cs" title="The modified MainPage.xaml.cs page"></p>
+<p>Let's recompile the solution and launch the project with the suffix &quot;.Browser&quot;. The default browser launches and the application runs.</p>
+<p><img src="/images/6.AppBrowser.png" alt="application displaying a message in the browser" title="The application running in the browser"></p>
+<p>Let’s enter some text and press the button. A dialog box appears with the text entered.</p>
+<p><img src="/images/7.DialogBrowser.png" alt="application displaying a message in the browser" title="The application displaying a message in the browser"></p>
+<p>To see that the application runs in WebAssembly (currently in interpreted mode), let’s go to the browser development tools (Chrome in this example) by pressing the F12 key, then go to the &quot;Network&quot; tab and refresh the page by pressing F5. Microsoft .NET assemblies (such as &quot;mscorlib.dll&quot; and &quot;System.dll&quot;) are downloaded by the browser instead of JavaScript files.</p>
+<p><img src="/images/8.NetworkTab.png" alt="Network tab" title="Network tab in Chrome's development tools"></p>
+<p>Now let's go back to Visual Studio and launch the project with the suffix &quot;.Simulator&quot;</p>
+<p>Note: if a message indicates that the Simulator is not configured, simply open the &quot;Package Manager Console&quot; and wait for the Simulator to be automatically configured, then restart the project.</p>
+<p>The application launches. Let’s enter some text and click the button.</p>
+<p><img src="/images/9.AppSimulator.png" alt="Application in the Simulator" title="The application running in the Simulator"></p>
+<p>Let's put a breakpoint inside the Button_Click method. It is possible to inspect the variables and to do step-by-step debugging.</p>
+<p><img src="/images/10.Breakpoint.png" alt="Breakpoint" title="Variables inspection at a Breakpoint"></p>
+<p>Let’s press the F5 key to continue.</p>
+<p>From the Simulator window, let’s press &quot;Inspect Visual Tree&quot; (in the top right corner) to explore the visual tree that constitutes the UI of the application.</p>
+<p><img src="/images/11.VisualTree.png" alt="Breakpoint" title="The Simulator visual tree inspector"></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
