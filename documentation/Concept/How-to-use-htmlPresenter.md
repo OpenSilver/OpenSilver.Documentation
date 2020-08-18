@@ -202,7 +202,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
 
 Here is a screenshot of the result:
 </br>
-![html_demo](/images/htmlpresenterdemo1_screenshot.png "HtmlPresenter demo screenshot")
+![html_demo](../../images/htmlpresenterdemo1_screenshot.png "HtmlPresenter demo screenshot")
 
 
 ## Example 2: Creating a NumericTextBox control with &lt;input type='number'&gt;
@@ -307,7 +307,7 @@ namespace Application1
 
 Here is a screenshot of the result:
 </br>
-![NumericTextBox](/images/creating-a-numeric-text-box1.png "Creating a NumericTextBox - screenshot")
+![NumericTextBox](../../images/creating-a-numeric-text-box1.png "Creating a NumericTextBox - screenshot")
 
 
 

@@ -32,7 +32,7 @@ In the current version, C#/XAML for HTML5 has the following limitations regardin
 
 * When adding a WCF Service Reference via the "Add Service Reference" command of VS, VS may add unwanted references to your project, such as the "System" reference. *You need to manually remove those references in order to be able to compile the project.*
 
-![Remove reference System](/images/RemoveSystemreference.png "Remove System.* refere,ces")
+![Remove reference System](../../images/RemoveSystemreference.png "Remove System.* refere,ces")
 
 * When using OpenSilver, configuring a WCF Service Reference requires temporarily adding a reference to the "System.dll" assembly. You should add this reference only while configuring the service, and then you should remove it once the service has been configured.
 

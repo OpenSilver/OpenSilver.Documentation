@@ -44,7 +44,7 @@ In FireFox and IE, in order to print background colors and images (including <Im
 ## Example: printing an invoice
 Here is a screenshot of the result:
 
-![Screenshot of the Printing Invoice demo](/images/screenshotPrintingDemo.png "Screenshot of the Printing Invoice demo")
+![Screenshot of the Printing Invoice demo](../../images/screenshotPrintingDemo.png "Screenshot of the Printing Invoice demo")
 
 ### XAML code:
 ```

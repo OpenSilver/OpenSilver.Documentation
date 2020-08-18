@@ -87,7 +87,7 @@ XAML code:
 
 Example3 (full project)
 </br>
-![canvasDemo](/images/htmlcanvasdemo1_screenshot.png "HtmlCanvas Demo 1 Screenshot")
+![canvasDemo](../../images/htmlcanvasdemo1_screenshot.png "HtmlCanvas Demo 1 Screenshot")
 
 
 You can run the sample online [here](http://cshtml5.com/samples/htmlcanvas1/index.html?20170316).

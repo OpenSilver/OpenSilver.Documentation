@@ -9,7 +9,7 @@ You should now have downloaded a file with a name similar to "kendoui.for.jquery
 
 3. *Extract the libraries* that you have downloaded at the previous step and place them *into a subfolder of your project.* Note: while you can always extract all the files, only a few files are actually required. Here is a screenshot that shows which files are required:
 </br>
-![Kendorequirement](/images/kendo-ui-for-cshtml5-libraries1.png "Kendo UI for CSHTML5")
+![Kendorequirement](../../images/kendo-ui-for-cshtml5-libraries1.png "Kendo UI for CSHTML5")
 
 
 4. Make sure that the *"Build Action"* of the files that you have added is *"Content"* (in particular, the default build action of the .ttf and .woff files is usually "none", so you need to change it to "Content"). To do so, select a file in the Solution Explorer and press F4 to see its properties.

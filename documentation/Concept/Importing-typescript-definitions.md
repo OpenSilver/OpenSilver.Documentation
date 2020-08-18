@@ -106,7 +106,7 @@ Click HERE to download a sample OpenSilver project that demonstrates the use of 
 This is what the project looks like:
 <br>
 
-![solutionExplorer](/images/typescript_importer_solution_explorer.png "Screenshot of Solution Explorer")
+![solutionExplorer](../../images/typescript_importer_solution_explorer.png "Screenshot of Solution Explorer")
 
 This is the content of MainPage.xaml:
 ```
