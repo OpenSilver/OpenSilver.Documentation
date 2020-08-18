@@ -45,6 +45,46 @@ The files used are referenced in the .json which is at the base of the folder. E
 
 ## Update Github Pages
 
+## Markdown exemples
+Create a title
+```
+# H1 ##H2 ### H3
+```
+
+Emphasis a Text
+```
+*bold text*
+```
+
+Unordered List :
+```
+* Element 1
+* Element 2
+* Element 3
+```
+
+Ordered List :
+```
+1. Element 1
+2. Element 2
+3. Element 3
+```
+
+Add an image
+```
+![Name](/images/img.png "title")
+```
+
+add an hyperlink :
+```
+[Texte](link)
+```
+
+add Code :
+```
+  ``` Code ```  
+```
+
 ## Link to Source Code
 To generate the documentation from the source code, one needs to edit the docfx.json file. In the metadata section, there is the path of the csproj :
 ```
