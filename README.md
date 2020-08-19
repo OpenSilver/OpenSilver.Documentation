@@ -82,9 +82,6 @@ add Code :
   ``` Code ```  
 ```
 
-## Organize your project for github Pages
-In order to facilitate your commit, it's better to have the master branch in the root folder and clone the gh-pages branch in the _site folder. This will allows you to push both branches without going back and forth.
-
 ## Link to Source Code
 To generate the documentation from the source code, one needs to edit the docfx.json file. In the metadata section, there is the path of the csproj :
 ```
@@ -100,4 +97,6 @@ To generate the documentation from the source code, one needs to edit the docfx.
 ```
 
 and use the command to read only the metadata configuration
-`docfx metadata`
+```
+docfx metadata
+```
