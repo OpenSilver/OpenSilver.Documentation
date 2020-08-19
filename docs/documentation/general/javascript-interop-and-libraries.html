@@ -8,7 +8,7 @@
     <title>Interop between C# and JavaScript, importing JS libraries, and importing TypeScript Definitions </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interop between C# and JavaScript, importing JS libraries, and importing TypeScript Definitions ">
-    <meta name="generator" content="docfx 2.56.1.0">
+    <meta name="generator" content="docfx 2.56.2.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -82,7 +82,7 @@
     Interop.ExecuteJavaScript(&quot;alert($0)&quot;, text);
 }
 </code></pre>
-<p>$0 is replaced by the first argument, $1 is replaced by the second, etc. For strings it is the same as concatenating strings, but the purpose of this syntax is to preserve string typing in the case where the types are more complex, as we will see below.</p>
+<p>$0 is replaced by the first argument, $1 is replaced by the second, etc. For strings it is the same as concatenating strings, but the purpose of this syntax is to preserve strong typing in the case where the types are more complex, as we will see below.</p>
 <p>One of the functionalities supported by this API is the passage of objects from the JavaScript context to the C# context, so as to be able to chain several calls, as shown in the following example:</p>
 <pre><code>// Let's get the current URL by chaining multiple JavaScript calls in our C#:
 object jsWindow = Interop.ExecuteJavaScript(&quot;window&quot;);
@@ -103,10 +103,10 @@ void GpsReceived(object jsEventArgs)
 }
 </code></pre>
 <p>To allow the call of C# code from JavaScript code, the developer can simply expose entry points by exposing &quot;delegates&quot;, as shown in the example above.</p>
-<p>Here is another example showing how to expose a  # method taking an argument of type String so that it can be called from JavaScript code:</p>
+<p>Here is another example showing how to expose a C# method taking an argument of type String so that it can be called from JavaScript code:</p>
 <pre><code>Interop.ExecuteJavaScript(&quot;window.MyCSharpEntryPoint = $0&quot;, (Action&lt;string&gt;)MyCSharpMethod);
 </code></pre>
-<p>Furthermore, the API provides access to the HTML visual tree (the DOM) from C#, in order to manually manipulate HTML and CSS. To do this, developers can call the method &quot;Interop.GetDiv(uielement)&quot;, which gives access to the <div> corresponding to the specified XAML element.<p>
+<p>Furthermore, the API provides access to the HTML visual tree (the DOM) from C#, in order to manually manipulate HTML and CSS. To do this, developers can call the method &quot;Interop.GetDiv(uielement)&quot;, which gives access to the corresponding <code>div</code> of the specified XAML element.</p>
 <p>Here is an example that shows how to manually change the background color of the DataGrid XAML by manipulating the corresponding HTML and CSS (note: this is not much useful because the DataGrid already has a Background property in C#, but it shows how to use the low-level API):</p>
 <pre><code>    DataGrid xamlDataGrid = new DataGrid();
 
@@ -144,8 +144,8 @@ void GpsReceived(object jsEventArgs)
 <p>Normally these files are intended for developers of TypeScript applications, but OpenSilver has diverted their use in order to auto-generate strongly typed C# wrapper classes that allow to interact with JavaScript libraries in pure C#, that is to say without any manual call to JavaScript.</p>
 <p>To use these files, developers can simply copy/paste them to an OpenSilver project and compile the project. The auto-generated files can be seen in the “obj/Debug” subfolder of the project.</p>
 <p>In the current version, some advanced features of TypeScript are not yet supported, so a little cleaning up inside the TypeScript Definition file is often necessary to keep only the essentials.</p>
-<p>Many examples are available in the GitHub of CSHTML5, which is a sister product also maintained by Userware. Its GitHub is accessible at the following address: <a href="https://github.com/cshtml5?tab=repositories">repositories</a></p>
-</div></article>
+<p>Many examples are available in the GitHub of CSHTML5, which is a sister product also maintained by Userware. Its GitHub is accessible at the following address: <a href="https://github.com/cshtml5?tab=repositories">https://github.com/cshtml5?tab=repositories</a></p>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
