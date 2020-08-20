@@ -22,7 +22,7 @@ public static void DisplayAlert(string text)
 }
 ```
 
-$0 is replaced by the first argument, $1 is replaced by the second, etc. For strings it is the same as concatenating strings, but the purpose of this syntax is to preserve string typing in the case where the types are more complex, as we will see below.
+$0 is replaced by the first argument, $1 is replaced by the second, etc. For strings it is the same as concatenating strings, but the purpose of this syntax is to preserve strong typing in the case where the types are more complex, as we will see below.
 
 One of the functionalities supported by this API is the passage of objects from the JavaScript context to the C# context, so as to be able to chain several calls, as shown in the following example:
 
@@ -51,11 +51,11 @@ void GpsReceived(object jsEventArgs)
 
 To allow the call of C# code from JavaScript code, the developer can simply expose entry points by exposing "delegates", as shown in the example above.
 
-Here is another example showing how to expose a  # method taking an argument of type String so that it can be called from JavaScript code:
+Here is another example showing how to expose a C# method taking an argument of type String so that it can be called from JavaScript code:
 
     Interop.ExecuteJavaScript("window.MyCSharpEntryPoint = $0", (Action<string>)MyCSharpMethod);
 
-Furthermore, the API provides access to the HTML visual tree (the DOM) from C#, in order to manually manipulate HTML and CSS. To do this, developers can call the method "Interop.GetDiv(uielement)", which gives access to the <div> corresponding to the specified XAML element.
+Furthermore, the API provides access to the HTML visual tree (the DOM) from C#, in order to manually manipulate HTML and CSS. To do this, developers can call the method "Interop.GetDiv(uielement)", which gives access to the corresponding `div` of the specified XAML element.
 
 Here is an example that shows how to manually change the background color of the DataGrid XAML by manipulating the corresponding HTML and CSS (note: this is not much useful because the DataGrid already has a Background property in C#, but it shows how to use the low-level API):
 
@@ -112,4 +112,4 @@ To use these files, developers can simply copy/paste them to an OpenSilver proje
 
 In the current version, some advanced features of TypeScript are not yet supported, so a little cleaning up inside the TypeScript Definition file is often necessary to keep only the essentials.
 
-Many examples are available in the GitHub of CSHTML5, which is a sister product also maintained by Userware. Its GitHub is accessible at the following address: [repositories](https://github.com/cshtml5?tab=repositories)
+Many examples are available in the GitHub of CSHTML5, which is a sister product also maintained by Userware. Its GitHub is accessible at the following address: [https://github.com/cshtml5?tab=repositories](https://github.com/cshtml5?tab=repositories)
