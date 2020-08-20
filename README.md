@@ -108,6 +108,6 @@ The template structure is the following :
 
 * Layout folder, this is where you find the *"_master.tmpl"* file which organize the whole documentation structure. It's HTML compatible, so you can add div to change the structure.
 
-* Partials folder, this is where you can organize small structure of the code, small div. Currently, the documentation uses the *".tmpl.partial"* files, the *".liquid"* seems unused. here is you change the navbar layout ("navbar.tmpl.partial"), breadcrumbs ("breadcrumb.tmpl.partial"), logo ("logo.tmpl.partial"), toc ("toc.tmpl.partial"), ...
+* Partials folder, this is where you can organize small structure of the code, small div. Currently, the documentation uses the *".tmpl.partial"* files, the *".liquid"* seems unused. here is you change the navbar layout ("navbar.tmpl.partial"), breadcrumbs ("breadcrumb.tmpl.partial"), toc ("toc.tmpl.partial"), ...
 
 * Style folder, this is your resources folder where you find the *".css"* and the *".js"* files. The *"docfx.js"* & *"docfx.css"* are the default looks of the documentation. The *"docfx.vendor.js"* and the *"docfx.vendor.css"* are the responsive and functional part of the documentation. *"main.js"* & *"main.css"* contains all the custom style.
