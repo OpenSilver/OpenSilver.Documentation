@@ -27,6 +27,25 @@ and the merged command
 
 [Docfx Documentation](https://dotnet.github.io/docfx/tutorial/walkthrough/walkthrough_create_a_docfx_project.html)
 
+## Generate the Source Code
+To generate the documentation from the source code, one needs to edit the docfx.json file. In the metadata section, there is the path of the csproj :
+```
+"metadata": [
+  {
+    "src": [
+      {
+        "files": [
+          "../../OpenSilverDocumentation/OpenSilver/src/CSHTML5.Runtime/**.csproj"
+        ]
+      }
+    ],
+```
+
+and use the command to read only the metadata configuration
+```
+docfx metadata
+```
+
 
 ## Edit Files
 To modify the current documentation, one needs to edit the .md file in the master branch.
@@ -74,7 +93,7 @@ Add an image
 
 add an hyperlink :
 ```
-[Texte](link)
+[Text](link)
 ```
 
 add Code :
@@ -82,21 +101,13 @@ add Code :
   ``` Code ```  
 ```
 
-## Link to Source Code
-To generate the documentation from the source code, one needs to edit the docfx.json file. In the metadata section, there is the path of the csproj :
-```
-"metadata": [
-  {
-    "src": [
-      {
-        "files": [
-          "../../OpenSilverDocumentation/OpenSilver/src/CSHTML5.Runtime/**.csproj"
-        ]
-      }
-    ],
-```
+## Modify the visual style of the Documentation
 
-and use the command to read only the metadata configuration
-```
-docfx metadata
-```
+The template structure is the following :
+* Fonts folder, this is where you add all the fonts
+
+* Layout folder, this is where you find the *"_master.tmpl"* file which organize the whole documentation structure. It's HTML compatible, so you can add div to change the structure.
+
+* Partials folder, this is where you can organize small structure of the code, small div. Currently, the documentation uses the *".tmpl.partial"* files, the *".liquid"* seems unused. here is you change the navbar layout ("navbar.tmpl.partial"), breadcrumbs ("breadcrumb.tmpl.partial"), logo ("logo.tmpl.partial"), toc ("toc.tmpl.partial"), ...
+
+* Style folder, this is your resources folder where you find the *".css"* and the *".js"* files. The *"docfx.js"* & *"docfx.css"* are the default looks of the documentation. The *"docfx.vendor.js"* and the *"docfx.vendor.css"* are the responsive and functional part of the documentation. *"main.js"* & *"main.css"* contains all the custom style.
