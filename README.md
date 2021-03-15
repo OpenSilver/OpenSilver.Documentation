@@ -8,7 +8,15 @@ http://doc.opensilver.net/
 
 This repository contains the source code of the documentation. Feel free to send Pull Requests to fix the content of the documentation or add more content. For any questions, please feel free to contact us at: https://opensilver.net/contact.aspx
 
-## How to compile the documentation?
+## How to modify documentation?
+
+There are many ways to do so:
+* Option 1: Go to any page of the [online documentation](http://doc.opensilver.net/) and click "Improve this Doc" in the top-right of the page that you wish to modify. This will bring you to the page source on GitHub, where you can make the changes. If you do not have the permissions to make or push the changes to the repository, just fork the repository, then make the changes on the forked repository, and then submit a Pull Request. All of this can be done online via the GUI of the GitHub.com website.
+* Option 2: Use an IDE such as Visual Studio 2019 (or newer) to edit the documentation. The general idea is to clone the [repository](https://github.com/OpenSilver/OpenSilver.Documentation) to a folder of your computer, then open that folder with Visual Studio (click "Open a local folder" from the VS splash screen), and start editing .MD files. For convenience, you can install the "[Markdown Editor](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor)" Visual Studio extension by Mads Kristensen, which shows a live preview of the .MD files in Visual Studio while you are editing them.
+
+Then, refer to the section "How are the documentation source code files organized?" below for details on how the files are organized.
+
+## How to compile and preview the documentation?
 
 After making changes to the source code of the documentation in this repository, you need to compile it in order to generate the HTML files of the documentation.
 
@@ -45,7 +53,7 @@ You will need to also run the other .BAT files to generate the HTML and see a pr
 
 The .md files are the ones that contain the documentation pages. They use the Markdown syntax.
 
-If you wish to preview Markdown files in Visual Studio, you can install the free extension named "Markdown Editor" by "Mads Kristensen" from:
+Note: if you wish to preview Markdown files in Visual Studio, you can install the free extension named "Markdown Editor" by Mads Kristensen from:
 https://marketplace.visualstudio.com/items?itemName=MadsKristensen.MarkdownEditor
 
 The files used in the documentation are referenced in the ".JSON" file that is located in each folder.
@@ -55,6 +63,8 @@ All folders have the same structure:
 * The ".MD" files are used to generate HTML pages. They are the ones to edit to change the content of a page.
 
 * The "toc.yml" file references every file of the folder with a name and the path (href). yml files are space sensitive, meaning that each line must have a one tab indentation only.
+
+Important: if you modify the folders structure, make sure to reflect the change in "docfx.json".
 
 Note: The "toc" file at the root of the project is slightly different because it is used to build the navbar and the sidebar. "Name" corresponds to the navbar tab name, "homepage" corresponds to the ".MD" file linked to the navbar, and "href" corresponds to the location where the sidebar (menu) is generated.
 
