@@ -21,6 +21,10 @@ In practice however, we do not want to copy/paste the files but rather share the
 
 Many compilation errors are expected, because OpenSilver currently only supports a subset of Silverlight functionality, so manual work should be expected. This guide provides tips and guidance to fix those compilation errors.
 
+## Use the "work in progress" version of the OpenSilver NuGet package
+
+By default when you create a new OpenSilver project, it will reference the "OpenSilver" package. For best compatibility, you should replace it with the alternative "OpenSilver.WorkInProgress" package (available on [NuGet.org](https://www.nuget.org/packages/OpenSilver.WorkInProgress/)).
+
 ## Use compiler directives to not break the original Silverlight application
 
 #### In C# files:
