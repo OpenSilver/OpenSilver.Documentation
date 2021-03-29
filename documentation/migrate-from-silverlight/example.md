@@ -3,7 +3,7 @@
 In this tutorial we are going to migrate an example of **Silverlight** application to **OpenSilver**.\
 It is assumed that the steps described in [Environment Setup](environment-setup.md) page are followed.
 
-The migration steps described below allows us to avoid source file duplication and gives a possibility to share them between separate **.sln** and **.csproj** files.\
+The migration steps described below will allow us to avoid source file duplication and will give a possibility to share them between separate **.sln** and **.csproj** files.\
 The basic idea is to create a separate *OpenSilver* project with the same name and directory structure as *Silverlight* has, then by renaming solution and project names we can just copy the files to actual *Silverlight* project location and use them without manual modifications.
 
 ### About the Silverlight application
