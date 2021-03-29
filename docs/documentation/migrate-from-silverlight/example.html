@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Tutorial: Migration from Silverlight application to OpenSilver </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Tutorial: Migration from Silverlight application to OpenSilver ">
+    <meta name="generator" content="docfx 2.56.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/LogoWithText2022x595TransparentBackground.png">
+                            </a>
+                            <nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"></a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="tutorial-migration-from-silverlight-application-to-opensilver">Tutorial: Migration from Silverlight application to OpenSilver</h1>
+
+<p>In this tutorial we are going to migrate an example of <strong>Silverlight</strong> application to <strong>OpenSilver</strong>.<br>
+It is assumed that the steps described in <a href="environment-setup.html">Environment Setup</a> page are followed.</p>
+<p>The migration steps described below allows us to avoid source file duplication and gives a possibility to share them between separate <strong>.sln</strong> and <strong>.csproj</strong> files.<br>
+The basic idea is to create a separate <em>OpenSilver</em> project with the same name and directory structure as <em>Silverlight</em> has, then by renaming solution and project names we can just copy the files to actual <em>Silverlight</em> project location and use them without manual modifications.</p>
+<h3 id="about-the-silverlight-application">About the Silverlight application</h3>
+<p><strong>CustomerApp</strong> is a simple <em>Silverlight</em> application which shows basic customer information in a <em>Data Grid View</em> and allows to filter the information by customer name or by membership.</p>
+<p>Here is how it looks like.</p>
+<p><img src="/images/CustomerAppOpensilver.png" alt="The OpenSilver Application" title="The OpenSilver Application"></p>
+<p>Directory structure of the <em>Silverlight</em> application looks like this.</p>
+<p><img src="/images/SilverlightAppDirectoryStructure.png" alt="Silverlight App Directory Structure" title="Silverlight App Directory Structure"></p>
+<p>So it is a typical <em>Silverlight</em> application having an additional <em>Silverlight Class Library</em> inside (<strong>CustomerData</strong>)</p>
+<h3 id="migration-steps">Migration Steps</h3>
+<h4 id="1-create-a-new-opensilver-project-visual-studio-2019">1. Create a new OpenSilver project (Visual Studio 2019)</h4>
+<p>In this step we are going to create a separate <em>OpenSilver</em> project having the same name as <em>Silverlight</em> application has but in a different location.</p>
+<ul>
+<li>Go to <code>File -&gt; New -&gt; Project</code> menu item and choose the <code>OpenSilver Application</code>.</li>
+</ul>
+<p><img src="/images/NewOpenSilverApplication.png" alt="New OpenSilver Application" title="New OpenSilver Application"></p>
+<ul>
+<li>Type <strong>CustomerApp</strong> as a <code>Project name</code></li>
+<li>Check <code>Place solution and project in the same directory</code> and click <code>Create</code></li>
+</ul>
+<p><img src="/images/ApplicationName.png" alt="Application Name" title="Application Name"></p>
+<h4 id="2-add-a-new-opensilver-class-library">2. Add a new <em>OpenSilver Class Library</em></h4>
+<p>We need to keep our new <em>OpenSilver</em> project consistent with the <em>Silverlight</em>. Since the project has a <em>Silverlight Class Library</em> we are going to create a new <em>OpenSilver Class Library</em> with the same name.</p>
+<ul>
+<li>In <code>Solution Explorer</code>, right-click on <code>Solution -&gt; Add -&gt; New project...</code></li>
+<li>Choose <code>OpenSilver Class Library</code> and click <code>Next</code></li>
+<li>Make sure the end location is <strong>CustomerApp</strong></li>
+<li>Type <strong>CustomerData</strong> as <code>Project name</code> and click <code>Create</code></li>
+</ul>
+<p><img src="/images/LibraryName.png" alt="Library Name" title="Library Name"></p>
+<h4 id="3-add-customerdata-as-a-project-reference">3. Add CustomerData as a Project Reference</h4>
+<ul>
+<li>In <code>Solution Explorer</code>, right-click on the Dependencies of CustomerApp project <code>-&gt; Add Project Reference...</code></li>
+<li>Choose <code>CustomerData</code> as a reference project and click <code>OK</code></li>
+</ul>
+<p><img src="/images/ProjectReference.png" alt="Project Reference" title="Project Reference"></p>
+<h4 id="4-remove-opensilver-nuget-package-and-install-opensilverworkinprogress-one">4. Remove OpenSilver Nuget package and install OpenSilver.WorkInProgress one</h4>
+<p>As it was mentioned on the <a href="compile-with-opensilver.html">Compile with OpenSilver</a> page for best compatibility we are going to use <strong>OpenSilver.WorkInProgress</strong> package instead of <strong>OpenSilver</strong>.</p>
+<ul>
+<li>Uninstall <strong>OpenSilver</strong> Nuget package</li>
+</ul>
+<pre><code>Uninstall-Package OpenSilver -Project CustomerApp
+Uninstall-Package OpenSilver -Project CustomerApp.Browser
+Uninstall-Package OpenSilver -Project CustomerData
+</code></pre>
+<ul>
+<li>Install <strong>OpenSilver.WorkInProgress</strong> Nuget package</li>
+</ul>
+<pre><code>Install-Package OpenSilver.WorkInProgress -Version 1.0.0-alpha-018 -Project CustomerApp
+Install-Package OpenSilver.WorkInProgress -Version 1.0.0-alpha-018 -Project CustomerApp.Browser
+Install-Package OpenSilver.WorkInProgress -Version 1.0.0-alpha-018 -Project CustomerData
+</code></pre>
+<h4 id="5-rename-opensilver-projects">5. Rename OpenSilver projects</h4>
+<ul>
+<li>Rename <code>CustomerApp</code> to <code>CustomerApp.OpenSilver</code></li>
+<li>Rename <code>CustomerData</code> to <code>CustomerData.OpenSilver</code></li>
+<li>Rename <code>CustomerApp</code> Solution to <code>CustomerApp.OpenSilver</code></li>
+</ul>
+<p><img src="/images/Rename.png" alt="Rename" title="Rename"></p>
+<p>Now we can close <strong>Visual Studio 2019</strong>.</p>
+<h4 id="6-copy-files-and-directories-from-opensilver-project-to-silverlight-project">6. Copy files and directories from OpenSilver project to Silverlight project</h4>
+<ul>
+<li>Copy <strong>CustomerApp.Browser</strong>, <strong>CustomerApp.Simulator</strong> folders and <strong>CustomerApp.OpenSilver.sln</strong> file to Silverlight's <strong>root</strong> directory</li>
+<li>Copy <strong>CustomerData.OpenSilver.csproj</strong> and <strong>CustomerApp.OpenSilver.csproj</strong> files to Silverlight's according projects directory</li>
+</ul>
+<p><img src="/images/DirectoryStructure.png" alt="Directory Structure" title="Directory Structure"></p>
+<h4 id="7-compile-migrated-project-with-visual-studio-2019">7. Compile migrated project with Visual Studio 2019</h4>
+<ul>
+<li>Open <strong>CustomerApp.OpenSilver.sln</strong> located in Silverlight's project with <em>Visual Studio 2019</em></li>
+<li>In <code>Solution Explorer</code> find <code>AssemblyInfo.cs</code> for both CustomerApp and CustomerData projects and exclude them</li>
+</ul>
+<p><img src="/images/ExcludeFromProject.png" alt="Exclude From Project" title="Exclude From Project"></p>
+<ul>
+<li>Make <strong>CustomerApp.Browser</strong> as a Startup Project</li>
+</ul>
+<p><img src="/images/SetStartupProject.png" alt="Set Startup Project" title="Set Startup Project"></p>
+<ul>
+<li>Rebuild the solution and just run it</li>
+</ul>
+<p>The result should look like this</p>
+<p><img src="/images/Result.png" alt="Result" title="Result"></p>
+<p>And if we click on 'Show Members' checkbox we will see filtered result</p>
+<p><img src="/images/ResultWithFilter.png" alt="Result With Filter" title="Result With Filter"></p>
+<p>Please note that in the example we didn't change a single line of Silverlight's code and we didn't fix any compilation errors. In real and much bigger projects however some errors expected to happen.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
