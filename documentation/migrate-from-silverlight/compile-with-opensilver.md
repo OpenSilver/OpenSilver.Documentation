@@ -17,6 +17,17 @@ The general principle for migrating a Silverlight application to OpenSilver cons
 
 In practice however, we do not want to copy/paste the files but rather share them between the original application and the migrated application, so that both applications can be maintained, at least in the short term. This also makes it easier to merge code changes in case that new developments or bug fixes are made on the original Silverlight application while we are still migrating it.
 
+To avoid manual editing of **.sln** and **.csproj** files the following steps can be taken.
+- Create an OpenSilver application with the same name as Silverlight application has but in different location
+- Add all other Silverlight-type projects the solution has using according names.\
+  If the project type is a **Silverlight Class Library** then **OpenSilver Class Library** needs to be created.
+  
+  Now we have the same directory structure as original Silverlight application has.
+- Rename solution and all Silverlight related projects adding **.OpenSilver** at the end
+- Copy all **.sln** and **.csproj** files to according Silverlight project locations
+
+You can find more detailed instructions in this [example](example.md).
+
 ## Errors are expected
 
 Many compilation errors are expected, because OpenSilver currently only supports a subset of Silverlight functionality, so manual work should be expected. This guide provides tips and guidance to fix those compilation errors.
