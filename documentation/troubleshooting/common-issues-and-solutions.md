@@ -31,6 +31,12 @@ To do so, please right-click on the project "<PROJECT NAME>.Simulator", click "P
 Make sure to enter the following path, where you need to replace "YOUR-USER-NAME-GOES-HERE" with your actual Windows user name, and the package version number with the current version of OpenSilver that you are using:
 C:\Users\YOUR-USER-NAME-GOES-HERE\.nuget\packages\opensilver.workinprogress\1.0.0-alpha-007\tools\simulator\CSharpXamlForHtml5.Simulator.exe
 
+### > I am getting "Error MSB4018: The "ResolveBlazorRuntimeDependencies" task failed unexpectedly." when I compile.
+
+Make sure that all the projects in your solution use the exact same OpenSilver NuGet package name and version.
+
+For example, this error may occur if one project references the "OpenSilver" package while another project references the "OpenSilver.WorkInProgress" package.
+
 ### > What if my issue is not listed here?
 
 Please contact us at: https://opensilver.net/contact.aspx
