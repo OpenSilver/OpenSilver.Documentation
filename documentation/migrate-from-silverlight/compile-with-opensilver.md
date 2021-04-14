@@ -48,4 +48,52 @@ As far as XAML files are concerned, since compiler directives do not work in XAM
 - If it is a small change, try to do it in the C# code-behind file instead of the XAML file. To do so, first add x:Name="SOME_NAME" (in XAML) to the control that you wish to modify, then make the change in the constructor in the C# code-behind, and use #if OPENSILVER compiler directive to make sure that the change does not break the original Silverlight version of the application.
 - If the change is extensive or if it cannot be done in the C# code-behind, we recommend you to create a copy of the XAML file, and reference that copy in your OpenSilver project, while the original Silverlight application references the original file. For example, if you need to make a change to "App.xaml", you should create a copy named for example "App.OpenSilver.xaml", and have the OpenSilver project  reference that file instead of "App.xaml". Note: the associated C# code-behind file ("App.xaml.cs") can still be shared between the original and migrated projects.
 
+#### Here are the steps to copy and use a new XAML file.
+
+#### 1. Copy XAML file name that needs to be duplicated
+
+![Copy XAML file](/images/xaml_copy/1.png "Copy XAML file")
+
+#### 2. Add a new item
+
+In **Solution Explorer** right-click on the folder where the file is located and choose **Add -> New item ...**
+
+![Add new item](/images/xaml_copy/2.png "Add new item")
+
+#### 3. Choose item type
+
+Most of the time xaml will represent different Silverlights controls - **UserControl, ChildWindow, Page** etc. In that case we can create the exact altertnative OpenSilver provides.
+
+![Choose control type](/images/xaml_copy/3.png "Choose control type")
+
+If it is not the case then we can simply create any of given controls and then rename and modify as needed.
+
+#### 4. Change namespace
+
+Visual Studio will automatically generate a namespace which might not be the one we wanted. Copy the namespace from original .cs file and replace it in both **.OpenSilver.xaml** and **.OpenSilver.xaml.cs** files.
+
+![Change namespace](/images/xaml_copy/4.png "Change namespace")
+![Change namespace](/images/xaml_copy/5.png "Change namespace")
+
+#### 5. Exclude the original one from project
+
+We can exclude the original **.xaml** and **.cs** files from project because now we have new ones.
+
+![Exclude project](/images/xaml_copy/6.png "Exclude project")
+
+Here is how it looks like after
+
+![Excluded project](/images/xaml_copy/7.png "Excluded project")
+
+To see the files that are not part of the project click **Show All Files** button in **Projects Explorer**
+
+![Show all files](/images/xaml_copy/8.png "Show all files")
+
+Please note that it is also possible to replace only .xaml file and share the original .cs.
+For that we can just exlude (or remove) **.OpenSilver.xaml.cs** from project and include the original **.xaml.cs**
+
+It will look little bit odd though because now .xaml.cs will not be shown as a direct child for .OpenSilver.xaml in Solution Explorer.
+
+![Share .cs file](/images/xaml_copy/9.png "Share .cs file")
+
 ## (WORK IN PROGRESS DOCUMENTATION, CHECK BACK SOON)
