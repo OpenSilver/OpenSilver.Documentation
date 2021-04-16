@@ -24,6 +24,9 @@ To avoid manual editing of **.sln** and **.csproj** files the following steps ca
   
   Now we have the same directory structure as original Silverlight application has.
 - Rename solution and all Silverlight related projects adding **.OpenSilver** at the end
+- Remove **.OpenSilver** from **Assembly name**
+
+  In Solution Explorer, right-click on project -> Properties
 - Copy all **.sln** and **.csproj** files to according Silverlight project locations
 
 You can find more detailed instructions in this [example](example.md).
