@@ -31,30 +31,54 @@ The original documentation for WCF RIA Services is still relevant and can be fou
 
 Documentation for changes since WCF RIA Services can be found under https://github.com/OpenRIAServices/OpenRiaServices/releases)
 
-## A step-by-step guide to migrate WCF RIA Services in OpenSilver project
+## A step-by-step guide to migrate Silverlight and OpenSilver projects from WCF RIA to OpenRIA Services
 
 In [this](https://doc.opensilver.net/documentation/migrate-from-silverlight/example.html) example it is shown how to migrate **Silverlight** application to **OpenSilver**.\
 If the project uses **WCF RIA** services then the beginning steps are the same but then compilation errors are expected.
 
 ![Domain Services Error](/images/DomainServicesError.png "Domain Services Error")
 
+It is not required to have **Silverlight** project migrated to OpenRIA Services before **OpenSilver** migration but it can be useful for testing purposes.\
+Migration steps are similar for both **Silverlight** and **OpenSilver** projects. The main difference is package versions.\
+If nothing is mentioned then the instruction refers to both.
+
 #### 1. Install nuget packages
 
 There are two types of projects: **Client-side** and **Server-Side**
 
-- For client-side projects install **OpenRiaServices.Client.Core** nuget package.\
-We use version **v4.6.3** because **v5.0** drops Silverlight support. Please note that **v4.6.0** could also be used but it doesn't include **OpenRiaServices.DomainServices.Client.Web.dll**.
+- Client-side
 
-```
-Install-Package OpenRiaServices.Client.Core -Version 4.6.3 -Project My.Project.Name
-```
+    - Silverlight project
+	```
+	Install-Package OpenRiaServices.Client.Core -Version 4.6.0
+	Install-Package OpenRiaServices.Silverlight.CodeGen -Version 4.6.0
+	```
+	
+	- OpenSilver project
+	```
+	Install-Package OpenRiaServices.OpenSilver.Client -Version 5.0.0-preview0003
+	```
 
-- For server-side projects install **OpenRiaServices.Server** nuget package.\
-We use version **v4.6.0** for the same reason as for above.
-
-```
-Install-Package OpenRiaServices.Server -Version 4.6.0 -Project My.Project.Name
-```
+- Server-side
+    - Silverlight project
+	```
+    Install-Package OpenRiaServices.Server -Version 4.6.0
+    Install-Package OpenRiaServices.EntityFramework.EF4 -Version 4.6.0
+	```
+	
+	- OpenSilver project
+	```
+	Install-Package OpenRiaServices.Server -Version 5.0.0-preview0003
+	Install-Package OpenRiaServices.EntityFramework.EF4 -Version 4.6.0
+	```
+	
+	Depending on project type it might be required to install other packages as well. For example if Soap and Json Ria Endpoints are used then install the following package as well.
+	```
+	Install-Package OpenRiaServices.Endpoints -Version 5.0.0-preview0003
+	```
+	
+As you can see for Silverlight projects versions **4.6.0** are used because version **5.0.0** drops Silverlight support.
+For OpenSilver project version **5.0.0-preview0003** is used. This is required for code generation and everything to work fine.
 
 #### 2. Find and replace System.ServiceModel.DomainServices* with OpenRiaServices.DomainServices* everywhere
 Use **OPENSILVER** compiler directive to keep original code working.
@@ -63,10 +87,7 @@ Use **OPENSILVER** compiler directive to keep original code working.
 
 Please note that you can also use "Find and Replace" feature but regular expressions need to be enabled in order to be able to generate multiline code.
 
-#### 3. Use auto-generated files
+#### 3. Auto code generation
 
-Visual Studio will auto-generate a file or files under **Generated_Code** directory when compiling Silverlight solution. It is convenient to copy this folder under **Generated_Code.OpenSilver** to make sure that the code won't be regenrated again.\
-Exclude **Generated_Code** folder from the OpenSilver project after the copy to not have duplicate classes.
-
-![Generated Code](/images/GeneratedCode.png "Generated Code")
+If all above packages are installed with required versions then code generation will work fine.
 
