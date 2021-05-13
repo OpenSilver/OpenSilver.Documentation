@@ -191,6 +191,33 @@ For OpenSilver project version <strong>5.0.0-preview0003</strong> is used. This 
 <p>Please note that you can also use &quot;Find and Replace&quot; feature but regular expressions need to be enabled in order to be able to generate multiline code.</p>
 <h4 id="3-auto-code-generation">3. Auto code generation</h4>
 <p>If all above packages are installed with required versions then code generation will work fine.</p>
+<h4 id="4-webconfig">4. web.config</h4>
+<p>If the project contains <strong>web.config</strong>, then go through the web.config and remove any references to System.ServiceModel.DomainServices and add the corresponding references to corresponding OpenRiaServices assemblies instead.</p>
+<p>Here are common entries</p>
+<p>WCF RIA</p>
+<pre><code>&lt;section name=&quot;domainServices&quot; type=&quot;System.ServiceModel.DomainServices.Hosting.DomainServicesSection, System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&quot; allowDefinition=&quot;MachineToApplication&quot; requirePermission=&quot;false&quot; /&gt;
+</code></pre>
+<p>OpenRIA</p>
+<pre><code>&lt;section name=&quot;domainServices&quot; type=&quot;OpenRiaServices.DomainServices.Hosting.DomainServicesSection, OpenRiaServices.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e0b7ccb1ae5b4c8&quot; allowDefinition=&quot;MachineToApplication&quot; requirePermission=&quot;false&quot; /&gt;
+</code></pre>
+<p>WCF RIA</p>
+<pre><code>&lt;add name=&quot;DomainServiceModule&quot; type=&quot;System.ServiceModel.DomainServices.Hosting.DomainServiceHttpModule, System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&quot; /&gt;
+</code></pre>
+<p>OpenRIA</p>
+<pre><code>&lt;add name=&quot;DomainServiceModule&quot; type=&quot;OpenRiaServices.DomainServices.Hosting.DomainServiceHttpModule, OpenRiaServices.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e0b7ccb1ae5b4c8&quot; /&gt;
+</code></pre>
+<p>WCF RIA</p>
+<pre><code>&lt;add name=&quot;DomainServiceModule&quot; preCondition=&quot;managedHandler&quot; type=&quot;System.ServiceModel.DomainServices.Hosting.DomainServiceHttpModule, System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35&quot; /&gt;
+</code></pre>
+<p>OpenRIA</p>
+<pre><code>&lt;add name=&quot;DomainServiceModule&quot; preCondition=&quot;managedHandler&quot; type=&quot;OpenRiaServices.DomainServices.Hosting.DomainServiceHttpModule, OpenRiaServices.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e0b7ccb1ae5b4c8&quot; /&gt;
+</code></pre>
+<h4 id="5-add-linkedopenriaserverproject-tag">5. Add LinkedOpenRiaServerProject tag</h4>
+<p>If the original Silverlight application has <strong>LinkedServerProject</strong> tag then add <strong>LinkedOpenRiaServerProject</strong> with the correct project name in <strong>PropertyGroup</strong>.
+The same applies for <strong>RiaClientUseFullTypesNames</strong> -&gt; <strong>OpenRiaClientUseFullTypeNames</strong></p>
+<pre><code>&lt;LinkedOpenRiaServerProject&gt;..\Project.Web\Project.Web.csproj&lt;/LinkedOpenRiaServerProject&gt;
+&lt;OpenRiaClientUseFullTypeNames&gt;true&lt;/OpenRiaClientUseFullTypeNames&gt;
+</code></pre>
 </article>
           </div>
           
