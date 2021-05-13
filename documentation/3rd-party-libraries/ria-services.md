@@ -91,3 +91,48 @@ Please note that you can also use "Find and Replace" feature but regular express
 
 If all above packages are installed with required versions then code generation will work fine.
 
+#### 4. web.config
+
+If the project contains **web.config**, then go through the web.config and remove any references to System.ServiceModel.DomainServices and add the corresponding references to corresponding OpenRiaServices assemblies instead.
+
+Here are common entries
+
+WCF RIA
+```
+<section name="domainServices" type="System.ServiceModel.DomainServices.Hosting.DomainServicesSection, System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" allowDefinition="MachineToApplication" requirePermission="false" />
+```
+
+OpenRIA
+```
+<section name="domainServices" type="OpenRiaServices.DomainServices.Hosting.DomainServicesSection, OpenRiaServices.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e0b7ccb1ae5b4c8" allowDefinition="MachineToApplication" requirePermission="false" />
+```
+
+
+WCF RIA
+```
+<add name="DomainServiceModule" type="System.ServiceModel.DomainServices.Hosting.DomainServiceHttpModule, System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+```
+
+OpenRIA
+```
+<add name="DomainServiceModule" type="OpenRiaServices.DomainServices.Hosting.DomainServiceHttpModule, OpenRiaServices.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e0b7ccb1ae5b4c8" />
+```
+
+
+WCF RIA
+```
+<add name="DomainServiceModule" preCondition="managedHandler" type="System.ServiceModel.DomainServices.Hosting.DomainServiceHttpModule, System.ServiceModel.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+```
+
+OpenRIA
+```
+<add name="DomainServiceModule" preCondition="managedHandler" type="OpenRiaServices.DomainServices.Hosting.DomainServiceHttpModule, OpenRiaServices.DomainServices.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2e0b7ccb1ae5b4c8" />
+```
+
+#### 5. Add LinkedOpenRiaServerProject tag
+If the original Silverlight application has **LinkedServerProject** tag then add **LinkedOpenRiaServerProject** with the correct project name in **PropertyGroup**.
+The same applies for **RiaClientUseFullTypesNames** -> **OpenRiaClientUseFullTypeNames**
+```
+<LinkedOpenRiaServerProject>..\Project.Web\Project.Web.csproj</LinkedOpenRiaServerProject>
+<OpenRiaClientUseFullTypeNames>true</OpenRiaClientUseFullTypeNames>
+```
