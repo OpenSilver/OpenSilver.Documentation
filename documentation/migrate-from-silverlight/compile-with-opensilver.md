@@ -27,6 +27,7 @@ To avoid manual editing of **.sln** and **.csproj** files the following steps ca
 - Remove **.OpenSilver** from **Assembly name**
 
   In Solution Explorer, right-click on project -> Properties
+  This needs to be done in order to not broke "xmlns" references in XAML files.
 - Copy all **.sln** and **.csproj** files to according Silverlight project locations
 
 You can find more detailed instructions in this [example](example.md).
