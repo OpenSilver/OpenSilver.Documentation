@@ -8,6 +8,11 @@ Before starting to migrate to OpenSilver:
 - Follow the steps described on the "[Environment Setup](environment-setup.md)" page
 - Make sure that you have the full source code of the legacy Silverlight application tthat you wish to migrate to OpenSilver
 - **Make sure that the legacy Silverlight application fully compiles on your developer machine**. All the Silverlight projects should be loading and compiling properly, and all the referenced libraries should be properly resolved. Refer to the "[Environment Setup](environment-setup.md)" page for the list of software that you may need to install to get the Silverlight application to compile.
+- If the Silverlight application has database connections make sure that the connection strings are correct.
+    - Go to **Server Explorer** tab
+	- Right click on **Data Connections** -> **Add Connection...**
+	- Enter Server name then select database and click OK. Db will appear under **Data Connections**
+	- To see connection string check db properties.
 - At this stage you do not need to be able to run the Silverlight application on your local developer machine yet, but this will be useful at a later stage.
 
 
