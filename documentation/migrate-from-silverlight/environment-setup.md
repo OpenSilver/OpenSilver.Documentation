@@ -23,6 +23,9 @@ To run the original Silverlight application you will likely need the following s
 
 - [Silverlight 5 Developer Runtime](https://go.microsoft.com/fwlink/?LinkId=229324) for Windows (64 bit)
 
+It is recommended that the Silverlight development environment is tested by attempting to create a new Silverlight application and by verifying that step-by-step debugging works properly. If it doesn't please make sure that the above components have been installed successfully and also make sure that the **Silverlight** option is checked under the **Debuggers** section of the **.Web** project properties.
+
+![Turn on Silverlight debugging](/images/silverlight_debuggers.png "Turn on Silverlight debugging")
 
   Notes:
   - In some cases the original application may have been created with an older version of Visual Studio (usually 2010, 2012, or 2013). In such case, you should either install one of those older versions of VS, or attempt to update the Silverlight solution to a more recent version of VS.
