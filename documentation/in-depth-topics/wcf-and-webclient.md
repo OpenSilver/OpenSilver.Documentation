@@ -61,6 +61,7 @@ Here are your options:
 
 * Or *work around the issue by using Fiddler* to make the browser believe that your server allows cross-domain requests. This is obviously only for development, not for use in production. To do so, follow the steps described [here](fiddler-enable-cors.html).
 
+[Here](https://doc.opensilver.net/documentation/how-to-topics/browser-with-arguments.html) is how to launch OpenSilver project in Browser using custom arguments
 
 
 ### To add CORS to your web service (recommended), simply follow these steps:
