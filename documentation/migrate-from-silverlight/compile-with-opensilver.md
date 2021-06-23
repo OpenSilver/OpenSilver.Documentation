@@ -51,6 +51,8 @@ By default when you create a new OpenSilver project, it will reference the "Open
 
 Every time that we need to make a change to the C# code, we are going to use the #if OPENSILVER and #if !OPENSILVER compiler directives to distinguish between the original code and the migrated one. The goes is to be able to quickly find all the places that have been modified, and also to make changes to the files without breaking the original Silverlight application. (Read above to understand why we want to avoid breaking the original Silverlight application)
 
+It is possible that OpenSilver doesn't have required class or method implemented yet. The temporary solution for compiling the project would be to add empty classes/methods in OpenSilver "Empty Namespaces" folder and use that .dll instead.
+
 #### In XAML files:
 
 As far as XAML files are concerned, since compiler directives do not work in XAML, we recommend these 2 approaches to make changes to the XAML code without breaking the original Silverlight application:
