@@ -74,7 +74,7 @@ ii) Add the following code to the said file:
 ```
 protected void Application_BeginRequest(object sender, EventArgs e)
 {
-    HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
+    HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "/* the-absolute-URL-of-the-client-app */");
 
     if (HttpContext.Current.Request.HttpMethod == "OPTIONS")
     {
@@ -86,6 +86,9 @@ protected void Application_BeginRequest(object sender, EventArgs e)
     }
 }
 ```
+> **Note**: To use cookies, which is necesary for authentication, there MUST be an `Access-Control-Allow-Origin` header set to the URL of the client application. 
+The star wildcard is not sufficcient in this case and the preflight request WILL FAIL with the following error in the browser: 
+**Access to XMLHttpRequest at '*server-enpoint*' from origin '*client-endpoint*' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute.**
 
 To see this code in action, follow the SOAP [tutorial below](#tutorial-to-easily-create-a-soap-based-clientserver-app-in-opensilver-wcf).
 
