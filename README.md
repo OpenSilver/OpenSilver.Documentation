@@ -26,7 +26,7 @@ To preview the result in the browser, simply run the .BAT file named "**3. Previ
 
 ## How to deploy/publish the modified documentation?
 
-After compiling and previewing the modified documenation according to the steps above, you just have to commit the modified files to the "master" branch of this repository to update the online documentation located at: http://doc.opensilver.net/ - The files in the "docs" subfolder of this repository are the HTML files that are displayed on the mentioned website.
+After compiling and previewing the modified documenation according to the steps above, you just have to commit the modified files to the "master" branch of this repository to update the online documentation located at: http://doc.opensilver.net/ - The files in the "docs" subfolder of this repository are the HTML files that are displayed on the mentioned website. For the commit subject, if you are pushing the generated html files, please use a sentence such as "Publish ..." replacing "..." with a description of what you are publishing (eg. "Publish note for CORS with cookies").
 
 ## How to rebuild the "Reference" (API) section of the documentation to reflect the latest version of the OpenSilver source code?
 
