@@ -37,6 +37,11 @@ Make sure that all the projects in your solution use the exact same OpenSilver N
 
 For example, this error may occur if one project references the "OpenSilver" package while another project references the "OpenSilver.WorkInProgress" package.
 
+### > How to see more detailed logs
+
+Build output verbosity can be changed from `Tools -> Options -> Projects and Solutions -> Build and Run`\
+Choose an option from **MSBuild project build output verbosity**
+
 ### > What if my issue is not listed here?
 
 Please contact us at: https://opensilver.net/contact.aspx
