@@ -136,3 +136,18 @@ The same applies for **RiaClientUseFullTypesNames** -> **OpenRiaClientUseFullTyp
 <LinkedOpenRiaServerProject>..\Project.Web\Project.Web.csproj</LinkedOpenRiaServerProject>
 <OpenRiaClientUseFullTypeNames>true</OpenRiaClientUseFullTypeNames>
 ```
+
+#### 6. Add ServerBaseUri
+
+Add the following code in Application startup. For example App.xaml.cs constructor after InitializeComponent().
+
+```
+#if OPENSILVER
+    DomainContext.DomainClientFactory = new OpenRiaServices.DomainServices.Client.Web.SoapDomainClientFactory()
+    {
+        ServerBaseUri = new Uri("http://localhost:51157/"),
+    };
+#endif
+```
+
+The Uri is the Web Project Uri.
