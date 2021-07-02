@@ -64,3 +64,31 @@ Add new Web Site in IIS
 https://docs.google.com/document/d/1c4M3chxXxnS7_-NKvSc7TfP04FsHcJtBThWWqwlbJsc/edit
 
 <img src="/images/how-to-topics/run-published.png" alt="Run published" width="700"/><br />
+
+## Known Issues
+
+1. Exit code: -1073741571
+
+In some cases publish fails with an error similar to following.
+
+```
+Exit code: -1073741571
+C:\Program Files\dotnet\packs\Microsoft.NET.Runtime.WebAssembly.Sdk\6.0.0-preview.5.21301.5\Sdk\WasmApp.targets(145,5): Error : Precompiling failed for 
+```
+
+This error happens when **mono-aot-cross.exe** tries to convert llvm method which is very big and most probably it will be one of **InitializeComponent** functions.
+
+One of the techniques to find how many presumably big functions exist in the project would be to search **.xaml.g.cs** generated files that are bigger than 1MB. If there are not many then the solution can be to split a large xaml file by adding UserControls.
+
+2. Not served mime types after publish.
+
+After running published website the following error can appear in browser console.
+
+<img src="/images/how-to-topics/not_served_files.png" alt="Not served error" /><br />
+
+That means some of MIME types are not served by IIS. To solve that go to **MIME Types** and add **.dat** and **.blat** types both **application/octet-stream**.
+
+<img src="/images/how-to-topics/mime_types.png" alt="Not served error" /><br />
+
+<img src="/images/how-to-topics/add_mime_type.png" alt="Not served error" /><br />
+
