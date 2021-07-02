@@ -178,6 +178,24 @@
 <p>Add new Web Site in IIS</p>
 <p><a href="https://docs.google.com/document/d/1c4M3chxXxnS7_-NKvSc7TfP04FsHcJtBThWWqwlbJsc/edit">https://docs.google.com/document/d/1c4M3chxXxnS7_-NKvSc7TfP04FsHcJtBThWWqwlbJsc/edit</a></p>
 <p><img src="/images/how-to-topics/run-published.png" alt="Run published" width="700"><br></p>
+<h2 id="known-issues">Known Issues</h2>
+<ol>
+<li>Exit code: -1073741571</li>
+</ol>
+<p>In some cases publish fails with an error similar to following.</p>
+<pre><code>Exit code: -1073741571
+C:\Program Files\dotnet\packs\Microsoft.NET.Runtime.WebAssembly.Sdk\6.0.0-preview.5.21301.5\Sdk\WasmApp.targets(145,5): Error : Precompiling failed for 
+</code></pre>
+<p>This error happens when <strong>mono-aot-cross.exe</strong> tries to convert llvm method which is very big and most probably it will be one of <strong>InitializeComponent</strong> functions.</p>
+<p>One of the techniques to find how many presumably big functions exist in the project would be to search <strong>.xaml.g.cs</strong> generated files that are bigger than 1MB. If there are not many then the solution can be to split a large xaml file by adding UserControls.</p>
+<ol start="2">
+<li>Not served mime types after publish.</li>
+</ol>
+<p>After running published website the following error can appear in browser console.</p>
+<p><img src="/images/how-to-topics/not_served_files.png" alt="Not served error"><br></p>
+<p>That means some of MIME types are not served by IIS. To solve that go to <strong>MIME Types</strong> and add <strong>.dat</strong> and <strong>.blat</strong> types both <strong>application/octet-stream</strong>.</p>
+<p><img src="/images/how-to-topics/mime_types.png" alt="Not served error"><br></p>
+<p><img src="/images/how-to-topics/add_mime_type.png" alt="Not served error"><br></p>
 </article>
           </div>
           
