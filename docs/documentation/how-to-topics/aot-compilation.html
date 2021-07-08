@@ -179,18 +179,28 @@
 <p><a href="https://docs.google.com/document/d/1c4M3chxXxnS7_-NKvSc7TfP04FsHcJtBThWWqwlbJsc/edit">https://docs.google.com/document/d/1c4M3chxXxnS7_-NKvSc7TfP04FsHcJtBThWWqwlbJsc/edit</a></p>
 <p><img src="/images/how-to-topics/run-published.png" alt="Run published" width="700"><br></p>
 <h2 id="known-issues">Known Issues</h2>
-<ol>
-<li>Exit code: -1073741571</li>
-</ol>
+<h3 id="1-exit-code--1073741571">1. Exit code: -1073741571</h3>
 <p>In some cases publish fails with an error similar to following.</p>
 <pre><code>Exit code: -1073741571
 C:\Program Files\dotnet\packs\Microsoft.NET.Runtime.WebAssembly.Sdk\6.0.0-preview.5.21301.5\Sdk\WasmApp.targets(145,5): Error : Precompiling failed for 
 </code></pre>
 <p>This error happens when <strong>mono-aot-cross.exe</strong> tries to convert llvm method which is very big and most probably it will be one of <strong>InitializeComponent</strong> functions.</p>
-<p>One of the techniques to find how many presumably big functions exist in the project would be to search <strong>.xaml.g.cs</strong> generated files that are bigger than 1MB. If there are not many then the solution can be to split a large xaml file by adding UserControls.</p>
-<ol start="2">
-<li>Not served mime types after publish.</li>
-</ol>
+<p>One of the techniques to find how many presumably big functions exist in the project would be to search <strong>.xaml.g.cs</strong> generated files that are bigger than 1MB. The solution can be to split <strong>InitializeComponent</strong> method to several methods, exclude <strong>.xaml</strong> file and include generated <strong>.xaml.g.cs</strong> one one.</p>
+<p>To find out which exact function causes the issue follow the steps.</p>
+<ul>
+<li>Set MSBuild output verbosity to <code>Diagnostic</code> level<br>
+Tools -&gt; Options -&gt; Build And Run</li>
+<li>Publish the project again and wait until it fails.</li>
+<li>Find the last execution of <strong>mono-aot-cross.exe</strong> and run it with <strong>cmd.exe</strong> adding <strong>-v</strong> (verbosity) option.</li>
+</ul>
+<p>The command will look similar to this</p>
+<pre><code>&quot;C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Runtime.AOT.win-x64.Cross.browser-wasm\6.0.0-preview.5.21301.5\Sdk\..\tools\mono-aot-cross.exe&quot; -v --debug --llvm &quot;--aot=no-opt,static,direct-icalls,deterministic,dwarfdebug,llvm-path=C:\Program Files\dotnet\packs\Microsoft.NET.Runtime.Emscripten.2.0.12.Sdk.win-x64\6.0.0-preview.5.21281.1\tools\bin\,llvmonly,interp,asmonly,llvm-outfile=MyLib.dll.bc&quot; MyLib.dll
+</code></pre>
+<p>There is also <strong>MONO_PATH</strong> environment variable that need to be set before running the command. It will be shown in Visual Studio output as well.</p>
+<p>If command succeeded you will see some statistic about converted methods etc. If it fails you will see the last method it was trying to convert and fails.</p>
+<pre><code>converting llvm method void MyApp.Views.MyEditServiceCodeDetailsView:InitializeComponent ()
+</code></pre>
+<h3 id="2-not-served-mime-types-after-publish">2. Not served mime types after publish.</h3>
 <p>After running published website the following error can appear in browser console.</p>
 <p><img src="/images/how-to-topics/not_served_files.png" alt="Not served error"><br></p>
 <p>That means some of MIME types are not served by IIS. To solve that go to <strong>MIME Types</strong> and add <strong>.dat</strong> and <strong>.blat</strong> types both <strong>application/octet-stream</strong>.</p>
