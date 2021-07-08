@@ -67,7 +67,7 @@ https://docs.google.com/document/d/1c4M3chxXxnS7_-NKvSc7TfP04FsHcJtBThWWqwlbJsc/
 
 ## Known Issues
 
-1. Exit code: -1073741571
+### 1. Exit code: -1073741571
 
 In some cases publish fails with an error similar to following.
 
@@ -78,9 +78,27 @@ C:\Program Files\dotnet\packs\Microsoft.NET.Runtime.WebAssembly.Sdk\6.0.0-previe
 
 This error happens when **mono-aot-cross.exe** tries to convert llvm method which is very big and most probably it will be one of **InitializeComponent** functions.
 
-One of the techniques to find how many presumably big functions exist in the project would be to search **.xaml.g.cs** generated files that are bigger than 1MB. If there are not many then the solution can be to split a large xaml file by adding UserControls.
+One of the techniques to find how many presumably big functions exist in the project would be to search **.xaml.g.cs** generated files that are bigger than 1MB. The solution can be to split **InitializeComponent** method to several methods, exclude **.xaml** file and include generated **.xaml.g.cs** one one.
 
-2. Not served mime types after publish.
+To find out which exact function causes the issue follow the steps.
+- Set MSBuild output verbosity to `Diagnostic` level\
+  Tools -> Options -> Build And Run
+- Publish the project again and wait until it fails.
+- Find the last execution of **mono-aot-cross.exe** and run it with **cmd.exe** adding **-v** (verbosity) option.
+
+The command will look similar to this
+```
+"C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Runtime.AOT.win-x64.Cross.browser-wasm\6.0.0-preview.5.21301.5\Sdk\..\tools\mono-aot-cross.exe" -v --debug --llvm "--aot=no-opt,static,direct-icalls,deterministic,dwarfdebug,llvm-path=C:\Program Files\dotnet\packs\Microsoft.NET.Runtime.Emscripten.2.0.12.Sdk.win-x64\6.0.0-preview.5.21281.1\tools\bin\,llvmonly,interp,asmonly,llvm-outfile=MyLib.dll.bc" MyLib.dll
+```
+
+There is also **MONO_PATH** environment variable that need to be set before running the command. It will be shown in Visual Studio output as well.
+
+If command succeeded you will see some statistic about converted methods etc. If it fails you will see the last method it was trying to convert and fails.
+```
+converting llvm method void MyApp.Views.MyEditServiceCodeDetailsView:InitializeComponent ()
+```
+
+### 2. Not served mime types after publish.
 
 After running published website the following error can appear in browser console.
 
