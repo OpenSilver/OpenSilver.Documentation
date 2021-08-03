@@ -183,6 +183,10 @@ We are working to add support for all of the above features as soon as possible.
 <ul>
 <li>Or <em>work around the issue by using Fiddler</em> to make the browser believe that your server allows cross-domain requests. This is obviously only for development, not for use in production. To do so, follow the steps described <a href="fiddler-enable-cors.html">here</a>.</li>
 </ul>
+<p>It is also possible to get <strong>SameSite</strong> attribute related errors similar to below when the client and web service are not hosted on the same domain.</p>
+<pre><code>A cookie associated with a cross-site resource at &lt;URL&gt; was set without the 'SameSite' attribute. ...
+</code></pre>
+<p>To solve this go to chrome://flags/ and disable <strong>SameSite by default cookies</strong>. But the option might be removed from latest versions of browsers.</p>
 <p><a href="https://doc.opensilver.net/documentation/how-to-topics/browser-with-arguments.html">Here</a> is how to launch OpenSilver project in Browser using custom arguments</p>
 <h3 id="to-add-cors-to-your-web-service-recommended-simply-follow-these-steps">To add CORS to your web service (recommended), simply follow these steps:</h3>
 <h4 id="1-if-you-are-using-a-soap-web-service">1) If you are using a SOAP web service:</h4>
@@ -190,7 +194,7 @@ We are working to add support for all of the above features as soon as possible.
 <p>ii) Add the following code to the said file:</p>
 <pre><code>protected void Application_BeginRequest(object sender, EventArgs e)
 {
-    HttpContext.Current.Response.AddHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;/* the-absolute-URL-of-the-browser-app */&quot;);
+    HttpContext.Current.Response.AddHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;/* the-absolute-URL-of-the-client-app */&quot;);
 
     if (HttpContext.Current.Request.HttpMethod == &quot;OPTIONS&quot;)
     {
