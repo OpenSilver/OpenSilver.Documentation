@@ -61,6 +61,12 @@ Here are your options:
 
 * Or *work around the issue by using Fiddler* to make the browser believe that your server allows cross-domain requests. This is obviously only for development, not for use in production. To do so, follow the steps described [here](fiddler-enable-cors.html).
 
+It is also possible to get **SameSite** attribute related errors similar to below when the client and web service are not hosted on the same domain.
+```
+A cookie associated with a cross-site resource at <URL> was set without the 'SameSite' attribute. ...
+```
+To solve this go to chrome://flags/ and disable **SameSite by default cookies**. But the option might be removed from latest versions of browsers.
+
 [Here](https://doc.opensilver.net/documentation/how-to-topics/browser-with-arguments.html) is how to launch OpenSilver project in Browser using custom arguments
 
 
