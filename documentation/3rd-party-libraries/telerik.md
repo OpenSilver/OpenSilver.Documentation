@@ -1,4 +1,4 @@
-﻿# Telerik Support
+﻿# Telerik UI Support
 
 ## Status
 
@@ -19,4 +19,7 @@ Note: if you hire us to do the full migration of your application from Silverlig
 The RadMaskedTextBox has changed in a recent version of Telerik UI. If you are upgrading from an old version of Telerik UI, please read the following instructions:
 https://docs.telerik.com/devtools/wpf/controls/radmaskedinput/migrating
 
+## Legal notice
+
+Telerik UI is the property of Progress, not Userware. Userware is not affiliated with Telerik. OpenSilver can compile the source code of Telerik UI, which is provided to you by Progress as part of the license that you have bought from Progress. Userware does not provide the source code of Telerik UI. For support and further information, please contact Userware at: https://www.opensilver.net/contact.aspx
 #### *(WORK IN PROGRESS DOCUMENTATION, PLEASE CHECK BACK SOON)*
