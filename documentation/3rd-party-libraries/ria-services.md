@@ -77,6 +77,16 @@ There are two types of projects: **Client-side** and **Server-Side**
 	Install-Package OpenRiaServices.Endpoints -Version 5.0.0-preview0003
 	```
 	
+- Projects that are referenced by Server-side
+
+    Remove reference to `System.Data.Entity` and replace that with nuget package:
+
+    ```
+    Install-Package EntityFramework -Version 6.0.1
+    ```
+
+    Replace `using System.Data` with using `System.Data.Entity.Core`
+
 As you can see for Silverlight projects versions **4.6.0** are used because version **5.0.0** drops Silverlight support.
 For OpenSilver project version **5.0.0-preview0003** is used. This is required for code generation and everything to work fine.
 
