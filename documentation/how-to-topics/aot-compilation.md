@@ -110,3 +110,38 @@ That means some of MIME types are not served by IIS. To solve that go to **MIME 
 
 <img src="/images/how-to-topics/add_mime_type.png" alt="Not served error" /><br />
 
+### A quick recap about AOT
+
+The concept of "AOT" exists in 2 contexts: `desktop/mobile` applications (CoreRT, NativeAOT, etc.) and `Blazor WebAssembly`. The 2 work in a very different way. Here is the explanation how both work.
+
+#### When running on Windows or as desktop/mobile apps:
+
+- Without AOT:
+
+VS will compile the C# to IL (Intermediate Language) (.DLLs)
+When app is launched, the JIT ("Just-In-Time" compilation) (which comes from .NET Framework runtime, or NET Core...) will convert IL into binary executable code.
+
+- With AOT:
+
+VS will compile the C# to binary executable code.
+
+=> No much difference in performance during application execution (on Windows) between non-AOT and AOT because JIT will compile to binary code on Windows when the application starts.
+
+#### When running in the browser with Blazor WebAssembly:
+
+- Without AOT:
+
+VS will compile the C# to IL (Intermediate Language) (.DLLs).
+There is no JIT in the browser.
+"dotnet.wasm" is the only binary executable that gets downloaded. "dotnet.wasm" loads the IL of the DLLs and "interprets" them.
+Negative impact on performance because interpretion layer.
+
+- With AOT:
+
+VS will compile the C# to binary executable code (files are bigger than IL).
+
+=> Much better performance with AOT during application execution. As far as initial loading is concerned, AOT needs to download bigger files, so initial load is slower, but then the files are cached by the browser, so when coming back go the app, initial time is the same as non-AOT.
+
+Note: when C# reflection is used in the application, or "dynamic" types, the execution will temporaroly fall back to "interpreted" mode, which means that the runtime performance of AOT will be nearly the same as non-AOT. We are working to remove all those types, so as to really benefit from AOT.
+
+We recommend clients to already publish the application in AOT mode so that you can see the current state with AOT. Please keep in mind that further AOT performance improvement will come as we remove more types and we make further optimizations, to leverage AOT and not fall back to "interpreted" mode too often.
