@@ -28,7 +28,7 @@ After **Nuget.Config** creation "Package source" will have one more option - "Pr
 
 ![Package Sources](/images/package_sources.png "Package Sources")
 
-If the option is selected then **OpenSilver.WorkInProgress** will appear in Browse tab. Make sure 'Include prerelease' is checked.
+If the option is selected then **OpenSilver** will appear in Browse tab. Make sure 'Include prerelease' is checked.
 
 ![Browse](/images/browse.png "Browse")
 
