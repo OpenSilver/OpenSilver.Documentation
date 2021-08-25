@@ -20,7 +20,7 @@ Take the following steps to include OpenSilver private package in delivery (offl
 	- Use `build-nuget-package-OpenSilver-private.bat` and follow this naming convention: OpenSilver.1.0.0-private-YYYY-MM-DD.nupkg where you should replace YYYY, MM and DD with today's date.
 - Install nuget package inside PrivatePackages.
 ```
-nuget.exe add OpenSilver.1.0.0-private-<version>.nupkg -source <Project_Path>\PrivatePackages\
+nuget.exe add output\OpenSilver\OpenSilver.1.0.0-private-<version>.nupkg -source <Project_Path>\PrivatePackages\
 ```
 - Reference the package.
 
