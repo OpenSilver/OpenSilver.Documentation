@@ -54,16 +54,11 @@ Issues can occur if changing this path.
 
 Try to change publishing settings If it does not work.
 
-<img src="/images/how-to-topics/publish.png" alt="Publish" width="700"/><br />
+<img src="/images/how-to-topics/publish.png" alt="Publish" width="700"/><br /><br />
 
 
-#### How to run published website
+[Here](add-site-to-iis.md) is how to add and run published website.
 
-Add new Web Site in IIS
-
-https://docs.google.com/document/d/1c4M3chxXxnS7_-NKvSc7TfP04FsHcJtBThWWqwlbJsc/edit
-
-<img src="/images/how-to-topics/run-published.png" alt="Run published" width="700"/><br />
 
 ## Known Issues
 
