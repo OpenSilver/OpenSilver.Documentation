@@ -6,7 +6,9 @@ Good support in OpenSilver
 
 ## NuGet Packages
 
-Coming soon
+Use the package from:
+
+https://github.com/vijayvepa/NetStandardEnterpriseLibrary/blob/master/NugetPackages/NetStandard.Microsoft.Practices.Unity.4.0.2.nupkg
 
 ## Source code
 

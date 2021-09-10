@@ -6,7 +6,9 @@ Good support in OpenSilver
 
 ## NuGet Packages
 
-Coming soon
+Get the package from here:
+
+https://drive.google.com/file/d/1qc5VFwokH7tCMEcVoYk6H-iqkZwyekf7/view?usp=sharing
 
 ## Source code
 

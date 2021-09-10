@@ -6,7 +6,9 @@ Coming soon
 
 ## NuGet Packages
 
-Coming soon
+Get the package from here:
+
+https://drive.google.com/file/d/1c80EmJwgqv_4U0oXtZ2tDUFuE0BuD39T/view?usp=sharing
 
 ## Source code
 
