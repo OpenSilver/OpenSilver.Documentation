@@ -2,7 +2,7 @@
 
 ## Status
 
-Coming soon
+Good support in OpenSilver
 
 ## NuGet Packages
 
