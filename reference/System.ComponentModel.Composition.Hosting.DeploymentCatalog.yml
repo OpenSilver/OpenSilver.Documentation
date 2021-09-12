@@ -6,6 +6,8 @@ items:
   parent: System.ComponentModel.Composition.Hosting
   children:
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor
+  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor(System.String)
+  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor(Uri)
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.CancelAsync
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changed
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changing
@@ -13,11 +15,11 @@ items:
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadAsync
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadCompleted
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadProgressChanged
-  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
-  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
-  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(System.ComponentModel.AsyncCompletedEventArgs)
-  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(System.Net.DownloadProgressChangedEventArgs)
+  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(ImportDefinition)
+  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(ComposablePartCatalogChangeEventArgs)
+  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(ComposablePartCatalogChangeEventArgs)
+  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(AsyncCompletedEventArgs)
+  - System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(DownloadProgressChangedEventArgs)
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.Parts
   - System.ComponentModel.Composition.Hosting.DeploymentCatalog.Uri
   langs:
@@ -28,43 +30,24 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog
   type: Class
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DeploymentCatalog
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
     startLine: 18
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nDiscovers attributed parts in a XAP file, and provides methods for asynchronously\ndownloading XAP files.\n"
   example: []
   syntax:
-    content: 'public class DeploymentCatalog : ComposablePartCatalog, IEnumerable<ComposablePartDefinition>, IEnumerable, IDisposable, INotifyComposablePartCatalogChanged'
+    content: 'public class DeploymentCatalog : ComposablePartCatalog, INotifyComposablePartCatalogChanged'
     content.vb: >-
       Public Class DeploymentCatalog
           Inherits ComposablePartCatalog
-          Implements IEnumerable(Of ComposablePartDefinition), IEnumerable, IDisposable, INotifyComposablePartCatalogChanged
+          Implements INotifyComposablePartCatalogChanged
   inheritance:
   - System.Object
-  - System.ComponentModel.Composition.Primitives.ComposablePartCatalog
   implements:
-  - System.Collections.Generic.IEnumerable{System.ComponentModel.Composition.Primitives.ComposablePartDefinition}
-  - System.Collections.IEnumerable
-  - System.IDisposable
-  - System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
-  inheritedMembers:
-  - System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
-  - System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator
-  - System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System#Collections#IEnumerable#GetEnumerator
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
+  - INotifyComposablePartCatalogChanged
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
@@ -85,15 +68,11 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DeploymentCatalog()
   type: Constructor
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
     startLine: 28
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nInitializes a new instance of the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog\" data-throw-if-not-resolved=\"false\"></xref> \nclass using assemblies in the current XAP.\n"
   example: []
@@ -101,6 +80,90 @@ items:
     content: public DeploymentCatalog()
     content.vb: Public Sub New
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor(System.String)
+  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: System.ComponentModel.Composition.Hosting.DeploymentCatalog
+  langs:
+  - csharp
+  - vb
+  name: DeploymentCatalog(String)
+  nameWithType: DeploymentCatalog.DeploymentCatalog(String)
+  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DeploymentCatalog(System.String)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 38
+  assemblies:
+  - Runtime.OpenSilver
+  namespace: System.ComponentModel.Composition.Hosting
+  summary: "\nInitializes a new instance of the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog\" data-throw-if-not-resolved=\"false\"></xref>\nclass using the XAP file at the specified relative URI.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public DeploymentCatalog(string uriRelative)
+    parameters:
+    - id: uriRelative
+      type: System.String
+      description: The URI of the XAP file.
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub New(uriRelative As String)
+  overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor(Uri)
+  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor(Uri)
+  id: '#ctor(Uri)'
+  parent: System.ComponentModel.Composition.Hosting.DeploymentCatalog
+  langs:
+  - csharp
+  - vb
+  name: DeploymentCatalog(Uri)
+  nameWithType: DeploymentCatalog.DeploymentCatalog(Uri)
+  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DeploymentCatalog(Uri)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 49
+  assemblies:
+  - Runtime.OpenSilver
+  namespace: System.ComponentModel.Composition.Hosting
+  summary: "\nInitializes a new instance of the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog\" data-throw-if-not-resolved=\"false\"></xref>\nclass using the XAP file at the specified URI.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public DeploymentCatalog(Uri uri)
+    parameters:
+    - id: uri
+      type: Uri
+      description: The URI of the XAP file.
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub New(uri As Uri)
+  overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.#ctor*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -117,15 +180,11 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Parts
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Parts
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
     startLine: 61
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nGets all the parts contained in the catalog.\n"
   example: []
@@ -133,10 +192,9 @@ items:
     content: public override IQueryable<ComposablePartDefinition> Parts { get; }
     parameters: []
     return:
-      type: System.Linq.IQueryable{System.ComponentModel.Composition.Primitives.ComposablePartDefinition}
+      type: IQueryable{ComposablePartDefinition}
       description: "\nA query enumerating all the parts contained in the catalog.\n"
     content.vb: Public Overrides ReadOnly Property Parts As IQueryable(Of ComposablePartDefinition)
-  overridden: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Parts
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Parts*
   modifiers.csharp:
   - public
@@ -158,15 +216,11 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Uri
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Uri
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
     startLine: 73
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nGets the URI for the XAP file.\n"
   example: []
@@ -174,7 +228,7 @@ items:
     content: public Uri Uri { get; }
     parameters: []
     return:
-      type: System.Uri
+      type: Uri
     content.vb: Public ReadOnly Property Uri As Uri
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Uri*
   modifiers.csharp:
@@ -195,25 +249,19 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changed
   type: Event
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Changed
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
     startLine: 86
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nOccurs when the contents of the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog\" data-throw-if-not-resolved=\"false\"></xref>\nhave changed.\n"
   example: []
   syntax:
     content: public event EventHandler<ComposablePartCatalogChangeEventArgs> Changed
     return:
-      type: System.EventHandler{System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs}
+      type: System.EventHandler{ComposablePartCatalogChangeEventArgs}
     content.vb: Public Event Changed As EventHandler(Of ComposablePartCatalogChangeEventArgs)
-  implements:
-  - System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changed
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -230,25 +278,19 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changing
   type: Event
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Changing
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
     startLine: 92
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nOccurs when the contents of the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog\" data-throw-if-not-resolved=\"false\"></xref>\nare changing.\n"
   example: []
   syntax:
     content: public event EventHandler<ComposablePartCatalogChangeEventArgs> Changing
     return:
-      type: System.EventHandler{System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs}
+      type: System.EventHandler{ComposablePartCatalogChangeEventArgs}
     content.vb: Public Event Changing As EventHandler(Of ComposablePartCatalogChangeEventArgs)
-  implements:
-  - System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changing
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -265,23 +307,29 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadCompleted
   type: Event
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadCompleted
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
     startLine: 97
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nOccurs when the XAP file has finished downloading, or there has been an error.\n"
   example: []
   syntax:
-    content: public event EventHandler<AsyncCompletedEventArgs> DownloadCompleted
+    content: >-
+      [NotImplemented]
+
+      public event EventHandler<AsyncCompletedEventArgs> DownloadCompleted
     return:
-      type: System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs}
-    content.vb: Public Event DownloadCompleted As EventHandler(Of AsyncCompletedEventArgs)
+      type: System.EventHandler{AsyncCompletedEventArgs}
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event DownloadCompleted As EventHandler(Of AsyncCompletedEventArgs)
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -298,23 +346,29 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadProgressChanged
   type: Event
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadProgressChanged
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 112
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 113
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nOccurs when the download progress of the XAP file changes.\n"
   example: []
   syntax:
-    content: public event EventHandler<DownloadProgressChangedEventArgs> DownloadProgressChanged
+    content: >-
+      [NotImplemented]
+
+      public event EventHandler<DownloadProgressChangedEventArgs> DownloadProgressChanged
     return:
-      type: System.EventHandler{System.Net.DownloadProgressChangedEventArgs}
-    content.vb: Public Event DownloadProgressChanged As EventHandler(Of DownloadProgressChangedEventArgs)
+      type: System.EventHandler{DownloadProgressChangedEventArgs}
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event DownloadProgressChanged As EventHandler(Of DownloadProgressChangedEventArgs)
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -331,26 +385,32 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.CancelAsync()
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CancelAsync
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 131
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 133
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nCancels the XAP file download in progress.\n"
   example: []
   syntax:
-    content: public void CancelAsync()
-    content.vb: Public Sub CancelAsync
+    content: >-
+      [NotImplemented]
+
+      public void CancelAsync()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub CancelAsync
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.CancelAsync*
   exceptions:
   - type: System.InvalidOperationException
     commentId: T:System.InvalidOperationException
     description: "\nThe method is called before <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadAsync\" data-throw-if-not-resolved=\"false\"></xref>\nor after the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadCompleted\" data-throw-if-not-resolved=\"false\"></xref> event has occurred.\n"
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -367,51 +427,53 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadAsync()
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadAsync
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 143
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 146
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nBegins downloading the XAP file associated with the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: public void DownloadAsync()
-    content.vb: Public Sub DownloadAsync
+    content: >-
+      [NotImplemented]
+
+      public void DownloadAsync()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub DownloadAsync
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadAsync*
   exceptions:
   - type: System.InvalidOperationException
     commentId: T:System.InvalidOperationException
     description: "\nThis method is called more than once, or after the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog.CancelAsync\" data-throw-if-not-resolved=\"false\"></xref>\nmethod.\n"
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-  id: GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
+- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(ImportDefinition)
+  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(ImportDefinition)
+  id: GetExports(ImportDefinition)
   parent: System.ComponentModel.Composition.Hosting.DeploymentCatalog
   langs:
   - csharp
   - vb
   name: GetExports(ImportDefinition)
   nameWithType: DeploymentCatalog.GetExports(ImportDefinition)
-  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
+  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports(ImportDefinition)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetExports
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 160
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 164
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nGets the export definitions that match the constraint expressed by the specified\ndefinition.\n"
   example: []
@@ -419,13 +481,12 @@ items:
     content: public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
     parameters:
     - id: definition
-      type: System.ComponentModel.Composition.Primitives.ImportDefinition
-      description: "\nThe conditions of the <xref href=\"System.ComponentModel.Composition.Primitives.ExportDefinition\" data-throw-if-not-resolved=\"false\"></xref> objects to be returned.\n"
+      type: ImportDefinition
+      description: "\nThe conditions of the <see cref=\"!:ExportDefinition\"></see> objects to be returned.\n"
     return:
-      type: System.Collections.Generic.IEnumerable{System.Tuple{System.ComponentModel.Composition.Primitives.ComposablePartDefinition,System.ComponentModel.Composition.Primitives.ExportDefinition}}
-      description: "\nA collection of <xref href=\"System.Tuple%602\" data-throw-if-not-resolved=\"false\"></xref> objects containing the <xref href=\"System.ComponentModel.Composition.Primitives.ExportDefinition\" data-throw-if-not-resolved=\"false\"></xref>\nobjects and their associated <xref href=\"System.ComponentModel.Composition.Primitives.ComposablePartDefinition\" data-throw-if-not-resolved=\"false\"></xref>\nobjects for objects that match the constraint specified by definition.\n"
+      type: System.Collections.Generic.IEnumerable{System.Tuple{ComposablePartDefinition,ExportDefinition}}
+      description: "\nA collection of <xref href=\"System.Tuple%602\" data-throw-if-not-resolved=\"false\"></xref> objects containing the <see cref=\"!:ExportDefinition\"></see>\nobjects and their associated <see cref=\"!:ComposablePartDefinition\"></see>\nobjects for objects that match the constraint specified by definition.\n"
     content.vb: Public Overrides Function GetExports(definition As ImportDefinition) As IEnumerable(Of Tuple(Of ComposablePartDefinition, ExportDefinition))
-  overridden: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports*
   modifiers.csharp:
   - public
@@ -445,15 +506,11 @@ items:
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Dispose(System.Boolean)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Dispose
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 174
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 178
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nReleases the unmanaged resources used by the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog\" data-throw-if-not-resolved=\"false\"></xref>\nand optionally releases the managed resources.\n"
   example: []
@@ -464,7 +521,6 @@ items:
       type: System.Boolean
       description: "\ntrue to release both managed and unmanaged resources; false to release only unmanaged\nresources.\n"
     content.vb: Protected Overrides Sub Dispose(disposing As Boolean)
-  overridden: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose(System.Boolean)
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Dispose*
   modifiers.csharp:
   - protected
@@ -472,27 +528,23 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
-  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
-  id: OnChanged(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
+- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(ComposablePartCatalogChangeEventArgs)
+  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(ComposablePartCatalogChangeEventArgs)
+  id: OnChanged(ComposablePartCatalogChangeEventArgs)
   parent: System.ComponentModel.Composition.Hosting.DeploymentCatalog
   langs:
   - csharp
   - vb
   name: OnChanged(ComposablePartCatalogChangeEventArgs)
   nameWithType: DeploymentCatalog.OnChanged(ComposablePartCatalogChangeEventArgs)
-  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
+  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged(ComposablePartCatalogChangeEventArgs)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnChanged
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 213
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 217
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nRaises the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changed\" data-throw-if-not-resolved=\"false\"></xref>\nevent.\n"
   example: []
@@ -500,8 +552,8 @@ items:
     content: protected virtual void OnChanged(ComposablePartCatalogChangeEventArgs e)
     parameters:
     - id: e
-      type: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
-      description: "\nA <xref href=\"System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs\" data-throw-if-not-resolved=\"false\"></xref>\nobject that contains the event data.\n"
+      type: ComposablePartCatalogChangeEventArgs
+      description: "\nA <see cref=\"!:ComposablePartCatalogChangeEventArgs\"></see>\nobject that contains the event data.\n"
     content.vb: Protected Overridable Sub OnChanged(e As ComposablePartCatalogChangeEventArgs)
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged*
   modifiers.csharp:
@@ -510,27 +562,23 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
-  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
-  id: OnChanging(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
+- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(ComposablePartCatalogChangeEventArgs)
+  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(ComposablePartCatalogChangeEventArgs)
+  id: OnChanging(ComposablePartCatalogChangeEventArgs)
   parent: System.ComponentModel.Composition.Hosting.DeploymentCatalog
   langs:
   - csharp
   - vb
   name: OnChanging(ComposablePartCatalogChangeEventArgs)
   nameWithType: DeploymentCatalog.OnChanging(ComposablePartCatalogChangeEventArgs)
-  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
+  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging(ComposablePartCatalogChangeEventArgs)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnChanging
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 227
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 231
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nRaises the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changing\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
   example: []
@@ -538,8 +586,8 @@ items:
     content: protected virtual void OnChanging(ComposablePartCatalogChangeEventArgs e)
     parameters:
     - id: e
-      type: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
-      description: "\nA <xref href=\"System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs\" data-throw-if-not-resolved=\"false\"></xref> object that contains the event data.\n"
+      type: ComposablePartCatalogChangeEventArgs
+      description: "\nA <see cref=\"!:ComposablePartCatalogChangeEventArgs\"></see> object that contains the event data.\n"
     content.vb: Protected Overridable Sub OnChanging(e As ComposablePartCatalogChangeEventArgs)
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging*
   modifiers.csharp:
@@ -548,76 +596,88 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(System.ComponentModel.AsyncCompletedEventArgs)
-  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(System.ComponentModel.AsyncCompletedEventArgs)
-  id: OnDownloadCompleted(System.ComponentModel.AsyncCompletedEventArgs)
+- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(AsyncCompletedEventArgs)
+  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(AsyncCompletedEventArgs)
+  id: OnDownloadCompleted(AsyncCompletedEventArgs)
   parent: System.ComponentModel.Composition.Hosting.DeploymentCatalog
   langs:
   - csharp
   - vb
   name: OnDownloadCompleted(AsyncCompletedEventArgs)
   nameWithType: DeploymentCatalog.OnDownloadCompleted(AsyncCompletedEventArgs)
-  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(System.ComponentModel.AsyncCompletedEventArgs)
+  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted(AsyncCompletedEventArgs)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnDownloadCompleted
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 241
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 245
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nRaises the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadCompleted\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
   example: []
   syntax:
-    content: protected virtual void OnDownloadCompleted(AsyncCompletedEventArgs e)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnDownloadCompleted(AsyncCompletedEventArgs e)
     parameters:
     - id: e
-      type: System.ComponentModel.AsyncCompletedEventArgs
-      description: "\nA <xref href=\"System.ComponentModel.AsyncCompletedEventArgs\" data-throw-if-not-resolved=\"false\"></xref> object that contains the event data.\n"
-    content.vb: Protected Overridable Sub OnDownloadCompleted(e As AsyncCompletedEventArgs)
+      type: AsyncCompletedEventArgs
+      description: "\nA <see cref=\"!:AsyncCompletedEventArgs\"></see> object that contains the event data.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnDownloadCompleted(e As AsyncCompletedEventArgs)
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
   modifiers.vb:
   - Protected
   - Overridable
-- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(System.Net.DownloadProgressChangedEventArgs)
-  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(System.Net.DownloadProgressChangedEventArgs)
-  id: OnDownloadProgressChanged(System.Net.DownloadProgressChangedEventArgs)
+- uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(DownloadProgressChangedEventArgs)
+  commentId: M:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(DownloadProgressChangedEventArgs)
+  id: OnDownloadProgressChanged(DownloadProgressChangedEventArgs)
   parent: System.ComponentModel.Composition.Hosting.DeploymentCatalog
   langs:
   - csharp
   - vb
   name: OnDownloadProgressChanged(DownloadProgressChangedEventArgs)
   nameWithType: DeploymentCatalog.OnDownloadProgressChanged(DownloadProgressChangedEventArgs)
-  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(System.Net.DownloadProgressChangedEventArgs)
+  fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged(DownloadProgressChangedEventArgs)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnDownloadProgressChanged
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.ComponentModel.Composition.Hosting/WORKINPROGRESS/DeploymentCatalog.cs
-    startLine: 252
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel.Composition.Hosting\WORKINPROGRESS\DeploymentCatalog.cs
+    startLine: 257
   assemblies:
-  - OpenSilver
+  - Runtime.OpenSilver
   namespace: System.ComponentModel.Composition.Hosting
   summary: "\nRaises the <xref href=\"System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadProgressChanged\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
   example: []
   syntax:
-    content: protected virtual void OnDownloadProgressChanged(DownloadProgressChangedEventArgs e)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnDownloadProgressChanged(DownloadProgressChangedEventArgs e)
     parameters:
     - id: e
-      type: System.Net.DownloadProgressChangedEventArgs
-      description: "\nA <xref href=\"System.Net.DownloadProgressChangedEventArgs\" data-throw-if-not-resolved=\"false\"></xref> object that contains the event data.\n"
-    content.vb: Protected Overridable Sub OnDownloadProgressChanged(e As DownloadProgressChangedEventArgs)
+      type: DownloadProgressChangedEventArgs
+      description: "\nA <see cref=\"!:DownloadProgressChangedEventArgs\"></see> object that contains the event data.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnDownloadProgressChanged(e As DownloadProgressChangedEventArgs)
   overload: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
@@ -637,452 +697,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
-  commentId: T:System.ComponentModel.Composition.Primitives.ComposablePartCatalog
-  parent: System.ComponentModel.Composition.Primitives
-  isExternal: true
-  name: ComposablePartCatalog
-  nameWithType: ComposablePartCatalog
-  fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
-- uid: System.Collections.Generic.IEnumerable{System.ComponentModel.Composition.Primitives.ComposablePartDefinition}
-  commentId: T:System.Collections.Generic.IEnumerable{System.ComponentModel.Composition.Primitives.ComposablePartDefinition}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IEnumerable`1
-  name: IEnumerable<ComposablePartDefinition>
-  nameWithType: IEnumerable<ComposablePartDefinition>
-  fullName: System.Collections.Generic.IEnumerable<System.ComponentModel.Composition.Primitives.ComposablePartDefinition>
-  nameWithType.vb: IEnumerable(Of ComposablePartDefinition)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of System.ComponentModel.Composition.Primitives.ComposablePartDefinition)
-  name.vb: IEnumerable(Of ComposablePartDefinition)
-  spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
-    name: ComposablePartDefinition
-    nameWithType: ComposablePartDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
-    name: ComposablePartDefinition
-    nameWithType: ComposablePartDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.IEnumerable
-  commentId: T:System.Collections.IEnumerable
-  parent: System.Collections
-  isExternal: true
-  name: IEnumerable
-  nameWithType: IEnumerable
-  fullName: System.Collections.IEnumerable
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
-  commentId: T:System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
-  parent: System.ComponentModel.Composition.Hosting
+- uid: INotifyComposablePartCatalogChanged
+  commentId: '!:INotifyComposablePartCatalogChanged'
   isExternal: true
   name: INotifyComposablePartCatalogChanged
   nameWithType: INotifyComposablePartCatalogChanged
-  fullName: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
-  commentId: M:System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
-  parent: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
-  isExternal: true
-  name: Dispose()
-  nameWithType: ComposablePartCatalog.Dispose()
-  fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose()
-  spec.csharp:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
-    name: Dispose
-    nameWithType: ComposablePartCatalog.Dispose
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
-    name: Dispose
-    nameWithType: ComposablePartCatalog.Dispose
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator
-  commentId: M:System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator
-  parent: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
-  isExternal: true
-  name: GetEnumerator()
-  nameWithType: ComposablePartCatalog.GetEnumerator()
-  fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator()
-  spec.csharp:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator
-    name: GetEnumerator
-    nameWithType: ComposablePartCatalog.GetEnumerator
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator
-    name: GetEnumerator
-    nameWithType: ComposablePartCatalog.GetEnumerator
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetEnumerator
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System#Collections#IEnumerable#GetEnumerator
-  commentId: M:System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System#Collections#IEnumerable#GetEnumerator
-  parent: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
-  isExternal: true
-  name: IEnumerable.GetEnumerator()
-  nameWithType: ComposablePartCatalog.IEnumerable.GetEnumerator()
-  fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System.Collections.IEnumerable.GetEnumerator()
-  nameWithType.vb: ComposablePartCatalog.System.Collections.IEnumerable.GetEnumerator()
-  name.vb: System.Collections.IEnumerable.GetEnumerator()
-  spec.csharp:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System#Collections#IEnumerable#GetEnumerator
-    name: IEnumerable.GetEnumerator
-    nameWithType: ComposablePartCatalog.IEnumerable.GetEnumerator
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System.Collections.IEnumerable.GetEnumerator
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System#Collections#IEnumerable#GetEnumerator
-    name: System.Collections.IEnumerable.GetEnumerator
-    nameWithType: ComposablePartCatalog.System.Collections.IEnumerable.GetEnumerator
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.System.Collections.IEnumerable.GetEnumerator
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
+  fullName: INotifyComposablePartCatalogChanged
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -1117,62 +737,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: System.ComponentModel.Composition.Primitives
-  commentId: N:System.ComponentModel.Composition.Primitives
-  isExternal: true
-  name: System.ComponentModel.Composition.Primitives
-  nameWithType: System.ComponentModel.Composition.Primitives
-  fullName: System.ComponentModel.Composition.Primitives
-- uid: System.Collections.Generic.IEnumerable`1
-  commentId: T:System.Collections.Generic.IEnumerable`1
-  isExternal: true
-  name: IEnumerable<T>
-  nameWithType: IEnumerable<T>
-  fullName: System.Collections.Generic.IEnumerable<T>
-  nameWithType.vb: IEnumerable(Of T)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
-  name.vb: IEnumerable(Of T)
-  spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
-- uid: System.Collections
-  commentId: N:System.Collections
-  isExternal: true
-  name: System.Collections
-  nameWithType: System.Collections
-  fullName: System.Collections
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -1232,134 +796,119 @@ references:
   name: DeploymentCatalog
   nameWithType: DeploymentCatalog.DeploymentCatalog
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DeploymentCatalog
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Parts
-  commentId: P:System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Parts
-  parent: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
+- uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
-  name: Parts
-  nameWithType: ComposablePartCatalog.Parts
-  fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Parts
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Uri
+  isExternal: true
+  name: Uri
+  nameWithType: Uri
+  fullName: Uri
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Parts*
   commentId: Overload:System.ComponentModel.Composition.Hosting.DeploymentCatalog.Parts
   name: Parts
   nameWithType: DeploymentCatalog.Parts
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Parts
-- uid: System.Linq.IQueryable{System.ComponentModel.Composition.Primitives.ComposablePartDefinition}
-  commentId: T:System.Linq.IQueryable{System.ComponentModel.Composition.Primitives.ComposablePartDefinition}
-  parent: System.Linq
-  definition: System.Linq.IQueryable`1
+- uid: IQueryable{ComposablePartDefinition}
+  commentId: '!:IQueryable{ComposablePartDefinition}'
+  definition: IQueryable`1
   name: IQueryable<ComposablePartDefinition>
   nameWithType: IQueryable<ComposablePartDefinition>
-  fullName: System.Linq.IQueryable<System.ComponentModel.Composition.Primitives.ComposablePartDefinition>
+  fullName: IQueryable<ComposablePartDefinition>
   nameWithType.vb: IQueryable(Of ComposablePartDefinition)
-  fullName.vb: System.Linq.IQueryable(Of System.ComponentModel.Composition.Primitives.ComposablePartDefinition)
+  fullName.vb: IQueryable(Of ComposablePartDefinition)
   name.vb: IQueryable(Of ComposablePartDefinition)
   spec.csharp:
-  - uid: System.Linq.IQueryable`1
+  - uid: IQueryable`1
     name: IQueryable
     nameWithType: IQueryable
-    fullName: System.Linq.IQueryable
+    fullName: IQueryable
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+  - uid: ComposablePartDefinition
     name: ComposablePartDefinition
     nameWithType: ComposablePartDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+    fullName: ComposablePartDefinition
     isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Linq.IQueryable`1
+  - uid: IQueryable`1
     name: IQueryable
     nameWithType: IQueryable
-    fullName: System.Linq.IQueryable
+    fullName: IQueryable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+  - uid: ComposablePartDefinition
     name: ComposablePartDefinition
     nameWithType: ComposablePartDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+    fullName: ComposablePartDefinition
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Linq.IQueryable`1
-  commentId: T:System.Linq.IQueryable`1
+- uid: IQueryable`1
+  commentId: '!:IQueryable`1'
   isExternal: true
-  name: IQueryable<T>
-  nameWithType: IQueryable<T>
-  fullName: System.Linq.IQueryable<T>
-  nameWithType.vb: IQueryable(Of T)
-  fullName.vb: System.Linq.IQueryable(Of T)
-  name.vb: IQueryable(Of T)
+  name: IQueryable<>
+  nameWithType: IQueryable<>
+  fullName: IQueryable<>
+  nameWithType.vb: IQueryable(Of )
+  fullName.vb: IQueryable(Of )
+  name.vb: IQueryable(Of )
   spec.csharp:
-  - uid: System.Linq.IQueryable`1
+  - uid: IQueryable`1
     name: IQueryable
     nameWithType: IQueryable
-    fullName: System.Linq.IQueryable
+    fullName: IQueryable
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Linq.IQueryable`1
+  - uid: IQueryable`1
     name: IQueryable
     nameWithType: IQueryable
-    fullName: System.Linq.IQueryable
+    fullName: IQueryable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Linq
-  commentId: N:System.Linq
-  name: System.Linq
-  nameWithType: System.Linq
-  fullName: System.Linq
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Uri*
   commentId: Overload:System.ComponentModel.Composition.Hosting.DeploymentCatalog.Uri
   name: Uri
   nameWithType: DeploymentCatalog.Uri
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Uri
-- uid: System.Uri
-  commentId: T:System.Uri
-  parent: System
-  isExternal: true
-  name: Uri
-  nameWithType: Uri
-  fullName: System.Uri
-- uid: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changed
-  commentId: E:System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changed
-  parent: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
-  isExternal: true
-  name: Changed
-  nameWithType: INotifyComposablePartCatalogChanged.Changed
-  fullName: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changed
-- uid: System.EventHandler{System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs}
-  commentId: T:System.EventHandler{System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs}
+- uid: System.EventHandler{ComposablePartCatalogChangeEventArgs}
+  commentId: T:System.EventHandler{ComposablePartCatalogChangeEventArgs}
   parent: System
   definition: System.EventHandler`1
   name: EventHandler<ComposablePartCatalogChangeEventArgs>
   nameWithType: EventHandler<ComposablePartCatalogChangeEventArgs>
-  fullName: System.EventHandler<System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs>
+  fullName: System.EventHandler<ComposablePartCatalogChangeEventArgs>
   nameWithType.vb: EventHandler(Of ComposablePartCatalogChangeEventArgs)
-  fullName.vb: System.EventHandler(Of System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs)
+  fullName.vb: System.EventHandler(Of ComposablePartCatalogChangeEventArgs)
   name.vb: EventHandler(Of ComposablePartCatalogChangeEventArgs)
   spec.csharp:
   - uid: System.EventHandler`1
@@ -1370,10 +919,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
+  - uid: ComposablePartCatalogChangeEventArgs
     name: ComposablePartCatalogChangeEventArgs
     nameWithType: ComposablePartCatalogChangeEventArgs
-    fullName: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
+    fullName: ComposablePartCatalogChangeEventArgs
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1387,10 +936,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
+  - uid: ComposablePartCatalogChangeEventArgs
     name: ComposablePartCatalogChangeEventArgs
     nameWithType: ComposablePartCatalogChangeEventArgs
-    fullName: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
+    fullName: ComposablePartCatalogChangeEventArgs
     isExternal: true
   - name: )
     nameWithType: )
@@ -1434,22 +983,15 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changing
-  commentId: E:System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changing
-  parent: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged
-  isExternal: true
-  name: Changing
-  nameWithType: INotifyComposablePartCatalogChanged.Changing
-  fullName: System.ComponentModel.Composition.Hosting.INotifyComposablePartCatalogChanged.Changing
-- uid: System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs}
-  commentId: T:System.EventHandler{System.ComponentModel.AsyncCompletedEventArgs}
+- uid: System.EventHandler{AsyncCompletedEventArgs}
+  commentId: T:System.EventHandler{AsyncCompletedEventArgs}
   parent: System
   definition: System.EventHandler`1
   name: EventHandler<AsyncCompletedEventArgs>
   nameWithType: EventHandler<AsyncCompletedEventArgs>
-  fullName: System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs>
+  fullName: System.EventHandler<AsyncCompletedEventArgs>
   nameWithType.vb: EventHandler(Of AsyncCompletedEventArgs)
-  fullName.vb: System.EventHandler(Of System.ComponentModel.AsyncCompletedEventArgs)
+  fullName.vb: System.EventHandler(Of AsyncCompletedEventArgs)
   name.vb: EventHandler(Of AsyncCompletedEventArgs)
   spec.csharp:
   - uid: System.EventHandler`1
@@ -1460,10 +1002,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.ComponentModel.AsyncCompletedEventArgs
+  - uid: AsyncCompletedEventArgs
     name: AsyncCompletedEventArgs
     nameWithType: AsyncCompletedEventArgs
-    fullName: System.ComponentModel.AsyncCompletedEventArgs
+    fullName: AsyncCompletedEventArgs
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1477,23 +1019,23 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.ComponentModel.AsyncCompletedEventArgs
+  - uid: AsyncCompletedEventArgs
     name: AsyncCompletedEventArgs
     nameWithType: AsyncCompletedEventArgs
-    fullName: System.ComponentModel.AsyncCompletedEventArgs
+    fullName: AsyncCompletedEventArgs
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.EventHandler{System.Net.DownloadProgressChangedEventArgs}
-  commentId: T:System.EventHandler{System.Net.DownloadProgressChangedEventArgs}
+- uid: System.EventHandler{DownloadProgressChangedEventArgs}
+  commentId: T:System.EventHandler{DownloadProgressChangedEventArgs}
   parent: System
   definition: System.EventHandler`1
   name: EventHandler<DownloadProgressChangedEventArgs>
   nameWithType: EventHandler<DownloadProgressChangedEventArgs>
-  fullName: System.EventHandler<System.Net.DownloadProgressChangedEventArgs>
+  fullName: System.EventHandler<DownloadProgressChangedEventArgs>
   nameWithType.vb: EventHandler(Of DownloadProgressChangedEventArgs)
-  fullName.vb: System.EventHandler(Of System.Net.DownloadProgressChangedEventArgs)
+  fullName.vb: System.EventHandler(Of DownloadProgressChangedEventArgs)
   name.vb: EventHandler(Of DownloadProgressChangedEventArgs)
   spec.csharp:
   - uid: System.EventHandler`1
@@ -1504,10 +1046,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.Net.DownloadProgressChangedEventArgs
+  - uid: DownloadProgressChangedEventArgs
     name: DownloadProgressChangedEventArgs
     nameWithType: DownloadProgressChangedEventArgs
-    fullName: System.Net.DownloadProgressChangedEventArgs
+    fullName: DownloadProgressChangedEventArgs
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1521,10 +1063,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.Net.DownloadProgressChangedEventArgs
+  - uid: DownloadProgressChangedEventArgs
     name: DownloadProgressChangedEventArgs
     nameWithType: DownloadProgressChangedEventArgs
-    fullName: System.Net.DownloadProgressChangedEventArgs
+    fullName: DownloadProgressChangedEventArgs
     isExternal: true
   - name: )
     nameWithType: )
@@ -1551,77 +1093,29 @@ references:
   name: DownloadAsync
   nameWithType: DeploymentCatalog.DownloadAsync
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadAsync
-- uid: System.ComponentModel.Composition.Primitives.ExportDefinition
-  commentId: T:System.ComponentModel.Composition.Primitives.ExportDefinition
-  isExternal: true
 - uid: System.Tuple`2
   commentId: T:System.Tuple`2
   isExternal: true
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
-  commentId: T:System.ComponentModel.Composition.Primitives.ComposablePartDefinition
-  isExternal: true
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-  commentId: M:System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-  parent: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
-  isExternal: true
-  name: GetExports(ImportDefinition)
-  nameWithType: ComposablePartCatalog.GetExports(ImportDefinition)
-  fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-  spec.csharp:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-    name: GetExports
-    nameWithType: ComposablePartCatalog.GetExports
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.ComponentModel.Composition.Primitives.ImportDefinition
-    name: ImportDefinition
-    nameWithType: ImportDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ImportDefinition
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports(System.ComponentModel.Composition.Primitives.ImportDefinition)
-    name: GetExports
-    nameWithType: ComposablePartCatalog.GetExports
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.GetExports
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.ComponentModel.Composition.Primitives.ImportDefinition
-    name: ImportDefinition
-    nameWithType: ImportDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ImportDefinition
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports*
   commentId: Overload:System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports
   name: GetExports
   nameWithType: DeploymentCatalog.GetExports
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.GetExports
-- uid: System.ComponentModel.Composition.Primitives.ImportDefinition
-  commentId: T:System.ComponentModel.Composition.Primitives.ImportDefinition
-  parent: System.ComponentModel.Composition.Primitives
+- uid: ImportDefinition
+  commentId: '!:ImportDefinition'
   isExternal: true
   name: ImportDefinition
   nameWithType: ImportDefinition
-  fullName: System.ComponentModel.Composition.Primitives.ImportDefinition
-- uid: System.Collections.Generic.IEnumerable{System.Tuple{System.ComponentModel.Composition.Primitives.ComposablePartDefinition,System.ComponentModel.Composition.Primitives.ExportDefinition}}
-  commentId: T:System.Collections.Generic.IEnumerable{System.Tuple{System.ComponentModel.Composition.Primitives.ComposablePartDefinition,System.ComponentModel.Composition.Primitives.ExportDefinition}}
+  fullName: ImportDefinition
+- uid: System.Collections.Generic.IEnumerable{System.Tuple{ComposablePartDefinition,ExportDefinition}}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Tuple{ComposablePartDefinition,ExportDefinition}}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IEnumerable`1
   name: IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>
   nameWithType: IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>>
-  fullName: System.Collections.Generic.IEnumerable<System.Tuple<System.ComponentModel.Composition.Primitives.ComposablePartDefinition, System.ComponentModel.Composition.Primitives.ExportDefinition>>
+  fullName: System.Collections.Generic.IEnumerable<System.Tuple<ComposablePartDefinition, ExportDefinition>>
   nameWithType.vb: IEnumerable(Of Tuple(Of ComposablePartDefinition, ExportDefinition))
-  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Tuple(Of System.ComponentModel.Composition.Primitives.ComposablePartDefinition, System.ComponentModel.Composition.Primitives.ExportDefinition))
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Tuple(Of ComposablePartDefinition, ExportDefinition))
   name.vb: IEnumerable(Of Tuple(Of ComposablePartDefinition, ExportDefinition))
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -1640,18 +1134,18 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+  - uid: ComposablePartDefinition
     name: ComposablePartDefinition
     nameWithType: ComposablePartDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+    fullName: ComposablePartDefinition
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.ComponentModel.Composition.Primitives.ExportDefinition
+  - uid: ExportDefinition
     name: ExportDefinition
     nameWithType: ExportDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ExportDefinition
+    fullName: ExportDefinition
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1676,18 +1170,18 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+  - uid: ComposablePartDefinition
     name: ComposablePartDefinition
     nameWithType: ComposablePartDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartDefinition
+    fullName: ComposablePartDefinition
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.ComponentModel.Composition.Primitives.ExportDefinition
+  - uid: ExportDefinition
     name: ExportDefinition
     nameWithType: ExportDefinition
-    fullName: System.ComponentModel.Composition.Primitives.ExportDefinition
+    fullName: ExportDefinition
     isExternal: true
   - name: )
     nameWithType: )
@@ -1695,47 +1189,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose(System.Boolean)
-  commentId: M:System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose(System.Boolean)
-  parent: System.ComponentModel.Composition.Primitives.ComposablePartCatalog
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
   isExternal: true
-  name: Dispose(Boolean)
-  nameWithType: ComposablePartCatalog.Dispose(Boolean)
-  fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose(System.Boolean)
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
   spec.csharp:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose(System.Boolean)
-    name: Dispose
-    nameWithType: ComposablePartCatalog.Dispose
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
   spec.vb:
-  - uid: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose(System.Boolean)
-    name: Dispose
-    nameWithType: ComposablePartCatalog.Dispose
-    fullName: System.ComponentModel.Composition.Primitives.ComposablePartCatalog.Dispose
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
     isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Dispose*
   commentId: Overload:System.ComponentModel.Composition.Hosting.DeploymentCatalog.Dispose
   name: Dispose
@@ -1751,18 +1248,16 @@ references:
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changed
   commentId: E:System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changed
   isExternal: true
-- uid: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
-  commentId: T:System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
-  parent: System.ComponentModel.Composition.Hosting
-  isExternal: true
-  name: ComposablePartCatalogChangeEventArgs
-  nameWithType: ComposablePartCatalogChangeEventArgs
-  fullName: System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged*
   commentId: Overload:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged
   name: OnChanged
   nameWithType: DeploymentCatalog.OnChanged
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanged
+- uid: ComposablePartCatalogChangeEventArgs
+  isExternal: true
+  name: ComposablePartCatalogChangeEventArgs
+  nameWithType: ComposablePartCatalogChangeEventArgs
+  fullName: ComposablePartCatalogChangeEventArgs
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changing
   commentId: E:System.ComponentModel.Composition.Hosting.DeploymentCatalog.Changing
   isExternal: true
@@ -1771,40 +1266,28 @@ references:
   name: OnChanging
   nameWithType: DeploymentCatalog.OnChanging
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnChanging
-- uid: System.ComponentModel.AsyncCompletedEventArgs
-  commentId: T:System.ComponentModel.AsyncCompletedEventArgs
-  parent: System.ComponentModel
-  isExternal: true
-  name: AsyncCompletedEventArgs
-  nameWithType: AsyncCompletedEventArgs
-  fullName: System.ComponentModel.AsyncCompletedEventArgs
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted*
   commentId: Overload:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted
   name: OnDownloadCompleted
   nameWithType: DeploymentCatalog.OnDownloadCompleted
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadCompleted
-- uid: System.ComponentModel
-  commentId: N:System.ComponentModel
-  name: System.ComponentModel
-  nameWithType: System.ComponentModel
-  fullName: System.ComponentModel
+- uid: AsyncCompletedEventArgs
+  commentId: '!:AsyncCompletedEventArgs'
+  isExternal: true
+  name: AsyncCompletedEventArgs
+  nameWithType: AsyncCompletedEventArgs
+  fullName: AsyncCompletedEventArgs
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadProgressChanged
   commentId: E:System.ComponentModel.Composition.Hosting.DeploymentCatalog.DownloadProgressChanged
   isExternal: true
-- uid: System.Net.DownloadProgressChangedEventArgs
-  commentId: T:System.Net.DownloadProgressChangedEventArgs
-  parent: System.Net
-  isExternal: true
-  name: DownloadProgressChangedEventArgs
-  nameWithType: DownloadProgressChangedEventArgs
-  fullName: System.Net.DownloadProgressChangedEventArgs
 - uid: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged*
   commentId: Overload:System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged
   name: OnDownloadProgressChanged
   nameWithType: DeploymentCatalog.OnDownloadProgressChanged
   fullName: System.ComponentModel.Composition.Hosting.DeploymentCatalog.OnDownloadProgressChanged
-- uid: System.Net
-  commentId: N:System.Net
-  name: System.Net
-  nameWithType: System.Net
-  fullName: System.Net
+- uid: DownloadProgressChangedEventArgs
+  commentId: '!:DownloadProgressChangedEventArgs'
+  isExternal: true
+  name: DownloadProgressChangedEventArgs
+  nameWithType: DownloadProgressChangedEventArgs
+  fullName: DownloadProgressChangedEventArgs
