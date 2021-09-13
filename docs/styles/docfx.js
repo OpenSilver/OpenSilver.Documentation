@@ -402,7 +402,7 @@ $(function () {
             }
           }
         });
-        renderNavbar();
+        //renderNavbar();
       });
     }
   }

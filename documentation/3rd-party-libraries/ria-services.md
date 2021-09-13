@@ -13,7 +13,12 @@ We use Open RIA Services, which is the official replacement by Microsoft when RI
 
 ## NuGet Packages
 
-Coming soon
+https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client.Core/
+https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client/
+
+## Example
+
+https://github.com/OpenSilver/OpenRiaServicesSamples/tree/main/CustomEndpoint
 
 ## Source code
 
