@@ -6,9 +6,7 @@ Good support in OpenSilver
 
 ## NuGet Packages
 
-Get the package from here:
-
-https://drive.google.com/file/d/1qc5VFwokH7tCMEcVoYk6H-iqkZwyekf7/view?usp=sharing
+https://www.nuget.org/packages/OpenSilver.Prism4/
 
 ## Source code
 

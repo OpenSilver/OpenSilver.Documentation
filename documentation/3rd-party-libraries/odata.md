@@ -6,9 +6,7 @@ Good support in OpenSilver
 
 ## NuGet Packages
 
-Get the package from here:
-
-https://drive.google.com/file/d/1c80EmJwgqv_4U0oXtZ2tDUFuE0BuD39T/view?usp=sharing
+https://www.nuget.org/packages/OpenSilver.OData/
 
 ## Source code
 
