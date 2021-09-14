@@ -50,24 +50,7 @@ We need to keep our new *OpenSilver* project consistent with the *Silverlight*. 
 
 ![Project Reference](/images/ProjectReference.png "Project Reference")
 
-#### 4. Remove OpenSilver Nuget package and install OpenSilver.WorkInProgress one
-As it was mentioned on the [Compile with OpenSilver](compile-with-opensilver.md) page for best compatibility we are going to use **OpenSilver.WorkInProgress** package instead of **OpenSilver**.
-
-- Uninstall **OpenSilver** Nuget package
-```
-Uninstall-Package OpenSilver -Project CustomerApp
-Uninstall-Package OpenSilver -Project CustomerApp.Browser
-Uninstall-Package OpenSilver -Project CustomerData
-```
-
-- Install **OpenSilver.WorkInProgress** Nuget package
-```
-Install-Package OpenSilver.WorkInProgress -Version 1.0.0-alpha-018 -Project CustomerApp
-Install-Package OpenSilver.WorkInProgress -Version 1.0.0-alpha-018 -Project CustomerApp.Browser
-Install-Package OpenSilver.WorkInProgress -Version 1.0.0-alpha-018 -Project CustomerData
-```
-
-#### 5. Rename OpenSilver projects
+#### 4. Rename OpenSilver projects
 
 - Rename `CustomerApp` to `CustomerApp.OpenSilver`
 - Rename `CustomerData` to `CustomerData.OpenSilver`
@@ -77,14 +60,14 @@ Install-Package OpenSilver.WorkInProgress -Version 1.0.0-alpha-018 -Project Cust
 
 Now we can close **Visual Studio 2019**.
 
-#### 6. Copy files and directories from OpenSilver project to Silverlight project
+#### 5. Copy files and directories from OpenSilver project to Silverlight project
 
 - Copy **CustomerApp.Browser**, **CustomerApp.Simulator** folders and **CustomerApp.OpenSilver.sln** file to Silverlight's **root** directory
 - Copy **CustomerData.OpenSilver.csproj** and **CustomerApp.OpenSilver.csproj** files to Silverlight's according projects directory
 
 ![Directory Structure](/images/DirectoryStructure.png "Directory Structure")
 
-#### 7. Compile migrated project with Visual Studio 2019
+#### 6. Compile migrated project with Visual Studio 2019
 
 - Open **CustomerApp.OpenSilver.sln** located in Silverlight's project with *Visual Studio 2019*
 - In `Solution Explorer` find `AssemblyInfo.cs` for both CustomerApp and CustomerData projects and exclude them
