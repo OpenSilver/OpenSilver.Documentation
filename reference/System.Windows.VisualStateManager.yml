@@ -5,9 +5,14 @@ items:
   id: VisualStateManager
   parent: System.Windows
   children:
-  - System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.DependencyObject)
+  - System.Windows.VisualStateManager.CustomVisualStateManagerProperty
+  - System.Windows.VisualStateManager.GetCustomVisualStateManager(System.Windows.FrameworkElement)
+  - System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.FrameworkElement)
   - System.Windows.VisualStateManager.GoToState(System.Windows.Controls.Control,System.String,System.Boolean)
-  - System.Windows.VisualStateManager.SetVisualStateGroups(System.Windows.DependencyObject,System.Collections.IList)
+  - System.Windows.VisualStateManager.GoToStateCore(System.Windows.Controls.Control,System.Windows.FrameworkElement,System.String,System.Windows.VisualStateGroup,System.Windows.VisualState,System.Boolean)
+  - System.Windows.VisualStateManager.RaiseCurrentStateChanged(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
+  - System.Windows.VisualStateManager.RaiseCurrentStateChanging(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
+  - System.Windows.VisualStateManager.SetCustomVisualStateManager(System.Windows.FrameworkElement,System.Windows.VisualStateManager)
   - System.Windows.VisualStateManager.VisualStateGroupsProperty
   langs:
   - csharp
@@ -17,13 +22,9 @@ items:
   fullName: System.Windows.VisualStateManager
   type: Class
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: VisualStateManager
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-    startLine: 38
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 39
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -54,56 +55,202 @@ items:
   - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
   - System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
+  - System.Windows.DependencyObject.CheckAccess
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.DependencyObject)
-  commentId: M:System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.DependencyObject)
-  id: GetVisualStateGroups(System.Windows.DependencyObject)
+- uid: System.Windows.VisualStateManager.GoToState(System.Windows.Controls.Control,System.String,System.Boolean)
+  commentId: M:System.Windows.VisualStateManager.GoToState(System.Windows.Controls.Control,System.String,System.Boolean)
+  id: GoToState(System.Windows.Controls.Control,System.String,System.Boolean)
   parent: System.Windows.VisualStateManager
   langs:
   - csharp
   - vb
-  name: GetVisualStateGroups(DependencyObject)
-  nameWithType: VisualStateManager.GetVisualStateGroups(DependencyObject)
-  fullName: System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.DependencyObject)
+  name: GoToState(Control, String, Boolean)
+  nameWithType: VisualStateManager.GoToState(Control, String, Boolean)
+  fullName: System.Windows.VisualStateManager.GoToState(System.Windows.Controls.Control, System.String, System.Boolean)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GetVisualStateGroups
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-    startLine: 69
+    id: GoToState
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 103
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets the value of the VisualStateManager.VisualStateGroups attached property.\n"
+  summary: "\nTransitions the control between two states.\n"
   example: []
   syntax:
-    content: public static IList GetVisualStateGroups(DependencyObject obj)
+    content: public static bool GoToState(Control control, string stateName, bool useTransitions)
+    parameters:
+    - id: control
+      type: System.Windows.Controls.Control
+      description: "\nThe control to transition between states.\n"
+    - id: stateName
+      type: System.String
+      description: "\nThe state to transition to.\n"
+    - id: useTransitions
+      type: System.Boolean
+      description: "\nTrue to use a VisualTransition to transition between states; otherwise,\nfalse.\n"
+    return:
+      type: System.Boolean
+      description: "\nTrue if the control successfully transitioned to the new state; otherwise,\nfalse.\n"
+    content.vb: Public Shared Function GoToState(control As Control, stateName As String, useTransitions As Boolean) As Boolean
+  overload: System.Windows.VisualStateManager.GoToState*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.VisualStateManager.GoToStateCore(System.Windows.Controls.Control,System.Windows.FrameworkElement,System.String,System.Windows.VisualStateGroup,System.Windows.VisualState,System.Boolean)
+  commentId: M:System.Windows.VisualStateManager.GoToStateCore(System.Windows.Controls.Control,System.Windows.FrameworkElement,System.String,System.Windows.VisualStateGroup,System.Windows.VisualState,System.Boolean)
+  id: GoToStateCore(System.Windows.Controls.Control,System.Windows.FrameworkElement,System.String,System.Windows.VisualStateGroup,System.Windows.VisualState,System.Boolean)
+  parent: System.Windows.VisualStateManager
+  langs:
+  - csharp
+  - vb
+  name: GoToStateCore(Control, FrameworkElement, String, VisualStateGroup, VisualState, Boolean)
+  nameWithType: VisualStateManager.GoToStateCore(Control, FrameworkElement, String, VisualStateGroup, VisualState, Boolean)
+  fullName: System.Windows.VisualStateManager.GoToStateCore(System.Windows.Controls.Control, System.Windows.FrameworkElement, System.String, System.Windows.VisualStateGroup, System.Windows.VisualState, System.Boolean)
+  type: Method
+  source:
+    id: GoToStateCore
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 118
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nAllows subclasses to override the GoToState logic.\n"
+  example: []
+  syntax:
+    content: protected virtual bool GoToStateCore(Control control, FrameworkElement templateRoot, string stateName, VisualStateGroup group, VisualState state, bool useTransitions)
+    parameters:
+    - id: control
+      type: System.Windows.Controls.Control
+    - id: templateRoot
+      type: System.Windows.FrameworkElement
+    - id: stateName
+      type: System.String
+    - id: group
+      type: System.Windows.VisualStateGroup
+    - id: state
+      type: System.Windows.VisualState
+    - id: useTransitions
+      type: System.Boolean
+    return:
+      type: System.Boolean
+    content.vb: Protected Overridable Function GoToStateCore(control As Control, templateRoot As FrameworkElement, stateName As String, group As VisualStateGroup, state As VisualState, useTransitions As Boolean) As Boolean
+  overload: System.Windows.VisualStateManager.GoToStateCore*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: System.Windows.VisualStateManager.CustomVisualStateManagerProperty
+  commentId: F:System.Windows.VisualStateManager.CustomVisualStateManagerProperty
+  id: CustomVisualStateManagerProperty
+  parent: System.Windows.VisualStateManager
+  langs:
+  - csharp
+  - vb
+  name: CustomVisualStateManagerProperty
+  nameWithType: VisualStateManager.CustomVisualStateManagerProperty
+  fullName: System.Windows.VisualStateManager.CustomVisualStateManagerProperty
+  type: Field
+  source:
+    id: CustomVisualStateManagerProperty
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 125
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static readonly DependencyProperty CustomVisualStateManagerProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly CustomVisualStateManagerProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.VisualStateManager.GetCustomVisualStateManager(System.Windows.FrameworkElement)
+  commentId: M:System.Windows.VisualStateManager.GetCustomVisualStateManager(System.Windows.FrameworkElement)
+  id: GetCustomVisualStateManager(System.Windows.FrameworkElement)
+  parent: System.Windows.VisualStateManager
+  langs:
+  - csharp
+  - vb
+  name: GetCustomVisualStateManager(FrameworkElement)
+  nameWithType: VisualStateManager.GetCustomVisualStateManager(FrameworkElement)
+  fullName: System.Windows.VisualStateManager.GetCustomVisualStateManager(System.Windows.FrameworkElement)
+  type: Method
+  source:
+    id: GetCustomVisualStateManager
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 132
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static VisualStateManager GetCustomVisualStateManager(FrameworkElement obj)
     parameters:
     - id: obj
-      type: System.Windows.DependencyObject
-      description: The object to get the value from.
+      type: System.Windows.FrameworkElement
     return:
-      type: System.Collections.IList
-      description: "\nThe collection of VisualStateGroup objects that is associated with the specified\nobject.\n"
-    content.vb: Public Shared Function GetVisualStateGroups(obj As DependencyObject) As IList
-  overload: System.Windows.VisualStateManager.GetVisualStateGroups*
+      type: System.Windows.VisualStateManager
+    content.vb: Public Shared Function GetCustomVisualStateManager(obj As FrameworkElement) As VisualStateManager
+  overload: System.Windows.VisualStateManager.GetCustomVisualStateManager*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.VisualStateManager.SetCustomVisualStateManager(System.Windows.FrameworkElement,System.Windows.VisualStateManager)
+  commentId: M:System.Windows.VisualStateManager.SetCustomVisualStateManager(System.Windows.FrameworkElement,System.Windows.VisualStateManager)
+  id: SetCustomVisualStateManager(System.Windows.FrameworkElement,System.Windows.VisualStateManager)
+  parent: System.Windows.VisualStateManager
+  langs:
+  - csharp
+  - vb
+  name: SetCustomVisualStateManager(FrameworkElement, VisualStateManager)
+  nameWithType: VisualStateManager.SetCustomVisualStateManager(FrameworkElement, VisualStateManager)
+  fullName: System.Windows.VisualStateManager.SetCustomVisualStateManager(System.Windows.FrameworkElement, System.Windows.VisualStateManager)
+  type: Method
+  source:
+    id: SetCustomVisualStateManager
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 142
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static void SetCustomVisualStateManager(FrameworkElement obj, VisualStateManager value)
+    parameters:
+    - id: obj
+      type: System.Windows.FrameworkElement
+    - id: value
+      type: System.Windows.VisualStateManager
+    content.vb: Public Shared Sub SetCustomVisualStateManager(obj As FrameworkElement, value As VisualStateManager)
+  overload: System.Windows.VisualStateManager.SetCustomVisualStateManager*
   modifiers.csharp:
   - public
   - static
@@ -122,17 +269,14 @@ items:
   fullName: System.Windows.VisualStateManager.VisualStateGroupsProperty
   type: Field
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: VisualStateGroupsProperty
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-    startLine: 89
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 166
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nIdentifies the VisualStateManager.VisualStateGroup XAML attached property\n"
+  summary: "\nIdentifies the VisualStateManager.VisualStateGroup attached property\n"
+  remarks: "\nThis field is not supposed to be public, but needs to be for now because\nof a limitation due to our XAML compiler. Using it to call \n<xref href=\"System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty%2cSystem.Object)\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Data.BindingOperations.SetBinding(System.Windows.DependencyObject%2cSystem.Windows.DependencyProperty%2cSystem.Windows.Data.Binding)\" data-throw-if-not-resolved=\"false\"></xref>\nor any other method that manipulate dependency properties can lead to some \nunexpected behavior.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty VisualStateGroupsProperty
@@ -147,94 +291,113 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.VisualStateManager.SetVisualStateGroups(System.Windows.DependencyObject,System.Collections.IList)
-  commentId: M:System.Windows.VisualStateManager.SetVisualStateGroups(System.Windows.DependencyObject,System.Collections.IList)
-  id: SetVisualStateGroups(System.Windows.DependencyObject,System.Collections.IList)
+- uid: System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.FrameworkElement)
+  commentId: M:System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.FrameworkElement)
+  id: GetVisualStateGroups(System.Windows.FrameworkElement)
   parent: System.Windows.VisualStateManager
   langs:
   - csharp
   - vb
-  name: SetVisualStateGroups(DependencyObject, IList)
-  nameWithType: VisualStateManager.SetVisualStateGroups(DependencyObject, IList)
-  fullName: System.Windows.VisualStateManager.SetVisualStateGroups(System.Windows.DependencyObject, System.Collections.IList)
+  name: GetVisualStateGroups(FrameworkElement)
+  nameWithType: VisualStateManager.GetVisualStateGroups(FrameworkElement)
+  fullName: System.Windows.VisualStateManager.GetVisualStateGroups(System.Windows.FrameworkElement)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: SetVisualStateGroups
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-    startLine: 98
+    id: GetVisualStateGroups
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 189
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nSets the value of the Grid.Column XAML attached property on the specified FrameworkElement.\n"
+  summary: "\nGets the VisualStateManager.VisualStateGroups attached property.\n"
   example: []
   syntax:
-    content: public static void SetVisualStateGroups(DependencyObject obj, IList value)
+    content: public static IList GetVisualStateGroups(FrameworkElement obj)
     parameters:
     - id: obj
-      type: System.Windows.DependencyObject
-      description: The target element on which to set the Grid.Row XAML attached property.
-    - id: value
-      type: System.Collections.IList
-      description: The property value to set.
-    content.vb: Public Shared Sub SetVisualStateGroups(obj As DependencyObject, value As IList)
-  overload: System.Windows.VisualStateManager.SetVisualStateGroups*
+      type: System.Windows.FrameworkElement
+      description: "\nThe element to get the VisualStateManager.VisualStateGroups attached\nproperty from.\n"
+    return:
+      type: IList
+      description: "\nThe collection of <xref href=\"System.Windows.VisualStateGroup\" data-throw-if-not-resolved=\"false\"></xref> objects that is associated\nwith the specified object.\n"
+    content.vb: Public Shared Function GetVisualStateGroups(obj As FrameworkElement) As IList
+  overload: System.Windows.VisualStateManager.GetVisualStateGroups*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: System.Windows.VisualStateManager.GoToState(System.Windows.Controls.Control,System.String,System.Boolean)
-  commentId: M:System.Windows.VisualStateManager.GoToState(System.Windows.Controls.Control,System.String,System.Boolean)
-  id: GoToState(System.Windows.Controls.Control,System.String,System.Boolean)
+- uid: System.Windows.VisualStateManager.RaiseCurrentStateChanging(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
+  commentId: M:System.Windows.VisualStateManager.RaiseCurrentStateChanging(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
+  id: RaiseCurrentStateChanging(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
   parent: System.Windows.VisualStateManager
   langs:
   - csharp
   - vb
-  name: GoToState(Control, String, Boolean)
-  nameWithType: VisualStateManager.GoToState(Control, String, Boolean)
-  fullName: System.Windows.VisualStateManager.GoToState(System.Windows.Controls.Control, System.String, System.Boolean)
+  name: RaiseCurrentStateChanging(VisualStateGroup, VisualState, VisualState, Control)
+  nameWithType: VisualStateManager.RaiseCurrentStateChanging(VisualStateGroup, VisualState, VisualState, Control)
+  fullName: System.Windows.VisualStateManager.RaiseCurrentStateChanging(System.Windows.VisualStateGroup, System.Windows.VisualState, System.Windows.VisualState, System.Windows.Controls.Control)
   type: Method
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GoToState
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml/VisualStateManager.cs
-    startLine: 117
+    id: RaiseCurrentStateChanging
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 301
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nTransitions the control between two states.\n"
-  example: []
   syntax:
-    content: public static bool GoToState(Control control, string stateName, bool useTransitions)
+    content: protected void RaiseCurrentStateChanging(VisualStateGroup stateGroup, VisualState oldState, VisualState newState, Control control)
     parameters:
+    - id: stateGroup
+      type: System.Windows.VisualStateGroup
+    - id: oldState
+      type: System.Windows.VisualState
+    - id: newState
+      type: System.Windows.VisualState
     - id: control
       type: System.Windows.Controls.Control
-      description: The control to transition between states.
-    - id: stateName
-      type: System.String
-      description: The state to transition to.
-    - id: useTransitions
-      type: System.Boolean
-      description: "\nTrue to use a VisualTransition to transition between states; otherwise,\nfalse.\n"
-    return:
-      type: System.Boolean
-      description: "\nTrue if the control successfully transitioned to the new state; otherwise,\nfalse.\n"
-    content.vb: Public Shared Function GoToState(control As Control, stateName As String, useTransitions As Boolean) As Boolean
-  overload: System.Windows.VisualStateManager.GoToState*
+    content.vb: Protected Sub RaiseCurrentStateChanging(stateGroup As VisualStateGroup, oldState As VisualState, newState As VisualState, control As Control)
+  overload: System.Windows.VisualStateManager.RaiseCurrentStateChanging*
   modifiers.csharp:
-  - public
-  - static
+  - protected
   modifiers.vb:
-  - Public
-  - Shared
+  - Protected
+- uid: System.Windows.VisualStateManager.RaiseCurrentStateChanged(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
+  commentId: M:System.Windows.VisualStateManager.RaiseCurrentStateChanged(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
+  id: RaiseCurrentStateChanged(System.Windows.VisualStateGroup,System.Windows.VisualState,System.Windows.VisualState,System.Windows.Controls.Control)
+  parent: System.Windows.VisualStateManager
+  langs:
+  - csharp
+  - vb
+  name: RaiseCurrentStateChanged(VisualStateGroup, VisualState, VisualState, Control)
+  nameWithType: VisualStateManager.RaiseCurrentStateChanged(VisualStateGroup, VisualState, VisualState, Control)
+  fullName: System.Windows.VisualStateManager.RaiseCurrentStateChanged(System.Windows.VisualStateGroup, System.Windows.VisualState, System.Windows.VisualState, System.Windows.Controls.Control)
+  type: Method
+  source:
+    id: RaiseCurrentStateChanged
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\VisualStateManager.cs
+    startLine: 327
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: protected void RaiseCurrentStateChanged(VisualStateGroup stateGroup, VisualState oldState, VisualState newState, Control control)
+    parameters:
+    - id: stateGroup
+      type: System.Windows.VisualStateGroup
+    - id: oldState
+      type: System.Windows.VisualState
+    - id: newState
+      type: System.Windows.VisualState
+    - id: control
+      type: System.Windows.Controls.Control
+    content.vb: Protected Sub RaiseCurrentStateChanged(stateGroup As VisualStateGroup, oldState As VisualState, newState As VisualState, control As Control)
+  overload: System.Windows.VisualStateManager.RaiseCurrentStateChanged*
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
 references:
 - uid: System.Windows
   commentId: N:System.Windows
@@ -243,7 +406,6 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
-  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -883,117 +1045,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+- uid: System.Windows.DependencyObject.CheckAccess
+  commentId: M:System.Windows.DependencyObject.CheckAccess
+  parent: System.Windows.DependencyObject
+  name: CheckAccess()
+  nameWithType: DependencyObject.CheckAccess()
+  fullName: System.Windows.DependencyObject.CheckAccess()
   spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
+  - uid: System.Windows.DependencyObject.CheckAccess
+    name: CheckAccess
+    nameWithType: DependencyObject.CheckAccess
+    fullName: System.Windows.DependencyObject.CheckAccess
   - name: (
     nameWithType: (
     fullName: (
@@ -1001,161 +1063,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
+  - uid: System.Windows.DependencyObject.CheckAccess
+    name: CheckAccess
+    nameWithType: DependencyObject.CheckAccess
+    fullName: System.Windows.DependencyObject.CheckAccess
   - name: (
     nameWithType: (
     fullName: (
@@ -1191,11 +1102,238 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System
-  commentId: N:System
-  name: System
-  nameWithType: System
-  fullName: System
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
+  name: GetVisualAncestors()
+  nameWithType: VisualTreeExtensions.GetVisualAncestors()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+    name: GetVisualAncestors
+    nameWithType: VisualTreeExtensions.GetVisualAncestors
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+    name: GetVisualAncestors
+    nameWithType: VisualTreeExtensions.GetVisualAncestors
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
+  name: GetVisualAncestorsAndSelf()
+  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+    name: GetVisualAncestorsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+    name: GetVisualAncestorsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
+  name: GetVisualChildren()
+  nameWithType: VisualTreeExtensions.GetVisualChildren()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+    name: GetVisualChildren
+    nameWithType: VisualTreeExtensions.GetVisualChildren
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+    name: GetVisualChildren
+    nameWithType: VisualTreeExtensions.GetVisualChildren
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
+  name: GetVisualChildrenAndSelf()
+  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+    name: GetVisualChildrenAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+    name: GetVisualChildrenAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
+  name: GetVisualDescendants()
+  nameWithType: VisualTreeExtensions.GetVisualDescendants()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+    name: GetVisualDescendants
+    nameWithType: VisualTreeExtensions.GetVisualDescendants
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+    name: GetVisualDescendants
+    nameWithType: VisualTreeExtensions.GetVisualDescendants
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
+  name: GetVisualDescendantsAndSelf()
+  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+    name: GetVisualDescendantsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+    name: GetVisualDescendantsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
+  name: GetVisualSiblings()
+  nameWithType: VisualTreeExtensions.GetVisualSiblings()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+    name: GetVisualSiblings
+    nameWithType: VisualTreeExtensions.GetVisualSiblings
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+    name: GetVisualSiblings
+    nameWithType: VisualTreeExtensions.GetVisualSiblings
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
+  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
+  name: GetVisualSiblingsAndSelf()
+  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf()
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf()
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
+    name: GetVisualSiblingsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
+    name: GetVisualSiblingsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -1240,40 +1378,302 @@ references:
   name: ToJavaScriptObjectExtender
   nameWithType: ToJavaScriptObjectExtender
   fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
+  name: GetVisualAncestors(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualAncestors(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
+    name: GetVisualAncestors
+    nameWithType: VisualTreeExtensions.GetVisualAncestors
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
+    name: GetVisualAncestors
+    nameWithType: VisualTreeExtensions.GetVisualAncestors
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions
+  commentId: T:System.Windows.Controls.Primitives.VisualTreeExtensions
+  parent: System.Windows.Controls.Primitives
+  name: VisualTreeExtensions
+  nameWithType: VisualTreeExtensions
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
+  name: GetVisualAncestorsAndSelf(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
+    name: GetVisualAncestorsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
+    name: GetVisualAncestorsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
+  name: GetVisualChildren(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualChildren(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
+    name: GetVisualChildren
+    nameWithType: VisualTreeExtensions.GetVisualChildren
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
+    name: GetVisualChildren
+    nameWithType: VisualTreeExtensions.GetVisualChildren
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
+  name: GetVisualChildrenAndSelf(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
+    name: GetVisualChildrenAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
+    name: GetVisualChildrenAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
+  name: GetVisualDescendants(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualDescendants(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
+    name: GetVisualDescendants
+    nameWithType: VisualTreeExtensions.GetVisualDescendants
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
+    name: GetVisualDescendants
+    nameWithType: VisualTreeExtensions.GetVisualDescendants
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
+  name: GetVisualDescendantsAndSelf(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
+    name: GetVisualDescendantsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
+    name: GetVisualDescendantsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
+  name: GetVisualSiblings(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualSiblings(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
+    name: GetVisualSiblings
+    nameWithType: VisualTreeExtensions.GetVisualSiblings
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
+    name: GetVisualSiblings
+    nameWithType: VisualTreeExtensions.GetVisualSiblings
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
+  name: GetVisualSiblingsAndSelf(DependencyObject)
+  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf(DependencyObject)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
+    name: GetVisualSiblingsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
+    name: GetVisualSiblingsAndSelf
+    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
+    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: ToJavaScriptObjectExtender
   commentId: N:ToJavaScriptObjectExtender
   name: ToJavaScriptObjectExtender
   nameWithType: ToJavaScriptObjectExtender
   fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.VisualStateManager.GetVisualStateGroups*
-  commentId: Overload:System.Windows.VisualStateManager.GetVisualStateGroups
-  name: GetVisualStateGroups
-  nameWithType: VisualStateManager.GetVisualStateGroups
-  fullName: System.Windows.VisualStateManager.GetVisualStateGroups
-- uid: System.Collections.IList
-  commentId: T:System.Collections.IList
-  parent: System.Collections
-  isExternal: true
-  name: IList
-  nameWithType: IList
-  fullName: System.Collections.IList
-- uid: System.Collections
-  commentId: N:System.Collections
-  isExternal: true
-  name: System.Collections
-  nameWithType: System.Collections
-  fullName: System.Collections
-- uid: System.Windows.DependencyProperty
-  commentId: T:System.Windows.DependencyProperty
-  parent: System.Windows
-  name: DependencyProperty
-  nameWithType: DependencyProperty
-  fullName: System.Windows.DependencyProperty
-- uid: System.Windows.VisualStateManager.SetVisualStateGroups*
-  commentId: Overload:System.Windows.VisualStateManager.SetVisualStateGroups
-  name: SetVisualStateGroups
-  nameWithType: VisualStateManager.SetVisualStateGroups
-  fullName: System.Windows.VisualStateManager.SetVisualStateGroups
+- uid: System.Windows.Controls.Primitives
+  commentId: N:System.Windows.Controls.Primitives
+  name: System.Windows.Controls.Primitives
+  nameWithType: System.Windows.Controls.Primitives
+  fullName: System.Windows.Controls.Primitives
 - uid: System.Windows.VisualStateManager.GoToState*
   commentId: Overload:System.Windows.VisualStateManager.GoToState
   name: GoToState
@@ -1286,15 +1686,11 @@ references:
   nameWithType: Control
   fullName: System.Windows.Controls.Control
 - uid: System.String
-  commentId: T:System.String
-  parent: System
   isExternal: true
   name: String
   nameWithType: String
   fullName: System.String
 - uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -1304,3 +1700,71 @@ references:
   name: System.Windows.Controls
   nameWithType: System.Windows.Controls
   fullName: System.Windows.Controls
+- uid: System.Windows.VisualStateManager.GoToStateCore*
+  commentId: Overload:System.Windows.VisualStateManager.GoToStateCore
+  name: GoToStateCore
+  nameWithType: VisualStateManager.GoToStateCore
+  fullName: System.Windows.VisualStateManager.GoToStateCore
+- uid: System.Windows.FrameworkElement
+  commentId: T:System.Windows.FrameworkElement
+  parent: System.Windows
+  name: FrameworkElement
+  nameWithType: FrameworkElement
+  fullName: System.Windows.FrameworkElement
+- uid: System.Windows.VisualStateGroup
+  commentId: T:System.Windows.VisualStateGroup
+  parent: System.Windows
+  name: VisualStateGroup
+  nameWithType: VisualStateGroup
+  fullName: System.Windows.VisualStateGroup
+- uid: System.Windows.VisualState
+  commentId: T:System.Windows.VisualState
+  parent: System.Windows
+  name: VisualState
+  nameWithType: VisualState
+  fullName: System.Windows.VisualState
+- uid: System.Windows.DependencyProperty
+  commentId: T:System.Windows.DependencyProperty
+  parent: System.Windows
+  name: DependencyProperty
+  nameWithType: DependencyProperty
+  fullName: System.Windows.DependencyProperty
+- uid: System.Windows.VisualStateManager.GetCustomVisualStateManager*
+  commentId: Overload:System.Windows.VisualStateManager.GetCustomVisualStateManager
+  name: GetCustomVisualStateManager
+  nameWithType: VisualStateManager.GetCustomVisualStateManager
+  fullName: System.Windows.VisualStateManager.GetCustomVisualStateManager
+- uid: System.Windows.VisualStateManager
+  commentId: T:System.Windows.VisualStateManager
+  parent: System.Windows
+  name: VisualStateManager
+  nameWithType: VisualStateManager
+  fullName: System.Windows.VisualStateManager
+- uid: System.Windows.VisualStateManager.SetCustomVisualStateManager*
+  commentId: Overload:System.Windows.VisualStateManager.SetCustomVisualStateManager
+  name: SetCustomVisualStateManager
+  nameWithType: VisualStateManager.SetCustomVisualStateManager
+  fullName: System.Windows.VisualStateManager.SetCustomVisualStateManager
+- uid: System.Windows.Data.BindingOperations.SetBinding(System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Windows.Data.Binding)
+  commentId: M:System.Windows.Data.BindingOperations.SetBinding(System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Windows.Data.Binding)
+  isExternal: true
+- uid: System.Windows.VisualStateManager.GetVisualStateGroups*
+  commentId: Overload:System.Windows.VisualStateManager.GetVisualStateGroups
+  name: GetVisualStateGroups
+  nameWithType: VisualStateManager.GetVisualStateGroups
+  fullName: System.Windows.VisualStateManager.GetVisualStateGroups
+- uid: IList
+  isExternal: true
+  name: IList
+  nameWithType: IList
+  fullName: IList
+- uid: System.Windows.VisualStateManager.RaiseCurrentStateChanging*
+  commentId: Overload:System.Windows.VisualStateManager.RaiseCurrentStateChanging
+  name: RaiseCurrentStateChanging
+  nameWithType: VisualStateManager.RaiseCurrentStateChanging
+  fullName: System.Windows.VisualStateManager.RaiseCurrentStateChanging
+- uid: System.Windows.VisualStateManager.RaiseCurrentStateChanged*
+  commentId: Overload:System.Windows.VisualStateManager.RaiseCurrentStateChanged
+  name: RaiseCurrentStateChanged
+  nameWithType: VisualStateManager.RaiseCurrentStateChanged
+  fullName: System.Windows.VisualStateManager.RaiseCurrentStateChanged

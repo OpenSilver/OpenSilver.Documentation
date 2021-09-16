@@ -7,6 +7,8 @@ items:
   children:
   - System.Windows.Data.Binding.#ctor
   - System.Windows.Data.Binding.#ctor(System.String)
+  - System.Windows.Data.Binding.#ctor(System.Windows.Data.Binding)
+  - System.Windows.Data.Binding.BindsDirectlyToSource
   - System.Windows.Data.Binding.Converter
   - System.Windows.Data.Binding.ConverterCulture
   - System.Windows.Data.Binding.ConverterParameter
@@ -18,8 +20,10 @@ items:
   - System.Windows.Data.Binding.Source
   - System.Windows.Data.Binding.TemplateOwner
   - System.Windows.Data.Binding.UpdateSourceTrigger
+  - System.Windows.Data.Binding.ValidatesOnDataErrors
   - System.Windows.Data.Binding.ValidatesOnExceptions
   - System.Windows.Data.Binding.ValidatesOnLoad
+  - System.Windows.Data.Binding.ValidatesOnNotifyDataErrors
   langs:
   - csharp
   - vb
@@ -28,12 +32,8 @@ items:
   fullName: System.Windows.Data.Binding
   type: Class
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Binding
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 81
   assemblies:
   - OpenSilver
@@ -42,27 +42,23 @@ items:
   example:
   - "\nYou can add a Binding using XAML as follows:\n<pre><code><TextBlock x:Name=\"MyTextBlock\" Text=\"{Binding Size}\" HorizontalAlignment=\"Left\" xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"></TextBlock></code></pre>\n<pre><code>MyTextBlock.DataContext = myPlanet;</code></pre>\nNote: you can create the Binding directly using C#:\n<pre><code>Binding myBinding = new Binding(&quot;Size&quot;);\nMyTextBlock.SetBinding(TextBlock.TextProperty, myBinding);\nMyTextBlock.DataContext = myPlanet;</code></pre>\nHere is another example using the TwoWay mode, and also using a Converter:\n<pre><code>MyTextBox.DataContext = myPlanet;</code></pre>\n<pre><code><Border xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\" xmlns:local=\"using:MyAssembly.MyApp\">\n<!-- We define the Converter: -->\n<Border.Resources>\n<local:KilometersToMilesConverter x:Key=\"KilometersToMilesConverter\"></local:KilometersToMilesConverter>\n</Border.Resources>\n<TextBox x:Name=\"MyTextBox\" Text=\"{Binding Length, Mode=TwoWay, Converter={StaticResource KilometersToMilesConverter}}\" HorizontalAlignment=\"Left\"></TextBox>\n</Border></code></pre>\nUsing C#:\n<pre><code>Binding myBinding = new Binding(&quot;Size&quot;);\n\n//we set the binding in TwoWay mode:\nmyBinding.Mode = BindingMode.TwoWay;\n\n//We create the converter:\nmyBinding.Converter = new KilometersToMilesConverter();\n\nMyTextBox.SetBinding(TextBox.TextProperty, myBinding);\nMyTextBox.DataContext = myPlanet;</code></pre>\n"
   syntax:
-    content: 'public class Binding : BindingBase'
+    content: 'public class Binding : BindingBase, IMarkupExtension<object>'
     content.vb: >-
       Public Class Binding
           Inherits BindingBase
+          Implements IMarkupExtension(Of Object)
   inheritance:
   - System.Object
   - System.Windows.Markup.MarkupExtension
   - System.Windows.Data.BindingBase
+  implements:
+  - System.Xaml.IMarkupExtension{System.Object}
   inheritedMembers:
-  - System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+  - System.Windows.Data.BindingBase.ProvideValue(IServiceProvider)
   - System.Windows.Data.BindingBase.FallbackValue
   - System.Windows.Data.BindingBase.TargetNullValue
   - System.Windows.Data.BindingBase._stringFormat
   - System.Windows.Data.BindingBase.StringFormat
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
@@ -71,6 +67,137 @@ items:
   modifiers.vb:
   - Public
   - Class
+- uid: System.Windows.Data.Binding.#ctor(System.Windows.Data.Binding)
+  commentId: M:System.Windows.Data.Binding.#ctor(System.Windows.Data.Binding)
+  id: '#ctor(System.Windows.Data.Binding)'
+  parent: System.Windows.Data.Binding
+  langs:
+  - csharp
+  - vb
+  name: Binding(Binding)
+  nameWithType: Binding.Binding(Binding)
+  fullName: System.Windows.Data.Binding.Binding(System.Windows.Data.Binding)
+  type: Constructor
+  source:
+    id: .ctor
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\WORKINPROGRESS\Binding.cs
+    startLine: 23
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Data
+  syntax:
+    content: public Binding(Binding original)
+    parameters:
+    - id: original
+      type: System.Windows.Data.Binding
+    content.vb: Public Sub New(original As Binding)
+  overload: System.Windows.Data.Binding.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Data.Binding.BindsDirectlyToSource
+  commentId: P:System.Windows.Data.Binding.BindsDirectlyToSource
+  id: BindsDirectlyToSource
+  parent: System.Windows.Data.Binding
+  langs:
+  - csharp
+  - vb
+  name: BindsDirectlyToSource
+  nameWithType: Binding.BindsDirectlyToSource
+  fullName: System.Windows.Data.Binding.BindsDirectlyToSource
+  type: Property
+  source:
+    id: BindsDirectlyToSource
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\WORKINPROGRESS\Binding.cs
+    startLine: 36
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Data
+  summary: "\nGets or sets a value that indicates whether the binding ignores any <xref href=\"System.ComponentModel.ICollectionView\" data-throw-if-not-resolved=\"false\"></xref>\nsettings on the data source.\n"
+  example: []
+  syntax:
+    content: public bool BindsDirectlyToSource { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: "\ntrue if the binding binds directly to the data source; otherwise, false.\n"
+    content.vb: Public Property BindsDirectlyToSource As Boolean
+  overload: System.Windows.Data.Binding.BindsDirectlyToSource*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Data.Binding.ValidatesOnNotifyDataErrors
+  commentId: P:System.Windows.Data.Binding.ValidatesOnNotifyDataErrors
+  id: ValidatesOnNotifyDataErrors
+  parent: System.Windows.Data.Binding
+  langs:
+  - csharp
+  - vb
+  name: ValidatesOnNotifyDataErrors
+  nameWithType: Binding.ValidatesOnNotifyDataErrors
+  fullName: System.Windows.Data.Binding.ValidatesOnNotifyDataErrors
+  type: Property
+  source:
+    id: ValidatesOnNotifyDataErrors
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\WORKINPROGRESS\Binding.cs
+    startLine: 48
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Data
+  summary: "\nGets or sets a value that indicates whether the binding engine will report validation\nerrors from an System.ComponentModel.INotifyDataErrorInfo implementation on the\nbound data entity.\n"
+  example: []
+  syntax:
+    content: public bool ValidatesOnNotifyDataErrors { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: "\ntrue if the binding engine will report System.ComponentModel.INotifyDataErrorInfo\nvalidation errors; otherwise, false. The default is true.\n"
+    content.vb: Public Property ValidatesOnNotifyDataErrors As Boolean
+  overload: System.Windows.Data.Binding.ValidatesOnNotifyDataErrors*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Data.Binding.ValidatesOnDataErrors
+  commentId: P:System.Windows.Data.Binding.ValidatesOnDataErrors
+  id: ValidatesOnDataErrors
+  parent: System.Windows.Data.Binding
+  langs:
+  - csharp
+  - vb
+  name: ValidatesOnDataErrors
+  nameWithType: Binding.ValidatesOnDataErrors
+  fullName: System.Windows.Data.Binding.ValidatesOnDataErrors
+  type: Property
+  source:
+    id: ValidatesOnDataErrors
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\WORKINPROGRESS\Binding.cs
+    startLine: 60
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Data
+  summary: "\nGets or sets a value that indicates whether the binding engine will report validation\nerrors from an System.ComponentModel.IDataErrorInfo implementation on the bound\ndata entity.\n"
+  example: []
+  syntax:
+    content: public bool ValidatesOnDataErrors { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: "\ntrue if the binding engine will report System.ComponentModel.IDataErrorInfo validation\nerrors; otherwise, false. The default is false.\n"
+    content.vb: Public Property ValidatesOnDataErrors As Boolean
+  overload: System.Windows.Data.Binding.ValidatesOnDataErrors*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Data.Binding.#ctor
   commentId: M:System.Windows.Data.Binding.#ctor
   id: '#ctor'
@@ -83,12 +210,8 @@ items:
   fullName: System.Windows.Data.Binding.Binding()
   type: Constructor
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 89
   assemblies:
   - OpenSilver
@@ -115,12 +238,8 @@ items:
   fullName: System.Windows.Data.Binding.Binding(System.String)
   type: Constructor
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 94
   assemblies:
   - OpenSilver
@@ -151,12 +270,8 @@ items:
   fullName: System.Windows.Data.Binding.Converter
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Converter
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 105
   assemblies:
   - OpenSilver
@@ -188,12 +303,8 @@ items:
   fullName: System.Windows.Data.Binding.ConverterCulture
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ConverterCulture
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 112
   assemblies:
   - OpenSilver
@@ -204,7 +315,7 @@ items:
     content: public CultureInfo ConverterCulture { get; set; }
     parameters: []
     return:
-      type: System.Globalization.CultureInfo
+      type: CultureInfo
     content.vb: Public Property ConverterCulture As CultureInfo
   overload: System.Windows.Data.Binding.ConverterCulture*
   modifiers.csharp:
@@ -225,12 +336,8 @@ items:
   fullName: System.Windows.Data.Binding.ConverterParameter
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ConverterParameter
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 126
   assemblies:
   - OpenSilver
@@ -262,12 +369,8 @@ items:
   fullName: System.Windows.Data.Binding.ElementName
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ElementName
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 132
   assemblies:
   - OpenSilver
@@ -299,12 +402,8 @@ items:
   fullName: System.Windows.Data.Binding.Mode
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Mode
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 139
   assemblies:
   - OpenSilver
@@ -336,12 +435,8 @@ items:
   fullName: System.Windows.Data.Binding.Path
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Path
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 163
   assemblies:
   - OpenSilver
@@ -373,12 +468,8 @@ items:
   fullName: System.Windows.Data.Binding.RelativeSource
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RelativeSource
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 183
   assemblies:
   - OpenSilver
@@ -410,12 +501,8 @@ items:
   fullName: System.Windows.Data.Binding.Source
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Source
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 190
   assemblies:
   - OpenSilver
@@ -447,12 +534,8 @@ items:
   fullName: System.Windows.Data.Binding.UpdateSourceTrigger
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UpdateSourceTrigger
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
     startLine: 205
   assemblies:
   - OpenSilver
@@ -484,13 +567,9 @@ items:
   fullName: System.Windows.Data.Binding.TemplateOwner
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TemplateOwner
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-    startLine: 258
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
+    startLine: 239
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -521,13 +600,9 @@ items:
   fullName: System.Windows.Data.Binding.ValidatesOnExceptions
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ValidatesOnExceptions
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-    startLine: 273
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
+    startLine: 247
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -558,13 +633,9 @@ items:
   fullName: System.Windows.Data.Binding.NotifyOnValidationError
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: NotifyOnValidationError
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-    startLine: 283
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
+    startLine: 257
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -595,13 +666,9 @@ items:
   fullName: System.Windows.Data.Binding.ValidatesOnLoad
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ValidatesOnLoad
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/Windows.UI.Xaml.Data/Binding.cs
-    startLine: 291
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Data\Binding.cs
+    startLine: 265
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -628,7 +695,6 @@ references:
   fullName: System.Windows.Data
 - uid: System.Object
   commentId: T:System.Object
-  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -645,41 +711,83 @@ references:
   name: BindingBase
   nameWithType: BindingBase
   fullName: System.Windows.Data.BindingBase
-- uid: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
-  commentId: M:System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+- uid: System.Xaml.IMarkupExtension{System.Object}
+  commentId: T:System.Xaml.IMarkupExtension{System.Object}
+  parent: System.Xaml
+  definition: System.Xaml.IMarkupExtension`1
+  name: IMarkupExtension<Object>
+  nameWithType: IMarkupExtension<Object>
+  fullName: System.Xaml.IMarkupExtension<System.Object>
+  nameWithType.vb: IMarkupExtension(Of Object)
+  fullName.vb: System.Xaml.IMarkupExtension(Of System.Object)
+  name.vb: IMarkupExtension(Of Object)
+  spec.csharp:
+  - uid: System.Xaml.IMarkupExtension`1
+    name: IMarkupExtension
+    nameWithType: IMarkupExtension
+    fullName: System.Xaml.IMarkupExtension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Xaml.IMarkupExtension`1
+    name: IMarkupExtension
+    nameWithType: IMarkupExtension
+    fullName: System.Xaml.IMarkupExtension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Data.BindingBase.ProvideValue(IServiceProvider)
+  commentId: M:System.Windows.Data.BindingBase.ProvideValue(IServiceProvider)
   parent: System.Windows.Data.BindingBase
   isExternal: true
   name: ProvideValue(IServiceProvider)
   nameWithType: BindingBase.ProvideValue(IServiceProvider)
-  fullName: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+  fullName: System.Windows.Data.BindingBase.ProvideValue(IServiceProvider)
   spec.csharp:
-  - uid: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+  - uid: System.Windows.Data.BindingBase.ProvideValue(IServiceProvider)
     name: ProvideValue
     nameWithType: BindingBase.ProvideValue
     fullName: System.Windows.Data.BindingBase.ProvideValue
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.IServiceProvider
+  - uid: IServiceProvider
     name: IServiceProvider
     nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
+    fullName: IServiceProvider
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+  - uid: System.Windows.Data.BindingBase.ProvideValue(IServiceProvider)
     name: ProvideValue
     nameWithType: BindingBase.ProvideValue
     fullName: System.Windows.Data.BindingBase.ProvideValue
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.IServiceProvider
+  - uid: IServiceProvider
     name: IServiceProvider
     nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
+    fullName: IServiceProvider
     isExternal: true
   - name: )
     nameWithType: )
@@ -708,285 +816,6 @@ references:
   name: StringFormat
   nameWithType: BindingBase.StringFormat
   fullName: System.Windows.Data.BindingBase.StringFormat
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -1016,16 +845,52 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System
-  commentId: N:System
-  name: System
-  nameWithType: System
-  fullName: System
 - uid: System.Windows.Markup
   commentId: N:System.Windows.Markup
   name: System.Windows.Markup
   nameWithType: System.Windows.Markup
   fullName: System.Windows.Markup
+- uid: System.Xaml.IMarkupExtension`1
+  commentId: T:System.Xaml.IMarkupExtension`1
+  name: IMarkupExtension<T>
+  nameWithType: IMarkupExtension<T>
+  fullName: System.Xaml.IMarkupExtension<T>
+  nameWithType.vb: IMarkupExtension(Of T)
+  fullName.vb: System.Xaml.IMarkupExtension(Of T)
+  name.vb: IMarkupExtension(Of T)
+  spec.csharp:
+  - uid: System.Xaml.IMarkupExtension`1
+    name: IMarkupExtension
+    nameWithType: IMarkupExtension
+    fullName: System.Xaml.IMarkupExtension
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Xaml.IMarkupExtension`1
+    name: IMarkupExtension
+    nameWithType: IMarkupExtension
+    fullName: System.Xaml.IMarkupExtension
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Xaml
+  commentId: N:System.Xaml
+  name: System.Xaml
+  nameWithType: System.Xaml
+  fullName: System.Xaml
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -1080,9 +945,44 @@ references:
   name: Binding
   nameWithType: Binding.Binding
   fullName: System.Windows.Data.Binding.Binding
+- uid: System.Windows.Data.Binding
+  commentId: T:System.Windows.Data.Binding
+  parent: System.Windows.Data
+  name: Binding
+  nameWithType: Binding
+  fullName: System.Windows.Data.Binding
+- uid: System.ComponentModel.ICollectionView
+  commentId: T:System.ComponentModel.ICollectionView
+  parent: System.ComponentModel
+  name: ICollectionView
+  nameWithType: ICollectionView
+  fullName: System.ComponentModel.ICollectionView
+- uid: System.Windows.Data.Binding.BindsDirectlyToSource*
+  commentId: Overload:System.Windows.Data.Binding.BindsDirectlyToSource
+  name: BindsDirectlyToSource
+  nameWithType: Binding.BindsDirectlyToSource
+  fullName: System.Windows.Data.Binding.BindsDirectlyToSource
+- uid: System.Boolean
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+- uid: System.Windows.Data.Binding.ValidatesOnNotifyDataErrors*
+  commentId: Overload:System.Windows.Data.Binding.ValidatesOnNotifyDataErrors
+  name: ValidatesOnNotifyDataErrors
+  nameWithType: Binding.ValidatesOnNotifyDataErrors
+  fullName: System.Windows.Data.Binding.ValidatesOnNotifyDataErrors
+- uid: System.Windows.Data.Binding.ValidatesOnDataErrors*
+  commentId: Overload:System.Windows.Data.Binding.ValidatesOnDataErrors
+  name: ValidatesOnDataErrors
+  nameWithType: Binding.ValidatesOnDataErrors
+  fullName: System.Windows.Data.Binding.ValidatesOnDataErrors
 - uid: System.String
-  commentId: T:System.String
-  parent: System
   isExternal: true
   name: String
   nameWithType: String
@@ -1103,19 +1003,11 @@ references:
   name: ConverterCulture
   nameWithType: Binding.ConverterCulture
   fullName: System.Windows.Data.Binding.ConverterCulture
-- uid: System.Globalization.CultureInfo
-  commentId: T:System.Globalization.CultureInfo
-  parent: System.Globalization
+- uid: CultureInfo
   isExternal: true
   name: CultureInfo
   nameWithType: CultureInfo
-  fullName: System.Globalization.CultureInfo
-- uid: System.Globalization
-  commentId: N:System.Globalization
-  isExternal: true
-  name: System.Globalization
-  nameWithType: System.Globalization
-  fullName: System.Globalization
+  fullName: CultureInfo
 - uid: System.Windows.Data.Binding.ConverterParameter*
   commentId: Overload:System.Windows.Data.Binding.ConverterParameter
   name: ConverterParameter
@@ -1196,13 +1088,6 @@ references:
   name: ValidatesOnExceptions
   nameWithType: Binding.ValidatesOnExceptions
   fullName: System.Windows.Data.Binding.ValidatesOnExceptions
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
 - uid: System.Windows.Data.Binding.NotifyOnValidationError*
   commentId: Overload:System.Windows.Data.Binding.NotifyOnValidationError
   name: NotifyOnValidationError

@@ -6,7 +6,12 @@ items:
   parent: System.Windows.Browser
   children:
   - System.Windows.Browser.HtmlDocument.#ctor
+  - System.Windows.Browser.HtmlDocument.Body
+  - System.Windows.Browser.HtmlDocument.Cookies
+  - System.Windows.Browser.HtmlDocument.CreateElement(System.String)
   - System.Windows.Browser.HtmlDocument.DocumentUri
+  - System.Windows.Browser.HtmlDocument.GetElementById(System.String)
+  - System.Windows.Browser.HtmlDocument.GetElementsByTagName(System.String)
   - System.Windows.Browser.HtmlDocument.QueryString
   langs:
   - csharp
@@ -16,29 +21,37 @@ items:
   fullName: System.Windows.Browser.HtmlDocument
   type: Class
   source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: HtmlDocument
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-    startLine: 27
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\HtmlDocument.cs
+    startLine: 24
   assemblies:
   - OpenSilver
   namespace: System.Windows.Browser
   syntax:
-    content: public sealed class HtmlDocument
-    content.vb: Public NotInheritable Class HtmlDocument
+    content: 'public sealed class HtmlDocument : HtmlObject'
+    content.vb: >-
+      Public NotInheritable Class HtmlDocument
+          Inherits HtmlObject
   inheritance:
   - System.Object
+  - System.Windows.Browser.ScriptObject
+  - System.Windows.Browser.HtmlObject
   inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
+  - System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler)
+  - System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+  - System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler)
+  - System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+  - System.Windows.Browser.HtmlObject.ConvertTo(Type,System.Boolean)
+  - System.Windows.Browser.ScriptObject.Dispatcher
+  - System.Windows.Browser.ScriptObject.ManagedObject
+  - System.Windows.Browser.ScriptObject.CheckAccess
+  - System.Windows.Browser.ScriptObject.ConvertTo``1
+  - System.Windows.Browser.ScriptObject.GetProperty(System.Int32)
+  - System.Windows.Browser.ScriptObject.GetProperty(System.String)
+  - System.Windows.Browser.ScriptObject.Invoke(System.String,System.Object[])
+  - System.Windows.Browser.ScriptObject.InvokeSelf(System.Object[])
+  - System.Windows.Browser.ScriptObject.SetProperty(System.Int32,System.Object)
+  - System.Windows.Browser.ScriptObject.SetProperty(System.String,System.Object)
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
@@ -49,6 +62,99 @@ items:
   - Public
   - NotInheritable
   - Class
+- uid: System.Windows.Browser.HtmlDocument.Body
+  commentId: P:System.Windows.Browser.HtmlDocument.Body
+  id: Body
+  parent: System.Windows.Browser.HtmlDocument
+  langs:
+  - csharp
+  - vb
+  name: Body
+  nameWithType: HtmlDocument.Body
+  fullName: System.Windows.Browser.HtmlDocument.Body
+  type: Property
+  source:
+    id: Body
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\WORKINPROGRESS\HtmlDocument.cs
+    startLine: 6
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Browser
+  syntax:
+    content: public HtmlElement Body { get; }
+    parameters: []
+    return:
+      type: System.Windows.Browser.HtmlElement
+    content.vb: Public ReadOnly Property Body As HtmlElement
+  overload: System.Windows.Browser.HtmlDocument.Body*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Browser.HtmlDocument.CreateElement(System.String)
+  commentId: M:System.Windows.Browser.HtmlDocument.CreateElement(System.String)
+  id: CreateElement(System.String)
+  parent: System.Windows.Browser.HtmlDocument
+  langs:
+  - csharp
+  - vb
+  name: CreateElement(String)
+  nameWithType: HtmlDocument.CreateElement(String)
+  fullName: System.Windows.Browser.HtmlDocument.CreateElement(System.String)
+  type: Method
+  source:
+    id: CreateElement
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\WORKINPROGRESS\HtmlDocument.cs
+    startLine: 9
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Browser
+  syntax:
+    content: public HtmlElement CreateElement(string tagName)
+    parameters:
+    - id: tagName
+      type: System.String
+    return:
+      type: System.Windows.Browser.HtmlElement
+    content.vb: Public Function CreateElement(tagName As String) As HtmlElement
+  overload: System.Windows.Browser.HtmlDocument.CreateElement*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Browser.HtmlDocument.GetElementsByTagName(System.String)
+  commentId: M:System.Windows.Browser.HtmlDocument.GetElementsByTagName(System.String)
+  id: GetElementsByTagName(System.String)
+  parent: System.Windows.Browser.HtmlDocument
+  langs:
+  - csharp
+  - vb
+  name: GetElementsByTagName(String)
+  nameWithType: HtmlDocument.GetElementsByTagName(String)
+  fullName: System.Windows.Browser.HtmlDocument.GetElementsByTagName(System.String)
+  type: Method
+  source:
+    id: GetElementsByTagName
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\WORKINPROGRESS\HtmlDocument.cs
+    startLine: 36
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Browser
+  syntax:
+    content: public ScriptObjectCollection GetElementsByTagName(string tagName)
+    parameters:
+    - id: tagName
+      type: System.String
+    return:
+      type: System.Windows.Browser.ScriptObjectCollection
+    content.vb: Public Function GetElementsByTagName(tagName As String) As ScriptObjectCollection
+  overload: System.Windows.Browser.HtmlDocument.GetElementsByTagName*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Browser.HtmlDocument.#ctor
   commentId: M:System.Windows.Browser.HtmlDocument.#ctor
   id: '#ctor'
@@ -61,13 +167,9 @@ items:
   fullName: System.Windows.Browser.HtmlDocument.HtmlDocument()
   type: Constructor
   source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-    startLine: 30
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\HtmlDocument.cs
+    startLine: 26
   assemblies:
   - OpenSilver
   namespace: System.Windows.Browser
@@ -91,13 +193,9 @@ items:
   fullName: System.Windows.Browser.HtmlDocument.DocumentUri
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DocumentUri
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-    startLine: 39
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\HtmlDocument.cs
+    startLine: 35
   assemblies:
   - OpenSilver
   namespace: System.Windows.Browser
@@ -107,7 +205,7 @@ items:
     content: public Uri DocumentUri { get; }
     parameters: []
     return:
-      type: System.Uri
+      type: Uri
     content.vb: Public ReadOnly Property DocumentUri As Uri
   overload: System.Windows.Browser.HtmlDocument.DocumentUri*
   modifiers.csharp:
@@ -128,13 +226,9 @@ items:
   fullName: System.Windows.Browser.HtmlDocument.QueryString
   type: Property
   source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-      branch: develop
-      repo: https://github.com/OpenSilver/OpenSilver.git
     id: QueryString
-    path: ../GitHub-OpenSilver/src/Runtime/Runtime/System.Windows.Browser/HtmlDocument.cs
-    startLine: 51
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\HtmlDocument.cs
+    startLine: 47
   assemblies:
   - OpenSilver
   namespace: System.Windows.Browser
@@ -144,7 +238,7 @@ items:
     content: public IDictionary<string, string> QueryString { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IDictionary{System.String,System.String}
+      type: IDictionary{System.String,System.String}
     content.vb: Public ReadOnly Property QueryString As IDictionary(Of String, String)
   overload: System.Windows.Browser.HtmlDocument.QueryString*
   modifiers.csharp:
@@ -153,6 +247,70 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Windows.Browser.HtmlDocument.GetElementById(System.String)
+  commentId: M:System.Windows.Browser.HtmlDocument.GetElementById(System.String)
+  id: GetElementById(System.String)
+  parent: System.Windows.Browser.HtmlDocument
+  langs:
+  - csharp
+  - vb
+  name: GetElementById(String)
+  nameWithType: HtmlDocument.GetElementById(String)
+  fullName: System.Windows.Browser.HtmlDocument.GetElementById(System.String)
+  type: Method
+  source:
+    id: GetElementById
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\HtmlDocument.cs
+    startLine: 91
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Browser
+  syntax:
+    content: public HtmlElement GetElementById(string id)
+    parameters:
+    - id: id
+      type: System.String
+    return:
+      type: System.Windows.Browser.HtmlElement
+    content.vb: Public Function GetElementById(id As String) As HtmlElement
+  overload: System.Windows.Browser.HtmlDocument.GetElementById*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Browser.HtmlDocument.Cookies
+  commentId: P:System.Windows.Browser.HtmlDocument.Cookies
+  id: Cookies
+  parent: System.Windows.Browser.HtmlDocument
+  langs:
+  - csharp
+  - vb
+  name: Cookies
+  nameWithType: HtmlDocument.Cookies
+  fullName: System.Windows.Browser.HtmlDocument.Cookies
+  type: Property
+  source:
+    id: Cookies
+    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Browser\HtmlDocument.cs
+    startLine: 101
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Browser
+  summary: "\nGets or sets the browser&apos;s cookie string. If the browser does not have a \ncookie string, the property returns an empty string.\n"
+  example: []
+  syntax:
+    content: public string Cookies { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Cookies As String
+  overload: System.Windows.Browser.HtmlDocument.Cookies*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 references:
 - uid: System.Windows.Browser
   commentId: N:System.Windows.Browser
@@ -161,65 +319,571 @@ references:
   fullName: System.Windows.Browser
 - uid: System.Object
   commentId: T:System.Object
-  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
+- uid: System.Windows.Browser.ScriptObject
+  commentId: T:System.Windows.Browser.ScriptObject
+  parent: System.Windows.Browser
+  name: ScriptObject
+  nameWithType: ScriptObject
+  fullName: System.Windows.Browser.ScriptObject
+- uid: System.Windows.Browser.HtmlObject
+  commentId: T:System.Windows.Browser.HtmlObject
+  parent: System.Windows.Browser
+  name: HtmlObject
+  nameWithType: HtmlObject
+  fullName: System.Windows.Browser.HtmlObject
+- uid: System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler)
+  commentId: M:System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler)
+  parent: System.Windows.Browser.HtmlObject
   isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
+  name: AttachEvent(String, EventHandler)
+  nameWithType: HtmlObject.AttachEvent(String, EventHandler)
+  fullName: System.Windows.Browser.HtmlObject.AttachEvent(System.String, EventHandler)
   spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
+  - uid: System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler)
+    name: AttachEvent
+    nameWithType: HtmlObject.AttachEvent
+    fullName: System.Windows.Browser.HtmlObject.AttachEvent
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
+  - uid: System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler)
+    name: AttachEvent
+    nameWithType: HtmlObject.AttachEvent
+    fullName: System.Windows.Browser.HtmlObject.AttachEvent
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
+- uid: System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+  commentId: M:System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+  parent: System.Windows.Browser.HtmlObject
   isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
+  name: AttachEvent(String, EventHandler<HtmlEventArgs>)
+  nameWithType: HtmlObject.AttachEvent(String, EventHandler<HtmlEventArgs>)
+  fullName: System.Windows.Browser.HtmlObject.AttachEvent(System.String, EventHandler<System.Windows.Browser.HtmlEventArgs>)
+  nameWithType.vb: HtmlObject.AttachEvent(String, EventHandler(Of HtmlEventArgs))
+  fullName.vb: System.Windows.Browser.HtmlObject.AttachEvent(System.String, EventHandler(Of System.Windows.Browser.HtmlEventArgs))
+  name.vb: AttachEvent(String, EventHandler(Of HtmlEventArgs))
   spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
+  - uid: System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+    name: AttachEvent
+    nameWithType: HtmlObject.AttachEvent
+    fullName: System.Windows.Browser.HtmlObject.AttachEvent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Windows.Browser.HtmlEventArgs
+    name: HtmlEventArgs
+    nameWithType: HtmlEventArgs
+    fullName: System.Windows.Browser.HtmlEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.HtmlObject.AttachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+    name: AttachEvent
+    nameWithType: HtmlObject.AttachEvent
+    fullName: System.Windows.Browser.HtmlObject.AttachEvent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Windows.Browser.HtmlEventArgs
+    name: HtmlEventArgs
+    nameWithType: HtmlEventArgs
+    fullName: System.Windows.Browser.HtmlEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler)
+  commentId: M:System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler)
+  parent: System.Windows.Browser.HtmlObject
+  isExternal: true
+  name: DetachEvent(String, EventHandler)
+  nameWithType: HtmlObject.DetachEvent(String, EventHandler)
+  fullName: System.Windows.Browser.HtmlObject.DetachEvent(System.String, EventHandler)
+  spec.csharp:
+  - uid: System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler)
+    name: DetachEvent
+    nameWithType: HtmlObject.DetachEvent
+    fullName: System.Windows.Browser.HtmlObject.DetachEvent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler)
+    name: DetachEvent
+    nameWithType: HtmlObject.DetachEvent
+    fullName: System.Windows.Browser.HtmlObject.DetachEvent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+  commentId: M:System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+  parent: System.Windows.Browser.HtmlObject
+  isExternal: true
+  name: DetachEvent(String, EventHandler<HtmlEventArgs>)
+  nameWithType: HtmlObject.DetachEvent(String, EventHandler<HtmlEventArgs>)
+  fullName: System.Windows.Browser.HtmlObject.DetachEvent(System.String, EventHandler<System.Windows.Browser.HtmlEventArgs>)
+  nameWithType.vb: HtmlObject.DetachEvent(String, EventHandler(Of HtmlEventArgs))
+  fullName.vb: System.Windows.Browser.HtmlObject.DetachEvent(System.String, EventHandler(Of System.Windows.Browser.HtmlEventArgs))
+  name.vb: DetachEvent(String, EventHandler(Of HtmlEventArgs))
+  spec.csharp:
+  - uid: System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+    name: DetachEvent
+    nameWithType: HtmlObject.DetachEvent
+    fullName: System.Windows.Browser.HtmlObject.DetachEvent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Windows.Browser.HtmlEventArgs
+    name: HtmlEventArgs
+    nameWithType: HtmlEventArgs
+    fullName: System.Windows.Browser.HtmlEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.HtmlObject.DetachEvent(System.String,EventHandler{System.Windows.Browser.HtmlEventArgs})
+    name: DetachEvent
+    nameWithType: HtmlObject.DetachEvent
+    fullName: System.Windows.Browser.HtmlObject.DetachEvent
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Windows.Browser.HtmlEventArgs
+    name: HtmlEventArgs
+    nameWithType: HtmlEventArgs
+    fullName: System.Windows.Browser.HtmlEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.HtmlObject.ConvertTo(Type,System.Boolean)
+  commentId: M:System.Windows.Browser.HtmlObject.ConvertTo(Type,System.Boolean)
+  parent: System.Windows.Browser.HtmlObject
+  isExternal: true
+  name: ConvertTo(Type, Boolean)
+  nameWithType: HtmlObject.ConvertTo(Type, Boolean)
+  fullName: System.Windows.Browser.HtmlObject.ConvertTo(Type, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.Browser.HtmlObject.ConvertTo(Type,System.Boolean)
+    name: ConvertTo
+    nameWithType: HtmlObject.ConvertTo
+    fullName: System.Windows.Browser.HtmlObject.ConvertTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Type
+    name: Type
+    nameWithType: Type
+    fullName: Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.HtmlObject.ConvertTo(Type,System.Boolean)
+    name: ConvertTo
+    nameWithType: HtmlObject.ConvertTo
+    fullName: System.Windows.Browser.HtmlObject.ConvertTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Type
+    name: Type
+    nameWithType: Type
+    fullName: Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.ScriptObject.Dispatcher
+  commentId: P:System.Windows.Browser.ScriptObject.Dispatcher
+  parent: System.Windows.Browser.ScriptObject
+  name: Dispatcher
+  nameWithType: ScriptObject.Dispatcher
+  fullName: System.Windows.Browser.ScriptObject.Dispatcher
+- uid: System.Windows.Browser.ScriptObject.ManagedObject
+  commentId: P:System.Windows.Browser.ScriptObject.ManagedObject
+  parent: System.Windows.Browser.ScriptObject
+  name: ManagedObject
+  nameWithType: ScriptObject.ManagedObject
+  fullName: System.Windows.Browser.ScriptObject.ManagedObject
+- uid: System.Windows.Browser.ScriptObject.CheckAccess
+  commentId: M:System.Windows.Browser.ScriptObject.CheckAccess
+  parent: System.Windows.Browser.ScriptObject
+  name: CheckAccess()
+  nameWithType: ScriptObject.CheckAccess()
+  fullName: System.Windows.Browser.ScriptObject.CheckAccess()
+  spec.csharp:
+  - uid: System.Windows.Browser.ScriptObject.CheckAccess
+    name: CheckAccess
+    nameWithType: ScriptObject.CheckAccess
+    fullName: System.Windows.Browser.ScriptObject.CheckAccess
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.ScriptObject.CheckAccess
+    name: CheckAccess
+    nameWithType: ScriptObject.CheckAccess
+    fullName: System.Windows.Browser.ScriptObject.CheckAccess
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.ScriptObject.ConvertTo``1
+  commentId: M:System.Windows.Browser.ScriptObject.ConvertTo``1
+  parent: System.Windows.Browser.ScriptObject
+  name: ConvertTo<T>()
+  nameWithType: ScriptObject.ConvertTo<T>()
+  fullName: System.Windows.Browser.ScriptObject.ConvertTo<T>()
+  nameWithType.vb: ScriptObject.ConvertTo(Of T)()
+  fullName.vb: System.Windows.Browser.ScriptObject.ConvertTo(Of T)()
+  name.vb: ConvertTo(Of T)()
+  spec.csharp:
+  - uid: System.Windows.Browser.ScriptObject.ConvertTo``1
+    name: ConvertTo<T>
+    nameWithType: ScriptObject.ConvertTo<T>
+    fullName: System.Windows.Browser.ScriptObject.ConvertTo<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.ScriptObject.ConvertTo``1
+    name: ConvertTo(Of T)
+    nameWithType: ScriptObject.ConvertTo(Of T)
+    fullName: System.Windows.Browser.ScriptObject.ConvertTo(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.ScriptObject.GetProperty(System.Int32)
+  commentId: M:System.Windows.Browser.ScriptObject.GetProperty(System.Int32)
+  parent: System.Windows.Browser.ScriptObject
+  isExternal: true
+  name: GetProperty(Int32)
+  nameWithType: ScriptObject.GetProperty(Int32)
+  fullName: System.Windows.Browser.ScriptObject.GetProperty(System.Int32)
+  spec.csharp:
+  - uid: System.Windows.Browser.ScriptObject.GetProperty(System.Int32)
+    name: GetProperty
+    nameWithType: ScriptObject.GetProperty
+    fullName: System.Windows.Browser.ScriptObject.GetProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.ScriptObject.GetProperty(System.Int32)
+    name: GetProperty
+    nameWithType: ScriptObject.GetProperty
+    fullName: System.Windows.Browser.ScriptObject.GetProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.ScriptObject.GetProperty(System.String)
+  commentId: M:System.Windows.Browser.ScriptObject.GetProperty(System.String)
+  parent: System.Windows.Browser.ScriptObject
+  isExternal: true
+  name: GetProperty(String)
+  nameWithType: ScriptObject.GetProperty(String)
+  fullName: System.Windows.Browser.ScriptObject.GetProperty(System.String)
+  spec.csharp:
+  - uid: System.Windows.Browser.ScriptObject.GetProperty(System.String)
+    name: GetProperty
+    nameWithType: ScriptObject.GetProperty
+    fullName: System.Windows.Browser.ScriptObject.GetProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.ScriptObject.GetProperty(System.String)
+    name: GetProperty
+    nameWithType: ScriptObject.GetProperty
+    fullName: System.Windows.Browser.ScriptObject.GetProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.ScriptObject.Invoke(System.String,System.Object[])
+  commentId: M:System.Windows.Browser.ScriptObject.Invoke(System.String,System.Object[])
+  parent: System.Windows.Browser.ScriptObject
+  isExternal: true
+  name: Invoke(String, Object[])
+  nameWithType: ScriptObject.Invoke(String, Object[])
+  fullName: System.Windows.Browser.ScriptObject.Invoke(System.String, System.Object[])
+  nameWithType.vb: ScriptObject.Invoke(String, Object())
+  fullName.vb: System.Windows.Browser.ScriptObject.Invoke(System.String, System.Object())
+  name.vb: Invoke(String, Object())
+  spec.csharp:
+  - uid: System.Windows.Browser.ScriptObject.Invoke(System.String,System.Object[])
+    name: Invoke
+    nameWithType: ScriptObject.Invoke
+    fullName: System.Windows.Browser.ScriptObject.Invoke
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.ScriptObject.Invoke(System.String,System.Object[])
+    name: Invoke
+    nameWithType: ScriptObject.Invoke
+    fullName: System.Windows.Browser.ScriptObject.Invoke
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.ScriptObject.InvokeSelf(System.Object[])
+  commentId: M:System.Windows.Browser.ScriptObject.InvokeSelf(System.Object[])
+  parent: System.Windows.Browser.ScriptObject
+  isExternal: true
+  name: InvokeSelf(Object[])
+  nameWithType: ScriptObject.InvokeSelf(Object[])
+  fullName: System.Windows.Browser.ScriptObject.InvokeSelf(System.Object[])
+  nameWithType.vb: ScriptObject.InvokeSelf(Object())
+  fullName.vb: System.Windows.Browser.ScriptObject.InvokeSelf(System.Object())
+  name.vb: InvokeSelf(Object())
+  spec.csharp:
+  - uid: System.Windows.Browser.ScriptObject.InvokeSelf(System.Object[])
+    name: InvokeSelf
+    nameWithType: ScriptObject.InvokeSelf
+    fullName: System.Windows.Browser.ScriptObject.InvokeSelf
   - name: (
     nameWithType: (
     fullName: (
@@ -227,6 +891,51 @@ references:
     name: Object
     nameWithType: Object
     fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Browser.ScriptObject.InvokeSelf(System.Object[])
+    name: InvokeSelf
+    nameWithType: ScriptObject.InvokeSelf
+    fullName: System.Windows.Browser.ScriptObject.InvokeSelf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Browser.ScriptObject.SetProperty(System.Int32,System.Object)
+  commentId: M:System.Windows.Browser.ScriptObject.SetProperty(System.Int32,System.Object)
+  parent: System.Windows.Browser.ScriptObject
+  isExternal: true
+  name: SetProperty(Int32, Object)
+  nameWithType: ScriptObject.SetProperty(Int32, Object)
+  fullName: System.Windows.Browser.ScriptObject.SetProperty(System.Int32, System.Object)
+  spec.csharp:
+  - uid: System.Windows.Browser.ScriptObject.SetProperty(System.Int32,System.Object)
+    name: SetProperty
+    nameWithType: ScriptObject.SetProperty
+    fullName: System.Windows.Browser.ScriptObject.SetProperty
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -240,18 +949,17 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
+  - uid: System.Windows.Browser.ScriptObject.SetProperty(System.Int32,System.Object)
+    name: SetProperty
+    nameWithType: ScriptObject.SetProperty
+    fullName: System.Windows.Browser.ScriptObject.SetProperty
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -264,119 +972,25 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
+- uid: System.Windows.Browser.ScriptObject.SetProperty(System.String,System.Object)
+  commentId: M:System.Windows.Browser.ScriptObject.SetProperty(System.String,System.Object)
+  parent: System.Windows.Browser.ScriptObject
   isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
+  name: SetProperty(String, Object)
+  nameWithType: ScriptObject.SetProperty(String, Object)
+  fullName: System.Windows.Browser.ScriptObject.SetProperty(System.String, System.Object)
   spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
+  - uid: System.Windows.Browser.ScriptObject.SetProperty(System.String,System.Object)
+    name: SetProperty
+    nameWithType: ScriptObject.SetProperty
+    fullName: System.Windows.Browser.ScriptObject.SetProperty
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -390,18 +1004,17 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
+  - uid: System.Windows.Browser.ScriptObject.SetProperty(System.String,System.Object)
+    name: SetProperty
+    nameWithType: ScriptObject.SetProperty
+    fullName: System.Windows.Browser.ScriptObject.SetProperty
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -411,37 +1024,6 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
   - name: )
     nameWithType: )
     fullName: )
@@ -474,11 +1056,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System
-  commentId: N:System
-  name: System
-  nameWithType: System
-  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -528,6 +1105,38 @@ references:
   name: ToJavaScriptObjectExtender
   nameWithType: ToJavaScriptObjectExtender
   fullName: ToJavaScriptObjectExtender
+- uid: System.Windows.Browser.HtmlDocument.Body*
+  commentId: Overload:System.Windows.Browser.HtmlDocument.Body
+  name: Body
+  nameWithType: HtmlDocument.Body
+  fullName: System.Windows.Browser.HtmlDocument.Body
+- uid: System.Windows.Browser.HtmlElement
+  commentId: T:System.Windows.Browser.HtmlElement
+  parent: System.Windows.Browser
+  name: HtmlElement
+  nameWithType: HtmlElement
+  fullName: System.Windows.Browser.HtmlElement
+- uid: System.Windows.Browser.HtmlDocument.CreateElement*
+  commentId: Overload:System.Windows.Browser.HtmlDocument.CreateElement
+  name: CreateElement
+  nameWithType: HtmlDocument.CreateElement
+  fullName: System.Windows.Browser.HtmlDocument.CreateElement
+- uid: System.String
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Windows.Browser.HtmlDocument.GetElementsByTagName*
+  commentId: Overload:System.Windows.Browser.HtmlDocument.GetElementsByTagName
+  name: GetElementsByTagName
+  nameWithType: HtmlDocument.GetElementsByTagName
+  fullName: System.Windows.Browser.HtmlDocument.GetElementsByTagName
+- uid: System.Windows.Browser.ScriptObjectCollection
+  commentId: T:System.Windows.Browser.ScriptObjectCollection
+  parent: System.Windows.Browser
+  name: ScriptObjectCollection
+  nameWithType: ScriptObjectCollection
+  fullName: System.Windows.Browser.ScriptObjectCollection
 - uid: System.Windows.Browser.HtmlDocument.#ctor*
   commentId: Overload:System.Windows.Browser.HtmlDocument.#ctor
   name: HtmlDocument
@@ -538,33 +1147,30 @@ references:
   name: DocumentUri
   nameWithType: HtmlDocument.DocumentUri
   fullName: System.Windows.Browser.HtmlDocument.DocumentUri
-- uid: System.Uri
-  commentId: T:System.Uri
-  parent: System
+- uid: Uri
   isExternal: true
   name: Uri
   nameWithType: Uri
-  fullName: System.Uri
+  fullName: Uri
 - uid: System.Windows.Browser.HtmlDocument.QueryString*
   commentId: Overload:System.Windows.Browser.HtmlDocument.QueryString
   name: QueryString
   nameWithType: HtmlDocument.QueryString
   fullName: System.Windows.Browser.HtmlDocument.QueryString
-- uid: System.Collections.Generic.IDictionary{System.String,System.String}
-  commentId: T:System.Collections.Generic.IDictionary{System.String,System.String}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IDictionary`2
+- uid: IDictionary{System.String,System.String}
+  commentId: '!:IDictionary{System.String,System.String}'
+  definition: IDictionary`2
   name: IDictionary<String, String>
   nameWithType: IDictionary<String, String>
-  fullName: System.Collections.Generic.IDictionary<System.String, System.String>
+  fullName: IDictionary<System.String, System.String>
   nameWithType.vb: IDictionary(Of String, String)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, System.String)
+  fullName.vb: IDictionary(Of System.String, System.String)
   name.vb: IDictionary(Of String, String)
   spec.csharp:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: <
     nameWithType: <
@@ -586,10 +1192,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -610,59 +1216,63 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IDictionary`2
-  commentId: T:System.Collections.Generic.IDictionary`2
+- uid: IDictionary`2
   isExternal: true
-  name: IDictionary<TKey, TValue>
-  nameWithType: IDictionary<TKey, TValue>
-  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
-  nameWithType.vb: IDictionary(Of TKey, TValue)
-  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
-  name.vb: IDictionary(Of TKey, TValue)
+  name: IDictionary<, >
+  nameWithType: IDictionary<, >
+  fullName: IDictionary<, >
+  nameWithType.vb: IDictionary(Of , )
+  fullName.vb: IDictionary(Of , )
+  name.vb: IDictionary(Of , )
   spec.csharp:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TValue
-    nameWithType: TValue
-    fullName: TValue
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TValue
-    nameWithType: TValue
-    fullName: TValue
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
+- uid: System.Windows.Browser.HtmlDocument.GetElementById*
+  commentId: Overload:System.Windows.Browser.HtmlDocument.GetElementById
+  name: GetElementById
+  nameWithType: HtmlDocument.GetElementById
+  fullName: System.Windows.Browser.HtmlDocument.GetElementById
+- uid: System.Windows.Browser.HtmlDocument.Cookies*
+  commentId: Overload:System.Windows.Browser.HtmlDocument.Cookies
+  name: Cookies
+  nameWithType: HtmlDocument.Cookies
+  fullName: System.Windows.Browser.HtmlDocument.Cookies
