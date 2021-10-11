@@ -1,4 +1,4 @@
-﻿# Compile with OpenSilver
+﻿# Compiling with OpenSilver
 
 **Note: this section assumes that you would like to do the migration on your own. Alternatively, you can have your application migrated by Userware - the company behind OpenSilver - in a fast and cost-effective way, so that your resources are free to work on other tasks. Visit [OpenSilver.net](https://opensilver.net) for details.**
 
@@ -40,6 +40,29 @@ You can find more detailed instructions in this [example](example.md).
 ## Errors are expected
 
 Some compilation errors are expected, because OpenSilver currently supports a (fairly large) subset of Silverlight functionality, so manual work should be expected. This guide provides tips and guidance to fix those compilation errors.
+
+### Errors from .xaml.cs sources
+Many different compilation errors related to UI controls can occur if the project consists of **.xaml** files (which Silverlight application usually does).
+
+![xaml Errors](/images/XamlErrors.png "xaml Errors")
+
+This error is due to the files **.g.i.cs** not being generated. To fix it, click on **.xaml** file, go to its properties (F4), and in the advanced section choose:
+```
+Build Action: Content
+Custom Tool: MSBuild:Compile
+```
+
+![Build Action](/images/BuildAction.png "Build Action")
+
+Please note that if the project includes **Generic.xaml** file for default styles, then most probably no errors will be encountered during compilation but some screens will not be shown as expected at the end. So the above steps need to be followed both for **Generic.xaml** and for all other **.xaml** files.
+
+### Make build configurations consistent
+Some large projects might have different build configurations with many compiler directives. As a result a lot of confusing errors might be encountered during compilation.
+It is a good practice to check the original **Silverlight** project and see if the build configurations are consistent with the **OpenSilver** project.
+
+### Known issues
+
+Visit the "[Troubleshooting](../troubleshooting/common-issues-and-solutions.md)" page for known issues and tips.
 
 ## Use compiler directives to not break the original Silverlight application
 
