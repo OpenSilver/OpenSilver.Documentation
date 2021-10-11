@@ -1,35 +1,54 @@
 ﻿# Troubleshooting
 
-## Known issues of the current release
+## Known issues and tips:
 
-- Performance will be greatly improved (by at least 30 times) when the Mono for WebAssembly team at Microsoft releases AOT compilation. Please keep an eye on the "What's new and Roadmap" page for updates.
-
-- Auto-complete and intellisense are not yet available when editing XAML code. The XAML editor displays misleading errors during design time, which you should ignore.
-
-- The "Error List" window may display misleading errors. Please refer only to the content of the "Output" window (Ctrl+W, O) to know if a compilation has succeeded. If there are compilation errors when rebuilding a project, please search for the very first error that appears in the "Output" window (Ctrl+W, O).
+### Compilation errors
 
 - To improve the accuracy of the "Error List" window, select "Build only", as shown in the screenshot below:
 
 ![Select 'Build Only' to see only relevant errors](/images/view-only-build-errors-small.png "Select 'Build Only' to see only relevant errors")
 
-- If you get compilation errors that only appear from time to time and are not consistent, killing the "msbuild.exe" process may fix them. In particular, when updating to a newer OpenSilver NuGet package or working with multiple instances of Visual Studio, you may sometimes need to kill the "msbuild.exe" process to force it to use the current version of the package.
+- The "Error List" window may display misleading errors. Please only refer to the content of the "Output" window (Ctrl+W, O) to know if a compilation has succeeded. If there are compilation errors when rebuilding a project, please search for the very first error that appears in the "Output" window (Ctrl+W, O).
 
-- ResX files are not yet supported.
+- The XAML editor sometimes displays misleading errors during design-time, which do not affect the ability to compile and run the application.
 
-- If you only change the XAML without changing the C#, you need to Rebuild to see the changes reflected in your app.
+- If you have trouble rebuilding the solution, please delete the 'obj' folders and try again.
 
-- When adding a WCF Service Reference, please uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.7
+- All XAML files in the project need to have the following properties: Build Action = Content, CustomTool = MSBuild:Compile
+
+- Killing "msbuild.exe" process may fix some rare issues that appear after updating to a newer OpenSilver NuGet package or when working with multiple instances of Visual Studio.
+
+### Debugging
+
+- If your breakpoints are not hit, try disabling "Enable just my code" (uncheck the option in Tools->Options->Debugging->General->Enable Just My Code)
+
+- Disabling code optimisation may help if you experience debugging issues (right click the project->Properties->Build->uncheck "optimize code")
+
+### Design-time
+
+- XAML auto-completion and intellisense may sometime not show up.
+
+- If you only change XAML files without changing C# files, you need to manually Rebuild the solution to see the changes reflected in your app.
+
+### WCF and client/server communication
+
+- The browser security context may require that you enable cross-domain calls by [configuring CORS](../in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors) and the SameSite attribute.
+
+- When adding a [WCF Service Reference](../in-depth-topics/wcf-and-webclient.html), please uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.7. When configuring a WCF Service Reference, temporarily add a reference to the "System.dll" assembly, then configure the service, and remove the reference after you are done.
+
+- To enable passing cookies (eg. for credentials/authentication), set the "[DefaultSoapCredentialsMode](../in-depth-topics/wcf-and-webclient.html)" parameter.
+
+### Performance
+
+- Performance has been greatly improved in the past few months and will keep improving with every upcoming release. Please keep an eye on the [commits history](https://github.com/OpenSilver/OpenSilver/commits/develop) for updates.
+
 
 ## FAQ - Other issues and solutions
 
-### > I am getting "Simulator Not Enabled" whenever I launch the simulator project, even though I did open Package Manager Console.
 
-Please fix the path that is in the "Start Program" field of the project properties of the project with the ".Simulator" suffix.
+### > Where is the "WorkInProgress" package?
 
-To do so, please right-click on the project "<PROJECT NAME>.Simulator", click "Properties", go to the "Debug" section, and check "Start external program".
-
-Make sure to enter the following path, where you need to replace "YOUR-USER-NAME-GOES-HERE" with your actual Windows user name, and the package version number with the current version of OpenSilver that you are using:
-C:\Users\YOUR-USER-NAME-GOES-HERE\.nuget\packages\opensilver.workinprogress\1.0.0-alpha-007\tools\simulator\CSharpXamlForHtml5.Simulator.exe
+The "WorkInProgress" package has been merged into the OpenSilver package and will no longer be updated ([learn more](https://www.opensilver.net/permalinks/wip_discontinued.aspx)).
 
 ### > I am getting "Error MSB4018: The "ResolveBlazorRuntimeDependencies" task failed unexpectedly." when I compile.
 
@@ -37,7 +56,7 @@ Make sure that all the projects in your solution use the exact same OpenSilver N
 
 For example, this error may occur if one project references the "OpenSilver" package while another project references the "OpenSilver.WorkInProgress" package.
 
-### > How to see more detailed logs
+### > How to see more detailed logs?
 
 Build output verbosity can be changed from `Tools -> Options -> Projects and Solutions -> Build and Run`\
 Choose an option from **MSBuild project build output verbosity**
