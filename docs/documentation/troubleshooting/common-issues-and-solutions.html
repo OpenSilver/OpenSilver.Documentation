@@ -8,7 +8,7 @@
     <title>Troubleshooting </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Troubleshooting ">
-    <meta name="generator" content="docfx 2.56.2.0">
+    <meta name="generator" content="docfx 2.58.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -122,45 +122,65 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="troubleshooting">Troubleshooting</h1>
 
-<h2 id="known-issues-of-the-current-release">Known issues of the current release</h2>
+<h2 id="known-issues-and-tips">Known issues and tips:</h2>
+<h3 id="compilation-errors">Compilation errors</h3>
 <ul>
-<li><p>Performance will be greatly improved (by at least 30 times) when the Mono for WebAssembly team at Microsoft releases AOT compilation. Please keep an eye on the &quot;What's new and Roadmap&quot; page for updates.</p>
-</li>
-<li><p>Auto-complete and intellisense are not yet available when editing XAML code. The XAML editor displays misleading errors during design time, which you should ignore.</p>
-</li>
-<li><p>The &quot;Error List&quot; window may display misleading errors. Please refer only to the content of the &quot;Output&quot; window (Ctrl+W, O) to know if a compilation has succeeded. If there are compilation errors when rebuilding a project, please search for the very first error that appears in the &quot;Output&quot; window (Ctrl+W, O).</p>
-</li>
-<li><p>To improve the accuracy of the &quot;Error List&quot; window, select &quot;Build only&quot;, as shown in the screenshot below:</p>
-</li>
+<li>To improve the accuracy of the &quot;Error List&quot; window, select &quot;Build only&quot;, as shown in the screenshot below:</li>
 </ul>
 <p><img src="/images/view-only-build-errors-small.png" alt="Select 'Build Only' to see only relevant errors" title="Select 'Build Only' to see only relevant errors"></p>
 <ul>
-<li><p>If you get compilation errors that only appear from time to time and are not consistent, killing the &quot;msbuild.exe&quot; process may fix them. In particular, when updating to a newer OpenSilver NuGet package or working with multiple instances of Visual Studio, you may sometimes need to kill the &quot;msbuild.exe&quot; process to force it to use the current version of the package.</p>
+<li><p>The &quot;Error List&quot; window may display misleading errors. Please only refer to the content of the &quot;Output&quot; window (Ctrl+W, O) to know if a compilation has succeeded. If there are compilation errors when rebuilding a project, please search for the very first error that appears in the &quot;Output&quot; window (Ctrl+W, O).</p>
 </li>
-<li><p>ResX files are not yet supported.</p>
+<li><p>The XAML editor sometimes displays misleading errors during design-time, which do not affect the ability to compile and run the application.</p>
 </li>
-<li><p>If you only change the XAML without changing the C#, you need to Rebuild to see the changes reflected in your app.</p>
+<li><p>If you have trouble rebuilding the solution, please delete the 'obj' folders and try again.</p>
 </li>
-<li><p>When adding a WCF Service Reference, please uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.7</p>
+<li><p>All XAML files in the project need to have the following properties: Build Action = Content, CustomTool = MSBuild:Compile</p>
+</li>
+<li><p>Killing &quot;msbuild.exe&quot; process may fix some rare issues that appear after updating to a newer OpenSilver NuGet package or when working with multiple instances of Visual Studio.</p>
 </li>
 </ul>
+<h3 id="debugging">Debugging</h3>
+<ul>
+<li><p>If your breakpoints are not hit, try disabling &quot;Enable just my code&quot; (uncheck the option in Tools-&gt;Options-&gt;Debugging-&gt;General-&gt;Enable Just My Code)</p>
+</li>
+<li><p>Disabling code optimisation may help if you experience debugging issues (right click the project-&gt;Properties-&gt;Build-&gt;uncheck &quot;optimize code&quot;)</p>
+</li>
+</ul>
+<h3 id="design-time">Design-time</h3>
+<ul>
+<li><p>XAML auto-completion and intellisense may sometime not show up.</p>
+</li>
+<li><p>If you only change XAML files without changing C# files, you need to manually Rebuild the solution to see the changes reflected in your app.</p>
+</li>
+</ul>
+<h3 id="wcf-and-clientserver-communication">WCF and client/server communication</h3>
+<ul>
+<li><p>The browser security context may require that you enable cross-domain calls by <a href="../in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors">configuring CORS</a> and the SameSite attribute.</p>
+</li>
+<li><p>When adding a <a href="../in-depth-topics/wcf-and-webclient.html">WCF Service Reference</a>, please uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.7. When configuring a WCF Service Reference, temporarily add a reference to the &quot;System.dll&quot; assembly, then configure the service, and remove the reference after you are done.</p>
+</li>
+<li><p>To enable passing cookies (eg. for credentials/authentication), set the &quot;<a href="../in-depth-topics/wcf-and-webclient.html">DefaultSoapCredentialsMode</a>&quot; parameter.</p>
+</li>
+</ul>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Performance has been greatly improved in the past few months and will keep improving with every upcoming release. Please keep an eye on the <a href="https://github.com/OpenSilver/OpenSilver/commits/develop">commits history</a> for updates.</li>
+</ul>
 <h2 id="faq---other-issues-and-solutions">FAQ - Other issues and solutions</h2>
-<h3 id="-i-am-getting-simulator-not-enabled-whenever-i-launch-the-simulator-project-even-though-i-did-open-package-manager-console">&gt; I am getting &quot;Simulator Not Enabled&quot; whenever I launch the simulator project, even though I did open Package Manager Console.</h3>
-<p>Please fix the path that is in the &quot;Start Program&quot; field of the project properties of the project with the &quot;.Simulator&quot; suffix.</p>
-<p>To do so, please right-click on the project &quot;<project name="">.Simulator&quot;, click &quot;Properties&quot;, go to the &quot;Debug&quot; section, and check &quot;Start external program&quot;.<p>
-<p>Make sure to enter the following path, where you need to replace &quot;YOUR-USER-NAME-GOES-HERE&quot; with your actual Windows user name, and the package version number with the current version of OpenSilver that you are using:
-C:\Users\YOUR-USER-NAME-GOES-HERE.nuget\packages\opensilver.workinprogress\1.0.0-alpha-007\tools\simulator\CSharpXamlForHtml5.Simulator.exe</p>
+<h3 id="-where-is-the-workinprogress-package">&gt; Where is the &quot;WorkInProgress&quot; package?</h3>
+<p>The &quot;WorkInProgress&quot; package has been merged into the OpenSilver package and will no longer be updated (<a href="https://www.opensilver.net/permalinks/wip_discontinued.aspx">learn more</a>).</p>
 <h3 id="-i-am-getting-error-msb4018-the-resolveblazorruntimedependencies-task-failed-unexpectedly-when-i-compile">&gt; I am getting &quot;Error MSB4018: The &quot;ResolveBlazorRuntimeDependencies&quot; task failed unexpectedly.&quot; when I compile.</h3>
 <p>Make sure that all the projects in your solution use the exact same OpenSilver NuGet package name and version.</p>
 <p>For example, this error may occur if one project references the &quot;OpenSilver&quot; package while another project references the &quot;OpenSilver.WorkInProgress&quot; package.</p>
-<h3 id="-how-to-see-more-detailed-logs">&gt; How to see more detailed logs</h3>
+<h3 id="-how-to-see-more-detailed-logs">&gt; How to see more detailed logs?</h3>
 <p>Build output verbosity can be changed from <code>Tools -&gt; Options -&gt; Projects and Solutions -&gt; Build and Run</code><br>
 Choose an option from <strong>MSBuild project build output verbosity</strong></p>
 <h3 id="-problems-with-breakpoints">&gt; Problems with breakpoints</h3>
 <p><a href="https://doc.opensilver.net/documentation/troubleshooting/common-issues-and-solutions.html">https://doc.opensilver.net/documentation/troubleshooting/common-issues-and-solutions.html</a></p>
 <h3 id="-what-if-my-issue-is-not-listed-here">&gt; What if my issue is not listed here?</h3>
 <p>Please contact us at: <a href="https://opensilver.net/contact.aspx">https://opensilver.net/contact.aspx</a></p>
-</project></article>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
