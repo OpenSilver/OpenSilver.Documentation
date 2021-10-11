@@ -13,10 +13,3 @@ https://www.nuget.org/packages/Newtonsoft.Json
 ## Source code
 
 https://github.com/JamesNK/Newtonsoft.Json
-
-## Instructions
-
-Coming soon
-
-#### *(WORK IN PROGRESS DOCUMENTATION, PLEASE CHECK BACK SOON)*
-

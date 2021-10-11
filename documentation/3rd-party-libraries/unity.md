@@ -13,10 +13,3 @@ https://github.com/vijayvepa/NetStandardEnterpriseLibrary/blob/master/NugetPacka
 ## Source code
 
 https://github.com/Chavoshi/EnterpriseLibrary.NetCore
-
-## Instructions
-
-Coming soon
-
-#### *(WORK IN PROGRESS DOCUMENTATION, PLEASE CHECK BACK SOON)*
-

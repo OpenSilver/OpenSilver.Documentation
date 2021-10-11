@@ -39,7 +39,7 @@ You can find more detailed instructions in this [example](example.md).
 
 ## Errors are expected
 
-Many compilation errors are expected, because OpenSilver currently only supports a subset of Silverlight functionality, so manual work should be expected. This guide provides tips and guidance to fix those compilation errors.
+Some compilation errors are expected, because OpenSilver currently supports a (fairly large) subset of Silverlight functionality, so manual work should be expected. This guide provides tips and guidance to fix those compilation errors.
 
 ## Use compiler directives to not break the original Silverlight application
 
@@ -55,7 +55,7 @@ As far as XAML files are concerned, since compiler directives do not work in XAM
 - If it is a small change, try to do it in the C# code-behind file instead of the XAML file. To do so, first add x:Name="SOME_NAME" (in XAML) to the control that you wish to modify, then make the change in the constructor in the C# code-behind, and use #if OPENSILVER compiler directive to make sure that the change does not break the original Silverlight version of the application.
 - If the change is extensive or if it cannot be done in the C# code-behind, we recommend you to create a copy of the XAML file, and reference that copy in your OpenSilver project, while the original Silverlight application references the original file. For example, if you need to make a change to "App.xaml", you should create a copy named for example "App.OpenSilver.xaml", and have the OpenSilver project  reference that file instead of "App.xaml". Note: the associated C# code-behind file ("App.xaml.cs") can still be shared between the original and migrated projects.
 
-#### Here are the steps to copy and use a new XAML file.
+#### Here are the steps to copy and use a new XAML file:
 
 #### 1. Copy XAML file name that needs to be duplicated
 
@@ -103,4 +103,3 @@ It will look little bit odd though because now .xaml.cs will not be shown as a d
 
 ![Share .cs file](/images/xaml_copy/9.png "Share .cs file")
 
-## (WORK IN PROGRESS DOCUMENTATION, CHECK BACK SOON)

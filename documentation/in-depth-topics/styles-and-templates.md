@@ -1,4 +1,7 @@
 # Styles and Templates
+
+### UPDATE: since this page was originally written, the built-in styles of OpenSilver have been improved to more closely match those of Silverlight. Please check back in the future for updated styles.
+
 ## General Concepts
 
 * The way styling works in OpenSilver is the same as in other recent XAML-based platforms such as UWP, Silverlight, WinRT, and Windows Phone.
