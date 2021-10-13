@@ -132,6 +132,49 @@ If command succeeded you will see some statistic about converted methods etc. If
 converting llvm method void MyApp.Views.MyEditServiceCodeDetailsView:InitializeComponent ()
 ```
 
+### Solution
+It turns out that the bug is not directly related to the function size but the amount of lines that are adding objects to the List
+
+```
+var parents_8ce7371e02ef489e9893174ae5411181 = new global::System.Collections.Generic.List<global::System.Object>();
+parents_8ce7371e02ef489e9893174ae5411181.Add(TextBlock_c0999e8200734224a58a6861f2e68cfb);
+parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_8465a697e0a94b7ca24107bb115330f6);
+parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_c7b62394168e4c7da9eabfbeb9d6a833);
+```
+
+Having many .Add lines in generated .g.cs code increases probability for mono-aot-cross.exe to fail.
+
+As a workaround, OpenSilver compiler can be adapted to generate local function inside InitializeComponent() and add list items inside the function.
+
+```
+var parents_8ce7371e02ef489e9893174ae5411181 = new global::System.Collections.Generic.List<global::System.Object>();
+void parents_8ce7371e02ef489e9893174ae5411181_func() {
+    parents_8ce7371e02ef489e9893174ae5411181.Add(TextBlock_c0999e8200734224a58a6861f2e68cfb);
+    parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_8465a697e0a94b7ca24107bb115330f6);
+    parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_c7b62394168e4c7da9eabfbeb9d6a833);
+};
+parents_8ce7371e02ef489e9893174ae5411181_func();
+```
+
+To achieve that we need 3 lines of code.
+- Open `GeneratingCSharpCode.cs` file
+- Find the following line
+
+```
+while (elementForSearch != null && elementForSearch.Parent != null)`
+```
+- Add this line before while statement
+
+```
+stringBuilder.AppendLine("void " + nameForParentsCollection + "_func() {");
+```
+- Add this two lines after while statment
+
+```
+stringBuilder.AppendLine("};");
+stringBuilder.AppendLine(nameForParentsCollection + "_func();");
+```
+
 ### 2. Not served mime types after publish.
 
 After running published website the following error can appear in browser console.
