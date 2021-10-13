@@ -227,6 +227,41 @@ Tools -&gt; Options -&gt; Build And Run</li>
 <p>If command succeeded you will see some statistic about converted methods etc. If it fails you will see the last method it was trying to convert and fails.</p>
 <pre><code>converting llvm method void MyApp.Views.MyEditServiceCodeDetailsView:InitializeComponent ()
 </code></pre>
+<h3 id="solution">Solution</h3>
+<p>It turns out that the bug is not directly related to the function size but the amount of lines that are adding objects to the List</p>
+<pre><code>var parents_8ce7371e02ef489e9893174ae5411181 = new global::System.Collections.Generic.List&lt;global::System.Object&gt;();
+parents_8ce7371e02ef489e9893174ae5411181.Add(TextBlock_c0999e8200734224a58a6861f2e68cfb);
+parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_8465a697e0a94b7ca24107bb115330f6);
+parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_c7b62394168e4c7da9eabfbeb9d6a833);
+</code></pre>
+<p>Having many .Add lines in generated .g.cs code increases probability for mono-aot-cross.exe to fail.</p>
+<p>As a workaround, OpenSilver compiler can be adapted to generate local function inside InitializeComponent() and add list items inside the function.</p>
+<pre><code>var parents_8ce7371e02ef489e9893174ae5411181 = new global::System.Collections.Generic.List&lt;global::System.Object&gt;();
+void parents_8ce7371e02ef489e9893174ae5411181_func() {
+    parents_8ce7371e02ef489e9893174ae5411181.Add(TextBlock_c0999e8200734224a58a6861f2e68cfb);
+    parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_8465a697e0a94b7ca24107bb115330f6);
+    parents_8ce7371e02ef489e9893174ae5411181.Add(StackPanel_c7b62394168e4c7da9eabfbeb9d6a833);
+};
+parents_8ce7371e02ef489e9893174ae5411181_func();
+</code></pre>
+<p>To achieve that we need 3 lines of code.</p>
+<ul>
+<li>Open <code>GeneratingCSharpCode.cs</code> file</li>
+<li>Find the following line</li>
+</ul>
+<pre><code>while (elementForSearch != null &amp;&amp; elementForSearch.Parent != null)`
+</code></pre>
+<ul>
+<li>Add this line before while statement</li>
+</ul>
+<pre><code>stringBuilder.AppendLine(&quot;void &quot; + nameForParentsCollection + &quot;_func() {&quot;);
+</code></pre>
+<ul>
+<li>Add this two lines after while statment</li>
+</ul>
+<pre><code>stringBuilder.AppendLine(&quot;};&quot;);
+stringBuilder.AppendLine(nameForParentsCollection + &quot;_func();&quot;);
+</code></pre>
 <h3 id="2-not-served-mime-types-after-publish">2. Not served mime types after publish.</h3>
 <p>After running published website the following error can appear in browser console.</p>
 <p><img src="/images/how-to-topics/not_served_files.png" alt="Not served error"><br></p>
@@ -268,9 +303,6 @@ Negative impact on performance because interpretion layer.</p>
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
-                  <li>
-                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/how-to-topics/aot-compilation.md/#L1" class="contribution-link">Improve this Doc</a>
-                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
