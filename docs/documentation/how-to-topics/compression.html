@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title> </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content=" ">
+    <meta name="generator" content="docfx 2.58.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/LogoWithText2022x595TransparentBackground.png">
+                            </a>
+                            <nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"></a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+
+<p>When OpenSilver application is published, by default the output files are compressed using gzip or brotli compression. However IIS needs to be configured via <code>web.config</code> to serve the compressed assets.</p>
+<p>To verify if the application is using compression, check the Network tab in a browser's developer tools and make sure <code>Content-Encoding</code> is either <code>br</code> or <code>gz</code>.</p>
+<p><img src="/images/how-to-topics/compression1.png" alt="Content-Encoding" title="Content-Encoding" style="border: 2px solid #555;"><br></p>
+<p>Here is the case where the compression is not used.</p>
+<p><img src="/images/how-to-topics/compression2.png" alt="Content-Encoding" title="Content-Encoding" style="border: 2px solid #555;"><br></p>
+<p>For usual OpenSilver application the following <code>web.config</code> will work without any modifications.</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;configuration&gt;
+  &lt;system.webServer&gt;
+    &lt;staticContent&gt;
+      &lt;remove fileExtension=&quot;.dll&quot; /&gt;
+      &lt;remove fileExtension=&quot;.json&quot; /&gt;
+      &lt;remove fileExtension=&quot;.woff&quot; /&gt;
+      &lt;remove fileExtension=&quot;.woff2&quot; /&gt;
+      &lt;remove fileExtension=&quot;.dat&quot; /&gt;
+      &lt;remove fileExtension=&quot;.wasm&quot; /&gt;
+      &lt;remove fileExtension=&quot;.blat&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.json&quot; mimeType=&quot;application/json&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.woff&quot; mimeType=&quot;font/woff&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.woff2&quot; mimeType=&quot;font/woff2&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.dat&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.dll&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.wasm&quot; mimeType=&quot;application/wasm&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.blat&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.js.gz&quot; mimeType=&quot;application/javascript&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.dat.gz&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.dll.gz&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.json.gz&quot; mimeType=&quot;application/json&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.wasm.gz&quot; mimeType=&quot;application/wasm&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.blat.gz&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.html.gz&quot; mimeType=&quot;text/html&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.css.gz&quot; mimeType=&quot;text/css&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.ico.gz&quot; mimeType=&quot;image/x-icon&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.svg.gz&quot; mimeType=&quot;image/svg+xml&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.js.br&quot; mimeType=&quot;application/javascript&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.dat.br&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.dll.br&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.json.br&quot; mimeType=&quot;application/json&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.wasm.br&quot; mimeType=&quot;application/wasm&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.blat.br&quot; mimeType=&quot;application/octet-stream&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.html.br&quot; mimeType=&quot;text/html&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.css.br&quot; mimeType=&quot;text/css&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.ico.br&quot; mimeType=&quot;image/x-icon&quot; /&gt;
+      &lt;mimeMap fileExtension=&quot;.svg.br&quot; mimeType=&quot;image/svg+xml&quot; /&gt;
+    &lt;/staticContent&gt;
+    &lt;httpCompression&gt;
+      &lt;dynamicTypes&gt;
+        &lt;remove mimeType=&quot;text/*&quot; /&gt;
+        &lt;remove mimeType=&quot;application/javascript&quot; /&gt;
+        &lt;remove mimeType=&quot;image/svg+xml&quot; /&gt;
+      &lt;/dynamicTypes&gt;
+      &lt;staticTypes&gt;
+        &lt;remove mimeType=&quot;text/*&quot; /&gt;
+        &lt;remove mimeType=&quot;application/javascript&quot; /&gt;
+        &lt;remove mimeType=&quot;image/svg+xml&quot; /&gt;
+      &lt;/staticTypes&gt;
+    &lt;/httpCompression&gt;
+    &lt;rewrite&gt;
+      &lt;outboundRules rewriteBeforeCache=&quot;true&quot;&gt;
+        &lt;rule name=&quot;Add Vary Accept-Encoding&quot; preCondition=&quot;PreCompressedFile&quot; enabled=&quot;true&quot;&gt;
+          &lt;match serverVariable=&quot;RESPONSE_Vary&quot; pattern=&quot;.*&quot; /&gt;
+          &lt;action type=&quot;Rewrite&quot; value=&quot;Accept-Encoding&quot; /&gt;
+        &lt;/rule&gt;
+        &lt;rule name=&quot;Add Encoding Brotli&quot; preCondition=&quot;PreCompressedBrotli&quot; enabled=&quot;true&quot; stopProcessing=&quot;true&quot;&gt;
+          &lt;match serverVariable=&quot;RESPONSE_Content_Encoding&quot; pattern=&quot;.*&quot; /&gt;
+          &lt;action type=&quot;Rewrite&quot; value=&quot;br&quot; /&gt;
+        &lt;/rule&gt;
+        &lt;rule name=&quot;Add Encoding Gzip&quot; preCondition=&quot;PreCompressedGzip&quot; enabled=&quot;true&quot; stopProcessing=&quot;true&quot;&gt;
+          &lt;match serverVariable=&quot;RESPONSE_Content_Encoding&quot; pattern=&quot;.*&quot; /&gt;
+          &lt;action type=&quot;Rewrite&quot; value=&quot;gzip&quot; /&gt;
+        &lt;/rule&gt;
+        &lt;preConditions&gt;
+          &lt;preCondition name=&quot;PreCompressedFile&quot;&gt;
+            &lt;add input=&quot;{HTTP_URL}&quot; pattern=&quot;\.(gz|br)$&quot; /&gt;
+          &lt;/preCondition&gt;
+            &lt;preCondition name=&quot;PreCompressedBrotli&quot;&gt;
+            &lt;add input=&quot;{HTTP_URL}&quot; pattern=&quot;\.br$&quot; /&gt;
+          &lt;/preCondition&gt;
+          &lt;preCondition name=&quot;PreCompressedGzip&quot;&gt;
+            &lt;add input=&quot;{HTTP_URL}&quot; pattern=&quot;\.gz$&quot; /&gt;
+          &lt;/preCondition&gt;
+        &lt;/preConditions&gt;
+      &lt;/outboundRules&gt;
+      &lt;rules&gt;
+        &lt;rule name=&quot;Serve subdir&quot;&gt;
+          &lt;match url=&quot;.*&quot; /&gt;
+          &lt;action type=&quot;Rewrite&quot; url=&quot;wwwroot\{R:0}&quot; /&gt;
+        &lt;/rule&gt;
+        &lt;rule name=&quot;Rewrite brotli file&quot; stopProcessing=&quot;true&quot;&gt;
+          &lt;match url=&quot;(.*)&quot;/&gt;
+          &lt;conditions&gt;
+            &lt;add input=&quot;{HTTP_ACCEPT_ENCODING}&quot; pattern=&quot;br&quot; /&gt;
+            &lt;add input=&quot;{REQUEST_FILENAME}&quot; pattern=&quot;\.(js|dat|dll|json|wasm|blat|htm|html|css|ico|svg)$&quot; /&gt;
+            &lt;add input=&quot;{REQUEST_FILENAME}.br&quot; matchType=&quot;IsFile&quot; /&gt;
+          &lt;/conditions&gt;
+          &lt;action type=&quot;Rewrite&quot; url=&quot;{R:1}.br&quot; /&gt;
+        &lt;/rule&gt;
+        &lt;rule name=&quot;Rewrite gzip file&quot; stopProcessing=&quot;true&quot;&gt;
+          &lt;match url=&quot;(.*)&quot;/&gt;
+          &lt;conditions&gt;
+            &lt;add input=&quot;{HTTP_ACCEPT_ENCODING}&quot; pattern=&quot;gzip&quot; /&gt;
+            &lt;add input=&quot;{REQUEST_FILENAME}&quot; pattern=&quot;\.(js|dat|dll|json|wasm|blat|htm|html|css|ico|svg)$&quot; /&gt;
+            &lt;add input=&quot;{REQUEST_FILENAME}.gz&quot; matchType=&quot;IsFile&quot; /&gt;
+          &lt;/conditions&gt;
+          &lt;action type=&quot;Rewrite&quot; url=&quot;{R:1}.gz&quot; /&gt;
+        &lt;/rule&gt;
+        &lt;rule name=&quot;SPA fallback routing&quot; stopProcessing=&quot;true&quot;&gt;
+          &lt;match url=&quot;.*&quot; /&gt;
+          &lt;conditions logicalGrouping=&quot;MatchAll&quot;&gt;
+            &lt;add input=&quot;{REQUEST_FILENAME}&quot; matchType=&quot;IsFile&quot; negate=&quot;true&quot; /&gt;
+          &lt;/conditions&gt;
+          &lt;action type=&quot;Rewrite&quot; url=&quot;wwwroot\&quot; /&gt;
+        &lt;/rule&gt;
+      &lt;/rules&gt;
+    &lt;/rewrite&gt;
+  &lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>Here is a more detailed explanation <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-6.0">How to Host and deploy ASP.NET Core Blazor WebAssembly</a></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/how-to-topics/compression.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
