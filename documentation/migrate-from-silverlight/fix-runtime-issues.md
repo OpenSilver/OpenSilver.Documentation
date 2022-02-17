@@ -4,7 +4,7 @@
 
 ### [Video] Best practices for identifying, reporting, and fixing OpenSilver rendering issues:
 
-> [!Video https://youtu.be/OE52Z2g66bg]
+> [!Video https://www.youtube.com/embed/OE52Z2g66bg]
 
 ### Fixing cookie-related issues:
 
