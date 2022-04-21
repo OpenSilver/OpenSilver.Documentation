@@ -1,6 +1,6 @@
 # Tutorial: Migration from Silverlight application to OpenSilver
 
-In this tutorial we are going to migrate an example of **Silverlight** application to **OpenSilver**.\
+In this tutorial we are going to migrate an example of **Silverlight** application to **OpenSilver**. The source code can be found [here](https://github.com/OpenSilver/CustomerApp).\
 It is assumed that the steps described in [Environment Setup](environment-setup.md) page are followed.
 
 The migration steps described below will allow us to avoid source file duplication and will give a possibility to share them between separate **.sln** and **.csproj** files.\
