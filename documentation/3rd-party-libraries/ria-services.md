@@ -13,6 +13,11 @@ We use Open RIA Services, which is the official replacement by Microsoft when RI
 
 ## NuGet Packages
 
+#### Version 4.6 (Recommended)
+https://www.myget.org/feed/opensilver/package/nuget/OpenSilver.OpenRiaServices.Client.Core.4.6
+https://www.myget.org/feed/opensilver/package/nuget/OpenSilver.OpenRiaServices.Client.4.6
+
+#### Version 5
 https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client.Core/
 https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client/
 
