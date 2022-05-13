@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Use Opensilver's Performance Profiler. </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Use Opensilver's Performance Profiler. ">
+    <meta name="generator" content="docfx 2.58.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/LogoWithText2022x595TransparentBackground.png">
+                            </a>
+                            <nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"></a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="use-opensilvers-performance-profiler">Use Opensilver's Performance Profiler.</h2>
+
+<p>OpenSilver provides the OpenSilver.Profiler class which allows you to measure the time spent in specific portions of your code.</p>
+<h4 id="1-define-the-portions-of-code-you-would-like-to-measure">1. Define the portions of code you would like to measure</h4>
+<p>The OpenSilver.Profiler class lets you use the two following methods:</p>
+<ul>
+<li><p>OpenSilver.Profiler.StartMeasuringTime()
+You can call this method before the code that you wish to profile in order to start the stopwatch.</p>
+<p>This method returns a number that you need to pass to the &quot;StopMeasuringTime()&quot; method.</p>
+</li>
+<li><p>CSHTML5.Profiler.StopMeasuringTime(description, resultOfStartMeasureCall)
+You can call this method after the code that you wish to profile, in order to stop the stopwatch.</p>
+<p>This method takes 2 arguments: the first is an arbitrary text that you can specify to describe the measure, while the second argument is the number returned by the call to the &quot;StopMeasuringTime()&quot; method.</p>
+</li>
+</ul>
+<p>Note: the time measured is &quot;accrued&quot;, meaning that it is cumulative if the code is executed multiple times.</p>
+<h6 id="here-is-an-example-of-use">Here is an example of use:</h6>
+<pre><code>// Call the &quot;StartMeasuringTime&quot; method to start the stopwatch:
+var t0 = CSHTML5.Profiler.StartMeasuringTime();
+
+// This is the code that we want to profile (ie. measure the time it takes to execute):
+List&lt;string&gt; list = new List&lt;string&gt;();
+for (int i = 0; i &lt; 10000; i++)
+{
+    list.Add(i.ToString());
+}
+
+// Call the &quot;StopMeasuringTime&quot; method to stop the stopwatch:
+CSHTML5.Profiler.StopMeasuringTime(&quot;Time it takes to execute a loop with 10000 items&quot;, t0);
+</code></pre>
+<h4 id="2-use-latest-simulator-project">2. Use latest Simulator project</h4>
+<p>.Simulator project needs to be set as <strong>Startup Project</strong> in order to be able to use profiler. As an addition simulator project needs to be updated to the latest version which means it needs to run as a standalone executable <strong>Windows Application</strong>.</p>
+<p><a href="https://opensilver.net/permalinks/update/alpha19.aspx">Here</a> are full instructions.</p>
+<h4 id="3-run-profiler">3. Run profiler</h4>
+<p>If the above mentioned points are satisfied then to run profiler go to <strong>Debug -&gt; Performance Profiler...</strong></p>
+<p><img src="/images/how-to-topics/performance-profiler-menu.png" alt="Performance Profiler Menu" width="400"><br></p>
+<p><img src="/images/how-to-topics/profiler-tools.png" alt="Profiler tools" width="900"><br></p>
+<p>Select profiling tool and click <strong>Start</strong>. Diagnostics information will be generated after closing the simulator.</p>
+<p>Here are some examples of CPU Usage diagnostics.</p>
+<p><img src="/images/how-to-topics/profiling-result.png" alt="Profiling result" width="800"><br></p>
+<p><img src="/images/how-to-topics/cpu-usage.png" alt="CPU usage" width="800"><br></p>
+<h4 id="4-specify-pdb-files-location">4. Specify .pdb files location</h4>
+<p>If the result doesn't show OpenSilver external calls then most probably profiler couldn't find .pdb files for OpenSilver.</p>
+<p><a href="https://docs.microsoft.com/en-us/visualstudio/debugger/specify-symbol-dot-pdb-and-source-files-in-the-visual-studio-debugger?view=vs-2019">Follow</a> the instructions to specify .pdb files location in Visual Studio. One other option would be to copy OpenSilver.pdb in Simulator Debug folder.</p>
+<h4 id="useful-links">Useful links</h4>
+<p>This document describes all profiling tools in depth.<br>
+<a href="https://docs.microsoft.com/en-us/visualstudio/profiling/?view=vs-2019">Measure app performance in Visual Studio</a></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/how-to-topics/measure-performance-with-OpenSilver-Profiler.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
