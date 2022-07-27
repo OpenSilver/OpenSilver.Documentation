@@ -21,7 +21,7 @@ To run the original Silverlight application you will likely need the following s
 
 - [Silverlight 5 Toolkit (Dec 2011 release)](https://github.com/microsoftarchive/SilverlightToolkit/releases)
 
-- [Silverlight 5 Developer Runtime](https://go.microsoft.com/fwlink/?LinkId=229324) for Windows (64 bit)
+- [Silverlight 5 Developer Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=29715) for Windows (64 bit). Note: to download it, choose "**Silverlight_Developer_x64.exe**" from the popup that appears when following the link above and clicking 'Download'.
 
 It is recommended that the Silverlight development environment is tested by attempting to create a new Silverlight application and by verifying that step-by-step debugging works properly. If it doesn't please make sure that the above components have been installed successfully and also make sure that the **Silverlight** option is checked under the **Debuggers** section of the **.Web** project properties.
 
@@ -33,7 +33,7 @@ It is recommended that the Silverlight development environment is tested by atte
 
 Depending on the libraries that the Silverlight application is using, you may also need the following components:
 
-- [RIA Services V1.0 SP2](https://www.microsoft.com/en-in/download/details.aspx?id=28357). This is required only if the Silverlight application uses WCF RIA Services.
+- [RIA Services V1.0 SP2](https://rapidshare.io/Ecr/RiaServices.msi). This is required only if the Silverlight application uses WCF RIA Services.
 
 - Other 3rd party components (Telerik, DevExpress, Syncfusion, ComponentOne...) 
 
