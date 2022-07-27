@@ -163,6 +163,12 @@
 <li><p>To enable passing cookies (eg. for credentials/authentication), set the &quot;<a href="../in-depth-topics/wcf-and-webclient.html">DefaultSoapCredentialsMode</a>&quot; parameter.</p>
 </li>
 </ul>
+<h4 id="code-trimming-and-wcfsoap-data-contract-serialization">Code trimming and WCF/SOAP data contract serialization</h4>
+<p>Code trimming is an optimization that can reduce the size of a published Open Silver application, thus improving both performance and start-up time. For more information you can read the official documentation <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/configure-trimmer?view=aspnetcore-6.0">here</a>.</p>
+<p>However, in some scenarios, is it possible that code trimming breaks .NET serialization and/or deserialization that rely heavily on Reflection.</p>
+<p>If you receive an error on data contract serialization or deserialization (or if you use Reflection in your application) you can disable code trimming.</p>
+<p>To do so, just edit the “.Browser” project file and make sure that the <strong>PublishTrimmed</strong> flag is set to False. Below you will find an example.</p>
+<p><img src="https://user-images.githubusercontent.com/93962591/158984083-c10f6e4c-0147-434f-b977-97c2ac268dfe.png" alt="image"></p>
 <h3 id="performance">Performance</h3>
 <ul>
 <li>Performance has been greatly improved in the past few months and will keep improving with every upcoming release. Please keep an eye on the <a href="https://github.com/OpenSilver/OpenSilver/commits/develop">commits history</a> for updates.</li>
