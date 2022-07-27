@@ -56,7 +56,7 @@ Here are your options:
 
 * Or *work around the issue by running Chrome without CORS verification*. This is obviously only for development, not for use in production. To do so, open the Windows "Run" dialog (for example by pressing the Windows+R keys combination), and execute the following command:
 ```
-"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="c:/chromedev"
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="c:/chromedev" --disable-features=SameSiteByDefaultCookies
 ```
 
 * Or *work around the issue by using Fiddler* to make the browser believe that your server allows cross-domain requests. This is obviously only for development, not for use in production. To do so, follow the steps described [here](fiddler-enable-cors.html).
