@@ -15,7 +15,7 @@ In fact, you may later want to do step-by-step debugging in both the original ap
 
 To run the original Silverlight application you will likely need the following software:
 
-- [Visual Studio 2015](https://visualstudio.microsoft.com/vs/older-downloads/). This is the most recent version of Visual Studio that officially supported Silverlight.
+- [Visual Studio 2015](https://visualstudio.microsoft.com/vs/older-downloads/) (or [here](https://stackoverflow.com/questions/44290672/how-to-download-visual-studio-community-edition-2015-not-2017)). This is the most recent version of Visual Studio that officially supported Silverlight.
 
 - [Silverlight 5 SDK](https://web.archive.org/web/20190126163602if_/http://download.microsoft.com/download/3/A/3/3A35179D-5C87-4D0A-91EB-BF5FEDC601A4/sdk/silverlight_sdk.exe)
 
