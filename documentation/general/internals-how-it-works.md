@@ -81,4 +81,4 @@ It is a WPF-type application that contains an embedded Chromium browser. The goa
 
 Its internal operation is as follows: when the Simulator launches, it loads the DLL of the OpenSilver application via an “Assembly.Load”. This is possible because the application DLL is .NET Standard compatible. Then, the Simulator applies some C# reflection to inspect the content of the DLL and to find the entry point of the application, which is usually the class "App" defined in "App.xaml.cs". Once found, it instantiates it, and it launches the application in the .NET Framework context.
 
-All HTML and CSS manipulations are redirected by the Simulator to the embedded browser (chromium) via C# <-> JavaScript interops (see corresponding paragraph below). JavaScript events are connected to C# events.
+All HTML and CSS manipulations are redirected by the Simulator to the embedded browser (chromium) via C# <-> JavaScript interops (see corresponding section). JavaScript events are connected to C# events.
