@@ -79,6 +79,6 @@ It is a WPF-type application that contains an embedded Chromium browser. The goa
 
 ![Simulator Visual Tree](/images/11.VisualTree.png "The Simulator visual tree inspector")
 
-Its internal operation is as follows: when the Simulator launches, it loads the DLL of the OpenSilver application via an “Assembly.Load”. This is possible because the application DLL is .NET Standard compatible. Then, the Simulator applies some C# reflection to inspect the content of the DLL and to find the entry point of the application, which is usually the class "App" defined in "App.xaml.cs". Once found, it instantiates it, and it launches the application in the .NET Framework context.
+Its internal operation is as follows: when the Simulator launches, it starts the application via an "Activator.CreateInstance". This is possible because the application DLL is .NET Standard compatible. Then, the Simulator instantiates several methods in the application to handle interops and to analyze the components tree. Finally, the application is running in the .NET Framework context.
 
 All HTML and CSS manipulations are redirected by the Simulator to the embedded browser (chromium) via C# <-> JavaScript interops (see corresponding section). JavaScript events are connected to C# events.
