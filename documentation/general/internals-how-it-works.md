@@ -62,7 +62,7 @@ One can see this auto-generated code by going to the “obj/Debug” directory o
 
 In the Visual Studio solution, in addition to the main application project (the one containing App.xaml), we mentioned two other projects, which serve as entry points:
 
-* The .Browser or .Web project is an ASP.NET Client-Side Blazor type project. It references the main project of the application and allows to run it in WebAssembly
+* The .Browser project is an ASP.NET Client-Side Blazor type project. It references the main project of the application and allows to run it in WebAssembly
 
 * The .Simulator project is a .NET Framework type project whose purpose is to launch the executable "Simulator.exe" by passing it as a parameter the assembly path corresponding to the main project of the application
 
