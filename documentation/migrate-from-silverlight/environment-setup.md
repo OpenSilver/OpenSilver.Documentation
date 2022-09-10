@@ -4,7 +4,7 @@
 
 ### - Software required to create OpenSilver applications:
 
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) (16.4+) or newer, for Windows
+* [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) or newer, for Windows
 * [OpenSilver extension for Visual Studio](https://opensilver.net/download.aspx). This is a free and full [open-source](https://github.com/OpenSilver/OpenSilver) VSIX that adds some Project Templates to your Visual Studio, so that you can easily create new OpenSilver applications from the "File -> New Project" dialog. It also adds a XAML Editor that allows you to see a preview while you are editing your XAML files.
 
 ### - Software required to run legacy Silverlight applications:
