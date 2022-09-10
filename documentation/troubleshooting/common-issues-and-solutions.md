@@ -72,9 +72,9 @@ For example, this error may occur if one project references the "OpenSilver" pac
 Build output verbosity can be changed from `Tools -> Options -> Projects and Solutions -> Build and Run`\
 Choose an option from **MSBuild project build output verbosity**
 
-### > Problems with breakpoints
 
-https://doc.opensilver.net/documentation/troubleshooting/common-issues-and-solutions.html
+
+
 
 ### > What if my issue is not listed here?
 
