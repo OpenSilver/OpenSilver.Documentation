@@ -64,7 +64,8 @@ In the Visual Studio solution, in addition to the main application project (the 
 
 * The .Browser project is an ASP.NET Client-Side Blazor type project. It references the main project of the application and allows to run it in WebAssembly
 
-* The .Simulator project is a .NET Framework type project whose purpose is to launch the executable "Simulator.exe" by passing it as a parameter the assembly path corresponding to the main project of the application
+* The .Simulator project is a .NET Framework type project whose purpose is to launch the app as a desktop application with a bunch of handy helpers for a developer, including the ability to debug the application.
+
 
 ![OpenSilver solution](/images/3.solutionExplorer.png "The three projects of a typical OpenSilver solution")
 
