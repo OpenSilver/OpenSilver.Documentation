@@ -21,7 +21,7 @@ So it is a typical *Silverlight* application having an additional *Silverlight C
 
 ### Migration Steps
 
-#### 1. Create a new OpenSilver project (Visual Studio 2019)
+#### 1. Create a new OpenSilver project (Visual Studio 2022)
 In this step we are going to create a separate *OpenSilver* project having the same name as *Silverlight* application has but in a different location.
 
 - Go to `File -> New -> Project` menu item and choose the `OpenSilver Application`.
@@ -58,7 +58,7 @@ We need to keep our new *OpenSilver* project consistent with the *Silverlight*. 
 
 ![Rename](/images/Rename.png "Rename")
 
-Now we can close **Visual Studio 2019**.
+Now we can close **Visual Studio 2022**.
 
 #### 5. Copy files and directories from OpenSilver project to Silverlight project
 
@@ -67,9 +67,9 @@ Now we can close **Visual Studio 2019**.
 
 ![Directory Structure](/images/DirectoryStructure.png "Directory Structure")
 
-#### 6. Compile migrated project with Visual Studio 2019
+#### 6. Compile migrated project with Visual Studio 2022
 
-- Open **CustomerApp.OpenSilver.sln** located in Silverlight's project with *Visual Studio 2019*
+- Open **CustomerApp.OpenSilver.sln** located in Silverlight's project with *Visual Studio 2022*
 - In `Solution Explorer` find `AssemblyInfo.cs` for both CustomerApp and CustomerData projects and exclude them
 
 ![Exclude From Project](/images/ExcludeFromProject.png "Exclude From Project")
