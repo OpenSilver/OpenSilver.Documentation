@@ -39,7 +39,7 @@ https://github.com/OpenRIAServices/OpenRiaServices/wiki
 
 The original documentation for WCF RIA Services is still relevant and can be found at https://msdn.microsoft.com/en-us/library/ee707344(v=vs.91).aspx . Namespaces and assembly names are no longer correct since they changed with the release of OpenRiaServices.
 
-Documentation for changes since WCF RIA Services can be found under https://github.com/OpenRIAServices/OpenRiaServices/releases)
+Documentation for changes since WCF RIA Services can be found under https://github.com/OpenRIAServices/OpenRiaServices/releases
 
 ## A step-by-step guide to migrate Silverlight and OpenSilver projects from WCF RIA to OpenRIA Services
 
