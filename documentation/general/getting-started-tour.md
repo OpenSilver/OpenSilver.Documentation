@@ -45,7 +45,7 @@ void Button_Click(object sender, RoutedEventArgs e)
 
 ![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
 
-Let's recompile the solution and launch the project with the suffix ".Browser" (or ".Web"). The default browser launches and the application runs.
+Let's recompile the solution and launch the project with the suffix ".Browser" . The default browser launches and the application runs.
 
 ![application displaying a message in the browser](/images/6.AppBrowser.png "The application running in the browser")
 
