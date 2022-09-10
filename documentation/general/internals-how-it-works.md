@@ -10,8 +10,7 @@ An OpenSilver project is none other than a .NET Standard type project that refer
 
 ### 1. References
 
-First, the NuGet package will add a reference to the "OpenSilver.Runtime.dll" assembly, which contains the implementation of the XAML classes. For example, the "Button" and "TextBox" classes are located there.
-
+First, the NuGet package will add a reference to the "OpenSilver.dll" assembly, which contains the implementation of the XAML classes. For example, the "Button" and "TextBox" classes are located there.
 These classes can be seen by going to the "[src/Runtime/Runtime](https://github.com/OpenSilver/OpenSilver/tree/master/src/Runtime/Runtime)" directory of the OpenSilver source code on GitHub, at the address: https://github.com/OpenSilver/OpenSilver
 
 Low-level elements, such as the "TextBox", "MediaElement" or "WebBrowser" controls, contain a method named "CreateDomElement", which specifies how they should render in HTML.
