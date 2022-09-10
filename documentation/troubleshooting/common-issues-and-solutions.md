@@ -49,6 +49,8 @@ To do so, just edit the “.Browser” project file and make sure that the **Pub
 
 ![image](https://user-images.githubusercontent.com/93962591/158984083-c10f6e4c-0147-434f-b977-97c2ac268dfe.png)
 
+If disabling trimming helps to solve the issue, please, consider reverting trimming and configure trimming rules. To do this, please, follow the instructions [here](https://github.com/dotnet/linker/blob/main/docs/data-formats.md#descriptor-format).
+
 ### Performance
 
 - Performance has been greatly improved in the past few months and will keep improving with every upcoming release. Please keep an eye on the [commits history](https://github.com/OpenSilver/OpenSilver/commits/develop) for updates.
