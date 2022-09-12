@@ -73,7 +73,7 @@ In the Visual Studio solution, in addition to the main application project (the 
 
 The Simulator is a tool which is distributed as a NuGet package. Usually it is located in the "C:\Users\%USERNAME%\.Nuget\packages\opensilver.simulator".
 
-![Simulator Folder](/images/16.SimulatorFolder.png "The contents of the Simulator directory in the NuGet package")
+
 
 It is a WPF-type application that contains an embedded Chromium browser. The goal of the Simulator is to allow debugging the application with the very powerful tools of the .NET Framework. It also allows to inspect the XAML visual tree.
 
