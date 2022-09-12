@@ -24,6 +24,7 @@ https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client/
 ## Example
 
 https://github.com/OpenSilver/OpenRiaServicesSamples/tree/main/CustomEndpoint
+https://github.com/OpenSilver/OpenRiaServicesDemo
 
 ## Source code
 
