@@ -71,7 +71,7 @@ In the Visual Studio solution, in addition to the main application project (the 
 
 ### 4. The Simulator
 
-The Simulator is a tool which is distributed as a NuGet package. Usually it is located in the "C:\Users\%USERNAME%\.Nuget\packages\opensilver.simulator".
+The Simulator is a tool which is distributed as a NuGet package. Usually it is located in the "C:\Users&#92;%USERNAME%&#92;.Nuget\packages\opensilver.simulator".
 
 
 
