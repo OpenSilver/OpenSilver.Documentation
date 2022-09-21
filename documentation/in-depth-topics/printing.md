@@ -14,7 +14,7 @@ CSHTML5.Native.Html.Printing.PrintManager.Print(textToPrint);
 
 You can also set a "Print Area", so that when the user presses "Ctrl+P" or clicks on "File" -> "Print" in the browser, the content of the "Print Area" is printed instead of the whole window.
 
-*Note:* In FireFox and IE, in order to print background colors and images (including Image and Path elements), the user needs to explicitely check the option *"Print Background (Colors and Images) or Background Graphics*" from the Options section of the Print dialog. Otherwise only text and foregrounds will be printed. This is not the case in Chrome.
+*Note:* In Firefox and IE, in order to print background colors and images (including Image and Path elements), the user needs to explicitly check the option *"Print Background (Colors and Images) or Background Graphics*" from the Options section of the Print dialog. Otherwise only text and foregrounds will be printed.
 
 
 
@@ -38,7 +38,7 @@ Note: the element must be in the Visual Tree. To know whether an element is in t
 
 ## Note about colors, images, and shapes in FireFox and IE
 
-In FireFox and IE, in order to print background colors and images (including Image and Path elements), the user needs to explicitely check the option *"Print Background (Colors and Images) or Background Graphics"* from the Options section of the Print dialog. Otherwise only text and foregrounds will be printed. This is not the case in Chrome.
+In Firefox and IE, in order to print background colors and images (including Image and Path elements), the user needs to explicitly check the option *"Print Background (Colors and Images) or Background Graphics"* from the Options section of the Print dialog. Otherwise only text and foregrounds will be printed.
 
 ![Screenshot of Print Dialog](../../images/PrintDialog.png "Screenshot of the Print Dialog")
 
