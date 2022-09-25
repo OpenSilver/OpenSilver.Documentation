@@ -1,12 +1,13 @@
-# WCF and WebClient
+# WCF and Http Clients
 
 ## Introduction
 
 OpenSilver provides support for web services and HTTP calls in multiple ways, including:
 
 * The *"Add Service Reference"* feature of Visual Studio. Use this feature to easily communicate with SOAP / WCF web services. See below for [limitations](#limitations-of-the-add-service-reference-support-soap) and a [Tutorial](#tutorial-to-easily-create-a-soap-based-clientserver-app-in-opensilver-wcf).
-> :warning: **Important limitation of the current release**: When adding a WCF Service Reference, please be sure to uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.7.
-* The *"WebClient"* class. Use this classs to download strings from the web, as well as to communicate with REST / Web API web services. See below for a [Tutorial](#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api).
+> :warning: **Important limitation of the current release**: When adding a WCF Service Reference, please be sure to uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.10.
+* [HttpClient](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-6.0)
+* The *"WebClient"* class. Use this classs to download strings from the web, as well as to communicate with REST / Web API web services. See below for a [Tutorial](#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api). Please pay attention to the fact that System.Net.WebClient is not supported in the Browser for .NET 5+. However, you can use the migrated class OpenSilver.Compatibility.WebClient.
 > **Note**: to enable passing cookies (for credentials/authentication), put the following code in your App.xaml.cs constructor:
 ```
 Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.CredentialsMode.Enabled;
@@ -17,13 +18,12 @@ Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.Creden
 
 ## Sample application
 
-You can download a sample SOAP-based client/server application from the following URL:
+You can download sample applications from the [examples](https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples) folder:
 
-https://github.com/cshtml5/TestCshtml5WCF
+* WcfService1. This is a sample for a server-side WCF project.
+* OpenSilverWcfConsumer. This is a sample OpenSilver application, which interacts with the server-side project via WCF services.
 
-> :warning: **Note**: The sample is made with [CSHTML5](http://cshtml5.com) rather than OpenSilver, but the concepts are the same.
-
-The sample shows a basic To-Do management application.
+Sample shows a basic To-Do management application.
 
 ## Limitations of the "Add Service Reference" support (SOAP)
 
@@ -31,9 +31,7 @@ In the current version, OpenSilver has the following limitations regarding the "
 
 * Due to JavaScript restrictions in the browser, *cross-domain calls require the server to [implement CORS](#adding-support-for-cross-domain-calls-cors)*. In other words, if your client application is not hosted on the same domain as your WCF web service, you need to add CORS to the web service (or you can use [JSONP](Circumventing-cross-domain-policies-using-JSONP.html) as an alternative to CORS, but it is not recommended for modern services). To add CORS to your web service, follow this [tutorial](#adding-support-for-cross-domain-calls-cors).
 
-* When adding a WCF Service Reference via the "Add Service Reference" command of VS, please be sure to uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.7.
-
-* With the current version of OpenSilver, configuring a WCF Service Reference requires temporarily adding a reference to the "System.dll" assembly. You should add this reference only while configuring the service, and then you should remove it once the service has been configured.
+* When adding a WCF Service Reference via the "Add Service Reference" command of VS, please be sure to uncheck the option "Reuse types in referenced assemblies", and update the NuGet packages from v4.4 to v4.10.
 
 <!--Furthermore, please note that the following features are NOT yet supported:
 
@@ -223,11 +221,12 @@ namespace WcfService1
     }
 }
 ```
-4) Create the file *"Global.asax* by right-clicking the project in the Solution Explorer, and clicking Add -> Global Application Class -> OK. Add the following code to it:
+4) Create the file *"Global.asax* by right-clicking the project in the Solution Explorer, and clicking Add -> New Item -> Global Application Class -> OK. Add the following code to it:
 ```
 protected void Application_BeginRequest(object sender, EventArgs e)
 {
-    HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
+    //You need to replace URL of a client app later
+    HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "http://localhost:55591");
 
     if (HttpContext.Current.Request.HttpMethod == "OPTIONS")
     {
@@ -246,42 +245,67 @@ Keep the project running.
 
 7) Click Project -> *Add Service Reference*, and paste the URL of the service that you created above.  It should be something like: http://localhost:4598/Service1.svc where you must replace 4958 with your port number. Click GO and then OK (leave the default name "ServiceReference1").
 
-8) Manually update the NuGet packages from v4.4 to v4.7.
+8) Manually update the NuGet packages from v4.4 to v4.10.
 
 9) Modify the page *MainPage.XAML* by removing the default TextBlock and replacing it with the following code:
 ```
 <StackPanel>
-    <TextBlock Text="CREATE A NEW TO-DO:" Margin="0,20,0,0" Foreground="Black" HorizontalAlignment="Left"/>
+    <TextBlock Text="CREATE A NEW TO-DO:" Margin="0,20,0,0" HorizontalAlignment="Left"/>
     <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-        <TextBox x:Name="SoapToDoTextBox" Width="200" Text="Enter your To-Do here" Foreground="Black" Background="#FFEEEEEE"/>
-        <Button Content="Create" Click="ButtonAddSoapToDo_Click" Foreground="White" Background="#FFE44D26" Margin="5,0,0,0"/>
+        <TextBox x:Name="SoapToDoTextBox" Width="200" Text="Enter your To-Do here"/>
+        <Button Content="Create" Click="ButtonAddSoapToDo_Click" Margin="5,0,0,0"/>
     </StackPanel>
-    <TextBlock Text="LIST OF TODO's:" Margin="0,20,0,0" Foreground="Black" HorizontalAlignment="Left"/>
+    <TextBlock Text="LIST OF TODO's:" Margin="0,20,0,0" HorizontalAlignment="Left"/>
     <ItemsControl x:Name="SoapToDosItemsControl" HorizontalAlignment="Left">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBlock Text="{Binding Description}" Foreground="Black"/>
-                    <Button Content="Delete" Click="ButtonDeleteSoapToDo_Click" Foreground="White" Background="#FFE44D26" Margin="5,0,0,0"/>
+                    <TextBlock Text="{Binding Description}"/>
+                    <Button Content="Delete" Click="ButtonDeleteSoapToDo_Click" Margin="5,0,0,0"/>
                 </StackPanel>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
-    <Button Content="Refresh the list" Foreground="White" Background="#FFE44D26" Click="ButtonRefreshSoapToDos_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+    <Button Content="Refresh the list" Click="ButtonRefreshSoapToDos_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
 </StackPanel>
 ```
 10) Add the following code to MainPage.xaml.cs (IMPORTANT: be sure to *replace the URL in orange* with the correct one - ie. use the same URL as above):
 ```
 ServiceReference1.Service1Client _soapClient =
-        new ServiceReference1.Service1Client(
-            new System.ServiceModel.BasicHttpBinding(),
-            new System.ServiceModel.EndpointAddress(
-                new Uri("http://localhost:4598/Service1.svc")));
+    new ServiceReference1.Service1Client(
+        new CustomBinding(),
+        new System.ServiceModel.EndpointAddress(
+            new Uri("http://localhost:65264/Service1.svc")));
+
+private async Task GetTodosAsync()
+{
+    var todos = await _soapClient.GetToDosAsync();
+    SoapToDosItemsControl.ItemsSource = todos;
+}
+
+private async Task AddOrUpdateTodosAsync(ServiceReference1.ToDoItem todo)
+{
+    await _soapClient.AddOrUpdateToDoAsync(todo);
+    await GetTodosAsync();
+}
+
+private async Task DeleteAsync(ServiceReference1.ToDoItem todo)
+{
+    try
+    {
+        await _soapClient.DeleteToDoAsync(todo);
+        await GetTodosAsync();
+    }
+    catch (System.ServiceModel.FaultException ex)
+    {
+        // Fault exceptions allow the server to pass information such as "Item not found":
+        System.Windows.MessageBox.Show(ex.Message);
+    }
+}
 
 void ButtonRefreshSoapToDos_Click(object sender, RoutedEventArgs e)
 {
-    var todos = _soapClient.GetToDos();
-    SoapToDosItemsControl.ItemsSource = todos;
+    _ = GetTodosAsync();
 }
 
 void ButtonAddSoapToDo_Click(object sender, RoutedEventArgs e)
@@ -291,26 +315,20 @@ void ButtonAddSoapToDo_Click(object sender, RoutedEventArgs e)
         Description = SoapToDoTextBox.Text,
         Id = Guid.NewGuid()
     };
-    _soapClient.AddOrUpdateToDo(todo);
-    ButtonRefreshSoapToDos_Click(sender, e);
+    _ = AddOrUpdateTodosAsync(todo);
 }
 
 void ButtonDeleteSoapToDo_Click(object sender, RoutedEventArgs e)
 {
-    try
-    {
-        var todo = (ServiceReference1.ToDoItem)((Button)sender).DataContext;
-        _soapClient.DeleteToDo(todo);
-        ButtonRefreshSoapToDos_Click(sender, e);
-    }
-    catch (System.ServiceModel.FaultException ex)
-    {
-        // Fault exceptions allow the server to pass information such as "Item not found":
-        System.Windows.MessageBox.Show(ex.Message);
-    }
+    var todo = (ServiceReference1.ToDoItem)((Button)sender).DataContext;
+    _ = DeleteAsync(todo);
 }
 ```
 11) Launch the project to test your client/server To-Do items application.
+
+There are working examples for both of these projects:
+* [WcfService1](https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/WcfService1)
+* [OpenSilverWcfConsumer](https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverWcfConsumer)
 
 ## Tutorial to easily create a REST-based client/server app in OpenSilver (Wep API)
 

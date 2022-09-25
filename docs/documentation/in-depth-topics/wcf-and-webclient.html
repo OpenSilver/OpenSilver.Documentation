@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>WCF and WebClient </title>
+    <title>WCF and Http Clients </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="WCF and WebClient ">
+    <meta name="title" content="WCF and Http Clients ">
     <meta name="generator" content="docfx 2.58.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -120,7 +120,7 @@
         <div class="article row grid-right">
           <div class="col-md-8">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="wcf-and-webclient">WCF and WebClient</h1>
+<h1 id="wcf-and-http-clients">WCF and Http Clients</h1>
 
 <h2 id="introduction">Introduction</h2>
 <p>OpenSilver provides support for web services and HTTP calls in multiple ways, including:</p>
@@ -128,10 +128,11 @@
 <li>The <em>&quot;Add Service Reference&quot;</em> feature of Visual Studio. Use this feature to easily communicate with SOAP / WCF web services. See below for <a href="#limitations-of-the-add-service-reference-support-soap">limitations</a> and a <a href="#tutorial-to-easily-create-a-soap-based-clientserver-app-in-opensilver-wcf">Tutorial</a>.</li>
 </ul>
 <blockquote>
-<p>⚠️ <strong>Important limitation of the current release</strong>: When adding a WCF Service Reference, please be sure to uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.7.</p>
+<p>⚠️ <strong>Important limitation of the current release</strong>: When adding a WCF Service Reference, please be sure to uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.10.</p>
 </blockquote>
 <ul>
-<li>The <em>&quot;WebClient&quot;</em> class. Use this classs to download strings from the web, as well as to communicate with REST / Web API web services. See below for a <a href="#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api">Tutorial</a>.</li>
+<li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-6.0">HttpClient</a></li>
+<li>The <em>&quot;WebClient&quot;</em> class. Use this classs to download strings from the web, as well as to communicate with REST / Web API web services. See below for a <a href="#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api">Tutorial</a>. Please pay attention to the fact that System.Net.WebClient is not supported in the Browser for .NET 5+. However, you can use the migrated class OpenSilver.Compatibility.WebClient.</li>
 </ul>
 <blockquote>
 <p><strong>Note</strong>: to enable passing cookies (for credentials/authentication), put the following code in your App.xaml.cs constructor:</p>
@@ -144,20 +145,18 @@
 <li><a href="jsonp.html">JSONP</a></li>
 </ul>
 <h2 id="sample-application">Sample application</h2>
-<p>You can download a sample SOAP-based client/server application from the following URL:</p>
-<p><a href="https://github.com/cshtml5/TestCshtml5WCF">https://github.com/cshtml5/TestCshtml5WCF</a></p>
-<blockquote>
-<p>⚠️ <strong>Note</strong>: The sample is made with <a href="http://cshtml5.com">CSHTML5</a> rather than OpenSilver, but the concepts are the same.</p>
-</blockquote>
-<p>The sample shows a basic To-Do management application.</p>
+<p>You can download sample applications from the <a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples">examples</a> folder:</p>
+<ul>
+<li>WcfService1. This is a sample for a server-side WCF project.</li>
+<li>OpenSilverWcfConsumer. This is a sample OpenSilver application, which interacts with the server-side project via WCF services.</li>
+</ul>
+<p>Sample shows a basic To-Do management application.</p>
 <h2 id="limitations-of-the-add-service-reference-support-soap">Limitations of the &quot;Add Service Reference&quot; support (SOAP)</h2>
 <p>In the current version, OpenSilver has the following limitations regarding the &quot;Add Service Reference&quot; (SOAP) feature:</p>
 <ul>
 <li><p>Due to JavaScript restrictions in the browser, <em>cross-domain calls require the server to <a href="#adding-support-for-cross-domain-calls-cors">implement CORS</a></em>. In other words, if your client application is not hosted on the same domain as your WCF web service, you need to add CORS to the web service (or you can use <a href="Circumventing-cross-domain-policies-using-JSONP.html">JSONP</a> as an alternative to CORS, but it is not recommended for modern services). To add CORS to your web service, follow this <a href="#adding-support-for-cross-domain-calls-cors">tutorial</a>.</p>
 </li>
-<li><p>When adding a WCF Service Reference via the &quot;Add Service Reference&quot; command of VS, please be sure to uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.7.</p>
-</li>
-<li><p>With the current version of OpenSilver, configuring a WCF Service Reference requires temporarily adding a reference to the &quot;System.dll&quot; assembly. You should add this reference only while configuring the service, and then you should remove it once the service has been configured.</p>
+<li><p>When adding a WCF Service Reference via the &quot;Add Service Reference&quot; command of VS, please be sure to uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.10.</p>
 </li>
 </ul>
 <!--Furthermore, please note that the following features are NOT yet supported:
@@ -329,11 +328,12 @@ namespace WcfService1
 }
 </code></pre>
 <ol start="4">
-<li>Create the file <em>&quot;Global.asax</em> by right-clicking the project in the Solution Explorer, and clicking Add -&gt; Global Application Class -&gt; OK. Add the following code to it:</li>
+<li>Create the file <em>&quot;Global.asax</em> by right-clicking the project in the Solution Explorer, and clicking Add -&gt; New Item -&gt; Global Application Class -&gt; OK. Add the following code to it:</li>
 </ol>
 <pre><code>protected void Application_BeginRequest(object sender, EventArgs e)
 {
-    HttpContext.Current.Response.AddHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);
+    //You need to replace URL of a client app later
+    HttpContext.Current.Response.AddHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;http://localhost:55591&quot;);
 
     if (HttpContext.Current.Request.HttpMethod == &quot;OPTIONS&quot;)
     {
@@ -353,44 +353,69 @@ Keep the project running.</p>
 </li>
 <li><p>Click Project -&gt; <em>Add Service Reference</em>, and paste the URL of the service that you created above.  It should be something like: http://localhost:4598/Service1.svc where you must replace 4958 with your port number. Click GO and then OK (leave the default name &quot;ServiceReference1&quot;).</p>
 </li>
-<li><p>Manually update the NuGet packages from v4.4 to v4.7.</p>
+<li><p>Manually update the NuGet packages from v4.4 to v4.10.</p>
 </li>
 <li><p>Modify the page <em>MainPage.XAML</em> by removing the default TextBlock and replacing it with the following code:</p>
 </li>
 </ol>
 <pre><code>&lt;StackPanel&gt;
-    &lt;TextBlock Text=&quot;CREATE A NEW TO-DO:&quot; Margin=&quot;0,20,0,0&quot; Foreground=&quot;Black&quot; HorizontalAlignment=&quot;Left&quot;/&gt;
+    &lt;TextBlock Text=&quot;CREATE A NEW TO-DO:&quot; Margin=&quot;0,20,0,0&quot; HorizontalAlignment=&quot;Left&quot;/&gt;
     &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0,10,0,0&quot;&gt;
-        &lt;TextBox x:Name=&quot;SoapToDoTextBox&quot; Width=&quot;200&quot; Text=&quot;Enter your To-Do here&quot; Foreground=&quot;Black&quot; Background=&quot;#FFEEEEEE&quot;/&gt;
-        &lt;Button Content=&quot;Create&quot; Click=&quot;ButtonAddSoapToDo_Click&quot; Foreground=&quot;White&quot; Background=&quot;#FFE44D26&quot; Margin=&quot;5,0,0,0&quot;/&gt;
+        &lt;TextBox x:Name=&quot;SoapToDoTextBox&quot; Width=&quot;200&quot; Text=&quot;Enter your To-Do here&quot;/&gt;
+        &lt;Button Content=&quot;Create&quot; Click=&quot;ButtonAddSoapToDo_Click&quot; Margin=&quot;5,0,0,0&quot;/&gt;
     &lt;/StackPanel&gt;
-    &lt;TextBlock Text=&quot;LIST OF TODO's:&quot; Margin=&quot;0,20,0,0&quot; Foreground=&quot;Black&quot; HorizontalAlignment=&quot;Left&quot;/&gt;
+    &lt;TextBlock Text=&quot;LIST OF TODO's:&quot; Margin=&quot;0,20,0,0&quot; HorizontalAlignment=&quot;Left&quot;/&gt;
     &lt;ItemsControl x:Name=&quot;SoapToDosItemsControl&quot; HorizontalAlignment=&quot;Left&quot;&gt;
         &lt;ItemsControl.ItemTemplate&gt;
             &lt;DataTemplate&gt;
                 &lt;StackPanel Orientation=&quot;Horizontal&quot; HorizontalAlignment=&quot;Left&quot;&gt;
-                    &lt;TextBlock Text=&quot;{Binding Description}&quot; Foreground=&quot;Black&quot;/&gt;
-                    &lt;Button Content=&quot;Delete&quot; Click=&quot;ButtonDeleteSoapToDo_Click&quot; Foreground=&quot;White&quot; Background=&quot;#FFE44D26&quot; Margin=&quot;5,0,0,0&quot;/&gt;
+                    &lt;TextBlock Text=&quot;{Binding Description}&quot;/&gt;
+                    &lt;Button Content=&quot;Delete&quot; Click=&quot;ButtonDeleteSoapToDo_Click&quot; Margin=&quot;5,0,0,0&quot;/&gt;
                 &lt;/StackPanel&gt;
             &lt;/DataTemplate&gt;
         &lt;/ItemsControl.ItemTemplate&gt;
     &lt;/ItemsControl&gt;
-    &lt;Button Content=&quot;Refresh the list&quot; Foreground=&quot;White&quot; Background=&quot;#FFE44D26&quot; Click=&quot;ButtonRefreshSoapToDos_Click&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;0,10,0,0&quot;/&gt;
+    &lt;Button Content=&quot;Refresh the list&quot; Click=&quot;ButtonRefreshSoapToDos_Click&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;0,10,0,0&quot;/&gt;
 &lt;/StackPanel&gt;
 </code></pre>
 <ol start="10">
 <li>Add the following code to MainPage.xaml.cs (IMPORTANT: be sure to <em>replace the URL in orange</em> with the correct one - ie. use the same URL as above):</li>
 </ol>
 <pre><code>ServiceReference1.Service1Client _soapClient =
-        new ServiceReference1.Service1Client(
-            new System.ServiceModel.BasicHttpBinding(),
-            new System.ServiceModel.EndpointAddress(
-                new Uri(&quot;http://localhost:4598/Service1.svc&quot;)));
+    new ServiceReference1.Service1Client(
+        new CustomBinding(),
+        new System.ServiceModel.EndpointAddress(
+            new Uri(&quot;http://localhost:65264/Service1.svc&quot;)));
+
+private async Task GetTodosAsync()
+{
+    var todos = await _soapClient.GetToDosAsync();
+    SoapToDosItemsControl.ItemsSource = todos;
+}
+
+private async Task AddOrUpdateTodosAsync(ServiceReference1.ToDoItem todo)
+{
+    await _soapClient.AddOrUpdateToDoAsync(todo);
+    await GetTodosAsync();
+}
+
+private async Task DeleteAsync(ServiceReference1.ToDoItem todo)
+{
+    try
+    {
+        await _soapClient.DeleteToDoAsync(todo);
+        await GetTodosAsync();
+    }
+    catch (System.ServiceModel.FaultException ex)
+    {
+        // Fault exceptions allow the server to pass information such as &quot;Item not found&quot;:
+        System.Windows.MessageBox.Show(ex.Message);
+    }
+}
 
 void ButtonRefreshSoapToDos_Click(object sender, RoutedEventArgs e)
 {
-    var todos = _soapClient.GetToDos();
-    SoapToDosItemsControl.ItemsSource = todos;
+    _ = GetTodosAsync();
 }
 
 void ButtonAddSoapToDo_Click(object sender, RoutedEventArgs e)
@@ -400,28 +425,23 @@ void ButtonAddSoapToDo_Click(object sender, RoutedEventArgs e)
         Description = SoapToDoTextBox.Text,
         Id = Guid.NewGuid()
     };
-    _soapClient.AddOrUpdateToDo(todo);
-    ButtonRefreshSoapToDos_Click(sender, e);
+    _ = AddOrUpdateTodosAsync(todo);
 }
 
 void ButtonDeleteSoapToDo_Click(object sender, RoutedEventArgs e)
 {
-    try
-    {
-        var todo = (ServiceReference1.ToDoItem)((Button)sender).DataContext;
-        _soapClient.DeleteToDo(todo);
-        ButtonRefreshSoapToDos_Click(sender, e);
-    }
-    catch (System.ServiceModel.FaultException ex)
-    {
-        // Fault exceptions allow the server to pass information such as &quot;Item not found&quot;:
-        System.Windows.MessageBox.Show(ex.Message);
-    }
+    var todo = (ServiceReference1.ToDoItem)((Button)sender).DataContext;
+    _ = DeleteAsync(todo);
 }
 </code></pre>
 <ol start="11">
 <li>Launch the project to test your client/server To-Do items application.</li>
 </ol>
+<p>There are working examples for both of these projects:</p>
+<ul>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/WcfService1">WcfService1</a></li>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverWcfConsumer">OpenSilverWcfConsumer</a></li>
+</ul>
 <h2 id="tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api">Tutorial to easily create a REST-based client/server app in OpenSilver (Wep API)</h2>
 <p>In this tutorial we are going to create a simple client/server application for managing To-Do items. If you have any feedback regarding this tutorial, please send us an email to contact@opensilver.net</p>
 <ol>
