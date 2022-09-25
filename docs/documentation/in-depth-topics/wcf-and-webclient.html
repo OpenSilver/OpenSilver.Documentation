@@ -147,8 +147,10 @@
 <h2 id="sample-application">Sample application</h2>
 <p>You can download sample applications from the <a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples">examples</a> folder:</p>
 <ul>
-<li>WcfService1. This is a sample for a server-side WCF project.</li>
-<li>OpenSilverWcfConsumer. This is a sample OpenSilver application, which interacts with the server-side project via WCF services.</li>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/WcfService1">WcfService1</a>. This is a sample for a server-side WCF project.</li>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverWcfConsumer">OpenSilverWcfConsumer</a>. This is a sample OpenSilver application, which interacts with the server-side project via WCF services.</li>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/ToDoWebApi">ToDoWebApi</a>. This is a sample for a server-side WebApi project.</li>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverRestConsumer">OpenSilverRestConsumer</a>. This is a sample OpenSilver application, which interacts with the server-side project via REST calls.</li>
 </ul>
 <p>Sample shows a basic To-Do management application.</p>
 <h2 id="limitations-of-the-add-service-reference-support-soap">Limitations of the &quot;Add Service Reference&quot; support (SOAP)</h2>
@@ -445,38 +447,51 @@ void ButtonDeleteSoapToDo_Click(object sender, RoutedEventArgs e)
 <h2 id="tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api">Tutorial to easily create a REST-based client/server app in OpenSilver (Wep API)</h2>
 <p>In this tutorial we are going to create a simple client/server application for managing To-Do items. If you have any feedback regarding this tutorial, please send us an email to contact@opensilver.net</p>
 <ol>
-<li>Create a new project of type <em>&quot;Web -&gt; ASP.NET MVC 4 Web Application&quot;</em> (or newer). Let's call it &quot;MvcApplication1&quot;.</li>
+<li><p>Create a new project of type <em>&quot;ASP.NET Core Web API&quot;</em>. Let's call it &quot;ToDoWebApi&quot;.</p>
+</li>
+<li><p>Modify <em>Program.cs</em> to add the following code:</p>
+</li>
 </ol>
-<p>When you click OK, a second dialog appears that lets you choose a Project Template. Be sure to select the <em>&quot;Web API&quot;</em> project template. Makes sure the option &quot;Create a unit test project&quot; is NOT checked, and click OK.</p>
-<ol start="2">
-<li>Modify <em>Web.Config</em> to add the following code (note: you need to add the code to the right section of Web.Config):</li>
-</ol>
-<pre><code>&lt;configuration&gt;
-  &lt;system.webServer&gt;
+<pre><code>var builder = WebApplication.CreateBuilder(args);
 
-    &lt;httpProtocol&gt;
-      &lt;customHeaders&gt;
-        &lt;add name=&quot;Access-Control-Allow-Origin&quot; value=&quot;*&quot; /&gt;
-        &lt;add name=&quot;Access-Control-Allow-Headers&quot; value=&quot;Content-Type, Content-Length&quot; /&gt;
-        &lt;add name=&quot;Access-Control-Allow-Methods&quot; value=&quot;POST,PUT,GET,DELETE,OPTIONS&quot; /&gt;
-      &lt;/customHeaders&gt;
-    &lt;/httpProtocol&gt;
+// Add services to the container.
 
-  &lt;/system.webServer&gt;
-&lt;/configuration&gt;
+builder.Services.AddControllers();
+
+const string corsApp = &quot;corsapp&quot;;
+//services cors
+builder.Services.AddCors(p =&gt; p.AddPolicy(corsApp, b =&gt;
+{
+    //You need to replace URL of a client app later
+    b.WithOrigins(&quot;http://localhost:55591/&quot;).AllowAnyMethod().AllowAnyHeader();
+}));
+
+var app = builder.Build();
+
+//app cors
+app.UseCors(corsApp);
+
+// Configure the HTTP request pipeline.
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
 </code></pre>
 <ol start="3">
 <li>Create a new class called <em>&quot;ToDoItem.cs&quot;</em> inside the folder named <em>&quot;Models&quot;</em>. Copy/paste the following code:</li>
 </ol>
-<pre><code>using System;
-
-namespace MvcApplication1.Models
+<pre><code>namespace ToDoWebApi.Models
 {
     public class ToDoItem
     {
         public Guid Id { get; set; }
         public Guid OwnerId { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }
 </code></pre>
@@ -484,82 +499,69 @@ namespace MvcApplication1.Models
 <li>Right-click the folder &quot;Controllers&quot; and click &quot;Add -&gt; Controller...&quot;. Enter the name <em>&quot;ToDoController&quot;</em> and choose &quot;Empty MVC Controller&quot; in the &quot;Template&quot; drop-down. Then click OK.
 Note: the name of the controller is very important because it will have a direct impact on the URL of your REST web service.</li>
 </ol>
-<pre><code>using MvcApplication1.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+<pre><code>using Microsoft.AspNetCore.Mvc;
+using ToDoWebApi.Models;
 
-namespace MvcApplication1.Controllers
+namespace ToDoWebApi.Controllers
 {
-    public class ToDoController : ApiController
+    [ApiController]
+    [Route(&quot;[controller]&quot;)]
+    public class ToDoController : ControllerBase
     {
-        private static Dictionary&lt;Guid, ToDoItem&gt; _todos = new Dictionary&lt;Guid, ToDoItem&gt;();
+        private static readonly Dictionary&lt;Guid, ToDoItem&gt; ToDos = new();
 
         // GET api/ToDo
+        [HttpGet]
         public IEnumerable&lt;ToDoItem&gt; GetToDos()
         {
-            return _todos.Values.ToList();
+            return ToDos.Values.ToList();
         }
 
         // GET api/ToDo/5
-        public ToDoItem GetToDo(Guid id)
+        [HttpGet(&quot;{id}&quot;)]
+        public ActionResult GetToDo(Guid id)
         {
-            if (_todos.ContainsKey(id))
-                return _todos[id];
-            else
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
-                    {
-                        Content = new StringContent(&quot;ID not found: &quot; + id),
-                        ReasonPhrase = &quot;ID not found&quot;
-                    });
-        }
+            if (ToDos.ContainsKey(id))
+            {
+                return Ok(ToDos[id]);
+            }
 
-        // OPTIONS
-        public HttpResponseMessage Options()
-        {
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return NotFound(&quot;ID not found: &quot; + id);
         }
 
         // PUT api/Todo/5
-        public HttpResponseMessage PutToDoItem(Guid id, ToDoItem toDoItem)
+        [HttpPut(&quot;{id}&quot;)]
+        public ActionResult PutToDoItem(Guid id, ToDoItem toDoItem)
         {
             if (id != toDoItem.Id)
-                return new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent(&quot;The ID must be the same as the ID of the todo.&quot;),
-                    ReasonPhrase = &quot;The ID must be the same as the ID of the todo&quot;
-                };
+            {
+                return BadRequest(&quot;The ID must be the same as the ID of the todo&quot;);
+            }
 
-            _todos[toDoItem.Id] = toDoItem;
-            return Request.CreateResponse(HttpStatusCode.OK);
+            ToDos[toDoItem.Id] = toDoItem;
+            return Ok();
         }
 
         // POST api/Todo
-        public HttpResponseMessage PostToDoItem(ToDoItem toDoItem)
+        [HttpPost]
+        public ActionResult PostToDoItem(ToDoItem toDoItem)
         {
-            _todos[toDoItem.Id] = toDoItem;
+            ToDos[toDoItem.Id] = toDoItem;
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
         }
 
         // DELETE api/Todo/5
-        public HttpResponseMessage DeleteToDoItem(Guid id)
+        [HttpDelete(&quot;{id}&quot;)]
+        public ActionResult DeleteToDoItem(Guid id)
         {
-            if (_todos.ContainsKey(id))
+            if (!ToDos.ContainsKey(id))
             {
-                var toDoItem = _todos[id];
-                _todos.Remove(id);
-                return Request.CreateResponse(HttpStatusCode.OK, toDoItem);
+                return NotFound(&quot;ID not found: &quot; + id);
             }
-            else
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.NotFound)
-                    {
-                        Content = new StringContent(&quot;ID not found: &quot; + id),
-                        ReasonPhrase = &quot;ID not found&quot;
-                    });
+
+            ToDos.Remove(id);
+            return Ok();
         }
     }
 }
@@ -575,57 +577,81 @@ Keep the project running.</p>
 </li>
 </ol>
 <pre><code>&lt;StackPanel&gt;
-    &lt;TextBlock Text=&quot;CREATE A NEW TO-DO:&quot; Margin=&quot;0,20,0,0&quot; Foreground=&quot;Black&quot; HorizontalAlignment=&quot;Left&quot;/&gt;
+    &lt;TextBlock Text=&quot;CREATE A NEW TO-DO:&quot; Margin=&quot;0,20,0,0&quot; HorizontalAlignment=&quot;Left&quot;/&gt;
     &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0,10,0,0&quot;&gt;
-        &lt;TextBox x:Name=&quot;RestToDoTextBox&quot; Width=&quot;200&quot; Text=&quot;Enter your To-Do here&quot; Foreground=&quot;Black&quot; Background=&quot;#FFEEEEEE&quot;/&gt;
-        &lt;Button Content=&quot;Create&quot; Click=&quot;ButtonAddRestToDo_Click&quot; Foreground=&quot;White&quot; Background=&quot;#FFE44D26&quot; Margin=&quot;5,0,0,0&quot;/&gt;
+        &lt;TextBox x:Name=&quot;RestToDoTextBox&quot; Width=&quot;200&quot; Text=&quot;Enter your To-Do here&quot;/&gt;
+        &lt;Button Content=&quot;Create&quot; Click=&quot;ButtonAddRestToDo_Click&quot; Margin=&quot;5,0,0,0&quot;/&gt;
     &lt;/StackPanel&gt;
     &lt;TextBlock Text=&quot;LIST OF TODO's:&quot; Margin=&quot;0,20,0,0&quot; Foreground=&quot;Black&quot; HorizontalAlignment=&quot;Left&quot;/&gt;
     &lt;ItemsControl x:Name=&quot;RestToDosItemsControl&quot; HorizontalAlignment=&quot;Left&quot;&gt;
         &lt;ItemsControl.ItemTemplate&gt;
             &lt;DataTemplate&gt;
                 &lt;StackPanel Orientation=&quot;Horizontal&quot; HorizontalAlignment=&quot;Left&quot;&gt;
-                    &lt;TextBlock Text=&quot;{Binding Description}&quot; Foreground=&quot;Black&quot;/&gt;
-                    &lt;Button Content=&quot;Delete&quot; Click=&quot;ButtonDeleteRestToDo_Click&quot; Foreground=&quot;White&quot; Background=&quot;#FFE44D26&quot; Margin=&quot;5,0,0,0&quot;/&gt;
+                    &lt;TextBlock Text=&quot;{Binding Description}&quot;/&gt;
+                    &lt;Button Content=&quot;Delete&quot; Click=&quot;ButtonDeleteRestToDo_Click&quot; Margin=&quot;5,0,0,0&quot;/&gt;
                 &lt;/StackPanel&gt;
             &lt;/DataTemplate&gt;
         &lt;/ItemsControl.ItemTemplate&gt;
     &lt;/ItemsControl&gt;
-    &lt;Button Content=&quot;Refresh the list&quot; Foreground=&quot;White&quot; Background=&quot;#FFE44D26&quot; Click=&quot;ButtonRefreshRestToDos_Click&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;0,10,0,0&quot;/&gt;
+    &lt;Button Content=&quot;Refresh the list&quot; Click=&quot;ButtonRefreshRestToDos_Click&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;0,10,0,0&quot;/&gt;
 &lt;/StackPanel&gt;
 </code></pre>
 <ol start="8">
 <li>Add the following code to MainPage.xaml.cs (<em>IMPORTANT</em>: be sure to <em>replace the URL in orange</em> with the correct one - ie. use the same URL as above):</li>
 </ol>
-<pre><code>const string BaseUrl = &quot;http://localhost:4858&quot;;
+<pre><code>const string BaseUrl = &quot;https://localhost:7037&quot;;
+private static readonly HttpClient Client = new HttpClient();
+
+private async Task DownloadAsync()
+{
+    using (var response = await Client.GetAsync(BaseUrl + &quot;/ToDo&quot;))
+    using (var content = response.Content)
+    {
+        var json = await content.ReadAsStringAsync();
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        var items = JsonSerializer.Deserialize&lt;IEnumerable&lt;ToDoItem&gt;&gt;(json, options).ToList();
+        RestToDosItemsControl.ItemsSource = items;
+    }
+}
+
+private async Task AddAsync(ToDoItem toDoItem)
+{
+    var content = new StringContent(JsonSerializer.Serialize(toDoItem), Encoding.UTF8,
+        &quot;application/json&quot;);
+
+    await Client.PostAsync(BaseUrl + &quot;/ToDo&quot;, content);
+    await DownloadAsync();
+}
+
+private async Task DeleteAsync(ToDoItem toDoItem)
+{
+    await Client.DeleteAsync(BaseUrl + &quot;/ToDo/&quot; + toDoItem.Id);
+    await DownloadAsync();
+}
 
 void ButtonRefreshRestToDos_Click(object sender, RoutedEventArgs e)
 {
-    var webClient = new WebClient();
-    webClient.Encoding = Encoding.UTF8;
-    webClient.Headers[HttpRequestHeader.Accept] = &quot;application/xml&quot;;
-    string response = webClient.DownloadString(BaseUrl + &quot;//api/Todo&quot;);
-    var dataContractSerializer = new DataContractSerializer(typeof(List&lt;ToDoItem&gt;));
-    List&lt;ToDoItem&gt; toDoItems = (List&lt;ToDoItem&gt;)dataContractSerializer.DeserializeFromString(response);
-    RestToDosItemsControl.ItemsSource = toDoItems;
+    _ = DownloadAsync();
 }
 
 void ButtonAddRestToDo_Click(object sender, RoutedEventArgs e)
 {
-    string data = string.Format(@&quot;{{&quot;&quot;Id&quot;&quot;: &quot;&quot;{0}&quot;&quot;,&quot;&quot;Description&quot;&quot;: &quot;&quot;{1}&quot;&quot;}}&quot;, Guid.NewGuid(), RestToDoTextBox.Text.Replace(&quot;\&quot;&quot;, &quot;'&quot;));
-    var webClient = new WebClient();
-    webClient.Headers[HttpRequestHeader.ContentType] = &quot;application/json&quot;;
-    webClient.Encoding = Encoding.UTF8;
-    string response = webClient.UploadString(BaseUrl + &quot;/api/Todo/&quot;, &quot;POST&quot;, data);
-    ButtonRefreshRestToDos_Click(sender, e);
+    var toDoItem = new ToDoItem
+    {
+        Id = Guid.NewGuid(),
+        Description = RestToDoTextBox.Text
+    };
+
+    _ = AddAsync(toDoItem);
 }
 
 void ButtonDeleteRestToDo_Click(object sender, RoutedEventArgs e)
 {
-    ToDoItem todo = (ToDoItem)((Button)sender).DataContext;
-    var webClient = new WebClient();
-    string response = webClient.UploadString(BaseUrl + &quot;/api/Todo/&quot; + todo.Id.ToString(), &quot;DELETE&quot;, &quot;&quot;);
-    ButtonRefreshRestToDos_Click(sender, e);
+    var todo = (ToDoItem)((Button)sender).DataContext;
+    _ = DeleteAsync(todo);
 }
 
 public class ToDoItem
@@ -638,6 +664,12 @@ public class ToDoItem
 <ol start="9">
 <li>Launch the project to test your client/server To-Do items application.</li>
 </ol>
+<p><em>Note:</em> if there are CORS issues in the console, please update URL of the client app in program.cs for the WebApi project.</p>
+<p>There are working examples for both of the described projects:</p>
+<ul>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/ToDoWebApi">ToDoWebApi</a></li>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverRestConsumer">OpenSilverRestConsumer</a></li>
+</ul>
 <h2 id="see-also">See Also</h2>
 <ul>
 <li><a href="accessing-database.html">Accessing a database</a></li>
