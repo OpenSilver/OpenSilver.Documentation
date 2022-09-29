@@ -63,7 +63,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
             </style>
 
             <h1>HTML Example</h1>
-            <p>This is an example of formatted text:&nbsp;
+            <p>This is an example of formatted text:&#160;
                 <strong>Pellentesque habitant morbi tristique</strong> senectus et
                 <em>aenean ultricies mi vitae est</em> netus et
                 <code>commodo vitae</code> , malesuada fames ac turpis egestas.
@@ -89,7 +89,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
                     <input id="name" tabindex="1" name="name" type="text" value="" />
                 </div>
                 <div>
-                    <p>Radio Button Choice:&nbsp;
+                    <p>Radio Button Choice:&#160;
                         <label for="radio-choice-1">Choice 1</label>
                         <input id="radio-choice-1" tabindex="2" name="radio-choice-1" type="radio" value="choice-1" />
                         <label for="radio-choice-2">Choice 2</label>
@@ -102,7 +102,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
                         <option value="Choice 1">Choice 1</option>
                         <option value="Choice 2">Choice 2</option>
                         <option value="Choice 3">Choice 3</option>
-                    </select> &nbsp;
+                    </select> &#160;
                 </div>
                 <div>
                     <label for="checkbox">Checkbox:</label>
@@ -119,11 +119,11 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
                 <tr>
                     <td>tag attributes</td>
                     <td>You can use tag attributes: example-
-                        <em>example&nbsp;</em>
+                        <em>example&#160;</em>
                         <strong>example</strong> -
                         <em>test</em>
                     </td>
-                    <td>&nbsp;</td>
+                    <td>&#160;</td>
                 </tr>
                 <tr>
                     <td>inline styles</td>
@@ -148,8 +148,8 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
                     </td>
                 </tr>
                 <tr>
-                    <td>successive &amp;nbsp;s</td>
-                    <td>Here are some spaces:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end of spaces</td>
+                    <td>successive &amp;#160;s</td>
+                    <td>Here are some spaces:&#160;&#160;&#160;&#160;&#160;&#160;&#160;end of spaces</td>
                     <td>
                         <strong style="font-size: 17px; color: #2b2301;">x</strong>
                     </td>
@@ -168,7 +168,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
                     <td>
                         <a href="http://www.cshtml5.com">This is</a> an example of link.
                     </td>
-                    <td>&nbsp;</td>
+                    <td>&#160;</td>
                 </tr>
                 <tr>
                     <td>comments</td>
@@ -182,7 +182,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
                 <tr>
                     <td>Encoding special characters</td>
                     <td>
-                        <span style="color: red; font-size: 17px;">&hearts;</span>
+                        <span style="color: red; font-size: 17px;">&#9829;</span>
                         <strong style="font-size: 20px;">? ?</strong> &gt;&lt;
                     </td>
                     <td>
@@ -214,6 +214,7 @@ Here is a screenshot of the result:
 using CSHTML5;
 using CSHTML5.Native.Html.Controls;
 using System;
+using System.Windows;
 
 namespace TestNumericTextBox
 {
@@ -252,7 +253,7 @@ namespace TestNumericTextBox
             }
         }
 
-        void NumericTextBox_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        void NumericTextBox_Loaded(object sender, RoutedEventArgs e)
         {
             // Here, the control has been added to the visual tree, so the DOM element exists. We set the initial value:
             Interop.ExecuteJavaScript("$0.value = $1", this.DomElement, _value);
