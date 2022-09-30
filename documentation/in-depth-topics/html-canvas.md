@@ -105,7 +105,7 @@ Example in XAML:
 ```
 <native:HtmlCanvas Width="100" Height="100" xmlns:native="using:CSHTML5.Native.Html.Controls">
      <!-- Place children here -->
-</native:Canvas>
+</native:HtmlCanvas>
 ```
 Example in C#:
 ```
