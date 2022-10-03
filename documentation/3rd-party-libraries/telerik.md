@@ -2,14 +2,14 @@
 
 ## Status
 
-To see a demo app of the current state of the 'Telerik UI for Silverlight' source code recompiled with OpenSilver (work-in-progress), please visit the following URL:
+To see a demo app of the current state of the 'Telerik UI for Silverlight' source code recompiled with OpenSilver, please visit the following URL:
 
-https://opensilvertelerik.azurewebsites.net/?alpha-20-rev-2021-08-04
+https://opensilverdemos.azurewebsites.net/telerikshowcase/release
 
 We are constantly improving OpenSilver until we will reach 100% support for the Silverlight API, so it is expected that the Telerik UI support will improve over time.
 
 ## Instructions
-To use the Telerik UI controls in your own OpenSilver application (work-in-progress), you need:
+To use the Telerik UI controls in your own OpenSilver application, you need:
 1. A valid license from Telerik for 'Telerik UI for Silverlight', which is available at: https://www.telerik.com/purchase/individual/silverlight.aspx
 2. A license for the 'OpenSilver Compatibility Pack for Telerik UI'. To buy it, please contact us at: https://opensilver.net/contact.aspx
 
