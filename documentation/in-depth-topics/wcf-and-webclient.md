@@ -50,9 +50,9 @@ If you see the error *"No 'Access-Control-Allow-Origin' header is present on the
 
 Here are your options:
 
-* Either *host your application on the same domain as your web service*. In this case, CORS won't be required and you won't encounter any cross-domain issues. However this is not practical during development because it requires you to publish your application every time you need to test.
+* Either *host your application on the same domain as your web service(a good choice for the production environment)*. In this case, CORS won't be required and you won't encounter any cross-domain issues. However this is not practical during development because it requires you to publish your application every time you need to test.
 
-* Or *add CORS to your web service (recommended)*. This is the recommended approach but it assumes that you have access to the source code of your web service and you have the rights to modify it and publish it. See below for a tutorial on how to add CORS to your web service.
+* Or *add CORS to your web service (recommended for development environment)*. This is the recommended approach but it assumes that you have access to the source code of your web service and you have the rights to modify it and publish it. See below for a tutorial on how to add CORS to your web service.
 
 * Or *work around the issue by running Chrome without CORS verification*. This is obviously only for development, not for use in production. To do so, open the Windows "Run" dialog (for example by pressing the Windows+R keys combination), and execute the following command:
 ```
@@ -70,7 +70,9 @@ To solve this go to chrome://flags/ and disable **SameSite by default cookies**.
 [Here](https://doc.opensilver.net/documentation/how-to-topics/browser-with-arguments.html) is how to launch OpenSilver project in Browser using custom arguments
 
 
-### To add CORS to your web service (recommended), simply follow these steps:
+### To add CORS to your web service (recommended for development environment), simply follow these steps:
+
+> :warning: Please, read about [CORS and security reasons of using CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
 #### 1) If you are using a SOAP web service:
 
@@ -117,6 +119,8 @@ i) Modify Web.Config to add the following code (note: you need to add the code t
   </system.webServer>
 </configuration>
 ```
+
+Please, replace * by the domain of your OpenSilver application.
 
 ii) Add the following code to each of your Web API controller classes:
 

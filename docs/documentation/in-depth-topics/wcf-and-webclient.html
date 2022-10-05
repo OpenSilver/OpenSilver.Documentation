@@ -172,9 +172,9 @@ We are working to add support for all of the above features as soon as possible.
 <p>If you see the error <em>&quot;No 'Access-Control-Allow-Origin' header is present on the requested resource&quot;</em> in the browser Console window (F12), it is likely that CORS has not been properly configured.</p>
 <p>Here are your options:</p>
 <ul>
-<li><p>Either <em>host your application on the same domain as your web service</em>. In this case, CORS won't be required and you won't encounter any cross-domain issues. However this is not practical during development because it requires you to publish your application every time you need to test.</p>
+<li><p>Either <em>host your application on the same domain as your web service(a good choice for the production environment)</em>. In this case, CORS won't be required and you won't encounter any cross-domain issues. However this is not practical during development because it requires you to publish your application every time you need to test.</p>
 </li>
-<li><p>Or <em>add CORS to your web service (recommended)</em>. This is the recommended approach but it assumes that you have access to the source code of your web service and you have the rights to modify it and publish it. See below for a tutorial on how to add CORS to your web service.</p>
+<li><p>Or <em>add CORS to your web service (recommended for development environment)</em>. This is the recommended approach but it assumes that you have access to the source code of your web service and you have the rights to modify it and publish it. See below for a tutorial on how to add CORS to your web service.</p>
 </li>
 <li><p>Or <em>work around the issue by running Chrome without CORS verification</em>. This is obviously only for development, not for use in production. To do so, open the Windows &quot;Run&quot; dialog (for example by pressing the Windows+R keys combination), and execute the following command:</p>
 </li>
@@ -189,7 +189,10 @@ We are working to add support for all of the above features as soon as possible.
 </code></pre>
 <p>To solve this go to chrome://flags/ and disable <strong>SameSite by default cookies</strong>. But the option might be removed from latest versions of browsers.</p>
 <p><a href="https://doc.opensilver.net/documentation/how-to-topics/browser-with-arguments.html">Here</a> is how to launch OpenSilver project in Browser using custom arguments</p>
-<h3 id="to-add-cors-to-your-web-service-recommended-simply-follow-these-steps">To add CORS to your web service (recommended), simply follow these steps:</h3>
+<h3 id="to-add-cors-to-your-web-service-recommended-for-development-environment-simply-follow-these-steps">To add CORS to your web service (recommended for development environment), simply follow these steps:</h3>
+<blockquote>
+<p>⚠️ Please, read about <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS and security reasons of using CORS</a></p>
+</blockquote>
 <h4 id="1-if-you-are-using-a-soap-web-service">1) If you are using a SOAP web service:</h4>
 <p>i) Make sure you have the file <em>&quot;Global.asax.cs&quot;</em> in your server-side SOAP web service project. If you don't have that file, right-click the project name in the Solution Explorer, and click &quot;Add&quot; -&gt; &quot;Global Application Class&quot;.</p>
 <p>ii) Add the following code to the said file:</p>
@@ -229,6 +232,7 @@ The star wildcard is not sufficcient in this case and the preflight request WILL
   &lt;/system.webServer&gt;
 &lt;/configuration&gt;
 </code></pre>
+<p>Please, replace * by the domain of your OpenSilver application.</p>
 <p>ii) Add the following code to each of your Web API controller classes:</p>
 <pre><code>// OPTIONS
 public HttpResponseMessage Options()
