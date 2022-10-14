@@ -69,7 +69,7 @@ Here is an example that shows how to manually change the background color of the
         object correspondingDiv = Interop.GetDiv(xamlDataGrid);
 
         // We change the background color via CSS:
-        Interop.ExecuteJavaScript("$0.style.backgroundColor = ‘red’ ", correspondingDiv);
+        Interop.ExecuteJavaScript("$0.style.backgroundColor = 'red' ", correspondingDiv);
     };
 ```
 
