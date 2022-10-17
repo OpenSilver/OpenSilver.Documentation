@@ -32,7 +32,7 @@ void Main()
         // This is JavaScript code
         alert('Hello from JavaScript');
 
-        // Let's call the C# method "MyCSharpMethod" from this JavaScript code. Due to the fact that it is passed as the first parameter to this ExecuteJavaScript call, we can access it with $0:
+        // Let's call the C# method 'MyCSharpMethod' from this JavaScript code. Due to the fact that it is passed as the first parameter to this ExecuteJavaScript call, we can access it with $0:
         $0();
 
     ", (Action)MyCSharpMethod);
@@ -57,7 +57,7 @@ You can then load them by calling ["Interop.LoadJavaScriptFile()"](#await-intero
 
 ## "I have a JavaScript library that needs &lt;div&gt; or another DOM element in order to render stuff. How can I obtain it?"
 
-You can use the method [CHSTML5.Interop.GetDiv(FrameworkElement)](#interopgetdivframeworkelement-fe) in order to get the DIV associated to a XAML element. For this method to succeed, the XAML element must be in the Visual Tree. To ensure that it is in the Visual Tree, you can read the IsLoaded property, or you can place your code in the "Loaded" event handler. This approach works best with simple XAML elements, such as Border or Canvas.
+You can use the method [CSHTML5.Interop.GetDiv(FrameworkElement)](#interopgetdivframeworkelement-fe) in order to get the DIV associated to a XAML element. For this method to succeed, the XAML element must be in the Visual Tree. To ensure that it is in the Visual Tree, you can read the IsLoaded property, or you can place your code in the "Loaded" event handler. This approach works best with simple XAML elements, such as Border or Canvas.
 
 Alternatively, you can use the [HtmlPresenter control](html-presenter.md)  to put arbitrary HTML/CSS code in your XAML, and then read the ".DomElement" property of the HtmlPresenter control to get a reference to the instantiated DOM element in order to pass it to the JavaScript library.
 
@@ -154,7 +154,7 @@ void Main()
         // This is JavaScript code
         alert('Hello from JavaScript');
 
-        // Let's call the C# method "MyCSharpMethod" from this JavaScript code. Due to the fact that it is passed as the first parameter to this ExecuteJavaScript call, we can access it with $0:
+        // Let's call the C# method 'MyCSharpMethod' from this JavaScript code. Due to the fact that it is passed as the first parameter to this ExecuteJavaScript call, we can access it with $0:
         $0();
 
     ", (Action)MyCSharpMethod);
