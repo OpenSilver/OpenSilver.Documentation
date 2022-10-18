@@ -17,11 +17,11 @@ To run the original Silverlight application you will likely need the following s
 
 - [Visual Studio 2015](https://visualstudio.microsoft.com/vs/older-downloads/) (or [here](https://stackoverflow.com/questions/44290672/how-to-download-visual-studio-community-edition-2015-not-2017)). This is the most recent version of Visual Studio that officially supported Silverlight.
 
-- [Silverlight 5 SDK](https://web.archive.org/web/20190126163602if_/http://download.microsoft.com/download/3/A/3/3A35179D-5C87-4D0A-91EB-BF5FEDC601A4/sdk/silverlight_sdk.exe)
+- Silverlight 5 SDK
 
-- [Silverlight 5 Toolkit (Dec 2011 release)](https://github.com/microsoftarchive/SilverlightToolkit/releases)
+- Silverlight 5 Toolkit (Dec 2011 release)
 
-- [Silverlight 5 Developer Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=29715) for Windows (64 bit). Note: to download it, choose "**Silverlight_Developer_x64.exe**" from the popup that appears when following the link above and clicking 'Download'.
+- Silverlight 5 Developer Runtime for Windows (64 bit).
 
 It is recommended that the Silverlight development environment is tested by attempting to create a new Silverlight application and by verifying that step-by-step debugging works properly. If it doesn't please make sure that the above components have been installed successfully and also make sure that the **Silverlight** option is checked under the **Debuggers** section of the **.Web** project properties.
 
@@ -33,7 +33,7 @@ It is recommended that the Silverlight development environment is tested by atte
 
 Depending on the libraries that the Silverlight application is using, you may also need the following components:
 
-- [RIA Services V1.0 SP2](https://rapidshare.io/Ecr/RiaServices.msi). This is required only if the Silverlight application uses WCF RIA Services.
+- RIA Services V1.0 SP2. This is required only if the Silverlight application uses WCF RIA Services.
 
 - Other 3rd party components (Telerik, DevExpress, Syncfusion, ComponentOne...) 
 
