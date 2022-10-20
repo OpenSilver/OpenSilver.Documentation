@@ -10,12 +10,14 @@ items:
   - System.Windows.Controls.TimeUpDown.CultureProperty
   - System.Windows.Controls.TimeUpDown.Format
   - System.Windows.Controls.TimeUpDown.FormatProperty
+  - System.Windows.Controls.TimeUpDown.GetValue
   - System.Windows.Controls.TimeUpDown.Maximum
   - System.Windows.Controls.TimeUpDown.MaximumProperty
   - System.Windows.Controls.TimeUpDown.Minimum
   - System.Windows.Controls.TimeUpDown.MinimumProperty
-  - System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
-  - System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
+  - System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
+  - System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
+  - System.Windows.Controls.TimeUpDown.SetValue(System.Object)
   - System.Windows.Controls.TimeUpDown.TimeGlobalizationInfo
   - System.Windows.Controls.TimeUpDown.TimeGlobalizationInfoProperty
   - System.Windows.Controls.TimeUpDown.TimeParsers
@@ -28,8 +30,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TimeUpDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 27
   assemblies:
   - OpenSilver
@@ -37,11 +43,16 @@ items:
   summary: "\nRepresents a control that uses a spinner and textbox to allow a user to\ninput time.\n"
   example: []
   syntax:
-    content: 'public class TimeUpDown : UpDownBase, IUpdateVisualState'
+    content: >-
+      [NotImplemented]
+
+      public class TimeUpDown : UpDownBase
     content.vb: >-
+      <NotImplemented>
+
       Public Class TimeUpDown
+
           Inherits UpDownBase
-          Implements IUpdateVisualState
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
@@ -52,6 +63,7 @@ items:
   inheritedMembers:
   - System.Windows.Controls.UpDownBase.SpinnerStyle
   - System.Windows.Controls.UpDownBase.SpinnerStyleProperty
+  - System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
   - System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
   - System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
   - System.Windows.Controls.Control.ManageIsEnabled(System.Boolean)
@@ -91,13 +103,12 @@ items:
   - System.Windows.Controls.Control.UseSystemFocusVisuals
   - System.Windows.Controls.Control.OnApplyTemplate
   - System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
-  - System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  - System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  - System.Windows.Controls.Control.CharacterSpacingProperty
+  - System.Windows.Controls.Control.CharacterSpacing
   - System.Windows.Controls.Control.TabNavigationProperty
   - System.Windows.Controls.Control.TabNavigation
   - System.Windows.Controls.Control.FontStretchProperty
   - System.Windows.Controls.Control.FontStretch
-  - System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
@@ -122,10 +133,9 @@ items:
   - System.Windows.FrameworkElement.DataContext
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
+  - System.Windows.FrameworkElement.Triggers
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.OnLayoutUpdated
-  - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
@@ -138,15 +148,18 @@ items:
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
   - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
-  - System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  - System.Windows.FrameworkElement.UnregisterName(System.String)
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
   - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.CustomLayout
   - System.Windows.FrameworkElement.CustomLayoutProperty
   - System.Windows.FrameworkElement.Height
@@ -169,6 +182,9 @@ items:
   - System.Windows.FrameworkElement.MaxWidthProperty
   - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.SizeChanged
   - System.Windows.FrameworkElement.ContextMenu
   - System.Windows.FrameworkElement.ContextMenuProperty
@@ -176,20 +192,21 @@ items:
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -204,7 +221,6 @@ items:
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
   - System.Windows.UIElement.IsVisible
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -225,6 +241,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -233,6 +251,10 @@ items:
   - System.Windows.UIElement.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
+  - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -242,12 +264,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -270,8 +291,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -287,6 +306,14 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
@@ -299,7 +326,11 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - class
@@ -318,8 +349,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.Minimum
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Minimum
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 50
   assemblies:
   - OpenSilver
@@ -333,12 +368,22 @@ items:
     and programmatically specifying a value.
   example: []
   syntax:
-    content: public DateTime? Minimum { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public DateTime? Minimum { get; set; }
     parameters: []
     return:
-      type: System.Nullable{DateTime}
-    content.vb: Public Property Minimum As DateTime?
+      type: System.Nullable{System.DateTime}
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Minimum As Date?
   overload: System.Windows.Controls.TimeUpDown.Minimum*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -357,8 +402,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.MinimumProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MinimumProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 61
   assemblies:
   - OpenSilver
@@ -366,10 +415,20 @@ items:
   summary: "\nIdentifies the Minimum dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty MinimumProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty MinimumProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly MinimumProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly MinimumProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -378,20 +437,24 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
-  commentId: M:System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
-  id: OnMinimumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
+- uid: System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
+  commentId: M:System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
+  id: OnMinimumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
   parent: System.Windows.Controls.TimeUpDown
   langs:
   - csharp
   - vb
   name: OnMinimumChanged(Nullable<DateTime>, Nullable<DateTime>)
   nameWithType: TimeUpDown.OnMinimumChanged(Nullable<DateTime>, Nullable<DateTime>)
-  fullName: System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable<DateTime>, System.Nullable<DateTime>)
+  fullName: System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable<System.DateTime>, System.Nullable<System.DateTime>)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMinimumChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 83
   assemblies:
   - OpenSilver
@@ -399,16 +462,26 @@ items:
   summary: "\nCalled when the Minimum property value has changed.\n"
   example: []
   syntax:
-    content: protected virtual void OnMinimumChanged(DateTime? oldValue, DateTime? newValue)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnMinimumChanged(DateTime? oldValue, DateTime? newValue)
     parameters:
     - id: oldValue
-      type: System.Nullable{DateTime}
+      type: System.Nullable{System.DateTime}
       description: Old value of the Minimum property.
     - id: newValue
-      type: System.Nullable{DateTime}
+      type: System.Nullable{System.DateTime}
       description: New value of the Minimum property.
-    content.vb: Protected Overridable Sub OnMinimumChanged(oldValue As DateTime?, newValue As DateTime?)
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnMinimumChanged(oldValue As Date?, newValue As Date?)
   overload: System.Windows.Controls.TimeUpDown.OnMinimumChanged*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   nameWithType.vb: TimeUpDown.OnMinimumChanged(Nullable(Of DateTime), Nullable(Of DateTime))
   modifiers.csharp:
   - protected
@@ -416,7 +489,7 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-  fullName.vb: System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable(Of DateTime), System.Nullable(Of DateTime))
+  fullName.vb: System.Windows.Controls.TimeUpDown.OnMinimumChanged(System.Nullable(Of System.DateTime), System.Nullable(Of System.DateTime))
   name.vb: OnMinimumChanged(Nullable(Of DateTime), Nullable(Of DateTime))
 - uid: System.Windows.Controls.TimeUpDown.Maximum
   commentId: P:System.Windows.Controls.TimeUpDown.Maximum
@@ -430,8 +503,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.Maximum
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Maximum
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 96
   assemblies:
   - OpenSilver
@@ -440,12 +517,22 @@ items:
   remarks: "Setting the Maximum property is applicable for the following\nfeatures: Parsing a new value from the textbox, spinning a new value\nand programmatically specifying a value. "
   example: []
   syntax:
-    content: public DateTime? Maximum { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public DateTime? Maximum { get; set; }
     parameters: []
     return:
-      type: System.Nullable{DateTime}
-    content.vb: Public Property Maximum As DateTime?
+      type: System.Nullable{System.DateTime}
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Maximum As Date?
   overload: System.Windows.Controls.TimeUpDown.Maximum*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -464,8 +551,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.MaximumProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MaximumProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 107
   assemblies:
   - OpenSilver
@@ -473,10 +564,20 @@ items:
   summary: "\nIdentifies the Maximum dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty MaximumProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty MaximumProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly MaximumProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly MaximumProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -485,20 +586,24 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
-  commentId: M:System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
-  id: OnMaximumChanged(System.Nullable{DateTime},System.Nullable{DateTime})
+- uid: System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
+  commentId: M:System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
+  id: OnMaximumChanged(System.Nullable{System.DateTime},System.Nullable{System.DateTime})
   parent: System.Windows.Controls.TimeUpDown
   langs:
   - csharp
   - vb
   name: OnMaximumChanged(Nullable<DateTime>, Nullable<DateTime>)
   nameWithType: TimeUpDown.OnMaximumChanged(Nullable<DateTime>, Nullable<DateTime>)
-  fullName: System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable<DateTime>, System.Nullable<DateTime>)
+  fullName: System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable<System.DateTime>, System.Nullable<System.DateTime>)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMaximumChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 129
   assemblies:
   - OpenSilver
@@ -506,16 +611,26 @@ items:
   summary: "\nCalled when the Maximum property value has changed.\n"
   example: []
   syntax:
-    content: protected virtual void OnMaximumChanged(DateTime? oldValue, DateTime? newValue)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnMaximumChanged(DateTime? oldValue, DateTime? newValue)
     parameters:
     - id: oldValue
-      type: System.Nullable{DateTime}
+      type: System.Nullable{System.DateTime}
       description: Old value of the Maximum property.
     - id: newValue
-      type: System.Nullable{DateTime}
+      type: System.Nullable{System.DateTime}
       description: New value of the Maximum property.
-    content.vb: Protected Overridable Sub OnMaximumChanged(oldValue As DateTime?, newValue As DateTime?)
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnMaximumChanged(oldValue As Date?, newValue As Date?)
   overload: System.Windows.Controls.TimeUpDown.OnMaximumChanged*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   nameWithType.vb: TimeUpDown.OnMaximumChanged(Nullable(Of DateTime), Nullable(Of DateTime))
   modifiers.csharp:
   - protected
@@ -523,7 +638,7 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-  fullName.vb: System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable(Of DateTime), System.Nullable(Of DateTime))
+  fullName.vb: System.Windows.Controls.TimeUpDown.OnMaximumChanged(System.Nullable(Of System.DateTime), System.Nullable(Of System.DateTime))
   name.vb: OnMaximumChanged(Nullable(Of DateTime), Nullable(Of DateTime))
 - uid: System.Windows.Controls.TimeUpDown.TimeParsers
   commentId: P:System.Windows.Controls.TimeUpDown.TimeParsers
@@ -537,8 +652,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.TimeParsers
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TimeParsers
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 140
   assemblies:
   - OpenSilver
@@ -546,12 +665,22 @@ items:
   summary: "\nGets or sets a collection of TimeParsers that are used when parsing\ntext to time.\n"
   example: []
   syntax:
-    content: public TimeParserCollection TimeParsers { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public TimeParserCollection TimeParsers { get; set; }
     parameters: []
     return:
       type: System.Windows.Controls.TimeParserCollection
-    content.vb: Public Property TimeParsers As TimeParserCollection
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property TimeParsers As TimeParserCollection
   overload: System.Windows.Controls.TimeUpDown.TimeParsers*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -570,8 +699,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.TimeParsersProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TimeParsersProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 151
   assemblies:
   - OpenSilver
@@ -579,10 +712,20 @@ items:
   summary: "\nIdentifies the TimeParsers dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty TimeParsersProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty TimeParsersProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly TimeParsersProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly TimeParsersProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -603,8 +746,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.Format
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Format
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 175
   assemblies:
   - OpenSilver
@@ -612,12 +759,22 @@ items:
   summary: "\nGets or sets the Format used by the control.\nFrom XAML Use either &quot;Short&quot;, &quot;Long&quot; or a custom format.\nCustom formats can only contain &quot;H&quot;, &quot;h&quot;, &quot;m&quot;, &quot;s&quot; or &quot;t&quot;.\nFor example: use &apos;hh:mm:ss&apos; is used to format time as &quot;13:45:30&quot;.\n"
   example: []
   syntax:
-    content: public ITimeFormat Format { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public ITimeFormat Format { get; set; }
     parameters: []
     return:
       type: System.Windows.Controls.ITimeFormat
-    content.vb: Public Property Format As ITimeFormat
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Format As ITimeFormat
   overload: System.Windows.Controls.TimeUpDown.Format*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -636,8 +793,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.FormatProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FormatProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 186
   assemblies:
   - OpenSilver
@@ -645,10 +806,20 @@ items:
   summary: "\nIdentifies the Format dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty FormatProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty FormatProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly FormatProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly FormatProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -669,8 +840,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.Culture
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Culture
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 210
   assemblies:
   - OpenSilver
@@ -678,12 +853,22 @@ items:
   summary: "\nGets or sets the culture that will be used by the control for\nparsing and formatting.\n"
   example: []
   syntax:
-    content: public CultureInfo Culture { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public CultureInfo Culture { get; set; }
     parameters: []
     return:
-      type: CultureInfo
-    content.vb: Public Property Culture As CultureInfo
+      type: System.Globalization.CultureInfo
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Culture As CultureInfo
   overload: System.Windows.Controls.TimeUpDown.Culture*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -702,8 +887,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.CultureProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CultureProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 221
   assemblies:
   - OpenSilver
@@ -711,10 +900,20 @@ items:
   summary: "\nIdentifies the Culture dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty CultureProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty CultureProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly CultureProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly CultureProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -735,8 +934,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.TimeGlobalizationInfo
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TimeGlobalizationInfo
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 245
   assemblies:
   - OpenSilver
@@ -744,12 +947,22 @@ items:
   summary: "\nGets or sets the strategy object that determines how the control\ninteracts with DateTime and CultureInfo.\n"
   example: []
   syntax:
-    content: public TimeGlobalizationInfo TimeGlobalizationInfo { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public TimeGlobalizationInfo TimeGlobalizationInfo { get; set; }
     parameters: []
     return:
       type: System.Windows.Controls.TimeGlobalizationInfo
-    content.vb: Public Property TimeGlobalizationInfo As TimeGlobalizationInfo
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property TimeGlobalizationInfo As TimeGlobalizationInfo
   overload: System.Windows.Controls.TimeUpDown.TimeGlobalizationInfo*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -768,8 +981,12 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.TimeGlobalizationInfoProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TimeGlobalizationInfoProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
     startLine: 256
   assemblies:
   - OpenSilver
@@ -777,10 +994,20 @@ items:
   summary: "\nIdentifies the TimeGlobalizationInfo dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty TimeGlobalizationInfoProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty TimeGlobalizationInfoProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly TimeGlobalizationInfoProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly TimeGlobalizationInfoProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -789,6 +1016,97 @@ items:
   - Public
   - Shared
   - ReadOnly
+- uid: System.Windows.Controls.TimeUpDown.GetValue
+  commentId: M:System.Windows.Controls.TimeUpDown.GetValue
+  id: GetValue
+  parent: System.Windows.Controls.TimeUpDown
+  langs:
+  - csharp
+  - vb
+  name: GetValue()
+  nameWithType: TimeUpDown.GetValue()
+  fullName: System.Windows.Controls.TimeUpDown.GetValue()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GetValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+    startLine: 279
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public override object GetValue()
+    return:
+      type: System.Object
+    content.vb: >-
+      <NotImplemented>
+
+      Public Overrides Function GetValue As Object
+  overridden: System.Windows.Controls.UpDownBase.GetValue
+  overload: System.Windows.Controls.TimeUpDown.GetValue*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: System.Windows.Controls.TimeUpDown.SetValue(System.Object)
+  commentId: M:System.Windows.Controls.TimeUpDown.SetValue(System.Object)
+  id: SetValue(System.Object)
+  parent: System.Windows.Controls.TimeUpDown
+  langs:
+  - csharp
+  - vb
+  name: SetValue(Object)
+  nameWithType: TimeUpDown.SetValue(Object)
+  fullName: System.Windows.Controls.TimeUpDown.SetValue(System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SetValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+    startLine: 285
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public override void SetValue(object value)
+    parameters:
+    - id: value
+      type: System.Object
+    content.vb: >-
+      <NotImplemented>
+
+      Public Overrides Sub SetValue(value As Object)
+  overridden: System.Windows.Controls.UpDownBase.SetValue(System.Object)
+  overload: System.Windows.Controls.TimeUpDown.SetValue*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
 - uid: System.Windows.Controls.TimeUpDown.ActualTimeGlobalizationInfo
   commentId: P:System.Windows.Controls.TimeUpDown.ActualTimeGlobalizationInfo
   id: ActualTimeGlobalizationInfo
@@ -801,9 +1119,13 @@ items:
   fullName: System.Windows.Controls.TimeUpDown.ActualTimeGlobalizationInfo
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ActualTimeGlobalizationInfo
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\TimeUpDown.cs
-    startLine: 284
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/TimeUpDown.cs
+    startLine: 296
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -814,12 +1136,22 @@ items:
     default TimeGlobalizationInfo instance.
   example: []
   syntax:
-    content: public TimeGlobalizationInfo ActualTimeGlobalizationInfo { get; }
+    content: >-
+      [NotImplemented]
+
+      public TimeGlobalizationInfo ActualTimeGlobalizationInfo { get; }
     parameters: []
     return:
       type: System.Windows.Controls.TimeGlobalizationInfo
-    content.vb: Public ReadOnly Property ActualTimeGlobalizationInfo As TimeGlobalizationInfo
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property ActualTimeGlobalizationInfo As TimeGlobalizationInfo
   overload: System.Windows.Controls.TimeUpDown.ActualTimeGlobalizationInfo*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -834,6 +1166,7 @@ references:
   fullName: System.Windows.Controls
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -880,6 +1213,56 @@ references:
   name: SpinnerStyleProperty
   nameWithType: UpDownBase.SpinnerStyleProperty
   fullName: System.Windows.Controls.UpDownBase.SpinnerStyleProperty
+- uid: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+  commentId: M:System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+  parent: System.Windows.Controls.UpDownBase
+  name: OnSpinnerStyleChanged(Style, Style)
+  nameWithType: UpDownBase.OnSpinnerStyleChanged(Style, Style)
+  fullName: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style, System.Windows.Style)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+    name: OnSpinnerStyleChanged
+    nameWithType: UpDownBase.OnSpinnerStyleChanged
+    fullName: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+    name: OnSpinnerStyleChanged
+    nameWithType: UpDownBase.OnSpinnerStyleChanged
+    fullName: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
   commentId: F:System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
   parent: System.Windows.Controls.Control
@@ -1295,78 +1678,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+- uid: System.Windows.Controls.Control.CharacterSpacingProperty
+  commentId: F:System.Windows.Controls.Control.CharacterSpacingProperty
   parent: System.Windows.Controls.Control
-  name: OnMouseRightButtonDown(MouseButtonEventArgs)
-  nameWithType: Control.OnMouseRightButtonDown(MouseButtonEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  name: CharacterSpacingProperty
+  nameWithType: Control.CharacterSpacingProperty
+  fullName: System.Windows.Controls.Control.CharacterSpacingProperty
+- uid: System.Windows.Controls.Control.CharacterSpacing
+  commentId: P:System.Windows.Controls.Control.CharacterSpacing
   parent: System.Windows.Controls.Control
-  name: OnMouseWheel(MouseWheelEventArgs)
-  nameWithType: Control.OnMouseWheel(MouseWheelEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: CharacterSpacing
+  nameWithType: Control.CharacterSpacing
+  fullName: System.Windows.Controls.Control.CharacterSpacing
 - uid: System.Windows.Controls.Control.TabNavigationProperty
   commentId: F:System.Windows.Controls.Control.TabNavigationProperty
   parent: System.Windows.Controls.Control
@@ -1391,42 +1714,6 @@ references:
   name: FontStretch
   nameWithType: Control.FontStretch
   fullName: System.Windows.Controls.Control.FontStretch
-- uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  parent: System.Windows.Controls.Control
-  name: OnTextInput(TextCompositionEventArgs)
-  nameWithType: Control.OnTextInput(TextCompositionEventArgs)
-  fullName: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   commentId: M:System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   parent: System.Windows.Controls.Control
@@ -1907,6 +2194,12 @@ references:
   name: DataContextChanged
   nameWithType: FrameworkElement.DataContextChanged
   fullName: System.Windows.FrameworkElement.DataContextChanged
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  parent: System.Windows.FrameworkElement
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   parent: System.Windows.FrameworkElement
@@ -1941,18 +2234,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  parent: System.Windows.FrameworkElement
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  parent: System.Windows.FrameworkElement
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -2085,6 +2366,12 @@ references:
   name: DefaultStyleKeyProperty
   nameWithType: FrameworkElement.DefaultStyleKeyProperty
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  parent: System.Windows.FrameworkElement
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
 - uid: System.Windows.FrameworkElement.Loaded
   commentId: E:System.Windows.FrameworkElement.Loaded
   parent: System.Windows.FrameworkElement
@@ -2103,100 +2390,6 @@ references:
   name: BindingValidationError
   nameWithType: FrameworkElement.BindingValidationError
   fullName: System.Windows.FrameworkElement.BindingValidationError
-- uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: RegisterName(String, Object)
-  nameWithType: FrameworkElement.RegisterName(String, Object)
-  fullName: System.Windows.FrameworkElement.RegisterName(System.String, System.Object)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-  commentId: M:System.Windows.FrameworkElement.UnregisterName(System.String)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: UnregisterName(String)
-  nameWithType: FrameworkElement.UnregisterName(String)
-  fullName: System.Windows.FrameworkElement.UnregisterName(System.String)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.FrameworkElement
@@ -2309,6 +2502,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   parent: System.Windows.FrameworkElement
@@ -2441,6 +2658,24 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  parent: System.Windows.FrameworkElement
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.FrameworkElement.SizeChanged
   commentId: E:System.Windows.FrameworkElement.SizeChanged
   parent: System.Windows.FrameworkElement
@@ -2483,6 +2718,12 @@ references:
   name: Drop
   nameWithType: UIElement.Drop
   fullName: System.Windows.UIElement.Drop
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  parent: System.Windows.UIElement
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
 - uid: System.Windows.UIElement.OpacityMask
   commentId: P:System.Windows.UIElement.OpacityMask
   parent: System.Windows.UIElement
@@ -2519,18 +2760,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.OnCreateAutomationPeer
   commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
   parent: System.Windows.UIElement
@@ -2589,6 +2818,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -2798,12 +3039,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -3154,6 +3389,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -3262,6 +3619,90 @@ references:
   name: MouseRightButtonDown
   nameWithType: UIElement.MouseRightButtonDown
   fullName: System.Windows.UIElement.MouseRightButtonDown
+- uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseRightButtonDown(MouseButtonEventArgs)
+  nameWithType: UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)
+  fullName: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseLeftButtonUpEvent
   commentId: F:System.Windows.UIElement.MouseLeftButtonUpEvent
   parent: System.Windows.UIElement
@@ -3406,24 +3847,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -3436,12 +3907,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -3795,128 +4260,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -4521,6 +4864,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -4888,45 +5546,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
@@ -5399,14 +6062,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5420,16 +6083,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5443,10 +6106,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -5466,14 +6129,15 @@ references:
   name: Minimum
   nameWithType: TimeUpDown.Minimum
   fullName: System.Windows.Controls.TimeUpDown.Minimum
-- uid: System.Nullable{DateTime}
-  commentId: '!:System.Nullable{DateTime}'
+- uid: System.Nullable{System.DateTime}
+  commentId: T:System.Nullable{System.DateTime}
+  parent: System
   definition: System.Nullable`1
   name: Nullable<DateTime>
   nameWithType: Nullable<DateTime>
-  fullName: System.Nullable<DateTime>
+  fullName: System.Nullable<System.DateTime>
   nameWithType.vb: Nullable(Of DateTime)
-  fullName.vb: System.Nullable(Of DateTime)
+  fullName.vb: System.Nullable(Of System.DateTime)
   name.vb: Nullable(Of DateTime)
   spec.csharp:
   - uid: System.Nullable`1
@@ -5484,10 +6148,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -5501,22 +6165,23 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
 - uid: System.Nullable`1
+  commentId: T:System.Nullable`1
   isExternal: true
-  name: Nullable<>
-  nameWithType: Nullable<>
-  fullName: System.Nullable<>
-  nameWithType.vb: Nullable(Of )
-  fullName.vb: System.Nullable(Of )
-  name.vb: Nullable(Of )
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
   spec.csharp:
   - uid: System.Nullable`1
     name: Nullable
@@ -5526,9 +6191,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -5541,9 +6206,9 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
@@ -5595,11 +6260,19 @@ references:
   name: Culture
   nameWithType: TimeUpDown.Culture
   fullName: System.Windows.Controls.TimeUpDown.Culture
-- uid: CultureInfo
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
   isExternal: true
   name: CultureInfo
   nameWithType: CultureInfo
-  fullName: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
 - uid: System.Windows.Controls.TimeUpDown.TimeGlobalizationInfo*
   commentId: Overload:System.Windows.Controls.TimeUpDown.TimeGlobalizationInfo
   name: TimeGlobalizationInfo
@@ -5611,6 +6284,83 @@ references:
   name: TimeGlobalizationInfo
   nameWithType: TimeGlobalizationInfo
   fullName: System.Windows.Controls.TimeGlobalizationInfo
+- uid: System.Windows.Controls.UpDownBase.GetValue
+  commentId: M:System.Windows.Controls.UpDownBase.GetValue
+  parent: System.Windows.Controls.UpDownBase
+  name: GetValue()
+  nameWithType: UpDownBase.GetValue()
+  fullName: System.Windows.Controls.UpDownBase.GetValue()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase.GetValue
+    name: GetValue
+    nameWithType: UpDownBase.GetValue
+    fullName: System.Windows.Controls.UpDownBase.GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase.GetValue
+    name: GetValue
+    nameWithType: UpDownBase.GetValue
+    fullName: System.Windows.Controls.UpDownBase.GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.TimeUpDown.GetValue*
+  commentId: Overload:System.Windows.Controls.TimeUpDown.GetValue
+  name: GetValue
+  nameWithType: TimeUpDown.GetValue
+  fullName: System.Windows.Controls.TimeUpDown.GetValue
+- uid: System.Windows.Controls.UpDownBase.SetValue(System.Object)
+  commentId: M:System.Windows.Controls.UpDownBase.SetValue(System.Object)
+  parent: System.Windows.Controls.UpDownBase
+  isExternal: true
+  name: SetValue(Object)
+  nameWithType: UpDownBase.SetValue(Object)
+  fullName: System.Windows.Controls.UpDownBase.SetValue(System.Object)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase.SetValue(System.Object)
+    name: SetValue
+    nameWithType: UpDownBase.SetValue
+    fullName: System.Windows.Controls.UpDownBase.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase.SetValue(System.Object)
+    name: SetValue
+    nameWithType: UpDownBase.SetValue
+    fullName: System.Windows.Controls.UpDownBase.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.TimeUpDown.SetValue*
+  commentId: Overload:System.Windows.Controls.TimeUpDown.SetValue
+  name: SetValue
+  nameWithType: TimeUpDown.SetValue
+  fullName: System.Windows.Controls.TimeUpDown.SetValue
 - uid: System.Windows.Controls.TimeUpDown.ActualTimeGlobalizationInfo*
   commentId: Overload:System.Windows.Controls.TimeUpDown.ActualTimeGlobalizationInfo
   name: ActualTimeGlobalizationInfo

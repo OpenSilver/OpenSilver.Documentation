@@ -6,7 +6,7 @@ items:
   parent: System.Windows
   children:
   - System.Windows.UIElement.#ctor
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
   - System.Windows.UIElement.AllowDrop
   - System.Windows.UIElement.AllowDropProperty
   - System.Windows.UIElement.AllowScrollOnTouchMove
@@ -24,6 +24,7 @@ items:
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.Drop
   - System.Windows.UIElement.Effect
   - System.Windows.UIElement.EffectProperty
@@ -41,7 +42,6 @@ items:
   - System.Windows.UIElement.IsMouseCaptured
   - System.Windows.UIElement.IsVisible
   - System.Windows.UIElement.IsVisibleChanged
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.KeyDown
   - System.Windows.UIElement.KeyDownEvent
   - System.Windows.UIElement.KeyUp
@@ -80,7 +80,9 @@ items:
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
   - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.OnMouseRightButtonUp(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.OnTapped(System.Windows.Input.TappedRoutedEventArgs)
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
@@ -88,7 +90,7 @@ items:
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
   - System.Windows.UIElement.ReleaseMouseCapture
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.RenderTransform
   - System.Windows.UIElement.RenderTransformOrigin
@@ -117,9 +119,13 @@ items:
   fullName: System.Windows.UIElement
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UIElement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 52
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 36
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -129,6 +135,7 @@ items:
     content: 'public abstract class UIElement : DependencyObject'
     content.vb: >-
       Public MustInherit Class UIElement
+
           Inherits DependencyObject
   inheritance:
   - System.Object
@@ -152,6 +159,14 @@ items:
   - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
@@ -182,17 +197,31 @@ items:
   fullName: System.Windows.UIElement.DragEnter
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragEnter
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
     startLine: 27
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public event DragEventHandler DragEnter
+    content: >-
+      [NotImplemented]
+
+      public event DragEventHandler DragEnter
     return:
       type: System.Windows.DragEventHandler
-    content.vb: Public Event DragEnter As DragEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event DragEnter As DragEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -209,17 +238,31 @@ items:
   fullName: System.Windows.UIElement.DragLeave
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragLeave
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
     startLine: 30
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public event DragEventHandler DragLeave
+    content: >-
+      [NotImplemented]
+
+      public event DragEventHandler DragLeave
     return:
       type: System.Windows.DragEventHandler
-    content.vb: Public Event DragLeave As DragEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event DragLeave As DragEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -236,17 +279,72 @@ items:
   fullName: System.Windows.UIElement.Drop
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Drop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
     startLine: 33
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public event DragEventHandler Drop
+    content: >-
+      [NotImplemented]
+
+      public event DragEventHandler Drop
     return:
       type: System.Windows.DragEventHandler
-    content.vb: Public Event Drop As DragEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event Drop As DragEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  id: DragOver
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DragOver
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 36
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public event DragEventHandler DragOver
+    return:
+      type: System.Windows.DragEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event DragOver As DragEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -263,22 +361,36 @@ items:
   fullName: System.Windows.UIElement.OpacityMask
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OpacityMask
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 43
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 46
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nGets or sets the brush used to alter the opacity of \nregions of this object.\n"
   example: []
   syntax:
-    content: public Brush OpacityMask { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public Brush OpacityMask { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Brush
       description: "\nA brush that describes the opacity applied to this \nobject. The default is null.\n"
-    content.vb: Public Property OpacityMask As Brush
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property OpacityMask As Brush
   overload: System.Windows.UIElement.OpacityMask*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -297,19 +409,33 @@ items:
   fullName: System.Windows.UIElement.OpacityMaskProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OpacityMaskProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 54
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 57
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nIdentifies the OpacityMask dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty OpacityMaskProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty OpacityMaskProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly OpacityMaskProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly OpacityMaskProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -330,22 +456,36 @@ items:
   fullName: System.Windows.UIElement.CacheMode
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CacheMode
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 73
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 76
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nGets or sets a value that indicates that rendered \ncontent should be cached when possible.\n"
   example: []
   syntax:
-    content: public CacheMode CacheMode { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public CacheMode CacheMode { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.CacheMode
       description: "\nA value that indicates that rendered content should be \ncached when possible. If you specify a value of \n<xref href=\"System.Windows.Media.CacheMode\" data-throw-if-not-resolved=\"false\"></xref>, rendering operations from \n<xref href=\"System.Windows.UIElement.RenderTransform\" data-throw-if-not-resolved=\"false\"></xref> and \n<xref href=\"System.Windows.UIElement.Opacity\" data-throw-if-not-resolved=\"false\"></xref> execute on the graphics \nprocessing unit (GPU), if available. The default is null, \nwhich does not enable a cached composition mode. \n"
-    content.vb: Public Property CacheMode As CacheMode
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property CacheMode As CacheMode
   overload: System.Windows.UIElement.CacheMode*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -364,20 +504,34 @@ items:
   fullName: System.Windows.UIElement.CacheModeProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CacheModeProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 83
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 86
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: Identifies the <xref href="System.Windows.UIElement.CacheMode" data-throw-if-not-resolved="false"></xref> dependency property.
   example: []
   syntax:
-    content: public static readonly DependencyProperty CacheModeProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty CacheModeProperty
     return:
       type: System.Windows.DependencyProperty
       description: The identifier for the <xref href="System.Windows.UIElement.CacheMode" data-throw-if-not-resolved="false"></xref> dependency property.
-    content.vb: Public Shared ReadOnly CacheModeProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly CacheModeProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -398,19 +552,33 @@ items:
   fullName: System.Windows.UIElement.Projection
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Projection
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 89
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 92
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public Projection Projection { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public Projection Projection { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Projection
-    content.vb: Public Property Projection As Projection
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Projection As Projection
   overload: System.Windows.UIElement.Projection*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -429,79 +597,31 @@ items:
   fullName: System.Windows.UIElement.ProjectionProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ProjectionProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 97
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 100
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public static readonly DependencyProperty ProjectionProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty ProjectionProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly ProjectionProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  id: Clip
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-  type: Property
-  source:
-    id: Clip
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 105
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public Geometry Clip { get; set; }
-    parameters: []
-    return:
-      type: System.Windows.Media.Geometry
-    content.vb: Public Property Clip As Geometry
-  overload: System.Windows.UIElement.Clip*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  id: ClipProperty
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
-  type: Field
-  source:
-    id: ClipProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 113
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public static readonly DependencyProperty ClipProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly ClipProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly ProjectionProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -522,18 +642,32 @@ items:
   fullName: System.Windows.UIElement.OnCreateAutomationPeer()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnCreateAutomationPeer
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\UIElement.cs
-    startLine: 129
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/UIElement.cs
+    startLine: 115
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: protected virtual AutomationPeer OnCreateAutomationPeer()
+    content: >-
+      [NotImplemented]
+
+      protected virtual AutomationPeer OnCreateAutomationPeer()
     return:
       type: System.Windows.Automation.Peers.AutomationPeer
-    content.vb: Protected Overridable Function OnCreateAutomationPeer As AutomationPeer
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Function OnCreateAutomationPeer As AutomationPeer
   overload: System.Windows.UIElement.OnCreateAutomationPeer*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
@@ -552,9 +686,13 @@ items:
   fullName: System.Windows.UIElement.XamlSourcePath
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: XamlSourcePath
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 86
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 256
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -579,9 +717,13 @@ items:
   fullName: System.Windows.UIElement.RenderSize
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RenderSize
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 97
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 267
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -610,9 +752,13 @@ items:
   fullName: System.Windows.UIElement.DesiredSize
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DesiredSize
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 99
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 269
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -641,9 +787,13 @@ items:
   fullName: System.Windows.UIElement.UIElement()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 182
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 348
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -667,9 +817,13 @@ items:
   fullName: System.Windows.UIElement.ClipToBounds
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ClipToBounds
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 211
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 375
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -700,9 +854,13 @@ items:
   fullName: System.Windows.UIElement.ClipToBoundsProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ClipToBoundsProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 221
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 385
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -713,6 +871,76 @@ items:
     return:
       type: System.Windows.DependencyProperty
     content.vb: Public Shared ReadOnly ClipToBoundsProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  id: Clip
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Clip
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 417
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public Geometry Clip { get; set; }
+    parameters: []
+    return:
+      type: System.Windows.Media.Geometry
+    content.vb: Public Property Clip As Geometry
+  overload: System.Windows.UIElement.Clip*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  id: ClipProperty
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ClipProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 423
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static readonly DependencyProperty ClipProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly ClipProperty As DependencyProperty
   modifiers.csharp:
   - public
   - static
@@ -733,9 +961,13 @@ items:
   fullName: System.Windows.UIElement.CreateDomElement(System.Object, out System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateDomElement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 258
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 474
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -776,16 +1008,20 @@ items:
   fullName: System.Windows.UIElement.CreateDomChildWrapper(System.Object, out System.Object, System.Int32)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateDomChildWrapper
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 267
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 483
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nWhen overriden, creates a dom wrapper for each child that is added to the UIElement.\n"
   example: []
   syntax:
-    content: public virtual object CreateDomChildWrapper(object parentRef, out object domElementWhereToPlaceChild, int index = null)
+    content: public virtual object CreateDomChildWrapper(object parentRef, out object domElementWhereToPlaceChild, int index = -1)
     parameters:
     - id: parentRef
       type: System.Object
@@ -799,7 +1035,7 @@ items:
     return:
       type: System.Object
       description: ''
-    content.vb: Public Overridable Function CreateDomChildWrapper(parentRef As Object, ByRef domElementWhereToPlaceChild As Object, index As Integer = Nothing) As Object
+    content.vb: Public Overridable Function CreateDomChildWrapper(parentRef As Object, ByRef domElementWhereToPlaceChild As Object, index As Integer = -1) As Object
   overload: System.Windows.UIElement.CreateDomChildWrapper*
   nameWithType.vb: UIElement.CreateDomChildWrapper(Object, ByRef Object, Int32)
   modifiers.csharp:
@@ -822,9 +1058,13 @@ items:
   fullName: System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetDomElementWhereToPlaceChild
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 274
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 490
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -855,9 +1095,13 @@ items:
   fullName: System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetChildsWrapper
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 279
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 495
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -886,9 +1130,13 @@ items:
   fullName: System.Windows.UIElement.Effect
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Effect
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 299
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 515
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -917,9 +1165,13 @@ items:
   fullName: System.Windows.UIElement.EffectProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: EffectProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 309
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 525
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -950,9 +1202,13 @@ items:
   fullName: System.Windows.UIElement.RenderTransform
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RenderTransform
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 342
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 558
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -983,9 +1239,13 @@ items:
   fullName: System.Windows.UIElement.RenderTransformProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RenderTransformProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 352
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 568
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1016,9 +1276,13 @@ items:
   fullName: System.Windows.UIElement.RenderTransformOrigin
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RenderTransformOrigin
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 398
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 614
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1047,9 +1311,13 @@ items:
   fullName: System.Windows.UIElement.RenderTransformOriginProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RenderTransformOriginProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 408
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 624
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1080,9 +1348,13 @@ items:
   fullName: System.Windows.UIElement.UseLayoutRounding
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UseLayoutRounding
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 451
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 667
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1113,9 +1385,13 @@ items:
   fullName: System.Windows.UIElement.UseLayoutRoundingProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UseLayoutRoundingProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 461
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 677
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1146,9 +1422,13 @@ items:
   fullName: System.Windows.UIElement.Visibility
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Visibility
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 483
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 699
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1179,9 +1459,13 @@ items:
   fullName: System.Windows.UIElement.VisibilityProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: VisibilityProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 493
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 709
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1212,12 +1496,18 @@ items:
   fullName: System.Windows.UIElement.IsVisible
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsVisible
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 573
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 794
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nA property indicating if this element is visible or not.\n"
+  example: []
   syntax:
     content: public bool IsVisible { get; }
     parameters: []
@@ -1231,39 +1521,6 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  id: IsVisibleProperty
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
-  type: Field
-  source:
-    id: IsVisibleProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 582
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.IsVisible\" data-throw-if-not-resolved=\"false\"></xref> dependency \nproperty.\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty IsVisibleProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly IsVisibleProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   id: IsVisibleChanged
@@ -1276,9 +1533,13 @@ items:
   fullName: System.Windows.UIElement.IsVisibleChanged
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsVisibleChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 641
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 868
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1303,9 +1564,13 @@ items:
   fullName: System.Windows.UIElement.Opacity
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Opacity
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 652
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 884
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1336,9 +1601,13 @@ items:
   fullName: System.Windows.UIElement.OpacityProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OpacityProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 662
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 894
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1369,9 +1638,13 @@ items:
   fullName: System.Windows.UIElement.IsHitTestVisible
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsHitTestVisible
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 686
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 918
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1402,9 +1675,13 @@ items:
   fullName: System.Windows.UIElement.IsHitTestVisibleProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsHitTestVisibleProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 696
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 928
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1435,9 +1712,13 @@ items:
   fullName: System.Windows.UIElement.AllowDrop
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: AllowDrop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 807
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1039
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1468,9 +1749,13 @@ items:
   fullName: System.Windows.UIElement.AllowDropProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: AllowDropProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 817
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1049
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1501,9 +1786,13 @@ items:
   fullName: System.Windows.UIElement.CaptureMouse()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CaptureMouse
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 848
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1080
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1532,9 +1821,13 @@ items:
   fullName: System.Windows.UIElement.IsMouseCaptured
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsMouseCaptured
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1037
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1213
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1565,9 +1858,13 @@ items:
   fullName: System.Windows.UIElement.ReleaseMouseCapture()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ReleaseMouseCapture
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1056
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1232
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1593,9 +1890,13 @@ items:
   fullName: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnLostMouseCapture
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1125
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1301
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1624,9 +1925,13 @@ items:
   fullName: System.Windows.UIElement.LostMouseCapture
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: LostMouseCapture
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1140
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1316
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1651,9 +1956,13 @@ items:
   fullName: System.Windows.UIElement.AllowScrollOnTouchMove
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: AllowScrollOnTouchMove
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1152
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1328
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1684,9 +1993,13 @@ items:
   fullName: System.Windows.UIElement.AllowScrollOnTouchMoveProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: AllowScrollOnTouchMoveProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1162
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1338
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1717,9 +2030,13 @@ items:
   fullName: System.Windows.UIElement.INTERNAL_OnDetachedFromVisualTree()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_OnDetachedFromVisualTree
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1187
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1363
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1746,9 +2063,13 @@ items:
   fullName: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TransformToVisual
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1222
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1398
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1781,9 +2102,13 @@ items:
   fullName: System.Windows.UIElement.OnLayoutUpdated()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnLayoutUpdated
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1354
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1521
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1809,9 +2134,13 @@ items:
   fullName: System.Windows.UIElement.Arrange(System.Windows.Rect)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Arrange
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1359
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1526
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1838,9 +2167,13 @@ items:
   fullName: System.Windows.UIElement.Measure(System.Windows.Size)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Measure
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1447
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1628
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1867,9 +2200,13 @@ items:
   fullName: System.Windows.UIElement.InvalidateArrange()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: InvalidateArrange
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1491
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1678
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1893,9 +2230,13 @@ items:
   fullName: System.Windows.UIElement.InvalidateMeasure()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: InvalidateMeasure
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1513
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1712
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1919,9 +2260,13 @@ items:
   fullName: System.Windows.UIElement.UpdateLayout()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UpdateLayout
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement.cs
-    startLine: 1533
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement.cs
+    startLine: 1732
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1929,6 +2274,107 @@ items:
     content: public void UpdateLayout()
     content.vb: Public Sub UpdateLayout
   overload: System.Windows.UIElement.UpdateLayout*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  id: AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: AddHandler
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 170
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nAdds a routed event handler for a specified routed event, adding the handler\nto the handler collection on the current element. Specify handledEventsToo as\ntrue to have the provided handler be invoked for routed event that had already\nbeen marked as handled by another element along the event route.\n"
+  example: []
+  syntax:
+    content: public void AddHandler(RoutedEvent routedEvent, Delegate handler, bool handledEventsToo)
+    parameters:
+    - id: routedEvent
+      type: System.Windows.RoutedEvent
+      description: "\nAn identifier for the routed event to be handled.\n"
+    - id: handler
+      type: System.Delegate
+      description: "\nA reference to the handler implementation.\n"
+    - id: handledEventsToo
+      type: System.Boolean
+      description: "\ntrue to register the handler such that it is invoked even when the routed event\nis marked handled in its event data; false to register the handler with the default\ncondition that it will not be invoked if the routed event is already marked handled.\nThe default is false. Do not routinely ask to rehandle a routed event. For more\ninformation, see Remarks.\n"
+    content.vb: Public Sub AddHandler(routedEvent As RoutedEvent, handler As  Delegate, handledEventsToo As Boolean)
+  overload: System.Windows.UIElement.AddHandler*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nroutedEvent or handler is null.\n"
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nroutedEvent does not represent a supported routed event.-or-handler does not\nimplement a supported delegate.\n"
+  - type: System.NotImplementedException
+    commentId: T:System.NotImplementedException
+    description: "\nAttempted to add handler for an event not supported by the current platform variation.\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  id: RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RemoveHandler
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 212
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRemoves the specified routed event handler from this <xref href=\"System.Windows.UIElement\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void RemoveHandler(RoutedEvent routedEvent, Delegate handler)
+    parameters:
+    - id: routedEvent
+      type: System.Windows.RoutedEvent
+      description: "\nThe identifier of the routed event for which the handler is attached.\n"
+    - id: handler
+      type: System.Delegate
+      description: "\nThe specific handler implementation to remove from the event handler collection\non this <xref href=\"System.Windows.UIElement\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Sub RemoveHandler(routedEvent As RoutedEvent, handler As  Delegate)
+  overload: System.Windows.UIElement.RemoveHandler*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nroutedEvent or handler is null.\n"
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nroutedEvent does not represent a supported routed event.-or-handler does not\nimplement a supported delegate.\n"
+  - type: System.NotImplementedException
+    commentId: T:System.NotImplementedException
+    description: "\nAttempted to remove handler for an event not supported by the current platform\nvariation.\n"
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1945,9 +2391,13 @@ items:
   fullName: System.Windows.UIElement.MouseMoveEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseMoveEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 66
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 349
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1976,9 +2426,13 @@ items:
   fullName: System.Windows.UIElement.MouseMove
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseMove
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 105
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 359
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2005,9 +2459,13 @@ items:
   fullName: System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMouseMove
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 126
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 391
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2039,9 +2497,13 @@ items:
   fullName: System.Windows.UIElement.MouseLeftButtonDownEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseLeftButtonDownEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 169
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 406
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2070,9 +2532,13 @@ items:
   fullName: System.Windows.UIElement.MouseLeftButtonDown
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseLeftButtonDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 231
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 416
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2099,9 +2565,13 @@ items:
   fullName: System.Windows.UIElement.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMouseLeftButtonDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 251
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 446
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2133,13 +2603,17 @@ items:
   fullName: System.Windows.UIElement.MouseRightButtonDownEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseRightButtonDownEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 311
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 464
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nIdentifies the System.Windows.UIElement.MouseRightButtonDown routed event.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.MouseRightButtonDown\" data-throw-if-not-resolved=\"false\"></xref> routed event.\n"
   example: []
   syntax:
     content: public static readonly RoutedEvent MouseRightButtonDownEvent
@@ -2166,9 +2640,13 @@ items:
   fullName: System.Windows.UIElement.MouseRightButtonDown
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseRightButtonDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 347
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 466
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2193,9 +2671,13 @@ items:
   fullName: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMouseRightButtonDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 363
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 482
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2215,6 +2697,114 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  id: MouseWheelEvent
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: MouseWheelEvent
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 496
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.MouseWheel\" data-throw-if-not-resolved=\"false\"></xref> routed event.\n"
+  example: []
+  syntax:
+    content: public static readonly RoutedEvent MouseWheelEvent
+    return:
+      type: System.Windows.RoutedEvent
+    content.vb: Public Shared ReadOnly MouseWheelEvent As RoutedEvent
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  id: MouseWheel
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: MouseWheel
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 509
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nOccurs when the user rotates the mouse wheel while the mouse pointer is over\na <xref href=\"System.Windows.UIElement\" data-throw-if-not-resolved=\"false\"></xref>, or the <xref href=\"System.Windows.UIElement\" data-throw-if-not-resolved=\"false\"></xref> has focus.\n"
+  example: []
+  syntax:
+    content: public event MouseWheelEventHandler MouseWheel
+    return:
+      type: System.Windows.Input.MouseWheelEventHandler
+    content.vb: Public Event MouseWheel As MouseWheelEventHandler
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  id: OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnMouseWheel
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 543
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRaises the PointerWheelChanged event\n"
+  example: []
+  syntax:
+    content: protected virtual void OnMouseWheel(MouseWheelEventArgs eventArgs)
+    parameters:
+    - id: eventArgs
+      type: System.Windows.Input.MouseWheelEventArgs
+      description: The arguments for the event.
+    content.vb: Protected Overridable Sub OnMouseWheel(eventArgs As MouseWheelEventArgs)
+  overload: System.Windows.UIElement.OnMouseWheel*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
 - uid: System.Windows.UIElement.MouseLeftButtonUpEvent
   commentId: F:System.Windows.UIElement.MouseLeftButtonUpEvent
   id: MouseLeftButtonUpEvent
@@ -2227,9 +2817,13 @@ items:
   fullName: System.Windows.UIElement.MouseLeftButtonUpEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseLeftButtonUpEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 405
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 558
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2258,9 +2852,13 @@ items:
   fullName: System.Windows.UIElement.MouseLeftButtonUp
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseLeftButtonUp
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 445
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 568
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2287,9 +2885,13 @@ items:
   fullName: System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMouseLeftButtonUp
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 466
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 598
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2321,9 +2923,13 @@ items:
   fullName: System.Windows.UIElement.MouseEnterEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseEnterEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 513
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 612
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2352,9 +2958,13 @@ items:
   fullName: System.Windows.UIElement.MouseEnter
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseEnter
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 546
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 621
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2381,9 +2991,13 @@ items:
   fullName: System.Windows.UIElement.OnMouseEnter(System.Windows.Input.MouseEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMouseEnter
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 584
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 651
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2415,9 +3029,13 @@ items:
   fullName: System.Windows.UIElement.MouseLeaveEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseLeaveEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 629
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 665
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2446,9 +3064,13 @@ items:
   fullName: System.Windows.UIElement.MouseLeave
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseLeave
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 662
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 674
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2475,9 +3097,13 @@ items:
   fullName: System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMouseLeave
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 741
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 704
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2497,68 +3123,6 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  id: MouseWheelEvent
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-  type: Field
-  source:
-    id: MouseWheelEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 793
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.MouseWheel\" data-throw-if-not-resolved=\"false\"></xref> routed event.\n"
-  example: []
-  syntax:
-    content: public static readonly RoutedEvent MouseWheelEvent
-    return:
-      type: System.Windows.RoutedEvent
-    content.vb: Public Shared ReadOnly MouseWheelEvent As RoutedEvent
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  id: MouseWheel
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
-  type: Event
-  source:
-    id: MouseWheel
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 800
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nOccurs when the user rotates the mouse wheel while the mouse pointer is over\na <xref href=\"System.Windows.UIElement\" data-throw-if-not-resolved=\"false\"></xref>, or the <xref href=\"System.Windows.UIElement\" data-throw-if-not-resolved=\"false\"></xref> has focus.\n"
-  example: []
-  syntax:
-    content: public event MouseWheelEventHandler MouseWheel
-    return:
-      type: System.Windows.Input.MouseWheelEventHandler
-    content.vb: Public Event MouseWheel As MouseWheelEventHandler
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   id: TextInputEvent
@@ -2571,9 +3135,13 @@ items:
   fullName: System.Windows.UIElement.TextInputEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TextInputEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 819
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 720
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2584,72 +3152,6 @@ items:
     return:
       type: System.Windows.RoutedEvent
     content.vb: Public Shared ReadOnly TextInputEvent As RoutedEvent
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.UIElement.TextInputStartEvent
-  commentId: F:System.Windows.UIElement.TextInputStartEvent
-  id: TextInputStartEvent
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: TextInputStartEvent
-  nameWithType: UIElement.TextInputStartEvent
-  fullName: System.Windows.UIElement.TextInputStartEvent
-  type: Field
-  source:
-    id: TextInputStartEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 825
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.TextInputStart\" data-throw-if-not-resolved=\"false\"></xref> routed event.\n"
-  example: []
-  syntax:
-    content: public static readonly RoutedEvent TextInputStartEvent
-    return:
-      type: System.Windows.RoutedEvent
-    content.vb: Public Shared ReadOnly TextInputStartEvent As RoutedEvent
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.UIElement.TextInputUpdateEvent
-  commentId: F:System.Windows.UIElement.TextInputUpdateEvent
-  id: TextInputUpdateEvent
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: TextInputUpdateEvent
-  nameWithType: UIElement.TextInputUpdateEvent
-  fullName: System.Windows.UIElement.TextInputUpdateEvent
-  type: Field
-  source:
-    id: TextInputUpdateEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 831
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.TextInputUpdate\" data-throw-if-not-resolved=\"false\"></xref> routed event.\n"
-  example: []
-  syntax:
-    content: public static readonly RoutedEvent TextInputUpdateEvent
-    return:
-      type: System.Windows.RoutedEvent
-    content.vb: Public Shared ReadOnly TextInputUpdateEvent As RoutedEvent
   modifiers.csharp:
   - public
   - static
@@ -2670,9 +3172,13 @@ items:
   fullName: System.Windows.UIElement.TextInput
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TextInput
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 837
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 728
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2687,6 +3193,138 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  id: OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnTextInput
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 744
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRaises the TextInput event\n"
+  example: []
+  syntax:
+    content: protected virtual void OnTextInput(TextCompositionEventArgs eventArgs)
+    parameters:
+    - id: eventArgs
+      type: System.Windows.Input.TextCompositionEventArgs
+      description: The arguments for the event.
+    content.vb: Protected Overridable Sub OnTextInput(eventArgs As TextCompositionEventArgs)
+  overload: System.Windows.UIElement.OnTextInput*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: System.Windows.UIElement.TextInputStartEvent
+  commentId: F:System.Windows.UIElement.TextInputStartEvent
+  id: TextInputStartEvent
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: TextInputStartEvent
+  nameWithType: UIElement.TextInputStartEvent
+  fullName: System.Windows.UIElement.TextInputStartEvent
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: TextInputStartEvent
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 752
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.TextInputStart\" data-throw-if-not-resolved=\"false\"></xref> routed event.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly RoutedEvent TextInputStartEvent
+    return:
+      type: System.Windows.RoutedEvent
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly TextInputStartEvent As RoutedEvent
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.UIElement.TextInputUpdateEvent
+  commentId: F:System.Windows.UIElement.TextInputUpdateEvent
+  id: TextInputUpdateEvent
+  parent: System.Windows.UIElement
+  langs:
+  - csharp
+  - vb
+  name: TextInputUpdateEvent
+  nameWithType: UIElement.TextInputUpdateEvent
+  fullName: System.Windows.UIElement.TextInputUpdateEvent
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: TextInputUpdateEvent
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 758
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.UIElement.TextInputUpdate\" data-throw-if-not-resolved=\"false\"></xref> routed event.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly RoutedEvent TextInputUpdateEvent
+    return:
+      type: System.Windows.RoutedEvent
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly TextInputUpdateEvent As RoutedEvent
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   id: TextInputStart
@@ -2699,19 +3337,33 @@ items:
   fullName: System.Windows.UIElement.TextInputStart
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TextInputStart
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 843
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 764
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nOccurs when a UI element initially gets text in a device-independent manner.\n"
   example: []
   syntax:
-    content: public event TextCompositionEventHandler TextInputStart
+    content: >-
+      [NotImplemented]
+
+      public event TextCompositionEventHandler TextInputStart
     return:
       type: System.Windows.Input.TextCompositionEventHandler
-    content.vb: Public Event TextInputStart As TextCompositionEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event TextInputStart As TextCompositionEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -2728,19 +3380,33 @@ items:
   fullName: System.Windows.UIElement.TextInputUpdate
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TextInputUpdate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 849
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 770
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nOccurs when text continues to be composed via an input method editor (IME).\n"
   example: []
   syntax:
-    content: public event TextCompositionEventHandler TextInputUpdate
+    content: >-
+      [NotImplemented]
+
+      public event TextCompositionEventHandler TextInputUpdate
     return:
       type: System.Windows.Input.TextCompositionEventHandler
-    content.vb: Public Event TextInputUpdate As TextCompositionEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event TextInputUpdate As TextCompositionEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -2757,9 +3423,13 @@ items:
   fullName: System.Windows.UIElement.TappedEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TappedEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 856
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 776
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2788,9 +3458,13 @@ items:
   fullName: System.Windows.UIElement.Tapped
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Tapped
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 875
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 782
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2817,9 +3491,13 @@ items:
   fullName: System.Windows.UIElement.OnTapped(System.Windows.Input.TappedRoutedEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnTapped
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 921
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 798
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2851,9 +3529,13 @@ items:
   fullName: System.Windows.UIElement.MouseRightButtonUpEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseRightButtonUpEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 949
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 807
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2882,9 +3564,13 @@ items:
   fullName: System.Windows.UIElement.MouseRightButtonUp
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MouseRightButtonUp
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 981
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 817
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2911,9 +3597,13 @@ items:
   fullName: System.Windows.UIElement.OnMouseRightButtonUp(System.Windows.Input.MouseButtonEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnMouseRightButtonUp
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1052
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 847
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2945,9 +3635,13 @@ items:
   fullName: System.Windows.UIElement.KeyDownEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: KeyDownEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1094
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 860
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2976,9 +3670,13 @@ items:
   fullName: System.Windows.UIElement.KeyDown
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: KeyDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1121
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 865
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3005,9 +3703,13 @@ items:
   fullName: System.Windows.UIElement.OnKeyDown(System.Windows.Input.KeyEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnKeyDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1175
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 882
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3039,9 +3741,13 @@ items:
   fullName: System.Windows.UIElement.KeyUpEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: KeyUpEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1209
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 895
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3070,9 +3776,13 @@ items:
   fullName: System.Windows.UIElement.KeyUp
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: KeyUp
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1236
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 900
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3099,9 +3809,13 @@ items:
   fullName: System.Windows.UIElement.OnKeyUp(System.Windows.Input.KeyEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnKeyUp
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1289
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 917
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3133,9 +3847,13 @@ items:
   fullName: System.Windows.UIElement.GotFocusEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GotFocusEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1323
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 930
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3164,9 +3882,13 @@ items:
   fullName: System.Windows.UIElement.GotFocus
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GotFocus
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1343
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 937
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3193,9 +3915,13 @@ items:
   fullName: System.Windows.UIElement.OnGotFocus(System.Windows.RoutedEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnGotFocus
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1374
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 953
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3227,9 +3953,13 @@ items:
   fullName: System.Windows.UIElement.LostFocusEvent
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: LostFocusEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1389
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 961
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3258,9 +3988,13 @@ items:
   fullName: System.Windows.UIElement.LostFocus
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: LostFocus
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1407
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 966
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3287,9 +4021,13 @@ items:
   fullName: System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnLostFocus
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1438
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 982
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3321,9 +4059,13 @@ items:
   fullName: System.Windows.UIElement.INTERNAL_AttachToDomEvents()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_AttachToDomEvents
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1773
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 1017
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3349,9 +4091,13 @@ items:
   fullName: System.Windows.UIElement.INTERNAL_DetachFromDomEvents()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_DetachFromDomEvents
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 1994
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/UIElement_Events.cs
+    startLine: 1023
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -3365,82 +4111,6 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  id: AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  type: Method
-  source:
-    id: AddHandler
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 2059
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nAdds a routed event handler for a specified routed event, adding the handler\nto the handler collection on the current element. Specify handledEventsToo\nas true to have the provided handler be invoked for a routed event case that\nhad already been marked as handled by another element along the event route.\n"
-  example: []
-  syntax:
-    content: public void AddHandler(RoutedEvent routedEvent, object handler, bool handledEventsToo)
-    parameters:
-    - id: routedEvent
-      type: System.Windows.RoutedEvent
-      description: An identifier for the routed event to be handled.
-    - id: handler
-      type: System.Object
-      description: A reference to the handler implementation.
-    - id: handledEventsToo
-      type: System.Boolean
-      description: "\nTrue to register the handler such that it is invoked even when the routed\nevent is marked handled in its event data. False to register the handler\nwith the default condition that it will not be invoked if the routed event\nis already marked handled. The default is false.\n"
-    content.vb: Public Sub AddHandler(routedEvent As RoutedEvent, handler As Object, handledEventsToo As Boolean)
-  overload: System.Windows.UIElement.AddHandler*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  id: RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  langs:
-  - csharp
-  - vb
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  type: Method
-  source:
-    id: RemoveHandler
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\UIElement_Events.cs
-    startLine: 2183
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nRemoves the specified routed event handler from this UIElement. Typically\nthe handler in question was added by AddHandler.\n"
-  example: []
-  syntax:
-    content: public void RemoveHandler(RoutedEvent routedEvent, object handler)
-    parameters:
-    - id: routedEvent
-      type: System.Windows.RoutedEvent
-      description: The identifier of the routed event for which the handler is attached.
-    - id: handler
-      type: System.Object
-      description: >-
-        The specific handler implementation to remove from the event handler collection
-
-        on this UIElement.
-    content.vb: Public Sub RemoveHandler(routedEvent As RoutedEvent, handler As Object)
-  overload: System.Windows.UIElement.RemoveHandler*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 references:
 - uid: System.Windows
   commentId: N:System.Windows
@@ -3449,6 +4119,7 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -4088,6 +4759,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -4349,6 +5335,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -4763,17 +5754,6 @@ references:
   name: Projection
   nameWithType: Projection
   fullName: System.Windows.Media.Projection
-- uid: System.Windows.UIElement.Clip*
-  commentId: Overload:System.Windows.UIElement.Clip
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.Media.Geometry
-  commentId: T:System.Windows.Media.Geometry
-  parent: System.Windows.Media
-  name: Geometry
-  nameWithType: Geometry
-  fullName: System.Windows.Media.Geometry
 - uid: System.Windows.UIElement.OnCreateAutomationPeer*
   commentId: Overload:System.Windows.UIElement.OnCreateAutomationPeer
   name: OnCreateAutomationPeer
@@ -4791,6 +5771,8 @@ references:
   nameWithType: System.Windows.Automation.Peers
   fullName: System.Windows.Automation.Peers
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
@@ -4822,6 +5804,8 @@ references:
   nameWithType: UIElement.ClipToBounds
   fullName: System.Windows.UIElement.ClipToBounds
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -4832,6 +5816,17 @@ references:
   name: ClipToBounds
   nameWithType: UIElement.ClipToBounds
   fullName: System.Windows.UIElement.ClipToBounds
+- uid: System.Windows.UIElement.Clip*
+  commentId: Overload:System.Windows.UIElement.Clip
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.Media.Geometry
+  commentId: T:System.Windows.Media.Geometry
+  parent: System.Windows.Media
+  name: Geometry
+  nameWithType: Geometry
+  fullName: System.Windows.Media.Geometry
 - uid: System.Windows.UIElement.CreateDomElement*
   commentId: Overload:System.Windows.UIElement.CreateDomElement
   name: CreateDomElement
@@ -4843,6 +5838,8 @@ references:
   nameWithType: UIElement.CreateDomChildWrapper
   fullName: System.Windows.UIElement.CreateDomChildWrapper
 - uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
   name: Int32
   nameWithType: Int32
@@ -4940,12 +5937,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisible
-  commentId: P:System.Windows.UIElement.IsVisible
-  parent: System.Windows.UIElement
-  name: IsVisible
-  nameWithType: UIElement.IsVisible
-  fullName: System.Windows.UIElement.IsVisible
 - uid: System.Windows.DependencyPropertyChangedEventHandler
   commentId: T:System.Windows.DependencyPropertyChangedEventHandler
   parent: System.Windows
@@ -4958,6 +5949,8 @@ references:
   nameWithType: UIElement.Opacity
   fullName: System.Windows.UIElement.Opacity
 - uid: System.Double
+  commentId: T:System.Double
+  parent: System
   isExternal: true
   name: Double
   nameWithType: Double
@@ -5112,12 +6105,38 @@ references:
   name: UpdateLayout
   nameWithType: UIElement.UpdateLayout
   fullName: System.Windows.UIElement.UpdateLayout
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: System.NotImplementedException
+  commentId: T:System.NotImplementedException
+  isExternal: true
+- uid: System.Windows.UIElement.AddHandler*
+  commentId: Overload:System.Windows.UIElement.AddHandler
+  name: AddHandler
+  nameWithType: UIElement.AddHandler
+  fullName: System.Windows.UIElement.AddHandler
 - uid: System.Windows.RoutedEvent
   commentId: T:System.Windows.RoutedEvent
   parent: System.Windows
   name: RoutedEvent
   nameWithType: RoutedEvent
   fullName: System.Windows.RoutedEvent
+- uid: System.Delegate
+  commentId: T:System.Delegate
+  parent: System
+  isExternal: true
+  name: Delegate
+  nameWithType: Delegate
+  fullName: System.Delegate
+- uid: System.Windows.UIElement.RemoveHandler*
+  commentId: Overload:System.Windows.UIElement.RemoveHandler
+  name: RemoveHandler
+  nameWithType: UIElement.RemoveHandler
+  fullName: System.Windows.UIElement.RemoveHandler
 - uid: System.Windows.UIElement.OnMouseMove*
   commentId: Overload:System.Windows.UIElement.OnMouseMove
   name: OnMouseMove
@@ -5140,11 +6159,40 @@ references:
   name: MouseButtonEventArgs
   nameWithType: MouseButtonEventArgs
   fullName: System.Windows.Input.MouseButtonEventArgs
+- uid: System.Windows.UIElement.MouseRightButtonDown
+  commentId: E:System.Windows.UIElement.MouseRightButtonDown
+  parent: System.Windows.UIElement
+  name: MouseRightButtonDown
+  nameWithType: UIElement.MouseRightButtonDown
+  fullName: System.Windows.UIElement.MouseRightButtonDown
 - uid: System.Windows.UIElement.OnMouseRightButtonDown*
   commentId: Overload:System.Windows.UIElement.OnMouseRightButtonDown
   name: OnMouseRightButtonDown
   nameWithType: UIElement.OnMouseRightButtonDown
   fullName: System.Windows.UIElement.OnMouseRightButtonDown
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.Input.MouseWheelEventHandler
+  commentId: T:System.Windows.Input.MouseWheelEventHandler
+  parent: System.Windows.Input
+  name: MouseWheelEventHandler
+  nameWithType: MouseWheelEventHandler
+  fullName: System.Windows.Input.MouseWheelEventHandler
+- uid: System.Windows.UIElement.OnMouseWheel*
+  commentId: Overload:System.Windows.UIElement.OnMouseWheel
+  name: OnMouseWheel
+  nameWithType: UIElement.OnMouseWheel
+  fullName: System.Windows.UIElement.OnMouseWheel
+- uid: System.Windows.Input.MouseWheelEventArgs
+  commentId: T:System.Windows.Input.MouseWheelEventArgs
+  parent: System.Windows.Input
+  name: MouseWheelEventArgs
+  nameWithType: MouseWheelEventArgs
+  fullName: System.Windows.Input.MouseWheelEventArgs
 - uid: System.Windows.UIElement.OnMouseLeftButtonUp*
   commentId: Overload:System.Windows.UIElement.OnMouseLeftButtonUp
   name: OnMouseLeftButtonUp
@@ -5160,24 +6208,29 @@ references:
   name: OnMouseLeave
   nameWithType: UIElement.OnMouseLeave
   fullName: System.Windows.UIElement.OnMouseLeave
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
-- uid: System.Windows.Input.MouseWheelEventHandler
-  commentId: T:System.Windows.Input.MouseWheelEventHandler
-  parent: System.Windows.Input
-  name: MouseWheelEventHandler
-  nameWithType: MouseWheelEventHandler
-  fullName: System.Windows.Input.MouseWheelEventHandler
 - uid: System.Windows.UIElement.TextInput
   commentId: E:System.Windows.UIElement.TextInput
   parent: System.Windows.UIElement
   name: TextInput
   nameWithType: UIElement.TextInput
   fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.Input.TextCompositionEventHandler
+  commentId: T:System.Windows.Input.TextCompositionEventHandler
+  parent: System.Windows.Input
+  name: TextCompositionEventHandler
+  nameWithType: TextCompositionEventHandler
+  fullName: System.Windows.Input.TextCompositionEventHandler
+- uid: System.Windows.UIElement.OnTextInput*
+  commentId: Overload:System.Windows.UIElement.OnTextInput
+  name: OnTextInput
+  nameWithType: UIElement.OnTextInput
+  fullName: System.Windows.UIElement.OnTextInput
+- uid: System.Windows.Input.TextCompositionEventArgs
+  commentId: T:System.Windows.Input.TextCompositionEventArgs
+  parent: System.Windows.Input
+  name: TextCompositionEventArgs
+  nameWithType: TextCompositionEventArgs
+  fullName: System.Windows.Input.TextCompositionEventArgs
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -5190,12 +6243,6 @@ references:
   name: TextInputUpdate
   nameWithType: UIElement.TextInputUpdate
   fullName: System.Windows.UIElement.TextInputUpdate
-- uid: System.Windows.Input.TextCompositionEventHandler
-  commentId: T:System.Windows.Input.TextCompositionEventHandler
-  parent: System.Windows.Input
-  name: TextCompositionEventHandler
-  nameWithType: TextCompositionEventHandler
-  fullName: System.Windows.Input.TextCompositionEventHandler
 - uid: System.Windows.Input.TappedEventHandler
   commentId: T:System.Windows.Input.TappedEventHandler
   parent: System.Windows.Input
@@ -5272,13 +6319,3 @@ references:
   name: INTERNAL_DetachFromDomEvents
   nameWithType: UIElement.INTERNAL_DetachFromDomEvents
   fullName: System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-- uid: System.Windows.UIElement.AddHandler*
-  commentId: Overload:System.Windows.UIElement.AddHandler
-  name: AddHandler
-  nameWithType: UIElement.AddHandler
-  fullName: System.Windows.UIElement.AddHandler
-- uid: System.Windows.UIElement.RemoveHandler*
-  commentId: Overload:System.Windows.UIElement.RemoveHandler
-  name: RemoveHandler
-  nameWithType: UIElement.RemoveHandler
-  fullName: System.Windows.UIElement.RemoveHandler

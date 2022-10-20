@@ -12,8 +12,8 @@ items:
   - System.Windows.ResourceDictionary.Clear
   - System.Windows.ResourceDictionary.Contains(System.Object)
   - System.Windows.ResourceDictionary.ContainsKey(System.Object)
-  - System.Windows.ResourceDictionary.CopyTo(Array,System.Int32)
-  - System.Windows.ResourceDictionary.CopyTo(DictionaryEntry[],System.Int32)
+  - System.Windows.ResourceDictionary.CopyTo(System.Array,System.Int32)
+  - System.Windows.ResourceDictionary.CopyTo(System.Collections.DictionaryEntry[],System.Int32)
   - System.Windows.ResourceDictionary.Count
   - System.Windows.ResourceDictionary.EndInit
   - System.Windows.ResourceDictionary.FindName(System.String)
@@ -28,6 +28,19 @@ items:
   - System.Windows.ResourceDictionary.Remove(System.Object)
   - System.Windows.ResourceDictionary.Remove(System.String)
   - System.Windows.ResourceDictionary.Source
+  - System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Add(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  - System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Contains(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  - System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#CopyTo(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[],System.Int32)
+  - System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Count
+  - System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Remove(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  - System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Keys
+  - System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Remove(System.Object)
+  - System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#TryGetValue(System.Object,System.Object@)
+  - System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Values
+  - System.Windows.ResourceDictionary.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#GetEnumerator
+  - System.Windows.ResourceDictionary.System#Collections#ICollection#IsSynchronized
+  - System.Windows.ResourceDictionary.System#Collections#ICollection#SyncRoot
+  - System.Windows.ResourceDictionary.System#Collections#IEnumerable#GetEnumerator
   - System.Windows.ResourceDictionary.ThemeDictionaries
   - System.Windows.ResourceDictionary.UnregisterName(System.String)
   - System.Windows.ResourceDictionary.Values
@@ -39,8 +52,12 @@ items:
   fullName: System.Windows.ResourceDictionary
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ResourceDictionary
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 45
   assemblies:
   - OpenSilver
@@ -48,19 +65,24 @@ items:
   summary: "\nDefines a dictionary that contains resources used by components of the app.\nThis dictionary is oriented toward defining the resources in XAML, and then\nretrieving them through XAML references via the StaticResource markup extension.\nAlternatively you can access resources by traversing the dictionary at run\ntime.\n"
   example: []
   syntax:
-    content: 'public class ResourceDictionary : DependencyObject, IDictionary<object, object>, IDictionary, ICollection, ISupportInitialize, INameScope'
+    content: 'public class ResourceDictionary : DependencyObject, IDictionary<object, object>, ICollection<KeyValuePair<object, object>>, IEnumerable<KeyValuePair<object, object>>, IDictionary, ICollection, IEnumerable, ISupportInitialize, INameScope'
     content.vb: >-
       Public Class ResourceDictionary
+
           Inherits DependencyObject
-          Implements IDictionary(Of Object, Object), IDictionary, ICollection, ISupportInitialize, INameScope
+
+          Implements IDictionary(Of Object, Object), ICollection(Of KeyValuePair(Of Object, Object)), IEnumerable(Of KeyValuePair(Of Object, Object)), IDictionary, ICollection, IEnumerable, ISupportInitialize, INameScope
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   implements:
-  - IDictionary{System.Object,System.Object}
-  - IDictionary
-  - ICollection
-  - ISupportInitialize
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  - System.Collections.IDictionary
+  - System.Collections.ICollection
+  - System.Collections.IEnumerable
+  - System.ComponentModel.ISupportInitialize
   - System.Windows.Markup.INameScope
   inheritedMembers:
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
@@ -80,6 +102,14 @@ items:
   - System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
@@ -108,17 +138,33 @@ items:
   fullName: System.Windows.ResourceDictionary.INTERNAL_HasImplicitStyles
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_HasImplicitStyles
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 50
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public bool INTERNAL_HasImplicitStyles
+    content: >-
+      [Obsolete("Don't use this.")]
+
+      public bool INTERNAL_HasImplicitStyles
     return:
       type: System.Boolean
-    content.vb: Public INTERNAL_HasImplicitStyles As Boolean
+    content.vb: >-
+      <Obsolete("Don't use this.")>
+
+      Public INTERNAL_HasImplicitStyles As Boolean
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Don't use this.
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -135,8 +181,12 @@ items:
   fullName: System.Windows.ResourceDictionary.ResourceDictionary()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 97
   assemblies:
   - OpenSilver
@@ -163,8 +213,12 @@ items:
   fullName: System.Windows.ResourceDictionary.ThemeDictionaries
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ThemeDictionaries
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 125
   assemblies:
   - OpenSilver
@@ -175,7 +229,7 @@ items:
     content: public IDictionary<object, ResourceDictionary> ThemeDictionaries { get; }
     parameters: []
     return:
-      type: IDictionary{System.Object,System.Windows.ResourceDictionary}
+      type: System.Collections.Generic.IDictionary{System.Object,System.Windows.ResourceDictionary}
     content.vb: Public ReadOnly Property ThemeDictionaries As IDictionary(Of Object, ResourceDictionary)
   overload: System.Windows.ResourceDictionary.ThemeDictionaries*
   modifiers.csharp:
@@ -196,8 +250,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Item[System.Object]
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: this[]
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 145
   assemblies:
   - OpenSilver
@@ -214,6 +272,13 @@ items:
       type: System.Object
     content.vb: Public Property Item(key As Object) As Object
   overload: System.Windows.ResourceDictionary.Item*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: key is null.
+  implements:
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}.Item(System.Object)
+  - System.Collections.IDictionary.Item(System.Object)
   nameWithType.vb: ResourceDictionary.Item(Object)
   modifiers.csharp:
   - public
@@ -235,8 +300,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Count
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Count
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 172
   assemblies:
   - OpenSilver
@@ -252,6 +321,8 @@ items:
       description: "\nThe number of elements contained in the collection.\n"
     content.vb: Public ReadOnly Property Count As Integer
   overload: System.Windows.ResourceDictionary.Count*
+  implements:
+  - System.Collections.ICollection.Count
   modifiers.csharp:
   - public
   - get
@@ -270,8 +341,12 @@ items:
   fullName: System.Windows.ResourceDictionary.IsFixedSize
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsFixedSize
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 181
   assemblies:
   - OpenSilver
@@ -286,6 +361,8 @@ items:
       description: Always returns false.
     content.vb: Public ReadOnly Property IsFixedSize As Boolean
   overload: System.Windows.ResourceDictionary.IsFixedSize*
+  implements:
+  - System.Collections.IDictionary.IsFixedSize
   modifiers.csharp:
   - public
   - get
@@ -304,8 +381,12 @@ items:
   fullName: System.Windows.ResourceDictionary.IsReadOnly
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsReadOnly
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 196
   assemblies:
   - OpenSilver
@@ -320,6 +401,9 @@ items:
       description: "\nAlways returns false\n"
     content.vb: Public ReadOnly Property IsReadOnly As Boolean
   overload: System.Windows.ResourceDictionary.IsReadOnly*
+  implements:
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.IsReadOnly
+  - System.Collections.IDictionary.IsReadOnly
   modifiers.csharp:
   - public
   - get
@@ -338,21 +422,27 @@ items:
   fullName: System.Windows.ResourceDictionary.Keys
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Keys
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 204
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets an <see cref=\"!:ICollection\"></see> object containing the keys of the <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nGets an <xref href=\"System.Collections.ICollection\" data-throw-if-not-resolved=\"false\"></xref> object containing the keys of the <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public ICollection Keys { get; }
     parameters: []
     return:
-      type: ICollection
+      type: System.Collections.ICollection
     content.vb: Public ReadOnly Property Keys As ICollection
   overload: System.Windows.ResourceDictionary.Keys*
+  implements:
+  - System.Collections.IDictionary.Keys
   modifiers.csharp:
   - public
   - get
@@ -371,8 +461,12 @@ items:
   fullName: System.Windows.ResourceDictionary.MergedDictionaries
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MergedDictionaries
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 212
   assemblies:
   - OpenSilver
@@ -404,8 +498,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Source
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Source
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 229
   assemblies:
   - OpenSilver
@@ -416,7 +514,7 @@ items:
     content: public Uri Source { get; set; }
     parameters: []
     return:
-      type: Uri
+      type: System.Uri
     content.vb: Public Property Source As Uri
   overload: System.Windows.ResourceDictionary.Source*
   modifiers.csharp:
@@ -437,21 +535,27 @@ items:
   fullName: System.Windows.ResourceDictionary.Values
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Values
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 234
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets an <see cref=\"!:ICollection\"></see> object containing the values of the <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nGets an <xref href=\"System.Collections.ICollection\" data-throw-if-not-resolved=\"false\"></xref> object containing the values of the <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public ICollection Values { get; }
     parameters: []
     return:
-      type: ICollection
+      type: System.Collections.ICollection
     content.vb: Public ReadOnly Property Values As ICollection
   overload: System.Windows.ResourceDictionary.Values*
+  implements:
+  - System.Collections.IDictionary.Values
   modifiers.csharp:
   - public
   - get
@@ -470,8 +574,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Add(System.Object, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Add
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 255
   assemblies:
   - OpenSilver
@@ -489,6 +597,16 @@ items:
       description: The item value to add.
     content.vb: Public Sub Add(key As Object, value As Object)
   overload: System.Windows.ResourceDictionary.Add*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: "\nAttempted to add null as a value.\n"
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nAttempted to add an item with a key that already exists in this <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>.-or-Attempted\nto use a key that is not a string.\n"
+  implements:
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}.Add(System.Object,System.Object)
+  - System.Collections.IDictionary.Add(System.Object,System.Object)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -505,8 +623,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Add(System.String, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Add
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 260
   assemblies:
   - OpenSilver
@@ -536,8 +658,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Clear()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Clear
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 268
   assemblies:
   - OpenSilver
@@ -548,6 +674,9 @@ items:
     content: public void Clear()
     content.vb: Public Sub Clear
   overload: System.Windows.ResourceDictionary.Clear*
+  implements:
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Clear
+  - System.Collections.IDictionary.Clear
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -564,8 +693,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Contains(System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Contains
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 296
   assemblies:
   - OpenSilver
@@ -583,6 +716,12 @@ items:
       description: "\ntrue if an item with that key exists in the <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>;\notherwise, false.\n"
     content.vb: Public Function Contains(key As Object) As Boolean
   overload: System.Windows.ResourceDictionary.Contains*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nkey is null.\n"
+  implements:
+  - System.Collections.IDictionary.Contains(System.Object)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -599,8 +738,12 @@ items:
   fullName: System.Windows.ResourceDictionary.ContainsKey(System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ContainsKey
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 319
   assemblies:
   - OpenSilver
@@ -616,59 +759,71 @@ items:
       type: System.Boolean
     content.vb: Public Function ContainsKey(key As Object) As Boolean
   overload: System.Windows.ResourceDictionary.ContainsKey*
+  implements:
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}.ContainsKey(System.Object)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.ResourceDictionary.CopyTo(Array,System.Int32)
-  commentId: M:System.Windows.ResourceDictionary.CopyTo(Array,System.Int32)
-  id: CopyTo(Array,System.Int32)
+- uid: System.Windows.ResourceDictionary.CopyTo(System.Array,System.Int32)
+  commentId: M:System.Windows.ResourceDictionary.CopyTo(System.Array,System.Int32)
+  id: CopyTo(System.Array,System.Int32)
   parent: System.Windows.ResourceDictionary
   langs:
   - csharp
   - vb
   name: CopyTo(Array, Int32)
   nameWithType: ResourceDictionary.CopyTo(Array, Int32)
-  fullName: System.Windows.ResourceDictionary.CopyTo(Array, System.Int32)
+  fullName: System.Windows.ResourceDictionary.CopyTo(System.Array, System.Int32)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CopyTo
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 336
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nCopies the elements of the <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref> to an <see cref=\"!:Array\"></see>,\nstarting at a particular <see cref=\"!:Array\"></see> index.\n"
+  summary: "\nCopies the elements of the <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref> to an <xref href=\"System.Array\" data-throw-if-not-resolved=\"false\"></xref>,\nstarting at a particular <xref href=\"System.Array\" data-throw-if-not-resolved=\"false\"></xref> index.\n"
   example: []
   syntax:
     content: public void CopyTo(Array array, int index)
     parameters:
     - id: array
-      type: Array
-      description: "\nThe one-dimensional <see cref=\"!:Array\"></see> that is the destination of the elements copied\nfrom <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>. The System.Array must have zero-based\nindexing.\n"
+      type: System.Array
+      description: "\nThe one-dimensional <xref href=\"System.Array\" data-throw-if-not-resolved=\"false\"></xref> that is the destination of the elements copied\nfrom <xref href=\"System.Windows.ResourceDictionary\" data-throw-if-not-resolved=\"false\"></xref>. The System.Array must have zero-based\nindexing.\n"
     - id: index
       type: System.Int32
       description: "\nThe zero-based index in array at which copying begins.\n"
     content.vb: Public Sub CopyTo(array As Array, index As Integer)
   overload: System.Windows.ResourceDictionary.CopyTo*
+  implements:
+  - System.Collections.ICollection.CopyTo(System.Array,System.Int32)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.ResourceDictionary.CopyTo(DictionaryEntry[],System.Int32)
-  commentId: M:System.Windows.ResourceDictionary.CopyTo(DictionaryEntry[],System.Int32)
-  id: CopyTo(DictionaryEntry[],System.Int32)
+- uid: System.Windows.ResourceDictionary.CopyTo(System.Collections.DictionaryEntry[],System.Int32)
+  commentId: M:System.Windows.ResourceDictionary.CopyTo(System.Collections.DictionaryEntry[],System.Int32)
+  id: CopyTo(System.Collections.DictionaryEntry[],System.Int32)
   parent: System.Windows.ResourceDictionary
   langs:
   - csharp
   - vb
   name: CopyTo(DictionaryEntry[], Int32)
   nameWithType: ResourceDictionary.CopyTo(DictionaryEntry[], Int32)
-  fullName: System.Windows.ResourceDictionary.CopyTo(DictionaryEntry[], System.Int32)
+  fullName: System.Windows.ResourceDictionary.CopyTo(System.Collections.DictionaryEntry[], System.Int32)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CopyTo
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 362
   assemblies:
   - OpenSilver
@@ -679,7 +834,7 @@ items:
     content: public void CopyTo(DictionaryEntry[] array, int arrayIndex)
     parameters:
     - id: array
-      type: DictionaryEntry[]
+      type: System.Collections.DictionaryEntry[]
       description: "\nThe one-dimensional Array that is the destination of the\nDictionaryEntry objects copied from Dictionary. The Array\nmust have zero-based indexing.\n"
     - id: arrayIndex
       type: System.Int32
@@ -691,7 +846,7 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: System.Windows.ResourceDictionary.CopyTo(DictionaryEntry(), System.Int32)
+  fullName.vb: System.Windows.ResourceDictionary.CopyTo(System.Collections.DictionaryEntry(), System.Int32)
   name.vb: CopyTo(DictionaryEntry(), Int32)
 - uid: System.Windows.ResourceDictionary.GetEnumerator
   commentId: M:System.Windows.ResourceDictionary.GetEnumerator
@@ -705,8 +860,12 @@ items:
   fullName: System.Windows.ResourceDictionary.GetEnumerator()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetEnumerator
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 379
   assemblies:
   - OpenSilver
@@ -716,10 +875,12 @@ items:
   syntax:
     content: public IDictionaryEnumerator GetEnumerator()
     return:
-      type: IDictionaryEnumerator
+      type: System.Collections.IDictionaryEnumerator
       description: "\nAn enumerator that can be used to iterate through the collection.\n"
     content.vb: Public Function GetEnumerator As IDictionaryEnumerator
   overload: System.Windows.ResourceDictionary.GetEnumerator*
+  implements:
+  - System.Collections.IDictionary.GetEnumerator
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -736,8 +897,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Remove(System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Remove
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 393
   assemblies:
   - OpenSilver
@@ -752,6 +917,12 @@ items:
       description: "\nThe key of the item to remove.\n"
     content.vb: Public Sub Remove(key As Object)
   overload: System.Windows.ResourceDictionary.Remove*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nkey is null.\n"
+  implements:
+  - System.Collections.IDictionary.Remove(System.Object)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -768,8 +939,12 @@ items:
   fullName: System.Windows.ResourceDictionary.Remove(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Remove
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 418
   assemblies:
   - OpenSilver
@@ -784,6 +959,10 @@ items:
       description: "\nThe string key of the item to remove.\n"
     content.vb: Public Sub Remove(key As String)
   overload: System.Windows.ResourceDictionary.Remove*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nkey is null.\n"
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -800,8 +979,12 @@ items:
   fullName: System.Windows.ResourceDictionary.BeginInit()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BeginInit
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 432
   assemblies:
   - OpenSilver
@@ -813,6 +996,8 @@ items:
     content: public void BeginInit()
     content.vb: Public Sub BeginInit
   overload: System.Windows.ResourceDictionary.BeginInit*
+  implements:
+  - System.ComponentModel.ISupportInitialize.BeginInit
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -829,8 +1014,12 @@ items:
   fullName: System.Windows.ResourceDictionary.EndInit()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: EndInit
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
     startLine: 451
   assemblies:
   - OpenSilver
@@ -842,10 +1031,494 @@ items:
     content: public void EndInit()
     content.vb: Public Sub
   overload: System.Windows.ResourceDictionary.EndInit*
+  implements:
+  - System.ComponentModel.ISupportInitialize.EndInit
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.ResourceDictionary.System#Collections#ICollection#SyncRoot
+  commentId: P:System.Windows.ResourceDictionary.System#Collections#ICollection#SyncRoot
+  id: System#Collections#ICollection#SyncRoot
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: ICollection.SyncRoot
+  nameWithType: ResourceDictionary.ICollection.SyncRoot
+  fullName: System.Windows.ResourceDictionary.System.Collections.ICollection.SyncRoot
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.ICollection.SyncRoot
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 472
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: object ICollection.SyncRoot { get; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: ReadOnly WriteOnly Property System.Collections.ICollection.SyncRoot As Object Implements ICollection.SyncRoot
+  overload: System.Windows.ResourceDictionary.System#Collections#ICollection#SyncRoot*
+  implements:
+  - System.Collections.ICollection.SyncRoot
+  nameWithType.vb: ResourceDictionary.System.Collections.ICollection.SyncRoot
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+  name.vb: System.Collections.ICollection.SyncRoot
+- uid: System.Windows.ResourceDictionary.System#Collections#ICollection#IsSynchronized
+  commentId: P:System.Windows.ResourceDictionary.System#Collections#ICollection#IsSynchronized
+  id: System#Collections#ICollection#IsSynchronized
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: ICollection.IsSynchronized
+  nameWithType: ResourceDictionary.ICollection.IsSynchronized
+  fullName: System.Windows.ResourceDictionary.System.Collections.ICollection.IsSynchronized
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.ICollection.IsSynchronized
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 477
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: bool ICollection.IsSynchronized { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly WriteOnly Property System.Collections.ICollection.IsSynchronized As Boolean Implements ICollection.IsSynchronized
+  overload: System.Windows.ResourceDictionary.System#Collections#ICollection#IsSynchronized*
+  implements:
+  - System.Collections.ICollection.IsSynchronized
+  nameWithType.vb: ResourceDictionary.System.Collections.ICollection.IsSynchronized
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+  name.vb: System.Collections.ICollection.IsSynchronized
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Count
+  commentId: P:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Count
+  id: System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Count
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: ICollection<KeyValuePair<Object, Object>>.Count
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Count
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Count
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 482
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: int ICollection<KeyValuePair<object, object>>.Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly WriteOnly Property System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count As Integer Implements ICollection(Of KeyValuePair(Of Object, Object)).Count
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Count*
+  implements:
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Count
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Keys
+  commentId: P:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Keys
+  id: System#Collections#Generic#IDictionary{System#Object,System#Object}#Keys
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: IDictionary<Object, Object>.Keys
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.Keys
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.Keys
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 487
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: ICollection<object> IDictionary<object, object>.Keys { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.ICollection{System.Object}
+    content.vb: ReadOnly WriteOnly Property System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys As ICollection(Of Object) Implements IDictionary(Of Object, Object).Keys
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Keys*
+  implements:
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}.Keys
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Values
+  commentId: P:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Values
+  id: System#Collections#Generic#IDictionary{System#Object,System#Object}#Values
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: IDictionary<Object, Object>.Values
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.Values
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.Values
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.IDictionary<System.Object,System.Object>.Values
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 492
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: ICollection<object> IDictionary<object, object>.Values { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.ICollection{System.Object}
+    content.vb: ReadOnly WriteOnly Property System.Collections.Generic.IDictionary<System.Object,System.Object>.Values As ICollection(Of Object) Implements IDictionary(Of Object, Object).Values
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Values*
+  implements:
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}.Values
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Values
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Values
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.Values
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Remove(System.Object)
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Remove(System.Object)
+  id: System#Collections#Generic#IDictionary{System#Object,System#Object}#Remove(System.Object)
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: IDictionary<Object, Object>.Remove(Object)
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.Remove(Object)
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.Remove(System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 497
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: bool IDictionary<object, object>.Remove(object key)
+    parameters:
+    - id: key
+      type: System.Object
+    return:
+      type: System.Boolean
+    content.vb: Function System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove(key As Object) As Boolean Implements IDictionary(Of Object, Object).Remove
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Remove*
+  implements:
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}.Remove(System.Object)
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove(Object)
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove(System.Object)
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove(Object)
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#TryGetValue(System.Object,System.Object@)
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#TryGetValue(System.Object,System.Object@)
+  id: System#Collections#Generic#IDictionary{System#Object,System#Object}#TryGetValue(System.Object,System.Object@)
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: IDictionary<Object, Object>.TryGetValue(Object, out Object)
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.TryGetValue(Object, out Object)
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.TryGetValue(System.Object, out System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 504
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: bool IDictionary<object, object>.TryGetValue(object key, out object value)
+    parameters:
+    - id: key
+      type: System.Object
+    - id: value
+      type: System.Object
+    return:
+      type: System.Boolean
+    content.vb: Function System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue(key As Object, ByRef value As Object) As Boolean Implements IDictionary(Of Object, Object).TryGetValue
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#TryGetValue*
+  implements:
+  - System.Collections.Generic.IDictionary{System.Object,System.Object}.TryGetValue(System.Object,System.Object@)
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue(Object, ByRef Object)
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue(System.Object, ByRef System.Object)
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue(Object, ByRef Object)
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Add(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Add(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  id: System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Add(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: ICollection<KeyValuePair<Object, Object>>.Add(KeyValuePair<Object, Object>)
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Add(KeyValuePair<Object, Object>)
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Add(System.Collections.Generic.KeyValuePair<System.Object, System.Object>)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 509
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: void ICollection<KeyValuePair<object, object>>.Add(KeyValuePair<object, object> item)
+    parameters:
+    - id: item
+      type: System.Collections.Generic.KeyValuePair{System.Object,System.Object}
+    content.vb: Sub System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add(item As KeyValuePair(Of Object, Object)) Implements ICollection(Of KeyValuePair(Of Object, Object)).Add
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Add*
+  implements:
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Add(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add(KeyValuePair(Of Object, Object))
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add(KeyValuePair(Of Object, Object))
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#CopyTo(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[],System.Int32)
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#CopyTo(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[],System.Int32)
+  id: System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#CopyTo(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[],System.Int32)
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: ICollection<KeyValuePair<Object, Object>>.CopyTo(KeyValuePair<Object, Object>[], Int32)
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.CopyTo(KeyValuePair<Object, Object>[], Int32)
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.CopyTo(System.Collections.Generic.KeyValuePair<System.Object, System.Object>[], System.Int32)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 514
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: void ICollection<KeyValuePair<object, object>>.CopyTo(KeyValuePair<object, object>[] array, int arrayIndex)
+    parameters:
+    - id: array
+      type: System.Collections.Generic.KeyValuePair{System.Object,System.Object}[]
+    - id: arrayIndex
+      type: System.Int32
+    content.vb: Sub System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo(array As KeyValuePair(Of Object, Object)(), arrayIndex As Integer) Implements ICollection(Of KeyValuePair(Of Object, Object)).CopyTo
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#CopyTo*
+  implements:
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.CopyTo(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[],System.Int32)
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo(KeyValuePair(Of Object, Object)(), Int32)
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)(), System.Int32)
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo(KeyValuePair(Of Object, Object)(), Int32)
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Contains(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Contains(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  id: System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Contains(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: ICollection<KeyValuePair<Object, Object>>.Contains(KeyValuePair<Object, Object>)
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Contains(KeyValuePair<Object, Object>)
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Contains(System.Collections.Generic.KeyValuePair<System.Object, System.Object>)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 519
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: bool ICollection<KeyValuePair<object, object>>.Contains(KeyValuePair<object, object> item)
+    parameters:
+    - id: item
+      type: System.Collections.Generic.KeyValuePair{System.Object,System.Object}
+    return:
+      type: System.Boolean
+    content.vb: Function System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains(item As KeyValuePair(Of Object, Object)) As Boolean Implements ICollection(Of KeyValuePair(Of Object, Object)).Contains
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Contains*
+  implements:
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Contains(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains(KeyValuePair(Of Object, Object))
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains(KeyValuePair(Of Object, Object))
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Remove(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Remove(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  id: System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Remove(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: ICollection<KeyValuePair<Object, Object>>.Remove(KeyValuePair<Object, Object>)
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Remove(KeyValuePair<Object, Object>)
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Remove(System.Collections.Generic.KeyValuePair<System.Object, System.Object>)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 524
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: bool ICollection<KeyValuePair<object, object>>.Remove(KeyValuePair<object, object> item)
+    parameters:
+    - id: item
+      type: System.Collections.Generic.KeyValuePair{System.Object,System.Object}
+    return:
+      type: System.Boolean
+    content.vb: Function System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove(item As KeyValuePair(Of Object, Object)) As Boolean Implements ICollection(Of KeyValuePair(Of Object, Object)).Remove
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Remove*
+  implements:
+  - System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Remove(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove(KeyValuePair(Of Object, Object))
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove(KeyValuePair(Of Object, Object))
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#GetEnumerator
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#GetEnumerator
+  id: System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#GetEnumerator
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: IEnumerable<KeyValuePair<Object, Object>>.GetEnumerator()
+  nameWithType: ResourceDictionary.IEnumerable<KeyValuePair<Object, Object>>.GetEnumerator()
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 531
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: IEnumerator<KeyValuePair<object, object>> IEnumerable<KeyValuePair<object, object>>.GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+    content.vb: Function System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator As IEnumerator(Of KeyValuePair(Of Object, Object)) Implements IEnumerable(Of KeyValuePair(Of Object, Object)).GetEnumerator
+  overload: System.Windows.ResourceDictionary.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#GetEnumerator*
+  implements:
+  - System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.GetEnumerator
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator()
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator()
+  name.vb: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator()
+- uid: System.Windows.ResourceDictionary.System#Collections#IEnumerable#GetEnumerator
+  commentId: M:System.Windows.ResourceDictionary.System#Collections#IEnumerable#GetEnumerator
+  id: System#Collections#IEnumerable#GetEnumerator
+  isEii: true
+  parent: System.Windows.ResourceDictionary
+  langs:
+  - csharp
+  - vb
+  name: IEnumerable.GetEnumerator()
+  nameWithType: ResourceDictionary.IEnumerable.GetEnumerator()
+  fullName: System.Windows.ResourceDictionary.System.Collections.IEnumerable.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.IEnumerable.GetEnumerator
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 536
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: IEnumerator IEnumerable.GetEnumerator()
+    return:
+      type: System.Collections.IEnumerator
+    content.vb: Function System.Collections.IEnumerable.GetEnumerator As IEnumerator Implements IEnumerable.GetEnumerator
+  overload: System.Windows.ResourceDictionary.System#Collections#IEnumerable#GetEnumerator*
+  implements:
+  - System.Collections.IEnumerable.GetEnumerator
+  nameWithType.vb: ResourceDictionary.System.Collections.IEnumerable.GetEnumerator()
+  name.vb: System.Collections.IEnumerable.GetEnumerator()
 - uid: System.Windows.ResourceDictionary.FindName(System.String)
   commentId: M:System.Windows.ResourceDictionary.FindName(System.String)
   id: FindName(System.String)
@@ -858,9 +1531,13 @@ items:
   fullName: System.Windows.ResourceDictionary.FindName(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FindName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
-    startLine: 1274
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 1292
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -895,9 +1572,13 @@ items:
   fullName: System.Windows.ResourceDictionary.RegisterName(System.String, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RegisterName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
-    startLine: 1286
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 1304
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -928,9 +1609,13 @@ items:
   fullName: System.Windows.ResourceDictionary.UnregisterName(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UnregisterName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\ResourceDictionary.cs
-    startLine: 1297
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/ResourceDictionary.cs
+    startLine: 1315
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -955,6 +1640,7 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -965,20 +1651,21 @@ references:
   name: DependencyObject
   nameWithType: DependencyObject
   fullName: System.Windows.DependencyObject
-- uid: IDictionary{System.Object,System.Object}
-  commentId: '!:IDictionary{System.Object,System.Object}'
-  definition: IDictionary`2
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  commentId: T:System.Collections.Generic.IDictionary{System.Object,System.Object}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
   name: IDictionary<Object, Object>
   nameWithType: IDictionary<Object, Object>
-  fullName: IDictionary<System.Object, System.Object>
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>
   nameWithType.vb: IDictionary(Of Object, Object)
-  fullName.vb: IDictionary(Of System.Object, System.Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object)
   name.vb: IDictionary(Of Object, Object)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     nameWithType: <
@@ -1000,10 +1687,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1024,22 +1711,198 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: IDictionary
-  commentId: '!:IDictionary'
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  commentId: T:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  name: ICollection<KeyValuePair<Object, Object>>
+  nameWithType: ICollection<KeyValuePair<Object, Object>>
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object))
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: ICollection(Of KeyValuePair(Of Object, Object))
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  commentId: T:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  name: IEnumerable<KeyValuePair<Object, Object>>
+  nameWithType: IEnumerable<KeyValuePair<Object, Object>>
+  fullName: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>
+  nameWithType.vb: IEnumerable(Of KeyValuePair(Of Object, Object))
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: IEnumerable(Of KeyValuePair(Of Object, Object))
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.IDictionary
+  commentId: T:System.Collections.IDictionary
+  parent: System.Collections
   isExternal: true
   name: IDictionary
   nameWithType: IDictionary
-  fullName: IDictionary
-- uid: ICollection
+  fullName: System.Collections.IDictionary
+- uid: System.Collections.ICollection
+  commentId: T:System.Collections.ICollection
+  parent: System.Collections
   isExternal: true
   name: ICollection
   nameWithType: ICollection
-  fullName: ICollection
-- uid: ISupportInitialize
+  fullName: System.Collections.ICollection
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.ComponentModel.ISupportInitialize
+  commentId: T:System.ComponentModel.ISupportInitialize
+  parent: System.ComponentModel
   isExternal: true
   name: ISupportInitialize
   nameWithType: ISupportInitialize
-  fullName: ISupportInitialize
+  fullName: System.ComponentModel.ISupportInitialize
 - uid: System.Windows.Markup.INameScope
   commentId: T:System.Windows.Markup.INameScope
   parent: System.Windows.Markup
@@ -1703,6 +2566,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -1964,56 +3142,156 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: IDictionary`2
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.IDictionary`2
+  commentId: T:System.Collections.Generic.IDictionary`2
   isExternal: true
-  name: IDictionary<, >
-  nameWithType: IDictionary<, >
-  fullName: IDictionary<, >
-  nameWithType.vb: IDictionary(Of , )
-  fullName.vb: IDictionary(Of , )
-  name.vb: IDictionary(Of , )
+  name: IDictionary<TKey, TValue>
+  nameWithType: IDictionary<TKey, TValue>
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
+  nameWithType.vb: IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  name.vb: IDictionary(Of TKey, TValue)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.Generic.IEnumerable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
 - uid: System.Windows.Markup
   commentId: N:System.Windows.Markup
   name: System.Windows.Markup
@@ -2360,6 +3638,8 @@ references:
   nameWithType: System.Windows.Controls.Primitives
   fullName: System.Windows.Controls.Primitives
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -2374,20 +3654,21 @@ references:
   name: ThemeDictionaries
   nameWithType: ResourceDictionary.ThemeDictionaries
   fullName: System.Windows.ResourceDictionary.ThemeDictionaries
-- uid: IDictionary{System.Object,System.Windows.ResourceDictionary}
-  commentId: '!:IDictionary{System.Object,System.Windows.ResourceDictionary}'
-  definition: IDictionary`2
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Windows.ResourceDictionary}
+  commentId: T:System.Collections.Generic.IDictionary{System.Object,System.Windows.ResourceDictionary}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IDictionary`2
   name: IDictionary<Object, ResourceDictionary>
   nameWithType: IDictionary<Object, ResourceDictionary>
-  fullName: IDictionary<System.Object, System.Windows.ResourceDictionary>
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Windows.ResourceDictionary>
   nameWithType.vb: IDictionary(Of Object, ResourceDictionary)
-  fullName.vb: IDictionary(Of System.Object, System.Windows.ResourceDictionary)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Windows.ResourceDictionary)
   name.vb: IDictionary(Of Object, ResourceDictionary)
   spec.csharp:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: <
     nameWithType: <
@@ -2408,10 +3689,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: IDictionary`2
+  - uid: System.Collections.Generic.IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: IDictionary
+    fullName: System.Collections.Generic.IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -2431,11 +3712,141 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
 - uid: System.Windows.ResourceDictionary.Item*
   commentId: Overload:System.Windows.ResourceDictionary.Item
   name: Item
   nameWithType: ResourceDictionary.Item
   fullName: System.Windows.ResourceDictionary.Item
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}.Item(System.Object)
+  commentId: P:System.Collections.Generic.IDictionary{System.Object,System.Object}.Item(System.Object)
+  parent: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  definition: System.Collections.Generic.IDictionary`2.Item(`0)
+  name: Item[Object]
+  nameWithType: IDictionary<Object, Object>.Item[Object]
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Item[System.Object]
+  nameWithType.vb: IDictionary(Of Object, Object).Item(Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Item(System.Object)
+  name.vb: Item(Object)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.Item(`0)
+    name: Item
+    nameWithType: IDictionary<Object, Object>.Item
+    fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Item
+    isExternal: true
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.Item(`0)
+    name: Item
+    nameWithType: IDictionary(Of Object, Object).Item
+    fullName: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Item
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.IDictionary.Item(System.Object)
+  commentId: P:System.Collections.IDictionary.Item(System.Object)
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: Item[Object]
+  nameWithType: IDictionary.Item[Object]
+  fullName: System.Collections.IDictionary.Item[System.Object]
+  nameWithType.vb: IDictionary.Item(Object)
+  fullName.vb: System.Collections.IDictionary.Item(System.Object)
+  name.vb: Item(Object)
+  spec.csharp:
+  - uid: System.Collections.IDictionary.Item(System.Object)
+    name: Item
+    nameWithType: IDictionary.Item
+    fullName: System.Collections.IDictionary.Item
+    isExternal: true
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: System.Collections.IDictionary.Item(System.Object)
+    name: Item
+    nameWithType: IDictionary.Item
+    fullName: System.Collections.IDictionary.Item
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IDictionary`2.Item(`0)
+  commentId: P:System.Collections.Generic.IDictionary`2.Item(`0)
+  isExternal: true
+  name: Item[TKey]
+  nameWithType: IDictionary<TKey, TValue>.Item[TKey]
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Item[TKey]
+  nameWithType.vb: IDictionary(Of TKey, TValue).Item(TKey)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue).Item(TKey)
+  name.vb: Item(TKey)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.Item(`0)
+    name: Item
+    nameWithType: IDictionary<TKey, TValue>.Item
+    fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Item
+    isExternal: true
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.Item(`0)
+    name: Item
+    nameWithType: IDictionary(Of TKey, TValue).Item
+    fullName: System.Collections.Generic.IDictionary(Of TKey, TValue).Item
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.ResourceDictionary.MergedDictionaries
   commentId: P:System.Windows.ResourceDictionary.MergedDictionaries
   isExternal: true
@@ -2444,7 +3855,16 @@ references:
   name: Count
   nameWithType: ResourceDictionary.Count
   fullName: System.Windows.ResourceDictionary.Count
+- uid: System.Collections.ICollection.Count
+  commentId: P:System.Collections.ICollection.Count
+  parent: System.Collections.ICollection
+  isExternal: true
+  name: Count
+  nameWithType: ICollection.Count
+  fullName: System.Collections.ICollection.Count
 - uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
   name: Int32
   nameWithType: Int32
@@ -2460,16 +3880,54 @@ references:
   name: IsFixedSize
   nameWithType: ResourceDictionary.IsFixedSize
   fullName: System.Windows.ResourceDictionary.IsFixedSize
+- uid: System.Collections.IDictionary.IsFixedSize
+  commentId: P:System.Collections.IDictionary.IsFixedSize
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: IsFixedSize
+  nameWithType: IDictionary.IsFixedSize
+  fullName: System.Collections.IDictionary.IsFixedSize
 - uid: System.Windows.ResourceDictionary.IsReadOnly*
   commentId: Overload:System.Windows.ResourceDictionary.IsReadOnly
   name: IsReadOnly
   nameWithType: ResourceDictionary.IsReadOnly
   fullName: System.Windows.ResourceDictionary.IsReadOnly
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.IsReadOnly
+  parent: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.ICollection`1.IsReadOnly
+  name: IsReadOnly
+  nameWithType: ICollection<KeyValuePair<Object, Object>>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.IsReadOnly
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object)).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).IsReadOnly
+- uid: System.Collections.IDictionary.IsReadOnly
+  commentId: P:System.Collections.IDictionary.IsReadOnly
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: IsReadOnly
+  nameWithType: IDictionary.IsReadOnly
+  fullName: System.Collections.IDictionary.IsReadOnly
+- uid: System.Collections.Generic.ICollection`1.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection`1.IsReadOnly
+  isExternal: true
+  name: IsReadOnly
+  nameWithType: ICollection<T>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<T>.IsReadOnly
+  nameWithType.vb: ICollection(Of T).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of T).IsReadOnly
 - uid: System.Windows.ResourceDictionary.Keys*
   commentId: Overload:System.Windows.ResourceDictionary.Keys
   name: Keys
   nameWithType: ResourceDictionary.Keys
   fullName: System.Windows.ResourceDictionary.Keys
+- uid: System.Collections.IDictionary.Keys
+  commentId: P:System.Collections.IDictionary.Keys
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: Keys
+  nameWithType: IDictionary.Keys
+  fullName: System.Collections.IDictionary.Keys
 - uid: System.Windows.ResourceDictionary.MergedDictionaries*
   commentId: Overload:System.Windows.ResourceDictionary.MergedDictionaries
   name: MergedDictionaries
@@ -2556,22 +4014,205 @@ references:
   name: Source
   nameWithType: ResourceDictionary.Source
   fullName: System.Windows.ResourceDictionary.Source
-- uid: Uri
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
   isExternal: true
   name: Uri
   nameWithType: Uri
-  fullName: Uri
+  fullName: System.Uri
 - uid: System.Windows.ResourceDictionary.Values*
   commentId: Overload:System.Windows.ResourceDictionary.Values
   name: Values
   nameWithType: ResourceDictionary.Values
   fullName: System.Windows.ResourceDictionary.Values
+- uid: System.Collections.IDictionary.Values
+  commentId: P:System.Collections.IDictionary.Values
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: Values
+  nameWithType: IDictionary.Values
+  fullName: System.Collections.IDictionary.Values
+- uid: System.NotSupportedException
+  commentId: T:System.NotSupportedException
+  isExternal: true
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
 - uid: System.Windows.ResourceDictionary.Add*
   commentId: Overload:System.Windows.ResourceDictionary.Add
   name: Add
   nameWithType: ResourceDictionary.Add
   fullName: System.Windows.ResourceDictionary.Add
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}.Add(System.Object,System.Object)
+  commentId: M:System.Collections.Generic.IDictionary{System.Object,System.Object}.Add(System.Object,System.Object)
+  parent: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  definition: System.Collections.Generic.IDictionary`2.Add(`0,`1)
+  name: Add(Object, Object)
+  nameWithType: IDictionary<Object, Object>.Add(Object, Object)
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Add(System.Object, System.Object)
+  nameWithType.vb: IDictionary(Of Object, Object).Add(Object, Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Add(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.Add(`0,`1)
+    name: Add
+    nameWithType: IDictionary<Object, Object>.Add
+    fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.Add(`0,`1)
+    name: Add
+    nameWithType: IDictionary(Of Object, Object).Add
+    fullName: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.IDictionary.Add(System.Object,System.Object)
+  commentId: M:System.Collections.IDictionary.Add(System.Object,System.Object)
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: Add(Object, Object)
+  nameWithType: IDictionary.Add(Object, Object)
+  fullName: System.Collections.IDictionary.Add(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Collections.IDictionary.Add(System.Object,System.Object)
+    name: Add
+    nameWithType: IDictionary.Add
+    fullName: System.Collections.IDictionary.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.IDictionary.Add(System.Object,System.Object)
+    name: Add
+    nameWithType: IDictionary.Add
+    fullName: System.Collections.IDictionary.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IDictionary`2.Add(`0,`1)
+  commentId: M:System.Collections.Generic.IDictionary`2.Add(`0,`1)
+  isExternal: true
+  name: Add(TKey, TValue)
+  nameWithType: IDictionary<TKey, TValue>.Add(TKey, TValue)
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Add(TKey, TValue)
+  nameWithType.vb: IDictionary(Of TKey, TValue).Add(TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue).Add(TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.Add(`0,`1)
+    name: Add
+    nameWithType: IDictionary<TKey, TValue>.Add
+    fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.Add(`0,`1)
+    name: Add
+    nameWithType: IDictionary(Of TKey, TValue).Add
+    fullName: System.Collections.Generic.IDictionary(Of TKey, TValue).Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
@@ -2581,11 +4222,148 @@ references:
   name: Clear
   nameWithType: ResourceDictionary.Clear
   fullName: System.Windows.ResourceDictionary.Clear
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Clear
+  commentId: M:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Clear
+  parent: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.ICollection`1.Clear
+  name: Clear()
+  nameWithType: ICollection<KeyValuePair<Object, Object>>.Clear()
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Clear()
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object)).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    nameWithType: ICollection<KeyValuePair<Object, Object>>.Clear
+    fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    nameWithType: ICollection(Of KeyValuePair(Of Object, Object)).Clear
+    fullName: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.IDictionary.Clear
+  commentId: M:System.Collections.IDictionary.Clear
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: Clear()
+  nameWithType: IDictionary.Clear()
+  fullName: System.Collections.IDictionary.Clear()
+  spec.csharp:
+  - uid: System.Collections.IDictionary.Clear
+    name: Clear
+    nameWithType: IDictionary.Clear
+    fullName: System.Collections.IDictionary.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.IDictionary.Clear
+    name: Clear
+    nameWithType: IDictionary.Clear
+    fullName: System.Collections.IDictionary.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1.Clear
+  commentId: M:System.Collections.Generic.ICollection`1.Clear
+  isExternal: true
+  name: Clear()
+  nameWithType: ICollection<T>.Clear()
+  fullName: System.Collections.Generic.ICollection<T>.Clear()
+  nameWithType.vb: ICollection(Of T).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    nameWithType: ICollection<T>.Clear
+    fullName: System.Collections.Generic.ICollection<T>.Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    nameWithType: ICollection(Of T).Clear
+    fullName: System.Collections.Generic.ICollection(Of T).Clear
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.ResourceDictionary.Contains*
   commentId: Overload:System.Windows.ResourceDictionary.Contains
   name: Contains
   nameWithType: ResourceDictionary.Contains
   fullName: System.Windows.ResourceDictionary.Contains
+- uid: System.Collections.IDictionary.Contains(System.Object)
+  commentId: M:System.Collections.IDictionary.Contains(System.Object)
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: Contains(Object)
+  nameWithType: IDictionary.Contains(Object)
+  fullName: System.Collections.IDictionary.Contains(System.Object)
+  spec.csharp:
+  - uid: System.Collections.IDictionary.Contains(System.Object)
+    name: Contains
+    nameWithType: IDictionary.Contains
+    fullName: System.Collections.IDictionary.Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.IDictionary.Contains(System.Object)
+    name: Contains
+    nameWithType: IDictionary.Contains
+    fullName: System.Collections.IDictionary.Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.ResourceDictionary.Contains(System.Object)
   commentId: M:System.Windows.ResourceDictionary.Contains(System.Object)
   isExternal: true
@@ -2594,38 +4372,178 @@ references:
   name: ContainsKey
   nameWithType: ResourceDictionary.ContainsKey
   fullName: System.Windows.ResourceDictionary.ContainsKey
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}.ContainsKey(System.Object)
+  commentId: M:System.Collections.Generic.IDictionary{System.Object,System.Object}.ContainsKey(System.Object)
+  parent: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  definition: System.Collections.Generic.IDictionary`2.ContainsKey(`0)
+  name: ContainsKey(Object)
+  nameWithType: IDictionary<Object, Object>.ContainsKey(Object)
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.ContainsKey(System.Object)
+  nameWithType.vb: IDictionary(Of Object, Object).ContainsKey(Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object).ContainsKey(System.Object)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.ContainsKey(`0)
+    name: ContainsKey
+    nameWithType: IDictionary<Object, Object>.ContainsKey
+    fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.ContainsKey
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.ContainsKey(`0)
+    name: ContainsKey
+    nameWithType: IDictionary(Of Object, Object).ContainsKey
+    fullName: System.Collections.Generic.IDictionary(Of System.Object, System.Object).ContainsKey
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IDictionary`2.ContainsKey(`0)
+  commentId: M:System.Collections.Generic.IDictionary`2.ContainsKey(`0)
+  isExternal: true
+  name: ContainsKey(TKey)
+  nameWithType: IDictionary<TKey, TValue>.ContainsKey(TKey)
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>.ContainsKey(TKey)
+  nameWithType.vb: IDictionary(Of TKey, TValue).ContainsKey(TKey)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue).ContainsKey(TKey)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.ContainsKey(`0)
+    name: ContainsKey
+    nameWithType: IDictionary<TKey, TValue>.ContainsKey
+    fullName: System.Collections.Generic.IDictionary<TKey, TValue>.ContainsKey
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.ContainsKey(`0)
+    name: ContainsKey
+    nameWithType: IDictionary(Of TKey, TValue).ContainsKey
+    fullName: System.Collections.Generic.IDictionary(Of TKey, TValue).ContainsKey
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Array
+  commentId: T:System.Array
+  parent: System
+  isExternal: true
+  name: Array
+  nameWithType: Array
+  fullName: System.Array
 - uid: System.Windows.ResourceDictionary.CopyTo*
   commentId: Overload:System.Windows.ResourceDictionary.CopyTo
   name: CopyTo
   nameWithType: ResourceDictionary.CopyTo
   fullName: System.Windows.ResourceDictionary.CopyTo
-- uid: Array
+- uid: System.Collections.ICollection.CopyTo(System.Array,System.Int32)
+  commentId: M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)
+  parent: System.Collections.ICollection
   isExternal: true
-  name: Array
-  nameWithType: Array
-  fullName: Array
-- uid: DictionaryEntry[]
+  name: CopyTo(Array, Int32)
+  nameWithType: ICollection.CopyTo(Array, Int32)
+  fullName: System.Collections.ICollection.CopyTo(System.Array, System.Int32)
+  spec.csharp:
+  - uid: System.Collections.ICollection.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: ICollection.CopyTo
+    fullName: System.Collections.ICollection.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.ICollection.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: ICollection.CopyTo
+    fullName: System.Collections.ICollection.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.DictionaryEntry[]
   isExternal: true
   name: DictionaryEntry[]
   nameWithType: DictionaryEntry[]
-  fullName: DictionaryEntry[]
+  fullName: System.Collections.DictionaryEntry[]
   nameWithType.vb: DictionaryEntry()
-  fullName.vb: DictionaryEntry()
+  fullName.vb: System.Collections.DictionaryEntry()
   name.vb: DictionaryEntry()
   spec.csharp:
-  - uid: DictionaryEntry
+  - uid: System.Collections.DictionaryEntry
     name: DictionaryEntry
     nameWithType: DictionaryEntry
-    fullName: DictionaryEntry
+    fullName: System.Collections.DictionaryEntry
     isExternal: true
   - name: '[]'
     nameWithType: '[]'
     fullName: '[]'
   spec.vb:
-  - uid: DictionaryEntry
+  - uid: System.Collections.DictionaryEntry
     name: DictionaryEntry
     nameWithType: DictionaryEntry
-    fullName: DictionaryEntry
+    fullName: System.Collections.DictionaryEntry
     isExternal: true
   - name: ()
     nameWithType: ()
@@ -2635,27 +4553,1486 @@ references:
   name: GetEnumerator
   nameWithType: ResourceDictionary.GetEnumerator
   fullName: System.Windows.ResourceDictionary.GetEnumerator
-- uid: IDictionaryEnumerator
-  commentId: '!:IDictionaryEnumerator'
+- uid: System.Collections.IDictionary.GetEnumerator
+  commentId: M:System.Collections.IDictionary.GetEnumerator
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: GetEnumerator()
+  nameWithType: IDictionary.GetEnumerator()
+  fullName: System.Collections.IDictionary.GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.IDictionary.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IDictionary.GetEnumerator
+    fullName: System.Collections.IDictionary.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.IDictionary.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IDictionary.GetEnumerator
+    fullName: System.Collections.IDictionary.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.IDictionaryEnumerator
+  commentId: T:System.Collections.IDictionaryEnumerator
+  parent: System.Collections
   isExternal: true
   name: IDictionaryEnumerator
   nameWithType: IDictionaryEnumerator
-  fullName: IDictionaryEnumerator
+  fullName: System.Collections.IDictionaryEnumerator
 - uid: System.Windows.ResourceDictionary.Remove*
   commentId: Overload:System.Windows.ResourceDictionary.Remove
   name: Remove
   nameWithType: ResourceDictionary.Remove
   fullName: System.Windows.ResourceDictionary.Remove
+- uid: System.Collections.IDictionary.Remove(System.Object)
+  commentId: M:System.Collections.IDictionary.Remove(System.Object)
+  parent: System.Collections.IDictionary
+  isExternal: true
+  name: Remove(Object)
+  nameWithType: IDictionary.Remove(Object)
+  fullName: System.Collections.IDictionary.Remove(System.Object)
+  spec.csharp:
+  - uid: System.Collections.IDictionary.Remove(System.Object)
+    name: Remove
+    nameWithType: IDictionary.Remove
+    fullName: System.Collections.IDictionary.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.IDictionary.Remove(System.Object)
+    name: Remove
+    nameWithType: IDictionary.Remove
+    fullName: System.Collections.IDictionary.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.ResourceDictionary.BeginInit*
   commentId: Overload:System.Windows.ResourceDictionary.BeginInit
   name: BeginInit
   nameWithType: ResourceDictionary.BeginInit
   fullName: System.Windows.ResourceDictionary.BeginInit
+- uid: System.ComponentModel.ISupportInitialize.BeginInit
+  commentId: M:System.ComponentModel.ISupportInitialize.BeginInit
+  parent: System.ComponentModel.ISupportInitialize
+  isExternal: true
+  name: BeginInit()
+  nameWithType: ISupportInitialize.BeginInit()
+  fullName: System.ComponentModel.ISupportInitialize.BeginInit()
+  spec.csharp:
+  - uid: System.ComponentModel.ISupportInitialize.BeginInit
+    name: BeginInit
+    nameWithType: ISupportInitialize.BeginInit
+    fullName: System.ComponentModel.ISupportInitialize.BeginInit
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ComponentModel.ISupportInitialize.BeginInit
+    name: BeginInit
+    nameWithType: ISupportInitialize.BeginInit
+    fullName: System.ComponentModel.ISupportInitialize.BeginInit
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.ResourceDictionary.EndInit*
   commentId: Overload:System.Windows.ResourceDictionary.EndInit
   name: EndInit
   nameWithType: ResourceDictionary.EndInit
   fullName: System.Windows.ResourceDictionary.EndInit
+- uid: System.ComponentModel.ISupportInitialize.EndInit
+  commentId: M:System.ComponentModel.ISupportInitialize.EndInit
+  parent: System.ComponentModel.ISupportInitialize
+  isExternal: true
+  name: EndInit()
+  nameWithType: ISupportInitialize.EndInit()
+  fullName: System.ComponentModel.ISupportInitialize.EndInit()
+  spec.csharp:
+  - uid: System.ComponentModel.ISupportInitialize.EndInit
+    name: EndInit
+    nameWithType: ISupportInitialize.EndInit
+    fullName: System.ComponentModel.ISupportInitialize.EndInit
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ComponentModel.ISupportInitialize.EndInit
+    name: EndInit
+    nameWithType: ISupportInitialize.EndInit
+    fullName: System.ComponentModel.ISupportInitialize.EndInit
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#ICollection#SyncRoot*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#ICollection#SyncRoot
+  name: ICollection.SyncRoot
+  nameWithType: ResourceDictionary.ICollection.SyncRoot
+  fullName: System.Windows.ResourceDictionary.System.Collections.ICollection.SyncRoot
+  nameWithType.vb: ResourceDictionary.System.Collections.ICollection.SyncRoot
+  name.vb: System.Collections.ICollection.SyncRoot
+- uid: System.Collections.ICollection.SyncRoot
+  commentId: P:System.Collections.ICollection.SyncRoot
+  parent: System.Collections.ICollection
+  isExternal: true
+  name: SyncRoot
+  nameWithType: ICollection.SyncRoot
+  fullName: System.Collections.ICollection.SyncRoot
+- uid: System.Windows.ResourceDictionary.System#Collections#ICollection#IsSynchronized*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#ICollection#IsSynchronized
+  name: ICollection.IsSynchronized
+  nameWithType: ResourceDictionary.ICollection.IsSynchronized
+  fullName: System.Windows.ResourceDictionary.System.Collections.ICollection.IsSynchronized
+  nameWithType.vb: ResourceDictionary.System.Collections.ICollection.IsSynchronized
+  name.vb: System.Collections.ICollection.IsSynchronized
+- uid: System.Collections.ICollection.IsSynchronized
+  commentId: P:System.Collections.ICollection.IsSynchronized
+  parent: System.Collections.ICollection
+  isExternal: true
+  name: IsSynchronized
+  nameWithType: ICollection.IsSynchronized
+  fullName: System.Collections.ICollection.IsSynchronized
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Count*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Count
+  name: ICollection<KeyValuePair<Object, Object>>.Count
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Count
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Count
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Count
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Count
+  commentId: P:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Count
+  parent: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.ICollection`1.Count
+  name: Count
+  nameWithType: ICollection<KeyValuePair<Object, Object>>.Count
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Count
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object)).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Count
+- uid: System.Collections.Generic.ICollection`1.Count
+  commentId: P:System.Collections.Generic.ICollection`1.Count
+  isExternal: true
+  name: Count
+  nameWithType: ICollection<T>.Count
+  fullName: System.Collections.Generic.ICollection<T>.Count
+  nameWithType.vb: ICollection(Of T).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Count
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Keys*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Keys
+  name: IDictionary<Object, Object>.Keys
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.Keys
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.Keys
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.Keys
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}.Keys
+  commentId: P:System.Collections.Generic.IDictionary{System.Object,System.Object}.Keys
+  parent: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  definition: System.Collections.Generic.IDictionary`2.Keys
+  name: Keys
+  nameWithType: IDictionary<Object, Object>.Keys
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Keys
+  nameWithType.vb: IDictionary(Of Object, Object).Keys
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Keys
+- uid: System.Collections.Generic.ICollection{System.Object}
+  commentId: T:System.Collections.Generic.ICollection{System.Object}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  name: ICollection<Object>
+  nameWithType: ICollection<Object>
+  fullName: System.Collections.Generic.ICollection<System.Object>
+  nameWithType.vb: ICollection(Of Object)
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Object)
+  name.vb: ICollection(Of Object)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    nameWithType: ICollection
+    fullName: System.Collections.Generic.ICollection
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IDictionary`2.Keys
+  commentId: P:System.Collections.Generic.IDictionary`2.Keys
+  isExternal: true
+  name: Keys
+  nameWithType: IDictionary<TKey, TValue>.Keys
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Keys
+  nameWithType.vb: IDictionary(Of TKey, TValue).Keys
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue).Keys
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Values*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Values
+  name: IDictionary<Object, Object>.Values
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.Values
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.Values
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Values
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Values
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.Values
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}.Values
+  commentId: P:System.Collections.Generic.IDictionary{System.Object,System.Object}.Values
+  parent: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  definition: System.Collections.Generic.IDictionary`2.Values
+  name: Values
+  nameWithType: IDictionary<Object, Object>.Values
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Values
+  nameWithType.vb: IDictionary(Of Object, Object).Values
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Values
+- uid: System.Collections.Generic.IDictionary`2.Values
+  commentId: P:System.Collections.Generic.IDictionary`2.Values
+  isExternal: true
+  name: Values
+  nameWithType: IDictionary<TKey, TValue>.Values
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Values
+  nameWithType.vb: IDictionary(Of TKey, TValue).Values
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue).Values
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Remove*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#Remove
+  name: IDictionary<Object, Object>.Remove
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.Remove
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.Remove
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.Remove
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}.Remove(System.Object)
+  commentId: M:System.Collections.Generic.IDictionary{System.Object,System.Object}.Remove(System.Object)
+  parent: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  definition: System.Collections.Generic.IDictionary`2.Remove(`0)
+  name: Remove(Object)
+  nameWithType: IDictionary<Object, Object>.Remove(Object)
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Remove(System.Object)
+  nameWithType.vb: IDictionary(Of Object, Object).Remove(Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Remove(System.Object)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.Remove(`0)
+    name: Remove
+    nameWithType: IDictionary<Object, Object>.Remove
+    fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.Remove(`0)
+    name: Remove
+    nameWithType: IDictionary(Of Object, Object).Remove
+    fullName: System.Collections.Generic.IDictionary(Of System.Object, System.Object).Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IDictionary`2.Remove(`0)
+  commentId: M:System.Collections.Generic.IDictionary`2.Remove(`0)
+  isExternal: true
+  name: Remove(TKey)
+  nameWithType: IDictionary<TKey, TValue>.Remove(TKey)
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Remove(TKey)
+  nameWithType.vb: IDictionary(Of TKey, TValue).Remove(TKey)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue).Remove(TKey)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.Remove(`0)
+    name: Remove
+    nameWithType: IDictionary<TKey, TValue>.Remove
+    fullName: System.Collections.Generic.IDictionary<TKey, TValue>.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.Remove(`0)
+    name: Remove
+    nameWithType: IDictionary(Of TKey, TValue).Remove
+    fullName: System.Collections.Generic.IDictionary(Of TKey, TValue).Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#TryGetValue*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#IDictionary{System#Object,System#Object}#TryGetValue
+  name: IDictionary<Object, Object>.TryGetValue
+  nameWithType: ResourceDictionary.IDictionary<Object, Object>.TryGetValue
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object, System.Object>.TryGetValue
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue
+  name.vb: System.Collections.Generic.IDictionary<System.Object,System.Object>.TryGetValue
+- uid: System.Collections.Generic.IDictionary{System.Object,System.Object}.TryGetValue(System.Object,System.Object@)
+  commentId: M:System.Collections.Generic.IDictionary{System.Object,System.Object}.TryGetValue(System.Object,System.Object@)
+  parent: System.Collections.Generic.IDictionary{System.Object,System.Object}
+  definition: System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)
+  name: TryGetValue(Object, Object)
+  nameWithType: IDictionary<Object, Object>.TryGetValue(Object, Object)
+  fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.TryGetValue(System.Object, System.Object)
+  nameWithType.vb: IDictionary(Of Object, Object).TryGetValue(Object, Object)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.Object, System.Object).TryGetValue(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)
+    name: TryGetValue
+    nameWithType: IDictionary<Object, Object>.TryGetValue
+    fullName: System.Collections.Generic.IDictionary<System.Object, System.Object>.TryGetValue
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)
+    name: TryGetValue
+    nameWithType: IDictionary(Of Object, Object).TryGetValue
+    fullName: System.Collections.Generic.IDictionary(Of System.Object, System.Object).TryGetValue
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)
+  commentId: M:System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)
+  isExternal: true
+  name: TryGetValue(TKey, TValue)
+  nameWithType: IDictionary<TKey, TValue>.TryGetValue(TKey, TValue)
+  fullName: System.Collections.Generic.IDictionary<TKey, TValue>.TryGetValue(TKey, TValue)
+  nameWithType.vb: IDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue).TryGetValue(TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)
+    name: TryGetValue
+    nameWithType: IDictionary<TKey, TValue>.TryGetValue
+    fullName: System.Collections.Generic.IDictionary<TKey, TValue>.TryGetValue
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IDictionary`2.TryGetValue(`0,`1@)
+    name: TryGetValue
+    nameWithType: IDictionary(Of TKey, TValue).TryGetValue
+    fullName: System.Collections.Generic.IDictionary(Of TKey, TValue).TryGetValue
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Add*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Add
+  name: ICollection<KeyValuePair<Object, Object>>.Add
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Add
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Add
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Add
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Add(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  commentId: M:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Add(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  parent: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.ICollection`1.Add(`0)
+  name: Add(KeyValuePair<Object, Object>)
+  nameWithType: ICollection<KeyValuePair<Object, Object>>.Add(KeyValuePair<Object, Object>)
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Add(System.Collections.Generic.KeyValuePair<System.Object, System.Object>)
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object)).Add(KeyValuePair(Of Object, Object))
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Add(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: Add(KeyValuePair(Of Object, Object))
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection<KeyValuePair<Object, Object>>.Add
+    fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection(Of KeyValuePair(Of Object, Object)).Add
+    fullName: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.KeyValuePair{System.Object,System.Object}
+  commentId: T:System.Collections.Generic.KeyValuePair{System.Object,System.Object}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.KeyValuePair`2
+  name: KeyValuePair<Object, Object>
+  nameWithType: KeyValuePair<Object, Object>
+  fullName: System.Collections.Generic.KeyValuePair<System.Object, System.Object>
+  nameWithType.vb: KeyValuePair(Of Object, Object)
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)
+  name.vb: KeyValuePair(Of Object, Object)
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1.Add(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Add(`0)
+  isExternal: true
+  name: Add(T)
+  nameWithType: ICollection<T>.Add(T)
+  fullName: System.Collections.Generic.ICollection<T>.Add(T)
+  nameWithType.vb: ICollection(Of T).Add(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Add(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection<T>.Add
+    fullName: System.Collections.Generic.ICollection<T>.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    nameWithType: ICollection(Of T).Add
+    fullName: System.Collections.Generic.ICollection(Of T).Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.KeyValuePair`2
+  commentId: T:System.Collections.Generic.KeyValuePair`2
+  isExternal: true
+  name: KeyValuePair<TKey, TValue>
+  nameWithType: KeyValuePair<TKey, TValue>
+  fullName: System.Collections.Generic.KeyValuePair<TKey, TValue>
+  nameWithType.vb: KeyValuePair(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of TKey, TValue)
+  name.vb: KeyValuePair(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#CopyTo*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#CopyTo
+  name: ICollection<KeyValuePair<Object, Object>>.CopyTo
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.CopyTo
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.CopyTo
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.CopyTo
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.CopyTo(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.CopyTo(System.Collections.Generic.KeyValuePair{System.Object,System.Object}[],System.Int32)
+  parent: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  name: CopyTo(KeyValuePair<Object, Object>[], Int32)
+  nameWithType: ICollection<KeyValuePair<Object, Object>>.CopyTo(KeyValuePair<Object, Object>[], Int32)
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.CopyTo(System.Collections.Generic.KeyValuePair<System.Object, System.Object>[], System.Int32)
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object)).CopyTo(KeyValuePair(Of Object, Object)(), Int32)
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).CopyTo(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)(), System.Int32)
+  name.vb: CopyTo(KeyValuePair(Of Object, Object)(), Int32)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection<KeyValuePair<Object, Object>>.CopyTo
+    fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection(Of KeyValuePair(Of Object, Object)).CopyTo
+    fullName: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.KeyValuePair{System.Object,System.Object}[]
+  isExternal: true
+  name: KeyValuePair<Object, Object>[]
+  nameWithType: KeyValuePair<Object, Object>[]
+  fullName: System.Collections.Generic.KeyValuePair<System.Object, System.Object>[]
+  nameWithType.vb: KeyValuePair(Of Object, Object)()
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)()
+  name.vb: KeyValuePair(Of Object, Object)()
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  isExternal: true
+  name: CopyTo(T[], Int32)
+  nameWithType: ICollection<T>.CopyTo(T[], Int32)
+  fullName: System.Collections.Generic.ICollection<T>.CopyTo(T[], System.Int32)
+  nameWithType.vb: ICollection(Of T).CopyTo(T(), Int32)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).CopyTo(T(), System.Int32)
+  name.vb: CopyTo(T(), Int32)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection<T>.CopyTo
+    fullName: System.Collections.Generic.ICollection<T>.CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    nameWithType: ICollection(Of T).CopyTo
+    fullName: System.Collections.Generic.ICollection(Of T).CopyTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Contains*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Contains
+  name: ICollection<KeyValuePair<Object, Object>>.Contains
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Contains
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Contains
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Contains
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Contains(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  commentId: M:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Contains(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  parent: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.ICollection`1.Contains(`0)
+  name: Contains(KeyValuePair<Object, Object>)
+  nameWithType: ICollection<KeyValuePair<Object, Object>>.Contains(KeyValuePair<Object, Object>)
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Contains(System.Collections.Generic.KeyValuePair<System.Object, System.Object>)
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object)).Contains(KeyValuePair(Of Object, Object))
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Contains(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: Contains(KeyValuePair(Of Object, Object))
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection<KeyValuePair<Object, Object>>.Contains
+    fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection(Of KeyValuePair(Of Object, Object)).Contains
+    fullName: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1.Contains(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Contains(`0)
+  isExternal: true
+  name: Contains(T)
+  nameWithType: ICollection<T>.Contains(T)
+  fullName: System.Collections.Generic.ICollection<T>.Contains(T)
+  nameWithType.vb: ICollection(Of T).Contains(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection<T>.Contains
+    fullName: System.Collections.Generic.ICollection<T>.Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    nameWithType: ICollection(Of T).Contains
+    fullName: System.Collections.Generic.ICollection(Of T).Contains
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Remove*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#Remove
+  name: ICollection<KeyValuePair<Object, Object>>.Remove
+  nameWithType: ResourceDictionary.ICollection<KeyValuePair<Object, Object>>.Remove
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Remove
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove
+  name.vb: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.Remove
+- uid: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Remove(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  commentId: M:System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.Remove(System.Collections.Generic.KeyValuePair{System.Object,System.Object})
+  parent: System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.ICollection`1.Remove(`0)
+  name: Remove(KeyValuePair<Object, Object>)
+  nameWithType: ICollection<KeyValuePair<Object, Object>>.Remove(KeyValuePair<Object, Object>)
+  fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Remove(System.Collections.Generic.KeyValuePair<System.Object, System.Object>)
+  nameWithType.vb: ICollection(Of KeyValuePair(Of Object, Object)).Remove(KeyValuePair(Of Object, Object))
+  fullName.vb: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Remove(System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: Remove(KeyValuePair(Of Object, Object))
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection<KeyValuePair<Object, Object>>.Remove
+    fullName: System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection(Of KeyValuePair(Of Object, Object)).Remove
+    fullName: System.Collections.Generic.ICollection(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.ICollection`1.Remove(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Remove(`0)
+  isExternal: true
+  name: Remove(T)
+  nameWithType: ICollection<T>.Remove(T)
+  fullName: System.Collections.Generic.ICollection<T>.Remove(T)
+  nameWithType.vb: ICollection(Of T).Remove(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Remove(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection<T>.Remove
+    fullName: System.Collections.Generic.ICollection<T>.Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    nameWithType: ICollection(Of T).Remove
+    fullName: System.Collections.Generic.ICollection(Of T).Remove
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#GetEnumerator*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#Generic#IEnumerable{System#Collections#Generic#KeyValuePair{System#Object,System#Object}}#GetEnumerator
+  name: IEnumerable<KeyValuePair<Object, Object>>.GetEnumerator
+  nameWithType: ResourceDictionary.IEnumerable<KeyValuePair<Object, Object>>.GetEnumerator
+  fullName: System.Windows.ResourceDictionary.System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.GetEnumerator
+  nameWithType.vb: ResourceDictionary.System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator
+  fullName.vb: System.Windows.ResourceDictionary.System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator
+  name.vb: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object,System.Object>>.GetEnumerator
+- uid: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}.GetEnumerator
+  parent: System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  definition: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<KeyValuePair<Object, Object>>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of KeyValuePair(Of Object, Object)).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable<KeyValuePair<Object, Object>>.GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable(Of KeyValuePair(Of Object, Object)).GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object)).GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  commentId: T:System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{System.Object,System.Object}}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  name: IEnumerator<KeyValuePair<Object, Object>>
+  nameWithType: IEnumerator<KeyValuePair<Object, Object>>
+  fullName: System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.Object, System.Object>>
+  nameWithType.vb: IEnumerator(Of KeyValuePair(Of Object, Object))
+  fullName.vb: System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of System.Object, System.Object))
+  name.vb: IEnumerator(Of KeyValuePair(Of Object, Object))
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable`1.GetEnumerator
+  isExternal: true
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable<T>.GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable(Of T).GetEnumerator
+    fullName: System.Collections.Generic.IEnumerable(Of T).GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    nameWithType: IEnumerator
+    fullName: System.Collections.Generic.IEnumerator
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.ResourceDictionary.System#Collections#IEnumerable#GetEnumerator*
+  commentId: Overload:System.Windows.ResourceDictionary.System#Collections#IEnumerable#GetEnumerator
+  name: IEnumerable.GetEnumerator
+  nameWithType: ResourceDictionary.IEnumerable.GetEnumerator
+  fullName: System.Windows.ResourceDictionary.System.Collections.IEnumerable.GetEnumerator
+  nameWithType.vb: ResourceDictionary.System.Collections.IEnumerable.GetEnumerator
+  name.vb: System.Collections.IEnumerable.GetEnumerator
+- uid: System.Collections.IEnumerable.GetEnumerator
+  commentId: M:System.Collections.IEnumerable.GetEnumerator
+  parent: System.Collections.IEnumerable
+  isExternal: true
+  name: GetEnumerator()
+  nameWithType: IEnumerable.GetEnumerator()
+  fullName: System.Collections.IEnumerable.GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.IEnumerable.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable.GetEnumerator
+    fullName: System.Collections.IEnumerable.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.IEnumerable.GetEnumerator
+    name: GetEnumerator
+    nameWithType: IEnumerable.GetEnumerator
+    fullName: System.Collections.IEnumerable.GetEnumerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.IEnumerator
+  commentId: T:System.Collections.IEnumerator
+  parent: System.Collections
+  isExternal: true
+  name: IEnumerator
+  nameWithType: IEnumerator
+  fullName: System.Collections.IEnumerator
 - uid: System.Windows.ResourceDictionary.FindName*
   commentId: Overload:System.Windows.ResourceDictionary.FindName
   name: FindName

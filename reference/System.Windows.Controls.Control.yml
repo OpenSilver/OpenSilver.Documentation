@@ -13,6 +13,8 @@ items:
   - System.Windows.Controls.Control.BorderBrushProperty
   - System.Windows.Controls.Control.BorderThickness
   - System.Windows.Controls.Control.BorderThicknessProperty
+  - System.Windows.Controls.Control.CharacterSpacing
+  - System.Windows.Controls.Control.CharacterSpacingProperty
   - System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
   - System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
   - System.Windows.Controls.Control.Focus
@@ -40,9 +42,6 @@ items:
   - System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
-  - System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  - System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  - System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnTextInputUpdate(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.Padding
@@ -66,9 +65,13 @@ items:
   fullName: System.Windows.Controls.Control
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Control
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 43
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 44
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -78,6 +81,7 @@ items:
     content: 'public class Control : FrameworkElement'
     content.vb: >-
       Public Class Control
+
           Inherits FrameworkElement
   inheritance:
   - System.Object
@@ -86,14 +90,12 @@ items:
   - System.Windows.FrameworkElement
   derivedClasses:
   - System.Windows.Controls.ContentControl
-  - System.Windows.Controls.DataGridRow
-  - System.Windows.Controls.DataGridRowGroupHeader
-  - System.Windows.Controls.DataPager
   - System.Windows.Controls.GridSplitter
   - System.Windows.Controls.INTERNAL_DateTimePickerBase
   - System.Windows.Controls.ItemsControl
   - System.Windows.Controls.PasswordBox
   - System.Windows.Controls.Picker
+  - System.Windows.Controls.Primitives.CalendarItem
   - System.Windows.Controls.Primitives.RangeBase
   - System.Windows.Controls.Primitives.Thumb
   - System.Windows.Controls.RichTextBox
@@ -124,10 +126,9 @@ items:
   - System.Windows.FrameworkElement.DataContext
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
+  - System.Windows.FrameworkElement.Triggers
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.OnLayoutUpdated
-  - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
@@ -140,15 +141,18 @@ items:
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
   - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
-  - System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  - System.Windows.FrameworkElement.UnregisterName(System.String)
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
   - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.CustomLayout
   - System.Windows.FrameworkElement.CustomLayoutProperty
   - System.Windows.FrameworkElement.Height
@@ -171,6 +175,9 @@ items:
   - System.Windows.FrameworkElement.MaxWidthProperty
   - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.SizeChanged
   - System.Windows.FrameworkElement.ContextMenu
   - System.Windows.FrameworkElement.ContextMenuProperty
@@ -178,20 +185,21 @@ items:
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -206,7 +214,6 @@ items:
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
   - System.Windows.UIElement.IsVisible
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -227,6 +234,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -235,6 +244,10 @@ items:
   - System.Windows.UIElement.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
+  - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -244,12 +257,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -272,8 +284,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -289,6 +299,14 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
@@ -301,7 +319,7 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   modifiers.csharp:
   - public
   - class
@@ -320,9 +338,13 @@ items:
   fullName: System.Windows.Controls.Control.Control()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 66
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 67
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -348,19 +370,35 @@ items:
   fullName: System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_DoNotApplyControlTemplate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 84
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 85
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nDerived classes can set this flag in their constructor to prevent the &quot;Template&quot; property from being applied.\n"
   example: []
   syntax:
-    content: protected bool INTERNAL_DoNotApplyControlTemplate
+    content: >-
+      [Obsolete("This value is ignored. ControlTemplate is always applied.")]
+
+      protected bool INTERNAL_DoNotApplyControlTemplate
     return:
       type: System.Boolean
-    content.vb: Protected INTERNAL_DoNotApplyControlTemplate As Boolean
+    content.vb: >-
+      <Obsolete("This value is ignored. ControlTemplate is always applied.")>
+
+      Protected INTERNAL_DoNotApplyControlTemplate As Boolean
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: This value is ignored. ControlTemplate is always applied.
   modifiers.csharp:
   - protected
   modifiers.vb:
@@ -377,9 +415,13 @@ items:
   fullName: System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DisableBaseControlHandlingOfVisualStates
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 89
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 90
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -406,9 +448,13 @@ items:
   fullName: System.Windows.Controls.Control.ManageIsEnabled(System.Boolean)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ManageIsEnabled
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 105
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 96
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -438,9 +484,13 @@ items:
   fullName: System.Windows.Controls.Control.Background
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Background
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 123
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 119
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -471,9 +521,13 @@ items:
   fullName: System.Windows.Controls.Control.BackgroundProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BackgroundProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 132
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 128
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -504,9 +558,13 @@ items:
   fullName: System.Windows.Controls.Control.BorderBrush
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BorderBrush
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 174
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 170
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -537,9 +595,13 @@ items:
   fullName: System.Windows.Controls.Control.BorderBrushProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BorderBrushProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 183
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 179
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -570,9 +632,13 @@ items:
   fullName: System.Windows.Controls.Control.BorderThickness
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BorderThickness
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 202
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 192
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -603,9 +669,13 @@ items:
   fullName: System.Windows.Controls.Control.BorderThicknessProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BorderThicknessProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 211
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 201
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -636,9 +706,13 @@ items:
   fullName: System.Windows.Controls.Control.FontWeight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontWeight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 240
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 215
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -669,9 +743,13 @@ items:
   fullName: System.Windows.Controls.Control.FontWeightProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontWeightProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 249
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 224
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -702,9 +780,13 @@ items:
   fullName: System.Windows.Controls.Control.FontStyle
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontStyle
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 268
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 243
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -735,9 +817,13 @@ items:
   fullName: System.Windows.Controls.Control.FontStyleProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontStyleProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 277
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 252
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -768,9 +854,13 @@ items:
   fullName: System.Windows.Controls.Control.Foreground
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Foreground
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 306
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 281
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -801,9 +891,13 @@ items:
   fullName: System.Windows.Controls.Control.ForegroundProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ForegroundProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 315
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 290
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -834,9 +928,13 @@ items:
   fullName: System.Windows.Controls.Control.FontFamily
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontFamily
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 336
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 311
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -867,9 +965,13 @@ items:
   fullName: System.Windows.Controls.Control.FontFamilyProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontFamilyProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 345
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 320
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -900,9 +1002,13 @@ items:
   fullName: System.Windows.Controls.Control.FontSize
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontSize
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 369
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 344
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -933,9 +1039,13 @@ items:
   fullName: System.Windows.Controls.Control.FontSizeProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontSizeProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 378
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 353
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -966,9 +1076,13 @@ items:
   fullName: System.Windows.Controls.Control.TextDecorations
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TextDecorations
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 417
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 392
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -999,9 +1113,13 @@ items:
   fullName: System.Windows.Controls.Control.TextDecorationsProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TextDecorationsProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 426
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 401
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1032,9 +1150,13 @@ items:
   fullName: System.Windows.Controls.Control.Padding
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Padding
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 517
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 492
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1065,9 +1187,13 @@ items:
   fullName: System.Windows.Controls.Control.PaddingProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: PaddingProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 526
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 501
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1098,9 +1224,13 @@ items:
   fullName: System.Windows.Controls.Control.HorizontalContentAlignment
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: HorizontalContentAlignment
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 563
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 538
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1131,9 +1261,13 @@ items:
   fullName: System.Windows.Controls.Control.HorizontalContentAlignmentProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: HorizontalContentAlignmentProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 572
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 547
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1164,9 +1298,13 @@ items:
   fullName: System.Windows.Controls.Control.VerticalContentAlignment
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: VerticalContentAlignment
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 586
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 561
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1197,9 +1335,13 @@ items:
   fullName: System.Windows.Controls.Control.VerticalContentAlignmentProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: VerticalContentAlignmentProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 595
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 570
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1230,9 +1372,13 @@ items:
   fullName: System.Windows.Controls.Control.TabIndex
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TabIndex
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 611
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 586
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1263,9 +1409,13 @@ items:
   fullName: System.Windows.Controls.Control.TabIndexProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TabIndexProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 620
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 595
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1296,9 +1446,13 @@ items:
   fullName: System.Windows.Controls.Control.IsTabStop
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsTabStop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 700
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 673
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1329,9 +1483,13 @@ items:
   fullName: System.Windows.Controls.Control.IsTabStopProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsTabStopProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 709
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 682
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1362,9 +1520,13 @@ items:
   fullName: System.Windows.Controls.Control.Template
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Template
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 728
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 701
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1395,9 +1557,13 @@ items:
   fullName: System.Windows.Controls.Control.TemplateProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TemplateProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 750
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 723
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1428,9 +1594,13 @@ items:
   fullName: System.Windows.Controls.Control.ApplyTemplate()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ApplyTemplate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 770
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 741
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1456,9 +1626,13 @@ items:
   fullName: System.Windows.Controls.Control.GetTemplateChild(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetTemplateChild
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 783
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 754
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1491,9 +1665,13 @@ items:
   fullName: System.Windows.Controls.Control.Focus()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Focus
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 804
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 775
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1522,9 +1700,13 @@ items:
   fullName: System.Windows.Controls.Control.UseSystemFocusVisuals
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UseSystemFocusVisuals
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 820
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 797
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1555,9 +1737,13 @@ items:
   fullName: System.Windows.Controls.Control.OnApplyTemplate()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnApplyTemplate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 827
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 804
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1584,9 +1770,13 @@ items:
   fullName: System.Windows.Controls.Control.CreateDomElement(System.Object, out System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateDomElement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1014
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 999
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1611,71 +1801,96 @@ items:
   - Overrides
   fullName.vb: System.Windows.Controls.Control.CreateDomElement(System.Object, ByRef System.Object)
   name.vb: CreateDomElement(Object, ByRef Object)
-- uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  id: OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+- uid: System.Windows.Controls.Control.CharacterSpacingProperty
+  commentId: F:System.Windows.Controls.Control.CharacterSpacingProperty
+  id: CharacterSpacingProperty
   parent: System.Windows.Controls.Control
   langs:
   - csharp
   - vb
-  name: OnMouseRightButtonDown(MouseButtonEventArgs)
-  nameWithType: Control.OnMouseRightButtonDown(MouseButtonEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  type: Method
+  name: CharacterSpacingProperty
+  nameWithType: Control.CharacterSpacingProperty
+  fullName: System.Windows.Controls.Control.CharacterSpacingProperty
+  type: Field
   source:
-    id: OnMouseRightButtonDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1064
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CharacterSpacingProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1068
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: protected virtual void OnMouseRightButtonDown(MouseButtonEventArgs e)
-    parameters:
-    - id: e
-      type: System.Windows.Input.MouseButtonEventArgs
-    content.vb: Protected Overridable Sub OnMouseRightButtonDown(e As MouseButtonEventArgs)
-  overload: System.Windows.Controls.Control.OnMouseRightButtonDown*
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty CharacterSpacingProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly CharacterSpacingProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
-  - protected
-  - virtual
+  - public
+  - static
+  - readonly
   modifiers.vb:
-  - Protected
-  - Overridable
-- uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  id: OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Controls.Control.CharacterSpacing
+  commentId: P:System.Windows.Controls.Control.CharacterSpacing
+  id: CharacterSpacing
   parent: System.Windows.Controls.Control
   langs:
   - csharp
   - vb
-  name: OnMouseWheel(MouseWheelEventArgs)
-  nameWithType: Control.OnMouseWheel(MouseWheelEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  type: Method
+  name: CharacterSpacing
+  nameWithType: Control.CharacterSpacing
+  fullName: System.Windows.Controls.Control.CharacterSpacing
+  type: Property
   source:
-    id: OnMouseWheel
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1073
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CharacterSpacing
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1083
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: 'Called before the <xref href="System.Windows.UIElement.MouseWheel" data-throw-if-not-resolved="false"></xref> event occurs to provide handling for the event in a derived class without attaching a delegate. '
-  example: []
   syntax:
-    content: protected virtual void OnMouseWheel(MouseWheelEventArgs e)
-    parameters:
-    - id: e
-      type: System.Windows.Input.MouseWheelEventArgs
-      description: A <xref href="System.Windows.Input.MouseWheelEventArgs" data-throw-if-not-resolved="false"></xref> that contains the event data.
-    content.vb: Protected Overridable Sub OnMouseWheel(e As MouseWheelEventArgs)
-  overload: System.Windows.Controls.Control.OnMouseWheel*
+    content: >-
+      [NotImplemented]
+
+      public int CharacterSpacing { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property CharacterSpacing As Integer
+  overload: System.Windows.Controls.Control.CharacterSpacing*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
-  - protected
-  - virtual
+  - public
+  - get
+  - set
   modifiers.vb:
-  - Protected
-  - Overridable
+  - Public
 - uid: System.Windows.Controls.Control.TabNavigationProperty
   commentId: F:System.Windows.Controls.Control.TabNavigationProperty
   id: TabNavigationProperty
@@ -1688,17 +1903,31 @@ items:
   fullName: System.Windows.Controls.Control.TabNavigationProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TabNavigationProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1080
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1091
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: public static readonly DependencyProperty TabNavigationProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty TabNavigationProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly TabNavigationProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly TabNavigationProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -1719,19 +1948,33 @@ items:
   fullName: System.Windows.Controls.Control.TabNavigation
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TabNavigation
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1087
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1098
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: public KeyboardNavigationMode TabNavigation { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public KeyboardNavigationMode TabNavigation { get; set; }
     parameters: []
     return:
       type: System.Windows.Input.KeyboardNavigationMode
-    content.vb: Public Property TabNavigation As KeyboardNavigationMode
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property TabNavigation As KeyboardNavigationMode
   overload: System.Windows.Controls.Control.TabNavigation*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -1750,17 +1993,31 @@ items:
   fullName: System.Windows.Controls.Control.FontStretchProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontStretchProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1095
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1106
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: public static readonly DependencyProperty FontStretchProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty FontStretchProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly FontStretchProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly FontStretchProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -1781,58 +2038,41 @@ items:
   fullName: System.Windows.Controls.Control.FontStretch
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FontStretch
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1107
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1118
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nThe stretch of the desired font.\nThis will only affect controls whose template uses the property\nas a parameter. On other controls, the property will do nothing.\n"
   example: []
   syntax:
-    content: public FontStretch FontStretch { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public FontStretch FontStretch { get; set; }
     parameters: []
     return:
       type: System.Windows.FontStretch
-    content.vb: Public Property FontStretch As FontStretch
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property FontStretch As FontStretch
   overload: System.Windows.Controls.Control.FontStretch*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  id: OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  parent: System.Windows.Controls.Control
-  langs:
-  - csharp
-  - vb
-  name: OnTextInput(TextCompositionEventArgs)
-  nameWithType: Control.OnTextInput(TextCompositionEventArgs)
-  fullName: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  type: Method
-  source:
-    id: OnTextInput
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1121
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  syntax:
-    content: protected virtual void OnTextInput(TextCompositionEventArgs e)
-    parameters:
-    - id: e
-      type: System.Windows.Input.TextCompositionEventArgs
-    content.vb: Protected Overridable Sub OnTextInput(e As TextCompositionEventArgs)
-  overload: System.Windows.Controls.Control.OnTextInput*
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
 - uid: System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   commentId: M:System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   id: OnDrop(System.Windows.DragEventArgs)
@@ -1845,19 +2085,33 @@ items:
   fullName: System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnDrop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1127
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1137
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: protected virtual void OnDrop(DragEventArgs e)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnDrop(DragEventArgs e)
     parameters:
     - id: e
       type: System.Windows.DragEventArgs
-    content.vb: Protected Overridable Sub OnDrop(e As DragEventArgs)
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnDrop(e As DragEventArgs)
   overload: System.Windows.Controls.Control.OnDrop*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
@@ -1876,19 +2130,33 @@ items:
   fullName: System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnDragEnter
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1133
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1143
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: protected virtual void OnDragEnter(DragEventArgs e)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnDragEnter(DragEventArgs e)
     parameters:
     - id: e
       type: System.Windows.DragEventArgs
-    content.vb: Protected Overridable Sub OnDragEnter(e As DragEventArgs)
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnDragEnter(e As DragEventArgs)
   overload: System.Windows.Controls.Control.OnDragEnter*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
@@ -1907,19 +2175,33 @@ items:
   fullName: System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnDragLeave
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1139
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1149
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: protected virtual void OnDragLeave(DragEventArgs e)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnDragLeave(DragEventArgs e)
     parameters:
     - id: e
       type: System.Windows.DragEventArgs
-    content.vb: Protected Overridable Sub OnDragLeave(e As DragEventArgs)
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnDragLeave(e As DragEventArgs)
   overload: System.Windows.Controls.Control.OnDragLeave*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
@@ -1938,19 +2220,33 @@ items:
   fullName: System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnTextInputStart
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1145
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1155
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: protected virtual void OnTextInputStart(TextCompositionEventArgs e)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnTextInputStart(TextCompositionEventArgs e)
     parameters:
     - id: e
       type: System.Windows.Input.TextCompositionEventArgs
-    content.vb: Protected Overridable Sub OnTextInputStart(e As TextCompositionEventArgs)
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnTextInputStart(e As TextCompositionEventArgs)
   overload: System.Windows.Controls.Control.OnTextInputStart*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
@@ -1969,19 +2265,33 @@ items:
   fullName: System.Windows.Controls.Control.OnTextInputUpdate(System.Windows.Input.TextCompositionEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnTextInputUpdate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1151
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1161
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: protected virtual void OnTextInputUpdate(TextCompositionEventArgs e)
+    content: >-
+      [NotImplemented]
+
+      protected virtual void OnTextInputUpdate(TextCompositionEventArgs e)
     parameters:
     - id: e
       type: System.Windows.Input.TextCompositionEventArgs
-    content.vb: Protected Overridable Sub OnTextInputUpdate(e As TextCompositionEventArgs)
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Sub OnTextInputUpdate(e As TextCompositionEventArgs)
   overload: System.Windows.Controls.Control.OnTextInputUpdate*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - protected
   - virtual
@@ -2000,9 +2310,13 @@ items:
   fullName: System.Windows.Controls.Control.MeasureOverride(System.Windows.Size)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/Control.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MeasureOverride
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\Control.cs
-    startLine: 1156
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/Control.cs
+    startLine: 1166
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -2030,6 +2344,7 @@ references:
   fullName: System.Windows.Controls
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -2316,6 +2631,12 @@ references:
   name: DataContextChanged
   nameWithType: FrameworkElement.DataContextChanged
   fullName: System.Windows.FrameworkElement.DataContextChanged
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  parent: System.Windows.FrameworkElement
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   parent: System.Windows.FrameworkElement
@@ -2350,18 +2671,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  parent: System.Windows.FrameworkElement
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  parent: System.Windows.FrameworkElement
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -2494,6 +2803,12 @@ references:
   name: DefaultStyleKeyProperty
   nameWithType: FrameworkElement.DefaultStyleKeyProperty
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  parent: System.Windows.FrameworkElement
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
 - uid: System.Windows.FrameworkElement.Loaded
   commentId: E:System.Windows.FrameworkElement.Loaded
   parent: System.Windows.FrameworkElement
@@ -2512,100 +2827,6 @@ references:
   name: BindingValidationError
   nameWithType: FrameworkElement.BindingValidationError
   fullName: System.Windows.FrameworkElement.BindingValidationError
-- uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: RegisterName(String, Object)
-  nameWithType: FrameworkElement.RegisterName(String, Object)
-  fullName: System.Windows.FrameworkElement.RegisterName(System.String, System.Object)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-  commentId: M:System.Windows.FrameworkElement.UnregisterName(System.String)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: UnregisterName(String)
-  nameWithType: FrameworkElement.UnregisterName(String)
-  fullName: System.Windows.FrameworkElement.UnregisterName(System.String)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.FrameworkElement
@@ -2718,6 +2939,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   parent: System.Windows.FrameworkElement
@@ -2850,6 +3095,24 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  parent: System.Windows.FrameworkElement
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.FrameworkElement.SizeChanged
   commentId: E:System.Windows.FrameworkElement.SizeChanged
   parent: System.Windows.FrameworkElement
@@ -2892,6 +3155,12 @@ references:
   name: Drop
   nameWithType: UIElement.Drop
   fullName: System.Windows.UIElement.Drop
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  parent: System.Windows.UIElement
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
 - uid: System.Windows.UIElement.OpacityMask
   commentId: P:System.Windows.UIElement.OpacityMask
   parent: System.Windows.UIElement
@@ -2928,18 +3197,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.OnCreateAutomationPeer
   commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
   parent: System.Windows.UIElement
@@ -2998,6 +3255,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -3207,12 +3476,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -3563,6 +3826,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -3671,6 +4056,90 @@ references:
   name: MouseRightButtonDown
   nameWithType: UIElement.MouseRightButtonDown
   fullName: System.Windows.UIElement.MouseRightButtonDown
+- uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseRightButtonDown(MouseButtonEventArgs)
+  nameWithType: UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)
+  fullName: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseLeftButtonUpEvent
   commentId: F:System.Windows.UIElement.MouseLeftButtonUpEvent
   parent: System.Windows.UIElement
@@ -3815,24 +4284,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -3845,12 +4344,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -4204,128 +4697,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -4930,6 +5301,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -5297,45 +5983,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
@@ -5808,14 +6499,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5829,16 +6520,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5852,10 +6543,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -5882,6 +6573,8 @@ references:
   nameWithType: Control.Control
   fullName: System.Windows.Controls.Control.Control
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -6060,6 +6753,8 @@ references:
   nameWithType: Control.FontSize
   fullName: System.Windows.Controls.Control.FontSize
 - uid: System.Double
+  commentId: T:System.Double
+  parent: System
   isExternal: true
   name: Double
   nameWithType: Double
@@ -6138,6 +6833,8 @@ references:
   nameWithType: Control.TabIndex
   fullName: System.Windows.Controls.Control.TabIndex
 - uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
   name: Int32
   nameWithType: Int32
@@ -6181,6 +6878,8 @@ references:
   nameWithType: Control.GetTemplateChild
   fullName: System.Windows.Controls.Control.GetTemplateChild
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
@@ -6288,33 +6987,11 @@ references:
   name: CreateDomElement
   nameWithType: Control.CreateDomElement
   fullName: System.Windows.Controls.Control.CreateDomElement
-- uid: System.Windows.Controls.Control.OnMouseRightButtonDown*
-  commentId: Overload:System.Windows.Controls.Control.OnMouseRightButtonDown
-  name: OnMouseRightButtonDown
-  nameWithType: Control.OnMouseRightButtonDown
-  fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-- uid: System.Windows.Input.MouseButtonEventArgs
-  commentId: T:System.Windows.Input.MouseButtonEventArgs
-  parent: System.Windows.Input
-  name: MouseButtonEventArgs
-  nameWithType: MouseButtonEventArgs
-  fullName: System.Windows.Input.MouseButtonEventArgs
-- uid: System.Windows.Input
-  commentId: N:System.Windows.Input
-  name: System.Windows.Input
-  nameWithType: System.Windows.Input
-  fullName: System.Windows.Input
-- uid: System.Windows.Input.MouseWheelEventArgs
-  commentId: T:System.Windows.Input.MouseWheelEventArgs
-  parent: System.Windows.Input
-  name: MouseWheelEventArgs
-  nameWithType: MouseWheelEventArgs
-  fullName: System.Windows.Input.MouseWheelEventArgs
-- uid: System.Windows.Controls.Control.OnMouseWheel*
-  commentId: Overload:System.Windows.Controls.Control.OnMouseWheel
-  name: OnMouseWheel
-  nameWithType: Control.OnMouseWheel
-  fullName: System.Windows.Controls.Control.OnMouseWheel
+- uid: System.Windows.Controls.Control.CharacterSpacing*
+  commentId: Overload:System.Windows.Controls.Control.CharacterSpacing
+  name: CharacterSpacing
+  nameWithType: Control.CharacterSpacing
+  fullName: System.Windows.Controls.Control.CharacterSpacing
 - uid: System.Windows.Controls.Control.TabNavigation*
   commentId: Overload:System.Windows.Controls.Control.TabNavigation
   name: TabNavigation
@@ -6326,6 +7003,11 @@ references:
   name: KeyboardNavigationMode
   nameWithType: KeyboardNavigationMode
   fullName: System.Windows.Input.KeyboardNavigationMode
+- uid: System.Windows.Input
+  commentId: N:System.Windows.Input
+  name: System.Windows.Input
+  nameWithType: System.Windows.Input
+  fullName: System.Windows.Input
 - uid: System.Windows.Controls.Control.FontStretch*
   commentId: Overload:System.Windows.Controls.Control.FontStretch
   name: FontStretch
@@ -6337,17 +7019,6 @@ references:
   name: FontStretch
   nameWithType: FontStretch
   fullName: System.Windows.FontStretch
-- uid: System.Windows.Controls.Control.OnTextInput*
-  commentId: Overload:System.Windows.Controls.Control.OnTextInput
-  name: OnTextInput
-  nameWithType: Control.OnTextInput
-  fullName: System.Windows.Controls.Control.OnTextInput
-- uid: System.Windows.Input.TextCompositionEventArgs
-  commentId: T:System.Windows.Input.TextCompositionEventArgs
-  parent: System.Windows.Input
-  name: TextCompositionEventArgs
-  nameWithType: TextCompositionEventArgs
-  fullName: System.Windows.Input.TextCompositionEventArgs
 - uid: System.Windows.Controls.Control.OnDrop*
   commentId: Overload:System.Windows.Controls.Control.OnDrop
   name: OnDrop
@@ -6374,6 +7045,12 @@ references:
   name: OnTextInputStart
   nameWithType: Control.OnTextInputStart
   fullName: System.Windows.Controls.Control.OnTextInputStart
+- uid: System.Windows.Input.TextCompositionEventArgs
+  commentId: T:System.Windows.Input.TextCompositionEventArgs
+  parent: System.Windows.Input
+  name: TextCompositionEventArgs
+  nameWithType: TextCompositionEventArgs
+  fullName: System.Windows.Input.TextCompositionEventArgs
 - uid: System.Windows.Controls.Control.OnTextInputUpdate*
   commentId: Overload:System.Windows.Controls.Control.OnTextInputUpdate
   name: OnTextInputUpdate

@@ -6,30 +6,34 @@ items:
   parent: OpenSilver.Compatibility
   children:
   - OpenSilver.Compatibility.WebClient.#ctor
+  - OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering
+  - OpenSilver.Compatibility.WebClient.CancelAsync
   - OpenSilver.Compatibility.WebClient.DownloadString(System.String)
-  - OpenSilver.Compatibility.WebClient.DownloadString(Uri)
-  - OpenSilver.Compatibility.WebClient.DownloadStringAsync(Uri)
+  - OpenSilver.Compatibility.WebClient.DownloadString(System.Uri)
+  - OpenSilver.Compatibility.WebClient.DownloadStringAsync(System.Uri)
   - OpenSilver.Compatibility.WebClient.DownloadStringCompleted
   - OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.String)
-  - OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(Uri)
+  - OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.Uri)
   - OpenSilver.Compatibility.WebClient.Encoding
   - OpenSilver.Compatibility.WebClient.Headers
-  - OpenSilver.Compatibility.WebClient.OpenReadAsync(Uri,System.Object)
+  - OpenSilver.Compatibility.WebClient.IsBusy
+  - OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri)
+  - OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri,System.Object)
   - OpenSilver.Compatibility.WebClient.OpenReadCompleted
-  - OpenSilver.Compatibility.WebClient.OpenWriteAsync(Uri)
+  - OpenSilver.Compatibility.WebClient.OpenWriteAsync(System.Uri)
   - OpenSilver.Compatibility.WebClient.OpenWriteCompleted
   - OpenSilver.Compatibility.WebClient.ResponseHeaders
   - OpenSilver.Compatibility.WebClient.UploadString(System.String,System.String)
   - OpenSilver.Compatibility.WebClient.UploadString(System.String,System.String,System.String)
-  - OpenSilver.Compatibility.WebClient.UploadString(Uri,System.String)
-  - OpenSilver.Compatibility.WebClient.UploadString(Uri,System.String,System.String)
-  - OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri,System.String)
-  - OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri,System.String,System.String)
+  - OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String)
+  - OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String,System.String)
+  - OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String)
+  - OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String,System.String)
   - OpenSilver.Compatibility.WebClient.UploadStringCompleted
   - OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String,System.String)
   - OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String,System.String,System.String)
-  - OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri,System.String)
-  - OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri,System.String,System.String)
+  - OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String)
+  - OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String,System.String)
   langs:
   - csharp
   - vb
@@ -38,9 +42,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: WebClient
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 93
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 94
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -48,12 +56,18 @@ items:
   example:
   - "\nHere is an example of a use of the WebClient to receive data:\n<pre><code>//We create the WebClient with the right encoding and headers:\nvar webClient = new WebClient();\nwebClient.Encoding = Encoding.UTF8;\nwebClient.Headers[HttpRequestHeader.Accept] = &quot;application/xml&quot;;\n\n//We submit the request to the server and wait for its response:\nstring response = await webClient.DownloadStringTaskAsync(&quot;http://someAddress.com&quot;);\n\n//We modify the response so that it can be deserialized (deserialization is not perfect yet):\nresponse = response.Replace(@&quot;xmlns=&quot;&quot;http://NameSpaceOfTheDeserialization&quot;&quot;&quot;, &quot;&quot;);\nresponse = &quot;&lt;ToDoItemsWrapper>&quot; + response.Replace(&quot;ArrayOfToDoItem&quot;, &quot;ToDoItems&quot;) + &quot;&lt;/ToDoItemsWrapper>&quot;; // Workaround for the fact that &quot;ArrayOf&quot; types cannot be directly deserialized by the XmlSerializer in this Beta version.\n\n//We create the Deserializer:\nvar deserializer = new XmlSerializer(typeof(ToDoItemsWrapper));\nvar memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(response));\nvar xmlReader = XmlReader.Create(memoryStream);\n\n//We deserialize:\nToDoItemsWrapper items = (ToDoItemsWrapper)deserializer.Deserialize(xmlReader);</code></pre>\nHere is what the ToDoItemsWrapper class looks like (with ToDoItem a Serializable class) :\n<pre><code>// Workaround for the fact that &quot;ArrayOf&quot; types cannot directly be deserialized by the XmlSerializer in this Beta version:\n[DataContract]\npublic partial class ToDoItemsWrapper\n{\n    public List&lt;ToDoItem> ToDoItems { get; set; }\n}</code></pre>\nHere is another example that shows how you can use the WebClient to send data:\n<pre><code>//We parse the data in a string:\nstring data = string.Format(@&quot;{{&quot;&quot;Id&quot;&quot;: &quot;&quot;{0}&quot;&quot;,&quot;&quot;Description&quot;&quot;: &quot;&quot;{1}&quot;&quot;}}&quot;Guid.NewGuid(), MyTextBox.Text.Replace(&quot;\\&quot;&quot;, &quot;&apos;&quot;));\n//We create the WebClient:\nvar webClient = new WebClient();\nWe set the encoding and Headers (note: our data is formatted in json so we set the HttpRequestHeader.ContentType header accordingly) \nwebClient.Headers[HttpRequestHeader.ContentType] = &quot;application/json&quot;;\nwebClient.Encoding = Encoding.UTF8;\nstring response = await webClient.UploadStringTaskAsync(&quot;http://cshtml5-rest-sample.azurewebsites.net/api/Todo/&quot;, &quot;POST&quot;, data);</code></pre>\n"
   syntax:
-    content: 'public class WebClient : object'
-    content.vb: >-
-      Public Class WebClient
-          Inherits Object
+    content: public class WebClient
+    content.vb: Public Class WebClient
   inheritance:
   - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
@@ -74,9 +88,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.Encoding
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Encoding
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 105
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 106
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -86,7 +104,7 @@ items:
     content: public Encoding Encoding { get; set; }
     parameters: []
     return:
-      type: Encoding
+      type: System.Text.Encoding
     content.vb: Public Property Encoding As Encoding
   overload: OpenSilver.Compatibility.WebClient.Encoding*
   modifiers.csharp:
@@ -107,9 +125,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.Headers
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Headers
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 115
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 116
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -119,7 +141,7 @@ items:
     content: public WebHeaderCollection Headers { get; set; }
     parameters: []
     return:
-      type: WebHeaderCollection
+      type: System.Net.WebHeaderCollection
     content.vb: Public Property Headers As WebHeaderCollection
   overload: OpenSilver.Compatibility.WebClient.Headers*
   modifiers.csharp:
@@ -140,9 +162,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.WebClient()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 126
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 127
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -168,9 +194,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.DownloadStringCompleted
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadStringCompleted
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 133
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 134
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -197,9 +227,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.DownloadString(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 160
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 161
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -220,21 +254,25 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.DownloadString(Uri)
-  commentId: M:OpenSilver.Compatibility.WebClient.DownloadString(Uri)
-  id: DownloadString(Uri)
+- uid: OpenSilver.Compatibility.WebClient.DownloadString(System.Uri)
+  commentId: M:OpenSilver.Compatibility.WebClient.DownloadString(System.Uri)
+  id: DownloadString(System.Uri)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: DownloadString(Uri)
   nameWithType: WebClient.DownloadString(Uri)
-  fullName: OpenSilver.Compatibility.WebClient.DownloadString(Uri)
+  fullName: OpenSilver.Compatibility.WebClient.DownloadString(System.Uri)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 181
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 182
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -244,7 +282,7 @@ items:
     content: public string DownloadString(Uri address)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: A System.Uri object containing the URI to download.
     return:
       type: System.String
@@ -255,21 +293,25 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.DownloadStringAsync(Uri)
-  commentId: M:OpenSilver.Compatibility.WebClient.DownloadStringAsync(Uri)
-  id: DownloadStringAsync(Uri)
+- uid: OpenSilver.Compatibility.WebClient.DownloadStringAsync(System.Uri)
+  commentId: M:OpenSilver.Compatibility.WebClient.DownloadStringAsync(System.Uri)
+  id: DownloadStringAsync(System.Uri)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: DownloadStringAsync(Uri)
   nameWithType: WebClient.DownloadStringAsync(Uri)
-  fullName: OpenSilver.Compatibility.WebClient.DownloadStringAsync(Uri)
+  fullName: OpenSilver.Compatibility.WebClient.DownloadStringAsync(System.Uri)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadStringAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 226
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 227
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -279,7 +321,7 @@ items:
     content: public void DownloadStringAsync(Uri address)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: A System.Uri containing the URI to download.
     content.vb: Public Sub DownloadStringAsync(address As Uri)
   overload: OpenSilver.Compatibility.WebClient.DownloadStringAsync*
@@ -299,9 +341,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadStringTaskAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 317
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 318
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -314,29 +360,33 @@ items:
       type: System.String
       description: A System.Uri containing the URI to download.
     return:
-      type: Task{System.String}
-      description: Returns the resource as <see cref="!:System.Threading.Tasks.Task&lt;TResult>"></see>.
+      type: System.Threading.Tasks.Task{System.String}
+      description: Returns the resource as <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function DownloadStringTaskAsync(address As String) As Task(Of String)
   overload: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(Uri)
-  commentId: M:OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(Uri)
-  id: DownloadStringTaskAsync(Uri)
+- uid: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.Uri)
+  commentId: M:OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.Uri)
+  id: DownloadStringTaskAsync(System.Uri)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: DownloadStringTaskAsync(Uri)
   nameWithType: WebClient.DownloadStringTaskAsync(Uri)
-  fullName: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(Uri)
+  fullName: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync(System.Uri)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DownloadStringTaskAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 329
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 330
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -346,11 +396,11 @@ items:
     content: public Task<string> DownloadStringTaskAsync(Uri address)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: A System.Uri containing the URI to download.
     return:
-      type: Task{System.String}
-      description: Returns the resource as <see cref="!:System.Threading.Tasks.Task&lt;TResult>"></see>.
+      type: System.Threading.Tasks.Task{System.String}
+      description: Returns the resource as <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function DownloadStringTaskAsync(address As Uri) As Task(Of String)
   overload: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync*
   modifiers.csharp:
@@ -369,9 +419,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.ResponseHeaders
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ResponseHeaders
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 399
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 400
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -379,7 +433,7 @@ items:
     content: public WebHeaderCollection ResponseHeaders { get; }
     parameters: []
     return:
-      type: WebHeaderCollection
+      type: System.Net.WebHeaderCollection
     content.vb: Public ReadOnly Property ResponseHeaders As WebHeaderCollection
   overload: OpenSilver.Compatibility.WebClient.ResponseHeaders*
   modifiers.csharp:
@@ -400,9 +454,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.UploadString(System.String, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 438
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 439
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -426,21 +484,25 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.UploadString(Uri,System.String)
-  commentId: M:OpenSilver.Compatibility.WebClient.UploadString(Uri,System.String)
-  id: UploadString(Uri,System.String)
+- uid: OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String)
+  commentId: M:OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String)
+  id: UploadString(System.Uri,System.String)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: UploadString(Uri, String)
   nameWithType: WebClient.UploadString(Uri, String)
-  fullName: OpenSilver.Compatibility.WebClient.UploadString(Uri, System.String)
+  fullName: OpenSilver.Compatibility.WebClient.UploadString(System.Uri, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 461
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 462
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -450,7 +512,7 @@ items:
     content: public string UploadString(Uri address, string data)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: "\nThe URI of the resource to receive the string. For Http resources, this URI\nmust identify a resource that can accept a request sent with the POST method,\nsuch as a script or ASP page.\n"
     - id: data
       type: System.String
@@ -476,9 +538,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.UploadString(System.String, System.String, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 488
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 489
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -505,21 +571,25 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.UploadString(Uri,System.String,System.String)
-  commentId: M:OpenSilver.Compatibility.WebClient.UploadString(Uri,System.String,System.String)
-  id: UploadString(Uri,System.String,System.String)
+- uid: OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String,System.String)
+  commentId: M:OpenSilver.Compatibility.WebClient.UploadString(System.Uri,System.String,System.String)
+  id: UploadString(System.Uri,System.String,System.String)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: UploadString(Uri, String, String)
   nameWithType: WebClient.UploadString(Uri, String, String)
-  fullName: OpenSilver.Compatibility.WebClient.UploadString(Uri, System.String, System.String)
+  fullName: OpenSilver.Compatibility.WebClient.UploadString(System.Uri, System.String, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 515
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 516
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -529,7 +599,7 @@ items:
     content: public string UploadString(Uri address, string method, string data)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: "\nThe URI of the resource to receive the file. This URI must identify a resource\nthat can accept a request sent with the method method.\n"
     - id: method
       type: System.String
@@ -546,21 +616,25 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri,System.String)
-  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri,System.String)
-  id: UploadStringAsync(Uri,System.String)
+- uid: OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String)
+  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String)
+  id: UploadStringAsync(System.Uri,System.String)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: UploadStringAsync(Uri, String)
   nameWithType: WebClient.UploadStringAsync(Uri, String)
-  fullName: OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri, System.String)
+  fullName: OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadStringAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 610
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 611
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -570,7 +644,7 @@ items:
     content: public void UploadStringAsync(Uri address, string data)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: "\nThe URI of the resource to receive the file. For HTTP resources, this URI\nmust identify a resource that can accept a request sent with the POST method,\nsuch as a script or ASP page.\n"
     - id: data
       type: System.String
@@ -581,21 +655,25 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri,System.String,System.String)
-  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri,System.String,System.String)
-  id: UploadStringAsync(Uri,System.String,System.String)
+- uid: OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String,System.String)
+  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri,System.String,System.String)
+  id: UploadStringAsync(System.Uri,System.String,System.String)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: UploadStringAsync(Uri, String, String)
   nameWithType: WebClient.UploadStringAsync(Uri, String, String)
-  fullName: OpenSilver.Compatibility.WebClient.UploadStringAsync(Uri, System.String, System.String)
+  fullName: OpenSilver.Compatibility.WebClient.UploadStringAsync(System.Uri, System.String, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadStringAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 636
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 637
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -605,7 +683,7 @@ items:
     content: public void UploadStringAsync(Uri address, string method, string data)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: "\nThe URI of the resource to receive the file. For HTTP resources, this URI\nmust identify a resource that can accept a request sent with the POST method,\nsuch as a script or ASP page.\n"
     - id: method
       type: System.String
@@ -631,9 +709,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadStringTaskAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 660
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 661
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -649,29 +731,33 @@ items:
       type: System.String
       description: The string to be uploaded.
     return:
-      type: Task{System.String}
-      description: "\nReturns <see cref=\"!:System.Threading.Tasks.Task&lt;TResult>\"></see>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
+      type: System.Threading.Tasks.Task{System.String}
+      description: "\nReturns <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
     content.vb: Public Function UploadStringTaskAsync(address As String, data As String) As Task(Of String)
   overload: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri,System.String)
-  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri,System.String)
-  id: UploadStringTaskAsync(Uri,System.String)
+- uid: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String)
+  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String)
+  id: UploadStringTaskAsync(System.Uri,System.String)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: UploadStringTaskAsync(Uri, String)
   nameWithType: WebClient.UploadStringTaskAsync(Uri, String)
-  fullName: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri, System.String)
+  fullName: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadStringTaskAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 679
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 680
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -681,14 +767,14 @@ items:
     content: public Task<string> UploadStringTaskAsync(Uri address, string data)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: "\nThe URI of the resource to receive the string. For HTTP resources, this URI\nmust identify a resource that can accept a request sent with the POST method,\nsuch as a script or ASP page.\n"
     - id: data
       type: System.String
       description: The string to be uploaded.
     return:
-      type: Task{System.String}
-      description: "\nReturns <see cref=\"!:System.Threading.Tasks.Task&lt;TResult>\"></see>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
+      type: System.Threading.Tasks.Task{System.String}
+      description: "\nReturns <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
     content.vb: Public Function UploadStringTaskAsync(address As Uri, data As String) As Task(Of String)
   overload: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*
   modifiers.csharp:
@@ -707,9 +793,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.String, System.String, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadStringTaskAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 702
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 703
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -728,29 +818,33 @@ items:
       type: System.String
       description: The string to be uploaded.
     return:
-      type: Task{System.String}
-      description: "\nReturns <see cref=\"!:System.Threading.Tasks.Task&lt;TResult>\"></see>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
+      type: System.Threading.Tasks.Task{System.String}
+      description: "\nReturns <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
     content.vb: Public Function UploadStringTaskAsync(address As String, method As String, data As String) As Task(Of String)
   overload: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri,System.String,System.String)
-  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri,System.String,System.String)
-  id: UploadStringTaskAsync(Uri,System.String,System.String)
+- uid: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String,System.String)
+  commentId: M:OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri,System.String,System.String)
+  id: UploadStringTaskAsync(System.Uri,System.String,System.String)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: UploadStringTaskAsync(Uri, String, String)
   nameWithType: WebClient.UploadStringTaskAsync(Uri, String, String)
-  fullName: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(Uri, System.String, System.String)
+  fullName: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync(System.Uri, System.String, System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadStringTaskAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 725
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 726
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -760,7 +854,7 @@ items:
     content: public Task<string> UploadStringTaskAsync(Uri address, string method, string data)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
       description: "\nThe URI of the resource to receive the string. For HTTP resources, this URI\nmust identify a resource that can accept a request sent with the POST method,\nsuch as a script or ASP page.\n"
     - id: method
       type: System.String
@@ -769,8 +863,8 @@ items:
       type: System.String
       description: The string to be uploaded.
     return:
-      type: Task{System.String}
-      description: "\nReturns <see cref=\"!:System.Threading.Tasks.Task&lt;TResult>\"></see>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
+      type: System.Threading.Tasks.Task{System.String}
+      description: "\nReturns <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref>.\nThe task object representing the asynchronous operation. The Result property\non the task object returns a String containing the response sent by the server.\n"
     content.vb: Public Function UploadStringTaskAsync(address As Uri, method As String, data As String) As Task(Of String)
   overload: OpenSilver.Compatibility.WebClient.UploadStringTaskAsync*
   modifiers.csharp:
@@ -789,9 +883,13 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.UploadStringCompleted
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UploadStringCompleted
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 800
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 801
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
@@ -806,6 +904,99 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering
+  commentId: P:OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering
+  id: AllowReadStreamBuffering
+  parent: OpenSilver.Compatibility.WebClient
+  langs:
+  - csharp
+  - vb
+  name: AllowReadStreamBuffering
+  nameWithType: WebClient.AllowReadStreamBuffering
+  fullName: OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: AllowReadStreamBuffering
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 818
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver.Compatibility
+  summary: "\nGets or sets a value that indicates whether to buffer the data read from the\nInternet resource for a <xref href=\"OpenSilver.Compatibility.WebClient\" data-throw-if-not-resolved=\"false\"></xref> instance.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public bool AllowReadStreamBuffering { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: "\ntrue to enable buffering of the data received from the Internet resource; false\nto disable buffering. The default is true.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property AllowReadStreamBuffering As Boolean
+  overload: OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: OpenSilver.Compatibility.WebClient.IsBusy
+  commentId: P:OpenSilver.Compatibility.WebClient.IsBusy
+  id: IsBusy
+  parent: OpenSilver.Compatibility.WebClient
+  langs:
+  - csharp
+  - vb
+  name: IsBusy
+  nameWithType: WebClient.IsBusy
+  fullName: OpenSilver.Compatibility.WebClient.IsBusy
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsBusy
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 868
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver.Compatibility
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public bool IsBusy { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property IsBusy As Boolean
+  overload: OpenSilver.Compatibility.WebClient.IsBusy*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
 - uid: OpenSilver.Compatibility.WebClient.OpenReadCompleted
   commentId: E:OpenSilver.Compatibility.WebClient.OpenReadCompleted
   id: OpenReadCompleted
@@ -818,17 +1009,31 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.OpenReadCompleted
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OpenReadCompleted
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 919
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 926
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
   syntax:
-    content: public event OpenReadCompletedEventHandler OpenReadCompleted
+    content: >-
+      [NotImplemented]
+
+      public event OpenReadCompletedEventHandler OpenReadCompleted
     return:
-      type: OpenReadCompletedEventHandler
-    content.vb: Public Event OpenReadCompleted As OpenReadCompletedEventHandler
+      type: System.Net.OpenReadCompletedEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event OpenReadCompleted As OpenReadCompletedEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -845,77 +1050,202 @@ items:
   fullName: OpenSilver.Compatibility.WebClient.OpenWriteCompleted
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OpenWriteCompleted
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 926
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 933
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
   syntax:
-    content: public event OpenWriteCompletedEventHandler OpenWriteCompleted
+    content: >-
+      [NotImplemented]
+
+      public event OpenWriteCompletedEventHandler OpenWriteCompleted
     return:
-      type: OpenWriteCompletedEventHandler
-    content.vb: Public Event OpenWriteCompleted As OpenWriteCompletedEventHandler
+      type: System.Net.OpenWriteCompletedEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event OpenWriteCompleted As OpenWriteCompletedEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.OpenReadAsync(Uri,System.Object)
-  commentId: M:OpenSilver.Compatibility.WebClient.OpenReadAsync(Uri,System.Object)
-  id: OpenReadAsync(Uri,System.Object)
+- uid: OpenSilver.Compatibility.WebClient.CancelAsync
+  commentId: M:OpenSilver.Compatibility.WebClient.CancelAsync
+  id: CancelAsync
+  parent: OpenSilver.Compatibility.WebClient
+  langs:
+  - csharp
+  - vb
+  name: CancelAsync()
+  nameWithType: WebClient.CancelAsync()
+  fullName: OpenSilver.Compatibility.WebClient.CancelAsync()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CancelAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 958
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver.Compatibility
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public void CancelAsync()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub CancelAsync
+  overload: OpenSilver.Compatibility.WebClient.CancelAsync*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri)
+  commentId: M:OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri)
+  id: OpenReadAsync(System.Uri)
+  parent: OpenSilver.Compatibility.WebClient
+  langs:
+  - csharp
+  - vb
+  name: OpenReadAsync(Uri)
+  nameWithType: WebClient.OpenReadAsync(Uri)
+  fullName: OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OpenReadAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 1351
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver.Compatibility
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public void OpenReadAsync(Uri address)
+    parameters:
+    - id: address
+      type: System.Uri
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub OpenReadAsync(address As Uri)
+  overload: OpenSilver.Compatibility.WebClient.OpenReadAsync*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri,System.Object)
+  commentId: M:OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri,System.Object)
+  id: OpenReadAsync(System.Uri,System.Object)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: OpenReadAsync(Uri, Object)
   nameWithType: WebClient.OpenReadAsync(Uri, Object)
-  fullName: OpenSilver.Compatibility.WebClient.OpenReadAsync(Uri, System.Object)
+  fullName: OpenSilver.Compatibility.WebClient.OpenReadAsync(System.Uri, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OpenReadAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 1364
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 1374
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
   syntax:
-    content: public void OpenReadAsync(Uri address, object userToken)
+    content: >-
+      [NotImplemented]
+
+      public void OpenReadAsync(Uri address, object userToken)
     parameters:
     - id: address
-      type: Uri
+      type: System.Uri
     - id: userToken
       type: System.Object
-    content.vb: Public Sub OpenReadAsync(address As Uri, userToken As Object)
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub OpenReadAsync(address As Uri, userToken As Object)
   overload: OpenSilver.Compatibility.WebClient.OpenReadAsync*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: OpenSilver.Compatibility.WebClient.OpenWriteAsync(Uri)
-  commentId: M:OpenSilver.Compatibility.WebClient.OpenWriteAsync(Uri)
-  id: OpenWriteAsync(Uri)
+- uid: OpenSilver.Compatibility.WebClient.OpenWriteAsync(System.Uri)
+  commentId: M:OpenSilver.Compatibility.WebClient.OpenWriteAsync(System.Uri)
+  id: OpenWriteAsync(System.Uri)
   parent: OpenSilver.Compatibility.WebClient
   langs:
   - csharp
   - vb
   name: OpenWriteAsync(Uri)
   nameWithType: WebClient.OpenWriteAsync(Uri)
-  fullName: OpenSilver.Compatibility.WebClient.OpenWriteAsync(Uri)
+  fullName: OpenSilver.Compatibility.WebClient.OpenWriteAsync(System.Uri)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Net/WebClient.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OpenWriteAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Net\WebClient.cs
-    startLine: 1477
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Net/WebClient.cs
+    startLine: 1487
   assemblies:
   - OpenSilver
   namespace: OpenSilver.Compatibility
   syntax:
-    content: public void OpenWriteAsync(Uri address)
+    content: >-
+      [NotImplemented]
+
+      public void OpenWriteAsync(Uri address)
     parameters:
     - id: address
-      type: Uri
-    content.vb: Public Sub OpenWriteAsync(address As Uri)
+      type: System.Uri
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub OpenWriteAsync(address As Uri)
   overload: OpenSilver.Compatibility.WebClient.OpenWriteAsync*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -928,10 +1258,290 @@ references:
   fullName: OpenSilver.Compatibility
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -961,6 +1571,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -1015,22 +1630,36 @@ references:
   name: Encoding
   nameWithType: WebClient.Encoding
   fullName: OpenSilver.Compatibility.WebClient.Encoding
-- uid: Encoding
-  commentId: '!:Encoding'
+- uid: System.Text.Encoding
+  commentId: T:System.Text.Encoding
+  parent: System.Text
   isExternal: true
   name: Encoding
   nameWithType: Encoding
-  fullName: Encoding
+  fullName: System.Text.Encoding
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
 - uid: OpenSilver.Compatibility.WebClient.Headers*
   commentId: Overload:OpenSilver.Compatibility.WebClient.Headers
   name: Headers
   nameWithType: WebClient.Headers
   fullName: OpenSilver.Compatibility.WebClient.Headers
-- uid: WebHeaderCollection
+- uid: System.Net.WebHeaderCollection
+  commentId: T:System.Net.WebHeaderCollection
+  parent: System.Net
   isExternal: true
   name: WebHeaderCollection
   nameWithType: WebHeaderCollection
-  fullName: WebHeaderCollection
+  fullName: System.Net.WebHeaderCollection
+- uid: System.Net
+  commentId: N:System.Net
+  name: System.Net
+  nameWithType: System.Net
+  fullName: System.Net
 - uid: OpenSilver.Compatibility.WebClient.#ctor*
   commentId: Overload:OpenSilver.Compatibility.WebClient.#ctor
   name: WebClient
@@ -1048,39 +1677,83 @@ references:
   nameWithType: WebClient.DownloadString
   fullName: OpenSilver.Compatibility.WebClient.DownloadString
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Uri
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
   isExternal: true
   name: Uri
   nameWithType: Uri
-  fullName: Uri
+  fullName: System.Uri
 - uid: OpenSilver.Compatibility.WebClient.DownloadStringAsync*
   commentId: Overload:OpenSilver.Compatibility.WebClient.DownloadStringAsync
   name: DownloadStringAsync
   nameWithType: WebClient.DownloadStringAsync
   fullName: OpenSilver.Compatibility.WebClient.DownloadStringAsync
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync*
   commentId: Overload:OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync
   name: DownloadStringTaskAsync
   nameWithType: WebClient.DownloadStringTaskAsync
   fullName: OpenSilver.Compatibility.WebClient.DownloadStringTaskAsync
-- uid: Task{System.String}
-  commentId: '!:Task{System.String}'
-  definition: Task`1
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
   name: Task<String>
   nameWithType: Task<String>
-  fullName: Task<System.String>
+  fullName: System.Threading.Tasks.Task<System.String>
   nameWithType.vb: Task(Of String)
-  fullName.vb: Task(Of System.String)
+  fullName.vb: System.Threading.Tasks.Task(Of System.String)
   name.vb: Task(Of String)
   spec.csharp:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: <
     nameWithType: <
@@ -1094,10 +1767,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1110,44 +1783,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Task`1
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
   isExternal: true
-  name: Task<>
-  nameWithType: Task<>
-  fullName: Task<>
-  nameWithType.vb: Task(Of )
-  fullName.vb: Task(Of )
-  name.vb: Task(Of )
-  spec.csharp:
-  - uid: Task`1
-    name: Task
-    nameWithType: Task
-    fullName: Task
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Task`1
-    name: Task
-    nameWithType: Task
-    fullName: Task
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
 - uid: OpenSilver.Compatibility.WebClient.ResponseHeaders*
   commentId: Overload:OpenSilver.Compatibility.WebClient.ResponseHeaders
   name: ResponseHeaders
@@ -1174,18 +1815,47 @@ references:
   name: UploadStringCompletedEventHandler
   nameWithType: UploadStringCompletedEventHandler
   fullName: OpenSilver.Compatibility.UploadStringCompletedEventHandler
-- uid: OpenReadCompletedEventHandler
-  commentId: '!:OpenReadCompletedEventHandler'
+- uid: OpenSilver.Compatibility.WebClient
+  commentId: T:OpenSilver.Compatibility.WebClient
+  name: WebClient
+  nameWithType: WebClient
+  fullName: OpenSilver.Compatibility.WebClient
+- uid: OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering*
+  commentId: Overload:OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering
+  name: AllowReadStreamBuffering
+  nameWithType: WebClient.AllowReadStreamBuffering
+  fullName: OpenSilver.Compatibility.WebClient.AllowReadStreamBuffering
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: OpenSilver.Compatibility.WebClient.IsBusy*
+  commentId: Overload:OpenSilver.Compatibility.WebClient.IsBusy
+  name: IsBusy
+  nameWithType: WebClient.IsBusy
+  fullName: OpenSilver.Compatibility.WebClient.IsBusy
+- uid: System.Net.OpenReadCompletedEventHandler
+  commentId: T:System.Net.OpenReadCompletedEventHandler
+  parent: System.Net
   isExternal: true
   name: OpenReadCompletedEventHandler
   nameWithType: OpenReadCompletedEventHandler
-  fullName: OpenReadCompletedEventHandler
-- uid: OpenWriteCompletedEventHandler
-  commentId: '!:OpenWriteCompletedEventHandler'
+  fullName: System.Net.OpenReadCompletedEventHandler
+- uid: System.Net.OpenWriteCompletedEventHandler
+  commentId: T:System.Net.OpenWriteCompletedEventHandler
+  parent: System.Net
   isExternal: true
   name: OpenWriteCompletedEventHandler
   nameWithType: OpenWriteCompletedEventHandler
-  fullName: OpenWriteCompletedEventHandler
+  fullName: System.Net.OpenWriteCompletedEventHandler
+- uid: OpenSilver.Compatibility.WebClient.CancelAsync*
+  commentId: Overload:OpenSilver.Compatibility.WebClient.CancelAsync
+  name: CancelAsync
+  nameWithType: WebClient.CancelAsync
+  fullName: OpenSilver.Compatibility.WebClient.CancelAsync
 - uid: OpenSilver.Compatibility.WebClient.OpenReadAsync*
   commentId: Overload:OpenSilver.Compatibility.WebClient.OpenReadAsync
   name: OpenReadAsync

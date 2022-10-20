@@ -7,6 +7,8 @@ items:
   children:
   - System.Windows.Controls.DragDropTarget`2.#ctor
   - System.Windows.Controls.DragDropTarget`2.AddItem(`0,System.Object)
+  - System.Windows.Controls.DragDropTarget`2.AllowedSourceEffects
+  - System.Windows.Controls.DragDropTarget`2.AllowedSourceEffectsProperty
   - System.Windows.Controls.DragDropTarget`2.ContainerFromIndex(`0,System.Int32)
   - System.Windows.Controls.DragDropTarget`2.DragEnter
   - System.Windows.Controls.DragDropTarget`2.DragLeave
@@ -19,6 +21,7 @@ items:
   - System.Windows.Controls.DragDropTarget`2.ItemDragCompleted
   - System.Windows.Controls.DragDropTarget`2.ItemDragStarting
   - System.Windows.Controls.DragDropTarget`2.ItemDroppedOnSource
+  - System.Windows.Controls.DragDropTarget`2.ItemDroppedOnTarget
   - System.Windows.Controls.DragDropTarget`2.OnDragOver(Microsoft.Windows.DragEventArgs)
   - System.Windows.Controls.DragDropTarget`2.RemoveItem(`0,System.Object)
   - System.Windows.Controls.DragDropTarget`2.RemoveItemAtIndex(`0,System.Int32)
@@ -30,8 +33,12 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragDropTarget
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
     startLine: 57
   assemblies:
   - OpenSilver
@@ -47,6 +54,7 @@ items:
       description: The type of the item container.
     content.vb: >-
       Public MustInherit Class DragDropTarget(Of TItemsControlType As UIElement, TItemContainerType As UIElement)
+
           Inherits ContentControl
   inheritance:
   - System.Object
@@ -56,6 +64,7 @@ items:
   - System.Windows.Controls.Control
   - System.Windows.Controls.ContentControl
   derivedClasses:
+  - System.Windows.Controls.ItemsControlDragDropTarget`2
   - System.Windows.Controls.PanelDragDropTarget
   inheritedMembers:
   - System.Windows.Controls.ContentControl.Content
@@ -104,13 +113,12 @@ items:
   - System.Windows.Controls.Control.UseSystemFocusVisuals
   - System.Windows.Controls.Control.OnApplyTemplate
   - System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
-  - System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  - System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  - System.Windows.Controls.Control.CharacterSpacingProperty
+  - System.Windows.Controls.Control.CharacterSpacing
   - System.Windows.Controls.Control.TabNavigationProperty
   - System.Windows.Controls.Control.TabNavigation
   - System.Windows.Controls.Control.FontStretchProperty
   - System.Windows.Controls.Control.FontStretch
-  - System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
@@ -134,10 +142,9 @@ items:
   - System.Windows.FrameworkElement.DataContext
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
+  - System.Windows.FrameworkElement.Triggers
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.OnLayoutUpdated
-  - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
@@ -149,14 +156,17 @@ items:
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
   - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
-  - System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  - System.Windows.FrameworkElement.UnregisterName(System.String)
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
   - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.CustomLayout
   - System.Windows.FrameworkElement.CustomLayoutProperty
   - System.Windows.FrameworkElement.Height
@@ -179,6 +189,9 @@ items:
   - System.Windows.FrameworkElement.MaxWidthProperty
   - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.SizeChanged
   - System.Windows.FrameworkElement.ContextMenu
   - System.Windows.FrameworkElement.ContextMenuProperty
@@ -189,14 +202,14 @@ items:
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -211,7 +224,6 @@ items:
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
   - System.Windows.UIElement.IsVisible
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -232,6 +244,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -240,6 +254,10 @@ items:
   - System.Windows.UIElement.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
+  - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -249,12 +267,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -277,8 +294,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -294,6 +309,14 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
@@ -306,7 +329,7 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType)
   modifiers.csharp:
   - public
@@ -318,6 +341,94 @@ items:
   - Class
   fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType)
   name.vb: DragDropTarget(Of TItemsControlType, TItemContainerType)
+- uid: System.Windows.Controls.DragDropTarget`2.AllowedSourceEffects
+  commentId: P:System.Windows.Controls.DragDropTarget`2.AllowedSourceEffects
+  id: AllowedSourceEffects
+  parent: System.Windows.Controls.DragDropTarget`2
+  langs:
+  - csharp
+  - vb
+  name: AllowedSourceEffects
+  nameWithType: DragDropTarget<TItemsControlType, TItemContainerType>.AllowedSourceEffects
+  fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.AllowedSourceEffects
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: AllowedSourceEffects
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 87
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nGets or sets the allowed effects when this DragDropTarget is the drag source.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public DragDropEffects AllowedSourceEffects { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.Windows.DragDropEffects
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property AllowedSourceEffects As DragDropEffects
+  overload: System.Windows.Controls.DragDropTarget`2.AllowedSourceEffects*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).AllowedSourceEffects
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType).AllowedSourceEffects
+- uid: System.Windows.Controls.DragDropTarget`2.AllowedSourceEffectsProperty
+  commentId: F:System.Windows.Controls.DragDropTarget`2.AllowedSourceEffectsProperty
+  id: AllowedSourceEffectsProperty
+  parent: System.Windows.Controls.DragDropTarget`2
+  langs:
+  - csharp
+  - vb
+  name: AllowedSourceEffectsProperty
+  nameWithType: DragDropTarget<TItemsControlType, TItemContainerType>.AllowedSourceEffectsProperty
+  fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.AllowedSourceEffectsProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: AllowedSourceEffectsProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 97
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nIdentifies the AllowedSourceEffects dependency property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty AllowedSourceEffectsProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly AllowedSourceEffectsProperty As DependencyProperty
+  nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).AllowedSourceEffectsProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+  fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType).AllowedSourceEffectsProperty
 - uid: System.Windows.Controls.DragDropTarget`2.#ctor
   commentId: M:System.Windows.Controls.DragDropTarget`2.#ctor
   id: '#ctor'
@@ -330,9 +441,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.DragDropTarget()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 87
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 109
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -360,9 +475,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.OnDragOver(Microsoft.Windows.DragEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnDragOver
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 516
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 538
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -396,9 +515,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.INTERNAL_OnAttachedToVisualTree()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_OnAttachedToVisualTree
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 526
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 548
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -427,9 +550,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.ContainerFromIndex(TItemsControlType, System.Int32)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ContainerFromIndex
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 551
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 573
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -470,9 +597,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.AddItem(TItemsControlType, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: AddItem
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 558
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 580
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -509,9 +640,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.INTERNAL_ReturnNewTItemsControl()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_ReturnNewTItemsControl
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 564
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 586
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -544,9 +679,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.InsertItem(TItemsControlType, System.Int32, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: InsertItem
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 572
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 594
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -586,9 +725,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.IndexFromContainer(TItemsControlType, System.Windows.UIElement)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IndexFromContainer
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 580
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 602
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -628,9 +771,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.RemoveItem(TItemsControlType, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RemoveItem
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 587
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 609
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -667,9 +814,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.RemoveItemAtIndex(TItemsControlType, System.Int32)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RemoveItemAtIndex
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 594
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 616
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -706,9 +857,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.ItemDragStarting
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ItemDragStarting
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 604
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 626
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -717,7 +872,7 @@ items:
   syntax:
     content: public event EventHandler<ItemDragEventArgs> ItemDragStarting
     return:
-      type: EventHandler{System.Windows.Controls.ItemDragEventArgs}
+      type: System.EventHandler{System.Windows.Controls.ItemDragEventArgs}
     content.vb: Public Event ItemDragStarting As EventHandler(Of ItemDragEventArgs)
   nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).ItemDragStarting
   modifiers.csharp:
@@ -737,9 +892,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.ItemDragCompleted
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ItemDragCompleted
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 609
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 631
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -748,7 +907,7 @@ items:
   syntax:
     content: public event EventHandler<ItemDragEventArgs> ItemDragCompleted
     return:
-      type: EventHandler{System.Windows.Controls.ItemDragEventArgs}
+      type: System.EventHandler{System.Windows.Controls.ItemDragEventArgs}
     content.vb: Public Event ItemDragCompleted As EventHandler(Of ItemDragEventArgs)
   nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).ItemDragCompleted
   modifiers.csharp:
@@ -768,9 +927,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.DragEnter
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragEnter
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 613
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 635
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -799,9 +962,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.DragLeave
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragLeave
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 617
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 639
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -830,9 +997,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.DragOver
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragOver
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 621
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 643
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -861,9 +1032,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.Drop
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Drop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 625
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 647
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -892,9 +1067,13 @@ items:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.ItemDroppedOnSource
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ItemDroppedOnSource
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DragDropTarget_2.cs
-    startLine: 629
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 651
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -911,6 +1090,51 @@ items:
   modifiers.vb:
   - Public
   fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType).ItemDroppedOnSource
+- uid: System.Windows.Controls.DragDropTarget`2.ItemDroppedOnTarget
+  commentId: E:System.Windows.Controls.DragDropTarget`2.ItemDroppedOnTarget
+  id: ItemDroppedOnTarget
+  parent: System.Windows.Controls.DragDropTarget`2
+  langs:
+  - csharp
+  - vb
+  name: ItemDroppedOnTarget
+  nameWithType: DragDropTarget<TItemsControlType, TItemContainerType>.ItemDroppedOnTarget
+  fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.ItemDroppedOnTarget
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ItemDroppedOnTarget
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DragDropTarget_2.cs
+    startLine: 656
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nRaises the ItemDroppedOnTarget event\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public event EventHandler<ItemDragEventArgs> ItemDroppedOnTarget
+    return:
+      type: System.EventHandler{System.Windows.Controls.ItemDragEventArgs}
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event ItemDroppedOnTarget As EventHandler(Of ItemDragEventArgs)
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).ItemDroppedOnTarget
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType).ItemDroppedOnTarget
 references:
 - uid: System.Windows.Controls
   commentId: N:System.Windows.Controls
@@ -919,6 +1143,7 @@ references:
   fullName: System.Windows.Controls
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -1519,78 +1744,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+- uid: System.Windows.Controls.Control.CharacterSpacingProperty
+  commentId: F:System.Windows.Controls.Control.CharacterSpacingProperty
   parent: System.Windows.Controls.Control
-  name: OnMouseRightButtonDown(MouseButtonEventArgs)
-  nameWithType: Control.OnMouseRightButtonDown(MouseButtonEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  name: CharacterSpacingProperty
+  nameWithType: Control.CharacterSpacingProperty
+  fullName: System.Windows.Controls.Control.CharacterSpacingProperty
+- uid: System.Windows.Controls.Control.CharacterSpacing
+  commentId: P:System.Windows.Controls.Control.CharacterSpacing
   parent: System.Windows.Controls.Control
-  name: OnMouseWheel(MouseWheelEventArgs)
-  nameWithType: Control.OnMouseWheel(MouseWheelEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: CharacterSpacing
+  nameWithType: Control.CharacterSpacing
+  fullName: System.Windows.Controls.Control.CharacterSpacing
 - uid: System.Windows.Controls.Control.TabNavigationProperty
   commentId: F:System.Windows.Controls.Control.TabNavigationProperty
   parent: System.Windows.Controls.Control
@@ -1615,42 +1780,6 @@ references:
   name: FontStretch
   nameWithType: Control.FontStretch
   fullName: System.Windows.Controls.Control.FontStretch
-- uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  parent: System.Windows.Controls.Control
-  name: OnTextInput(TextCompositionEventArgs)
-  nameWithType: Control.OnTextInput(TextCompositionEventArgs)
-  fullName: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   commentId: M:System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   parent: System.Windows.Controls.Control
@@ -2095,6 +2224,12 @@ references:
   name: DataContextChanged
   nameWithType: FrameworkElement.DataContextChanged
   fullName: System.Windows.FrameworkElement.DataContextChanged
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  parent: System.Windows.FrameworkElement
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   parent: System.Windows.FrameworkElement
@@ -2129,18 +2264,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  parent: System.Windows.FrameworkElement
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  parent: System.Windows.FrameworkElement
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -2237,6 +2360,12 @@ references:
   name: DefaultStyleKeyProperty
   nameWithType: FrameworkElement.DefaultStyleKeyProperty
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  parent: System.Windows.FrameworkElement
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
 - uid: System.Windows.FrameworkElement.Loaded
   commentId: E:System.Windows.FrameworkElement.Loaded
   parent: System.Windows.FrameworkElement
@@ -2255,100 +2384,6 @@ references:
   name: BindingValidationError
   nameWithType: FrameworkElement.BindingValidationError
   fullName: System.Windows.FrameworkElement.BindingValidationError
-- uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: RegisterName(String, Object)
-  nameWithType: FrameworkElement.RegisterName(String, Object)
-  fullName: System.Windows.FrameworkElement.RegisterName(System.String, System.Object)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-  commentId: M:System.Windows.FrameworkElement.UnregisterName(System.String)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: UnregisterName(String)
-  nameWithType: FrameworkElement.UnregisterName(String)
-  fullName: System.Windows.FrameworkElement.UnregisterName(System.String)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.FrameworkElement
@@ -2433,6 +2468,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   parent: System.Windows.FrameworkElement
@@ -2565,6 +2624,24 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  parent: System.Windows.FrameworkElement
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.FrameworkElement.SizeChanged
   commentId: E:System.Windows.FrameworkElement.SizeChanged
   parent: System.Windows.FrameworkElement
@@ -2625,18 +2702,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.OnCreateAutomationPeer
   commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
   parent: System.Windows.UIElement
@@ -2695,6 +2760,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -2904,12 +2981,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -3260,6 +3331,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -3368,6 +3561,90 @@ references:
   name: MouseRightButtonDown
   nameWithType: UIElement.MouseRightButtonDown
   fullName: System.Windows.UIElement.MouseRightButtonDown
+- uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseRightButtonDown(MouseButtonEventArgs)
+  nameWithType: UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)
+  fullName: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseLeftButtonUpEvent
   commentId: F:System.Windows.UIElement.MouseLeftButtonUpEvent
   parent: System.Windows.UIElement
@@ -3512,24 +3789,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -3542,12 +3849,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -3901,128 +4202,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -4627,6 +4806,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -4994,45 +5488,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
@@ -5505,14 +6004,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5526,16 +6025,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5549,10 +6048,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -5567,6 +6066,30 @@ references:
   name: System.Windows.Controls.Primitives
   nameWithType: System.Windows.Controls.Primitives
   fullName: System.Windows.Controls.Primitives
+- uid: System.Windows.Controls.DragDropTarget`2.AllowedSourceEffects*
+  commentId: Overload:System.Windows.Controls.DragDropTarget`2.AllowedSourceEffects
+  name: AllowedSourceEffects
+  nameWithType: DragDropTarget<TItemsControlType, TItemContainerType>.AllowedSourceEffects
+  fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.AllowedSourceEffects
+  nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).AllowedSourceEffects
+  fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType).AllowedSourceEffects
+- uid: Microsoft.Windows.DragDropEffects
+  commentId: T:Microsoft.Windows.DragDropEffects
+  parent: Microsoft.Windows
+  name: DragDropEffects
+  nameWithType: DragDropEffects
+  fullName: Microsoft.Windows.DragDropEffects
+- uid: Microsoft.Windows
+  commentId: N:Microsoft.Windows
+  name: Microsoft.Windows
+  nameWithType: Microsoft.Windows
+  fullName: Microsoft.Windows
+- uid: System.Windows.DependencyProperty
+  commentId: T:System.Windows.DependencyProperty
+  parent: System.Windows
+  name: DependencyProperty
+  nameWithType: DependencyProperty
+  fullName: System.Windows.DependencyProperty
 - uid: System.Windows.Controls.DragDropTarget`2.#ctor*
   commentId: Overload:System.Windows.Controls.DragDropTarget`2.#ctor
   name: DragDropTarget
@@ -5587,11 +6110,6 @@ references:
   name: DragEventArgs
   nameWithType: DragEventArgs
   fullName: Microsoft.Windows.DragEventArgs
-- uid: Microsoft.Windows
-  commentId: N:Microsoft.Windows
-  name: Microsoft.Windows
-  nameWithType: Microsoft.Windows
-  fullName: Microsoft.Windows
 - uid: System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
   commentId: M:System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
   parent: System.Windows.Controls.ContentControl
@@ -5641,6 +6159,8 @@ references:
   nameWithType: TItemsControlType
   fullName: TItemsControlType
 - uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
   name: Int32
   nameWithType: Int32
@@ -5678,7 +6198,8 @@ references:
   nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).IndexFromContainer
   fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType).IndexFromContainer
 - uid: System.Nullable{System.Int32}
-  commentId: '!:System.Nullable{System.Int32}'
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
   definition: System.Nullable`1
   name: Nullable<Int32>
   nameWithType: Nullable<Int32>
@@ -5721,13 +6242,14 @@ references:
     nameWithType: )
     fullName: )
 - uid: System.Nullable`1
+  commentId: T:System.Nullable`1
   isExternal: true
-  name: Nullable<>
-  nameWithType: Nullable<>
-  fullName: System.Nullable<>
-  nameWithType.vb: Nullable(Of )
-  fullName.vb: System.Nullable(Of )
-  name.vb: Nullable(Of )
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
   spec.csharp:
   - uid: System.Nullable`1
     name: Nullable
@@ -5737,9 +6259,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -5752,9 +6274,9 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
@@ -5772,20 +6294,21 @@ references:
   fullName: System.Windows.Controls.DragDropTarget<TItemsControlType, TItemContainerType>.RemoveItemAtIndex
   nameWithType.vb: DragDropTarget(Of TItemsControlType, TItemContainerType).RemoveItemAtIndex
   fullName.vb: System.Windows.Controls.DragDropTarget(Of TItemsControlType, TItemContainerType).RemoveItemAtIndex
-- uid: EventHandler{System.Windows.Controls.ItemDragEventArgs}
-  commentId: '!:EventHandler{System.Windows.Controls.ItemDragEventArgs}'
-  definition: EventHandler`1
+- uid: System.EventHandler{System.Windows.Controls.ItemDragEventArgs}
+  commentId: T:System.EventHandler{System.Windows.Controls.ItemDragEventArgs}
+  parent: System
+  definition: System.EventHandler`1
   name: EventHandler<ItemDragEventArgs>
   nameWithType: EventHandler<ItemDragEventArgs>
-  fullName: EventHandler<System.Windows.Controls.ItemDragEventArgs>
+  fullName: System.EventHandler<System.Windows.Controls.ItemDragEventArgs>
   nameWithType.vb: EventHandler(Of ItemDragEventArgs)
-  fullName.vb: EventHandler(Of System.Windows.Controls.ItemDragEventArgs)
+  fullName.vb: System.EventHandler(Of System.Windows.Controls.ItemDragEventArgs)
   name.vb: EventHandler(Of ItemDragEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
@@ -5798,10 +6321,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -5813,41 +6336,42 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: EventHandler`1
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
   isExternal: true
-  name: EventHandler<>
-  nameWithType: EventHandler<>
-  fullName: EventHandler<>
-  nameWithType.vb: EventHandler(Of )
-  fullName.vb: EventHandler(Of )
-  name.vb: EventHandler(Of )
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: )
     nameWithType: )
     fullName: )

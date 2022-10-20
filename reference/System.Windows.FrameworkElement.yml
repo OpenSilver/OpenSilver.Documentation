@@ -7,7 +7,10 @@ items:
   children:
   - System.Windows.FrameworkElement.#ctor
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.ActualWidth
+  - System.Windows.FrameworkElement.ActualWidthProperty
   - System.Windows.FrameworkElement.ArrangeOverride(System.Windows.Size)
   - System.Windows.FrameworkElement.BindingValidationError
   - System.Windows.FrameworkElement.ContextMenu
@@ -36,6 +39,10 @@ items:
   - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
   - System.Windows.FrameworkElement.IsEnabled
   - System.Windows.FrameworkElement.IsEnabledChanged
   - System.Windows.FrameworkElement.IsEnabledProperty
@@ -44,6 +51,7 @@ items:
   - System.Windows.FrameworkElement.LanguageProperty
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.Loaded
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.ManageIsEnabled(System.Boolean)
   - System.Windows.FrameworkElement.Margin
   - System.Windows.FrameworkElement.MarginProperty
@@ -63,7 +71,6 @@ items:
   - System.Windows.FrameworkElement.OnApplyTemplate
   - System.Windows.FrameworkElement.OnLayoutUpdated
   - System.Windows.FrameworkElement.Parent
-  - System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
   - System.Windows.FrameworkElement.Resources
   - System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty,System.Windows.Data.Binding)
   - System.Windows.FrameworkElement.SizeChanged
@@ -72,9 +79,7 @@ items:
   - System.Windows.FrameworkElement.Tag
   - System.Windows.FrameworkElement.TagProperty
   - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.Unloaded
-  - System.Windows.FrameworkElement.UnregisterName(System.String)
   - System.Windows.FrameworkElement.VerticalAlignment
   - System.Windows.FrameworkElement.VerticalAlignmentProperty
   - System.Windows.FrameworkElement.Width
@@ -87,9 +92,13 @@ items:
   fullName: System.Windows.FrameworkElement
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FrameworkElement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 40
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 39
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -99,6 +108,7 @@ items:
     content: 'public abstract class FrameworkElement : UIElement'
     content.vb: >-
       Public MustInherit Class FrameworkElement
+
           Inherits UIElement
   inheritance:
   - System.Object
@@ -127,20 +137,21 @@ items:
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -155,7 +166,6 @@ items:
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
   - System.Windows.UIElement.IsVisible
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -176,6 +186,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -185,6 +197,9 @@ items:
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
   - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -194,12 +209,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -222,8 +236,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -239,6 +251,14 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
@@ -251,7 +271,7 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   modifiers.csharp:
   - public
   - abstract
@@ -272,9 +292,13 @@ items:
   fullName: System.Windows.FrameworkElement.Parent
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Parent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 54
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 188
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -305,9 +329,13 @@ items:
   fullName: System.Windows.FrameworkElement.INTERNAL_DoNotApplyStyle
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_DoNotApplyStyle
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 232
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 370
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -334,9 +362,13 @@ items:
   fullName: System.Windows.FrameworkElement.FrameworkElement()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 238
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 376
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -362,9 +394,13 @@ items:
   fullName: System.Windows.FrameworkElement.Resources
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Resources
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 278
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 416
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -395,9 +431,13 @@ items:
   fullName: System.Windows.FrameworkElement.IsLoaded
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsLoaded
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 336
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 474
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -428,9 +468,13 @@ items:
   fullName: System.Windows.FrameworkElement.CreateDomElement(System.Object, out System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateDomElement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 350
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 488
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -472,9 +516,13 @@ items:
   fullName: System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(System.Object, out System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateDomElement_WorkaroundBridgeInheritanceBug
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 371
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 521
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -508,9 +556,13 @@ items:
   fullName: System.Windows.FrameworkElement.OnApplyTemplate()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnApplyTemplate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 471
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 608
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -538,9 +590,13 @@ items:
   fullName: System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty, System.Windows.Data.Binding)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetBinding
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 519
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 697
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -576,9 +632,13 @@ items:
   fullName: System.Windows.FrameworkElement.GetBindingExpression(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetBindingExpression
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 524
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 702
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -607,9 +667,13 @@ items:
   fullName: System.Windows.FrameworkElement.Cursor
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Cursor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 539
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 717
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -640,9 +704,13 @@ items:
   fullName: System.Windows.FrameworkElement.CursorProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CursorProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 549
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 727
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -673,9 +741,13 @@ items:
   fullName: System.Windows.FrameworkElement.IsEnabled
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsEnabled
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 592
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 770
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -706,9 +778,13 @@ items:
   fullName: System.Windows.FrameworkElement.IsEnabledProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsEnabledProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 602
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 780
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -739,9 +815,13 @@ items:
   fullName: System.Windows.FrameworkElement.IsEnabledChanged
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsEnabledChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 664
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 842
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -768,9 +848,13 @@ items:
   fullName: System.Windows.FrameworkElement.ManageIsEnabled(System.Boolean)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ManageIsEnabled
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 673
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 851
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -799,9 +883,13 @@ items:
   fullName: System.Windows.FrameworkElement.FindName(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FindName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 727
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 907
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -812,10 +900,10 @@ items:
     parameters:
     - id: name
       type: System.String
-      description: The name of the requested object.
+      description: "\nThe name of the requested object.\n"
     return:
       type: System.Object
-      description: "\nThe requested object. This can be null if no matching object was found in\nthe current XAML namescope.\n"
+      description: "\nThe requested object. This can be null if no matching object was found in the\ncurrent XAML namescope.\n"
     content.vb: Public Function FindName(name As String) As Object
   overload: System.Windows.FrameworkElement.FindName*
   modifiers.csharp:
@@ -834,9 +922,13 @@ items:
   fullName: System.Windows.FrameworkElement.Name
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Name
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 748
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 994
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -867,9 +959,13 @@ items:
   fullName: System.Windows.FrameworkElement.NameProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: NameProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 757
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1003
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -900,9 +996,13 @@ items:
   fullName: System.Windows.FrameworkElement.DataContext
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DataContext
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 781
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1027
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -933,9 +1033,13 @@ items:
   fullName: System.Windows.FrameworkElement.DataContextProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DataContextProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 790
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1036
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -966,9 +1070,13 @@ items:
   fullName: System.Windows.FrameworkElement.DataContextChanged
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DataContextChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 814
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1060
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -983,6 +1091,44 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  id: Triggers
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Triggers
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1072
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the collection of triggers for animations that are defined for a <xref href=\"System.Windows.FrameworkElement\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public TriggerCollection Triggers { get; }
+    parameters: []
+    return:
+      type: System.Windows.TriggerCollection
+      description: "\nThe collection of triggers for animations that are defined for this object.\n"
+    content.vb: Public ReadOnly Property Triggers As TriggerCollection
+  overload: System.Windows.FrameworkElement.Triggers*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   id: LayoutUpdated
@@ -995,16 +1141,20 @@ items:
   fullName: System.Windows.FrameworkElement.LayoutUpdated
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: LayoutUpdated
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 818
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1099
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
     content: public event EventHandler LayoutUpdated
     return:
-      type: EventHandler
+      type: System.EventHandler
     content.vb: Public Event LayoutUpdated As EventHandler
   modifiers.csharp:
   - public
@@ -1022,9 +1172,13 @@ items:
   fullName: System.Windows.FrameworkElement.OnLayoutUpdated()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnLayoutUpdated
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 820
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1101
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1039,66 +1193,6 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  id: Triggers
-  parent: System.Windows.FrameworkElement
-  langs:
-  - csharp
-  - vb
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-  type: Property
-  source:
-    id: Triggers
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 828
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public TriggerCollection Triggers { get; }
-    parameters: []
-    return:
-      type: System.Windows.TriggerCollection
-    content.vb: Public ReadOnly Property Triggers As TriggerCollection
-  overload: System.Windows.FrameworkElement.Triggers*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  id: TriggersProperty
-  parent: System.Windows.FrameworkElement
-  langs:
-  - csharp
-  - vb
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
-  type: Field
-  source:
-    id: TriggersProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 838
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public static DependencyProperty TriggersProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared TriggersProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   id: FlowDirectionProperty
@@ -1111,17 +1205,31 @@ items:
   fullName: System.Windows.FrameworkElement.FlowDirectionProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FlowDirectionProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 848
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1109
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public static readonly DependencyProperty FlowDirectionProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty FlowDirectionProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly FlowDirectionProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly FlowDirectionProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -1142,22 +1250,36 @@ items:
   fullName: System.Windows.FrameworkElement.FlowDirection
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: FlowDirection
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 864
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1125
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nGets or sets the direction that text and other user interface \nelements flow within any parent element that controls their layout.\n"
   example: []
   syntax:
-    content: public FlowDirection FlowDirection { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public FlowDirection FlowDirection { get; set; }
     parameters: []
     return:
       type: System.Windows.FlowDirection
       description: "\nThe direction that text and other UI elements flow within their \nparent element, as a value of the enumeration. The default value \nis <xref href=\"System.Windows.FlowDirection.LeftToRight\" data-throw-if-not-resolved=\"false\"></xref>.\n"
-    content.vb: Public Property FlowDirection As FlowDirection
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property FlowDirection As FlowDirection
   overload: System.Windows.FrameworkElement.FlowDirection*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -1176,12 +1298,18 @@ items:
   fullName: System.Windows.FrameworkElement.LanguageProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: LanguageProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 878
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1141
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.FrameworkElement.Language\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
   syntax:
     content: public static readonly DependencyProperty LanguageProperty
     return:
@@ -1207,18 +1335,31 @@ items:
   fullName: System.Windows.FrameworkElement.Language
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Language
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 885
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1157
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nGets or sets localization/globalization language information that applies to\na <xref href=\"System.Windows.FrameworkElement\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
   syntax:
-    content: public XmlLanguage Language { get; set; }
+    content: >-
+      [TypeConverter(typeof(XmlLanguageConverter))]
+
+      public XmlLanguage Language { get; set; }
     parameters: []
     return:
       type: System.Windows.Markup.XmlLanguage
-    content.vb: Public Property Language As XmlLanguage
+      description: "\nThe language information for this object. The default is an <xref href=\"System.Windows.Markup.XmlLanguage\" data-throw-if-not-resolved=\"false\"></xref>\nobject that has its <xref href=\"System.Windows.Markup.XmlLanguage.IetfLanguageTag\" data-throw-if-not-resolved=\"false\"></xref> value set\nto the string &quot;en-US&quot;.\n"
+    content.vb: >-
+      <TypeConverter(GetType(XmlLanguageConverter))>
+
+      Public Property Language As XmlLanguage
   overload: System.Windows.FrameworkElement.Language*
   modifiers.csharp:
   - public
@@ -1238,9 +1379,13 @@ items:
   fullName: System.Windows.FrameworkElement.ArrangeOverride(System.Windows.Size)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ArrangeOverride
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1027
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1315
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1271,9 +1416,13 @@ items:
   fullName: System.Windows.FrameworkElement.MeasureOverride(System.Windows.Size)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MeasureOverride
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1080
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1368
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1304,9 +1453,13 @@ items:
   fullName: System.Windows.FrameworkElement.Tag
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Tag
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1095
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1383
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1337,9 +1490,13 @@ items:
   fullName: System.Windows.FrameworkElement.TagProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TagProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1104
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1392
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1370,19 +1527,35 @@ items:
   fullName: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_SetDefaultStyle
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1115
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1403
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: protected void INTERNAL_SetDefaultStyle(Style defaultStyle)
+    content: >-
+      [Obsolete("Use DefaultStyleKey")]
+
+      protected void INTERNAL_SetDefaultStyle(Style defaultStyle)
     parameters:
     - id: defaultStyle
       type: System.Windows.Style
-    content.vb: Protected Sub INTERNAL_SetDefaultStyle(defaultStyle As Style)
+    content.vb: >-
+      <Obsolete("Use DefaultStyleKey")>
+
+      Protected Sub INTERNAL_SetDefaultStyle(defaultStyle As Style)
   overload: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use DefaultStyleKey
   modifiers.csharp:
   - protected
   modifiers.vb:
@@ -1399,9 +1572,13 @@ items:
   fullName: System.Windows.FrameworkElement.Style
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Style
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1130
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1418
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1432,9 +1609,13 @@ items:
   fullName: System.Windows.FrameworkElement.StyleProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: StyleProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1139
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1427
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1465,9 +1646,13 @@ items:
   fullName: System.Windows.FrameworkElement.DefaultStyleKey
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DefaultStyleKey
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1336
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1641
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1498,9 +1683,13 @@ items:
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DefaultStyleKeyProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1346
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1651
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1511,6 +1700,41 @@ items:
     return:
       type: System.Windows.DependencyProperty
     content.vb: Public Shared ReadOnly DefaultStyleKeyProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  id: LoadedEvent
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: LoadedEvent
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1835
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static readonly RoutedEvent LoadedEvent
+    return:
+      type: System.Windows.RoutedEvent
+    content.vb: Public Shared ReadOnly LoadedEvent As RoutedEvent
   modifiers.csharp:
   - public
   - static
@@ -1531,9 +1755,13 @@ items:
   fullName: System.Windows.FrameworkElement.Loaded
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Loaded
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1533
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1845
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1560,9 +1788,13 @@ items:
   fullName: System.Windows.FrameworkElement.Unloaded
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Unloaded
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1546
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1858
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1589,9 +1821,13 @@ items:
   fullName: System.Windows.FrameworkElement.BindingValidationError
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BindingValidationError
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1565
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1877
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1600,68 +1836,8 @@ items:
   syntax:
     content: public event EventHandler<ValidationErrorEventArgs> BindingValidationError
     return:
-      type: EventHandler{System.Windows.Controls.ValidationErrorEventArgs}
+      type: System.EventHandler{System.Windows.Controls.ValidationErrorEventArgs}
     content.vb: Public Event BindingValidationError As EventHandler(Of ValidationErrorEventArgs)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  id: RegisterName(System.String,System.Object)
-  parent: System.Windows.FrameworkElement
-  langs:
-  - csharp
-  - vb
-  name: RegisterName(String, Object)
-  nameWithType: FrameworkElement.RegisterName(String, Object)
-  fullName: System.Windows.FrameworkElement.RegisterName(System.String, System.Object)
-  type: Method
-  source:
-    id: RegisterName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1628
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public void RegisterName(string name, object scopedElement)
-    parameters:
-    - id: name
-      type: System.String
-    - id: scopedElement
-      type: System.Object
-    content.vb: Public Sub RegisterName(name As String, scopedElement As Object)
-  overload: System.Windows.FrameworkElement.RegisterName*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-  commentId: M:System.Windows.FrameworkElement.UnregisterName(System.String)
-  id: UnregisterName(System.String)
-  parent: System.Windows.FrameworkElement
-  langs:
-  - csharp
-  - vb
-  name: UnregisterName(String)
-  nameWithType: FrameworkElement.UnregisterName(String)
-  fullName: System.Windows.FrameworkElement.UnregisterName(System.String)
-  type: Method
-  source:
-    id: UnregisterName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1663
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public void UnregisterName(string name)
-    parameters:
-    - id: name
-      type: System.String
-    content.vb: Public Sub UnregisterName(name As String)
-  overload: System.Windows.FrameworkElement.UnregisterName*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1678,9 +1854,13 @@ items:
   fullName: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_OnDetachedFromVisualTree
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1679
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1922
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1707,9 +1887,13 @@ items:
   fullName: System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_OnAttachedToVisualTree
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement.cs
-    startLine: 1690
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
+    startLine: 1933
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1736,9 +1920,13 @@ items:
   fullName: System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnAfterApplyHorizontalAlignmentAndWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 48
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 47
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1764,9 +1952,13 @@ items:
   fullName: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnAfterApplyVerticalAlignmentAndWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 52
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 51
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1780,6 +1972,150 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  id: IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsAutoWidthOnCustomLayout
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 92
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the Auto Width to the root of CustomLayout\n"
+  example: []
+  syntax:
+    content: public bool? IsAutoWidthOnCustomLayout { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property IsAutoWidthOnCustomLayout As Boolean?
+  overload: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  id: IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsAutoWidthOnCustomLayoutProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 98
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static readonly DependencyProperty IsAutoWidthOnCustomLayoutProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly IsAutoWidthOnCustomLayoutProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  id: IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsAutoHeightOnCustomLayout
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 108
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the Auto Height to the root of CustomLayout\n"
+  example: []
+  syntax:
+    content: public bool? IsAutoHeightOnCustomLayout { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+    content.vb: Public Property IsAutoHeightOnCustomLayout As Boolean?
+  overload: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  id: IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsAutoHeightOnCustomLayoutProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 114
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static readonly DependencyProperty IsAutoHeightOnCustomLayoutProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly IsAutoHeightOnCustomLayoutProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   id: CustomLayout
@@ -1792,9 +2128,13 @@ items:
   fullName: System.Windows.FrameworkElement.CustomLayout
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CustomLayout
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 93
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 124
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1825,9 +2165,13 @@ items:
   fullName: System.Windows.FrameworkElement.CustomLayoutProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CustomLayoutProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 103
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 134
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1858,9 +2202,13 @@ items:
   fullName: System.Windows.FrameworkElement.Height
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Height
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 134
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 168
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1891,9 +2239,13 @@ items:
   fullName: System.Windows.FrameworkElement.HeightProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: HeightProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 144
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 178
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1924,9 +2276,13 @@ items:
   fullName: System.Windows.FrameworkElement.Width
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Width
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 225
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 259
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1957,9 +2313,13 @@ items:
   fullName: System.Windows.FrameworkElement.WidthProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: WidthProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 234
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 268
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1990,9 +2350,13 @@ items:
   fullName: System.Windows.FrameworkElement.HorizontalAlignment
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: HorizontalAlignment
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 316
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 350
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2023,9 +2387,13 @@ items:
   fullName: System.Windows.FrameworkElement.HorizontalAlignmentProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: HorizontalAlignmentProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 326
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 360
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2056,9 +2424,13 @@ items:
   fullName: System.Windows.FrameworkElement.VerticalAlignment
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: VerticalAlignment
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 703
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 748
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2089,9 +2461,13 @@ items:
   fullName: System.Windows.FrameworkElement.VerticalAlignmentProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: VerticalAlignmentProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 713
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 758
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2122,9 +2498,13 @@ items:
   fullName: System.Windows.FrameworkElement.Margin
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Margin
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1125
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1185
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2155,9 +2535,13 @@ items:
   fullName: System.Windows.FrameworkElement.MarginProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MarginProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1134
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1194
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2188,9 +2572,13 @@ items:
   fullName: System.Windows.FrameworkElement.MinHeight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MinHeight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1280
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1340
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2221,9 +2609,13 @@ items:
   fullName: System.Windows.FrameworkElement.MinHeightProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MinHeightProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1290
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1350
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2254,9 +2646,13 @@ items:
   fullName: System.Windows.FrameworkElement.MinWidth
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MinWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1324
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1385
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2287,9 +2683,13 @@ items:
   fullName: System.Windows.FrameworkElement.MinWidthProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MinWidthProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1334
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1395
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2320,9 +2720,13 @@ items:
   fullName: System.Windows.FrameworkElement.MaxHeight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MaxHeight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1365
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1427
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2353,9 +2757,13 @@ items:
   fullName: System.Windows.FrameworkElement.MaxHeightProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MaxHeightProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1375
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1437
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2386,9 +2794,13 @@ items:
   fullName: System.Windows.FrameworkElement.MaxWidth
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MaxWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1409
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1472
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2419,9 +2831,13 @@ items:
   fullName: System.Windows.FrameworkElement.MaxWidthProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MaxWidthProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1419
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1482
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2452,9 +2868,13 @@ items:
   fullName: System.Windows.FrameworkElement.ActualWidth
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ActualWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1454
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1518
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2485,9 +2905,13 @@ items:
   fullName: System.Windows.FrameworkElement.ActualHeight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ActualHeight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1489
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1553
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2506,6 +2930,113 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  id: ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ActualWidthProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1584
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static readonly DependencyProperty ActualWidthProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly ActualWidthProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  id: ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ActualHeightProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1591
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static readonly DependencyProperty ActualHeightProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly ActualHeightProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  id: ActualSize
+  parent: System.Windows.FrameworkElement
+  langs:
+  - csharp
+  - vb
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ActualSize
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1622
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the rendered size of a FrameworkElement.\n"
+  example: []
+  syntax:
+    content: public Size ActualSize { get; }
+    parameters: []
+    return:
+      type: System.Windows.Size
+    content.vb: Public ReadOnly Property ActualSize As Size
+  overload: System.Windows.FrameworkElement.ActualSize*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
 - uid: System.Windows.FrameworkElement.SizeChanged
   commentId: E:System.Windows.FrameworkElement.SizeChanged
   id: SizeChanged
@@ -2518,9 +3049,13 @@ items:
   fullName: System.Windows.FrameworkElement.SizeChanged
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SizeChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1696
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1842
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2545,9 +3080,13 @@ items:
   fullName: System.Windows.FrameworkElement.ContextMenu
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ContextMenu
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1751
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1934
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2578,9 +3117,13 @@ items:
   fullName: System.Windows.FrameworkElement.ContextMenuProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ContextMenuProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1761
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1944
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2611,9 +3154,13 @@ items:
   fullName: System.Windows.FrameworkElement.ContextMenuOpening
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ContextMenuOpening
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\FrameworkElement_HandlingSizeAndAlignment.cs
-    startLine: 1782
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement_HandlingSizeAndAlignment.cs
+    startLine: 1965
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -2636,6 +3183,7 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -2670,6 +3218,12 @@ references:
   name: Drop
   nameWithType: UIElement.Drop
   fullName: System.Windows.UIElement.Drop
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  parent: System.Windows.UIElement
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
 - uid: System.Windows.UIElement.OpacityMask
   commentId: P:System.Windows.UIElement.OpacityMask
   parent: System.Windows.UIElement
@@ -2706,18 +3260,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.OnCreateAutomationPeer
   commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
   parent: System.Windows.UIElement
@@ -2776,6 +3318,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -2985,12 +3539,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -3341,6 +3889,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -3482,6 +4152,54 @@ references:
     name: MouseButtonEventArgs
     nameWithType: MouseButtonEventArgs
     fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -3629,24 +4347,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -3659,12 +4407,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -4018,128 +4760,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -4744,6 +5364,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -5111,45 +6046,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -5617,14 +6557,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5638,16 +6578,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5661,10 +6601,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -5690,6 +6630,8 @@ references:
   nameWithType: FrameworkElement.Parent
   fullName: System.Windows.FrameworkElement.Parent
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -5874,6 +6816,8 @@ references:
   nameWithType: FrameworkElement.FindName
   fullName: System.Windows.FrameworkElement.FindName
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
@@ -5900,11 +6844,24 @@ references:
   name: DataContext
   nameWithType: FrameworkElement.DataContext
   fullName: System.Windows.FrameworkElement.DataContext
-- uid: EventHandler
+- uid: System.Windows.FrameworkElement.Triggers*
+  commentId: Overload:System.Windows.FrameworkElement.Triggers
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
+- uid: System.Windows.TriggerCollection
+  commentId: T:System.Windows.TriggerCollection
+  parent: System.Windows
+  name: TriggerCollection
+  nameWithType: TriggerCollection
+  fullName: System.Windows.TriggerCollection
+- uid: System.EventHandler
+  commentId: T:System.EventHandler
+  parent: System
   isExternal: true
   name: EventHandler
   nameWithType: EventHandler
-  fullName: EventHandler
+  fullName: System.EventHandler
 - uid: System.Windows.UIElement.OnLayoutUpdated
   commentId: M:System.Windows.UIElement.OnLayoutUpdated
   parent: System.Windows.UIElement
@@ -5938,17 +6895,6 @@ references:
   name: OnLayoutUpdated
   nameWithType: FrameworkElement.OnLayoutUpdated
   fullName: System.Windows.FrameworkElement.OnLayoutUpdated
-- uid: System.Windows.FrameworkElement.Triggers*
-  commentId: Overload:System.Windows.FrameworkElement.Triggers
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.TriggerCollection
-  commentId: T:System.Windows.TriggerCollection
-  parent: System.Windows
-  name: TriggerCollection
-  nameWithType: TriggerCollection
-  fullName: System.Windows.TriggerCollection
 - uid: System.Windows.FlowDirection.LeftToRight
   commentId: F:System.Windows.FlowDirection.LeftToRight
   isExternal: true
@@ -5963,8 +6909,9 @@ references:
   name: FlowDirection
   nameWithType: FlowDirection
   fullName: System.Windows.FlowDirection
-- uid: System.Windows.FrameworkElement.Language*
-  commentId: Overload:System.Windows.FrameworkElement.Language
+- uid: System.Windows.FrameworkElement.Language
+  commentId: P:System.Windows.FrameworkElement.Language
+  parent: System.Windows.FrameworkElement
   name: Language
   nameWithType: FrameworkElement.Language
   fullName: System.Windows.FrameworkElement.Language
@@ -5974,6 +6921,14 @@ references:
   name: XmlLanguage
   nameWithType: XmlLanguage
   fullName: System.Windows.Markup.XmlLanguage
+- uid: System.Windows.Markup.XmlLanguage.IetfLanguageTag
+  commentId: P:System.Windows.Markup.XmlLanguage.IetfLanguageTag
+  isExternal: true
+- uid: System.Windows.FrameworkElement.Language*
+  commentId: Overload:System.Windows.FrameworkElement.Language
+  name: Language
+  nameWithType: FrameworkElement.Language
+  fullName: System.Windows.FrameworkElement.Language
 - uid: System.Windows.Markup
   commentId: N:System.Windows.Markup
   name: System.Windows.Markup
@@ -6039,26 +6994,33 @@ references:
   name: DefaultStyleKey
   nameWithType: FrameworkElement.DefaultStyleKey
   fullName: System.Windows.FrameworkElement.DefaultStyleKey
+- uid: System.Windows.RoutedEvent
+  commentId: T:System.Windows.RoutedEvent
+  parent: System.Windows
+  name: RoutedEvent
+  nameWithType: RoutedEvent
+  fullName: System.Windows.RoutedEvent
 - uid: System.Windows.RoutedEventHandler
   commentId: T:System.Windows.RoutedEventHandler
   parent: System.Windows
   name: RoutedEventHandler
   nameWithType: RoutedEventHandler
   fullName: System.Windows.RoutedEventHandler
-- uid: EventHandler{System.Windows.Controls.ValidationErrorEventArgs}
-  commentId: '!:EventHandler{System.Windows.Controls.ValidationErrorEventArgs}'
-  definition: EventHandler`1
+- uid: System.EventHandler{System.Windows.Controls.ValidationErrorEventArgs}
+  commentId: T:System.EventHandler{System.Windows.Controls.ValidationErrorEventArgs}
+  parent: System
+  definition: System.EventHandler`1
   name: EventHandler<ValidationErrorEventArgs>
   nameWithType: EventHandler<ValidationErrorEventArgs>
-  fullName: EventHandler<System.Windows.Controls.ValidationErrorEventArgs>
+  fullName: System.EventHandler<System.Windows.Controls.ValidationErrorEventArgs>
   nameWithType.vb: EventHandler(Of ValidationErrorEventArgs)
-  fullName.vb: EventHandler(Of System.Windows.Controls.ValidationErrorEventArgs)
+  fullName.vb: System.EventHandler(Of System.Windows.Controls.ValidationErrorEventArgs)
   name.vb: EventHandler(Of ValidationErrorEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
@@ -6071,10 +7033,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -6086,54 +7048,45 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: EventHandler`1
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
   isExternal: true
-  name: EventHandler<>
-  nameWithType: EventHandler<>
-  fullName: EventHandler<>
-  nameWithType.vb: EventHandler(Of )
-  fullName.vb: EventHandler(Of )
-  name.vb: EventHandler(Of )
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.RegisterName*
-  commentId: Overload:System.Windows.FrameworkElement.RegisterName
-  name: RegisterName
-  nameWithType: FrameworkElement.RegisterName
-  fullName: System.Windows.FrameworkElement.RegisterName
-- uid: System.Windows.FrameworkElement.UnregisterName*
-  commentId: Overload:System.Windows.FrameworkElement.UnregisterName
-  name: UnregisterName
-  nameWithType: FrameworkElement.UnregisterName
-  fullName: System.Windows.FrameworkElement.UnregisterName
 - uid: System.Windows.UIElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.UIElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.UIElement
@@ -6210,6 +7163,99 @@ references:
   name: OnAfterApplyVerticalAlignmentAndWidth
   nameWithType: FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
   fullName: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout*
+  commentId: Overload:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Nullable{System.Boolean}
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Boolean>
+  nameWithType: Nullable<Boolean>
+  fullName: System.Nullable<System.Boolean>
+  nameWithType.vb: Nullable(Of Boolean)
+  fullName.vb: System.Nullable(Of System.Boolean)
+  name.vb: Nullable(Of Boolean)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout*
+  commentId: Overload:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
 - uid: System.Windows.FrameworkElement.CustomLayout*
   commentId: Overload:System.Windows.FrameworkElement.CustomLayout
   name: CustomLayout
@@ -6227,6 +7273,8 @@ references:
   nameWithType: FrameworkElement.Height
   fullName: System.Windows.FrameworkElement.Height
 - uid: System.Double
+  commentId: T:System.Double
+  parent: System
   isExternal: true
   name: Double
   nameWithType: Double
@@ -6353,6 +7401,11 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualSize*
+  commentId: Overload:System.Windows.FrameworkElement.ActualSize
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.SizeChangedEventHandler
   commentId: T:System.Windows.SizeChangedEventHandler
   parent: System.Windows

@@ -7,22 +7,29 @@ items:
   children:
   - System.Windows.Application.#ctor
   - System.Windows.Application.ApplicationLifetimeObjects
+  - System.Windows.Application.CheckAndDownloadUpdateAsync
+  - System.Windows.Application.CheckAndDownloadUpdateCompleted
   - System.Windows.Application.Current
   - System.Windows.Application.Exit
-  - System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo,Uri)
-  - System.Windows.Application.GetResourceStream(Uri)
-  - System.Windows.Application.GetResourceString(Uri)
+  - System.Windows.Application.GetResourceStream(System.Uri)
+  - System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo,System.Uri)
+  - System.Windows.Application.GetResourceString(System.Uri)
   - System.Windows.Application.HasElevatedPermissions
   - System.Windows.Application.Host
+  - System.Windows.Application.Install
+  - System.Windows.Application.InstallState
+  - System.Windows.Application.InstallStateChanged
   - System.Windows.Application.INTERNAL_RaiseReloadedEvent
   - System.Windows.Application.INTERNAL_Reloaded
   - System.Windows.Application.IsRunningOutOfBrowser
+  - System.Windows.Application.LoadComponent(System.Object,OpenSilver.Internal.Xaml.IXamlComponentLoader)
+  - System.Windows.Application.LoadComponent(System.Object,System.Uri)
   - System.Windows.Application.MainWindow
-  - System.Windows.Application.OnExit(EventArgs)
+  - System.Windows.Application.OnExit(System.EventArgs)
   - System.Windows.Application.OnLaunched(System.ApplicationModel.Activation.LaunchActivatedEventArgs)
   - System.Windows.Application.Resources
   - System.Windows.Application.RootVisual
-  - System.Windows.Application.RunApplication(Action)
+  - System.Windows.Application.RunApplication(System.Action)
   - System.Windows.Application.Startup
   - System.Windows.Application.TryFindResource(System.Object)
   - System.Windows.Application.UnhandledException
@@ -35,21 +42,31 @@ items:
   fullName: System.Windows.Application
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Application
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\Application.cs
-    startLine: 27
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 35
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nEncapsulates the app and its available services.\n"
   example: []
   syntax:
-    content: 'public class Application : object'
-    content.vb: >-
-      Public Class Application
-          Inherits Object
+    content: public class Application
+    content.vb: Public Class Application
   inheritance:
   - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
@@ -70,29 +87,33 @@ items:
   fullName: System.Windows.Application.Current
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Current
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 62
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 66
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nGets the Application object for the current application.\n"
   example: []
   syntax:
-    content: public static Application Current { get; set; }
+    content: public static Application Current { get; }
     parameters: []
     return:
       type: System.Windows.Application
-    content.vb: Public Shared Property Current As Application
+    content.vb: Public Shared ReadOnly Property Current As Application
   overload: System.Windows.Application.Current*
   modifiers.csharp:
   - public
   - static
   - get
-  - set
   modifiers.vb:
   - Public
   - Shared
+  - ReadOnly
 - uid: System.Windows.Application.#ctor
   commentId: M:System.Windows.Application.#ctor
   id: '#ctor'
@@ -105,9 +126,13 @@ items:
   fullName: System.Windows.Application.Application()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 71
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 72
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -119,6 +144,41 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.Application.ApplicationLifetimeObjects
+  commentId: P:System.Windows.Application.ApplicationLifetimeObjects
+  id: ApplicationLifetimeObjects
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: ApplicationLifetimeObjects
+  nameWithType: Application.ApplicationLifetimeObjects
+  fullName: System.Windows.Application.ApplicationLifetimeObjects
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ApplicationLifetimeObjects
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 174
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public IList ApplicationLifetimeObjects { get; }
+    parameters: []
+    return:
+      type: System.Collections.IList
+    content.vb: Public ReadOnly Property ApplicationLifetimeObjects As IList
+  overload: System.Windows.Application.ApplicationLifetimeObjects*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
 - uid: System.Windows.Application.Resources
   commentId: P:System.Windows.Application.Resources
   id: Resources
@@ -131,9 +191,13 @@ items:
   fullName: System.Windows.Application.Resources
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Resources
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 253
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 308
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -164,9 +228,13 @@ items:
   fullName: System.Windows.Application.OnLaunched(System.ApplicationModel.Activation.LaunchActivatedEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnLaunched
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 299
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 381
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -198,9 +266,13 @@ items:
   fullName: System.Windows.Application.Startup
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Startup
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 306
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 388
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -227,9 +299,13 @@ items:
   fullName: System.Windows.Application.RootVisual
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RootVisual
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 315
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 397
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -260,9 +336,13 @@ items:
   fullName: System.Windows.Application.MainWindow
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MainWindow
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 341
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 423
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -281,21 +361,25 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Windows.Application.GetResourceString(Uri)
-  commentId: M:System.Windows.Application.GetResourceString(Uri)
-  id: GetResourceString(Uri)
+- uid: System.Windows.Application.GetResourceString(System.Uri)
+  commentId: M:System.Windows.Application.GetResourceString(System.Uri)
+  id: GetResourceString(System.Uri)
   parent: System.Windows.Application
   langs:
   - csharp
   - vb
   name: GetResourceString(Uri)
   nameWithType: Application.GetResourceString(Uri)
-  fullName: System.Windows.Application.GetResourceString(Uri)
+  fullName: System.Windows.Application.GetResourceString(System.Uri)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetResourceString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 374
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 456
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -305,10 +389,10 @@ items:
     content: public static Task<string> GetResourceString(Uri uriResource)
     parameters:
     - id: uriResource
-      type: Uri
+      type: System.Uri
       description: The System.Uri that maps to an embedded resource.
     return:
-      type: Task{System.String}
+      type: System.Threading.Tasks.Task{System.String}
       description: "\nA string that contains the content of the file that is located at the specified System.Uri.\n"
     content.vb: Public Shared Function GetResourceString(uriResource As Uri) As Task(Of String)
   overload: System.Windows.Application.GetResourceString*
@@ -330,9 +414,13 @@ items:
   fullName: System.Windows.Application.TryFindResource(System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TryFindResource
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 440
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 522
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -353,21 +441,103 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.Application.GetResourceStream(Uri)
-  commentId: M:System.Windows.Application.GetResourceStream(Uri)
-  id: GetResourceStream(Uri)
+- uid: System.Windows.Application.LoadComponent(System.Object,System.Uri)
+  commentId: M:System.Windows.Application.LoadComponent(System.Object,System.Uri)
+  id: LoadComponent(System.Object,System.Uri)
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: LoadComponent(Object, Uri)
+  nameWithType: Application.LoadComponent(Object, Uri)
+  fullName: System.Windows.Application.LoadComponent(System.Object, System.Uri)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: LoadComponent
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 533
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCreate logic tree from given resource Locator, and associate this\ntree with the given component.\n"
+  example: []
+  syntax:
+    content: public static void LoadComponent(object component, Uri resourceLocator)
+    parameters:
+    - id: component
+      type: System.Object
+      description: Root Element
+    - id: resourceLocator
+      type: System.Uri
+      description: Resource Locator
+    content.vb: Public Shared Sub LoadComponent(component As Object, resourceLocator As Uri)
+  overload: System.Windows.Application.LoadComponent*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Application.LoadComponent(System.Object,OpenSilver.Internal.Xaml.IXamlComponentLoader)
+  commentId: M:System.Windows.Application.LoadComponent(System.Object,OpenSilver.Internal.Xaml.IXamlComponentLoader)
+  id: LoadComponent(System.Object,OpenSilver.Internal.Xaml.IXamlComponentLoader)
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: LoadComponent(Object, IXamlComponentLoader)
+  nameWithType: Application.LoadComponent(Object, IXamlComponentLoader)
+  fullName: System.Windows.Application.LoadComponent(System.Object, OpenSilver.Internal.Xaml.IXamlComponentLoader)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: LoadComponent
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 561
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public static void LoadComponent(object component, IXamlComponentLoader loader)
+    parameters:
+    - id: component
+      type: System.Object
+    - id: loader
+      type: OpenSilver.Internal.Xaml.IXamlComponentLoader
+    content.vb: Public Shared Sub LoadComponent(component As Object, loader As IXamlComponentLoader)
+  overload: System.Windows.Application.LoadComponent*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Application.GetResourceStream(System.Uri)
+  commentId: M:System.Windows.Application.GetResourceStream(System.Uri)
+  id: GetResourceStream(System.Uri)
   parent: System.Windows.Application
   langs:
   - csharp
   - vb
   name: GetResourceStream(Uri)
   nameWithType: Application.GetResourceStream(Uri)
-  fullName: System.Windows.Application.GetResourceStream(Uri)
+  fullName: System.Windows.Application.GetResourceStream(System.Uri)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetResourceStream
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 473
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 634
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -377,10 +547,10 @@ items:
     content: public static async Task<StreamResourceInfo> GetResourceStream(Uri uriResource)
     parameters:
     - id: uriResource
-      type: Uri
+      type: System.Uri
       description: The System.Uri that maps to an embedded resource.
     return:
-      type: Task{System.Windows.Resources.StreamResourceInfo}
+      type: System.Threading.Tasks.Task{System.Windows.Resources.StreamResourceInfo}
       description: "\nA System.Windows.Resources.StreamResourceInfo that contains a resource stream\nfor resource data file that is located at the specified System.Uri.\n"
     content.vb: Public Shared Function GetResourceStream(uriResource As Uri) As Task(Of StreamResourceInfo)
   overload: System.Windows.Application.GetResourceStream*
@@ -403,16 +573,20 @@ items:
   fullName: System.Windows.Application.INTERNAL_Reloaded
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_Reloaded
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 496
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 657
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
     content: public static event EventHandler INTERNAL_Reloaded
     return:
-      type: EventHandler
+      type: System.EventHandler
     content.vb: Public Shared Event INTERNAL_Reloaded As EventHandler
   modifiers.csharp:
   - public
@@ -432,9 +606,13 @@ items:
   fullName: System.Windows.Application.INTERNAL_RaiseReloadedEvent()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_RaiseReloadedEvent
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 501
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 662
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -462,38 +640,46 @@ items:
   fullName: System.Windows.Application.Exit
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Exit
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 530
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 677
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nOccurs when an otherwise unhandled Tap interaction occurs over the hit test\narea of this element.\n"
+  summary: "\nOccurs just before an application shuts down and cannot be canceled.\n"
   example: []
   syntax:
     content: public event EventHandler Exit
     return:
-      type: EventHandler
+      type: System.EventHandler
     content.vb: Public Event Exit As EventHandler
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.Application.OnExit(EventArgs)
-  commentId: M:System.Windows.Application.OnExit(EventArgs)
-  id: OnExit(EventArgs)
+- uid: System.Windows.Application.OnExit(System.EventArgs)
+  commentId: M:System.Windows.Application.OnExit(System.EventArgs)
+  id: OnExit(System.EventArgs)
   parent: System.Windows.Application
   langs:
   - csharp
   - vb
   name: OnExit(EventArgs)
   nameWithType: Application.OnExit(EventArgs)
-  fullName: System.Windows.Application.OnExit(EventArgs)
+  fullName: System.Windows.Application.OnExit(System.EventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnExit
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 555
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 691
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -503,7 +689,7 @@ items:
     content: protected virtual void OnExit(EventArgs eventArgs)
     parameters:
     - id: eventArgs
-      type: EventArgs
+      type: System.EventArgs
       description: The arguments for the event.
     content.vb: Protected Overridable Sub OnExit(eventArgs As EventArgs)
   overload: System.Windows.Application.OnExit*
@@ -525,9 +711,13 @@ items:
   fullName: System.Windows.Application.Host
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Host
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 570
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 703
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -546,21 +736,25 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Windows.Application.RunApplication(Action)
-  commentId: M:System.Windows.Application.RunApplication(Action)
-  id: RunApplication(Action)
+- uid: System.Windows.Application.RunApplication(System.Action)
+  commentId: M:System.Windows.Application.RunApplication(System.Action)
+  id: RunApplication(System.Action)
   parent: System.Windows.Application
   langs:
   - csharp
   - vb
   name: RunApplication(Action)
   nameWithType: Application.RunApplication(Action)
-  fullName: System.Windows.Application.RunApplication(Action)
+  fullName: System.Windows.Application.RunApplication(System.Action)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RunApplication
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Application.cs
-    startLine: 586
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 719
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -570,7 +764,7 @@ items:
     content: public static void RunApplication(Action entryPoint)
     parameters:
     - id: entryPoint
-      type: Action
+      type: System.Action
       description: ''
     content.vb: Public Shared Sub RunApplication(entryPoint As Action)
   overload: System.Windows.Application.RunApplication*
@@ -592,19 +786,33 @@ items:
   fullName: System.Windows.Application.Windows
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Windows
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\Application.cs
-    startLine: 41
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 49
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public WindowCollection Windows { get; }
+    content: >-
+      [NotImplemented]
+
+      public WindowCollection Windows { get; }
     parameters: []
     return:
       type: System.Windows.WindowCollection
-    content.vb: Public ReadOnly Property Windows As WindowCollection
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property Windows As WindowCollection
   overload: System.Windows.Application.Windows*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -623,9 +831,13 @@ items:
   fullName: System.Windows.Application.UnhandledException
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UnhandledException
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\Application.cs
-    startLine: 47
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 55
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -634,8 +846,51 @@ items:
   syntax:
     content: public event EventHandler<ApplicationUnhandledExceptionEventArgs> UnhandledException
     return:
-      type: EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}
+      type: System.EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}
     content.vb: Public Event UnhandledException As EventHandler(Of ApplicationUnhandledExceptionEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Application.InstallStateChanged
+  commentId: E:System.Windows.Application.InstallStateChanged
+  id: InstallStateChanged
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: InstallStateChanged
+  nameWithType: Application.InstallStateChanged
+  fullName: System.Windows.Application.InstallStateChanged
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: InstallStateChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 59
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: 'Occurs when the <xref href="System.Windows.Application.InstallState" data-throw-if-not-resolved="false"></xref> property value changes. '
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public event EventHandler InstallStateChanged
+    return:
+      type: System.EventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event InstallStateChanged As EventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -652,19 +907,81 @@ items:
   fullName: System.Windows.Application.IsRunningOutOfBrowser
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsRunningOutOfBrowser
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\Application.cs
-    startLine: 66
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 78
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public bool IsRunningOutOfBrowser { get; }
+    content: >-
+      [NotImplemented]
+
+      public bool IsRunningOutOfBrowser { get; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Public ReadOnly Property IsRunningOutOfBrowser As Boolean
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property IsRunningOutOfBrowser As Boolean
   overload: System.Windows.Application.IsRunningOutOfBrowser*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Application.InstallState
+  commentId: P:System.Windows.Application.InstallState
+  id: InstallState
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: InstallState
+  nameWithType: Application.InstallState
+  fullName: System.Windows.Application.InstallState
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: InstallState
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 86
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: Gets the current out-of-browser installation state of the application.
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public InstallState InstallState { get; }
+    parameters: []
+    return:
+      type: System.Windows.InstallState
+      description: The out-of-browser installation state of the application.
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property InstallState As InstallState
+  overload: System.Windows.Application.InstallState*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -683,91 +1000,218 @@ items:
   fullName: System.Windows.Application.HasElevatedPermissions
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: HasElevatedPermissions
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\Application.cs
-    startLine: 72
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 89
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public bool HasElevatedPermissions { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public bool HasElevatedPermissions { get; set; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Public Property HasElevatedPermissions As Boolean
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property HasElevatedPermissions As Boolean
   overload: System.Windows.Application.HasElevatedPermissions*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Application.ApplicationLifetimeObjects
-  commentId: P:System.Windows.Application.ApplicationLifetimeObjects
-  id: ApplicationLifetimeObjects
-  parent: System.Windows.Application
-  langs:
-  - csharp
-  - vb
-  name: ApplicationLifetimeObjects
-  nameWithType: Application.ApplicationLifetimeObjects
-  fullName: System.Windows.Application.ApplicationLifetimeObjects
-  type: Property
-  source:
-    id: ApplicationLifetimeObjects
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\Application.cs
-    startLine: 76
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public IList ApplicationLifetimeObjects { get; }
-    parameters: []
-    return:
-      type: IList
-    content.vb: Public ReadOnly Property ApplicationLifetimeObjects As IList
-  overload: System.Windows.Application.ApplicationLifetimeObjects*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo,Uri)
-  commentId: M:System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo,Uri)
-  id: GetResourceStream(System.Windows.Resources.StreamResourceInfo,Uri)
+- uid: System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo,System.Uri)
+  commentId: M:System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo,System.Uri)
+  id: GetResourceStream(System.Windows.Resources.StreamResourceInfo,System.Uri)
   parent: System.Windows.Application
   langs:
   - csharp
   - vb
   name: GetResourceStream(StreamResourceInfo, Uri)
   nameWithType: Application.GetResourceStream(StreamResourceInfo, Uri)
-  fullName: System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo, Uri)
+  fullName: System.Windows.Application.GetResourceStream(System.Windows.Resources.StreamResourceInfo, System.Uri)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetResourceStream
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\Application.cs
-    startLine: 88
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 92
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public static StreamResourceInfo GetResourceStream(StreamResourceInfo zipPackageStreamResourceInfo, Uri uriResource)
+    content: >-
+      [NotImplemented]
+
+      public static StreamResourceInfo GetResourceStream(StreamResourceInfo zipPackageStreamResourceInfo, Uri uriResource)
     parameters:
     - id: zipPackageStreamResourceInfo
       type: System.Windows.Resources.StreamResourceInfo
     - id: uriResource
-      type: Uri
+      type: System.Uri
     return:
       type: System.Windows.Resources.StreamResourceInfo
-    content.vb: Public Shared Function GetResourceStream(zipPackageStreamResourceInfo As StreamResourceInfo, uriResource As Uri) As StreamResourceInfo
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared Function GetResourceStream(zipPackageStreamResourceInfo As StreamResourceInfo, uriResource As Uri) As StreamResourceInfo
   overload: System.Windows.Application.GetResourceStream*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
+- uid: System.Windows.Application.Install
+  commentId: M:System.Windows.Application.Install
+  id: Install
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: Install()
+  nameWithType: Application.Install()
+  fullName: System.Windows.Application.Install()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Install
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 101
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: 'Attempts to install the application so that it can run outside the browser. '
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public bool Install()
+    return:
+      type: System.Boolean
+      description: 'true if the user gave consent to install the application or the application requires elevated trust; otherwise, false. See Remarks for more information. '
+    content.vb: >-
+      <NotImplemented>
+
+      Public Function Install As Boolean
+  overload: System.Windows.Application.Install*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: The application is already installed.-or-The application is hosted at a URI with a scheme other than http, https, or file.
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Application.CheckAndDownloadUpdateCompleted
+  commentId: E:System.Windows.Application.CheckAndDownloadUpdateCompleted
+  id: CheckAndDownloadUpdateCompleted
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: CheckAndDownloadUpdateCompleted
+  nameWithType: Application.CheckAndDownloadUpdateCompleted
+  fullName: System.Windows.Application.CheckAndDownloadUpdateCompleted
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CheckAndDownloadUpdateCompleted
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 118
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public event CheckAndDownloadUpdateCompletedEventHandler CheckAndDownloadUpdateCompleted
+    return:
+      type: System.Windows.CheckAndDownloadUpdateCompletedEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event CheckAndDownloadUpdateCompleted As CheckAndDownloadUpdateCompletedEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Application.CheckAndDownloadUpdateAsync
+  commentId: M:System.Windows.Application.CheckAndDownloadUpdateAsync
+  id: CheckAndDownloadUpdateAsync
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: CheckAndDownloadUpdateAsync()
+  nameWithType: Application.CheckAndDownloadUpdateAsync()
+  fullName: System.Windows.Application.CheckAndDownloadUpdateAsync()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CheckAndDownloadUpdateAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
+    startLine: 120
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public void CheckAndDownloadUpdateAsync()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub CheckAndDownloadUpdateAsync
+  overload: System.Windows.Application.CheckAndDownloadUpdateAsync*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 references:
 - uid: System.Windows
   commentId: N:System.Windows
@@ -776,10 +1220,290 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -809,6 +1533,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -874,6 +1603,24 @@ references:
   name: Application
   nameWithType: Application.Application
   fullName: System.Windows.Application.Application
+- uid: System.Windows.Application.ApplicationLifetimeObjects*
+  commentId: Overload:System.Windows.Application.ApplicationLifetimeObjects
+  name: ApplicationLifetimeObjects
+  nameWithType: Application.ApplicationLifetimeObjects
+  fullName: System.Windows.Application.ApplicationLifetimeObjects
+- uid: System.Collections.IList
+  commentId: T:System.Collections.IList
+  parent: System.Collections
+  isExternal: true
+  name: IList
+  nameWithType: IList
+  fullName: System.Collections.IList
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
 - uid: System.Windows.Application.Resources*
   commentId: Overload:System.Windows.Application.Resources
   name: Resources
@@ -934,25 +1681,28 @@ references:
   name: GetResourceString
   nameWithType: Application.GetResourceString
   fullName: System.Windows.Application.GetResourceString
-- uid: Uri
+- uid: System.Uri
+  commentId: T:System.Uri
+  parent: System
   isExternal: true
   name: Uri
   nameWithType: Uri
-  fullName: Uri
-- uid: Task{System.String}
-  commentId: '!:Task{System.String}'
-  definition: Task`1
+  fullName: System.Uri
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
   name: Task<String>
   nameWithType: Task<String>
-  fullName: Task<System.String>
+  fullName: System.Threading.Tasks.Task<System.String>
   nameWithType.vb: Task(Of String)
-  fullName.vb: Task(Of System.String)
+  fullName.vb: System.Threading.Tasks.Task(Of System.String)
   name.vb: Task(Of String)
   spec.csharp:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: <
     nameWithType: <
@@ -966,10 +1716,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -982,68 +1732,92 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Task`1
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
-  name: Task<>
-  nameWithType: Task<>
-  fullName: Task<>
-  nameWithType.vb: Task(Of )
-  fullName.vb: Task(Of )
-  name.vb: Task(Of )
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
   spec.csharp:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
 - uid: System.Windows.Application.TryFindResource*
   commentId: Overload:System.Windows.Application.TryFindResource
   name: TryFindResource
   nameWithType: Application.TryFindResource
   fullName: System.Windows.Application.TryFindResource
+- uid: System.Windows.Application.LoadComponent*
+  commentId: Overload:System.Windows.Application.LoadComponent
+  name: LoadComponent
+  nameWithType: Application.LoadComponent
+  fullName: System.Windows.Application.LoadComponent
+- uid: OpenSilver.Internal.Xaml.IXamlComponentLoader
+  commentId: T:OpenSilver.Internal.Xaml.IXamlComponentLoader
+  parent: OpenSilver.Internal.Xaml
+  name: IXamlComponentLoader
+  nameWithType: IXamlComponentLoader
+  fullName: OpenSilver.Internal.Xaml.IXamlComponentLoader
+- uid: OpenSilver.Internal.Xaml
+  commentId: N:OpenSilver.Internal.Xaml
+  name: OpenSilver.Internal.Xaml
+  nameWithType: OpenSilver.Internal.Xaml
+  fullName: OpenSilver.Internal.Xaml
 - uid: System.Windows.Application.GetResourceStream*
   commentId: Overload:System.Windows.Application.GetResourceStream
   name: GetResourceStream
   nameWithType: Application.GetResourceStream
   fullName: System.Windows.Application.GetResourceStream
-- uid: Task{System.Windows.Resources.StreamResourceInfo}
-  commentId: '!:Task{System.Windows.Resources.StreamResourceInfo}'
-  definition: Task`1
+- uid: System.Threading.Tasks.Task{System.Windows.Resources.StreamResourceInfo}
+  commentId: T:System.Threading.Tasks.Task{System.Windows.Resources.StreamResourceInfo}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
   name: Task<StreamResourceInfo>
   nameWithType: Task<StreamResourceInfo>
-  fullName: Task<System.Windows.Resources.StreamResourceInfo>
+  fullName: System.Threading.Tasks.Task<System.Windows.Resources.StreamResourceInfo>
   nameWithType.vb: Task(Of StreamResourceInfo)
-  fullName.vb: Task(Of System.Windows.Resources.StreamResourceInfo)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Windows.Resources.StreamResourceInfo)
   name.vb: Task(Of StreamResourceInfo)
   spec.csharp:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: <
     nameWithType: <
@@ -1056,10 +1830,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Task`1
+  - uid: System.Threading.Tasks.Task`1
     name: Task
     nameWithType: Task
-    fullName: Task
+    fullName: System.Threading.Tasks.Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1071,11 +1845,13 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: EventHandler
+- uid: System.EventHandler
+  commentId: T:System.EventHandler
+  parent: System
   isExternal: true
   name: EventHandler
   nameWithType: EventHandler
-  fullName: EventHandler
+  fullName: System.EventHandler
 - uid: System.Windows.Application.INTERNAL_RaiseReloadedEvent*
   commentId: Overload:System.Windows.Application.INTERNAL_RaiseReloadedEvent
   name: INTERNAL_RaiseReloadedEvent
@@ -1086,11 +1862,13 @@ references:
   name: OnExit
   nameWithType: Application.OnExit
   fullName: System.Windows.Application.OnExit
-- uid: EventArgs
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
   isExternal: true
   name: EventArgs
   nameWithType: EventArgs
-  fullName: EventArgs
+  fullName: System.EventArgs
 - uid: System.Windows.Application.Host*
   commentId: Overload:System.Windows.Application.Host
   name: Host
@@ -1107,11 +1885,13 @@ references:
   name: RunApplication
   nameWithType: Application.RunApplication
   fullName: System.Windows.Application.RunApplication
-- uid: Action
+- uid: System.Action
+  commentId: T:System.Action
+  parent: System
   isExternal: true
   name: Action
   nameWithType: Action
-  fullName: Action
+  fullName: System.Action
 - uid: System.Windows.Application.Windows*
   commentId: Overload:System.Windows.Application.Windows
   name: Windows
@@ -1123,20 +1903,21 @@ references:
   name: WindowCollection
   nameWithType: WindowCollection
   fullName: System.Windows.WindowCollection
-- uid: EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}
-  commentId: '!:EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}'
-  definition: EventHandler`1
+- uid: System.EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}
+  commentId: T:System.EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}
+  parent: System
+  definition: System.EventHandler`1
   name: EventHandler<ApplicationUnhandledExceptionEventArgs>
   nameWithType: EventHandler<ApplicationUnhandledExceptionEventArgs>
-  fullName: EventHandler<System.Windows.ApplicationUnhandledExceptionEventArgs>
+  fullName: System.EventHandler<System.Windows.ApplicationUnhandledExceptionEventArgs>
   nameWithType.vb: EventHandler(Of ApplicationUnhandledExceptionEventArgs)
-  fullName.vb: EventHandler(Of System.Windows.ApplicationUnhandledExceptionEventArgs)
+  fullName.vb: System.EventHandler(Of System.Windows.ApplicationUnhandledExceptionEventArgs)
   name.vb: EventHandler(Of ApplicationUnhandledExceptionEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
@@ -1149,10 +1930,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1164,69 +1945,76 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: EventHandler`1
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
   isExternal: true
-  name: EventHandler<>
-  nameWithType: EventHandler<>
-  fullName: EventHandler<>
-  nameWithType.vb: EventHandler(Of )
-  fullName.vb: EventHandler(Of )
-  name.vb: EventHandler(Of )
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Application.InstallState
+  commentId: P:System.Windows.Application.InstallState
+  isExternal: true
 - uid: System.Windows.Application.IsRunningOutOfBrowser*
   commentId: Overload:System.Windows.Application.IsRunningOutOfBrowser
   name: IsRunningOutOfBrowser
   nameWithType: Application.IsRunningOutOfBrowser
   fullName: System.Windows.Application.IsRunningOutOfBrowser
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System.Windows.Application.InstallState*
+  commentId: Overload:System.Windows.Application.InstallState
+  name: InstallState
+  nameWithType: Application.InstallState
+  fullName: System.Windows.Application.InstallState
+- uid: System.Windows.InstallState
+  commentId: T:System.Windows.InstallState
+  parent: System.Windows
+  name: InstallState
+  nameWithType: InstallState
+  fullName: System.Windows.InstallState
 - uid: System.Windows.Application.HasElevatedPermissions*
   commentId: Overload:System.Windows.Application.HasElevatedPermissions
   name: HasElevatedPermissions
   nameWithType: Application.HasElevatedPermissions
   fullName: System.Windows.Application.HasElevatedPermissions
-- uid: System.Windows.Application.ApplicationLifetimeObjects*
-  commentId: Overload:System.Windows.Application.ApplicationLifetimeObjects
-  name: ApplicationLifetimeObjects
-  nameWithType: Application.ApplicationLifetimeObjects
-  fullName: System.Windows.Application.ApplicationLifetimeObjects
-- uid: IList
-  isExternal: true
-  name: IList
-  nameWithType: IList
-  fullName: IList
 - uid: System.Windows.Resources.StreamResourceInfo
   commentId: T:System.Windows.Resources.StreamResourceInfo
   parent: System.Windows.Resources
@@ -1238,3 +2026,22 @@ references:
   name: System.Windows.Resources
   nameWithType: System.Windows.Resources
   fullName: System.Windows.Resources
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: System.Windows.Application.Install*
+  commentId: Overload:System.Windows.Application.Install
+  name: Install
+  nameWithType: Application.Install
+  fullName: System.Windows.Application.Install
+- uid: System.Windows.CheckAndDownloadUpdateCompletedEventHandler
+  commentId: T:System.Windows.CheckAndDownloadUpdateCompletedEventHandler
+  parent: System.Windows
+  name: CheckAndDownloadUpdateCompletedEventHandler
+  nameWithType: CheckAndDownloadUpdateCompletedEventHandler
+  fullName: System.Windows.CheckAndDownloadUpdateCompletedEventHandler
+- uid: System.Windows.Application.CheckAndDownloadUpdateAsync*
+  commentId: Overload:System.Windows.Application.CheckAndDownloadUpdateAsync
+  name: CheckAndDownloadUpdateAsync
+  nameWithType: Application.CheckAndDownloadUpdateAsync
+  fullName: System.Windows.Application.CheckAndDownloadUpdateAsync

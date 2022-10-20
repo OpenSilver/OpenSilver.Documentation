@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ItemContainerGenerator
    ">
-    <meta name="generator" content="docfx 2.58.4.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -126,54 +126,66 @@
   
   <h1 id="System_Windows_Controls_ItemContainerGenerator" data-uid="System.Windows.Controls.ItemContainerGenerator" class="text-break">Class ItemContainerGenerator
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>An ItemContainerGenerator is responsible for generating the UI on behalf of
+its host (e.g. ItemsControl).  It maintains the association between the items in
+the control's data view and the corresponding
+UIElements.  The control's item-host can ask the ItemContainerGenerator for
+a Generator, which does the actual generation of UI.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ItemContainerGenerator</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="System.Windows.Controls.Primitives.IRecyclingItemContainerGenerator.html">IRecyclingItemContainerGenerator</a></div>
+    <div><a class="xref" href="System.Windows.Controls.Primitives.IItemContainerGenerator.html">IItemContainerGenerator</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="System.Windows.Controls.html">System.Windows.Controls</a></h6>
   <h6><strong>Assembly</strong>: OpenSilver.dll</h6>
   <h5 id="System_Windows_Controls_ItemContainerGenerator_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ItemContainerGenerator : object</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class ItemContainerGenerator : IRecyclingItemContainerGenerator, IItemContainerGenerator</code></pre>
   </div>
-  <h3 id="properties">Properties
-  </h3>
-  
-  
-  <a id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_AllContainers_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_AllContainers*"></a>
-  <h4 id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_AllContainers" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_AllContainers">INTERNAL_AllContainers</h4>
-  <div class="markdown level1 summary"><p>Gets all the containers associated to all the items.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerable&lt;object&gt; INTERNAL_AllContainers { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">System.Object</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
   </h3>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_ContainerFromIndex_System_Int32_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.ContainerFromIndex(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L751">View Source</a>
+  </span>
   <a id="System_Windows_Controls_ItemContainerGenerator_ContainerFromIndex_" data-uid="System.Windows.Controls.ItemContainerGenerator.ContainerFromIndex*"></a>
   <h4 id="System_Windows_Controls_ItemContainerGenerator_ContainerFromIndex_System_Int32_" data-uid="System.Windows.Controls.ItemContainerGenerator.ContainerFromIndex(System.Int32)">ContainerFromIndex(Int32)</h4>
-  <div class="markdown level1 summary"><p>Returns the container at the given index, or null if the index is negative or above the amount of containers.</p>
+  <div class="markdown level1 summary"><p>Return the UI element corresponding to the item at the given index
+within the ItemCollection.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -193,8 +205,7 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">index</span></td>
-        <td><p>The index at which the container is located.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -209,16 +220,22 @@
     <tbody>
       <tr>
         <td><a class="xref" href="System.Windows.DependencyObject.html">DependencyObject</a></td>
-        <td><p>The container at the given index, or null if the index is negative or above the amount of containers.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_ContainerFromItem_System_Object_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.ContainerFromItem(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L497">View Source</a>
+  </span>
   <a id="System_Windows_Controls_ItemContainerGenerator_ContainerFromItem_" data-uid="System.Windows.Controls.ItemContainerGenerator.ContainerFromItem*"></a>
   <h4 id="System_Windows_Controls_ItemContainerGenerator_ContainerFromItem_System_Object_" data-uid="System.Windows.Controls.ItemContainerGenerator.ContainerFromItem(System.Object)">ContainerFromItem(Object)</h4>
-  <div class="markdown level1 summary"><p>Returns the container corresponding to the specified item.</p>
+  <div class="markdown level1 summary"><p>Return the UI element corresponding to the given item.
+Returns null if the item does not belong to the item collection,
+or if no UI has been generated for it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -238,8 +255,7 @@
       <tr>
         <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">item</span></td>
-        <td><p>The item to retrieve the container for.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -254,17 +270,21 @@
     <tbody>
       <tr>
         <td><a class="xref" href="System.Windows.DependencyObject.html">DependencyObject</a></td>
-        <td><p>A container that corresponds to the specified item, if the item has a container
-and exists in the collection; otherwise, null.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_GeneratorPositionFromIndex_System_Int32_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.GeneratorPositionFromIndex(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L410">View Source</a>
+  </span>
   <a id="System_Windows_Controls_ItemContainerGenerator_GeneratorPositionFromIndex_" data-uid="System.Windows.Controls.ItemContainerGenerator.GeneratorPositionFromIndex*"></a>
   <h4 id="System_Windows_Controls_ItemContainerGenerator_GeneratorPositionFromIndex_System_Int32_" data-uid="System.Windows.Controls.ItemContainerGenerator.GeneratorPositionFromIndex(System.Int32)">GeneratorPositionFromIndex(Int32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Map an index into the items collection to a GeneratorPosition.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -302,11 +322,18 @@ and exists in the collection; otherwise, null.</p>
       </tr>
     </tbody>
   </table>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_IndexFromContainer_System_Windows_DependencyObject_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.IndexFromContainer(System.Windows.DependencyObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L514">View Source</a>
+  </span>
   <a id="System_Windows_Controls_ItemContainerGenerator_IndexFromContainer_" data-uid="System.Windows.Controls.ItemContainerGenerator.IndexFromContainer*"></a>
   <h4 id="System_Windows_Controls_ItemContainerGenerator_IndexFromContainer_System_Windows_DependencyObject_" data-uid="System.Windows.Controls.ItemContainerGenerator.IndexFromContainer(System.Windows.DependencyObject)">IndexFromContainer(DependencyObject)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Given a generated UI element, return the index of the corresponding item
+within the ItemCollection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -344,11 +371,17 @@ and exists in the collection; otherwise, null.</p>
       </tr>
     </tbody>
   </table>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_IndexFromGeneratorPosition_System_Windows_Controls_Primitives_GeneratorPosition_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.IndexFromGeneratorPosition(System.Windows.Controls.Primitives.GeneratorPosition)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L427">View Source</a>
+  </span>
   <a id="System_Windows_Controls_ItemContainerGenerator_IndexFromGeneratorPosition_" data-uid="System.Windows.Controls.ItemContainerGenerator.IndexFromGeneratorPosition*"></a>
   <h4 id="System_Windows_Controls_ItemContainerGenerator_IndexFromGeneratorPosition_System_Windows_Controls_Primitives_GeneratorPosition_" data-uid="System.Windows.Controls.ItemContainerGenerator.IndexFromGeneratorPosition(System.Windows.Controls.Primitives.GeneratorPosition)">IndexFromGeneratorPosition(GeneratorPosition)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Map a GeneratorPosition to an index into the items collection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -386,150 +419,18 @@ and exists in the collection; otherwise, null.</p>
       </tr>
     </tbody>
   </table>
-  
-  
-  <a id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_Clear_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_Clear*"></a>
-  <h4 id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_Clear" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_Clear">INTERNAL_Clear()</h4>
-  <div class="markdown level1 summary"><p>Resets the ItemContainerGenerator.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void INTERNAL_Clear()</code></pre>
-  </div>
-  
-  
-  <a id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_ContainerFromItem_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_ContainerFromItem*"></a>
-  <h4 id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_ContainerFromItem_System_Object_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_ContainerFromItem(System.Object)">INTERNAL_ContainerFromItem(Object)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public object INTERNAL_ContainerFromItem(object item)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">item</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_RegisterContainer_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_RegisterContainer*"></a>
-  <h4 id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_RegisterContainer_System_Object_System_Object_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_RegisterContainer(System.Object,System.Object)">INTERNAL_RegisterContainer(Object, Object)</h4>
-  <div class="markdown level1 summary"><p>Adds a container to the collection of containers.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void INTERNAL_RegisterContainer(object container, object correspondingItem)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">container</span></td>
-        <td><p>The container to add.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">correspondingItem</span></td>
-        <td><p>The item that corresponds to the container to add.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_TryUnregisterContainer_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_TryUnregisterContainer*"></a>
-  <h4 id="System_Windows_Controls_ItemContainerGenerator_INTERNAL_TryUnregisterContainer_System_Object_System_Object_" data-uid="System.Windows.Controls.ItemContainerGenerator.INTERNAL_TryUnregisterContainer(System.Object,System.Object)">INTERNAL_TryUnregisterContainer(Object, Object)</h4>
-  <div class="markdown level1 summary"><p>Removes the container associated to the item.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool INTERNAL_TryUnregisterContainer(object container, object correspondingItem)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">container</span></td>
-        <td><p>The container to remove.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Object</span></td>
-        <td><span class="parametername">correspondingItem</span></td>
-        <td><p>The item that corresponds to the container to remove.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p>True if found and removed, false otherwise.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_ItemFromContainer_System_Windows_DependencyObject_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.ItemFromContainer(System.Windows.DependencyObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L475">View Source</a>
+  </span>
   <a id="System_Windows_Controls_ItemContainerGenerator_ItemFromContainer_" data-uid="System.Windows.Controls.ItemContainerGenerator.ItemFromContainer*"></a>
   <h4 id="System_Windows_Controls_ItemContainerGenerator_ItemFromContainer_System_Windows_DependencyObject_" data-uid="System.Windows.Controls.ItemContainerGenerator.ItemFromContainer(System.Windows.DependencyObject)">ItemFromContainer(DependencyObject)</h4>
-  <div class="markdown level1 summary"><p>Returns the item that corresponds to the specified, generated container.</p>
+  <div class="markdown level1 summary"><p>Return the item corresponding to the given UI element.
+If the element was not generated as a container for this generator's
+host, the method returns DependencyProperty.UnsetValue.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -549,8 +450,7 @@ and exists in the collection; otherwise, null.</p>
       <tr>
         <td><a class="xref" href="System.Windows.DependencyObject.html">DependencyObject</a></td>
         <td><span class="parametername">container</span></td>
-        <td><p>The <a class="xref" href="System.Windows.DependencyObject.html">DependencyObject</a> that corresponds to the item to be returned.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -565,17 +465,23 @@ and exists in the collection; otherwise, null.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Object</span></td>
-        <td><p>The contained item, or the container if it does not contain an item.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
   <h3 id="events">Events
   </h3>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_ItemsChanged.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.ItemsChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L795">View Source</a>
+  </span>
   <h4 id="System_Windows_Controls_ItemContainerGenerator_ItemsChanged" data-uid="System.Windows.Controls.ItemContainerGenerator.ItemsChanged">ItemsChanged</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The ItemsChanged event is raised by a ItemContainerGenerator to inform
+layouts that the items collection has changed.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -596,6 +502,309 @@ and exists in the collection; otherwise, null.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="eii">Explicit Interface Implementations
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_GenerateNext_System_Boolean__.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.System%23Windows%23Controls%23Primitives%23IItemContainerGenerator%23GenerateNext(System.Boolean%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L149">View Source</a>
+  </span>
+  <a id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_GenerateNext_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#GenerateNext*"></a>
+  <h4 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_GenerateNext_System_Boolean__" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#GenerateNext(System.Boolean@)">IItemContainerGenerator.GenerateNext(out Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">DependencyObject IItemContainerGenerator.GenerateNext(out bool isNewlyRealized)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isNewlyRealized</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.DependencyObject.html">DependencyObject</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_GetItemContainerGeneratorForPanel_System_Windows_Controls_Panel_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.System%23Windows%23Controls%23Primitives%23IItemContainerGenerator%23GetItemContainerGeneratorForPanel(System.Windows.Controls.Panel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L114">View Source</a>
+  </span>
+  <a id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_GetItemContainerGeneratorForPanel_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#GetItemContainerGeneratorForPanel*"></a>
+  <h4 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_GetItemContainerGeneratorForPanel_System_Windows_Controls_Panel_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#GetItemContainerGeneratorForPanel(System.Windows.Controls.Panel)">IItemContainerGenerator.GetItemContainerGeneratorForPanel(Panel)</h4>
+  <div class="markdown level1 summary"><p>Return the ItemContainerGenerator appropriate for use by the given panel</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ItemContainerGenerator IItemContainerGenerator.GetItemContainerGeneratorForPanel(Panel panel)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.Controls.Panel.html">Panel</a></td>
+        <td><span class="parametername">panel</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.Controls.ItemContainerGenerator.html">ItemContainerGenerator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_PrepareItemContainer_System_Windows_DependencyObject_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.System%23Windows%23Controls%23Primitives%23IItemContainerGenerator%23PrepareItemContainer(System.Windows.DependencyObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L171">View Source</a>
+  </span>
+  <a id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_PrepareItemContainer_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#PrepareItemContainer*"></a>
+  <h4 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_PrepareItemContainer_System_Windows_DependencyObject_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#PrepareItemContainer(System.Windows.DependencyObject)">IItemContainerGenerator.PrepareItemContainer(DependencyObject)</h4>
+  <div class="markdown level1 summary"><p>Prepare the given element to act as the container for the
+corresponding item.  This includes applying the container style,
+forwarding information from the host control (ItemTemplate, etc.),
+and other small adjustments.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void IItemContainerGenerator.PrepareItemContainer(DependencyObject container)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.DependencyObject.html">DependencyObject</a></td>
+        <td><span class="parametername">container</span></td>
+        <td><p>The container to prepare.
+Normally this is the result of the previous call to GenerateNext.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_PrepareItemContainer_System_Windows_DependencyObject__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method must be called after the element has been added to the
+visual tree, so that resource references and inherited properties
+work correctly.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_Remove_System_Windows_Controls_Primitives_GeneratorPosition_System_Int32_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.System%23Windows%23Controls%23Primitives%23IItemContainerGenerator%23Remove(System.Windows.Controls.Primitives.GeneratorPosition%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L180">View Source</a>
+  </span>
+  <a id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_Remove_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#Remove*"></a>
+  <h4 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_Remove_System_Windows_Controls_Primitives_GeneratorPosition_System_Int32_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#Remove(System.Windows.Controls.Primitives.GeneratorPosition,System.Int32)">IItemContainerGenerator.Remove(GeneratorPosition, Int32)</h4>
+  <div class="markdown level1 summary"><p>Remove generated elements.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void IItemContainerGenerator.Remove(GeneratorPosition position, int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.Controls.Primitives.GeneratorPosition.html">GeneratorPosition</a></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_RemoveAll.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.System%23Windows%23Controls%23Primitives%23IItemContainerGenerator%23RemoveAll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L344">View Source</a>
+  </span>
+  <a id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_RemoveAll_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#RemoveAll*"></a>
+  <h4 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_RemoveAll" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#RemoveAll">IItemContainerGenerator.RemoveAll()</h4>
+  <div class="markdown level1 summary"><p>Remove all generated elements.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void IItemContainerGenerator.RemoveAll()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_StartAt_System_Windows_Controls_Primitives_GeneratorPosition_System_Windows_Controls_Primitives_GeneratorDirection_System_Boolean_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.System%23Windows%23Controls%23Primitives%23IItemContainerGenerator%23StartAt(System.Windows.Controls.Primitives.GeneratorPosition%2CSystem.Windows.Controls.Primitives.GeneratorDirection%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L140">View Source</a>
+  </span>
+  <a id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_StartAt_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#StartAt*"></a>
+  <h4 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_StartAt_System_Windows_Controls_Primitives_GeneratorPosition_System_Windows_Controls_Primitives_GeneratorDirection_System_Boolean_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IItemContainerGenerator#StartAt(System.Windows.Controls.Primitives.GeneratorPosition,System.Windows.Controls.Primitives.GeneratorDirection,System.Boolean)">IItemContainerGenerator.StartAt(GeneratorPosition, GeneratorDirection, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Begin generating at the given position and direction</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IDisposable IItemContainerGenerator.StartAt(GeneratorPosition position, GeneratorDirection direction, bool allowStartAtRealizedItem)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.Controls.Primitives.GeneratorPosition.html">GeneratorPosition</a></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="System.Windows.Controls.Primitives.GeneratorDirection.html">GeneratorDirection</a></td>
+        <td><span class="parametername">direction</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">allowStartAtRealizedItem</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IDisposable</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IItemContainerGenerator_StartAt_System_Windows_Controls_Primitives_GeneratorPosition_System_Windows_Controls_Primitives_GeneratorDirection_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method must be called before calling GenerateNext.  It returns an
+IDisposable object that tracks the lifetime of the generation loop.
+This method sets the generator's status to GeneratingContent;  when
+the IDisposable is disposed, the status changes to ContentReady or
+Error, as appropriate.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IRecyclingItemContainerGenerator_Recycle_System_Windows_Controls_Primitives_GeneratorPosition_System_Int32_.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator.System%23Windows%23Controls%23Primitives%23IRecyclingItemContainerGenerator%23Recycle(System.Windows.Controls.Primitives.GeneratorPosition%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L402">View Source</a>
+  </span>
+  <a id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IRecyclingItemContainerGenerator_Recycle_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IRecyclingItemContainerGenerator#Recycle*"></a>
+  <h4 id="System_Windows_Controls_ItemContainerGenerator_System_Windows_Controls_Primitives_IRecyclingItemContainerGenerator_Recycle_System_Windows_Controls_Primitives_GeneratorPosition_System_Int32_" data-uid="System.Windows.Controls.ItemContainerGenerator.System#Windows#Controls#Primitives#IRecyclingItemContainerGenerator#Recycle(System.Windows.Controls.Primitives.GeneratorPosition,System.Int32)">IRecyclingItemContainerGenerator.Recycle(GeneratorPosition, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void IRecyclingItemContainerGenerator.Recycle(GeneratorPosition position, int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.Controls.Primitives.GeneratorPosition.html">GeneratorPosition</a></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="System.Windows.Controls.Primitives.IRecyclingItemContainerGenerator.html">IRecyclingItemContainerGenerator</a>
+  </div>
+  <div>
+      <a class="xref" href="System.Windows.Controls.Primitives.IItemContainerGenerator.html">IItemContainerGenerator</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.html#ToJavaScriptObjectExtender_ToJavaScriptObjectExtender_ToJavaScriptObject_System_Object_">ToJavaScriptObjectExtender.ToJavaScriptObject(Object)</a>
@@ -607,6 +816,12 @@ and exists in the collection; otherwise, null.</p>
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Controls_ItemContainerGenerator.md&amp;value=---%0Auid%3A%20System.Windows.Controls.ItemContainerGenerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Controls/ItemContainerGenerator.cs/#L49" class="contribution-link">View Source</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

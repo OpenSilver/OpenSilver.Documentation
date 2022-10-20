@@ -6,8 +6,11 @@ items:
   parent: System.Windows
   children:
   - System.Windows.Clipboard.ContainsText
+  - System.Windows.Clipboard.ContainsTextAsync
   - System.Windows.Clipboard.GetText
+  - System.Windows.Clipboard.GetTextAsync
   - System.Windows.Clipboard.SetText(System.String)
+  - System.Windows.Clipboard.SetTextAsync(System.String)
   langs:
   - csharp
   - vb
@@ -16,21 +19,31 @@ items:
   fullName: System.Windows.Clipboard
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Clipboard
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Clipboard.cs
-    startLine: 24
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
+    startLine: 27
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nProvides static methods that facilitate transferring data to and from the\nsystem clipboard. In Silverlight 5, this access is limited to Unicode text\nstrings.\n"
+  summary: "\nProvides static methods that facilitate transferring data to and from the system\nclipboard. In Silverlight 5, this access is limited to Unicode text strings.\n"
   example: []
   syntax:
-    content: 'public static class Clipboard : object'
-    content.vb: >-
-      Public Module Clipboard
-          Inherits Object
+    content: public static class Clipboard
+    content.vb: Public Module Clipboard
   inheritance:
   - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   modifiers.csharp:
   - public
   - static
@@ -50,22 +63,86 @@ items:
   fullName: System.Windows.Clipboard.SetText(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetText
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Clipboard.cs
-    startLine: 30
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
+    startLine: 45
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nSets text data to store on the clipboard.\n"
+  summary: "\nSets Unicode text data to store on the clipboard, for later access with <xref href=\"System.Windows.Clipboard.GetText\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: public static void SetText(string text)
+    content: >-
+      [Obsolete("Use SetTextAsync(string) instead.")]
+
+      public static void SetText(string text)
     parameters:
     - id: text
       type: System.String
-      description: A string that contains the Unicode text data to store on the clipboard.
-    content.vb: Public Shared Sub SetText(text As String)
+      description: "\nA string that contains the Unicode text data to store on the clipboard.\n"
+    content.vb: >-
+      <Obsolete("Use SetTextAsync(string) instead.")>
+
+      Public Shared Sub SetText(text As String)
   overload: System.Windows.Clipboard.SetText*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\ntext is null.\n"
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use SetTextAsync(string) instead.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Clipboard.SetTextAsync(System.String)
+  commentId: M:System.Windows.Clipboard.SetTextAsync(System.String)
+  id: SetTextAsync(System.String)
+  parent: System.Windows.Clipboard
+  langs:
+  - csharp
+  - vb
+  name: SetTextAsync(String)
+  nameWithType: Clipboard.SetTextAsync(String)
+  fullName: System.Windows.Clipboard.SetTextAsync(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SetTextAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
+    startLine: 65
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nSets Unicode text data to store on the clipboard, for later access with <xref href=\"System.Windows.Clipboard.GetTextAsync\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static Task SetTextAsync(string text)
+    parameters:
+    - id: text
+      type: System.String
+      description: "\nA string that contains the Unicode text data to store on the clipboard.\n"
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Shared Function SetTextAsync(text As String) As Task
+  overload: System.Windows.Clipboard.SetTextAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\ntext is null.\n"
   modifiers.csharp:
   - public
   - static
@@ -84,18 +161,74 @@ items:
   fullName: System.Windows.Clipboard.GetText()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetText
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Clipboard.cs
-    startLine: 57
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
+    startLine: 82
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nQueries the clipboard for the presence of data in the UnicodeText format.\nNot implemented in the browser. Use <xref href=\"System.Windows.Clipboard.GetTextAsync\" data-throw-if-not-resolved=\"false\"></xref> instead.\n"
+  example: []
   syntax:
-    content: public static string GetText()
+    content: >-
+      [Obsolete("Use GetTextAsync() instead.")]
+
+      public static string GetText()
     return:
       type: System.String
-    content.vb: Public Shared Function GetText As String
+      description: "\nAlways returns <xref href=\"System.String.Empty\" data-throw-if-not-resolved=\"false\"></xref> in the browser.\n"
+    content.vb: >-
+      <Obsolete("Use GetTextAsync() instead.")>
+
+      Public Shared Function GetText As String
   overload: System.Windows.Clipboard.GetText*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use GetTextAsync() instead.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Clipboard.GetTextAsync
+  commentId: M:System.Windows.Clipboard.GetTextAsync
+  id: GetTextAsync
+  parent: System.Windows.Clipboard
+  langs:
+  - csharp
+  - vb
+  name: GetTextAsync()
+  nameWithType: Clipboard.GetTextAsync()
+  fullName: System.Windows.Clipboard.GetTextAsync()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GetTextAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
+    startLine: 92
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRetrieves Unicode text data from the system clipboard, if Unicode text data exists.\n"
+  example: []
+  syntax:
+    content: public static Task<string> GetTextAsync()
+    return:
+      type: System.Threading.Tasks.Task{System.String}
+      description: "\nIf Unicode text data is present on the system clipboard, returns a string that\ncontains the Unicode text data. Otherwise, returns an empty string.\n"
+    content.vb: Public Shared Function GetTextAsync As Task(Of String)
+  overload: System.Windows.Clipboard.GetTextAsync*
   modifiers.csharp:
   - public
   - static
@@ -114,18 +247,74 @@ items:
   fullName: System.Windows.Clipboard.ContainsText()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ContainsText
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Clipboard.cs
-    startLine: 63
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
+    startLine: 101
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nQueries the clipboard for the presence of data in the UnicodeText format.\nNot implemented in the browser. Use <xref href=\"System.Windows.Clipboard.ContainsTextAsync\" data-throw-if-not-resolved=\"false\"></xref> instead.\n"
+  example: []
   syntax:
-    content: public static bool ContainsText()
+    content: >-
+      [Obsolete("Use ContainsTextAsync() instead.")]
+
+      public static bool ContainsText()
     return:
       type: System.Boolean
-    content.vb: Public Shared Function ContainsText As Boolean
+      description: "\nAlways return false in the browser.\n"
+    content.vb: >-
+      <Obsolete("Use ContainsTextAsync() instead.")>
+
+      Public Shared Function ContainsText As Boolean
   overload: System.Windows.Clipboard.ContainsText*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use ContainsTextAsync() instead.
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Clipboard.ContainsTextAsync
+  commentId: M:System.Windows.Clipboard.ContainsTextAsync
+  id: ContainsTextAsync
+  parent: System.Windows.Clipboard
+  langs:
+  - csharp
+  - vb
+  name: ContainsTextAsync()
+  nameWithType: Clipboard.ContainsTextAsync()
+  fullName: System.Windows.Clipboard.ContainsTextAsync()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ContainsTextAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
+    startLine: 110
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nQueries the clipboard for the presence of data in the UnicodeText format.\n"
+  example: []
+  syntax:
+    content: public static Task<bool> ContainsTextAsync()
+    return:
+      type: System.Threading.Tasks.Task{System.Boolean}
+      description: "\ntrue if the system clipboard contains Unicode text data; otherwise, false.\n"
+    content.vb: Public Shared Function ContainsTextAsync As Task(Of Boolean)
+  overload: System.Windows.Clipboard.ContainsTextAsync*
   modifiers.csharp:
   - public
   - static
@@ -140,32 +329,491 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Windows.Clipboard.GetText
+  commentId: M:System.Windows.Clipboard.GetText
+  isExternal: true
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
 - uid: System.Windows.Clipboard.SetText*
   commentId: Overload:System.Windows.Clipboard.SetText
   name: SetText
   nameWithType: Clipboard.SetText
   fullName: System.Windows.Clipboard.SetText
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
   fullName: System.String
+- uid: System.Windows.Clipboard.GetTextAsync
+  commentId: M:System.Windows.Clipboard.GetTextAsync
+  isExternal: true
+- uid: System.Windows.Clipboard.SetTextAsync*
+  commentId: Overload:System.Windows.Clipboard.SetTextAsync
+  name: SetTextAsync
+  nameWithType: Clipboard.SetTextAsync
+  fullName: System.Windows.Clipboard.SetTextAsync
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+- uid: System.String.Empty
+  commentId: F:System.String.Empty
+  isExternal: true
 - uid: System.Windows.Clipboard.GetText*
   commentId: Overload:System.Windows.Clipboard.GetText
   name: GetText
   nameWithType: Clipboard.GetText
   fullName: System.Windows.Clipboard.GetText
+- uid: System.Windows.Clipboard.GetTextAsync*
+  commentId: Overload:System.Windows.Clipboard.GetTextAsync
+  name: GetTextAsync
+  nameWithType: Clipboard.GetTextAsync
+  fullName: System.Windows.Clipboard.GetTextAsync
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<String>
+  nameWithType: Task<String>
+  fullName: System.Threading.Tasks.Task<System.String>
+  nameWithType.vb: Task(Of String)
+  fullName.vb: System.Threading.Tasks.Task(Of System.String)
+  name.vb: Task(Of String)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Clipboard.ContainsTextAsync
+  commentId: M:System.Windows.Clipboard.ContainsTextAsync
+  isExternal: true
 - uid: System.Windows.Clipboard.ContainsText*
   commentId: Overload:System.Windows.Clipboard.ContainsText
   name: ContainsText
   nameWithType: Clipboard.ContainsText
   fullName: System.Windows.Clipboard.ContainsText
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System.Windows.Clipboard.ContainsTextAsync*
+  commentId: Overload:System.Windows.Clipboard.ContainsTextAsync
+  name: ContainsTextAsync
+  nameWithType: Clipboard.ContainsTextAsync
+  fullName: System.Windows.Clipboard.ContainsTextAsync
+- uid: System.Threading.Tasks.Task{System.Boolean}
+  commentId: T:System.Threading.Tasks.Task{System.Boolean}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<Boolean>
+  nameWithType: Task<Boolean>
+  fullName: System.Threading.Tasks.Task<System.Boolean>
+  nameWithType.vb: Task(Of Boolean)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Boolean)
+  name.vb: Task(Of Boolean)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )

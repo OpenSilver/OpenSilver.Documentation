@@ -6,9 +6,9 @@ items:
   parent: System.ServiceModel
   children:
   - System.ServiceModel.CSHTML5_ClientBase`1.#ctor
-  - System.ServiceModel.CSHTML5_ClientBase`1.#ctor(Binding,EndpointAddress)
+  - System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)
   - System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String)
-  - System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,EndpointAddress)
+  - System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.ServiceModel.EndpointAddress)
   - System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.String)
   - System.ServiceModel.CSHTML5_ClientBase`1.Abort
   - System.ServiceModel.CSHTML5_ClientBase`1.Channel
@@ -18,7 +18,7 @@ items:
   - System.ServiceModel.CSHTML5_ClientBase`1.GetDefaultValueForInitialization``1
   - System.ServiceModel.CSHTML5_ClientBase`1.InnerChannel
   - System.ServiceModel.CSHTML5_ClientBase`1.INTERNAL_RemoteAddressAsString
-  - System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,SendOrPostCallback,System.Object)
+  - System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,System.Threading.SendOrPostCallback,System.Object)
   - System.ServiceModel.CSHTML5_ClientBase`1.State
   langs:
   - csharp
@@ -28,8 +28,12 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CSHTML5_ClientBase
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
     startLine: 99
   assemblies:
   - OpenSilver
@@ -38,15 +42,26 @@ items:
   example:
   - "\nHere is an example on how you can use a WebService to receive data:\n<pre><code>//We create a new instance of the ServiceClient\nMyServiceClient soapClient =\n    new MyServiceClient(\n        new BasicHttpBinding(),\n        new EndpointAddress(\n            new Uri(&quot;http://MyServiceAddress.com/MyService.svc&quot;)));\n\n//We call the method that will give us the data we want:\nvar result = await soapClient.GetToDosAsync(_ownerId);\n//We get the data from the response:\nToDoItem[] todos = result.Body.GetToDosResult;</code></pre>\nHere is another example that shows how you can send data to a WebService:\n<pre><code>//We create an item to send to the WebService:\nToDoItem todo = new ToDoItem()\n{\n    Description = MyTextBox.Text,\n    Id = Guid.NewGuid(),\n};\n\n//We create a new instance of the ServiceClient\nMyServiceClient soapClient =\n    new MyServiceClient(\n        new BasicHttpBinding(),\n        new EndpointAddress(\n            new Uri(&quot;http://MyServiceAddress.com/MyService.svc&quot;)));\n\n//We send the data by calling a method implemented for that purpose in the WebService:\nawait soapClient.AddOrUpdateToDoAsync(todo);</code></pre>\n"
   syntax:
-    content: 'public abstract class CSHTML5_ClientBase<TChannel> : object where TChannel : class'
+    content: >-
+      public abstract class CSHTML5_ClientBase<TChannel>
+
+          where TChannel : class
     typeParameters:
     - id: TChannel
       description: The channel to be used to connect to the service.
-    content.vb: >-
-      Public MustInherit Class CSHTML5_ClientBase(Of TChannel As Class)
-          Inherits Object
+    content.vb: Public MustInherit Class CSHTML5_ClientBase(Of TChannel As Class)
   inheritance:
   - System.Object
+  derivedClasses:
+  - System.ServiceModel.CSHTML5_DuplexClientBase`1
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel)
@@ -72,8 +87,12 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.Endpoint
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Endpoint
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
     startLine: 104
   assemblies:
   - OpenSilver
@@ -105,8 +124,12 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.ClientCredentials
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ClientCredentials
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
     startLine: 105
   assemblies:
   - OpenSilver
@@ -138,8 +161,12 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.Channel
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Channel
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
     startLine: 110
   assemblies:
   - OpenSilver
@@ -159,20 +186,24 @@ items:
   - Public
   - ReadOnly
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).Channel
-- uid: System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,SendOrPostCallback,System.Object)
-  commentId: M:System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,SendOrPostCallback,System.Object)
-  id: InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,SendOrPostCallback,System.Object)
+- uid: System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,System.Threading.SendOrPostCallback,System.Object)
+  commentId: M:System.ServiceModel.CSHTML5_ClientBase`1.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,System.Threading.SendOrPostCallback,System.Object)
+  id: InvokeAsync(System.ServiceModel.CSHTML5_ClientBase{`0}.BeginOperationDelegate,System.Object[],System.ServiceModel.CSHTML5_ClientBase{`0}.EndOperationDelegate,System.Threading.SendOrPostCallback,System.Object)
   parent: System.ServiceModel.CSHTML5_ClientBase`1
   langs:
   - csharp
   - vb
   name: InvokeAsync(CSHTML5_ClientBase<TChannel>.BeginOperationDelegate, Object[], CSHTML5_ClientBase<TChannel>.EndOperationDelegate, SendOrPostCallback, Object)
   nameWithType: CSHTML5_ClientBase<TChannel>.InvokeAsync(CSHTML5_ClientBase<TChannel>.BeginOperationDelegate, Object[], CSHTML5_ClientBase<TChannel>.EndOperationDelegate, SendOrPostCallback, Object)
-  fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase<TChannel>.BeginOperationDelegate, System.Object[], System.ServiceModel.CSHTML5_ClientBase<TChannel>.EndOperationDelegate, SendOrPostCallback, System.Object)
+  fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.InvokeAsync(System.ServiceModel.CSHTML5_ClientBase<TChannel>.BeginOperationDelegate, System.Object[], System.ServiceModel.CSHTML5_ClientBase<TChannel>.EndOperationDelegate, System.Threading.SendOrPostCallback, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: InvokeAsync
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
     startLine: 129
   assemblies:
   - OpenSilver
@@ -192,7 +223,7 @@ items:
       type: System.ServiceModel.CSHTML5_ClientBase`1.EndOperationDelegate
       description: A delegate that is used to end the asynchronous call after it has completed.
     - id: operationCompletedCallback
-      type: SendOrPostCallback
+      type: System.Threading.SendOrPostCallback
       description: "\nA client-supplied callback that is invoked when the asynchronous method is\ncomplete. The callback is passed to the BeginOperationDelegate.\n"
     - id: userState
       type: System.Object
@@ -204,7 +235,7 @@ items:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).InvokeAsync(System.ServiceModel.CSHTML5_ClientBase(Of TChannel).BeginOperationDelegate, System.Object(), System.ServiceModel.CSHTML5_ClientBase(Of TChannel).EndOperationDelegate, SendOrPostCallback, System.Object)
+  fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).InvokeAsync(System.ServiceModel.CSHTML5_ClientBase(Of TChannel).BeginOperationDelegate, System.Object(), System.ServiceModel.CSHTML5_ClientBase(Of TChannel).EndOperationDelegate, System.Threading.SendOrPostCallback, System.Object)
   name.vb: InvokeAsync(CSHTML5_ClientBase(Of TChannel).BeginOperationDelegate, Object(), CSHTML5_ClientBase(Of TChannel).EndOperationDelegate, SendOrPostCallback, Object)
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.INTERNAL_RemoteAddressAsString
   commentId: P:System.ServiceModel.CSHTML5_ClientBase`1.INTERNAL_RemoteAddressAsString
@@ -218,9 +249,13 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.INTERNAL_RemoteAddressAsString
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_RemoteAddressAsString
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 268
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 246
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
@@ -251,9 +286,13 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 290
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 268
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
@@ -263,6 +302,10 @@ items:
     content: protected CSHTML5_ClientBase()
     content.vb: Protected Sub New
   overload: System.ServiceModel.CSHTML5_ClientBase`1.#ctor*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nEither there is no default endpoint information in the configuration file,\nmore than one endpoint in the file, or no configuration file.\n"
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase()
   modifiers.csharp:
   - protected
@@ -281,9 +324,13 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(System.String)
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 409
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 387
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
@@ -297,27 +344,38 @@ items:
       description: "\nThe name of the endpoint in the application configuration file.\n"
     content.vb: Protected Sub New(endpointConfigurationName As String)
   overload: System.ServiceModel.CSHTML5_ClientBase`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nThe specified endpoint information is null.\n"
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe endpoint cannot be found or the endpoint contract is not valid.\n"
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(String)
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(System.String)
-- uid: System.ServiceModel.CSHTML5_ClientBase`1.#ctor(Binding,EndpointAddress)
-  commentId: M:System.ServiceModel.CSHTML5_ClientBase`1.#ctor(Binding,EndpointAddress)
-  id: '#ctor(Binding,EndpointAddress)'
+- uid: System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)
+  commentId: M:System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)
+  id: '#ctor(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)'
   parent: System.ServiceModel.CSHTML5_ClientBase`1
   langs:
   - csharp
   - vb
   name: CSHTML5_ClientBase(Binding, EndpointAddress)
   nameWithType: CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(Binding, EndpointAddress)
-  fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(Binding, EndpointAddress)
+  fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(System.ServiceModel.Channels.Binding, System.ServiceModel.EndpointAddress)
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 427
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 405
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
@@ -327,34 +385,45 @@ items:
     content: protected CSHTML5_ClientBase(Binding binding, EndpointAddress remoteAddress)
     parameters:
     - id: binding
-      type: Binding
+      type: System.ServiceModel.Channels.Binding
       description: The binding with which to make calls to the service.
     - id: remoteAddress
-      type: EndpointAddress
+      type: System.ServiceModel.EndpointAddress
       description: The address of the service endpoint.
     content.vb: Protected Sub New(binding As Binding, remoteAddress As EndpointAddress)
   overload: System.ServiceModel.CSHTML5_ClientBase`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nThe binding is null.\n"
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nThe remote address is null.\n"
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(Binding, EndpointAddress)
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(Binding, EndpointAddress)
-- uid: System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,EndpointAddress)
-  commentId: M:System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,EndpointAddress)
-  id: '#ctor(System.String,EndpointAddress)'
+  fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(System.ServiceModel.Channels.Binding, System.ServiceModel.EndpointAddress)
+- uid: System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.ServiceModel.EndpointAddress)
+  commentId: M:System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.ServiceModel.EndpointAddress)
+  id: '#ctor(System.String,System.ServiceModel.EndpointAddress)'
   parent: System.ServiceModel.CSHTML5_ClientBase`1
   langs:
   - csharp
   - vb
   name: CSHTML5_ClientBase(String, EndpointAddress)
   nameWithType: CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(String, EndpointAddress)
-  fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(System.String, EndpointAddress)
+  fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(System.String, System.ServiceModel.EndpointAddress)
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 454
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 432
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
@@ -367,16 +436,26 @@ items:
       type: System.String
       description: The name of the endpoint in the application configuration file.
     - id: remoteAddress
-      type: EndpointAddress
+      type: System.ServiceModel.EndpointAddress
       description: The address of the service.
     content.vb: Protected Sub New(endpointConfigurationName As String, remoteAddress As EndpointAddress)
   overload: System.ServiceModel.CSHTML5_ClientBase`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nThe endpoint is null.\n"
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nThe remote address is null.\n"
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe endpoint cannot be found or the endpoint contract is not valid.\n"
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(String, EndpointAddress)
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
-  fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(System.String, EndpointAddress)
+  fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(System.String, System.ServiceModel.EndpointAddress)
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.String)
   commentId: M:System.ServiceModel.CSHTML5_ClientBase`1.#ctor(System.String,System.String)
   id: '#ctor(System.String,System.String)'
@@ -389,9 +468,13 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase(System.String, System.String)
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 475
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 453
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
@@ -408,6 +491,16 @@ items:
       description: The address of the service.
     content.vb: Protected Sub New(endpointConfigurationName As String, remoteAddress As String)
   overload: System.ServiceModel.CSHTML5_ClientBase`1.#ctor*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nThe endpoint is null.\n"
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nThe remote address is null.\n"
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe endpoint cannot be found or the endpoint contract is not valid.\n"
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase(String, String)
   modifiers.csharp:
   - protected
@@ -426,21 +519,35 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.InnerChannel
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: InnerChannel
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 1852
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 1849
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
   summary: "\nGets the underlying System.ServiceModel.IClientChannel implementation.\n"
   example: []
   syntax:
-    content: public IClientChannel InnerChannel { get; }
+    content: >-
+      [NotImplemented]
+
+      public IClientChannel InnerChannel { get; }
     parameters: []
     return:
-      type: IClientChannel
-    content.vb: Public ReadOnly Property InnerChannel As IClientChannel
+      type: System.ServiceModel.IClientChannel
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property InnerChannel As IClientChannel
   overload: System.ServiceModel.CSHTML5_ClientBase`1.InnerChannel*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).InnerChannel
   modifiers.csharp:
   - public
@@ -461,16 +568,30 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.Abort()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Abort
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 1858
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 1855
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
   syntax:
-    content: public void Abort()
-    content.vb: Public Sub Abort
+    content: >-
+      [NotImplemented]
+
+      public void Abort()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub Abort
   overload: System.ServiceModel.CSHTML5_ClientBase`1.Abort*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).Abort()
   modifiers.csharp:
   - public
@@ -489,19 +610,33 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.State
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: State
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 1864
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 1861
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
   syntax:
-    content: public CommunicationState State { get; }
+    content: >-
+      [NotImplemented]
+
+      public CommunicationState State { get; }
     parameters: []
     return:
-      type: CommunicationState
-    content.vb: Public ReadOnly Property State As CommunicationState
+      type: System.ServiceModel.CommunicationState
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property State As CommunicationState
   overload: System.ServiceModel.CSHTML5_ClientBase`1.State*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).State
   modifiers.csharp:
   - public
@@ -522,18 +657,32 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CreateChannel()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateChannel
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 1875
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 1872
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
   syntax:
-    content: protected virtual TChannel CreateChannel()
+    content: >-
+      [NotImplemented]
+
+      protected virtual TChannel CreateChannel()
     return:
       type: '{TChannel}'
-    content.vb: Protected Overridable Function CreateChannel As TChannel
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Overridable Function CreateChannel As TChannel
   overload: System.ServiceModel.CSHTML5_ClientBase`1.CreateChannel*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).CreateChannel()
   modifiers.csharp:
   - protected
@@ -554,20 +703,34 @@ items:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.GetDefaultValueForInitialization<T>()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetDefaultValueForInitialization
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ServiceModel\CSHTML5_ClientBase_1.cs
-    startLine: 1886
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ServiceModel/CSHTML5_ClientBase_1.cs
+    startLine: 1883
   assemblies:
   - OpenSilver
   namespace: System.ServiceModel
   syntax:
-    content: protected T GetDefaultValueForInitialization<T>()
+    content: >-
+      [NotImplemented]
+
+      protected T GetDefaultValueForInitialization<T>()
     typeParameters:
     - id: T
     return:
       type: '{T}'
-    content.vb: Protected Function GetDefaultValueForInitialization(Of T) As T
+    content.vb: >-
+      <NotImplemented>
+
+      Protected Function GetDefaultValueForInitialization(Of T) As T
   overload: System.ServiceModel.CSHTML5_ClientBase`1.GetDefaultValueForInitialization*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).GetDefaultValueForInitialization(Of T)()
   modifiers.csharp:
   - protected
@@ -583,10 +746,290 @@ references:
   fullName: System.ServiceModel
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -616,6 +1059,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -673,11 +1121,17 @@ references:
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).Endpoint
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).Endpoint
 - uid: System.ServiceModel.Description.ServiceEndpoint
-  commentId: '!:System.ServiceModel.Description.ServiceEndpoint'
+  commentId: T:System.ServiceModel.Description.ServiceEndpoint
+  parent: System.ServiceModel.Description
   isExternal: true
   name: ServiceEndpoint
   nameWithType: ServiceEndpoint
   fullName: System.ServiceModel.Description.ServiceEndpoint
+- uid: System.ServiceModel.Description
+  commentId: N:System.ServiceModel.Description
+  name: System.ServiceModel.Description
+  nameWithType: System.ServiceModel.Description
+  fullName: System.ServiceModel.Description
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.ClientCredentials*
   commentId: Overload:System.ServiceModel.CSHTML5_ClientBase`1.ClientCredentials
   name: ClientCredentials
@@ -686,7 +1140,8 @@ references:
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).ClientCredentials
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).ClientCredentials
 - uid: System.ServiceModel.Description.ClientCredentials
-  commentId: '!:System.ServiceModel.Description.ClientCredentials'
+  commentId: T:System.ServiceModel.Description.ClientCredentials
+  parent: System.ServiceModel.Description
   isExternal: true
   name: ClientCredentials
   nameWithType: ClientCredentials
@@ -803,12 +1258,19 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: SendOrPostCallback
-  commentId: '!:SendOrPostCallback'
+- uid: System.Threading.SendOrPostCallback
+  commentId: T:System.Threading.SendOrPostCallback
+  parent: System.Threading
   isExternal: true
   name: SendOrPostCallback
   nameWithType: SendOrPostCallback
-  fullName: SendOrPostCallback
+  fullName: System.Threading.SendOrPostCallback
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.INTERNAL_RemoteAddressAsString*
   commentId: Overload:System.ServiceModel.CSHTML5_ClientBase`1.INTERNAL_RemoteAddressAsString
   name: INTERNAL_RemoteAddressAsString
@@ -817,10 +1279,15 @@ references:
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).INTERNAL_RemoteAddressAsString
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).INTERNAL_RemoteAddressAsString
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
   fullName: System.String
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.#ctor*
   commentId: Overload:System.ServiceModel.CSHTML5_ClientBase`1.#ctor
   name: CSHTML5_ClientBase
@@ -828,17 +1295,28 @@ references:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.CSHTML5_ClientBase
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).CSHTML5_ClientBase
-- uid: Binding
-  commentId: '!:Binding'
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.ServiceModel.Channels.Binding
+  commentId: T:System.ServiceModel.Channels.Binding
+  parent: System.ServiceModel.Channels
   isExternal: true
   name: Binding
   nameWithType: Binding
-  fullName: Binding
-- uid: EndpointAddress
+  fullName: System.ServiceModel.Channels.Binding
+- uid: System.ServiceModel.EndpointAddress
+  commentId: T:System.ServiceModel.EndpointAddress
+  parent: System.ServiceModel
   isExternal: true
   name: EndpointAddress
   nameWithType: EndpointAddress
-  fullName: EndpointAddress
+  fullName: System.ServiceModel.EndpointAddress
+- uid: System.ServiceModel.Channels
+  commentId: N:System.ServiceModel.Channels
+  name: System.ServiceModel.Channels
+  nameWithType: System.ServiceModel.Channels
+  fullName: System.ServiceModel.Channels
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.InnerChannel*
   commentId: Overload:System.ServiceModel.CSHTML5_ClientBase`1.InnerChannel
   name: InnerChannel
@@ -846,12 +1324,13 @@ references:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.InnerChannel
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).InnerChannel
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).InnerChannel
-- uid: IClientChannel
-  commentId: '!:IClientChannel'
+- uid: System.ServiceModel.IClientChannel
+  commentId: T:System.ServiceModel.IClientChannel
+  parent: System.ServiceModel
   isExternal: true
   name: IClientChannel
   nameWithType: IClientChannel
-  fullName: IClientChannel
+  fullName: System.ServiceModel.IClientChannel
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.Abort*
   commentId: Overload:System.ServiceModel.CSHTML5_ClientBase`1.Abort
   name: Abort
@@ -866,11 +1345,13 @@ references:
   fullName: System.ServiceModel.CSHTML5_ClientBase<TChannel>.State
   nameWithType.vb: CSHTML5_ClientBase(Of TChannel).State
   fullName.vb: System.ServiceModel.CSHTML5_ClientBase(Of TChannel).State
-- uid: CommunicationState
+- uid: System.ServiceModel.CommunicationState
+  commentId: T:System.ServiceModel.CommunicationState
+  parent: System.ServiceModel
   isExternal: true
   name: CommunicationState
   nameWithType: CommunicationState
-  fullName: CommunicationState
+  fullName: System.ServiceModel.CommunicationState
 - uid: System.ServiceModel.CSHTML5_ClientBase`1.CreateChannel*
   commentId: Overload:System.ServiceModel.CSHTML5_ClientBase`1.CreateChannel
   name: CreateChannel

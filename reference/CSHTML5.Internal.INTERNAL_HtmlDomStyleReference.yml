@@ -24,6 +24,7 @@ items:
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderWidth
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.boxShadow
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.boxSizing
+  - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.color
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.cursor
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.display
@@ -78,7 +79,7 @@ items:
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.top
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.transform
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.transformOrigin
-  - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(SetMemberBinder,System.Object)
+  - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.verticalAlign
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.visibility
   - CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.WebkitOverflowScrolling
@@ -95,21 +96,61 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_HtmlDomStyleReference
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
     startLine: 39
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
   syntax:
-    content: 'public class INTERNAL_HtmlDomStyleReference : DynamicObject'
+    content: >-
+      [JSIgnore]
+
+      public class INTERNAL_HtmlDomStyleReference : DynamicObject, IDynamicMetaObjectProvider
     content.vb: >-
+      <JSIgnore>
+
       Public Class INTERNAL_HtmlDomStyleReference
+
           Inherits DynamicObject
+
+          Implements IDynamicMetaObjectProvider
   inheritance:
   - System.Object
+  - System.Dynamic.DynamicObject
+  implements:
+  - System.Dynamic.IDynamicMetaObjectProvider
+  inheritedMembers:
+  - System.Dynamic.DynamicObject.GetDynamicMemberNames
+  - System.Dynamic.DynamicObject.GetMetaObject(System.Linq.Expressions.Expression)
+  - System.Dynamic.DynamicObject.TryBinaryOperation(System.Dynamic.BinaryOperationBinder,System.Object,System.Object@)
+  - System.Dynamic.DynamicObject.TryConvert(System.Dynamic.ConvertBinder,System.Object@)
+  - System.Dynamic.DynamicObject.TryCreateInstance(System.Dynamic.CreateInstanceBinder,System.Object[],System.Object@)
+  - System.Dynamic.DynamicObject.TryDeleteIndex(System.Dynamic.DeleteIndexBinder,System.Object[])
+  - System.Dynamic.DynamicObject.TryDeleteMember(System.Dynamic.DeleteMemberBinder)
+  - System.Dynamic.DynamicObject.TryGetIndex(System.Dynamic.GetIndexBinder,System.Object[],System.Object@)
+  - System.Dynamic.DynamicObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)
+  - System.Dynamic.DynamicObject.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)
+  - System.Dynamic.DynamicObject.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)
+  - System.Dynamic.DynamicObject.TrySetIndex(System.Dynamic.SetIndexBinder,System.Object[],System.Object)
+  - System.Dynamic.DynamicObject.TryUnaryOperation(System.Dynamic.UnaryOperationBinder,System.Object@)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
+  attributes:
+  - type: JSIL.Meta.JSIgnoreAttribute
+    ctor: JSIL.Meta.JSIgnoreAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - class
@@ -128,42 +169,62 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.GetInstance(System.String)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetInstance
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 56
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 62
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
   syntax:
-    content: public static INTERNAL_HtmlDomStyleReference GetInstance(string elementId)
+    content: >-
+      [Obsolete("This method is not meant to be used outside of OpenSilver.")]
+
+      public static INTERNAL_HtmlDomStyleReference GetInstance(string elementId)
     parameters:
     - id: elementId
       type: System.String
     return:
       type: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference
-    content.vb: Public Shared Function GetInstance(elementId As String) As INTERNAL_HtmlDomStyleReference
+    content.vb: >-
+      <Obsolete("This method is not meant to be used outside of OpenSilver.")>
+
+      Public Shared Function GetInstance(elementId As String) As INTERNAL_HtmlDomStyleReference
   overload: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.GetInstance*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: This method is not meant to be used outside of OpenSilver.
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(SetMemberBinder,System.Object)
-  commentId: M:CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(SetMemberBinder,System.Object)
-  id: TrySetMember(SetMemberBinder,System.Object)
+- uid: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
+  commentId: M:CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
+  id: TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
   parent: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference
   langs:
   - csharp
   - vb
   name: TrySetMember(SetMemberBinder, Object)
   nameWithType: INTERNAL_HtmlDomStyleReference.TrySetMember(SetMemberBinder, Object)
-  fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(SetMemberBinder, System.Object)
+  fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember(System.Dynamic.SetMemberBinder, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: TrySetMember
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 76
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 66
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -171,12 +232,13 @@ items:
     content: public override bool TrySetMember(SetMemberBinder binder, object value)
     parameters:
     - id: binder
-      type: SetMemberBinder
+      type: System.Dynamic.SetMemberBinder
     - id: value
       type: System.Object
     return:
       type: System.Boolean
     content.vb: Public Overrides Function TrySetMember(binder As SetMemberBinder, value As Object) As Boolean
+  overridden: System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
   overload: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember*
   modifiers.csharp:
   - public
@@ -196,9 +258,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.background
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: background
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 138
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 128
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -227,9 +293,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.backgroundColor
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: backgroundColor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 139
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 129
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -258,9 +328,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.border
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: border
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 140
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 130
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -289,9 +363,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderRight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderRight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 141
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 131
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -320,9 +398,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderLeft
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderLeft
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 142
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 132
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -351,9 +433,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderBottom
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderBottom
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 143
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 133
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -382,9 +468,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderTop
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderTop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 144
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 134
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -413,9 +503,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderBottomLeftRadius
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderBottomLeftRadius
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 145
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 135
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -444,9 +538,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderBottomRightRadius
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderBottomRightRadius
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 146
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 136
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -475,9 +573,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderCollapse
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderCollapse
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 147
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 137
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -506,9 +608,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderColor
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderColor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 148
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 138
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -537,9 +643,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderRadius
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderRadius
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 149
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 139
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -568,9 +678,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderSpacing
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderSpacing
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 150
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 140
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -599,9 +713,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderStyle
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderStyle
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 151
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 141
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -630,9 +748,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderTopLeftRadius
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderTopLeftRadius
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 152
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 142
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -661,9 +783,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderTopRightRadius
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderTopRightRadius
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 153
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 143
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -692,9 +818,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.borderWidth
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: borderWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 154
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 144
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -723,9 +853,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.boxSizing
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: boxSizing
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 155
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 145
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -754,9 +888,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.boxShadow
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: boxShadow
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 156
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 146
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -785,9 +923,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.color
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: color
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 157
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 147
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -816,9 +958,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.cursor
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: cursor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 158
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 148
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -847,9 +993,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.display
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: display
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 159
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 149
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -878,9 +1028,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.fontSize
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: fontSize
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 160
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 150
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -909,9 +1063,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.gridColumnEnd
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: gridColumnEnd
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 161
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 151
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -940,9 +1098,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.gridColumnStart
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: gridColumnStart
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 162
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 152
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -971,9 +1133,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.gridRowEnd
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: gridRowEnd
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 163
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 153
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1002,9 +1168,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.gridRowStart
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: gridRowStart
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 164
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 154
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1033,9 +1203,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.gridTemplateColumns
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: gridTemplateColumns
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 165
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 155
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1064,9 +1238,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.gridTemplateRows
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: gridTemplateRows
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 166
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 156
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1095,9 +1273,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.height
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: height
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 167
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 157
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1126,9 +1308,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.left
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: left
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 168
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 158
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1157,9 +1343,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.lineHeight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: lineHeight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 169
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 159
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1188,9 +1378,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.margin
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: margin
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 170
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 160
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1219,9 +1413,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.marginBottom
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: marginBottom
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 171
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 161
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1250,9 +1448,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.marginLeft
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: marginLeft
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 172
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 162
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1281,9 +1483,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.marginRight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: marginRight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 173
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 163
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1312,9 +1518,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.marginTop
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: marginTop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 174
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 164
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1343,9 +1553,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.minHeight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: minHeight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 175
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 165
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1374,9 +1588,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.minWidth
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: minWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 176
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 166
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1405,9 +1623,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.maxHeight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: maxHeight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 177
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 167
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1436,9 +1658,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.maxWidth
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: maxWidth
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 178
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 168
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1467,9 +1693,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msGridColumn
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msGridColumn
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 179
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 169
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1498,9 +1728,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msGridColumns
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msGridColumns
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 180
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 170
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1529,9 +1763,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msGridColumnSpan
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msGridColumnSpan
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 181
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 171
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1560,9 +1798,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msGridRow
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msGridRow
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 182
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 172
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1591,9 +1833,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msGridRows
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msGridRows
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 183
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 173
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1622,9 +1868,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msGridRowSpan
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msGridRowSpan
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 184
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 174
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1653,9 +1903,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msGridRowAlign
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msGridRowAlign
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 185
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 175
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1684,9 +1938,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msTransform
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msTransform
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 186
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 176
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1715,9 +1973,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.msTransformOrigin
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: msTransformOrigin
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 187
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 177
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1746,9 +2008,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.objectPosition
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: objectPosition
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 188
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 178
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1777,9 +2043,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.opacity
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: opacity
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 189
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 179
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1808,9 +2078,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.outline
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: outline
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 190
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 180
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1839,9 +2113,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.overflow
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: overflow
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 191
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 181
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1870,9 +2148,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.overflowX
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: overflowX
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 192
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 182
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1901,9 +2183,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.overflowY
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: overflowY
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 193
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 183
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1932,9 +2218,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.padding
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: padding
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 194
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 184
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1963,9 +2253,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.paddingBottom
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: paddingBottom
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 195
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 185
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -1994,9 +2288,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.paddingLeft
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: paddingLeft
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 196
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 186
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2025,9 +2323,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.paddingRight
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: paddingRight
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 197
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 187
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2056,9 +2358,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.paddingTop
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: paddingTop
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 198
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 188
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2087,9 +2393,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.position
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: position
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 199
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 189
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2118,9 +2428,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.pointerEvents
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: pointerEvents
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 200
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 190
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2149,9 +2463,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.tableLayout
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: tableLayout
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 201
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 191
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2180,9 +2498,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.textAlign
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: textAlign
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 202
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 192
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2211,9 +2533,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.textDecoration
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: textDecoration
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 203
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 193
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2242,9 +2568,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.textOverflow
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: textOverflow
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 204
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 194
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2273,9 +2603,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.textShadow
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: textShadow
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 205
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 195
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2304,9 +2638,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.transform
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: transform
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 206
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 196
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2335,9 +2673,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.transformOrigin
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: transformOrigin
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 207
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 197
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2366,9 +2708,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.top
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: top
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 208
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 198
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2397,9 +2743,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.verticalAlign
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: verticalAlign
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 209
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 199
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2428,9 +2778,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.WebkitOverflowScrolling
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: WebkitOverflowScrolling
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 210
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 200
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2459,9 +2813,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.WebkitTransform
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: WebkitTransform
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 211
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 201
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2490,9 +2848,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.webkitTransformOrigin
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: webkitTransformOrigin
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 212
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 202
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2521,9 +2883,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.whiteSpace
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: whiteSpace
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 213
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 203
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2552,9 +2918,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.width
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: width
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 214
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 204
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2583,9 +2953,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.zIndex
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: zIndex
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 215
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 205
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2614,9 +2988,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.gridArea
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: gridArea
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 216
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 206
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2645,9 +3023,13 @@ items:
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.visibility
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: visibility
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\Core\Rendering\INTERNAL_HtmlDomStyleReference.cs
-    startLine: 217
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 207
   assemblies:
   - OpenSilver
   namespace: CSHTML5.Internal
@@ -2664,6 +3046,41 @@ items:
   modifiers.vb:
   - Public
   - WriteOnly
+- uid: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip
+  commentId: P:CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip
+  id: clip
+  parent: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference
+  langs:
+  - csharp
+  - vb
+  name: clip
+  nameWithType: INTERNAL_HtmlDomStyleReference.clip
+  fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: clip
+    path: ../OpenSilverGit/src/Runtime/Runtime/Core/Rendering/INTERNAL_HtmlDomStyleReference.cs
+    startLine: 208
+  assemblies:
+  - OpenSilver
+  namespace: CSHTML5.Internal
+  syntax:
+    content: public string clip { set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public WriteOnly Property clip As String
+  overload: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip*
+  modifiers.csharp:
+  - public
+  - set
+  modifiers.vb:
+  - Public
+  - WriteOnly
 references:
 - uid: CSHTML5.Internal
   commentId: N:CSHTML5.Internal
@@ -2672,10 +3089,1137 @@ references:
   fullName: CSHTML5.Internal
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Dynamic.DynamicObject
+  commentId: T:System.Dynamic.DynamicObject
+  parent: System.Dynamic
+  isExternal: true
+  name: DynamicObject
+  nameWithType: DynamicObject
+  fullName: System.Dynamic.DynamicObject
+- uid: System.Dynamic.IDynamicMetaObjectProvider
+  commentId: T:System.Dynamic.IDynamicMetaObjectProvider
+  parent: System.Dynamic
+  isExternal: true
+  name: IDynamicMetaObjectProvider
+  nameWithType: IDynamicMetaObjectProvider
+  fullName: System.Dynamic.IDynamicMetaObjectProvider
+- uid: System.Dynamic.DynamicObject.GetDynamicMemberNames
+  commentId: M:System.Dynamic.DynamicObject.GetDynamicMemberNames
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: GetDynamicMemberNames()
+  nameWithType: DynamicObject.GetDynamicMemberNames()
+  fullName: System.Dynamic.DynamicObject.GetDynamicMemberNames()
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.GetDynamicMemberNames
+    name: GetDynamicMemberNames
+    nameWithType: DynamicObject.GetDynamicMemberNames
+    fullName: System.Dynamic.DynamicObject.GetDynamicMemberNames
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.GetDynamicMemberNames
+    name: GetDynamicMemberNames
+    nameWithType: DynamicObject.GetDynamicMemberNames
+    fullName: System.Dynamic.DynamicObject.GetDynamicMemberNames
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.GetMetaObject(System.Linq.Expressions.Expression)
+  commentId: M:System.Dynamic.DynamicObject.GetMetaObject(System.Linq.Expressions.Expression)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: GetMetaObject(Expression)
+  nameWithType: DynamicObject.GetMetaObject(Expression)
+  fullName: System.Dynamic.DynamicObject.GetMetaObject(System.Linq.Expressions.Expression)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.GetMetaObject(System.Linq.Expressions.Expression)
+    name: GetMetaObject
+    nameWithType: DynamicObject.GetMetaObject
+    fullName: System.Dynamic.DynamicObject.GetMetaObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.GetMetaObject(System.Linq.Expressions.Expression)
+    name: GetMetaObject
+    nameWithType: DynamicObject.GetMetaObject
+    fullName: System.Dynamic.DynamicObject.GetMetaObject
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Linq.Expressions.Expression
+    name: Expression
+    nameWithType: Expression
+    fullName: System.Linq.Expressions.Expression
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryBinaryOperation(System.Dynamic.BinaryOperationBinder,System.Object,System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryBinaryOperation(System.Dynamic.BinaryOperationBinder,System.Object,System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryBinaryOperation(BinaryOperationBinder, Object, Object)
+  nameWithType: DynamicObject.TryBinaryOperation(BinaryOperationBinder, Object, Object)
+  fullName: System.Dynamic.DynamicObject.TryBinaryOperation(System.Dynamic.BinaryOperationBinder, System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryBinaryOperation(System.Dynamic.BinaryOperationBinder,System.Object,System.Object@)
+    name: TryBinaryOperation
+    nameWithType: DynamicObject.TryBinaryOperation
+    fullName: System.Dynamic.DynamicObject.TryBinaryOperation
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.BinaryOperationBinder
+    name: BinaryOperationBinder
+    nameWithType: BinaryOperationBinder
+    fullName: System.Dynamic.BinaryOperationBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryBinaryOperation(System.Dynamic.BinaryOperationBinder,System.Object,System.Object@)
+    name: TryBinaryOperation
+    nameWithType: DynamicObject.TryBinaryOperation
+    fullName: System.Dynamic.DynamicObject.TryBinaryOperation
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.BinaryOperationBinder
+    name: BinaryOperationBinder
+    nameWithType: BinaryOperationBinder
+    fullName: System.Dynamic.BinaryOperationBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryConvert(System.Dynamic.ConvertBinder,System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryConvert(System.Dynamic.ConvertBinder,System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryConvert(ConvertBinder, Object)
+  nameWithType: DynamicObject.TryConvert(ConvertBinder, Object)
+  fullName: System.Dynamic.DynamicObject.TryConvert(System.Dynamic.ConvertBinder, System.Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryConvert(System.Dynamic.ConvertBinder,System.Object@)
+    name: TryConvert
+    nameWithType: DynamicObject.TryConvert
+    fullName: System.Dynamic.DynamicObject.TryConvert
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.ConvertBinder
+    name: ConvertBinder
+    nameWithType: ConvertBinder
+    fullName: System.Dynamic.ConvertBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryConvert(System.Dynamic.ConvertBinder,System.Object@)
+    name: TryConvert
+    nameWithType: DynamicObject.TryConvert
+    fullName: System.Dynamic.DynamicObject.TryConvert
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.ConvertBinder
+    name: ConvertBinder
+    nameWithType: ConvertBinder
+    fullName: System.Dynamic.ConvertBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryCreateInstance(System.Dynamic.CreateInstanceBinder,System.Object[],System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryCreateInstance(System.Dynamic.CreateInstanceBinder,System.Object[],System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryCreateInstance(CreateInstanceBinder, Object[], Object)
+  nameWithType: DynamicObject.TryCreateInstance(CreateInstanceBinder, Object[], Object)
+  fullName: System.Dynamic.DynamicObject.TryCreateInstance(System.Dynamic.CreateInstanceBinder, System.Object[], System.Object)
+  nameWithType.vb: DynamicObject.TryCreateInstance(CreateInstanceBinder, Object(), Object)
+  fullName.vb: System.Dynamic.DynamicObject.TryCreateInstance(System.Dynamic.CreateInstanceBinder, System.Object(), System.Object)
+  name.vb: TryCreateInstance(CreateInstanceBinder, Object(), Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryCreateInstance(System.Dynamic.CreateInstanceBinder,System.Object[],System.Object@)
+    name: TryCreateInstance
+    nameWithType: DynamicObject.TryCreateInstance
+    fullName: System.Dynamic.DynamicObject.TryCreateInstance
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.CreateInstanceBinder
+    name: CreateInstanceBinder
+    nameWithType: CreateInstanceBinder
+    fullName: System.Dynamic.CreateInstanceBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryCreateInstance(System.Dynamic.CreateInstanceBinder,System.Object[],System.Object@)
+    name: TryCreateInstance
+    nameWithType: DynamicObject.TryCreateInstance
+    fullName: System.Dynamic.DynamicObject.TryCreateInstance
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.CreateInstanceBinder
+    name: CreateInstanceBinder
+    nameWithType: CreateInstanceBinder
+    fullName: System.Dynamic.CreateInstanceBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryDeleteIndex(System.Dynamic.DeleteIndexBinder,System.Object[])
+  commentId: M:System.Dynamic.DynamicObject.TryDeleteIndex(System.Dynamic.DeleteIndexBinder,System.Object[])
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryDeleteIndex(DeleteIndexBinder, Object[])
+  nameWithType: DynamicObject.TryDeleteIndex(DeleteIndexBinder, Object[])
+  fullName: System.Dynamic.DynamicObject.TryDeleteIndex(System.Dynamic.DeleteIndexBinder, System.Object[])
+  nameWithType.vb: DynamicObject.TryDeleteIndex(DeleteIndexBinder, Object())
+  fullName.vb: System.Dynamic.DynamicObject.TryDeleteIndex(System.Dynamic.DeleteIndexBinder, System.Object())
+  name.vb: TryDeleteIndex(DeleteIndexBinder, Object())
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryDeleteIndex(System.Dynamic.DeleteIndexBinder,System.Object[])
+    name: TryDeleteIndex
+    nameWithType: DynamicObject.TryDeleteIndex
+    fullName: System.Dynamic.DynamicObject.TryDeleteIndex
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.DeleteIndexBinder
+    name: DeleteIndexBinder
+    nameWithType: DeleteIndexBinder
+    fullName: System.Dynamic.DeleteIndexBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryDeleteIndex(System.Dynamic.DeleteIndexBinder,System.Object[])
+    name: TryDeleteIndex
+    nameWithType: DynamicObject.TryDeleteIndex
+    fullName: System.Dynamic.DynamicObject.TryDeleteIndex
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.DeleteIndexBinder
+    name: DeleteIndexBinder
+    nameWithType: DeleteIndexBinder
+    fullName: System.Dynamic.DeleteIndexBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryDeleteMember(System.Dynamic.DeleteMemberBinder)
+  commentId: M:System.Dynamic.DynamicObject.TryDeleteMember(System.Dynamic.DeleteMemberBinder)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryDeleteMember(DeleteMemberBinder)
+  nameWithType: DynamicObject.TryDeleteMember(DeleteMemberBinder)
+  fullName: System.Dynamic.DynamicObject.TryDeleteMember(System.Dynamic.DeleteMemberBinder)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryDeleteMember(System.Dynamic.DeleteMemberBinder)
+    name: TryDeleteMember
+    nameWithType: DynamicObject.TryDeleteMember
+    fullName: System.Dynamic.DynamicObject.TryDeleteMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.DeleteMemberBinder
+    name: DeleteMemberBinder
+    nameWithType: DeleteMemberBinder
+    fullName: System.Dynamic.DeleteMemberBinder
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryDeleteMember(System.Dynamic.DeleteMemberBinder)
+    name: TryDeleteMember
+    nameWithType: DynamicObject.TryDeleteMember
+    fullName: System.Dynamic.DynamicObject.TryDeleteMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.DeleteMemberBinder
+    name: DeleteMemberBinder
+    nameWithType: DeleteMemberBinder
+    fullName: System.Dynamic.DeleteMemberBinder
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryGetIndex(System.Dynamic.GetIndexBinder,System.Object[],System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryGetIndex(System.Dynamic.GetIndexBinder,System.Object[],System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryGetIndex(GetIndexBinder, Object[], Object)
+  nameWithType: DynamicObject.TryGetIndex(GetIndexBinder, Object[], Object)
+  fullName: System.Dynamic.DynamicObject.TryGetIndex(System.Dynamic.GetIndexBinder, System.Object[], System.Object)
+  nameWithType.vb: DynamicObject.TryGetIndex(GetIndexBinder, Object(), Object)
+  fullName.vb: System.Dynamic.DynamicObject.TryGetIndex(System.Dynamic.GetIndexBinder, System.Object(), System.Object)
+  name.vb: TryGetIndex(GetIndexBinder, Object(), Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryGetIndex(System.Dynamic.GetIndexBinder,System.Object[],System.Object@)
+    name: TryGetIndex
+    nameWithType: DynamicObject.TryGetIndex
+    fullName: System.Dynamic.DynamicObject.TryGetIndex
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.GetIndexBinder
+    name: GetIndexBinder
+    nameWithType: GetIndexBinder
+    fullName: System.Dynamic.GetIndexBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryGetIndex(System.Dynamic.GetIndexBinder,System.Object[],System.Object@)
+    name: TryGetIndex
+    nameWithType: DynamicObject.TryGetIndex
+    fullName: System.Dynamic.DynamicObject.TryGetIndex
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.GetIndexBinder
+    name: GetIndexBinder
+    nameWithType: GetIndexBinder
+    fullName: System.Dynamic.GetIndexBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryGetMember(GetMemberBinder, Object)
+  nameWithType: DynamicObject.TryGetMember(GetMemberBinder, Object)
+  fullName: System.Dynamic.DynamicObject.TryGetMember(System.Dynamic.GetMemberBinder, System.Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)
+    name: TryGetMember
+    nameWithType: DynamicObject.TryGetMember
+    fullName: System.Dynamic.DynamicObject.TryGetMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.GetMemberBinder
+    name: GetMemberBinder
+    nameWithType: GetMemberBinder
+    fullName: System.Dynamic.GetMemberBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)
+    name: TryGetMember
+    nameWithType: DynamicObject.TryGetMember
+    fullName: System.Dynamic.DynamicObject.TryGetMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.GetMemberBinder
+    name: GetMemberBinder
+    nameWithType: GetMemberBinder
+    fullName: System.Dynamic.GetMemberBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryInvoke(InvokeBinder, Object[], Object)
+  nameWithType: DynamicObject.TryInvoke(InvokeBinder, Object[], Object)
+  fullName: System.Dynamic.DynamicObject.TryInvoke(System.Dynamic.InvokeBinder, System.Object[], System.Object)
+  nameWithType.vb: DynamicObject.TryInvoke(InvokeBinder, Object(), Object)
+  fullName.vb: System.Dynamic.DynamicObject.TryInvoke(System.Dynamic.InvokeBinder, System.Object(), System.Object)
+  name.vb: TryInvoke(InvokeBinder, Object(), Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)
+    name: TryInvoke
+    nameWithType: DynamicObject.TryInvoke
+    fullName: System.Dynamic.DynamicObject.TryInvoke
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.InvokeBinder
+    name: InvokeBinder
+    nameWithType: InvokeBinder
+    fullName: System.Dynamic.InvokeBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)
+    name: TryInvoke
+    nameWithType: DynamicObject.TryInvoke
+    fullName: System.Dynamic.DynamicObject.TryInvoke
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.InvokeBinder
+    name: InvokeBinder
+    nameWithType: InvokeBinder
+    fullName: System.Dynamic.InvokeBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryInvokeMember(InvokeMemberBinder, Object[], Object)
+  nameWithType: DynamicObject.TryInvokeMember(InvokeMemberBinder, Object[], Object)
+  fullName: System.Dynamic.DynamicObject.TryInvokeMember(System.Dynamic.InvokeMemberBinder, System.Object[], System.Object)
+  nameWithType.vb: DynamicObject.TryInvokeMember(InvokeMemberBinder, Object(), Object)
+  fullName.vb: System.Dynamic.DynamicObject.TryInvokeMember(System.Dynamic.InvokeMemberBinder, System.Object(), System.Object)
+  name.vb: TryInvokeMember(InvokeMemberBinder, Object(), Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)
+    name: TryInvokeMember
+    nameWithType: DynamicObject.TryInvokeMember
+    fullName: System.Dynamic.DynamicObject.TryInvokeMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.InvokeMemberBinder
+    name: InvokeMemberBinder
+    nameWithType: InvokeMemberBinder
+    fullName: System.Dynamic.InvokeMemberBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryInvokeMember(System.Dynamic.InvokeMemberBinder,System.Object[],System.Object@)
+    name: TryInvokeMember
+    nameWithType: DynamicObject.TryInvokeMember
+    fullName: System.Dynamic.DynamicObject.TryInvokeMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.InvokeMemberBinder
+    name: InvokeMemberBinder
+    nameWithType: InvokeMemberBinder
+    fullName: System.Dynamic.InvokeMemberBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TrySetIndex(System.Dynamic.SetIndexBinder,System.Object[],System.Object)
+  commentId: M:System.Dynamic.DynamicObject.TrySetIndex(System.Dynamic.SetIndexBinder,System.Object[],System.Object)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TrySetIndex(SetIndexBinder, Object[], Object)
+  nameWithType: DynamicObject.TrySetIndex(SetIndexBinder, Object[], Object)
+  fullName: System.Dynamic.DynamicObject.TrySetIndex(System.Dynamic.SetIndexBinder, System.Object[], System.Object)
+  nameWithType.vb: DynamicObject.TrySetIndex(SetIndexBinder, Object(), Object)
+  fullName.vb: System.Dynamic.DynamicObject.TrySetIndex(System.Dynamic.SetIndexBinder, System.Object(), System.Object)
+  name.vb: TrySetIndex(SetIndexBinder, Object(), Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TrySetIndex(System.Dynamic.SetIndexBinder,System.Object[],System.Object)
+    name: TrySetIndex
+    nameWithType: DynamicObject.TrySetIndex
+    fullName: System.Dynamic.DynamicObject.TrySetIndex
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.SetIndexBinder
+    name: SetIndexBinder
+    nameWithType: SetIndexBinder
+    fullName: System.Dynamic.SetIndexBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TrySetIndex(System.Dynamic.SetIndexBinder,System.Object[],System.Object)
+    name: TrySetIndex
+    nameWithType: DynamicObject.TrySetIndex
+    fullName: System.Dynamic.DynamicObject.TrySetIndex
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.SetIndexBinder
+    name: SetIndexBinder
+    nameWithType: SetIndexBinder
+    fullName: System.Dynamic.SetIndexBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Dynamic.DynamicObject.TryUnaryOperation(System.Dynamic.UnaryOperationBinder,System.Object@)
+  commentId: M:System.Dynamic.DynamicObject.TryUnaryOperation(System.Dynamic.UnaryOperationBinder,System.Object@)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TryUnaryOperation(UnaryOperationBinder, Object)
+  nameWithType: DynamicObject.TryUnaryOperation(UnaryOperationBinder, Object)
+  fullName: System.Dynamic.DynamicObject.TryUnaryOperation(System.Dynamic.UnaryOperationBinder, System.Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TryUnaryOperation(System.Dynamic.UnaryOperationBinder,System.Object@)
+    name: TryUnaryOperation
+    nameWithType: DynamicObject.TryUnaryOperation
+    fullName: System.Dynamic.DynamicObject.TryUnaryOperation
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.UnaryOperationBinder
+    name: UnaryOperationBinder
+    nameWithType: UnaryOperationBinder
+    fullName: System.Dynamic.UnaryOperationBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TryUnaryOperation(System.Dynamic.UnaryOperationBinder,System.Object@)
+    name: TryUnaryOperation
+    nameWithType: DynamicObject.TryUnaryOperation
+    fullName: System.Dynamic.DynamicObject.TryUnaryOperation
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.UnaryOperationBinder
+    name: UnaryOperationBinder
+    nameWithType: UnaryOperationBinder
+    fullName: System.Dynamic.UnaryOperationBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -2705,6 +4249,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Dynamic
+  commentId: N:System.Dynamic
+  isExternal: true
+  name: System.Dynamic
+  nameWithType: System.Dynamic
+  fullName: System.Dynamic
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -2760,6 +4315,8 @@ references:
   nameWithType: INTERNAL_HtmlDomStyleReference.GetInstance
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.GetInstance
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
@@ -2770,17 +4327,78 @@ references:
   name: INTERNAL_HtmlDomStyleReference
   nameWithType: INTERNAL_HtmlDomStyleReference
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference
+- uid: System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
+  commentId: M:System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
+  parent: System.Dynamic.DynamicObject
+  isExternal: true
+  name: TrySetMember(SetMemberBinder, Object)
+  nameWithType: DynamicObject.TrySetMember(SetMemberBinder, Object)
+  fullName: System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder, System.Object)
+  spec.csharp:
+  - uid: System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
+    name: TrySetMember
+    nameWithType: DynamicObject.TrySetMember
+    fullName: System.Dynamic.DynamicObject.TrySetMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.SetMemberBinder
+    name: SetMemberBinder
+    nameWithType: SetMemberBinder
+    fullName: System.Dynamic.SetMemberBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)
+    name: TrySetMember
+    nameWithType: DynamicObject.TrySetMember
+    fullName: System.Dynamic.DynamicObject.TrySetMember
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Dynamic.SetMemberBinder
+    name: SetMemberBinder
+    nameWithType: SetMemberBinder
+    fullName: System.Dynamic.SetMemberBinder
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember*
   commentId: Overload:CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember
   name: TrySetMember
   nameWithType: INTERNAL_HtmlDomStyleReference.TrySetMember
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.TrySetMember
-- uid: SetMemberBinder
+- uid: System.Dynamic.SetMemberBinder
+  commentId: T:System.Dynamic.SetMemberBinder
+  parent: System.Dynamic
   isExternal: true
   name: SetMemberBinder
   nameWithType: SetMemberBinder
-  fullName: SetMemberBinder
+  fullName: System.Dynamic.SetMemberBinder
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -3185,3 +4803,8 @@ references:
   name: visibility
   nameWithType: INTERNAL_HtmlDomStyleReference.visibility
   fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.visibility
+- uid: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip*
+  commentId: Overload:CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip
+  name: clip
+  nameWithType: INTERNAL_HtmlDomStyleReference.clip
+  fullName: CSHTML5.Internal.INTERNAL_HtmlDomStyleReference.clip

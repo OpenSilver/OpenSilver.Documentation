@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class PrintDocument
    ">
-    <meta name="generator" content="docfx 2.58.4.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -126,7 +126,8 @@
   
   <h1 id="System_Windows_Printing_PrintDocument" data-uid="System.Windows.Printing.PrintDocument" class="text-break">Class PrintDocument
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Provides printing capabilities for a Silverlight application.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -187,6 +188,30 @@
     <div>
       <a class="xref" href="System.Windows.DependencyObject.html#System_Windows_DependencyObject_CheckAccess">DependencyObject.CheckAccess()</a>
     </div>
+    <div>
+      <a class="xref" href="System.Windows.DependencyObject.html#System_Windows_DependencyObject_GetAnimationBaseValue_System_Windows_DependencyProperty_">DependencyObject.GetAnimationBaseValue(DependencyProperty)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="System.Windows.Printing.html">System.Windows.Printing</a></h6>
   <h6><strong>Assembly</strong>: OpenSilver.dll</h6>
@@ -194,13 +219,117 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class PrintDocument : DependencyObject</code></pre>
   </div>
+  <h5 id="System_Windows_Printing_PrintDocument_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><ol>
+<li>All elements are collected using the PrintPage event and then 'print-section' class is added to all of them.</li>
+<li>A separate 'print-section' div is created inside 'beforeprint' event and all 'print-section' elements
+added to it with different class name to be printed later - 'print-document-section-to-print'</li>
+<li>'print-section' is added as the first child of the body element.</li>
+<li>@media print is used to show 'print-document-section-to-print' elements and hide the rest.</li>
+</ol>
+<p>The reason it recreates and adds the elements to 'body' is to avoid wrong positioning depending on other
+relative elements. One other solution would be to use 'fixed' position however it breaks paging (break-after).
+'beforeprint' event prepares everything needed for printing and 'afterprint' cleans up things.</p>
+<p>'beforeprint' and 'afterprint' events registered only once and @media print rule is added/removed by
+JavaScript which guarantees no side effects after print.</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument__ctor.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L62">View Source</a>
+  </span>
+  <a id="System_Windows_Printing_PrintDocument__ctor_" data-uid="System.Windows.Printing.PrintDocument.#ctor*"></a>
+  <h4 id="System_Windows_Printing_PrintDocument__ctor" data-uid="System.Windows.Printing.PrintDocument.#ctor">PrintDocument()</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="System.Windows.Printing.PrintDocument.html">PrintDocument</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PrintDocument()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_PrintedPageCountProperty.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.PrintedPageCountProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L70">View Source</a>
+  </span>
+  <h4 id="System_Windows_Printing_PrintDocument_PrintedPageCountProperty" data-uid="System.Windows.Printing.PrintDocument.PrintedPageCountProperty">PrintedPageCountProperty</h4>
+  <div class="markdown level1 summary"><p>Gets the identifier for the <a class="xref" href="System.Windows.Printing.PrintDocument.html#System_Windows_Printing_PrintDocument_PrintedPageCount">PrintedPageCount</a> dependency property.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly DependencyProperty PrintedPageCountProperty</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.DependencyProperty.html">DependencyProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_PrintedPageCount.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.PrintedPageCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L83">View Source</a>
+  </span>
+  <a id="System_Windows_Printing_PrintDocument_PrintedPageCount_" data-uid="System.Windows.Printing.PrintDocument.PrintedPageCount*"></a>
+  <h4 id="System_Windows_Printing_PrintDocument_PrintedPageCount" data-uid="System.Windows.Printing.PrintDocument.PrintedPageCount">PrintedPageCount</h4>
+  <div class="markdown level1 summary"><p>Gets the number of pages that have printed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PrintedPageCount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>The number of pages that have printed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_Print_System_String_.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.Print(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L115">View Source</a>
+  </span>
   <a id="System_Windows_Printing_PrintDocument_Print_" data-uid="System.Windows.Printing.PrintDocument.Print*"></a>
   <h4 id="System_Windows_Printing_PrintDocument_Print_System_String_" data-uid="System.Windows.Printing.PrintDocument.Print(System.String)">Print(String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Starts the printing process for the specified document by opening the print dialog box.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -219,19 +348,45 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">documentName</span></td>
-        <td></td>
+        <td><p>The name of the document to print.</p>
+</td>
       </tr>
     </tbody>
   </table>
-  
-  
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Security.SecurityException</span></td>
+        <td><p>The print operation is not user-initiated.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_Print_System_String_System_Windows_Printing_PrinterFallbackSettings_System_Boolean_.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.Print(System.String%2CSystem.Windows.Printing.PrinterFallbackSettings%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L362">View Source</a>
+  </span>
   <a id="System_Windows_Printing_PrintDocument_Print_" data-uid="System.Windows.Printing.PrintDocument.Print*"></a>
   <h4 id="System_Windows_Printing_PrintDocument_Print_System_String_System_Windows_Printing_PrinterFallbackSettings_System_Boolean_" data-uid="System.Windows.Printing.PrintDocument.Print(System.String,System.Windows.Printing.PrinterFallbackSettings,System.Boolean)">Print(String, PrinterFallbackSettings, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Starts the vector printing process for the specified document by optionally opening
+the print dialog box or printing directly to the default printer for trusted
+applications.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Print(string documentName, PrinterFallbackSettings printerFallbackSettings, bool useDefaultPrinter = false)</code></pre>
+    <pre><code class="lang-csharp hljs">[NotImplemented]
+public void Print(string documentName, PrinterFallbackSettings printerFallbackSettings, bool useDefaultPrinter = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -246,26 +401,92 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">documentName</span></td>
-        <td></td>
+        <td><p>The name of the document to print.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="System.Windows.Printing.PrinterFallbackSettings.html">PrinterFallbackSettings</a></td>
         <td><span class="parametername">printerFallbackSettings</span></td>
-        <td></td>
+        <td><p>The settings to use to enable vector printing for printers with limited support.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">useDefaultPrinter</span></td>
-        <td></td>
+        <td><p>Whether or not to automatically print to the default printer for the computer
+without showing a print dialog. This parameter can only be true in trusted applications,
+otherwise an exception will occur.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Security.SecurityException</span></td>
+        <td><p>The print operation is not user-initiated.-or-useDefaultPrinter is set to true
+and the application is not a trusted application.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_PrintBitmap_System_String_.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.PrintBitmap(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L374">View Source</a>
+  </span>
+  <a id="System_Windows_Printing_PrintDocument_PrintBitmap_" data-uid="System.Windows.Printing.PrintDocument.PrintBitmap*"></a>
+  <h4 id="System_Windows_Printing_PrintDocument_PrintBitmap_System_String_" data-uid="System.Windows.Printing.PrintDocument.PrintBitmap(System.String)">PrintBitmap(String)</h4>
+  <div class="markdown level1 summary"><p>Starts the bitmap printing process for the specified document by opening the
+print dialog box.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[NotImplemented]
+public void PrintBitmap(string documentName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">documentName</span></td>
+        <td><p>The name of the document to print.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h3 id="events">Events
   </h3>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_BeginPrint.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.BeginPrint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L93">View Source</a>
+  </span>
   <h4 id="System_Windows_Printing_PrintDocument_BeginPrint" data-uid="System.Windows.Printing.PrintDocument.BeginPrint">BeginPrint</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs after the <a class="xref" href="System.Windows.Printing.PrintDocument.html#System_Windows_Printing_PrintDocument_Print_System_String_">Print(String)</a> method is called and the print
+dialog box successfully returns, but before the <a class="xref" href="System.Windows.Printing.PrintDocument.html#System_Windows_Printing_PrintDocument_PrintPage">PrintPage</a>
+event is raised.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -281,15 +502,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="System.Windows.Printing.BeginPrintEventArgs.html">BeginPrintEventArgs</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="System.Windows.Printing.BeginPrintEventArgs.html">BeginPrintEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_EndPrint.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.EndPrint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L99">View Source</a>
+  </span>
   <h4 id="System_Windows_Printing_PrintDocument_EndPrint" data-uid="System.Windows.Printing.PrintDocument.EndPrint">EndPrint</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when the printing operation is passed to the print spooler or when the
+print operation is cancelled by the application author.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -305,15 +533,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="System.Windows.Printing.EndPrintEventArgs.html">EndPrintEventArgs</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="System.Windows.Printing.EndPrintEventArgs.html">EndPrintEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  
-  
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument_PrintPage.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument.PrintPage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L104">View Source</a>
+  </span>
   <h4 id="System_Windows_Printing_PrintDocument_PrintPage" data-uid="System.Windows.Printing.PrintDocument.PrintPage">PrintPage</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Occurs when each page is printing.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -329,7 +563,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="System.Windows.Printing.PrintPageEventArgs.html">PrintPageEventArgs</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="System.Windows.Printing.PrintPageEventArgs.html">PrintPageEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -369,6 +603,12 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Printing_PrintDocument.md&amp;value=---%0Auid%3A%20System.Windows.Printing.PrintDocument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Printing/PrintDocument.cs/#L55" class="contribution-link">View Source</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

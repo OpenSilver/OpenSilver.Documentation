@@ -1,0 +1,671 @@
+### YamlMime:ManagedReference
+items:
+- uid: OpenSilver.Profiler
+  commentId: T:OpenSilver.Profiler
+  id: Profiler
+  parent: OpenSilver
+  children:
+  - OpenSilver.Profiler.ConsoleTime(System.String)
+  - OpenSilver.Profiler.ConsoleTimeEnd(System.String)
+  - OpenSilver.Profiler.ConsoleTimeLog(System.String)
+  - OpenSilver.Profiler.StartMeasuringTime
+  - OpenSilver.Profiler.StopMeasuringTime(System.String,System.Int64)
+  - OpenSilver.Profiler.ViewProfilerResults
+  langs:
+  - csharp
+  - vb
+  name: Profiler
+  nameWithType: Profiler
+  fullName: OpenSilver.Profiler
+  type: Class
+  source:
+    remote:
+      path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Profiler
+    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+    startLine: 42
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nProvides static methods for profiling performance in the browser.\n"
+  example: []
+  syntax:
+    content: public static class Profiler
+    content.vb: Public Module Profiler
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: OpenSilver.Profiler.StartMeasuringTime
+  commentId: M:OpenSilver.Profiler.StartMeasuringTime
+  id: StartMeasuringTime
+  parent: OpenSilver.Profiler
+  langs:
+  - csharp
+  - vb
+  name: StartMeasuringTime()
+  nameWithType: Profiler.StartMeasuringTime()
+  fullName: OpenSilver.Profiler.StartMeasuringTime()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: StartMeasuringTime
+    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+    startLine: 59
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nAllows measuring the cumulative time between the start and the end of the measure. It returns a number that you need to pass to the &quot;StopMeasuringTime()&quot; method.\n"
+  example: []
+  syntax:
+    content: >-
+      [JSReplacement("performance.now()")]
+
+      public static long StartMeasuringTime()
+    return:
+      type: System.Int64
+      description: A number that you need to pass to the &quot;StopMeasuringTime()&quot; method.
+    content.vb: >-
+      <JSReplacement("performance.now()")>
+
+      Public Shared Function StartMeasuringTime As Long
+  overload: OpenSilver.Profiler.StartMeasuringTime*
+  attributes:
+  - type: JSIL.Meta.JSReplacementAttribute
+    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: performance.now()
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Profiler.StopMeasuringTime(System.String,System.Int64)
+  commentId: M:OpenSilver.Profiler.StopMeasuringTime(System.String,System.Int64)
+  id: StopMeasuringTime(System.String,System.Int64)
+  parent: OpenSilver.Profiler
+  langs:
+  - csharp
+  - vb
+  name: StopMeasuringTime(String, Int64)
+  nameWithType: Profiler.StopMeasuringTime(String, Int64)
+  fullName: OpenSilver.Profiler.StopMeasuringTime(System.String, System.Int64)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: StopMeasuringTime
+    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+    startLine: 80
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nAllows measuring the time between the start and the end of the measure. The result is &quot;accrued&quot;, meaning that it is cumulative if executed multiple times. You can see the result by calling &quot;ViewProfilerResults()&quot; from the browser console.\n"
+  example: []
+  syntax:
+    content: >-
+      [JSReplacement("document.addToPerformanceCounters($measureDescription, $numberReturnedByTheStartMeasuringTimeMethod)")]
+
+      public static void StopMeasuringTime(string measureDescription, long numberReturnedByTheStartMeasuringTimeMethod)
+    parameters:
+    - id: measureDescription
+      type: System.String
+      description: An arbitrary text to describe the measure.
+    - id: numberReturnedByTheStartMeasuringTimeMethod
+      type: System.Int64
+      description: The number returned by the call to &quot;StartMeasuringTime()&quot;. It is used to calculate the time elapsed between the start and the end of the measure.
+    content.vb: >-
+      <JSReplacement("document.addToPerformanceCounters($measureDescription, $numberReturnedByTheStartMeasuringTimeMethod)")>
+
+      Public Shared Sub StopMeasuringTime(measureDescription As String, numberReturnedByTheStartMeasuringTimeMethod As Long)
+  overload: OpenSilver.Profiler.StopMeasuringTime*
+  attributes:
+  - type: JSIL.Meta.JSReplacementAttribute
+    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: document.addToPerformanceCounters($measureDescription, $numberReturnedByTheStartMeasuringTimeMethod)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Profiler.ViewProfilerResults
+  commentId: M:OpenSilver.Profiler.ViewProfilerResults
+  id: ViewProfilerResults
+  parent: OpenSilver.Profiler
+  langs:
+  - csharp
+  - vb
+  name: ViewProfilerResults()
+  nameWithType: Profiler.ViewProfilerResults()
+  fullName: OpenSilver.Profiler.ViewProfilerResults()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ViewProfilerResults
+    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+    startLine: 114
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nShows the measures obtained so far in the Output window of Visual Studio if in the Simulator, in the browser&apos;s developer tools&apos; console if in the Browser.\n"
+  example: []
+  syntax:
+    content: public static void ViewProfilerResults()
+    content.vb: Public Shared Sub ViewProfilerResults
+  overload: OpenSilver.Profiler.ViewProfilerResults*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Profiler.ConsoleTime(System.String)
+  commentId: M:OpenSilver.Profiler.ConsoleTime(System.String)
+  id: ConsoleTime(System.String)
+  parent: OpenSilver.Profiler
+  langs:
+  - csharp
+  - vb
+  name: ConsoleTime(String)
+  nameWithType: Profiler.ConsoleTime(String)
+  fullName: OpenSilver.Profiler.ConsoleTime(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ConsoleTime
+    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+    startLine: 160
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: >-
+      [JSReplacement("console.time($label)")]
+
+      public static void ConsoleTime(string label)
+    parameters:
+    - id: label
+      type: System.String
+    content.vb: >-
+      <JSReplacement("console.time($label)")>
+
+      Public Shared Sub ConsoleTime(label As String)
+  overload: OpenSilver.Profiler.ConsoleTime*
+  attributes:
+  - type: JSIL.Meta.JSReplacementAttribute
+    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: console.time($label)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Profiler.ConsoleTimeEnd(System.String)
+  commentId: M:OpenSilver.Profiler.ConsoleTimeEnd(System.String)
+  id: ConsoleTimeEnd(System.String)
+  parent: OpenSilver.Profiler
+  langs:
+  - csharp
+  - vb
+  name: ConsoleTimeEnd(String)
+  nameWithType: Profiler.ConsoleTimeEnd(String)
+  fullName: OpenSilver.Profiler.ConsoleTimeEnd(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ConsoleTimeEnd
+    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+    startLine: 170
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: >-
+      [JSReplacement("console.timeEnd($label)")]
+
+      public static void ConsoleTimeEnd(string label)
+    parameters:
+    - id: label
+      type: System.String
+    content.vb: >-
+      <JSReplacement("console.timeEnd($label)")>
+
+      Public Shared Sub ConsoleTimeEnd(label As String)
+  overload: OpenSilver.Profiler.ConsoleTimeEnd*
+  attributes:
+  - type: JSIL.Meta.JSReplacementAttribute
+    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: console.timeEnd($label)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Profiler.ConsoleTimeLog(System.String)
+  commentId: M:OpenSilver.Profiler.ConsoleTimeLog(System.String)
+  id: ConsoleTimeLog(System.String)
+  parent: OpenSilver.Profiler
+  langs:
+  - csharp
+  - vb
+  name: ConsoleTimeLog(String)
+  nameWithType: Profiler.ConsoleTimeLog(String)
+  fullName: OpenSilver.Profiler.ConsoleTimeLog(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ConsoleTimeLog
+    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
+    startLine: 180
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: >-
+      [JSReplacement("console.timeLog($label)")]
+
+      public static void ConsoleTimeLog(string label)
+    parameters:
+    - id: label
+      type: System.String
+    content.vb: >-
+      <JSReplacement("console.timeLog($label)")>
+
+      Public Shared Sub ConsoleTimeLog(label As String)
+  overload: OpenSilver.Profiler.ConsoleTimeLog*
+  attributes:
+  - type: JSIL.Meta.JSReplacementAttribute
+    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: console.timeLog($label)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+references:
+- uid: OpenSilver
+  commentId: N:OpenSilver
+  name: OpenSilver
+  nameWithType: OpenSilver
+  fullName: OpenSilver
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OpenSilver.Profiler.StartMeasuringTime*
+  commentId: Overload:OpenSilver.Profiler.StartMeasuringTime
+  name: StartMeasuringTime
+  nameWithType: Profiler.StartMeasuringTime
+  fullName: OpenSilver.Profiler.StartMeasuringTime
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  name: Int64
+  nameWithType: Int64
+  fullName: System.Int64
+- uid: OpenSilver.Profiler.StopMeasuringTime*
+  commentId: Overload:OpenSilver.Profiler.StopMeasuringTime
+  name: StopMeasuringTime
+  nameWithType: Profiler.StopMeasuringTime
+  fullName: OpenSilver.Profiler.StopMeasuringTime
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: OpenSilver.Profiler.ViewProfilerResults*
+  commentId: Overload:OpenSilver.Profiler.ViewProfilerResults
+  name: ViewProfilerResults
+  nameWithType: Profiler.ViewProfilerResults
+  fullName: OpenSilver.Profiler.ViewProfilerResults
+- uid: OpenSilver.Profiler.ConsoleTime*
+  commentId: Overload:OpenSilver.Profiler.ConsoleTime
+  name: ConsoleTime
+  nameWithType: Profiler.ConsoleTime
+  fullName: OpenSilver.Profiler.ConsoleTime
+- uid: OpenSilver.Profiler.ConsoleTimeEnd*
+  commentId: Overload:OpenSilver.Profiler.ConsoleTimeEnd
+  name: ConsoleTimeEnd
+  nameWithType: Profiler.ConsoleTimeEnd
+  fullName: OpenSilver.Profiler.ConsoleTimeEnd
+- uid: OpenSilver.Profiler.ConsoleTimeLog*
+  commentId: Overload:OpenSilver.Profiler.ConsoleTimeLog
+  name: ConsoleTimeLog
+  nameWithType: Profiler.ConsoleTimeLog
+  fullName: OpenSilver.Profiler.ConsoleTimeLog

@@ -5,6 +5,7 @@ items:
   id: Window
   parent: System.Windows
   children:
+  - System.Windows.Window.#ctor
   - System.Windows.Window.Activate
   - System.Windows.Window.ArrangeOverride(System.Windows.Size)
   - System.Windows.Window.AttachToDomElement(System.Object)
@@ -17,16 +18,17 @@ items:
   - System.Windows.Window.Current
   - System.Windows.Window.DragMove
   - System.Windows.Window.DragResize(System.Windows.WindowResizeEdge)
-  - System.Windows.Window.FindName(System.String)
   - System.Windows.Window.GetWindow(System.Windows.DependencyObject)
   - System.Windows.Window.IsActive
   - System.Windows.Window.IsVisible
+  - System.Windows.Window.Left
   - System.Windows.Window.MeasureOverride(System.Windows.Size)
   - System.Windows.Window.OnClosing(System.ComponentModel.ClosingEventArgs)
   - System.Windows.Window.OnContentChanged(System.Object,System.Object)
-  - System.Windows.Window.RegisterName(System.String,System.Object)
+  - System.Windows.Window.Show
   - System.Windows.Window.SizeChanged
-  - System.Windows.Window.UnregisterName(System.String)
+  - System.Windows.Window.Title
+  - System.Windows.Window.Top
   - System.Windows.Window.WindowState
   - System.Windows.Window.WindowStyle
   langs:
@@ -37,27 +39,29 @@ items:
   fullName: System.Windows.Window
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Window
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 58
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 38
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nRepresents an application window.\n"
   example: []
   syntax:
-    content: 'public class Window : FrameworkElement, INameScope'
+    content: 'public class Window : FrameworkElement'
     content.vb: >-
       Public Class Window
+
           Inherits FrameworkElement
-          Implements INameScope
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   - System.Windows.UIElement
   - System.Windows.FrameworkElement
-  implements:
-  - System.Windows.Markup.INameScope
   inheritedMembers:
   - System.Windows.FrameworkElement.Parent
   - System.Windows.FrameworkElement.INTERNAL_DoNotApplyStyle
@@ -73,15 +77,15 @@ items:
   - System.Windows.FrameworkElement.IsEnabledProperty
   - System.Windows.FrameworkElement.IsEnabledChanged
   - System.Windows.FrameworkElement.ManageIsEnabled(System.Boolean)
+  - System.Windows.FrameworkElement.FindName(System.String)
   - System.Windows.FrameworkElement.Name
   - System.Windows.FrameworkElement.NameProperty
   - System.Windows.FrameworkElement.DataContext
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
+  - System.Windows.FrameworkElement.Triggers
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.OnLayoutUpdated
-  - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
@@ -93,6 +97,7 @@ items:
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
   - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
@@ -100,6 +105,10 @@ items:
   - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
   - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.CustomLayout
   - System.Windows.FrameworkElement.CustomLayoutProperty
   - System.Windows.FrameworkElement.Height
@@ -122,26 +131,30 @@ items:
   - System.Windows.FrameworkElement.MaxWidthProperty
   - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.ContextMenu
   - System.Windows.FrameworkElement.ContextMenuProperty
   - System.Windows.FrameworkElement.ContextMenuOpening
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -155,7 +168,6 @@ items:
   - System.Windows.UIElement.UseLayoutRoundingProperty
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -176,6 +188,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -185,6 +199,9 @@ items:
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
   - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -194,12 +211,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -222,8 +238,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -239,6 +253,14 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
@@ -251,13 +273,45 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
+- uid: System.Windows.Window.#ctor
+  commentId: M:System.Windows.Window.#ctor
+  id: '#ctor'
+  parent: System.Windows.Window
+  langs:
+  - csharp
+  - vb
+  name: Window()
+  nameWithType: Window.Window()
+  fullName: System.Windows.Window.Window()
+  type: Constructor
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: .ctor
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 48
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Window\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public Window()
+    content.vb: Public Sub New
+  overload: System.Windows.Window.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Window.Current
   commentId: P:System.Windows.Window.Current
   id: Current
@@ -270,9 +324,13 @@ items:
   fullName: System.Windows.Window.Current
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Current
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 68
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 90
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -293,6 +351,147 @@ items:
   modifiers.vb:
   - Public
   - Shared
+- uid: System.Windows.Window.Left
+  commentId: P:System.Windows.Window.Left
+  id: Left
+  parent: System.Windows.Window
+  langs:
+  - csharp
+  - vb
+  name: Left
+  nameWithType: Window.Left
+  fullName: System.Windows.Window.Left
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Left
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 97
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the position of the left edge of the application window; see Remarks\nfor restrictions on setting this property at run time.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public double Left { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Left As Double
+  overload: System.Windows.Window.Left*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Window.Top
+  commentId: P:System.Windows.Window.Top
+  id: Top
+  parent: System.Windows.Window
+  langs:
+  - csharp
+  - vb
+  name: Top
+  nameWithType: Window.Top
+  fullName: System.Windows.Window.Top
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Top
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 104
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the position of the top edge of the application window; see Remarks\nfor restrictions on setting this property at run time.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public double Top { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Top As Double
+  overload: System.Windows.Window.Top*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Window.Title
+  commentId: P:System.Windows.Window.Title
+  id: Title
+  parent: System.Windows.Window
+  langs:
+  - csharp
+  - vb
+  name: Title
+  nameWithType: Window.Title
+  fullName: System.Windows.Window.Title
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Title
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 110
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the window title bar text.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public string Title { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property Title As String
+  overload: System.Windows.Window.Title*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Window.AttachToDomElement(System.Object)
   commentId: M:System.Windows.Window.AttachToDomElement(System.Object)
   id: AttachToDomElement(System.Object)
@@ -305,9 +504,13 @@ items:
   fullName: System.Windows.Window.AttachToDomElement(System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: AttachToDomElement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 77
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 121
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -337,9 +540,13 @@ items:
   fullName: System.Windows.Window.SizeChanged
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SizeChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 140
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 184
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -366,9 +573,13 @@ items:
   fullName: System.Windows.Window.Bounds
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Bounds
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 197
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 225
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -399,9 +610,13 @@ items:
   fullName: System.Windows.Window.OnContentChanged(System.Object, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnContentChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 216
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 244
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -430,9 +645,13 @@ items:
   fullName: System.Windows.Window.Content
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Content
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 278
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 311
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -463,9 +682,13 @@ items:
   fullName: System.Windows.Window.ContentProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ContentProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 286
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 319
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -484,107 +707,6 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Window.FindName(System.String)
-  commentId: M:System.Windows.Window.FindName(System.String)
-  id: FindName(System.String)
-  parent: System.Windows.Window
-  langs:
-  - csharp
-  - vb
-  name: FindName(String)
-  nameWithType: Window.FindName(String)
-  fullName: System.Windows.Window.FindName(System.String)
-  type: Method
-  source:
-    id: FindName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 308
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nFinds the UIElement with the specified name.\n"
-  example: []
-  syntax:
-    content: public object FindName(string name)
-    parameters:
-    - id: name
-      type: System.String
-      description: The name to look for.
-    return:
-      type: System.Object
-      description: The object with the specified name if any; otherwise null.
-    content.vb: Public Function FindName(name As String) As Object
-  overload: System.Windows.Window.FindName*
-  implements:
-  - System.Windows.Markup.INameScope.FindName(System.String)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Window.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.Window.RegisterName(System.String,System.Object)
-  id: RegisterName(System.String,System.Object)
-  parent: System.Windows.Window
-  langs:
-  - csharp
-  - vb
-  name: RegisterName(String, Object)
-  nameWithType: Window.RegisterName(String, Object)
-  fullName: System.Windows.Window.RegisterName(System.String, System.Object)
-  type: Method
-  source:
-    id: RegisterName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 316
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public void RegisterName(string name, object scopedElement)
-    parameters:
-    - id: name
-      type: System.String
-    - id: scopedElement
-      type: System.Object
-    content.vb: Public Sub RegisterName(name As String, scopedElement As Object)
-  overload: System.Windows.Window.RegisterName*
-  implements:
-  - System.Windows.Markup.INameScope.RegisterName(System.String,System.Object)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Window.UnregisterName(System.String)
-  commentId: M:System.Windows.Window.UnregisterName(System.String)
-  id: UnregisterName(System.String)
-  parent: System.Windows.Window
-  langs:
-  - csharp
-  - vb
-  name: UnregisterName(String)
-  nameWithType: Window.UnregisterName(String)
-  fullName: System.Windows.Window.UnregisterName(System.String)
-  type: Method
-  source:
-    id: UnregisterName
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 324
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public void UnregisterName(string name)
-    parameters:
-    - id: name
-      type: System.String
-    content.vb: Public Sub UnregisterName(name As String)
-  overload: System.Windows.Window.UnregisterName*
-  implements:
-  - System.Windows.Markup.INameScope.UnregisterName(System.String)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: System.Windows.Window.Activate
   commentId: M:System.Windows.Window.Activate
   id: Activate
@@ -597,9 +719,13 @@ items:
   fullName: System.Windows.Window.Activate()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Activate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 349
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 342
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -625,9 +751,13 @@ items:
   fullName: System.Windows.Window.CreateDomElement(System.Object, out System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateDomElement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 354
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 347
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -664,9 +794,13 @@ items:
   fullName: System.Windows.Window.Closing
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Closing
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 382
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 358
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -675,7 +809,7 @@ items:
   syntax:
     content: public event EventHandler<ClosingEventArgs> Closing
     return:
-      type: EventHandler{System.ComponentModel.ClosingEventArgs}
+      type: System.EventHandler{System.ComponentModel.ClosingEventArgs}
     content.vb: Public Event Closing As EventHandler(Of ClosingEventArgs)
   modifiers.csharp:
   - public
@@ -693,9 +827,13 @@ items:
   fullName: System.Windows.Window.OnClosing(System.ComponentModel.ClosingEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnClosing
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 413
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 374
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -725,19 +863,33 @@ items:
   fullName: System.Windows.Window.IsActive
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsActive
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 423
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 381
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public bool IsActive { get; }
+    content: >-
+      [NotImplemented]
+
+      public bool IsActive { get; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Public ReadOnly Property IsActive As Boolean
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property IsActive As Boolean
   overload: System.Windows.Window.IsActive*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -756,19 +908,33 @@ items:
   fullName: System.Windows.Window.IsVisible
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsVisible
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 425
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 383
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public bool IsVisible { get; }
+    content: >-
+      [NotImplemented]
+
+      public bool IsVisible { get; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Public ReadOnly Property IsVisible As Boolean
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property IsVisible As Boolean
   overload: System.Windows.Window.IsVisible*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -787,19 +953,33 @@ items:
   fullName: System.Windows.Window.WindowStyle
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: WindowStyle
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 428
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 386
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public WindowStyle WindowStyle { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public WindowStyle WindowStyle { get; set; }
     parameters: []
     return:
       type: System.Windows.WindowStyle
-    content.vb: Public Property WindowStyle As WindowStyle
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property WindowStyle As WindowStyle
   overload: System.Windows.Window.WindowStyle*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -818,21 +998,35 @@ items:
   fullName: System.Windows.Window.GetWindow(System.Windows.DependencyObject)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetWindow
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 431
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 389
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public static Window GetWindow(DependencyObject dependencyObject)
+    content: >-
+      [NotImplemented]
+
+      public static Window GetWindow(DependencyObject dependencyObject)
     parameters:
     - id: dependencyObject
       type: System.Windows.DependencyObject
     return:
       type: System.Windows.Window
-    content.vb: Public Shared Function GetWindow(dependencyObject As DependencyObject) As Window
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared Function GetWindow(dependencyObject As DependencyObject) As Window
   overload: System.Windows.Window.GetWindow*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -851,23 +1045,79 @@ items:
   fullName: System.Windows.Window.WindowState
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: WindowState
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 437
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 395
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public WindowState WindowState { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public WindowState WindowState { get; set; }
     parameters: []
     return:
       type: System.Windows.WindowState
-    content.vb: Public Property WindowState As WindowState
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property WindowState As WindowState
   overload: System.Windows.Window.WindowState*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
   - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Window.Show
+  commentId: M:System.Windows.Window.Show
+  id: Show
+  parent: System.Windows.Window
+  langs:
+  - csharp
+  - vb
+  name: Show()
+  nameWithType: Window.Show()
+  fullName: System.Windows.Window.Show()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Show
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 401
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nShow the window\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public void Show()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub Show
+  overload: System.Windows.Window.Show*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
   modifiers.vb:
   - Public
 - uid: System.Windows.Window.Close
@@ -882,16 +1132,30 @@ items:
   fullName: System.Windows.Window.Close()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Close
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 440
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 407
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public void Close()
-    content.vb: Public Sub Close
+    content: >-
+      [NotImplemented]
+
+      public void Close()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub Close
   overload: System.Windows.Window.Close*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -908,16 +1172,30 @@ items:
   fullName: System.Windows.Window.DragMove()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragMove
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 446
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 413
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public void DragMove()
-    content.vb: Public Sub DragMove
+    content: >-
+      [NotImplemented]
+
+      public void DragMove()
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub DragMove
   overload: System.Windows.Window.DragMove*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -934,19 +1212,33 @@ items:
   fullName: System.Windows.Window.DragResize(System.Windows.WindowResizeEdge)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DragResize
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 452
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 419
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public void DragResize(WindowResizeEdge resizeEdge)
+    content: >-
+      [NotImplemented]
+
+      public void DragResize(WindowResizeEdge resizeEdge)
     parameters:
     - id: resizeEdge
       type: System.Windows.WindowResizeEdge
-    content.vb: Public Sub DragResize(resizeEdge As WindowResizeEdge)
+    content.vb: >-
+      <NotImplemented>
+
+      Public Sub DragResize(resizeEdge As WindowResizeEdge)
   overload: System.Windows.Window.DragResize*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -963,9 +1255,13 @@ items:
   fullName: System.Windows.Window.MeasureOverride(System.Windows.Size)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: MeasureOverride
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 471
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 438
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -997,9 +1293,13 @@ items:
   fullName: System.Windows.Window.ArrangeOverride(System.Windows.Size)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Window.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ArrangeOverride
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\Window.cs
-    startLine: 483
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Window.cs
+    startLine: 450
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1027,6 +1327,7 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -1049,12 +1350,6 @@ references:
   name: FrameworkElement
   nameWithType: FrameworkElement
   fullName: System.Windows.FrameworkElement
-- uid: System.Windows.Markup.INameScope
-  commentId: T:System.Windows.Markup.INameScope
-  parent: System.Windows.Markup
-  name: INameScope
-  nameWithType: INameScope
-  fullName: System.Windows.Markup.INameScope
 - uid: System.Windows.FrameworkElement.Parent
   commentId: P:System.Windows.FrameworkElement.Parent
   parent: System.Windows.FrameworkElement
@@ -1317,6 +1612,45 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.FindName(System.String)
+  commentId: M:System.Windows.FrameworkElement.FindName(System.String)
+  parent: System.Windows.FrameworkElement
+  isExternal: true
+  name: FindName(String)
+  nameWithType: FrameworkElement.FindName(String)
+  fullName: System.Windows.FrameworkElement.FindName(System.String)
+  spec.csharp:
+  - uid: System.Windows.FrameworkElement.FindName(System.String)
+    name: FindName
+    nameWithType: FrameworkElement.FindName
+    fullName: System.Windows.FrameworkElement.FindName
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.FrameworkElement.FindName(System.String)
+    name: FindName
+    nameWithType: FrameworkElement.FindName
+    fullName: System.Windows.FrameworkElement.FindName
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.FrameworkElement.Name
   commentId: P:System.Windows.FrameworkElement.Name
   parent: System.Windows.FrameworkElement
@@ -1347,6 +1681,12 @@ references:
   name: DataContextChanged
   nameWithType: FrameworkElement.DataContextChanged
   fullName: System.Windows.FrameworkElement.DataContextChanged
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  parent: System.Windows.FrameworkElement
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   parent: System.Windows.FrameworkElement
@@ -1381,18 +1721,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  parent: System.Windows.FrameworkElement
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  parent: System.Windows.FrameworkElement
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -1489,6 +1817,12 @@ references:
   name: DefaultStyleKeyProperty
   nameWithType: FrameworkElement.DefaultStyleKeyProperty
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  parent: System.Windows.FrameworkElement
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
 - uid: System.Windows.FrameworkElement.Loaded
   commentId: E:System.Windows.FrameworkElement.Loaded
   parent: System.Windows.FrameworkElement
@@ -1619,6 +1953,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   parent: System.Windows.FrameworkElement
@@ -1751,6 +2109,24 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  parent: System.Windows.FrameworkElement
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.FrameworkElement.ContextMenu
   commentId: P:System.Windows.FrameworkElement.ContextMenu
   parent: System.Windows.FrameworkElement
@@ -1787,6 +2163,12 @@ references:
   name: Drop
   nameWithType: UIElement.Drop
   fullName: System.Windows.UIElement.Drop
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  parent: System.Windows.UIElement
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
 - uid: System.Windows.UIElement.OpacityMask
   commentId: P:System.Windows.UIElement.OpacityMask
   parent: System.Windows.UIElement
@@ -1823,18 +2205,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.OnCreateAutomationPeer
   commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
   parent: System.Windows.UIElement
@@ -1893,6 +2263,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -2096,12 +2478,6 @@ references:
   name: VisibilityProperty
   nameWithType: UIElement.VisibilityProperty
   fullName: System.Windows.UIElement.VisibilityProperty
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -2452,6 +2828,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -2593,6 +3091,54 @@ references:
     name: MouseButtonEventArgs
     nameWithType: MouseButtonEventArgs
     fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -2740,24 +3286,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -2770,12 +3346,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -3129,128 +3699,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -3855,6 +4303,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -4222,50 +4985,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Markup
-  commentId: N:System.Windows.Markup
-  name: System.Windows.Markup
-  nameWithType: System.Windows.Markup
-  fullName: System.Windows.Markup
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -4733,14 +5496,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -4754,16 +5517,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -4777,10 +5540,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -4800,17 +5563,51 @@ references:
   name: System.Windows.Controls.Primitives
   nameWithType: System.Windows.Controls.Primitives
   fullName: System.Windows.Controls.Primitives
-- uid: System.Windows.Window.Current*
-  commentId: Overload:System.Windows.Window.Current
-  name: Current
-  nameWithType: Window.Current
-  fullName: System.Windows.Window.Current
 - uid: System.Windows.Window
   commentId: T:System.Windows.Window
   parent: System.Windows
   name: Window
   nameWithType: Window
   fullName: System.Windows.Window
+- uid: System.Windows.Window.#ctor*
+  commentId: Overload:System.Windows.Window.#ctor
+  name: Window
+  nameWithType: Window.Window
+  fullName: System.Windows.Window.Window
+- uid: System.Windows.Window.Current*
+  commentId: Overload:System.Windows.Window.Current
+  name: Current
+  nameWithType: Window.Current
+  fullName: System.Windows.Window.Current
+- uid: System.Windows.Window.Left*
+  commentId: Overload:System.Windows.Window.Left
+  name: Left
+  nameWithType: Window.Left
+  fullName: System.Windows.Window.Left
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: System.Windows.Window.Top*
+  commentId: Overload:System.Windows.Window.Top
+  name: Top
+  nameWithType: Window.Top
+  fullName: System.Windows.Window.Top
+- uid: System.Windows.Window.Title*
+  commentId: Overload:System.Windows.Window.Title
+  name: Title
+  nameWithType: Window.Title
+  fullName: System.Windows.Window.Title
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
 - uid: System.Windows.Window.AttachToDomElement*
   commentId: Overload:System.Windows.Window.AttachToDomElement
   name: AttachToDomElement
@@ -4849,159 +5646,6 @@ references:
   name: DependencyProperty
   nameWithType: DependencyProperty
   fullName: System.Windows.DependencyProperty
-- uid: System.Windows.Window.FindName*
-  commentId: Overload:System.Windows.Window.FindName
-  name: FindName
-  nameWithType: Window.FindName
-  fullName: System.Windows.Window.FindName
-- uid: System.Windows.Markup.INameScope.FindName(System.String)
-  commentId: M:System.Windows.Markup.INameScope.FindName(System.String)
-  parent: System.Windows.Markup.INameScope
-  isExternal: true
-  name: FindName(String)
-  nameWithType: INameScope.FindName(String)
-  fullName: System.Windows.Markup.INameScope.FindName(System.String)
-  spec.csharp:
-  - uid: System.Windows.Markup.INameScope.FindName(System.String)
-    name: FindName
-    nameWithType: INameScope.FindName
-    fullName: System.Windows.Markup.INameScope.FindName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Markup.INameScope.FindName(System.String)
-    name: FindName
-    nameWithType: INameScope.FindName
-    fullName: System.Windows.Markup.INameScope.FindName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.String
-  isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
-- uid: System.Windows.Window.RegisterName*
-  commentId: Overload:System.Windows.Window.RegisterName
-  name: RegisterName
-  nameWithType: Window.RegisterName
-  fullName: System.Windows.Window.RegisterName
-- uid: System.Windows.Markup.INameScope.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.Markup.INameScope.RegisterName(System.String,System.Object)
-  parent: System.Windows.Markup.INameScope
-  isExternal: true
-  name: RegisterName(String, Object)
-  nameWithType: INameScope.RegisterName(String, Object)
-  fullName: System.Windows.Markup.INameScope.RegisterName(System.String, System.Object)
-  spec.csharp:
-  - uid: System.Windows.Markup.INameScope.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: INameScope.RegisterName
-    fullName: System.Windows.Markup.INameScope.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Markup.INameScope.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: INameScope.RegisterName
-    fullName: System.Windows.Markup.INameScope.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Window.UnregisterName*
-  commentId: Overload:System.Windows.Window.UnregisterName
-  name: UnregisterName
-  nameWithType: Window.UnregisterName
-  fullName: System.Windows.Window.UnregisterName
-- uid: System.Windows.Markup.INameScope.UnregisterName(System.String)
-  commentId: M:System.Windows.Markup.INameScope.UnregisterName(System.String)
-  parent: System.Windows.Markup.INameScope
-  isExternal: true
-  name: UnregisterName(String)
-  nameWithType: INameScope.UnregisterName(String)
-  fullName: System.Windows.Markup.INameScope.UnregisterName(System.String)
-  spec.csharp:
-  - uid: System.Windows.Markup.INameScope.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: INameScope.UnregisterName
-    fullName: System.Windows.Markup.INameScope.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Markup.INameScope.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: INameScope.UnregisterName
-    fullName: System.Windows.Markup.INameScope.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.Window.Activate*
   commentId: Overload:System.Windows.Window.Activate
   name: Activate
@@ -5067,20 +5711,21 @@ references:
   name: CreateDomElement
   nameWithType: Window.CreateDomElement
   fullName: System.Windows.Window.CreateDomElement
-- uid: EventHandler{System.ComponentModel.ClosingEventArgs}
-  commentId: '!:EventHandler{System.ComponentModel.ClosingEventArgs}'
-  definition: EventHandler`1
+- uid: System.EventHandler{System.ComponentModel.ClosingEventArgs}
+  commentId: T:System.EventHandler{System.ComponentModel.ClosingEventArgs}
+  parent: System
+  definition: System.EventHandler`1
   name: EventHandler<ClosingEventArgs>
   nameWithType: EventHandler<ClosingEventArgs>
-  fullName: EventHandler<System.ComponentModel.ClosingEventArgs>
+  fullName: System.EventHandler<System.ComponentModel.ClosingEventArgs>
   nameWithType.vb: EventHandler(Of ClosingEventArgs)
-  fullName.vb: EventHandler(Of System.ComponentModel.ClosingEventArgs)
+  fullName.vb: System.EventHandler(Of System.ComponentModel.ClosingEventArgs)
   name.vb: EventHandler(Of ClosingEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
@@ -5093,10 +5738,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -5108,41 +5753,42 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: EventHandler`1
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
   isExternal: true
-  name: EventHandler<>
-  nameWithType: EventHandler<>
-  fullName: EventHandler<>
-  nameWithType.vb: EventHandler(Of )
-  fullName.vb: EventHandler(Of )
-  name.vb: EventHandler(Of )
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
   spec.csharp:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: EventHandler`1
+  - uid: System.EventHandler`1
     name: EventHandler
     nameWithType: EventHandler
-    fullName: EventHandler
+    fullName: System.EventHandler
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -5168,6 +5814,8 @@ references:
   nameWithType: Window.IsActive
   fullName: System.Windows.Window.IsActive
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
@@ -5204,6 +5852,11 @@ references:
   name: WindowState
   nameWithType: WindowState
   fullName: System.Windows.WindowState
+- uid: System.Windows.Window.Show*
+  commentId: Overload:System.Windows.Window.Show
+  name: Show
+  nameWithType: Window.Show
+  fullName: System.Windows.Window.Show
 - uid: System.Windows.Window.Close*
   commentId: Overload:System.Windows.Window.Close
   name: Close

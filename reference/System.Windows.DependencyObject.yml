@@ -12,6 +12,7 @@ items:
   - System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
@@ -31,8 +32,12 @@ items:
   fullName: System.Windows.DependencyObject
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DependencyObject
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
     startLine: 40
   assemblies:
   - OpenSilver
@@ -40,17 +45,14 @@ items:
   summary: "\nRepresents an object that participates in the dependency property system. DependencyObject\nis the immediate base class of many important UI-related classes, such as\nUIElement, Geometry, FrameworkTemplate, Style, and ResourceDictionary.\n"
   example: []
   syntax:
-    content: 'public class DependencyObject : object'
-    content.vb: >-
-      Public Class DependencyObject
-          Inherits Object
+    content: public class DependencyObject
+    content.vb: Public Class DependencyObject
   inheritance:
   - System.Object
   derivedClasses:
   - System.Windows.AssemblyPart
   - System.Windows.Automation.Peers.AutomationPeer
   - System.Windows.Controls.ColumnDefinition
-  - System.Windows.Controls.DataGridColumn
   - System.Windows.Controls.MultiScaleSubImage
   - System.Windows.Controls.RowDefinition
   - System.Windows.Controls.TextSearch
@@ -58,11 +60,10 @@ items:
   - System.Windows.DependencyObjectCollection`1
   - System.Windows.Deployment
   - System.Windows.FrameworkTemplate
+  - System.Windows.Ink.DrawingAttributes
+  - System.Windows.Ink.Stroke
   - System.Windows.Input.TouchDevice
   - System.Windows.Input.TouchPoint
-  - System.Windows.Interactivity.Behavior
-  - System.Windows.Interactivity.TriggerAction
-  - System.Windows.Interactivity.TriggerBase
   - System.Windows.Media.Animation.ColorKeyFrame
   - System.Windows.Media.Animation.DoubleKeyFrame
   - System.Windows.Media.Animation.EasingFunctionBase
@@ -83,7 +84,7 @@ items:
   - System.Windows.Media.PathFigure
   - System.Windows.Media.PathSegment
   - System.Windows.Media.Projection
-  - System.Windows.Navigation.UriMapping
+  - System.Windows.Media.TimelineMarker
   - System.Windows.NotificationWindow
   - System.Windows.OutOfBrowserSettings
   - System.Windows.PresentationFrameworkCollection`1
@@ -100,6 +101,14 @@ items:
   - System.Windows.VisualStateManager
   - System.Windows.VisualTransition
   - System.Windows.WindowSettings
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
@@ -128,9 +137,13 @@ items:
   fullName: System.Windows.DependencyObject.DependencyObject()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 241
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 238
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -154,9 +167,13 @@ items:
   fullName: System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 258
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 255
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -189,16 +206,23 @@ items:
   fullName: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetLocalValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 273
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 270
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nSets the local value of a dependency property on a DependencyObject while not overriding a hypothetical Binding (example: when the user writes in a TextBox with a two way Binding on its Text property).\n"
   example: []
   syntax:
-    content: public void SetLocalValue(DependencyProperty dependencyProperty, object value)
+    content: >-
+      [Obsolete("Use SetCurrentValue")]
+
+      public void SetLocalValue(DependencyProperty dependencyProperty, object value)
     parameters:
     - id: dependencyProperty
       type: System.Windows.DependencyProperty
@@ -206,8 +230,17 @@ items:
     - id: value
       type: System.Object
       description: The new local value.
-    content.vb: Public Sub SetLocalValue(dependencyProperty As DependencyProperty, value As Object)
+    content.vb: >-
+      <Obsolete("Use SetCurrentValue")>
+
+      Public Sub SetLocalValue(dependencyProperty As DependencyProperty, value As Object)
   overload: System.Windows.DependencyObject.SetLocalValue*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use SetCurrentValue
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -224,9 +257,13 @@ items:
   fullName: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetCurrentValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 279
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 276
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -255,21 +292,37 @@ items:
   fullName: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty, System.Windows.PropertyMetadata)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CoerceCurrentValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 286
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 283
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public void CoerceCurrentValue(DependencyProperty dependencyProperty, PropertyMetadata propertyMetadata)
+    content: >-
+      [Obsolete("Use CoerceValue")]
+
+      public void CoerceCurrentValue(DependencyProperty dependencyProperty, PropertyMetadata propertyMetadata)
     parameters:
     - id: dependencyProperty
       type: System.Windows.DependencyProperty
     - id: propertyMetadata
       type: System.Windows.PropertyMetadata
-    content.vb: Public Sub CoerceCurrentValue(dependencyProperty As DependencyProperty, propertyMetadata As PropertyMetadata)
+    content.vb: >-
+      <Obsolete("Use CoerceValue")>
+
+      Public Sub CoerceCurrentValue(dependencyProperty As DependencyProperty, propertyMetadata As PropertyMetadata)
   overload: System.Windows.DependencyObject.CoerceCurrentValue*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use CoerceValue
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -286,9 +339,13 @@ items:
   fullName: System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ReadLocalValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 305
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 302
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -321,9 +378,13 @@ items:
   fullName: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetVisualStateValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 351
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 354
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -352,9 +413,13 @@ items:
   fullName: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetVisualStateValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 363
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 366
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -383,9 +448,13 @@ items:
   fullName: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetAnimationValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 373
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 376
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -414,9 +483,13 @@ items:
   fullName: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetAnimationValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 383
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 386
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -445,9 +518,13 @@ items:
   fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 396
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 399
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -476,22 +553,38 @@ items:
   fullName: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Coerce
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 472
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 475
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nRefreshes the value of the given DependencyProperty on this DependencyObject so that it fits the coercion that should be applied on it.\n"
   example: []
   syntax:
-    content: public void Coerce(DependencyProperty dependencyProperty)
+    content: >-
+      [Obsolete("Use CoerceValue")]
+
+      public void Coerce(DependencyProperty dependencyProperty)
     parameters:
     - id: dependencyProperty
       type: System.Windows.DependencyProperty
       description: The dependencyProperty whose value we want to refresh.
-    content.vb: Public Sub Coerce(dependencyProperty As DependencyProperty)
+    content.vb: >-
+      <Obsolete("Use CoerceValue")>
+
+      Public Sub Coerce(dependencyProperty As DependencyProperty)
   overload: System.Windows.DependencyObject.Coerce*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use CoerceValue
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -508,9 +601,13 @@ items:
   fullName: System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CoerceValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 478
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 481
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -537,9 +634,13 @@ items:
   fullName: System.Windows.DependencyObject.Dispatcher
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Dispatcher
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 513
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 516
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -570,9 +671,13 @@ items:
   fullName: System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_OnAttachedToVisualTree
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 556
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 559
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -599,9 +704,13 @@ items:
   fullName: System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: INTERNAL_OnDetachedFromVisualTree
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 562
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 565
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -628,9 +737,13 @@ items:
   fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ClearValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 572
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 575
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -659,18 +772,77 @@ items:
   fullName: System.Windows.DependencyObject.CheckAccess()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CheckAccess
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\DependencyObject.cs
-    startLine: 581
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 584
   assemblies:
   - OpenSilver
   namespace: System.Windows
   syntax:
-    content: public bool CheckAccess()
+    content: >-
+      [NotImplemented]
+
+      public bool CheckAccess()
     return:
       type: System.Boolean
-    content.vb: Public Function CheckAccess As Boolean
+    content.vb: >-
+      <NotImplemented>
+
+      Public Function CheckAccess As Boolean
   overload: System.Windows.DependencyObject.CheckAccess*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  id: GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  langs:
+  - csharp
+  - vb
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GetAnimationBaseValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
+    startLine: 599
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public object GetAnimationBaseValue(DependencyProperty dp)
+    parameters:
+    - id: dp
+      type: System.Windows.DependencyProperty
+    return:
+      type: System.Object
+    content.vb: >-
+      <NotImplemented>
+
+      Public Function GetAnimationBaseValue(dp As DependencyProperty) As Object
+  overload: System.Windows.DependencyObject.GetAnimationBaseValue*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -683,10 +855,290 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -948,6 +1400,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -1402,7 +1859,14 @@ references:
   nameWithType: DependencyObject.CheckAccess
   fullName: System.Windows.DependencyObject.CheckAccess
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue*
+  commentId: Overload:System.Windows.DependencyObject.GetAnimationBaseValue
+  name: GetAnimationBaseValue
+  nameWithType: DependencyObject.GetAnimationBaseValue
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue

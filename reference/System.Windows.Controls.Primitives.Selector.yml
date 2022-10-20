@@ -6,16 +6,15 @@ items:
   parent: System.Windows.Controls.Primitives
   children:
   - System.Windows.Controls.Primitives.Selector.#ctor
-  - System.Windows.Controls.Primitives.Selector.ApplySelectedIndex(System.Int32)
   - System.Windows.Controls.Primitives.Selector.ChangingSelectionProgrammatically
+  - System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  - System.Windows.Controls.Primitives.Selector.HasItems
   - System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
   - System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItemProperty
-  - System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed(System.Windows.DependencyPropertyChangedEventArgs)
-  - System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter(System.Windows.Controls.Primitives.SelectorItem)
-  - System.Windows.Controls.Primitives.Selector.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  - System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-  - System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged(System.Object)
+  - System.Windows.Controls.Primitives.Selector.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  - System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
   - System.Windows.Controls.Primitives.Selector.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
+  - System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
   - System.Windows.Controls.Primitives.Selector.RowBackground
   - System.Windows.Controls.Primitives.Selector.RowBackgroundProperty
   - System.Windows.Controls.Primitives.Selector.SelectedIndex
@@ -42,20 +41,24 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: Selector
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 42
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 38
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
-  summary: "\nRepresents a control that allows a user to select an item from a collection of items.\n"
+  summary: "\nRepresents a control that allows a user to select an item from a collection\nof items.\n"
   example: []
   syntax:
-    content: 'public class Selector : ItemsControl, IGeneratorHost'
+    content: 'public class Selector : ItemsControl'
     content.vb: >-
       Public Class Selector
+
           Inherits ItemsControl
-          Implements IGeneratorHost
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
@@ -64,8 +67,8 @@ items:
   - System.Windows.Controls.Control
   - System.Windows.Controls.ItemsControl
   derivedClasses:
-  - System.Windows.Controls.AutoCompleteBox
   - System.Windows.Controls.ComboBox
+  - System.Windows.Controls.ListBox
   - System.Windows.Controls.Primitives.MultiSelector
   - System.Windows.Controls.TileView
   inheritedMembers:
@@ -81,14 +84,12 @@ items:
   - System.Windows.Controls.ItemsControl.DisplayMemberPathProperty
   - System.Windows.Controls.ItemsControl.ItemContainerStyle
   - System.Windows.Controls.ItemsControl.ItemContainerStyleProperty
-  - System.Windows.Controls.ItemsControl.ManageCollectionChanged(NotifyCollectionChangedEventArgs)
+  - System.Windows.Controls.ItemsControl.ManageCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
   - System.Windows.Controls.ItemsControl.UpdateItemsPanel(System.Windows.Controls.ItemsPanelTemplate)
-  - System.Windows.Controls.ItemsControl.OnItemsSourceChanged(IEnumerable,IEnumerable)
+  - System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(System.Collections.IEnumerable,System.Collections.IEnumerable)
   - System.Windows.Controls.ItemsControl.INTERNAL_OnAttachedToVisualTree
-  - System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
   - System.Windows.Controls.ItemsControl.GetContainerForItemOverride
   - System.Windows.Controls.ItemsControl.IsItemItsOwnContainerOverride(System.Object)
-  - System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
   - System.Windows.Controls.ItemsControl.GetItemsOwner(System.Windows.DependencyObject)
   - System.Windows.Controls.ItemsControl.ItemsControlFromItemContainer(System.Windows.DependencyObject)
   - System.Windows.Controls.ItemsControl.DisableDefaultRendering
@@ -135,13 +136,12 @@ items:
   - System.Windows.Controls.Control.UseSystemFocusVisuals
   - System.Windows.Controls.Control.OnApplyTemplate
   - System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
-  - System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  - System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  - System.Windows.Controls.Control.CharacterSpacingProperty
+  - System.Windows.Controls.Control.CharacterSpacing
   - System.Windows.Controls.Control.TabNavigationProperty
   - System.Windows.Controls.Control.TabNavigation
   - System.Windows.Controls.Control.FontStretchProperty
   - System.Windows.Controls.Control.FontStretch
-  - System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
@@ -166,10 +166,9 @@ items:
   - System.Windows.FrameworkElement.DataContext
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
+  - System.Windows.FrameworkElement.Triggers
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.OnLayoutUpdated
-  - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
@@ -182,14 +181,17 @@ items:
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
   - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
-  - System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  - System.Windows.FrameworkElement.UnregisterName(System.String)
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
   - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.CustomLayout
   - System.Windows.FrameworkElement.CustomLayoutProperty
   - System.Windows.FrameworkElement.Height
@@ -212,6 +214,9 @@ items:
   - System.Windows.FrameworkElement.MaxWidthProperty
   - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.SizeChanged
   - System.Windows.FrameworkElement.ContextMenu
   - System.Windows.FrameworkElement.ContextMenuProperty
@@ -219,20 +224,21 @@ items:
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -247,7 +253,6 @@ items:
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
   - System.Windows.UIElement.IsVisible
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -268,6 +273,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -276,6 +283,10 @@ items:
   - System.Windows.UIElement.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
+  - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -285,12 +296,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -313,8 +323,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -330,9 +338,19 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
+  - System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+  - System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetScrollHost
   - System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetContainers
   - System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetContainers``1
   - System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetItemsAndContainers
@@ -346,85 +364,13 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItemProperty
-  commentId: F:System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItemProperty
-  id: IsSynchronizedWithCurrentItemProperty
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: IsSynchronizedWithCurrentItemProperty
-  nameWithType: Selector.IsSynchronizedWithCurrentItemProperty
-  fullName: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItemProperty
-  type: Field
-  source:
-    id: IsSynchronizedWithCurrentItemProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\WORKINPROGRESS\Selector.cs
-    startLine: 34
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  summary: "\nIdentifies the <xref href=\"System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty IsSynchronizedWithCurrentItemProperty
-    return:
-      type: System.Windows.DependencyProperty
-      description: "\nThe identifier for the <xref href=\"System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
-    content.vb: Public Shared ReadOnly IsSynchronizedWithCurrentItemProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
-  commentId: P:System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
-  id: IsSynchronizedWithCurrentItem
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: IsSynchronizedWithCurrentItem
-  nameWithType: Selector.IsSynchronizedWithCurrentItem
-  fullName: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
-  type: Property
-  source:
-    id: IsSynchronizedWithCurrentItem
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\WORKINPROGRESS\Selector.cs
-    startLine: 48
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  summary: "\nGets or sets a value that indicates whether the <xref href=\"System.Windows.Controls.Primitives.Selector\" data-throw-if-not-resolved=\"false\"></xref> should keep the <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> synchronized with the current item in the <xref href=\"System.Windows.Controls.ItemsControl.Items\" data-throw-if-not-resolved=\"false\"></xref> property.\n"
-  example: []
-  syntax:
-    content: public bool? IsSynchronizedWithCurrentItem { get; set; }
-    parameters: []
-    return:
-      type: System.Nullable{System.Boolean}
-      description: "\ntrue if the <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> is always synchronized with the current item;\nfalse if the <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> is never synchronized with the current item;\nnull if the <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> is synchronized with the current item only if the <xref href=\"System.Windows.Controls.Primitives.Selector\" data-throw-if-not-resolved=\"false\"></xref> uses a <xref href=\"System.ComponentModel.ICollectionView\" data-throw-if-not-resolved=\"false\"></xref>.\nThe default is null.\n"
-    content.vb: Public Property IsSynchronizedWithCurrentItem As Boolean?
-  overload: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem*
-  exceptions:
-  - type: System.ArgumentException
-    commentId: T:System.ArgumentException
-    description: "\n<xref href=\"System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem\" data-throw-if-not-resolved=\"false\"></xref> is set to true.\n"
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
 - uid: System.Windows.Controls.Primitives.Selector.#ctor
   commentId: M:System.Windows.Controls.Primitives.Selector.#ctor
   id: '#ctor'
@@ -437,9 +383,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.Selector()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 59
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 57
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -463,9 +413,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectionChanged
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectionChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 71
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 69
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -480,72 +434,6 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.Controls.Primitives.Selector.SelectedItem
-  commentId: P:System.Windows.Controls.Primitives.Selector.SelectedItem
-  id: SelectedItem
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: SelectedItem
-  nameWithType: Selector.SelectedItem
-  fullName: System.Windows.Controls.Primitives.Selector.SelectedItem
-  type: Property
-  source:
-    id: SelectedItem
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 80
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  summary: "\nGets or sets the selected item.\n"
-  example: []
-  syntax:
-    content: public object SelectedItem { get; set; }
-    parameters: []
-    return:
-      type: System.Object
-    content.vb: Public Property SelectedItem As Object
-  overload: System.Windows.Controls.Primitives.Selector.SelectedItem*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Controls.Primitives.Selector.SelectedItemProperty
-  commentId: F:System.Windows.Controls.Primitives.Selector.SelectedItemProperty
-  id: SelectedItemProperty
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: SelectedItemProperty
-  nameWithType: Selector.SelectedItemProperty
-  fullName: System.Windows.Controls.Primitives.Selector.SelectedItemProperty
-  type: Field
-  source:
-    id: SelectedItemProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 89
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  summary: "\nIdentifies the SelectedItem dependency property.\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty SelectedItemProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly SelectedItemProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
 - uid: System.Windows.Controls.Primitives.Selector.SelectedIndex
   commentId: P:System.Windows.Controls.Primitives.Selector.SelectedIndex
   id: SelectedIndex
@@ -558,9 +446,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedIndex
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedIndex
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 176
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 74
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -591,9 +483,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedIndexProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedIndexProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 185
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 83
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -604,6 +500,80 @@ items:
     return:
       type: System.Windows.DependencyProperty
     content.vb: Public Shared ReadOnly SelectedIndexProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Controls.Primitives.Selector.SelectedItem
+  commentId: P:System.Windows.Controls.Primitives.Selector.SelectedItem
+  id: SelectedItem
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: SelectedItem
+  nameWithType: Selector.SelectedItem
+  fullName: System.Windows.Controls.Primitives.Selector.SelectedItem
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SelectedItem
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 118
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  summary: "\nGets or sets the selected item.\n"
+  example: []
+  syntax:
+    content: public object SelectedItem { get; set; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Public Property SelectedItem As Object
+  overload: System.Windows.Controls.Primitives.Selector.SelectedItem*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Controls.Primitives.Selector.SelectedItemProperty
+  commentId: F:System.Windows.Controls.Primitives.Selector.SelectedItemProperty
+  id: SelectedItemProperty
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: SelectedItemProperty
+  nameWithType: Selector.SelectedItemProperty
+  fullName: System.Windows.Controls.Primitives.Selector.SelectedItemProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SelectedItemProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 127
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  summary: "\nIdentifies the SelectedItem dependency property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty SelectedItemProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly SelectedItemProperty As DependencyProperty
   modifiers.csharp:
   - public
   - static
@@ -624,9 +594,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedValue
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedValue
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 280
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 164
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -657,9 +631,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedValueProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedValueProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 289
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 173
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -690,9 +668,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedValuePath
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedValuePath
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 360
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 235
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -723,9 +705,13 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedValuePathProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedValuePathProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 369
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 244
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
@@ -744,6 +730,310 @@ items:
   - Public
   - Shared
   - ReadOnly
+- uid: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
+  commentId: P:System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
+  id: IsSynchronizedWithCurrentItem
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: IsSynchronizedWithCurrentItem
+  nameWithType: Selector.IsSynchronizedWithCurrentItem
+  fullName: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsSynchronizedWithCurrentItem
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 272
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  summary: "\nGets or sets a value that indicates whether the <xref href=\"System.Windows.Controls.Primitives.Selector\" data-throw-if-not-resolved=\"false\"></xref> should keep \nthe <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> synchronized with the current item in the \n<xref href=\"System.Windows.Controls.ItemsControl.Items\" data-throw-if-not-resolved=\"false\"></xref> property.\n"
+  example: []
+  syntax:
+    content: public bool? IsSynchronizedWithCurrentItem { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Boolean}
+      description: "\ntrue if the <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> is always synchronized with the current item;\nfalse if the <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> is never synchronized with the current item;\nnull if the <xref href=\"System.Windows.Controls.Primitives.Selector.SelectedItem\" data-throw-if-not-resolved=\"false\"></xref> is synchronized with the current item only if \nthe <xref href=\"System.Windows.Controls.Primitives.Selector\" data-throw-if-not-resolved=\"false\"></xref> uses a <xref href=\"System.ComponentModel.ICollectionView\" data-throw-if-not-resolved=\"false\"></xref>.\nThe default is null.\n"
+    content.vb: Public Property IsSynchronizedWithCurrentItem As Boolean?
+  overload: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\n<xref href=\"System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem\" data-throw-if-not-resolved=\"false\"></xref> is set to true.\n"
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItemProperty
+  commentId: F:System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItemProperty
+  id: IsSynchronizedWithCurrentItemProperty
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: IsSynchronizedWithCurrentItemProperty
+  nameWithType: Selector.IsSynchronizedWithCurrentItemProperty
+  fullName: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItemProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsSynchronizedWithCurrentItemProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 281
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  summary: "\nIdentifies the <xref href=\"System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty IsSynchronizedWithCurrentItemProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly IsSynchronizedWithCurrentItemProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Controls.Primitives.Selector.HasItems
+  commentId: P:System.Windows.Controls.Primitives.Selector.HasItems
+  id: HasItems
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: HasItems
+  nameWithType: Selector.HasItems
+  fullName: System.Windows.Controls.Primitives.Selector.HasItems
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: HasItems
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 407
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  summary: "\nGets whether the <xref href=\"System.Windows.Controls.Primitives.Selector\" data-throw-if-not-resolved=\"false\"></xref> contains items.\n"
+  example: []
+  syntax:
+    content: protected bool HasItems { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Protected ReadOnly Property HasItems As Boolean
+  overload: System.Windows.Controls.Primitives.Selector.HasItems*
+  modifiers.csharp:
+  - protected
+  - get
+  modifiers.vb:
+  - Protected
+  - ReadOnly
+- uid: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+  commentId: M:System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+  id: OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: OnItemsSourceChanged(IEnumerable, IEnumerable)
+  nameWithType: Selector.OnItemsSourceChanged(IEnumerable, IEnumerable)
+  fullName: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged(System.Collections.IEnumerable, System.Collections.IEnumerable)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnItemsSourceChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 412
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  syntax:
+    content: protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
+    parameters:
+    - id: oldValue
+      type: System.Collections.IEnumerable
+    - id: newValue
+      type: System.Collections.IEnumerable
+    content.vb: Protected Overrides Sub OnItemsSourceChanged(oldValue As IEnumerable, newValue As IEnumerable)
+  overridden: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+  overload: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  commentId: M:System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  id: PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: PrepareContainerForItemOverride(DependencyObject, Object)
+  nameWithType: Selector.PrepareContainerForItemOverride(DependencyObject, Object)
+  fullName: System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride(System.Windows.DependencyObject, System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: PrepareContainerForItemOverride
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 431
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  syntax:
+    content: protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
+    parameters:
+    - id: element
+      type: System.Windows.DependencyObject
+    - id: item
+      type: System.Object
+    content.vb: Protected Overrides Sub PrepareContainerForItemOverride(element As DependencyObject, item As Object)
+  overridden: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  overload: System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  commentId: M:System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  id: ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: ClearContainerForItemOverride(DependencyObject, Object)
+  nameWithType: Selector.ClearContainerForItemOverride(DependencyObject, Object)
+  fullName: System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride(System.Windows.DependencyObject, System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ClearContainerForItemOverride
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 442
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  syntax:
+    content: protected override void ClearContainerForItemOverride(DependencyObject element, object item)
+    parameters:
+    - id: element
+      type: System.Windows.DependencyObject
+    - id: item
+      type: System.Object
+    content.vb: Protected Overrides Sub ClearContainerForItemOverride(element As DependencyObject, item As Object)
+  overridden: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  overload: System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: System.Windows.Controls.Primitives.Selector.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:System.Windows.Controls.Primitives.Selector.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  id: OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: OnItemsChanged(NotifyCollectionChangedEventArgs)
+  nameWithType: Selector.OnItemsChanged(NotifyCollectionChangedEventArgs)
+  fullName: System.Windows.Controls.Primitives.Selector.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnItemsChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 452
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  syntax:
+    content: protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+    parameters:
+    - id: e
+      type: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    content.vb: Protected Overrides Sub OnItemsChanged(e As NotifyCollectionChangedEventArgs)
+  overridden: System.Windows.Controls.ItemsControl.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  overload: System.Windows.Controls.Primitives.Selector.OnItemsChanged*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: System.Windows.Controls.Primitives.Selector.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
+  commentId: M:System.Windows.Controls.Primitives.Selector.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
+  id: OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
+  parent: System.Windows.Controls.Primitives.Selector
+  langs:
+  - csharp
+  - vb
+  name: OnSelectionChanged(SelectionChangedEventArgs)
+  nameWithType: Selector.OnSelectionChanged(SelectionChangedEventArgs)
+  fullName: System.Windows.Controls.Primitives.Selector.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnSelectionChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 565
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls.Primitives
+  summary: "\nRaises the SelectionChanged event\n"
+  example: []
+  syntax:
+    content: protected virtual void OnSelectionChanged(SelectionChangedEventArgs e)
+    parameters:
+    - id: e
+      type: System.Windows.Controls.SelectionChangedEventArgs
+      description: The arguments for the event.
+    content.vb: Protected Overridable Sub OnSelectionChanged(e As SelectionChangedEventArgs)
+  overload: System.Windows.Controls.Primitives.Selector.OnSelectionChanged*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
 - uid: System.Windows.Controls.Primitives.Selector.SelectedItemBackground
   commentId: P:System.Windows.Controls.Primitives.Selector.SelectedItemBackground
   id: SelectedItemBackground
@@ -756,21 +1046,35 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedItemBackground
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedItemBackground
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 404
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1344
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nGets or sets the bakground color of the selected Items.\n"
   example: []
   syntax:
-    content: public Brush SelectedItemBackground { get; set; }
+    content: >-
+      [Obsolete]
+
+      public Brush SelectedItemBackground { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Brush
-    content.vb: Public Property SelectedItemBackground As Brush
+    content.vb: >-
+      <Obsolete>
+
+      Public Property SelectedItemBackground As Brush
   overload: System.Windows.Controls.Primitives.Selector.SelectedItemBackground*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -789,19 +1093,33 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedItemBackgroundProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedItemBackgroundProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 413
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1355
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nIdentifies the SelectedItemBackground dependency property\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty SelectedItemBackgroundProperty
+    content: >-
+      [Obsolete]
+
+      public static readonly DependencyProperty SelectedItemBackgroundProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly SelectedItemBackgroundProperty As DependencyProperty
+    content.vb: >-
+      <Obsolete>
+
+      Public Shared ReadOnly SelectedItemBackgroundProperty As DependencyProperty
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -822,21 +1140,35 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedItemForeground
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedItemForeground
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 423
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1365
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nGets or sets the foreground color of the selected Items.\n"
   example: []
   syntax:
-    content: public Brush SelectedItemForeground { get; set; }
+    content: >-
+      [Obsolete]
+
+      public Brush SelectedItemForeground { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Brush
-    content.vb: Public Property SelectedItemForeground As Brush
+    content.vb: >-
+      <Obsolete>
+
+      Public Property SelectedItemForeground As Brush
   overload: System.Windows.Controls.Primitives.Selector.SelectedItemForeground*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -855,19 +1187,33 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.SelectedItemForegroundProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedItemForegroundProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 432
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1376
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nIdentifies the SelectedItemForeground dependency property\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty SelectedItemForegroundProperty
+    content: >-
+      [Obsolete]
+
+      public static readonly DependencyProperty SelectedItemForegroundProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly SelectedItemForegroundProperty As DependencyProperty
+    content.vb: >-
+      <Obsolete>
+
+      Public Shared ReadOnly SelectedItemForegroundProperty As DependencyProperty
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -888,21 +1234,35 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.RowBackground
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RowBackground
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 442
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1386
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nGets or sets the bakground color of the Items that are not selected.\n"
   example: []
   syntax:
-    content: public Brush RowBackground { get; set; }
+    content: >-
+      [Obsolete]
+
+      public Brush RowBackground { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Brush
-    content.vb: Public Property RowBackground As Brush
+    content.vb: >-
+      <Obsolete>
+
+      Public Property RowBackground As Brush
   overload: System.Windows.Controls.Primitives.Selector.RowBackground*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -921,19 +1281,33 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.RowBackgroundProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RowBackgroundProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 451
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1397
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nIdentifies the RowBackground dependency property\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty RowBackgroundProperty
+    content: >-
+      [Obsolete]
+
+      public static readonly DependencyProperty RowBackgroundProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly RowBackgroundProperty As DependencyProperty
+    content.vb: >-
+      <Obsolete>
+
+      Public Shared ReadOnly RowBackgroundProperty As DependencyProperty
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -954,21 +1328,35 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.UnselectedItemForeground
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UnselectedItemForeground
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 462
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1408
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nGets or sets the foreground color of the Items that are not selected.\n"
   example: []
   syntax:
-    content: public Brush UnselectedItemForeground { get; set; }
+    content: >-
+      [Obsolete]
+
+      public Brush UnselectedItemForeground { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Brush
-    content.vb: Public Property UnselectedItemForeground As Brush
+    content.vb: >-
+      <Obsolete>
+
+      Public Property UnselectedItemForeground As Brush
   overload: System.Windows.Controls.Primitives.Selector.UnselectedItemForeground*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -987,19 +1375,33 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.UnselectedItemForegroundProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UnselectedItemForegroundProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 471
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1419
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nIdentifies the UnselectedItemForeground dependency property\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty UnselectedItemForegroundProperty
+    content: >-
+      [Obsolete]
+
+      public static readonly DependencyProperty UnselectedItemForegroundProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly UnselectedItemForegroundProperty As DependencyProperty
+    content.vb: >-
+      <Obsolete>
+
+      Public Shared ReadOnly UnselectedItemForegroundProperty As DependencyProperty
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -1008,230 +1410,6 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Controls.Primitives.Selector.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
-  commentId: M:System.Windows.Controls.Primitives.Selector.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
-  id: OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: OnSelectionChanged(SelectionChangedEventArgs)
-  nameWithType: Selector.OnSelectionChanged(SelectionChangedEventArgs)
-  fullName: System.Windows.Controls.Primitives.Selector.OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs)
-  type: Method
-  source:
-    id: OnSelectionChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 488
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  summary: "\nRaises the SelectionChanged event\n"
-  example: []
-  syntax:
-    content: protected virtual void OnSelectionChanged(SelectionChangedEventArgs e)
-    parameters:
-    - id: e
-      type: System.Windows.Controls.SelectionChangedEventArgs
-      description: The arguments for the event.
-    content.vb: Protected Overridable Sub OnSelectionChanged(e As SelectionChangedEventArgs)
-  overload: System.Windows.Controls.Primitives.Selector.OnSelectionChanged*
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
-- uid: System.Windows.Controls.Primitives.Selector.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  commentId: M:System.Windows.Controls.Primitives.Selector.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  id: OnItemsChanged(NotifyCollectionChangedEventArgs)
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: OnItemsChanged(NotifyCollectionChangedEventArgs)
-  nameWithType: Selector.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  fullName: System.Windows.Controls.Primitives.Selector.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  type: Method
-  source:
-    id: OnItemsChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 496
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  syntax:
-    content: protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
-    parameters:
-    - id: e
-      type: NotifyCollectionChangedEventArgs
-    content.vb: Protected Overrides Sub OnItemsChanged(e As NotifyCollectionChangedEventArgs)
-  overridden: System.Windows.Controls.ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  overload: System.Windows.Controls.Primitives.Selector.OnItemsChanged*
-  modifiers.csharp:
-  - protected
-  - override
-  modifiers.vb:
-  - Protected
-  - Overrides
-- uid: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-  commentId: M:System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-  id: OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
-  nameWithType: Selector.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
-  fullName: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
-  type: Method
-  source:
-    id: OnItemsSourceChanged_BeforeVisualUpdate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 547
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  syntax:
-    content: protected override void OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable oldValue, IEnumerable newValue)
-    parameters:
-    - id: oldValue
-      type: IEnumerable
-    - id: newValue
-      type: IEnumerable
-    content.vb: Protected Overrides Sub OnItemsSourceChanged_BeforeVisualUpdate(oldValue As IEnumerable, newValue As IEnumerable)
-  overridden: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-  overload: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate*
-  modifiers.csharp:
-  - protected
-  - override
-  modifiers.vb:
-  - Protected
-  - Overrides
-- uid: System.Windows.Controls.Primitives.Selector.ApplySelectedIndex(System.Int32)
-  commentId: M:System.Windows.Controls.Primitives.Selector.ApplySelectedIndex(System.Int32)
-  id: ApplySelectedIndex(System.Int32)
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: ApplySelectedIndex(Int32)
-  nameWithType: Selector.ApplySelectedIndex(Int32)
-  fullName: System.Windows.Controls.Primitives.Selector.ApplySelectedIndex(System.Int32)
-  type: Method
-  source:
-    id: ApplySelectedIndex
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 559
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  syntax:
-    content: protected virtual void ApplySelectedIndex(int index)
-    parameters:
-    - id: index
-      type: System.Int32
-    content.vb: Protected Overridable Sub ApplySelectedIndex(index As Integer)
-  overload: System.Windows.Controls.Primitives.Selector.ApplySelectedIndex*
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
-- uid: System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed(System.Windows.DependencyPropertyChangedEventArgs)
-  commentId: M:System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed(System.Windows.DependencyPropertyChangedEventArgs)
-  id: ManageSelectedIndex_Changed(System.Windows.DependencyPropertyChangedEventArgs)
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: ManageSelectedIndex_Changed(DependencyPropertyChangedEventArgs)
-  nameWithType: Selector.ManageSelectedIndex_Changed(DependencyPropertyChangedEventArgs)
-  fullName: System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed(System.Windows.DependencyPropertyChangedEventArgs)
-  type: Method
-  source:
-    id: ManageSelectedIndex_Changed
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 564
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  syntax:
-    content: protected virtual void ManageSelectedIndex_Changed(DependencyPropertyChangedEventArgs e)
-    parameters:
-    - id: e
-      type: System.Windows.DependencyPropertyChangedEventArgs
-    content.vb: Protected Overridable Sub ManageSelectedIndex_Changed(e As DependencyPropertyChangedEventArgs)
-  overload: System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed*
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
-- uid: System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged(System.Object)
-  commentId: M:System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged(System.Object)
-  id: OnSelectedItemChanged(System.Object)
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: OnSelectedItemChanged(Object)
-  nameWithType: Selector.OnSelectedItemChanged(Object)
-  fullName: System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged(System.Object)
-  type: Method
-  source:
-    id: OnSelectedItemChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 569
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  syntax:
-    content: protected virtual void OnSelectedItemChanged(object selectedItem)
-    parameters:
-    - id: selectedItem
-      type: System.Object
-    content.vb: Protected Overridable Sub OnSelectedItemChanged(selectedItem As Object)
-  overload: System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged*
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
-- uid: System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter(System.Windows.Controls.Primitives.SelectorItem)
-  commentId: M:System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter(System.Windows.Controls.Primitives.SelectorItem)
-  id: NotifyItemMouseEnter(System.Windows.Controls.Primitives.SelectorItem)
-  parent: System.Windows.Controls.Primitives.Selector
-  langs:
-  - csharp
-  - vb
-  name: NotifyItemMouseEnter(SelectorItem)
-  nameWithType: Selector.NotifyItemMouseEnter(SelectorItem)
-  fullName: System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter(System.Windows.Controls.Primitives.SelectorItem)
-  type: Method
-  source:
-    id: NotifyItemMouseEnter
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 574
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls.Primitives
-  syntax:
-    content: public virtual void NotifyItemMouseEnter(SelectorItem item)
-    parameters:
-    - id: item
-      type: System.Windows.Controls.Primitives.SelectorItem
-    content.vb: Public Overridable Sub NotifyItemMouseEnter(item As SelectorItem)
-  overload: System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter*
-  modifiers.csharp:
-  - public
-  - virtual
-  modifiers.vb:
-  - Public
-  - Overridable
 - uid: System.Windows.Controls.Primitives.Selector.UnselectedItemBackground
   commentId: P:System.Windows.Controls.Primitives.Selector.UnselectedItemBackground
   id: UnselectedItemBackground
@@ -1244,21 +1422,37 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.UnselectedItemBackground
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: UnselectedItemBackground
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 645
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1429
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   summary: "\nGets or sets the bakground color of the Items that are not selected.\n"
   example: []
   syntax:
-    content: public Brush UnselectedItemBackground { get; set; }
+    content: >-
+      [Obsolete("Use RowBackground instead.")]
+
+      public Brush UnselectedItemBackground { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Brush
-    content.vb: Public Property UnselectedItemBackground As Brush
+    content.vb: >-
+      <Obsolete("Use RowBackground instead.")>
+
+      Public Property UnselectedItemBackground As Brush
   overload: System.Windows.Controls.Primitives.Selector.UnselectedItemBackground*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Use RowBackground instead.
   modifiers.csharp:
   - public
   - get
@@ -1277,19 +1471,35 @@ items:
   fullName: System.Windows.Controls.Primitives.Selector.ChangingSelectionProgrammatically
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: ChangingSelectionProgrammatically
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls.Primitives\Selector.cs
-    startLine: 652
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls.Primitives/Selector.cs
+    startLine: 1436
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls.Primitives
   syntax:
-    content: protected bool ChangingSelectionProgrammatically { get; set; }
+    content: >-
+      [Obsolete("Unused.")]
+
+      protected bool ChangingSelectionProgrammatically { get; set; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Protected Property ChangingSelectionProgrammatically As Boolean
+    content.vb: >-
+      <Obsolete("Unused.")>
+
+      Protected Property ChangingSelectionProgrammatically As Boolean
   overload: System.Windows.Controls.Primitives.Selector.ChangingSelectionProgrammatically*
+  attributes:
+  - type: System.ObsoleteAttribute
+    ctor: System.ObsoleteAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: Unused.
   modifiers.csharp:
   - protected
   - get
@@ -1304,6 +1514,7 @@ references:
   fullName: System.Windows.Controls.Primitives
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -1410,41 +1621,41 @@ references:
   name: ItemContainerStyleProperty
   nameWithType: ItemsControl.ItemContainerStyleProperty
   fullName: System.Windows.Controls.ItemsControl.ItemContainerStyleProperty
-- uid: System.Windows.Controls.ItemsControl.ManageCollectionChanged(NotifyCollectionChangedEventArgs)
-  commentId: M:System.Windows.Controls.ItemsControl.ManageCollectionChanged(NotifyCollectionChangedEventArgs)
+- uid: System.Windows.Controls.ItemsControl.ManageCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:System.Windows.Controls.ItemsControl.ManageCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
   parent: System.Windows.Controls.ItemsControl
   isExternal: true
   name: ManageCollectionChanged(NotifyCollectionChangedEventArgs)
   nameWithType: ItemsControl.ManageCollectionChanged(NotifyCollectionChangedEventArgs)
-  fullName: System.Windows.Controls.ItemsControl.ManageCollectionChanged(NotifyCollectionChangedEventArgs)
+  fullName: System.Windows.Controls.ItemsControl.ManageCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
   spec.csharp:
-  - uid: System.Windows.Controls.ItemsControl.ManageCollectionChanged(NotifyCollectionChangedEventArgs)
+  - uid: System.Windows.Controls.ItemsControl.ManageCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
     name: ManageCollectionChanged
     nameWithType: ItemsControl.ManageCollectionChanged
     fullName: System.Windows.Controls.ItemsControl.ManageCollectionChanged
   - name: (
     nameWithType: (
     fullName: (
-  - uid: NotifyCollectionChangedEventArgs
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
     name: NotifyCollectionChangedEventArgs
     nameWithType: NotifyCollectionChangedEventArgs
-    fullName: NotifyCollectionChangedEventArgs
+    fullName: System.Collections.Specialized.NotifyCollectionChangedEventArgs
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.ItemsControl.ManageCollectionChanged(NotifyCollectionChangedEventArgs)
+  - uid: System.Windows.Controls.ItemsControl.ManageCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
     name: ManageCollectionChanged
     nameWithType: ItemsControl.ManageCollectionChanged
     fullName: System.Windows.Controls.ItemsControl.ManageCollectionChanged
   - name: (
     nameWithType: (
     fullName: (
-  - uid: NotifyCollectionChangedEventArgs
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
     name: NotifyCollectionChangedEventArgs
     nameWithType: NotifyCollectionChangedEventArgs
-    fullName: NotifyCollectionChangedEventArgs
+    fullName: System.Collections.Specialized.NotifyCollectionChangedEventArgs
     isExternal: true
   - name: )
     nameWithType: )
@@ -1485,57 +1696,57 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(IEnumerable,IEnumerable)
-  commentId: M:System.Windows.Controls.ItemsControl.OnItemsSourceChanged(IEnumerable,IEnumerable)
+- uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(System.Collections.IEnumerable,System.Collections.IEnumerable)
+  commentId: M:System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(System.Collections.IEnumerable,System.Collections.IEnumerable)
   parent: System.Windows.Controls.ItemsControl
   isExternal: true
-  name: OnItemsSourceChanged(IEnumerable, IEnumerable)
-  nameWithType: ItemsControl.OnItemsSourceChanged(IEnumerable, IEnumerable)
-  fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(IEnumerable, IEnumerable)
+  name: OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
+  nameWithType: ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
+  fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(System.Collections.IEnumerable, System.Collections.IEnumerable)
   spec.csharp:
-  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(IEnumerable,IEnumerable)
-    name: OnItemsSourceChanged
-    nameWithType: ItemsControl.OnItemsSourceChanged
-    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged
+  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(System.Collections.IEnumerable,System.Collections.IEnumerable)
+    name: OnItemsSourceChanged_BeforeVisualUpdate
+    nameWithType: ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
+    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
   - name: (
     nameWithType: (
     fullName: (
-  - uid: IEnumerable
+  - uid: System.Collections.IEnumerable
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: IEnumerable
+    fullName: System.Collections.IEnumerable
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: IEnumerable
+  - uid: System.Collections.IEnumerable
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: IEnumerable
+    fullName: System.Collections.IEnumerable
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(IEnumerable,IEnumerable)
-    name: OnItemsSourceChanged
-    nameWithType: ItemsControl.OnItemsSourceChanged
-    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged
+  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(System.Collections.IEnumerable,System.Collections.IEnumerable)
+    name: OnItemsSourceChanged_BeforeVisualUpdate
+    nameWithType: ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
+    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
   - name: (
     nameWithType: (
     fullName: (
-  - uid: IEnumerable
+  - uid: System.Collections.IEnumerable
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: IEnumerable
+    fullName: System.Collections.IEnumerable
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: IEnumerable
+  - uid: System.Collections.IEnumerable
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: IEnumerable
+    fullName: System.Collections.IEnumerable
     isExternal: true
   - name: )
     nameWithType: )
@@ -1565,59 +1776,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-  commentId: M:System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-  parent: System.Windows.Controls.ItemsControl
-  isExternal: true
-  name: ClearContainerForItemOverride(DependencyObject, Object)
-  nameWithType: ItemsControl.ClearContainerForItemOverride(DependencyObject, Object)
-  fullName: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject, System.Object)
-  spec.csharp:
-  - uid: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-    name: ClearContainerForItemOverride
-    nameWithType: ItemsControl.ClearContainerForItemOverride
-    fullName: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-    name: ClearContainerForItemOverride
-    nameWithType: ItemsControl.ClearContainerForItemOverride
-    fullName: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -1680,59 +1838,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-  commentId: M:System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-  parent: System.Windows.Controls.ItemsControl
-  isExternal: true
-  name: PrepareContainerForItemOverride(DependencyObject, Object)
-  nameWithType: ItemsControl.PrepareContainerForItemOverride(DependencyObject, Object)
-  fullName: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject, System.Object)
-  spec.csharp:
-  - uid: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-    name: PrepareContainerForItemOverride
-    nameWithType: ItemsControl.PrepareContainerForItemOverride
-    fullName: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-    name: PrepareContainerForItemOverride
-    nameWithType: ItemsControl.PrepareContainerForItemOverride
-    fullName: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
   - uid: System.Object
     name: Object
     nameWithType: Object
@@ -2412,78 +2517,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+- uid: System.Windows.Controls.Control.CharacterSpacingProperty
+  commentId: F:System.Windows.Controls.Control.CharacterSpacingProperty
   parent: System.Windows.Controls.Control
-  name: OnMouseRightButtonDown(MouseButtonEventArgs)
-  nameWithType: Control.OnMouseRightButtonDown(MouseButtonEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  name: CharacterSpacingProperty
+  nameWithType: Control.CharacterSpacingProperty
+  fullName: System.Windows.Controls.Control.CharacterSpacingProperty
+- uid: System.Windows.Controls.Control.CharacterSpacing
+  commentId: P:System.Windows.Controls.Control.CharacterSpacing
   parent: System.Windows.Controls.Control
-  name: OnMouseWheel(MouseWheelEventArgs)
-  nameWithType: Control.OnMouseWheel(MouseWheelEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: CharacterSpacing
+  nameWithType: Control.CharacterSpacing
+  fullName: System.Windows.Controls.Control.CharacterSpacing
 - uid: System.Windows.Controls.Control.TabNavigationProperty
   commentId: F:System.Windows.Controls.Control.TabNavigationProperty
   parent: System.Windows.Controls.Control
@@ -2508,42 +2553,6 @@ references:
   name: FontStretch
   nameWithType: Control.FontStretch
   fullName: System.Windows.Controls.Control.FontStretch
-- uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  parent: System.Windows.Controls.Control
-  name: OnTextInput(TextCompositionEventArgs)
-  nameWithType: Control.OnTextInput(TextCompositionEventArgs)
-  fullName: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   commentId: M:System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   parent: System.Windows.Controls.Control
@@ -3024,6 +3033,12 @@ references:
   name: DataContextChanged
   nameWithType: FrameworkElement.DataContextChanged
   fullName: System.Windows.FrameworkElement.DataContextChanged
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  parent: System.Windows.FrameworkElement
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   parent: System.Windows.FrameworkElement
@@ -3058,18 +3073,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  parent: System.Windows.FrameworkElement
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  parent: System.Windows.FrameworkElement
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -3202,6 +3205,12 @@ references:
   name: DefaultStyleKeyProperty
   nameWithType: FrameworkElement.DefaultStyleKeyProperty
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  parent: System.Windows.FrameworkElement
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
 - uid: System.Windows.FrameworkElement.Loaded
   commentId: E:System.Windows.FrameworkElement.Loaded
   parent: System.Windows.FrameworkElement
@@ -3220,100 +3229,6 @@ references:
   name: BindingValidationError
   nameWithType: FrameworkElement.BindingValidationError
   fullName: System.Windows.FrameworkElement.BindingValidationError
-- uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: RegisterName(String, Object)
-  nameWithType: FrameworkElement.RegisterName(String, Object)
-  fullName: System.Windows.FrameworkElement.RegisterName(System.String, System.Object)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-  commentId: M:System.Windows.FrameworkElement.UnregisterName(System.String)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: UnregisterName(String)
-  nameWithType: FrameworkElement.UnregisterName(String)
-  fullName: System.Windows.FrameworkElement.UnregisterName(System.String)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.FrameworkElement
@@ -3398,6 +3313,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   parent: System.Windows.FrameworkElement
@@ -3530,6 +3469,24 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  parent: System.Windows.FrameworkElement
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.FrameworkElement.SizeChanged
   commentId: E:System.Windows.FrameworkElement.SizeChanged
   parent: System.Windows.FrameworkElement
@@ -3572,6 +3529,12 @@ references:
   name: Drop
   nameWithType: UIElement.Drop
   fullName: System.Windows.UIElement.Drop
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  parent: System.Windows.UIElement
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
 - uid: System.Windows.UIElement.OpacityMask
   commentId: P:System.Windows.UIElement.OpacityMask
   parent: System.Windows.UIElement
@@ -3608,18 +3571,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.OnCreateAutomationPeer
   commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
   parent: System.Windows.UIElement
@@ -3678,6 +3629,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -3887,12 +3850,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -4243,6 +4200,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -4351,6 +4430,90 @@ references:
   name: MouseRightButtonDown
   nameWithType: UIElement.MouseRightButtonDown
   fullName: System.Windows.UIElement.MouseRightButtonDown
+- uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseRightButtonDown(MouseButtonEventArgs)
+  nameWithType: UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)
+  fullName: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseLeftButtonUpEvent
   commentId: F:System.Windows.UIElement.MouseLeftButtonUpEvent
   parent: System.Windows.UIElement
@@ -4495,24 +4658,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -4525,12 +4718,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -4884,128 +5071,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -5610,6 +5675,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -5705,6 +6085,64 @@ references:
     nameWithType: Double
     fullName: System.Double
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+  commentId: M:System.Windows.Controls.ItemsControlExtensions.GetItemsHost(System.Windows.Controls.ItemsControl)
+  parent: System.Windows.Controls.ItemsControlExtensions
+  definition: System.Windows.Controls.ItemsControlExtensions.GetItemsHost(System.Windows.Controls.ItemsControl)
+  name: GetItemsHost()
+  nameWithType: ItemsControlExtensions.GetItemsHost()
+  fullName: System.Windows.Controls.ItemsControlExtensions.GetItemsHost()
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+    name: GetItemsHost
+    nameWithType: ItemsControlExtensions.GetItemsHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+    name: GetItemsHost
+    nameWithType: ItemsControlExtensions.GetItemsHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetScrollHost
+  commentId: M:System.Windows.Controls.ItemsControlExtensions.GetScrollHost(System.Windows.Controls.ItemsControl)
+  parent: System.Windows.Controls.ItemsControlExtensions
+  definition: System.Windows.Controls.ItemsControlExtensions.GetScrollHost(System.Windows.Controls.ItemsControl)
+  name: GetScrollHost()
+  nameWithType: ItemsControlExtensions.GetScrollHost()
+  fullName: System.Windows.Controls.ItemsControlExtensions.GetScrollHost()
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetScrollHost
+    name: GetScrollHost
+    nameWithType: ItemsControlExtensions.GetScrollHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetScrollHost
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetScrollHost
+    name: GetScrollHost
+    nameWithType: ItemsControlExtensions.GetScrollHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetScrollHost
+  - name: (
+    nameWithType: (
+    fullName: (
   - name: )
     nameWithType: )
     fullName: )
@@ -6099,45 +6537,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
@@ -6280,6 +6723,82 @@ references:
   name: ScrollExtensions
   nameWithType: ScrollExtensions
   fullName: System.Windows.Controls.ScrollExtensions
+- uid: System.Windows.Controls.ItemsControlExtensions.GetItemsHost(System.Windows.Controls.ItemsControl)
+  commentId: M:System.Windows.Controls.ItemsControlExtensions.GetItemsHost(System.Windows.Controls.ItemsControl)
+  name: GetItemsHost(ItemsControl)
+  nameWithType: ItemsControlExtensions.GetItemsHost(ItemsControl)
+  fullName: System.Windows.Controls.ItemsControlExtensions.GetItemsHost(System.Windows.Controls.ItemsControl)
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetItemsHost(System.Windows.Controls.ItemsControl)
+    name: GetItemsHost
+    nameWithType: ItemsControlExtensions.GetItemsHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.ItemsControl
+    name: ItemsControl
+    nameWithType: ItemsControl
+    fullName: System.Windows.Controls.ItemsControl
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetItemsHost(System.Windows.Controls.ItemsControl)
+    name: GetItemsHost
+    nameWithType: ItemsControlExtensions.GetItemsHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetItemsHost
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.ItemsControl
+    name: ItemsControl
+    nameWithType: ItemsControl
+    fullName: System.Windows.Controls.ItemsControl
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.ItemsControlExtensions
+  commentId: T:System.Windows.Controls.ItemsControlExtensions
+  parent: System.Windows.Controls
+  name: ItemsControlExtensions
+  nameWithType: ItemsControlExtensions
+  fullName: System.Windows.Controls.ItemsControlExtensions
+- uid: System.Windows.Controls.ItemsControlExtensions.GetScrollHost(System.Windows.Controls.ItemsControl)
+  commentId: M:System.Windows.Controls.ItemsControlExtensions.GetScrollHost(System.Windows.Controls.ItemsControl)
+  name: GetScrollHost(ItemsControl)
+  nameWithType: ItemsControlExtensions.GetScrollHost(ItemsControl)
+  fullName: System.Windows.Controls.ItemsControlExtensions.GetScrollHost(System.Windows.Controls.ItemsControl)
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetScrollHost(System.Windows.Controls.ItemsControl)
+    name: GetScrollHost
+    nameWithType: ItemsControlExtensions.GetScrollHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetScrollHost
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.ItemsControl
+    name: ItemsControl
+    nameWithType: ItemsControl
+    fullName: System.Windows.Controls.ItemsControl
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControlExtensions.GetScrollHost(System.Windows.Controls.ItemsControl)
+    name: GetScrollHost
+    nameWithType: ItemsControlExtensions.GetScrollHost
+    fullName: System.Windows.Controls.ItemsControlExtensions.GetScrollHost
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.ItemsControl
+    name: ItemsControl
+    nameWithType: ItemsControl
+    fullName: System.Windows.Controls.ItemsControl
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.Controls.ItemsControlExtensions.GetContainers(System.Windows.Controls.ItemsControl)
   commentId: M:System.Windows.Controls.ItemsControlExtensions.GetContainers(System.Windows.Controls.ItemsControl)
   name: GetContainers(ItemsControl)
@@ -6315,12 +6834,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.ItemsControlExtensions
-  commentId: T:System.Windows.Controls.ItemsControlExtensions
-  parent: System.Windows.Controls
-  name: ItemsControlExtensions
-  nameWithType: ItemsControlExtensions
-  fullName: System.Windows.Controls.ItemsControlExtensions
 - uid: System.Windows.Controls.ItemsControlExtensions.GetContainers``1(System.Windows.Controls.ItemsControl)
   commentId: M:System.Windows.Controls.ItemsControlExtensions.GetContainers``1(System.Windows.Controls.ItemsControl)
   name: GetContainers<TContainer>(ItemsControl)
@@ -6767,14 +7280,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -6788,16 +7301,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -6811,10 +7324,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -6824,18 +7337,57 @@ references:
   name: ToJavaScriptObjectExtender
   nameWithType: ToJavaScriptObjectExtender
   fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
-  commentId: P:System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
-  parent: System.Windows.Controls.Primitives.Selector
-  name: IsSynchronizedWithCurrentItem
-  nameWithType: Selector.IsSynchronizedWithCurrentItem
-  fullName: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
+- uid: System.Windows.Controls.Primitives.Selector.#ctor*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.#ctor
+  name: Selector
+  nameWithType: Selector.Selector
+  fullName: System.Windows.Controls.Primitives.Selector.Selector
+- uid: System.Windows.Controls.SelectionChangedEventHandler
+  commentId: T:System.Windows.Controls.SelectionChangedEventHandler
+  parent: System.Windows.Controls
+  name: SelectionChangedEventHandler
+  nameWithType: SelectionChangedEventHandler
+  fullName: System.Windows.Controls.SelectionChangedEventHandler
+- uid: System.Windows.Controls.Primitives.Selector.SelectedIndex*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedIndex
+  name: SelectedIndex
+  nameWithType: Selector.SelectedIndex
+  fullName: System.Windows.Controls.Primitives.Selector.SelectedIndex
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
 - uid: System.Windows.DependencyProperty
   commentId: T:System.Windows.DependencyProperty
   parent: System.Windows
   name: DependencyProperty
   nameWithType: DependencyProperty
   fullName: System.Windows.DependencyProperty
+- uid: System.Windows.Controls.Primitives.Selector.SelectedItem*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedItem
+  name: SelectedItem
+  nameWithType: Selector.SelectedItem
+  fullName: System.Windows.Controls.Primitives.Selector.SelectedItem
+- uid: System.Windows.Controls.Primitives.Selector.SelectedValue*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedValue
+  name: SelectedValue
+  nameWithType: Selector.SelectedValue
+  fullName: System.Windows.Controls.Primitives.Selector.SelectedValue
+- uid: System.Windows.Controls.Primitives.Selector.SelectedValuePath*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedValuePath
+  name: SelectedValuePath
+  nameWithType: Selector.SelectedValuePath
+  fullName: System.Windows.Controls.Primitives.Selector.SelectedValuePath
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
 - uid: System.Windows.Controls.Primitives.Selector
   commentId: T:System.Windows.Controls.Primitives.Selector
   parent: System.Windows.Controls.Primitives
@@ -6854,6 +7406,12 @@ references:
   name: ICollectionView
   nameWithType: ICollectionView
   fullName: System.ComponentModel.ICollectionView
+- uid: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
+  commentId: P:System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
+  parent: System.Windows.Controls.Primitives.Selector
+  name: IsSynchronizedWithCurrentItem
+  nameWithType: Selector.IsSynchronizedWithCurrentItem
+  fullName: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
 - uid: System.ArgumentException
   commentId: T:System.ArgumentException
   isExternal: true
@@ -6863,7 +7421,8 @@ references:
   nameWithType: Selector.IsSynchronizedWithCurrentItem
   fullName: System.Windows.Controls.Primitives.Selector.IsSynchronizedWithCurrentItem
 - uid: System.Nullable{System.Boolean}
-  commentId: '!:System.Nullable{System.Boolean}'
+  commentId: T:System.Nullable{System.Boolean}
+  parent: System
   definition: System.Nullable`1
   name: Nullable<Boolean>
   nameWithType: Nullable<Boolean>
@@ -6911,13 +7470,14 @@ references:
   nameWithType: System.ComponentModel
   fullName: System.ComponentModel
 - uid: System.Nullable`1
+  commentId: T:System.Nullable`1
   isExternal: true
-  name: Nullable<>
-  nameWithType: Nullable<>
-  fullName: System.Nullable<>
-  nameWithType.vb: Nullable(Of )
-  fullName.vb: System.Nullable(Of )
-  name.vb: Nullable(Of )
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
   spec.csharp:
   - uid: System.Nullable`1
     name: Nullable
@@ -6927,9 +7487,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -6942,53 +7502,281 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.Selector.#ctor*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.#ctor
-  name: Selector
-  nameWithType: Selector.Selector
-  fullName: System.Windows.Controls.Primitives.Selector.Selector
-- uid: System.Windows.Controls.SelectionChangedEventHandler
-  commentId: T:System.Windows.Controls.SelectionChangedEventHandler
+- uid: System.Windows.Controls.Primitives.Selector.HasItems*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.HasItems
+  name: HasItems
+  nameWithType: Selector.HasItems
+  fullName: System.Windows.Controls.Primitives.Selector.HasItems
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+  commentId: M:System.Windows.Controls.ItemsControl.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+  parent: System.Windows.Controls.ItemsControl
+  isExternal: true
+  name: OnItemsSourceChanged(IEnumerable, IEnumerable)
+  nameWithType: ItemsControl.OnItemsSourceChanged(IEnumerable, IEnumerable)
+  fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(System.Collections.IEnumerable, System.Collections.IEnumerable)
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+    name: OnItemsSourceChanged
+    nameWithType: ItemsControl.OnItemsSourceChanged
+    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.IEnumerable
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.IEnumerable
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.IEnumerable
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.IEnumerable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
+    name: OnItemsSourceChanged
+    nameWithType: ItemsControl.OnItemsSourceChanged
+    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.IEnumerable
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.IEnumerable
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Collections.IEnumerable
+    name: IEnumerable
+    nameWithType: IEnumerable
+    fullName: System.Collections.IEnumerable
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged
+  name: OnItemsSourceChanged
+  nameWithType: Selector.OnItemsSourceChanged
+  fullName: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+- uid: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  commentId: M:System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  parent: System.Windows.Controls.ItemsControl
+  isExternal: true
+  name: PrepareContainerForItemOverride(DependencyObject, Object)
+  nameWithType: ItemsControl.PrepareContainerForItemOverride(DependencyObject, Object)
+  fullName: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject, System.Object)
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+    name: PrepareContainerForItemOverride
+    nameWithType: ItemsControl.PrepareContainerForItemOverride
+    fullName: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+    name: PrepareContainerForItemOverride
+    nameWithType: ItemsControl.PrepareContainerForItemOverride
+    fullName: System.Windows.Controls.ItemsControl.PrepareContainerForItemOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride
+  name: PrepareContainerForItemOverride
+  nameWithType: Selector.PrepareContainerForItemOverride
+  fullName: System.Windows.Controls.Primitives.Selector.PrepareContainerForItemOverride
+- uid: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  commentId: M:System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+  parent: System.Windows.Controls.ItemsControl
+  isExternal: true
+  name: ClearContainerForItemOverride(DependencyObject, Object)
+  nameWithType: ItemsControl.ClearContainerForItemOverride(DependencyObject, Object)
+  fullName: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject, System.Object)
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+    name: ClearContainerForItemOverride
+    nameWithType: ItemsControl.ClearContainerForItemOverride
+    fullName: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
+    name: ClearContainerForItemOverride
+    nameWithType: ItemsControl.ClearContainerForItemOverride
+    fullName: System.Windows.Controls.ItemsControl.ClearContainerForItemOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride
+  name: ClearContainerForItemOverride
+  nameWithType: Selector.ClearContainerForItemOverride
+  fullName: System.Windows.Controls.Primitives.Selector.ClearContainerForItemOverride
+- uid: System.Windows.Controls.ItemsControl.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  commentId: M:System.Windows.Controls.ItemsControl.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  parent: System.Windows.Controls.ItemsControl
+  isExternal: true
+  name: OnItemsChanged(NotifyCollectionChangedEventArgs)
+  nameWithType: ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
+  fullName: System.Windows.Controls.ItemsControl.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.ItemsControl.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: OnItemsChanged
+    nameWithType: ItemsControl.OnItemsChanged
+    fullName: System.Windows.Controls.ItemsControl.OnItemsChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    nameWithType: NotifyCollectionChangedEventArgs
+    fullName: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.ItemsControl.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+    name: OnItemsChanged
+    nameWithType: ItemsControl.OnItemsChanged
+    fullName: System.Windows.Controls.ItemsControl.OnItemsChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    name: NotifyCollectionChangedEventArgs
+    nameWithType: NotifyCollectionChangedEventArgs
+    fullName: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Primitives.Selector.OnItemsChanged*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.OnItemsChanged
+  name: OnItemsChanged
+  nameWithType: Selector.OnItemsChanged
+  fullName: System.Windows.Controls.Primitives.Selector.OnItemsChanged
+- uid: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+  commentId: T:System.Collections.Specialized.NotifyCollectionChangedEventArgs
+  parent: System.Collections.Specialized
+  isExternal: true
+  name: NotifyCollectionChangedEventArgs
+  nameWithType: NotifyCollectionChangedEventArgs
+  fullName: System.Collections.Specialized.NotifyCollectionChangedEventArgs
+- uid: System.Collections.Specialized
+  commentId: N:System.Collections.Specialized
+  isExternal: true
+  name: System.Collections.Specialized
+  nameWithType: System.Collections.Specialized
+  fullName: System.Collections.Specialized
+- uid: System.Windows.Controls.Primitives.Selector.OnSelectionChanged*
+  commentId: Overload:System.Windows.Controls.Primitives.Selector.OnSelectionChanged
+  name: OnSelectionChanged
+  nameWithType: Selector.OnSelectionChanged
+  fullName: System.Windows.Controls.Primitives.Selector.OnSelectionChanged
+- uid: System.Windows.Controls.SelectionChangedEventArgs
+  commentId: T:System.Windows.Controls.SelectionChangedEventArgs
   parent: System.Windows.Controls
-  name: SelectionChangedEventHandler
-  nameWithType: SelectionChangedEventHandler
-  fullName: System.Windows.Controls.SelectionChangedEventHandler
-- uid: System.Windows.Controls.Primitives.Selector.SelectedItem*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedItem
-  name: SelectedItem
-  nameWithType: Selector.SelectedItem
-  fullName: System.Windows.Controls.Primitives.Selector.SelectedItem
-- uid: System.Windows.Controls.Primitives.Selector.SelectedIndex*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedIndex
-  name: SelectedIndex
-  nameWithType: Selector.SelectedIndex
-  fullName: System.Windows.Controls.Primitives.Selector.SelectedIndex
-- uid: System.Int32
-  isExternal: true
-  name: Int32
-  nameWithType: Int32
-  fullName: System.Int32
-- uid: System.Windows.Controls.Primitives.Selector.SelectedValue*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedValue
-  name: SelectedValue
-  nameWithType: Selector.SelectedValue
-  fullName: System.Windows.Controls.Primitives.Selector.SelectedValue
-- uid: System.Windows.Controls.Primitives.Selector.SelectedValuePath*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedValuePath
-  name: SelectedValuePath
-  nameWithType: Selector.SelectedValuePath
-  fullName: System.Windows.Controls.Primitives.Selector.SelectedValuePath
-- uid: System.String
-  isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
+  name: SelectionChangedEventArgs
+  nameWithType: SelectionChangedEventArgs
+  fullName: System.Windows.Controls.SelectionChangedEventArgs
 - uid: System.Windows.Controls.Primitives.Selector.SelectedItemBackground*
   commentId: Overload:System.Windows.Controls.Primitives.Selector.SelectedItemBackground
   name: SelectedItemBackground
@@ -7020,163 +7808,6 @@ references:
   name: UnselectedItemForeground
   nameWithType: Selector.UnselectedItemForeground
   fullName: System.Windows.Controls.Primitives.Selector.UnselectedItemForeground
-- uid: System.Windows.Controls.Primitives.Selector.OnSelectionChanged*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.OnSelectionChanged
-  name: OnSelectionChanged
-  nameWithType: Selector.OnSelectionChanged
-  fullName: System.Windows.Controls.Primitives.Selector.OnSelectionChanged
-- uid: System.Windows.Controls.SelectionChangedEventArgs
-  commentId: T:System.Windows.Controls.SelectionChangedEventArgs
-  parent: System.Windows.Controls
-  name: SelectionChangedEventArgs
-  nameWithType: SelectionChangedEventArgs
-  fullName: System.Windows.Controls.SelectionChangedEventArgs
-- uid: System.Windows.Controls.ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  commentId: M:System.Windows.Controls.ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  parent: System.Windows.Controls.ItemsControl
-  isExternal: true
-  name: OnItemsChanged(NotifyCollectionChangedEventArgs)
-  nameWithType: ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  fullName: System.Windows.Controls.ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
-    name: OnItemsChanged
-    nameWithType: ItemsControl.OnItemsChanged
-    fullName: System.Windows.Controls.ItemsControl.OnItemsChanged
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: NotifyCollectionChangedEventArgs
-    name: NotifyCollectionChangedEventArgs
-    nameWithType: NotifyCollectionChangedEventArgs
-    fullName: NotifyCollectionChangedEventArgs
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ItemsControl.OnItemsChanged(NotifyCollectionChangedEventArgs)
-    name: OnItemsChanged
-    nameWithType: ItemsControl.OnItemsChanged
-    fullName: System.Windows.Controls.ItemsControl.OnItemsChanged
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: NotifyCollectionChangedEventArgs
-    name: NotifyCollectionChangedEventArgs
-    nameWithType: NotifyCollectionChangedEventArgs
-    fullName: NotifyCollectionChangedEventArgs
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.Selector.OnItemsChanged*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.OnItemsChanged
-  name: OnItemsChanged
-  nameWithType: Selector.OnItemsChanged
-  fullName: System.Windows.Controls.Primitives.Selector.OnItemsChanged
-- uid: NotifyCollectionChangedEventArgs
-  isExternal: true
-  name: NotifyCollectionChangedEventArgs
-  nameWithType: NotifyCollectionChangedEventArgs
-  fullName: NotifyCollectionChangedEventArgs
-- uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-  commentId: M:System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-  parent: System.Windows.Controls.ItemsControl
-  isExternal: true
-  name: OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
-  nameWithType: ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
-  fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable, IEnumerable)
-  spec.csharp:
-  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-    name: OnItemsSourceChanged_BeforeVisualUpdate
-    nameWithType: ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
-    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: IEnumerable
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: IEnumerable
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: IEnumerable
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: IEnumerable
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(IEnumerable,IEnumerable)
-    name: OnItemsSourceChanged_BeforeVisualUpdate
-    nameWithType: ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
-    fullName: System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: IEnumerable
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: IEnumerable
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: IEnumerable
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: IEnumerable
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate
-  name: OnItemsSourceChanged_BeforeVisualUpdate
-  nameWithType: Selector.OnItemsSourceChanged_BeforeVisualUpdate
-  fullName: System.Windows.Controls.Primitives.Selector.OnItemsSourceChanged_BeforeVisualUpdate
-- uid: IEnumerable
-  isExternal: true
-  name: IEnumerable
-  nameWithType: IEnumerable
-  fullName: IEnumerable
-- uid: System.Windows.Controls.Primitives.Selector.ApplySelectedIndex*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.ApplySelectedIndex
-  name: ApplySelectedIndex
-  nameWithType: Selector.ApplySelectedIndex
-  fullName: System.Windows.Controls.Primitives.Selector.ApplySelectedIndex
-- uid: System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed
-  name: ManageSelectedIndex_Changed
-  nameWithType: Selector.ManageSelectedIndex_Changed
-  fullName: System.Windows.Controls.Primitives.Selector.ManageSelectedIndex_Changed
-- uid: System.Windows.DependencyPropertyChangedEventArgs
-  commentId: T:System.Windows.DependencyPropertyChangedEventArgs
-  parent: System.Windows
-  name: DependencyPropertyChangedEventArgs
-  nameWithType: DependencyPropertyChangedEventArgs
-  fullName: System.Windows.DependencyPropertyChangedEventArgs
-- uid: System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged
-  name: OnSelectedItemChanged
-  nameWithType: Selector.OnSelectedItemChanged
-  fullName: System.Windows.Controls.Primitives.Selector.OnSelectedItemChanged
-- uid: System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter*
-  commentId: Overload:System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter
-  name: NotifyItemMouseEnter
-  nameWithType: Selector.NotifyItemMouseEnter
-  fullName: System.Windows.Controls.Primitives.Selector.NotifyItemMouseEnter
-- uid: System.Windows.Controls.Primitives.SelectorItem
-  commentId: T:System.Windows.Controls.Primitives.SelectorItem
-  parent: System.Windows.Controls.Primitives
-  name: SelectorItem
-  nameWithType: SelectorItem
-  fullName: System.Windows.Controls.Primitives.SelectorItem
 - uid: System.Windows.Controls.Primitives.Selector.UnselectedItemBackground*
   commentId: Overload:System.Windows.Controls.Primitives.Selector.UnselectedItemBackground
   name: UnselectedItemBackground
@@ -7187,8 +7818,3 @@ references:
   name: ChangingSelectionProgrammatically
   nameWithType: Selector.ChangingSelectionProgrammatically
   fullName: System.Windows.Controls.Primitives.Selector.ChangingSelectionProgrammatically
-- uid: System.Boolean
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean

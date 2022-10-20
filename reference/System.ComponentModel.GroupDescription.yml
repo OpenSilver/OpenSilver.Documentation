@@ -7,14 +7,13 @@ items:
   children:
   - System.ComponentModel.GroupDescription.#ctor
   - System.ComponentModel.GroupDescription.CustomSort
-  - System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object,System.Int32,CultureInfo)
+  - System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object,System.Int32,System.Globalization.CultureInfo)
   - System.ComponentModel.GroupDescription.GroupNames
   - System.ComponentModel.GroupDescription.NamesMatch(System.Object,System.Object)
-  - System.ComponentModel.GroupDescription.OnPropertyChanged(PropertyChangedEventArgs)
+  - System.ComponentModel.GroupDescription.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
   - System.ComponentModel.GroupDescription.PropertyChanged
-  - System.ComponentModel.GroupDescription.ShouldSerializeGroupNames
-  - System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions
   - System.ComponentModel.GroupDescription.SortDescriptions
+  - System.ComponentModel.GroupDescription.System#ComponentModel#INotifyPropertyChanged#PropertyChanged
   langs:
   - csharp
   - vb
@@ -23,8 +22,12 @@ items:
   fullName: System.ComponentModel.GroupDescription
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GroupDescription
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 28
   assemblies:
   - OpenSilver
@@ -35,11 +38,22 @@ items:
     content: 'public abstract class GroupDescription : INotifyPropertyChanged'
     content.vb: >-
       Public MustInherit Class GroupDescription
-          Inherits INotifyPropertyChanged
+
+          Implements INotifyPropertyChanged
   inheritance:
   - System.Object
   derivedClasses:
   - System.Windows.Data.PropertyGroupDescription
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
@@ -62,8 +76,12 @@ items:
   fullName: System.ComponentModel.GroupDescription.GroupDescription()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 41
   assemblies:
   - OpenSilver
@@ -78,6 +96,40 @@ items:
   - protected
   modifiers.vb:
   - Protected
+- uid: System.ComponentModel.GroupDescription.System#ComponentModel#INotifyPropertyChanged#PropertyChanged
+  commentId: E:System.ComponentModel.GroupDescription.System#ComponentModel#INotifyPropertyChanged#PropertyChanged
+  id: System#ComponentModel#INotifyPropertyChanged#PropertyChanged
+  isEii: true
+  parent: System.ComponentModel.GroupDescription
+  langs:
+  - csharp
+  - vb
+  name: INotifyPropertyChanged.PropertyChanged
+  nameWithType: GroupDescription.INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.GroupDescription.System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+    startLine: 54
+  assemblies:
+  - OpenSilver
+  namespace: System.ComponentModel
+  summary: "\nThis event is raised when a property of the group description has changed.\n"
+  example: []
+  syntax:
+    content: event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+    return:
+      type: System.ComponentModel.PropertyChangedEventHandler
+    content.vb: Event System.ComponentModel.INotifyPropertyChanged.PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  nameWithType.vb: GroupDescription.System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  name.vb: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
 - uid: System.ComponentModel.GroupDescription.PropertyChanged
   commentId: E:System.ComponentModel.GroupDescription.PropertyChanged
   id: PropertyChanged
@@ -90,18 +142,22 @@ items:
   fullName: System.ComponentModel.GroupDescription.PropertyChanged
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: PropertyChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 69
   assemblies:
   - OpenSilver
   namespace: System.ComponentModel
-  summary: "\nPropertyChanged event (per <see cref=\"!:INotifyPropertyChanged\"></see>).\n"
+  summary: "\nPropertyChanged event (per <xref href=\"System.ComponentModel.INotifyPropertyChanged\" data-throw-if-not-resolved=\"false\"></xref>).\n"
   example: []
   syntax:
     content: protected virtual event PropertyChangedEventHandler PropertyChanged
     return:
-      type: PropertyChangedEventHandler
+      type: System.ComponentModel.PropertyChangedEventHandler
     content.vb: Protected Overridable Event PropertyChanged As PropertyChangedEventHandler
   modifiers.csharp:
   - protected
@@ -109,20 +165,24 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: System.ComponentModel.GroupDescription.OnPropertyChanged(PropertyChangedEventArgs)
-  commentId: M:System.ComponentModel.GroupDescription.OnPropertyChanged(PropertyChangedEventArgs)
-  id: OnPropertyChanged(PropertyChangedEventArgs)
+- uid: System.ComponentModel.GroupDescription.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  commentId: M:System.ComponentModel.GroupDescription.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
+  id: OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
   parent: System.ComponentModel.GroupDescription
   langs:
   - csharp
   - vb
   name: OnPropertyChanged(PropertyChangedEventArgs)
   nameWithType: GroupDescription.OnPropertyChanged(PropertyChangedEventArgs)
-  fullName: System.ComponentModel.GroupDescription.OnPropertyChanged(PropertyChangedEventArgs)
+  fullName: System.ComponentModel.GroupDescription.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnPropertyChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 74
   assemblies:
   - OpenSilver
@@ -133,7 +193,7 @@ items:
     content: protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
     parameters:
     - id: e
-      type: PropertyChangedEventArgs
+      type: System.ComponentModel.PropertyChangedEventArgs
     content.vb: Protected Overridable Sub OnPropertyChanged(e As PropertyChangedEventArgs)
   overload: System.ComponentModel.GroupDescription.OnPropertyChanged*
   modifiers.csharp:
@@ -154,8 +214,12 @@ items:
   fullName: System.ComponentModel.GroupDescription.GroupNames
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GroupNames
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 97
   assemblies:
   - OpenSilver
@@ -166,7 +230,7 @@ items:
     content: public ObservableCollection<object> GroupNames { get; }
     parameters: []
     return:
-      type: ObservableCollection{System.Object}
+      type: System.Collections.ObjectModel.ObservableCollection{System.Object}
     content.vb: Public ReadOnly Property GroupNames As ObservableCollection(Of Object)
   overload: System.ComponentModel.GroupDescription.GroupNames*
   modifiers.csharp:
@@ -175,36 +239,6 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.ComponentModel.GroupDescription.ShouldSerializeGroupNames
-  commentId: M:System.ComponentModel.GroupDescription.ShouldSerializeGroupNames
-  id: ShouldSerializeGroupNames
-  parent: System.ComponentModel.GroupDescription
-  langs:
-  - csharp
-  - vb
-  name: ShouldSerializeGroupNames()
-  nameWithType: GroupDescription.ShouldSerializeGroupNames()
-  fullName: System.ComponentModel.GroupDescription.ShouldSerializeGroupNames()
-  type: Method
-  source:
-    id: ShouldSerializeGroupNames
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
-    startLine: 106
-  assemblies:
-  - OpenSilver
-  namespace: System.ComponentModel
-  summary: "\nThis method is used by TypeDescriptor to determine if this property should\nbe serialized.\n"
-  example: []
-  syntax:
-    content: public bool ShouldSerializeGroupNames()
-    return:
-      type: System.Boolean
-    content.vb: Public Function ShouldSerializeGroupNames As Boolean
-  overload: System.ComponentModel.GroupDescription.ShouldSerializeGroupNames*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: System.ComponentModel.GroupDescription.SortDescriptions
   commentId: P:System.ComponentModel.GroupDescription.SortDescriptions
   id: SortDescriptions
@@ -217,8 +251,12 @@ items:
   fullName: System.ComponentModel.GroupDescription.SortDescriptions
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SortDescriptions
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 115
   assemblies:
   - OpenSilver
@@ -238,36 +276,6 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions
-  commentId: M:System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions
-  id: ShouldSerializeSortDescriptions
-  parent: System.ComponentModel.GroupDescription
-  langs:
-  - csharp
-  - vb
-  name: ShouldSerializeSortDescriptions()
-  nameWithType: GroupDescription.ShouldSerializeSortDescriptions()
-  fullName: System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions()
-  type: Method
-  source:
-    id: ShouldSerializeSortDescriptions
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
-    startLine: 129
-  assemblies:
-  - OpenSilver
-  namespace: System.ComponentModel
-  summary: "\nThis method is used by TypeDescriptor to determine if this property should\nbe serialized.\n"
-  example: []
-  syntax:
-    content: public bool ShouldSerializeSortDescriptions()
-    return:
-      type: System.Boolean
-    content.vb: Public Function ShouldSerializeSortDescriptions As Boolean
-  overload: System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: System.ComponentModel.GroupDescription.CustomSort
   commentId: P:System.ComponentModel.GroupDescription.CustomSort
   id: CustomSort
@@ -280,8 +288,12 @@ items:
   fullName: System.ComponentModel.GroupDescription.CustomSort
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CustomSort
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 141
   assemblies:
   - OpenSilver
@@ -293,7 +305,7 @@ items:
     content: public IComparer CustomSort { get; set; }
     parameters: []
     return:
-      type: IComparer
+      type: System.Collections.IComparer
     content.vb: Public Property CustomSort As IComparer
   overload: System.ComponentModel.GroupDescription.CustomSort*
   modifiers.csharp:
@@ -302,20 +314,24 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object,System.Int32,CultureInfo)
-  commentId: M:System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object,System.Int32,CultureInfo)
-  id: GroupNameFromItem(System.Object,System.Int32,CultureInfo)
+- uid: System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object,System.Int32,System.Globalization.CultureInfo)
+  commentId: M:System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object,System.Int32,System.Globalization.CultureInfo)
+  id: GroupNameFromItem(System.Object,System.Int32,System.Globalization.CultureInfo)
   parent: System.ComponentModel.GroupDescription
   langs:
   - csharp
   - vb
   name: GroupNameFromItem(Object, Int32, CultureInfo)
   nameWithType: GroupDescription.GroupNameFromItem(Object, Int32, CultureInfo)
-  fullName: System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object, System.Int32, CultureInfo)
+  fullName: System.ComponentModel.GroupDescription.GroupNameFromItem(System.Object, System.Int32, System.Globalization.CultureInfo)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GroupNameFromItem
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 165
   assemblies:
   - OpenSilver
@@ -330,7 +346,7 @@ items:
     - id: level
       type: System.Int32
     - id: culture
-      type: CultureInfo
+      type: System.Globalization.CultureInfo
     return:
       type: System.Object
     content.vb: Public MustOverride Function GroupNameFromItem(item As Object, level As Integer, culture As CultureInfo) As Object
@@ -353,8 +369,12 @@ items:
   fullName: System.ComponentModel.GroupDescription.NamesMatch(System.Object, System.Object)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: NamesMatch
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.ComponentModel\GroupDescription.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.ComponentModel/GroupDescription.cs
     startLine: 170
   assemblies:
   - OpenSilver
@@ -386,10 +406,297 @@ references:
   fullName: System.ComponentModel
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -419,6 +726,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -473,40 +785,52 @@ references:
   name: GroupDescription
   nameWithType: GroupDescription.GroupDescription
   fullName: System.ComponentModel.GroupDescription.GroupDescription
-- uid: PropertyChangedEventHandler
+- uid: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  commentId: E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+  parent: System.ComponentModel.INotifyPropertyChanged
+  isExternal: true
+  name: PropertyChanged
+  nameWithType: INotifyPropertyChanged.PropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+- uid: System.ComponentModel.PropertyChangedEventHandler
+  commentId: T:System.ComponentModel.PropertyChangedEventHandler
+  parent: System.ComponentModel
   isExternal: true
   name: PropertyChangedEventHandler
   nameWithType: PropertyChangedEventHandler
-  fullName: PropertyChangedEventHandler
+  fullName: System.ComponentModel.PropertyChangedEventHandler
 - uid: System.ComponentModel.GroupDescription.OnPropertyChanged*
   commentId: Overload:System.ComponentModel.GroupDescription.OnPropertyChanged
   name: OnPropertyChanged
   nameWithType: GroupDescription.OnPropertyChanged
   fullName: System.ComponentModel.GroupDescription.OnPropertyChanged
-- uid: PropertyChangedEventArgs
+- uid: System.ComponentModel.PropertyChangedEventArgs
+  commentId: T:System.ComponentModel.PropertyChangedEventArgs
+  parent: System.ComponentModel
   isExternal: true
   name: PropertyChangedEventArgs
   nameWithType: PropertyChangedEventArgs
-  fullName: PropertyChangedEventArgs
+  fullName: System.ComponentModel.PropertyChangedEventArgs
 - uid: System.ComponentModel.GroupDescription.GroupNames*
   commentId: Overload:System.ComponentModel.GroupDescription.GroupNames
   name: GroupNames
   nameWithType: GroupDescription.GroupNames
   fullName: System.ComponentModel.GroupDescription.GroupNames
-- uid: ObservableCollection{System.Object}
-  commentId: '!:ObservableCollection{System.Object}'
-  definition: ObservableCollection`1
+- uid: System.Collections.ObjectModel.ObservableCollection{System.Object}
+  commentId: T:System.Collections.ObjectModel.ObservableCollection{System.Object}
+  parent: System.Collections.ObjectModel
+  definition: System.Collections.ObjectModel.ObservableCollection`1
   name: ObservableCollection<Object>
   nameWithType: ObservableCollection<Object>
-  fullName: ObservableCollection<System.Object>
+  fullName: System.Collections.ObjectModel.ObservableCollection<System.Object>
   nameWithType.vb: ObservableCollection(Of Object)
-  fullName.vb: ObservableCollection(Of System.Object)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of System.Object)
   name.vb: ObservableCollection(Of Object)
   spec.csharp:
-  - uid: ObservableCollection`1
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
     name: ObservableCollection
     nameWithType: ObservableCollection
-    fullName: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
     isExternal: true
   - name: <
     nameWithType: <
@@ -520,10 +844,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ObservableCollection`1
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
     name: ObservableCollection
     nameWithType: ObservableCollection
-    fullName: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -536,54 +860,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: ObservableCollection`1
+- uid: System.Collections.ObjectModel.ObservableCollection`1
+  commentId: T:System.Collections.ObjectModel.ObservableCollection`1
   isExternal: true
-  name: ObservableCollection<>
-  nameWithType: ObservableCollection<>
-  fullName: ObservableCollection<>
-  nameWithType.vb: ObservableCollection(Of )
-  fullName.vb: ObservableCollection(Of )
-  name.vb: ObservableCollection(Of )
+  name: ObservableCollection<T>
+  nameWithType: ObservableCollection<T>
+  fullName: System.Collections.ObjectModel.ObservableCollection<T>
+  nameWithType.vb: ObservableCollection(Of T)
+  fullName.vb: System.Collections.ObjectModel.ObservableCollection(Of T)
+  name.vb: ObservableCollection(Of T)
   spec.csharp:
-  - uid: ObservableCollection`1
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
     name: ObservableCollection
     nameWithType: ObservableCollection
-    fullName: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ObservableCollection`1
+  - uid: System.Collections.ObjectModel.ObservableCollection`1
     name: ObservableCollection
     nameWithType: ObservableCollection
-    fullName: ObservableCollection
+    fullName: System.Collections.ObjectModel.ObservableCollection
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.ComponentModel.GroupDescription.ShouldSerializeGroupNames*
-  commentId: Overload:System.ComponentModel.GroupDescription.ShouldSerializeGroupNames
-  name: ShouldSerializeGroupNames
-  nameWithType: GroupDescription.ShouldSerializeGroupNames
-  fullName: System.ComponentModel.GroupDescription.ShouldSerializeGroupNames
-- uid: System.Boolean
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
+- uid: System.Collections.ObjectModel
+  commentId: N:System.Collections.ObjectModel
+  name: System.Collections.ObjectModel
+  nameWithType: System.Collections.ObjectModel
+  fullName: System.Collections.ObjectModel
 - uid: System.ComponentModel.GroupDescription.SortDescriptions*
   commentId: Overload:System.ComponentModel.GroupDescription.SortDescriptions
   name: SortDescriptions
@@ -595,11 +915,6 @@ references:
   name: SortDescriptionCollection
   nameWithType: SortDescriptionCollection
   fullName: System.ComponentModel.SortDescriptionCollection
-- uid: System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions*
-  commentId: Overload:System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions
-  name: ShouldSerializeSortDescriptions
-  nameWithType: GroupDescription.ShouldSerializeSortDescriptions
-  fullName: System.ComponentModel.GroupDescription.ShouldSerializeSortDescriptions
 - uid: System.ComponentModel.GroupDescription.SortDescriptions
   commentId: P:System.ComponentModel.GroupDescription.SortDescriptions
   parent: System.ComponentModel.GroupDescription
@@ -611,34 +926,59 @@ references:
   name: CustomSort
   nameWithType: GroupDescription.CustomSort
   fullName: System.ComponentModel.GroupDescription.CustomSort
-- uid: IComparer
+- uid: System.Collections.IComparer
+  commentId: T:System.Collections.IComparer
+  parent: System.Collections
   isExternal: true
   name: IComparer
   nameWithType: IComparer
-  fullName: IComparer
+  fullName: System.Collections.IComparer
 - uid: System.ComponentModel.GroupDescription
   commentId: T:System.ComponentModel.GroupDescription
   parent: System.ComponentModel
   name: GroupDescription
   nameWithType: GroupDescription
   fullName: System.ComponentModel.GroupDescription
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
 - uid: System.ComponentModel.GroupDescription.GroupNameFromItem*
   commentId: Overload:System.ComponentModel.GroupDescription.GroupNameFromItem
   name: GroupNameFromItem
   nameWithType: GroupDescription.GroupNameFromItem
   fullName: System.ComponentModel.GroupDescription.GroupNameFromItem
 - uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
-- uid: CultureInfo
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
   isExternal: true
   name: CultureInfo
   nameWithType: CultureInfo
-  fullName: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
 - uid: System.ComponentModel.GroupDescription.NamesMatch*
   commentId: Overload:System.ComponentModel.GroupDescription.NamesMatch
   name: NamesMatch
   nameWithType: GroupDescription.NamesMatch
   fullName: System.ComponentModel.GroupDescription.NamesMatch
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

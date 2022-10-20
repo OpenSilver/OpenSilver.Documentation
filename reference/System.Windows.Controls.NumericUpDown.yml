@@ -8,18 +8,24 @@ items:
   - System.Windows.Controls.NumericUpDown.#ctor
   - System.Windows.Controls.NumericUpDown.DecimalPlaces
   - System.Windows.Controls.NumericUpDown.DecimalPlacesProperty
-  - System.Windows.Controls.NumericUpDown.DoDecrement
-  - System.Windows.Controls.NumericUpDown.DoIncrement
-  - System.Windows.Controls.NumericUpDown.DragSpeed
-  - System.Windows.Controls.NumericUpDown.DragSpeedProperty
+  - System.Windows.Controls.NumericUpDown.FormatValue
   - System.Windows.Controls.NumericUpDown.Increment
   - System.Windows.Controls.NumericUpDown.IncrementProperty
-  - System.Windows.Controls.NumericUpDown.IsReadOnly
-  - System.Windows.Controls.NumericUpDown.IsReadOnlyProperty
+  - System.Windows.Controls.NumericUpDown.Maximum
+  - System.Windows.Controls.NumericUpDown.MaximumProperty
+  - System.Windows.Controls.NumericUpDown.Minimum
+  - System.Windows.Controls.NumericUpDown.MinimumProperty
   - System.Windows.Controls.NumericUpDown.OnApplyTemplate
-  - System.Windows.Controls.NumericUpDown.OnValueChanged(System.Double,System.Double)
-  - System.Windows.Controls.NumericUpDown.ValueBarVisibility
-  - System.Windows.Controls.NumericUpDown.ValueBarVisibilityProperty
+  - System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer
+  - System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged(System.Int32,System.Int32)
+  - System.Windows.Controls.NumericUpDown.OnDecrement
+  - System.Windows.Controls.NumericUpDown.OnIncrement
+  - System.Windows.Controls.NumericUpDown.OnIncrementChanged(System.Double,System.Double)
+  - System.Windows.Controls.NumericUpDown.OnMaximumChanged(System.Double,System.Double)
+  - System.Windows.Controls.NumericUpDown.OnMinimumChanged(System.Double,System.Double)
+  - System.Windows.Controls.NumericUpDown.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Double})
+  - System.Windows.Controls.NumericUpDown.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double})
+  - System.Windows.Controls.NumericUpDown.ParseValue(System.String)
   langs:
   - csharp
   - vb
@@ -28,40 +34,67 @@ items:
   fullName: System.Windows.Controls.NumericUpDown
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: NumericUpDown
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 55
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 30
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nNumericUpDown control - for representing values that can be\nentered with keyboard,\nusing increment/decrement buttons\nas well as swiping over the control.\n"
+  summary: "\nRepresents a control that enables single value selection from a numeric\nrange of values through a Spinner and TextBox.\n"
   example: []
   syntax:
-    content: 'public class NumericUpDown : RangeBase'
+    content: >-
+      [TemplatePart(Name = "Text", Type = typeof(TextBox))]
+
+      [TemplatePart(Name = "Spinner", Type = typeof(Spinner))]
+
+      [StyleTypedProperty(Property = "SpinnerStyle", StyleTargetType = typeof(ButtonSpinner))]
+
+      public class NumericUpDown : UpDownBase<double>
     content.vb: >-
+      <TemplatePart(Name:="Text", Type:=GetType(TextBox))>
+
+      <TemplatePart(Name:="Spinner", Type:=GetType(Spinner))>
+
+      <StyleTypedProperty(Property:="SpinnerStyle", StyleTargetType:=GetType(ButtonSpinner))>
+
       Public Class NumericUpDown
-          Inherits RangeBase
+
+          Inherits UpDownBase(Of Double)
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   - System.Windows.UIElement
   - System.Windows.FrameworkElement
   - System.Windows.Controls.Control
-  - System.Windows.Controls.Primitives.RangeBase
+  - System.Windows.Controls.UpDownBase
+  - System.Windows.Controls.UpDownBase{System.Double}
   inheritedMembers:
-  - System.Windows.Controls.Primitives.RangeBase.LargeChange
-  - System.Windows.Controls.Primitives.RangeBase.LargeChangeProperty
-  - System.Windows.Controls.Primitives.RangeBase.Maximum
-  - System.Windows.Controls.Primitives.RangeBase.MaximumProperty
-  - System.Windows.Controls.Primitives.RangeBase.Minimum
-  - System.Windows.Controls.Primitives.RangeBase.MinimumProperty
-  - System.Windows.Controls.Primitives.RangeBase.SmallChange
-  - System.Windows.Controls.Primitives.RangeBase.SmallChangeProperty
-  - System.Windows.Controls.Primitives.RangeBase.Value
-  - System.Windows.Controls.Primitives.RangeBase.ValueProperty
-  - System.Windows.Controls.Primitives.RangeBase.ValueChanged
-  - System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged(System.Double,System.Double)
-  - System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged(System.Double,System.Double)
+  - System.Windows.Controls.UpDownBase{System.Double}.Value
+  - System.Windows.Controls.UpDownBase{System.Double}.ValueProperty
+  - System.Windows.Controls.UpDownBase{System.Double}.IsEditable
+  - System.Windows.Controls.UpDownBase{System.Double}.IsEditableProperty
+  - System.Windows.Controls.UpDownBase{System.Double}.ValueChanging
+  - System.Windows.Controls.UpDownBase{System.Double}.ValueChanged
+  - System.Windows.Controls.UpDownBase{System.Double}.Parsing
+  - System.Windows.Controls.UpDownBase{System.Double}.ParseError
+  - System.Windows.Controls.UpDownBase{System.Double}.GetValue
+  - System.Windows.Controls.UpDownBase{System.Double}.SetValue(System.Object)
+  - System.Windows.Controls.UpDownBase{System.Double}.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  - System.Windows.Controls.UpDownBase{System.Double}.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  - System.Windows.Controls.UpDownBase{System.Double}.ApplyValue(System.String)
+  - System.Windows.Controls.UpDownBase{System.Double}.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  - System.Windows.Controls.UpDownBase{System.Double}.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{System.Double})
+  - System.Windows.Controls.UpDownBase{System.Double}.OnSpin(System.Windows.Controls.SpinEventArgs)
+  - System.Windows.Controls.UpDownBase{System.Double}.OnIsEditableChanged(System.Boolean,System.Boolean)
+  - System.Windows.Controls.UpDownBase{System.Double}.SelectAllText
+  - System.Windows.Controls.UpDownBase.SpinnerStyle
+  - System.Windows.Controls.UpDownBase.SpinnerStyleProperty
+  - System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
   - System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
   - System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
   - System.Windows.Controls.Control.ManageIsEnabled(System.Boolean)
@@ -100,13 +133,12 @@ items:
   - System.Windows.Controls.Control.Focus
   - System.Windows.Controls.Control.UseSystemFocusVisuals
   - System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
-  - System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  - System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  - System.Windows.Controls.Control.CharacterSpacingProperty
+  - System.Windows.Controls.Control.CharacterSpacing
   - System.Windows.Controls.Control.TabNavigationProperty
   - System.Windows.Controls.Control.TabNavigation
   - System.Windows.Controls.Control.FontStretchProperty
   - System.Windows.Controls.Control.FontStretch
-  - System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
@@ -131,10 +163,9 @@ items:
   - System.Windows.FrameworkElement.DataContext
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
+  - System.Windows.FrameworkElement.Triggers
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.OnLayoutUpdated
-  - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
@@ -147,15 +178,18 @@ items:
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
   - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
-  - System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  - System.Windows.FrameworkElement.UnregisterName(System.String)
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
   - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.CustomLayout
   - System.Windows.FrameworkElement.CustomLayoutProperty
   - System.Windows.FrameworkElement.Height
@@ -178,6 +212,9 @@ items:
   - System.Windows.FrameworkElement.MaxWidthProperty
   - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.SizeChanged
   - System.Windows.FrameworkElement.ContextMenu
   - System.Windows.FrameworkElement.ContextMenuProperty
@@ -185,20 +222,20 @@ items:
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
-  - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -213,7 +250,6 @@ items:
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
   - System.Windows.UIElement.IsVisible
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -234,6 +270,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -242,6 +280,9 @@ items:
   - System.Windows.UIElement.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
+  - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -251,12 +292,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -267,7 +307,6 @@ items:
   - System.Windows.UIElement.OnMouseRightButtonUp(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.KeyDownEvent
   - System.Windows.UIElement.KeyDown
-  - System.Windows.UIElement.OnKeyDown(System.Windows.Input.KeyEventArgs)
   - System.Windows.UIElement.KeyUpEvent
   - System.Windows.UIElement.KeyUp
   - System.Windows.UIElement.OnKeyUp(System.Windows.Input.KeyEventArgs)
@@ -279,8 +318,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -296,6 +333,14 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
@@ -308,13 +353,392 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  attributes:
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Text
+    - name: Type
+      type: System.Type
+      value: System.Windows.Controls.TextBox
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Spinner
+    - name: Type
+      type: System.Type
+      value: System.Windows.Controls.Spinner
+  - type: System.Windows.StyleTypedPropertyAttribute
+    ctor: System.Windows.StyleTypedPropertyAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Property
+      type: System.String
+      value: SpinnerStyle
+    - name: StyleTargetType
+      type: System.Type
+      value: System.Windows.Controls.ButtonSpinner
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
+- uid: System.Windows.Controls.NumericUpDown.Minimum
+  commentId: P:System.Windows.Controls.NumericUpDown.Minimum
+  id: Minimum
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: Minimum
+  nameWithType: NumericUpDown.Minimum
+  fullName: System.Windows.Controls.NumericUpDown.Minimum
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Minimum
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 54
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nGets or sets the Minimum possible Value.\n"
+  remarks: "\nThe default value is zero.\n"
+  example: []
+  syntax:
+    content: public double Minimum { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Minimum As Double
+  overload: System.Windows.Controls.NumericUpDown.Minimum*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Controls.NumericUpDown.MinimumProperty
+  commentId: F:System.Windows.Controls.NumericUpDown.MinimumProperty
+  id: MinimumProperty
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: MinimumProperty
+  nameWithType: NumericUpDown.MinimumProperty
+  fullName: System.Windows.Controls.NumericUpDown.MinimumProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: MinimumProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 63
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nIdentifies the Minimum dependency property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty MinimumProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly MinimumProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Controls.NumericUpDown.OnMinimumChanged(System.Double,System.Double)
+  commentId: M:System.Windows.Controls.NumericUpDown.OnMinimumChanged(System.Double,System.Double)
+  id: OnMinimumChanged(System.Double,System.Double)
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: OnMinimumChanged(Double, Double)
+  nameWithType: NumericUpDown.OnMinimumChanged(Double, Double)
+  fullName: System.Windows.Controls.NumericUpDown.OnMinimumChanged(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnMinimumChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 152
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nCalled when the Minimum property value has changed.\n"
+  example: []
+  syntax:
+    content: protected virtual void OnMinimumChanged(double oldValue, double newValue)
+    parameters:
+    - id: oldValue
+      type: System.Double
+      description: Old value of the Minimum property.
+    - id: newValue
+      type: System.Double
+      description: New value of the Minimum property.
+    content.vb: Protected Overridable Sub OnMinimumChanged(oldValue As Double, newValue As Double)
+  overload: System.Windows.Controls.NumericUpDown.OnMinimumChanged*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: System.Windows.Controls.NumericUpDown.Maximum
+  commentId: P:System.Windows.Controls.NumericUpDown.Maximum
+  id: Maximum
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: Maximum
+  nameWithType: NumericUpDown.Maximum
+  fullName: System.Windows.Controls.NumericUpDown.Maximum
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Maximum
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 164
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nGets or sets the Maximum possible Value.\n"
+  remarks: "\nThe default values is one.\n"
+  example: []
+  syntax:
+    content: public double Maximum { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Maximum As Double
+  overload: System.Windows.Controls.NumericUpDown.Maximum*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Controls.NumericUpDown.MaximumProperty
+  commentId: F:System.Windows.Controls.NumericUpDown.MaximumProperty
+  id: MaximumProperty
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: MaximumProperty
+  nameWithType: NumericUpDown.MaximumProperty
+  fullName: System.Windows.Controls.NumericUpDown.MaximumProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: MaximumProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 173
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nIdentifies the Maximum dependency property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty MaximumProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly MaximumProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Controls.NumericUpDown.OnMaximumChanged(System.Double,System.Double)
+  commentId: M:System.Windows.Controls.NumericUpDown.OnMaximumChanged(System.Double,System.Double)
+  id: OnMaximumChanged(System.Double,System.Double)
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: OnMaximumChanged(Double, Double)
+  nameWithType: NumericUpDown.OnMaximumChanged(Double, Double)
+  fullName: System.Windows.Controls.NumericUpDown.OnMaximumChanged(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnMaximumChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 240
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nCalled when the Maximum property value has changed.\n"
+  example: []
+  syntax:
+    content: protected virtual void OnMaximumChanged(double oldValue, double newValue)
+    parameters:
+    - id: oldValue
+      type: System.Double
+      description: Old value of the Maximum property.
+    - id: newValue
+      type: System.Double
+      description: New value of the Maximum property.
+    content.vb: Protected Overridable Sub OnMaximumChanged(oldValue As Double, newValue As Double)
+  overload: System.Windows.Controls.NumericUpDown.OnMaximumChanged*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+- uid: System.Windows.Controls.NumericUpDown.Increment
+  commentId: P:System.Windows.Controls.NumericUpDown.Increment
+  id: Increment
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: Increment
+  nameWithType: NumericUpDown.Increment
+  fullName: System.Windows.Controls.NumericUpDown.Increment
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Increment
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 252
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nGets or sets a value added or subtracted from the value property.\n"
+  remarks: "\nThe default values is one.\n"
+  example: []
+  syntax:
+    content: public double Increment { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property Increment As Double
+  overload: System.Windows.Controls.NumericUpDown.Increment*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Controls.NumericUpDown.IncrementProperty
+  commentId: F:System.Windows.Controls.NumericUpDown.IncrementProperty
+  id: IncrementProperty
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: IncrementProperty
+  nameWithType: NumericUpDown.IncrementProperty
+  fullName: System.Windows.Controls.NumericUpDown.IncrementProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IncrementProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 261
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nIdentifies the Increment dependency property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty IncrementProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly IncrementProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Controls.NumericUpDown.OnIncrementChanged(System.Double,System.Double)
+  commentId: M:System.Windows.Controls.NumericUpDown.OnIncrementChanged(System.Double,System.Double)
+  id: OnIncrementChanged(System.Double,System.Double)
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: OnIncrementChanged(Double, Double)
+  nameWithType: NumericUpDown.OnIncrementChanged(Double, Double)
+  fullName: System.Windows.Controls.NumericUpDown.OnIncrementChanged(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnIncrementChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 327
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nCalled when the Increment property value has changed.\n"
+  example: []
+  syntax:
+    content: protected virtual void OnIncrementChanged(double oldValue, double newValue)
+    parameters:
+    - id: oldValue
+      type: System.Double
+      description: Old value of the Increment property.
+    - id: newValue
+      type: System.Double
+      description: New value of the Increment property.
+    content.vb: Protected Overridable Sub OnIncrementChanged(oldValue As Double, newValue As Double)
+  overload: System.Windows.Controls.NumericUpDown.OnIncrementChanged*
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
 - uid: System.Windows.Controls.NumericUpDown.DecimalPlaces
   commentId: P:System.Windows.Controls.NumericUpDown.DecimalPlaces
   id: DecimalPlaces
@@ -327,9 +751,13 @@ items:
   fullName: System.Windows.Controls.NumericUpDown.DecimalPlaces
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DecimalPlaces
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\NumericUpDown.cs
-    startLine: 35
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 343
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -361,9 +789,13 @@ items:
   fullName: System.Windows.Controls.NumericUpDown.DecimalPlacesProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DecimalPlacesProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\NumericUpDown.cs
-    startLine: 46
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 352
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -382,204 +814,47 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Controls.NumericUpDown.ValueBarVisibilityProperty
-  commentId: F:System.Windows.Controls.NumericUpDown.ValueBarVisibilityProperty
-  id: ValueBarVisibilityProperty
+- uid: System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged(System.Int32,System.Int32)
+  commentId: M:System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged(System.Int32,System.Int32)
+  id: OnDecimalPlacesChanged(System.Int32,System.Int32)
   parent: System.Windows.Controls.NumericUpDown
   langs:
   - csharp
   - vb
-  name: ValueBarVisibilityProperty
-  nameWithType: NumericUpDown.ValueBarVisibilityProperty
-  fullName: System.Windows.Controls.NumericUpDown.ValueBarVisibilityProperty
-  type: Field
+  name: OnDecimalPlacesChanged(Int32, Int32)
+  nameWithType: NumericUpDown.OnDecimalPlacesChanged(Int32, Int32)
+  fullName: System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged(System.Int32, System.Int32)
+  type: Method
   source:
-    id: ValueBarVisibilityProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 144
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnDecimalPlacesChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 377
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nValueBarVisibility Dependency Property\n"
+  summary: "\nCalled when the DecimalPlaces property value has changed.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty ValueBarVisibilityProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly ValueBarVisibilityProperty As DependencyProperty
+    content: protected virtual void OnDecimalPlacesChanged(int oldValue, int newValue)
+    parameters:
+    - id: oldValue
+      type: System.Int32
+      description: Old value of the DecimalPlaces property.
+    - id: newValue
+      type: System.Int32
+      description: New value of the DecimalPlaces property.
+    content.vb: Protected Overridable Sub OnDecimalPlacesChanged(oldValue As Integer, newValue As Integer)
+  overload: System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged*
   modifiers.csharp:
-  - public
-  - static
-  - readonly
+  - protected
+  - virtual
   modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.Controls.NumericUpDown.ValueBarVisibility
-  commentId: P:System.Windows.Controls.NumericUpDown.ValueBarVisibility
-  id: ValueBarVisibility
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: ValueBarVisibility
-  nameWithType: NumericUpDown.ValueBarVisibility
-  fullName: System.Windows.Controls.NumericUpDown.ValueBarVisibility
-  type: Property
-  source:
-    id: ValueBarVisibility
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 156
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nGets or sets the ValueBarVisibility property. This dependency property \nindicates whether the value bar should be shown.\n"
-  example: []
-  syntax:
-    content: public NumericUpDownValueBarVisibility ValueBarVisibility { get; set; }
-    parameters: []
-    return:
-      type: System.Windows.Controls.NumericUpDownValueBarVisibility
-    content.vb: Public Property ValueBarVisibility As NumericUpDownValueBarVisibility
-  overload: System.Windows.Controls.NumericUpDown.ValueBarVisibility*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Controls.NumericUpDown.IsReadOnlyProperty
-  commentId: F:System.Windows.Controls.NumericUpDown.IsReadOnlyProperty
-  id: IsReadOnlyProperty
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: IsReadOnlyProperty
-  nameWithType: NumericUpDown.IsReadOnlyProperty
-  fullName: System.Windows.Controls.NumericUpDown.IsReadOnlyProperty
-  type: Field
-  source:
-    id: IsReadOnlyProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 194
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nIsReadOnly Dependency Property\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty IsReadOnlyProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly IsReadOnlyProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.Controls.NumericUpDown.IsReadOnly
-  commentId: P:System.Windows.Controls.NumericUpDown.IsReadOnly
-  id: IsReadOnly
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: IsReadOnly
-  nameWithType: NumericUpDown.IsReadOnly
-  fullName: System.Windows.Controls.NumericUpDown.IsReadOnly
-  type: Property
-  source:
-    id: IsReadOnly
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 206
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nGets or sets the IsReadOnly property. This dependency property \nindicates whether the box should only allow to read the values by copying and pasting them.\n"
-  example: []
-  syntax:
-    content: public bool IsReadOnly { get; set; }
-    parameters: []
-    return:
-      type: System.Boolean
-    content.vb: Public Property IsReadOnly As Boolean
-  overload: System.Windows.Controls.NumericUpDown.IsReadOnly*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Controls.NumericUpDown.DragSpeedProperty
-  commentId: F:System.Windows.Controls.NumericUpDown.DragSpeedProperty
-  id: DragSpeedProperty
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: DragSpeedProperty
-  nameWithType: NumericUpDown.DragSpeedProperty
-  fullName: System.Windows.Controls.NumericUpDown.DragSpeedProperty
-  type: Field
-  source:
-    id: DragSpeedProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 244
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nDragSpeed Dependency Property\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty DragSpeedProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly DragSpeedProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.Controls.NumericUpDown.DragSpeed
-  commentId: P:System.Windows.Controls.NumericUpDown.DragSpeed
-  id: DragSpeed
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: DragSpeed
-  nameWithType: NumericUpDown.DragSpeed
-  fullName: System.Windows.Controls.NumericUpDown.DragSpeed
-  type: Property
-  source:
-    id: DragSpeed
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 257
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nGets or sets the DragSpeed property. This dependency property \nindicates the speed with which the value changes when manipulated with dragging.\nThe default value of double.NaN indicates that the value will change by (Maximum - Minimum),\nwhen the control is dragged a full screen length.\n"
-  example: []
-  syntax:
-    content: public double DragSpeed { get; set; }
-    parameters: []
-    return:
-      type: System.Double
-    content.vb: Public Property DragSpeed As Double
-  overload: System.Windows.Controls.NumericUpDown.DragSpeed*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
+  - Protected
+  - Overridable
 - uid: System.Windows.Controls.NumericUpDown.#ctor
   commentId: M:System.Windows.Controls.NumericUpDown.#ctor
   id: '#ctor'
@@ -592,13 +867,17 @@ items:
   fullName: System.Windows.Controls.NumericUpDown.NumericUpDown()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 267
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 398
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Controls.NumericUpDown\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  summary: "\nInitializes a new instance of the NumericUpDown class.\n"
   example: []
   syntax:
     content: public NumericUpDown()
@@ -620,18 +899,22 @@ items:
   fullName: System.Windows.Controls.NumericUpDown.OnApplyTemplate()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnApplyTemplate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 315
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 431
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nInvoked whenever application code or internal processes (such as a rebuilding layout pass) call ApplyTemplate. In simplest terms, this means the method is called just before a UI element displays in your app. Override this method to influence the default post-template logic of a class.\n"
+  summary: "\nBuilds the visual tree for the NumericUpDown control when a new\ntemplate is applied.\n"
   example: []
   syntax:
     content: public override void OnApplyTemplate()
     content.vb: Public Overrides Sub OnApplyTemplate
-  overridden: System.Windows.Controls.Control.OnApplyTemplate
+  overridden: System.Windows.Controls.UpDownBase{System.Double}.OnApplyTemplate
   overload: System.Windows.Controls.NumericUpDown.OnApplyTemplate*
   modifiers.csharp:
   - public
@@ -639,163 +922,272 @@ items:
   modifiers.vb:
   - Public
   - Overrides
-- uid: System.Windows.Controls.NumericUpDown.DoDecrement
-  commentId: M:System.Windows.Controls.NumericUpDown.DoDecrement
-  id: DoDecrement
+- uid: System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer
+  commentId: M:System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer
+  id: OnCreateAutomationPeer
   parent: System.Windows.Controls.NumericUpDown
   langs:
   - csharp
   - vb
-  name: DoDecrement()
-  nameWithType: NumericUpDown.DoDecrement()
-  fullName: System.Windows.Controls.NumericUpDown.DoDecrement()
+  name: OnCreateAutomationPeer()
+  nameWithType: NumericUpDown.OnCreateAutomationPeer()
+  fullName: System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer()
   type: Method
   source:
-    id: DoDecrement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 539
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnCreateAutomationPeer
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 447
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nDecrements the value by Increment.\n"
+  summary: "\nReturns a NumericUpDownAutomationPeer for use by the Silverlight\nautomation infrastructure.\n"
   example: []
   syntax:
-    content: protected bool DoDecrement()
+    content: protected override AutomationPeer OnCreateAutomationPeer()
     return:
-      type: System.Boolean
-      description: <code>true</code> if the value was decremented by exactly <code>Increment</code>; <code>false</code> if it was constrained.
-    content.vb: Protected Function DoDecrement As Boolean
-  overload: System.Windows.Controls.NumericUpDown.DoDecrement*
+      type: System.Windows.Automation.Peers.AutomationPeer
+      description: A NumericUpDownAutomationPeer object for the NumericUpDown.
+    content.vb: Protected Overrides Function OnCreateAutomationPeer As AutomationPeer
+  overridden: System.Windows.UIElement.OnCreateAutomationPeer
+  overload: System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer*
   modifiers.csharp:
   - protected
+  - override
   modifiers.vb:
   - Protected
-- uid: System.Windows.Controls.NumericUpDown.DoIncrement
-  commentId: M:System.Windows.Controls.NumericUpDown.DoIncrement
-  id: DoIncrement
+  - Overrides
+- uid: System.Windows.Controls.NumericUpDown.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double})
+  commentId: M:System.Windows.Controls.NumericUpDown.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double})
+  id: OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double})
   parent: System.Windows.Controls.NumericUpDown
   langs:
   - csharp
   - vb
-  name: DoIncrement()
-  nameWithType: NumericUpDown.DoIncrement()
-  fullName: System.Windows.Controls.NumericUpDown.DoIncrement()
+  name: OnValueChanging(RoutedPropertyChangingEventArgs<Double>)
+  nameWithType: NumericUpDown.OnValueChanging(RoutedPropertyChangingEventArgs<Double>)
+  fullName: System.Windows.Controls.NumericUpDown.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs<System.Double>)
   type: Method
   source:
-    id: DoIncrement
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 548
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnValueChanging
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 457
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  syntax:
-    content: protected bool DoIncrement()
-    return:
-      type: System.Boolean
-    content.vb: Protected Function DoIncrement As Boolean
-  overload: System.Windows.Controls.NumericUpDown.DoIncrement*
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-- uid: System.Windows.Controls.NumericUpDown.Increment
-  commentId: P:System.Windows.Controls.NumericUpDown.Increment
-  id: Increment
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: Increment
-  nameWithType: NumericUpDown.Increment
-  fullName: System.Windows.Controls.NumericUpDown.Increment
-  type: Property
-  source:
-    id: Increment
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 560
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nGets or sets a value added or subtracted from the value property. The default values is one.\n"
+  summary: "\nOverride UpDownBase&lt;T>.OnValueChanging to do validation and coercion.\n"
   example: []
   syntax:
-    content: public double Increment { get; set; }
-    parameters: []
-    return:
-      type: System.Double
-    content.vb: Public Property Increment As Double
-  overload: System.Windows.Controls.NumericUpDown.Increment*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Controls.NumericUpDown.IncrementProperty
-  commentId: F:System.Windows.Controls.NumericUpDown.IncrementProperty
-  id: IncrementProperty
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: IncrementProperty
-  nameWithType: NumericUpDown.IncrementProperty
-  fullName: System.Windows.Controls.NumericUpDown.IncrementProperty
-  type: Field
-  source:
-    id: IncrementProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 568
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nThe identifier for the Increment dependency property.\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty IncrementProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly IncrementProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.Controls.NumericUpDown.OnValueChanged(System.Double,System.Double)
-  commentId: M:System.Windows.Controls.NumericUpDown.OnValueChanged(System.Double,System.Double)
-  id: OnValueChanged(System.Double,System.Double)
-  parent: System.Windows.Controls.NumericUpDown
-  langs:
-  - csharp
-  - vb
-  name: OnValueChanged(Double, Double)
-  nameWithType: NumericUpDown.OnValueChanged(Double, Double)
-  fullName: System.Windows.Controls.NumericUpDown.OnValueChanged(System.Double, System.Double)
-  type: Method
-  source:
-    id: OnValueChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\NumericUpDown.cs
-    startLine: 880
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nFires the ValueChanged routed event.\n"
-  example: []
-  syntax:
-    content: protected override void OnValueChanged(double oldValue, double newValue)
+    content: protected override void OnValueChanging(RoutedPropertyChangingEventArgs<double> e)
     parameters:
-    - id: oldValue
-      type: System.Double
-      description: Old value of the Value property.
-    - id: newValue
-      type: System.Double
-      description: New value of the Value property.
-    content.vb: Protected Overrides Sub OnValueChanged(oldValue As Double, newValue As Double)
-  overridden: System.Windows.Controls.Primitives.RangeBase.OnValueChanged(System.Double,System.Double)
+    - id: e
+      type: System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double}
+      description: Event args.
+    content.vb: Protected Overrides Sub OnValueChanging(e As RoutedPropertyChangingEventArgs(Of Double))
+  overridden: System.Windows.Controls.UpDownBase{System.Double}.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double})
+  overload: System.Windows.Controls.NumericUpDown.OnValueChanging*
+  nameWithType.vb: NumericUpDown.OnValueChanging(RoutedPropertyChangingEventArgs(Of Double))
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: System.Windows.Controls.NumericUpDown.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs(Of System.Double))
+  name.vb: OnValueChanging(RoutedPropertyChangingEventArgs(Of Double))
+- uid: System.Windows.Controls.NumericUpDown.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Double})
+  commentId: M:System.Windows.Controls.NumericUpDown.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Double})
+  id: OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Double})
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: OnValueChanged(RoutedPropertyChangedEventArgs<Double>)
+  nameWithType: NumericUpDown.OnValueChanged(RoutedPropertyChangedEventArgs<Double>)
+  fullName: System.Windows.Controls.NumericUpDown.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs<System.Double>)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnValueChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 499
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nOverride UpDownBase&lt;T>.OnValueChanged to raise value changed automation event and \ndetermine if a maximum or minimum has been reached.\n"
+  example: []
+  syntax:
+    content: protected override void OnValueChanged(RoutedPropertyChangedEventArgs<double> e)
+    parameters:
+    - id: e
+      type: System.Windows.RoutedPropertyChangedEventArgs{System.Double}
+      description: Event args.
+    content.vb: Protected Overrides Sub OnValueChanged(e As RoutedPropertyChangedEventArgs(Of Double))
+  overridden: System.Windows.Controls.UpDownBase{System.Double}.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Double})
   overload: System.Windows.Controls.NumericUpDown.OnValueChanged*
+  nameWithType.vb: NumericUpDown.OnValueChanged(RoutedPropertyChangedEventArgs(Of Double))
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: System.Windows.Controls.NumericUpDown.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs(Of System.Double))
+  name.vb: OnValueChanged(RoutedPropertyChangedEventArgs(Of Double))
+- uid: System.Windows.Controls.NumericUpDown.ParseValue(System.String)
+  commentId: M:System.Windows.Controls.NumericUpDown.ParseValue(System.String)
+  id: ParseValue(System.String)
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: ParseValue(String)
+  nameWithType: NumericUpDown.ParseValue(String)
+  fullName: System.Windows.Controls.NumericUpDown.ParseValue(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ParseValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 520
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nCalled by ApplyValue to parse user input as a decimal number.\n"
+  example: []
+  syntax:
+    content: protected override double ParseValue(string text)
+    parameters:
+    - id: text
+      type: System.String
+      description: User input.
+    return:
+      type: System.Double
+      description: Value parsed from user input.
+    content.vb: Protected Overrides Function ParseValue(text As String) As Double
+  overridden: System.Windows.Controls.UpDownBase{System.Double}.ParseValue(System.String)
+  overload: System.Windows.Controls.NumericUpDown.ParseValue*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: System.Windows.Controls.NumericUpDown.FormatValue
+  commentId: M:System.Windows.Controls.NumericUpDown.FormatValue
+  id: FormatValue
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: FormatValue()
+  nameWithType: NumericUpDown.FormatValue()
+  fullName: System.Windows.Controls.NumericUpDown.FormatValue()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: FormatValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 529
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nProvides decimal specific value formatting for the value property.\n"
+  example: []
+  syntax:
+    content: protected override string FormatValue()
+    return:
+      type: System.String
+      description: Formatted Value.
+    content.vb: Protected Overrides Function FormatValue As String
+  overridden: System.Windows.Controls.UpDownBase{System.Double}.FormatValue
+  overload: System.Windows.Controls.NumericUpDown.FormatValue*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: System.Windows.Controls.NumericUpDown.OnIncrement
+  commentId: M:System.Windows.Controls.NumericUpDown.OnIncrement
+  id: OnIncrement
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: OnIncrement()
+  nameWithType: NumericUpDown.OnIncrement()
+  fullName: System.Windows.Controls.NumericUpDown.OnIncrement()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnIncrement
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 537
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nCalled by OnSpin when the spin direction is SpinDirection.Increase.\n"
+  example: []
+  syntax:
+    content: protected override void OnIncrement()
+    content.vb: Protected Overrides Sub OnIncrement
+  overridden: System.Windows.Controls.UpDownBase{System.Double}.OnIncrement
+  overload: System.Windows.Controls.NumericUpDown.OnIncrement*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: System.Windows.Controls.NumericUpDown.OnDecrement
+  commentId: M:System.Windows.Controls.NumericUpDown.OnDecrement
+  id: OnDecrement
+  parent: System.Windows.Controls.NumericUpDown
+  langs:
+  - csharp
+  - vb
+  name: OnDecrement()
+  nameWithType: NumericUpDown.OnDecrement()
+  fullName: System.Windows.Controls.NumericUpDown.OnDecrement()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnDecrement
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/NumericUpDown.cs
+    startLine: 546
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nCalled by OnSpin when the spin direction is SpinDirection.Decrease.\n"
+  example: []
+  syntax:
+    content: protected override void OnDecrement()
+    content.vb: Protected Overrides Sub OnDecrement
+  overridden: System.Windows.Controls.UpDownBase{System.Double}.OnDecrement
+  overload: System.Windows.Controls.NumericUpDown.OnDecrement*
   modifiers.csharp:
   - protected
   - override
@@ -810,6 +1202,7 @@ references:
   fullName: System.Windows.Controls
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -838,185 +1231,604 @@ references:
   name: Control
   nameWithType: Control
   fullName: System.Windows.Controls.Control
-- uid: System.Windows.Controls.Primitives.RangeBase
-  commentId: T:System.Windows.Controls.Primitives.RangeBase
-  parent: System.Windows.Controls.Primitives
-  name: RangeBase
-  nameWithType: RangeBase
-  fullName: System.Windows.Controls.Primitives.RangeBase
-- uid: System.Windows.Controls.Primitives.RangeBase.LargeChange
-  commentId: P:System.Windows.Controls.Primitives.RangeBase.LargeChange
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: LargeChange
-  nameWithType: RangeBase.LargeChange
-  fullName: System.Windows.Controls.Primitives.RangeBase.LargeChange
-- uid: System.Windows.Controls.Primitives.RangeBase.LargeChangeProperty
-  commentId: F:System.Windows.Controls.Primitives.RangeBase.LargeChangeProperty
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: LargeChangeProperty
-  nameWithType: RangeBase.LargeChangeProperty
-  fullName: System.Windows.Controls.Primitives.RangeBase.LargeChangeProperty
-- uid: System.Windows.Controls.Primitives.RangeBase.Maximum
-  commentId: P:System.Windows.Controls.Primitives.RangeBase.Maximum
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: Maximum
-  nameWithType: RangeBase.Maximum
-  fullName: System.Windows.Controls.Primitives.RangeBase.Maximum
-- uid: System.Windows.Controls.Primitives.RangeBase.MaximumProperty
-  commentId: F:System.Windows.Controls.Primitives.RangeBase.MaximumProperty
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: MaximumProperty
-  nameWithType: RangeBase.MaximumProperty
-  fullName: System.Windows.Controls.Primitives.RangeBase.MaximumProperty
-- uid: System.Windows.Controls.Primitives.RangeBase.Minimum
-  commentId: P:System.Windows.Controls.Primitives.RangeBase.Minimum
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: Minimum
-  nameWithType: RangeBase.Minimum
-  fullName: System.Windows.Controls.Primitives.RangeBase.Minimum
-- uid: System.Windows.Controls.Primitives.RangeBase.MinimumProperty
-  commentId: F:System.Windows.Controls.Primitives.RangeBase.MinimumProperty
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: MinimumProperty
-  nameWithType: RangeBase.MinimumProperty
-  fullName: System.Windows.Controls.Primitives.RangeBase.MinimumProperty
-- uid: System.Windows.Controls.Primitives.RangeBase.SmallChange
-  commentId: P:System.Windows.Controls.Primitives.RangeBase.SmallChange
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: SmallChange
-  nameWithType: RangeBase.SmallChange
-  fullName: System.Windows.Controls.Primitives.RangeBase.SmallChange
-- uid: System.Windows.Controls.Primitives.RangeBase.SmallChangeProperty
-  commentId: F:System.Windows.Controls.Primitives.RangeBase.SmallChangeProperty
-  parent: System.Windows.Controls.Primitives.RangeBase
-  name: SmallChangeProperty
-  nameWithType: RangeBase.SmallChangeProperty
-  fullName: System.Windows.Controls.Primitives.RangeBase.SmallChangeProperty
-- uid: System.Windows.Controls.Primitives.RangeBase.Value
-  commentId: P:System.Windows.Controls.Primitives.RangeBase.Value
-  parent: System.Windows.Controls.Primitives.RangeBase
+- uid: System.Windows.Controls.UpDownBase
+  commentId: T:System.Windows.Controls.UpDownBase
+  parent: System.Windows.Controls
+  name: UpDownBase
+  nameWithType: UpDownBase
+  fullName: System.Windows.Controls.UpDownBase
+- uid: System.Windows.Controls.UpDownBase{System.Double}
+  commentId: T:System.Windows.Controls.UpDownBase{System.Double}
+  parent: System.Windows.Controls
+  definition: System.Windows.Controls.UpDownBase`1
+  name: UpDownBase<Double>
+  nameWithType: UpDownBase<Double>
+  fullName: System.Windows.Controls.UpDownBase<System.Double>
+  nameWithType.vb: UpDownBase(Of Double)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double)
+  name.vb: UpDownBase(Of Double)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1
+    name: UpDownBase
+    nameWithType: UpDownBase
+    fullName: System.Windows.Controls.UpDownBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1
+    name: UpDownBase
+    nameWithType: UpDownBase
+    fullName: System.Windows.Controls.UpDownBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.Value
+  commentId: P:System.Windows.Controls.UpDownBase{System.Double}.Value
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.Value
   name: Value
-  nameWithType: RangeBase.Value
-  fullName: System.Windows.Controls.Primitives.RangeBase.Value
-- uid: System.Windows.Controls.Primitives.RangeBase.ValueProperty
-  commentId: F:System.Windows.Controls.Primitives.RangeBase.ValueProperty
-  parent: System.Windows.Controls.Primitives.RangeBase
+  nameWithType: UpDownBase<Double>.Value
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.Value
+  nameWithType.vb: UpDownBase(Of Double).Value
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).Value
+- uid: System.Windows.Controls.UpDownBase{System.Double}.ValueProperty
+  commentId: F:System.Windows.Controls.UpDownBase{System.Double}.ValueProperty
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.ValueProperty
   name: ValueProperty
-  nameWithType: RangeBase.ValueProperty
-  fullName: System.Windows.Controls.Primitives.RangeBase.ValueProperty
-- uid: System.Windows.Controls.Primitives.RangeBase.ValueChanged
-  commentId: E:System.Windows.Controls.Primitives.RangeBase.ValueChanged
-  parent: System.Windows.Controls.Primitives.RangeBase
+  nameWithType: UpDownBase<Double>.ValueProperty
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.ValueProperty
+  nameWithType.vb: UpDownBase(Of Double).ValueProperty
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).ValueProperty
+- uid: System.Windows.Controls.UpDownBase{System.Double}.IsEditable
+  commentId: P:System.Windows.Controls.UpDownBase{System.Double}.IsEditable
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.IsEditable
+  name: IsEditable
+  nameWithType: UpDownBase<Double>.IsEditable
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.IsEditable
+  nameWithType.vb: UpDownBase(Of Double).IsEditable
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).IsEditable
+- uid: System.Windows.Controls.UpDownBase{System.Double}.IsEditableProperty
+  commentId: F:System.Windows.Controls.UpDownBase{System.Double}.IsEditableProperty
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.IsEditableProperty
+  name: IsEditableProperty
+  nameWithType: UpDownBase<Double>.IsEditableProperty
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.IsEditableProperty
+  nameWithType.vb: UpDownBase(Of Double).IsEditableProperty
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).IsEditableProperty
+- uid: System.Windows.Controls.UpDownBase{System.Double}.ValueChanging
+  commentId: E:System.Windows.Controls.UpDownBase{System.Double}.ValueChanging
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.ValueChanging
+  name: ValueChanging
+  nameWithType: UpDownBase<Double>.ValueChanging
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.ValueChanging
+  nameWithType.vb: UpDownBase(Of Double).ValueChanging
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).ValueChanging
+- uid: System.Windows.Controls.UpDownBase{System.Double}.ValueChanged
+  commentId: E:System.Windows.Controls.UpDownBase{System.Double}.ValueChanged
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.ValueChanged
   name: ValueChanged
-  nameWithType: RangeBase.ValueChanged
-  fullName: System.Windows.Controls.Primitives.RangeBase.ValueChanged
-- uid: System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged(System.Double,System.Double)
-  commentId: M:System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged(System.Double,System.Double)
-  parent: System.Windows.Controls.Primitives.RangeBase
-  isExternal: true
-  name: OnMaximumChanged(Double, Double)
-  nameWithType: RangeBase.OnMaximumChanged(Double, Double)
-  fullName: System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged(System.Double, System.Double)
+  nameWithType: UpDownBase<Double>.ValueChanged
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.ValueChanged
+  nameWithType.vb: UpDownBase(Of Double).ValueChanged
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).ValueChanged
+- uid: System.Windows.Controls.UpDownBase{System.Double}.Parsing
+  commentId: E:System.Windows.Controls.UpDownBase{System.Double}.Parsing
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.Parsing
+  name: Parsing
+  nameWithType: UpDownBase<Double>.Parsing
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.Parsing
+  nameWithType.vb: UpDownBase(Of Double).Parsing
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).Parsing
+- uid: System.Windows.Controls.UpDownBase{System.Double}.ParseError
+  commentId: E:System.Windows.Controls.UpDownBase{System.Double}.ParseError
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.ParseError
+  name: ParseError
+  nameWithType: UpDownBase<Double>.ParseError
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.ParseError
+  nameWithType.vb: UpDownBase(Of Double).ParseError
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).ParseError
+- uid: System.Windows.Controls.UpDownBase{System.Double}.GetValue
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.GetValue
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.GetValue
+  name: GetValue()
+  nameWithType: UpDownBase<Double>.GetValue()
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.GetValue()
+  nameWithType.vb: UpDownBase(Of Double).GetValue()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).GetValue()
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged(System.Double,System.Double)
-    name: OnMaximumChanged
-    nameWithType: RangeBase.OnMaximumChanged
-    fullName: System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged
+  - uid: System.Windows.Controls.UpDownBase`1.GetValue
+    name: GetValue
+    nameWithType: UpDownBase<Double>.GetValue
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.GetValue
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.GetValue
+    name: GetValue
+    nameWithType: UpDownBase(Of Double).GetValue
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.SetValue(System.Object)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.SetValue(System.Object)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.SetValue(System.Object)
+  name: SetValue(Object)
+  nameWithType: UpDownBase<Double>.SetValue(Object)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.SetValue(System.Object)
+  nameWithType.vb: UpDownBase(Of Double).SetValue(Object)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).SetValue(System.Object)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.SetValue(System.Object)
+    name: SetValue
+    nameWithType: UpDownBase<Double>.SetValue
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged(System.Double,System.Double)
-    name: OnMaximumChanged
-    nameWithType: RangeBase.OnMaximumChanged
-    fullName: System.Windows.Controls.Primitives.RangeBase.OnMaximumChanged
+  - uid: System.Windows.Controls.UpDownBase`1.SetValue(System.Object)
+    name: SetValue
+    nameWithType: UpDownBase(Of Double).SetValue
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).SetValue
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged(System.Double,System.Double)
-  commentId: M:System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged(System.Double,System.Double)
-  parent: System.Windows.Controls.Primitives.RangeBase
-  isExternal: true
-  name: OnMinimumChanged(Double, Double)
-  nameWithType: RangeBase.OnMinimumChanged(Double, Double)
-  fullName: System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged(System.Double, System.Double)
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  name: OnKeyDown(KeyEventArgs)
+  nameWithType: UpDownBase<Double>.OnKeyDown(KeyEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  nameWithType.vb: UpDownBase(Of Double).OnKeyDown(KeyEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnKeyDown(System.Windows.Input.KeyEventArgs)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged(System.Double,System.Double)
-    name: OnMinimumChanged
-    nameWithType: RangeBase.OnMinimumChanged
-    fullName: System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged
+  - uid: System.Windows.Controls.UpDownBase`1.OnKeyDown(System.Windows.Input.KeyEventArgs)
+    name: OnKeyDown
+    nameWithType: UpDownBase<Double>.OnKeyDown
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnKeyDown
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
+  - uid: System.Windows.Input.KeyEventArgs
+    name: KeyEventArgs
+    nameWithType: KeyEventArgs
+    fullName: System.Windows.Input.KeyEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnKeyDown(System.Windows.Input.KeyEventArgs)
+    name: OnKeyDown
+    nameWithType: UpDownBase(Of Double).OnKeyDown
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnKeyDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.KeyEventArgs
+    name: KeyEventArgs
+    nameWithType: KeyEventArgs
+    fullName: System.Windows.Input.KeyEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UpDownBase<Double>.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  nameWithType.vb: UpDownBase(Of Double).OnMouseWheel(MouseWheelEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UpDownBase<Double>.OnMouseWheel
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UpDownBase(Of Double).OnMouseWheel
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.ApplyValue(System.String)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.ApplyValue(System.String)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.ApplyValue(System.String)
+  name: ApplyValue(String)
+  nameWithType: UpDownBase<Double>.ApplyValue(String)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.ApplyValue(System.String)
+  nameWithType.vb: UpDownBase(Of Double).ApplyValue(String)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).ApplyValue(System.String)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.ApplyValue(System.String)
+    name: ApplyValue
+    nameWithType: UpDownBase<Double>.ApplyValue
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.ApplyValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged(System.Double,System.Double)
-    name: OnMinimumChanged
-    nameWithType: RangeBase.OnMinimumChanged
-    fullName: System.Windows.Controls.Primitives.RangeBase.OnMinimumChanged
+  - uid: System.Windows.Controls.UpDownBase`1.ApplyValue(System.String)
+    name: ApplyValue
+    nameWithType: UpDownBase(Of Double).ApplyValue
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).ApplyValue
   - name: (
     nameWithType: (
     fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  name: OnParseError(UpDownParseErrorEventArgs)
+  nameWithType: UpDownBase<Double>.OnParseError(UpDownParseErrorEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  nameWithType.vb: UpDownBase(Of Double).OnParseError(UpDownParseErrorEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+    name: OnParseError
+    nameWithType: UpDownBase<Double>.OnParseError
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnParseError
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParseErrorEventArgs
+    name: UpDownParseErrorEventArgs
+    nameWithType: UpDownParseErrorEventArgs
+    fullName: System.Windows.Controls.UpDownParseErrorEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+    name: OnParseError
+    nameWithType: UpDownBase(Of Double).OnParseError
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnParseError
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParseErrorEventArgs
+    name: UpDownParseErrorEventArgs
+    nameWithType: UpDownParseErrorEventArgs
+    fullName: System.Windows.Controls.UpDownParseErrorEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{System.Double})
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{System.Double})
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{`0})
+  name: OnParsing(UpDownParsingEventArgs<Double>)
+  nameWithType: UpDownBase<Double>.OnParsing(UpDownParsingEventArgs<Double>)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnParsing(System.Windows.Controls.UpDownParsingEventArgs<System.Double>)
+  nameWithType.vb: UpDownBase(Of Double).OnParsing(UpDownParsingEventArgs(Of Double))
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnParsing(System.Windows.Controls.UpDownParsingEventArgs(Of System.Double))
+  name.vb: OnParsing(UpDownParsingEventArgs(Of Double))
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{`0})
+    name: OnParsing
+    nameWithType: UpDownBase<Double>.OnParsing
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnParsing
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParsingEventArgs`1
+    name: UpDownParsingEventArgs
+    nameWithType: UpDownParsingEventArgs
+    fullName: System.Windows.Controls.UpDownParsingEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
   - uid: System.Double
     name: Double
     nameWithType: Double
     fullName: System.Double
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{`0})
+    name: OnParsing
+    nameWithType: UpDownBase(Of Double).OnParsing
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnParsing
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParsingEventArgs`1
+    name: UpDownParsingEventArgs
+    nameWithType: UpDownParsingEventArgs
+    fullName: System.Windows.Controls.UpDownParsingEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnSpin(System.Windows.Controls.SpinEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnSpin(System.Windows.Controls.SpinEventArgs)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnSpin(System.Windows.Controls.SpinEventArgs)
+  name: OnSpin(SpinEventArgs)
+  nameWithType: UpDownBase<Double>.OnSpin(SpinEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnSpin(System.Windows.Controls.SpinEventArgs)
+  nameWithType.vb: UpDownBase(Of Double).OnSpin(SpinEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnSpin(System.Windows.Controls.SpinEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnSpin(System.Windows.Controls.SpinEventArgs)
+    name: OnSpin
+    nameWithType: UpDownBase<Double>.OnSpin
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnSpin
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.SpinEventArgs
+    name: SpinEventArgs
+    nameWithType: SpinEventArgs
+    fullName: System.Windows.Controls.SpinEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnSpin(System.Windows.Controls.SpinEventArgs)
+    name: OnSpin
+    nameWithType: UpDownBase(Of Double).OnSpin
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnSpin
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.SpinEventArgs
+    name: SpinEventArgs
+    nameWithType: SpinEventArgs
+    fullName: System.Windows.Controls.SpinEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnIsEditableChanged(System.Boolean,System.Boolean)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnIsEditableChanged(System.Boolean,System.Boolean)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnIsEditableChanged(System.Boolean,System.Boolean)
+  name: OnIsEditableChanged(Boolean, Boolean)
+  nameWithType: UpDownBase<Double>.OnIsEditableChanged(Boolean, Boolean)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnIsEditableChanged(System.Boolean, System.Boolean)
+  nameWithType.vb: UpDownBase(Of Double).OnIsEditableChanged(Boolean, Boolean)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnIsEditableChanged(System.Boolean, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIsEditableChanged(System.Boolean,System.Boolean)
+    name: OnIsEditableChanged
+    nameWithType: UpDownBase<Double>.OnIsEditableChanged
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnIsEditableChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIsEditableChanged(System.Boolean,System.Boolean)
+    name: OnIsEditableChanged
+    nameWithType: UpDownBase(Of Double).OnIsEditableChanged
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnIsEditableChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.SelectAllText
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.SelectAllText
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.SelectAllText
+  name: SelectAllText()
+  nameWithType: UpDownBase<Double>.SelectAllText()
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.SelectAllText()
+  nameWithType.vb: UpDownBase(Of Double).SelectAllText()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).SelectAllText()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.SelectAllText
+    name: SelectAllText
+    nameWithType: UpDownBase<Double>.SelectAllText
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.SelectAllText
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.SelectAllText
+    name: SelectAllText
+    nameWithType: UpDownBase(Of Double).SelectAllText
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).SelectAllText
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase.SpinnerStyle
+  commentId: P:System.Windows.Controls.UpDownBase.SpinnerStyle
+  parent: System.Windows.Controls.UpDownBase
+  name: SpinnerStyle
+  nameWithType: UpDownBase.SpinnerStyle
+  fullName: System.Windows.Controls.UpDownBase.SpinnerStyle
+- uid: System.Windows.Controls.UpDownBase.SpinnerStyleProperty
+  commentId: F:System.Windows.Controls.UpDownBase.SpinnerStyleProperty
+  parent: System.Windows.Controls.UpDownBase
+  name: SpinnerStyleProperty
+  nameWithType: UpDownBase.SpinnerStyleProperty
+  fullName: System.Windows.Controls.UpDownBase.SpinnerStyleProperty
+- uid: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+  commentId: M:System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+  parent: System.Windows.Controls.UpDownBase
+  name: OnSpinnerStyleChanged(Style, Style)
+  nameWithType: UpDownBase.OnSpinnerStyleChanged(Style, Style)
+  fullName: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style, System.Windows.Style)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+    name: OnSpinnerStyleChanged
+    nameWithType: UpDownBase.OnSpinnerStyleChanged
+    fullName: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged(System.Windows.Style,System.Windows.Style)
+    name: OnSpinnerStyleChanged
+    nameWithType: UpDownBase.OnSpinnerStyleChanged
+    fullName: System.Windows.Controls.UpDownBase.OnSpinnerStyleChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Windows.Style
+    name: Style
+    nameWithType: Style
+    fullName: System.Windows.Style
   - name: )
     nameWithType: )
     fullName: )
@@ -1407,78 +2219,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+- uid: System.Windows.Controls.Control.CharacterSpacingProperty
+  commentId: F:System.Windows.Controls.Control.CharacterSpacingProperty
   parent: System.Windows.Controls.Control
-  name: OnMouseRightButtonDown(MouseButtonEventArgs)
-  nameWithType: Control.OnMouseRightButtonDown(MouseButtonEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  name: CharacterSpacingProperty
+  nameWithType: Control.CharacterSpacingProperty
+  fullName: System.Windows.Controls.Control.CharacterSpacingProperty
+- uid: System.Windows.Controls.Control.CharacterSpacing
+  commentId: P:System.Windows.Controls.Control.CharacterSpacing
   parent: System.Windows.Controls.Control
-  name: OnMouseWheel(MouseWheelEventArgs)
-  nameWithType: Control.OnMouseWheel(MouseWheelEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: CharacterSpacing
+  nameWithType: Control.CharacterSpacing
+  fullName: System.Windows.Controls.Control.CharacterSpacing
 - uid: System.Windows.Controls.Control.TabNavigationProperty
   commentId: F:System.Windows.Controls.Control.TabNavigationProperty
   parent: System.Windows.Controls.Control
@@ -1503,42 +2255,6 @@ references:
   name: FontStretch
   nameWithType: Control.FontStretch
   fullName: System.Windows.Controls.Control.FontStretch
-- uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  parent: System.Windows.Controls.Control
-  name: OnTextInput(TextCompositionEventArgs)
-  nameWithType: Control.OnTextInput(TextCompositionEventArgs)
-  fullName: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   commentId: M:System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   parent: System.Windows.Controls.Control
@@ -2019,6 +2735,12 @@ references:
   name: DataContextChanged
   nameWithType: FrameworkElement.DataContextChanged
   fullName: System.Windows.FrameworkElement.DataContextChanged
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  parent: System.Windows.FrameworkElement
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   parent: System.Windows.FrameworkElement
@@ -2053,18 +2775,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  parent: System.Windows.FrameworkElement
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  parent: System.Windows.FrameworkElement
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -2197,6 +2907,12 @@ references:
   name: DefaultStyleKeyProperty
   nameWithType: FrameworkElement.DefaultStyleKeyProperty
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  parent: System.Windows.FrameworkElement
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
 - uid: System.Windows.FrameworkElement.Loaded
   commentId: E:System.Windows.FrameworkElement.Loaded
   parent: System.Windows.FrameworkElement
@@ -2215,100 +2931,6 @@ references:
   name: BindingValidationError
   nameWithType: FrameworkElement.BindingValidationError
   fullName: System.Windows.FrameworkElement.BindingValidationError
-- uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: RegisterName(String, Object)
-  nameWithType: FrameworkElement.RegisterName(String, Object)
-  fullName: System.Windows.FrameworkElement.RegisterName(System.String, System.Object)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-  commentId: M:System.Windows.FrameworkElement.UnregisterName(System.String)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: UnregisterName(String)
-  nameWithType: FrameworkElement.UnregisterName(String)
-  fullName: System.Windows.FrameworkElement.UnregisterName(System.String)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.FrameworkElement
@@ -2421,6 +3043,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   parent: System.Windows.FrameworkElement
@@ -2553,6 +3199,24 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  parent: System.Windows.FrameworkElement
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.FrameworkElement.SizeChanged
   commentId: E:System.Windows.FrameworkElement.SizeChanged
   parent: System.Windows.FrameworkElement
@@ -2595,6 +3259,12 @@ references:
   name: Drop
   nameWithType: UIElement.Drop
   fullName: System.Windows.UIElement.Drop
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  parent: System.Windows.UIElement
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
 - uid: System.Windows.UIElement.OpacityMask
   commentId: P:System.Windows.UIElement.OpacityMask
   parent: System.Windows.UIElement
@@ -2631,46 +3301,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
-- uid: System.Windows.UIElement.OnCreateAutomationPeer
-  commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
-  parent: System.Windows.UIElement
-  name: OnCreateAutomationPeer()
-  nameWithType: UIElement.OnCreateAutomationPeer()
-  fullName: System.Windows.UIElement.OnCreateAutomationPeer()
-  spec.csharp:
-  - uid: System.Windows.UIElement.OnCreateAutomationPeer
-    name: OnCreateAutomationPeer
-    nameWithType: UIElement.OnCreateAutomationPeer
-    fullName: System.Windows.UIElement.OnCreateAutomationPeer
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.OnCreateAutomationPeer
-    name: OnCreateAutomationPeer
-    nameWithType: UIElement.OnCreateAutomationPeer
-    fullName: System.Windows.UIElement.OnCreateAutomationPeer
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.UIElement.XamlSourcePath
   commentId: F:System.Windows.UIElement.XamlSourcePath
   parent: System.Windows.UIElement
@@ -2701,6 +3331,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -2910,12 +3552,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -3266,6 +3902,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -3374,6 +4132,54 @@ references:
   name: MouseRightButtonDown
   nameWithType: UIElement.MouseRightButtonDown
   fullName: System.Windows.UIElement.MouseRightButtonDown
+- uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseRightButtonDown(MouseButtonEventArgs)
+  nameWithType: UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)
+  fullName: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.MouseLeftButtonUpEvent
   commentId: F:System.Windows.UIElement.MouseLeftButtonUpEvent
   parent: System.Windows.UIElement
@@ -3518,24 +4324,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -3548,12 +4384,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -3674,42 +4504,6 @@ references:
   name: KeyDown
   nameWithType: UIElement.KeyDown
   fullName: System.Windows.UIElement.KeyDown
-- uid: System.Windows.UIElement.OnKeyDown(System.Windows.Input.KeyEventArgs)
-  commentId: M:System.Windows.UIElement.OnKeyDown(System.Windows.Input.KeyEventArgs)
-  parent: System.Windows.UIElement
-  name: OnKeyDown(KeyEventArgs)
-  nameWithType: UIElement.OnKeyDown(KeyEventArgs)
-  fullName: System.Windows.UIElement.OnKeyDown(System.Windows.Input.KeyEventArgs)
-  spec.csharp:
-  - uid: System.Windows.UIElement.OnKeyDown(System.Windows.Input.KeyEventArgs)
-    name: OnKeyDown
-    nameWithType: UIElement.OnKeyDown
-    fullName: System.Windows.UIElement.OnKeyDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.KeyEventArgs
-    name: KeyEventArgs
-    nameWithType: KeyEventArgs
-    fullName: System.Windows.Input.KeyEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.OnKeyDown(System.Windows.Input.KeyEventArgs)
-    name: OnKeyDown
-    nameWithType: UIElement.OnKeyDown
-    fullName: System.Windows.UIElement.OnKeyDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.KeyEventArgs
-    name: KeyEventArgs
-    nameWithType: KeyEventArgs
-    fullName: System.Windows.Input.KeyEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.UIElement.KeyUpEvent
   commentId: F:System.Windows.UIElement.KeyUpEvent
   parent: System.Windows.UIElement
@@ -3907,128 +4701,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -4633,6 +5305,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -5000,55 +5987,545 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
-- uid: System.Windows.Controls.Primitives
-  commentId: N:System.Windows.Controls.Primitives
-  name: System.Windows.Controls.Primitives
-  nameWithType: System.Windows.Controls.Primitives
-  fullName: System.Windows.Controls.Primitives
+- uid: System.Windows.Controls.UpDownBase`1
+  commentId: T:System.Windows.Controls.UpDownBase`1
+  name: UpDownBase<T>
+  nameWithType: UpDownBase<T>
+  fullName: System.Windows.Controls.UpDownBase<T>
+  nameWithType.vb: UpDownBase(Of T)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T)
+  name.vb: UpDownBase(Of T)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1
+    name: UpDownBase
+    nameWithType: UpDownBase
+    fullName: System.Windows.Controls.UpDownBase
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1
+    name: UpDownBase
+    nameWithType: UpDownBase
+    fullName: System.Windows.Controls.UpDownBase
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.Value
+  commentId: P:System.Windows.Controls.UpDownBase`1.Value
+  name: Value
+  nameWithType: UpDownBase<T>.Value
+  fullName: System.Windows.Controls.UpDownBase<T>.Value
+  nameWithType.vb: UpDownBase(Of T).Value
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).Value
+- uid: System.Windows.Controls.UpDownBase`1.ValueProperty
+  commentId: F:System.Windows.Controls.UpDownBase`1.ValueProperty
+  name: ValueProperty
+  nameWithType: UpDownBase<T>.ValueProperty
+  fullName: System.Windows.Controls.UpDownBase<T>.ValueProperty
+  nameWithType.vb: UpDownBase(Of T).ValueProperty
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).ValueProperty
+- uid: System.Windows.Controls.UpDownBase`1.IsEditable
+  commentId: P:System.Windows.Controls.UpDownBase`1.IsEditable
+  name: IsEditable
+  nameWithType: UpDownBase<T>.IsEditable
+  fullName: System.Windows.Controls.UpDownBase<T>.IsEditable
+  nameWithType.vb: UpDownBase(Of T).IsEditable
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).IsEditable
+- uid: System.Windows.Controls.UpDownBase`1.IsEditableProperty
+  commentId: F:System.Windows.Controls.UpDownBase`1.IsEditableProperty
+  name: IsEditableProperty
+  nameWithType: UpDownBase<T>.IsEditableProperty
+  fullName: System.Windows.Controls.UpDownBase<T>.IsEditableProperty
+  nameWithType.vb: UpDownBase(Of T).IsEditableProperty
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).IsEditableProperty
+- uid: System.Windows.Controls.UpDownBase`1.ValueChanging
+  commentId: E:System.Windows.Controls.UpDownBase`1.ValueChanging
+  name: ValueChanging
+  nameWithType: UpDownBase<T>.ValueChanging
+  fullName: System.Windows.Controls.UpDownBase<T>.ValueChanging
+  nameWithType.vb: UpDownBase(Of T).ValueChanging
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).ValueChanging
+- uid: System.Windows.Controls.UpDownBase`1.ValueChanged
+  commentId: E:System.Windows.Controls.UpDownBase`1.ValueChanged
+  name: ValueChanged
+  nameWithType: UpDownBase<T>.ValueChanged
+  fullName: System.Windows.Controls.UpDownBase<T>.ValueChanged
+  nameWithType.vb: UpDownBase(Of T).ValueChanged
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).ValueChanged
+- uid: System.Windows.Controls.UpDownBase`1.Parsing
+  commentId: E:System.Windows.Controls.UpDownBase`1.Parsing
+  name: Parsing
+  nameWithType: UpDownBase<T>.Parsing
+  fullName: System.Windows.Controls.UpDownBase<T>.Parsing
+  nameWithType.vb: UpDownBase(Of T).Parsing
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).Parsing
+- uid: System.Windows.Controls.UpDownBase`1.ParseError
+  commentId: E:System.Windows.Controls.UpDownBase`1.ParseError
+  name: ParseError
+  nameWithType: UpDownBase<T>.ParseError
+  fullName: System.Windows.Controls.UpDownBase<T>.ParseError
+  nameWithType.vb: UpDownBase(Of T).ParseError
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).ParseError
+- uid: System.Windows.Controls.UpDownBase`1.GetValue
+  commentId: M:System.Windows.Controls.UpDownBase`1.GetValue
+  name: GetValue()
+  nameWithType: UpDownBase<T>.GetValue()
+  fullName: System.Windows.Controls.UpDownBase<T>.GetValue()
+  nameWithType.vb: UpDownBase(Of T).GetValue()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).GetValue()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.GetValue
+    name: GetValue
+    nameWithType: UpDownBase<T>.GetValue
+    fullName: System.Windows.Controls.UpDownBase<T>.GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.GetValue
+    name: GetValue
+    nameWithType: UpDownBase(Of T).GetValue
+    fullName: System.Windows.Controls.UpDownBase(Of T).GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.SetValue(System.Object)
+  commentId: M:System.Windows.Controls.UpDownBase`1.SetValue(System.Object)
+  isExternal: true
+  name: SetValue(Object)
+  nameWithType: UpDownBase<T>.SetValue(Object)
+  fullName: System.Windows.Controls.UpDownBase<T>.SetValue(System.Object)
+  nameWithType.vb: UpDownBase(Of T).SetValue(Object)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).SetValue(System.Object)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.SetValue(System.Object)
+    name: SetValue
+    nameWithType: UpDownBase<T>.SetValue
+    fullName: System.Windows.Controls.UpDownBase<T>.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.SetValue(System.Object)
+    name: SetValue
+    nameWithType: UpDownBase(Of T).SetValue
+    fullName: System.Windows.Controls.UpDownBase(Of T).SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  name: OnKeyDown(KeyEventArgs)
+  nameWithType: UpDownBase<T>.OnKeyDown(KeyEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnKeyDown(System.Windows.Input.KeyEventArgs)
+  nameWithType.vb: UpDownBase(Of T).OnKeyDown(KeyEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnKeyDown(System.Windows.Input.KeyEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnKeyDown(System.Windows.Input.KeyEventArgs)
+    name: OnKeyDown
+    nameWithType: UpDownBase<T>.OnKeyDown
+    fullName: System.Windows.Controls.UpDownBase<T>.OnKeyDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.KeyEventArgs
+    name: KeyEventArgs
+    nameWithType: KeyEventArgs
+    fullName: System.Windows.Input.KeyEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnKeyDown(System.Windows.Input.KeyEventArgs)
+    name: OnKeyDown
+    nameWithType: UpDownBase(Of T).OnKeyDown
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnKeyDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.KeyEventArgs
+    name: KeyEventArgs
+    nameWithType: KeyEventArgs
+    fullName: System.Windows.Input.KeyEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UpDownBase<T>.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  nameWithType.vb: UpDownBase(Of T).OnMouseWheel(MouseWheelEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UpDownBase<T>.OnMouseWheel
+    fullName: System.Windows.Controls.UpDownBase<T>.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UpDownBase(Of T).OnMouseWheel
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.ApplyValue(System.String)
+  commentId: M:System.Windows.Controls.UpDownBase`1.ApplyValue(System.String)
+  isExternal: true
+  name: ApplyValue(String)
+  nameWithType: UpDownBase<T>.ApplyValue(String)
+  fullName: System.Windows.Controls.UpDownBase<T>.ApplyValue(System.String)
+  nameWithType.vb: UpDownBase(Of T).ApplyValue(String)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).ApplyValue(System.String)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.ApplyValue(System.String)
+    name: ApplyValue
+    nameWithType: UpDownBase<T>.ApplyValue
+    fullName: System.Windows.Controls.UpDownBase<T>.ApplyValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.ApplyValue(System.String)
+    name: ApplyValue
+    nameWithType: UpDownBase(Of T).ApplyValue
+    fullName: System.Windows.Controls.UpDownBase(Of T).ApplyValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  name: OnParseError(UpDownParseErrorEventArgs)
+  nameWithType: UpDownBase<T>.OnParseError(UpDownParseErrorEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  nameWithType.vb: UpDownBase(Of T).OnParseError(UpDownParseErrorEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+    name: OnParseError
+    nameWithType: UpDownBase<T>.OnParseError
+    fullName: System.Windows.Controls.UpDownBase<T>.OnParseError
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParseErrorEventArgs
+    name: UpDownParseErrorEventArgs
+    nameWithType: UpDownParseErrorEventArgs
+    fullName: System.Windows.Controls.UpDownParseErrorEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParseError(System.Windows.Controls.UpDownParseErrorEventArgs)
+    name: OnParseError
+    nameWithType: UpDownBase(Of T).OnParseError
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnParseError
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParseErrorEventArgs
+    name: UpDownParseErrorEventArgs
+    nameWithType: UpDownParseErrorEventArgs
+    fullName: System.Windows.Controls.UpDownParseErrorEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{`0})
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{`0})
+  name: OnParsing(UpDownParsingEventArgs<T>)
+  nameWithType: UpDownBase<T>.OnParsing(UpDownParsingEventArgs<T>)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnParsing(System.Windows.Controls.UpDownParsingEventArgs<T>)
+  nameWithType.vb: UpDownBase(Of T).OnParsing(UpDownParsingEventArgs(Of T))
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnParsing(System.Windows.Controls.UpDownParsingEventArgs(Of T))
+  name.vb: OnParsing(UpDownParsingEventArgs(Of T))
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{`0})
+    name: OnParsing
+    nameWithType: UpDownBase<T>.OnParsing
+    fullName: System.Windows.Controls.UpDownBase<T>.OnParsing
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParsingEventArgs`1
+    name: UpDownParsingEventArgs
+    nameWithType: UpDownParsingEventArgs
+    fullName: System.Windows.Controls.UpDownParsingEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnParsing(System.Windows.Controls.UpDownParsingEventArgs{`0})
+    name: OnParsing
+    nameWithType: UpDownBase(Of T).OnParsing
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnParsing
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.UpDownParsingEventArgs`1
+    name: UpDownParsingEventArgs
+    nameWithType: UpDownParsingEventArgs
+    fullName: System.Windows.Controls.UpDownParsingEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnSpin(System.Windows.Controls.SpinEventArgs)
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnSpin(System.Windows.Controls.SpinEventArgs)
+  name: OnSpin(SpinEventArgs)
+  nameWithType: UpDownBase<T>.OnSpin(SpinEventArgs)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnSpin(System.Windows.Controls.SpinEventArgs)
+  nameWithType.vb: UpDownBase(Of T).OnSpin(SpinEventArgs)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnSpin(System.Windows.Controls.SpinEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnSpin(System.Windows.Controls.SpinEventArgs)
+    name: OnSpin
+    nameWithType: UpDownBase<T>.OnSpin
+    fullName: System.Windows.Controls.UpDownBase<T>.OnSpin
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.SpinEventArgs
+    name: SpinEventArgs
+    nameWithType: SpinEventArgs
+    fullName: System.Windows.Controls.SpinEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnSpin(System.Windows.Controls.SpinEventArgs)
+    name: OnSpin
+    nameWithType: UpDownBase(Of T).OnSpin
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnSpin
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.SpinEventArgs
+    name: SpinEventArgs
+    nameWithType: SpinEventArgs
+    fullName: System.Windows.Controls.SpinEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnIsEditableChanged(System.Boolean,System.Boolean)
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnIsEditableChanged(System.Boolean,System.Boolean)
+  isExternal: true
+  name: OnIsEditableChanged(Boolean, Boolean)
+  nameWithType: UpDownBase<T>.OnIsEditableChanged(Boolean, Boolean)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnIsEditableChanged(System.Boolean, System.Boolean)
+  nameWithType.vb: UpDownBase(Of T).OnIsEditableChanged(Boolean, Boolean)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnIsEditableChanged(System.Boolean, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIsEditableChanged(System.Boolean,System.Boolean)
+    name: OnIsEditableChanged
+    nameWithType: UpDownBase<T>.OnIsEditableChanged
+    fullName: System.Windows.Controls.UpDownBase<T>.OnIsEditableChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIsEditableChanged(System.Boolean,System.Boolean)
+    name: OnIsEditableChanged
+    nameWithType: UpDownBase(Of T).OnIsEditableChanged
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnIsEditableChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.SelectAllText
+  commentId: M:System.Windows.Controls.UpDownBase`1.SelectAllText
+  name: SelectAllText()
+  nameWithType: UpDownBase<T>.SelectAllText()
+  fullName: System.Windows.Controls.UpDownBase<T>.SelectAllText()
+  nameWithType.vb: UpDownBase(Of T).SelectAllText()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).SelectAllText()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.SelectAllText
+    name: SelectAllText
+    nameWithType: UpDownBase<T>.SelectAllText
+    fullName: System.Windows.Controls.UpDownBase<T>.SelectAllText
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.SelectAllText
+    name: SelectAllText
+    nameWithType: UpDownBase(Of T).SelectAllText
+    fullName: System.Windows.Controls.UpDownBase(Of T).SelectAllText
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -5516,14 +6993,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5537,16 +7014,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -5560,10 +7037,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -5573,74 +7050,90 @@ references:
   name: ToJavaScriptObjectExtender
   nameWithType: ToJavaScriptObjectExtender
   fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.NumericUpDown.DecimalPlaces*
-  commentId: Overload:System.Windows.Controls.NumericUpDown.DecimalPlaces
-  name: DecimalPlaces
-  nameWithType: NumericUpDown.DecimalPlaces
-  fullName: System.Windows.Controls.NumericUpDown.DecimalPlaces
-- uid: System.Int32
+- uid: System.Windows.Controls.Primitives
+  commentId: N:System.Windows.Controls.Primitives
+  name: System.Windows.Controls.Primitives
+  nameWithType: System.Windows.Controls.Primitives
+  fullName: System.Windows.Controls.Primitives
+- uid: System.Windows.Controls.NumericUpDown.Minimum*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.Minimum
+  name: Minimum
+  nameWithType: NumericUpDown.Minimum
+  fullName: System.Windows.Controls.NumericUpDown.Minimum
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
   isExternal: true
-  name: Int32
-  nameWithType: Int32
-  fullName: System.Int32
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
 - uid: System.Windows.DependencyProperty
   commentId: T:System.Windows.DependencyProperty
   parent: System.Windows
   name: DependencyProperty
   nameWithType: DependencyProperty
   fullName: System.Windows.DependencyProperty
-- uid: System.Windows.Controls.NumericUpDown.ValueBarVisibility*
-  commentId: Overload:System.Windows.Controls.NumericUpDown.ValueBarVisibility
-  name: ValueBarVisibility
-  nameWithType: NumericUpDown.ValueBarVisibility
-  fullName: System.Windows.Controls.NumericUpDown.ValueBarVisibility
-- uid: System.Windows.Controls.NumericUpDownValueBarVisibility
-  commentId: T:System.Windows.Controls.NumericUpDownValueBarVisibility
-  parent: System.Windows.Controls
-  name: NumericUpDownValueBarVisibility
-  nameWithType: NumericUpDownValueBarVisibility
-  fullName: System.Windows.Controls.NumericUpDownValueBarVisibility
-- uid: System.Windows.Controls.NumericUpDown.IsReadOnly*
-  commentId: Overload:System.Windows.Controls.NumericUpDown.IsReadOnly
-  name: IsReadOnly
-  nameWithType: NumericUpDown.IsReadOnly
-  fullName: System.Windows.Controls.NumericUpDown.IsReadOnly
-- uid: System.Boolean
+- uid: System.Windows.Controls.NumericUpDown.OnMinimumChanged*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnMinimumChanged
+  name: OnMinimumChanged
+  nameWithType: NumericUpDown.OnMinimumChanged
+  fullName: System.Windows.Controls.NumericUpDown.OnMinimumChanged
+- uid: System.Windows.Controls.NumericUpDown.Maximum*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.Maximum
+  name: Maximum
+  nameWithType: NumericUpDown.Maximum
+  fullName: System.Windows.Controls.NumericUpDown.Maximum
+- uid: System.Windows.Controls.NumericUpDown.OnMaximumChanged*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnMaximumChanged
+  name: OnMaximumChanged
+  nameWithType: NumericUpDown.OnMaximumChanged
+  fullName: System.Windows.Controls.NumericUpDown.OnMaximumChanged
+- uid: System.Windows.Controls.NumericUpDown.Increment*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.Increment
+  name: Increment
+  nameWithType: NumericUpDown.Increment
+  fullName: System.Windows.Controls.NumericUpDown.Increment
+- uid: System.Windows.Controls.NumericUpDown.OnIncrementChanged*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnIncrementChanged
+  name: OnIncrementChanged
+  nameWithType: NumericUpDown.OnIncrementChanged
+  fullName: System.Windows.Controls.NumericUpDown.OnIncrementChanged
+- uid: System.Windows.Controls.NumericUpDown.DecimalPlaces*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.DecimalPlaces
+  name: DecimalPlaces
+  nameWithType: NumericUpDown.DecimalPlaces
+  fullName: System.Windows.Controls.NumericUpDown.DecimalPlaces
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
   isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
-- uid: System.Windows.Controls.NumericUpDown.DragSpeed*
-  commentId: Overload:System.Windows.Controls.NumericUpDown.DragSpeed
-  name: DragSpeed
-  nameWithType: NumericUpDown.DragSpeed
-  fullName: System.Windows.Controls.NumericUpDown.DragSpeed
-- uid: System.Double
-  isExternal: true
-  name: Double
-  nameWithType: Double
-  fullName: System.Double
-- uid: System.Windows.Controls.NumericUpDown
-  commentId: T:System.Windows.Controls.NumericUpDown
-  name: NumericUpDown
-  nameWithType: NumericUpDown
-  fullName: System.Windows.Controls.NumericUpDown
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged
+  name: OnDecimalPlacesChanged
+  nameWithType: NumericUpDown.OnDecimalPlacesChanged
+  fullName: System.Windows.Controls.NumericUpDown.OnDecimalPlacesChanged
 - uid: System.Windows.Controls.NumericUpDown.#ctor*
   commentId: Overload:System.Windows.Controls.NumericUpDown.#ctor
   name: NumericUpDown
   nameWithType: NumericUpDown.NumericUpDown
   fullName: System.Windows.Controls.NumericUpDown.NumericUpDown
-- uid: System.Windows.Controls.Control.OnApplyTemplate
-  commentId: M:System.Windows.Controls.Control.OnApplyTemplate
-  parent: System.Windows.Controls.Control
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnApplyTemplate
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnApplyTemplate
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnApplyTemplate
   name: OnApplyTemplate()
-  nameWithType: Control.OnApplyTemplate()
-  fullName: System.Windows.Controls.Control.OnApplyTemplate()
+  nameWithType: UpDownBase<Double>.OnApplyTemplate()
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnApplyTemplate()
+  nameWithType.vb: UpDownBase(Of Double).OnApplyTemplate()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnApplyTemplate()
   spec.csharp:
-  - uid: System.Windows.Controls.Control.OnApplyTemplate
+  - uid: System.Windows.Controls.UpDownBase`1.OnApplyTemplate
     name: OnApplyTemplate
-    nameWithType: Control.OnApplyTemplate
-    fullName: System.Windows.Controls.Control.OnApplyTemplate
+    nameWithType: UpDownBase<Double>.OnApplyTemplate
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnApplyTemplate
   - name: (
     nameWithType: (
     fullName: (
@@ -5648,10 +7141,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Control.OnApplyTemplate
+  - uid: System.Windows.Controls.UpDownBase`1.OnApplyTemplate
     name: OnApplyTemplate
-    nameWithType: Control.OnApplyTemplate
-    fullName: System.Windows.Controls.Control.OnApplyTemplate
+    nameWithType: UpDownBase(Of Double).OnApplyTemplate
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnApplyTemplate
   - name: (
     nameWithType: (
     fullName: (
@@ -5663,44 +7156,130 @@ references:
   name: OnApplyTemplate
   nameWithType: NumericUpDown.OnApplyTemplate
   fullName: System.Windows.Controls.NumericUpDown.OnApplyTemplate
-- uid: System.Windows.Controls.NumericUpDown.DoDecrement*
-  commentId: Overload:System.Windows.Controls.NumericUpDown.DoDecrement
-  name: DoDecrement
-  nameWithType: NumericUpDown.DoDecrement
-  fullName: System.Windows.Controls.NumericUpDown.DoDecrement
-- uid: System.Windows.Controls.NumericUpDown.DoIncrement*
-  commentId: Overload:System.Windows.Controls.NumericUpDown.DoIncrement
-  name: DoIncrement
-  nameWithType: NumericUpDown.DoIncrement
-  fullName: System.Windows.Controls.NumericUpDown.DoIncrement
-- uid: System.Windows.Controls.NumericUpDown.Increment*
-  commentId: Overload:System.Windows.Controls.NumericUpDown.Increment
-  name: Increment
-  nameWithType: NumericUpDown.Increment
-  fullName: System.Windows.Controls.NumericUpDown.Increment
-- uid: System.Windows.Controls.Primitives.RangeBase.OnValueChanged(System.Double,System.Double)
-  commentId: M:System.Windows.Controls.Primitives.RangeBase.OnValueChanged(System.Double,System.Double)
-  parent: System.Windows.Controls.Primitives.RangeBase
-  isExternal: true
-  name: OnValueChanged(Double, Double)
-  nameWithType: RangeBase.OnValueChanged(Double, Double)
-  fullName: System.Windows.Controls.Primitives.RangeBase.OnValueChanged(System.Double, System.Double)
+- uid: System.Windows.Controls.UpDownBase`1.OnApplyTemplate
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnApplyTemplate
+  name: OnApplyTemplate()
+  nameWithType: UpDownBase<T>.OnApplyTemplate()
+  fullName: System.Windows.Controls.UpDownBase<T>.OnApplyTemplate()
+  nameWithType.vb: UpDownBase(Of T).OnApplyTemplate()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnApplyTemplate()
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.RangeBase.OnValueChanged(System.Double,System.Double)
-    name: OnValueChanged
-    nameWithType: RangeBase.OnValueChanged
-    fullName: System.Windows.Controls.Primitives.RangeBase.OnValueChanged
+  - uid: System.Windows.Controls.UpDownBase`1.OnApplyTemplate
+    name: OnApplyTemplate
+    nameWithType: UpDownBase<T>.OnApplyTemplate
+    fullName: System.Windows.Controls.UpDownBase<T>.OnApplyTemplate
   - name: (
     nameWithType: (
     fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnApplyTemplate
+    name: OnApplyTemplate
+    nameWithType: UpDownBase(Of T).OnApplyTemplate
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnApplyTemplate
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.OnCreateAutomationPeer
+  commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
+  parent: System.Windows.UIElement
+  name: OnCreateAutomationPeer()
+  nameWithType: UIElement.OnCreateAutomationPeer()
+  fullName: System.Windows.UIElement.OnCreateAutomationPeer()
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnCreateAutomationPeer
+    name: OnCreateAutomationPeer
+    nameWithType: UIElement.OnCreateAutomationPeer
+    fullName: System.Windows.UIElement.OnCreateAutomationPeer
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnCreateAutomationPeer
+    name: OnCreateAutomationPeer
+    nameWithType: UIElement.OnCreateAutomationPeer
+    fullName: System.Windows.UIElement.OnCreateAutomationPeer
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer
+  name: OnCreateAutomationPeer
+  nameWithType: NumericUpDown.OnCreateAutomationPeer
+  fullName: System.Windows.Controls.NumericUpDown.OnCreateAutomationPeer
+- uid: System.Windows.Automation.Peers.AutomationPeer
+  commentId: T:System.Windows.Automation.Peers.AutomationPeer
+  parent: System.Windows.Automation.Peers
+  name: AutomationPeer
+  nameWithType: AutomationPeer
+  fullName: System.Windows.Automation.Peers.AutomationPeer
+- uid: System.Windows.Automation.Peers
+  commentId: N:System.Windows.Automation.Peers
+  name: System.Windows.Automation.Peers
+  nameWithType: System.Windows.Automation.Peers
+  fullName: System.Windows.Automation.Peers
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double})
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double})
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{`0})
+  name: OnValueChanging(RoutedPropertyChangingEventArgs<Double>)
+  nameWithType: UpDownBase<Double>.OnValueChanging(RoutedPropertyChangingEventArgs<Double>)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs<System.Double>)
+  nameWithType.vb: UpDownBase(Of Double).OnValueChanging(RoutedPropertyChangingEventArgs(Of Double))
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs(Of System.Double))
+  name.vb: OnValueChanging(RoutedPropertyChangingEventArgs(Of Double))
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{`0})
+    name: OnValueChanging
+    nameWithType: UpDownBase<Double>.OnValueChanging
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnValueChanging
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
   - uid: System.Double
     name: Double
     nameWithType: Double
     fullName: System.Double
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{`0})
+    name: OnValueChanging
+    nameWithType: UpDownBase(Of Double).OnValueChanging
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnValueChanging
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
   - uid: System.Double
     name: Double
     nameWithType: Double
@@ -5709,27 +7288,207 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.NumericUpDown.OnValueChanging*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnValueChanging
+  name: OnValueChanging
+  nameWithType: NumericUpDown.OnValueChanging
+  fullName: System.Windows.Controls.NumericUpDown.OnValueChanging
+- uid: System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double}
+  commentId: T:System.Windows.Controls.RoutedPropertyChangingEventArgs{System.Double}
+  parent: System.Windows.Controls
+  definition: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+  name: RoutedPropertyChangingEventArgs<Double>
+  nameWithType: RoutedPropertyChangingEventArgs<Double>
+  fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs<System.Double>
+  nameWithType.vb: RoutedPropertyChangingEventArgs(Of Double)
+  fullName.vb: System.Windows.Controls.RoutedPropertyChangingEventArgs(Of System.Double)
+  name.vb: RoutedPropertyChangingEventArgs(Of Double)
+  spec.csharp:
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.RangeBase.OnValueChanged(System.Double,System.Double)
-    name: OnValueChanged
-    nameWithType: RangeBase.OnValueChanged
-    fullName: System.Windows.Controls.Primitives.RangeBase.OnValueChanged
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{`0})
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{`0})
+  name: OnValueChanging(RoutedPropertyChangingEventArgs<T>)
+  nameWithType: UpDownBase<T>.OnValueChanging(RoutedPropertyChangingEventArgs<T>)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs<T>)
+  nameWithType.vb: UpDownBase(Of T).OnValueChanging(RoutedPropertyChangingEventArgs(Of T))
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs(Of T))
+  name.vb: OnValueChanging(RoutedPropertyChangingEventArgs(Of T))
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{`0})
+    name: OnValueChanging
+    nameWithType: UpDownBase<T>.OnValueChanging
+    fullName: System.Windows.Controls.UpDownBase<T>.OnValueChanging
   - name: (
     nameWithType: (
     fullName: (
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanging(System.Windows.Controls.RoutedPropertyChangingEventArgs{`0})
+    name: OnValueChanging
+    nameWithType: UpDownBase(Of T).OnValueChanging
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnValueChanging
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+  commentId: T:System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+  name: RoutedPropertyChangingEventArgs<T>
+  nameWithType: RoutedPropertyChangingEventArgs<T>
+  fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs<T>
+  nameWithType.vb: RoutedPropertyChangingEventArgs(Of T)
+  fullName.vb: System.Windows.Controls.RoutedPropertyChangingEventArgs(Of T)
+  name.vb: RoutedPropertyChangingEventArgs(Of T)
+  spec.csharp:
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Windows.Controls.RoutedPropertyChangingEventArgs`1
+    name: RoutedPropertyChangingEventArgs
+    nameWithType: RoutedPropertyChangingEventArgs
+    fullName: System.Windows.Controls.RoutedPropertyChangingEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Double})
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Double})
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{`0})
+  name: OnValueChanged(RoutedPropertyChangedEventArgs<Double>)
+  nameWithType: UpDownBase<Double>.OnValueChanged(RoutedPropertyChangedEventArgs<Double>)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs<System.Double>)
+  nameWithType.vb: UpDownBase(Of Double).OnValueChanged(RoutedPropertyChangedEventArgs(Of Double))
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs(Of System.Double))
+  name.vb: OnValueChanged(RoutedPropertyChangedEventArgs(Of Double))
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{`0})
+    name: OnValueChanged
+    nameWithType: UpDownBase<Double>.OnValueChanged
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnValueChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
   - uid: System.Double
     name: Double
     nameWithType: Double
     fullName: System.Double
     isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{`0})
+    name: OnValueChanged
+    nameWithType: UpDownBase(Of Double).OnValueChanged
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnValueChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
   - uid: System.Double
     name: Double
     nameWithType: Double
     fullName: System.Double
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
   - name: )
     nameWithType: )
     fullName: )
@@ -5738,3 +7497,425 @@ references:
   name: OnValueChanged
   nameWithType: NumericUpDown.OnValueChanged
   fullName: System.Windows.Controls.NumericUpDown.OnValueChanged
+- uid: System.Windows.RoutedPropertyChangedEventArgs{System.Double}
+  commentId: T:System.Windows.RoutedPropertyChangedEventArgs{System.Double}
+  parent: System.Windows
+  definition: System.Windows.RoutedPropertyChangedEventArgs`1
+  name: RoutedPropertyChangedEventArgs<Double>
+  nameWithType: RoutedPropertyChangedEventArgs<Double>
+  fullName: System.Windows.RoutedPropertyChangedEventArgs<System.Double>
+  nameWithType.vb: RoutedPropertyChangedEventArgs(Of Double)
+  fullName.vb: System.Windows.RoutedPropertyChangedEventArgs(Of System.Double)
+  name.vb: RoutedPropertyChangedEventArgs(Of Double)
+  spec.csharp:
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Double
+    name: Double
+    nameWithType: Double
+    fullName: System.Double
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase`1.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{`0})
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{`0})
+  name: OnValueChanged(RoutedPropertyChangedEventArgs<T>)
+  nameWithType: UpDownBase<T>.OnValueChanged(RoutedPropertyChangedEventArgs<T>)
+  fullName: System.Windows.Controls.UpDownBase<T>.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs<T>)
+  nameWithType.vb: UpDownBase(Of T).OnValueChanged(RoutedPropertyChangedEventArgs(Of T))
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs(Of T))
+  name.vb: OnValueChanged(RoutedPropertyChangedEventArgs(Of T))
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{`0})
+    name: OnValueChanged
+    nameWithType: UpDownBase<T>.OnValueChanged
+    fullName: System.Windows.Controls.UpDownBase<T>.OnValueChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{`0})
+    name: OnValueChanged
+    nameWithType: UpDownBase(Of T).OnValueChanged
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnValueChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.RoutedPropertyChangedEventArgs`1
+  commentId: T:System.Windows.RoutedPropertyChangedEventArgs`1
+  name: RoutedPropertyChangedEventArgs<T>
+  nameWithType: RoutedPropertyChangedEventArgs<T>
+  fullName: System.Windows.RoutedPropertyChangedEventArgs<T>
+  nameWithType.vb: RoutedPropertyChangedEventArgs(Of T)
+  fullName.vb: System.Windows.RoutedPropertyChangedEventArgs(Of T)
+  name.vb: RoutedPropertyChangedEventArgs(Of T)
+  spec.csharp:
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Windows.RoutedPropertyChangedEventArgs`1
+    name: RoutedPropertyChangedEventArgs
+    nameWithType: RoutedPropertyChangedEventArgs
+    fullName: System.Windows.RoutedPropertyChangedEventArgs
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.ParseValue(System.String)
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.ParseValue(System.String)
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.ParseValue(System.String)
+  name: ParseValue(String)
+  nameWithType: UpDownBase<Double>.ParseValue(String)
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.ParseValue(System.String)
+  nameWithType.vb: UpDownBase(Of Double).ParseValue(String)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).ParseValue(System.String)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.ParseValue(System.String)
+    name: ParseValue
+    nameWithType: UpDownBase<Double>.ParseValue
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.ParseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.ParseValue(System.String)
+    name: ParseValue
+    nameWithType: UpDownBase(Of Double).ParseValue
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).ParseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.NumericUpDown.ParseValue*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.ParseValue
+  name: ParseValue
+  nameWithType: NumericUpDown.ParseValue
+  fullName: System.Windows.Controls.NumericUpDown.ParseValue
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Windows.Controls.UpDownBase`1.ParseValue(System.String)
+  commentId: M:System.Windows.Controls.UpDownBase`1.ParseValue(System.String)
+  isExternal: true
+  name: ParseValue(String)
+  nameWithType: UpDownBase<T>.ParseValue(String)
+  fullName: System.Windows.Controls.UpDownBase<T>.ParseValue(System.String)
+  nameWithType.vb: UpDownBase(Of T).ParseValue(String)
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).ParseValue(System.String)
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.ParseValue(System.String)
+    name: ParseValue
+    nameWithType: UpDownBase<T>.ParseValue
+    fullName: System.Windows.Controls.UpDownBase<T>.ParseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.ParseValue(System.String)
+    name: ParseValue
+    nameWithType: UpDownBase(Of T).ParseValue
+    fullName: System.Windows.Controls.UpDownBase(Of T).ParseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.FormatValue
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.FormatValue
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.FormatValue
+  name: FormatValue()
+  nameWithType: UpDownBase<Double>.FormatValue()
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.FormatValue()
+  nameWithType.vb: UpDownBase(Of Double).FormatValue()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).FormatValue()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.FormatValue
+    name: FormatValue
+    nameWithType: UpDownBase<Double>.FormatValue
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.FormatValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.FormatValue
+    name: FormatValue
+    nameWithType: UpDownBase(Of Double).FormatValue
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).FormatValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.NumericUpDown.FormatValue*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.FormatValue
+  name: FormatValue
+  nameWithType: NumericUpDown.FormatValue
+  fullName: System.Windows.Controls.NumericUpDown.FormatValue
+- uid: System.Windows.Controls.UpDownBase`1.FormatValue
+  commentId: M:System.Windows.Controls.UpDownBase`1.FormatValue
+  name: FormatValue()
+  nameWithType: UpDownBase<T>.FormatValue()
+  fullName: System.Windows.Controls.UpDownBase<T>.FormatValue()
+  nameWithType.vb: UpDownBase(Of T).FormatValue()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).FormatValue()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.FormatValue
+    name: FormatValue
+    nameWithType: UpDownBase<T>.FormatValue
+    fullName: System.Windows.Controls.UpDownBase<T>.FormatValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.FormatValue
+    name: FormatValue
+    nameWithType: UpDownBase(Of T).FormatValue
+    fullName: System.Windows.Controls.UpDownBase(Of T).FormatValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnIncrement
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnIncrement
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnIncrement
+  name: OnIncrement()
+  nameWithType: UpDownBase<Double>.OnIncrement()
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnIncrement()
+  nameWithType.vb: UpDownBase(Of Double).OnIncrement()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnIncrement()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIncrement
+    name: OnIncrement
+    nameWithType: UpDownBase<Double>.OnIncrement
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnIncrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIncrement
+    name: OnIncrement
+    nameWithType: UpDownBase(Of Double).OnIncrement
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnIncrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.NumericUpDown.OnIncrement*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnIncrement
+  name: OnIncrement
+  nameWithType: NumericUpDown.OnIncrement
+  fullName: System.Windows.Controls.NumericUpDown.OnIncrement
+- uid: System.Windows.Controls.UpDownBase`1.OnIncrement
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnIncrement
+  name: OnIncrement()
+  nameWithType: UpDownBase<T>.OnIncrement()
+  fullName: System.Windows.Controls.UpDownBase<T>.OnIncrement()
+  nameWithType.vb: UpDownBase(Of T).OnIncrement()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnIncrement()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIncrement
+    name: OnIncrement
+    nameWithType: UpDownBase<T>.OnIncrement
+    fullName: System.Windows.Controls.UpDownBase<T>.OnIncrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnIncrement
+    name: OnIncrement
+    nameWithType: UpDownBase(Of T).OnIncrement
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnIncrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.UpDownBase{System.Double}.OnDecrement
+  commentId: M:System.Windows.Controls.UpDownBase{System.Double}.OnDecrement
+  parent: System.Windows.Controls.UpDownBase{System.Double}
+  definition: System.Windows.Controls.UpDownBase`1.OnDecrement
+  name: OnDecrement()
+  nameWithType: UpDownBase<Double>.OnDecrement()
+  fullName: System.Windows.Controls.UpDownBase<System.Double>.OnDecrement()
+  nameWithType.vb: UpDownBase(Of Double).OnDecrement()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of System.Double).OnDecrement()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnDecrement
+    name: OnDecrement
+    nameWithType: UpDownBase<Double>.OnDecrement
+    fullName: System.Windows.Controls.UpDownBase<System.Double>.OnDecrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnDecrement
+    name: OnDecrement
+    nameWithType: UpDownBase(Of Double).OnDecrement
+    fullName: System.Windows.Controls.UpDownBase(Of System.Double).OnDecrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.NumericUpDown.OnDecrement*
+  commentId: Overload:System.Windows.Controls.NumericUpDown.OnDecrement
+  name: OnDecrement
+  nameWithType: NumericUpDown.OnDecrement
+  fullName: System.Windows.Controls.NumericUpDown.OnDecrement
+- uid: System.Windows.Controls.UpDownBase`1.OnDecrement
+  commentId: M:System.Windows.Controls.UpDownBase`1.OnDecrement
+  name: OnDecrement()
+  nameWithType: UpDownBase<T>.OnDecrement()
+  fullName: System.Windows.Controls.UpDownBase<T>.OnDecrement()
+  nameWithType.vb: UpDownBase(Of T).OnDecrement()
+  fullName.vb: System.Windows.Controls.UpDownBase(Of T).OnDecrement()
+  spec.csharp:
+  - uid: System.Windows.Controls.UpDownBase`1.OnDecrement
+    name: OnDecrement
+    nameWithType: UpDownBase<T>.OnDecrement
+    fullName: System.Windows.Controls.UpDownBase<T>.OnDecrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.UpDownBase`1.OnDecrement
+    name: OnDecrement
+    nameWithType: UpDownBase(Of T).OnDecrement
+    fullName: System.Windows.Controls.UpDownBase(Of T).OnDecrement
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )

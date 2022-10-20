@@ -9,6 +9,9 @@ items:
   - System.Windows.Controls.DatePicker.BlackoutDates
   - System.Windows.Controls.DatePicker.CalendarClosed
   - System.Windows.Controls.DatePicker.CalendarOpened
+  - System.Windows.Controls.DatePicker.CalendarStyle
+  - System.Windows.Controls.DatePicker.CalendarStyleProperty
+  - System.Windows.Controls.DatePicker.DateValidationError
   - System.Windows.Controls.DatePicker.DisplayDate
   - System.Windows.Controls.DatePicker.DisplayDateEnd
   - System.Windows.Controls.DatePicker.DisplayDateEndProperty
@@ -20,7 +23,7 @@ items:
   - System.Windows.Controls.DatePicker.IsTodayHighlightedProperty
   - System.Windows.Controls.DatePicker.OnApplyTemplate
   - System.Windows.Controls.DatePicker.OnEmptyText
-  - System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable{DateTime})
+  - System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable{System.DateTime})
   - System.Windows.Controls.DatePicker.OnTextChanged
   - System.Windows.Controls.DatePicker.SelectedDate
   - System.Windows.Controls.DatePicker.SelectedDateFormat
@@ -28,7 +31,7 @@ items:
   - System.Windows.Controls.DatePicker.SelectedDateProperty
   - System.Windows.Controls.DatePicker.SelectionBackground
   - System.Windows.Controls.DatePicker.SelectionBackgroundProperty
-  - System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable{DateTime})
+  - System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable{System.DateTime})
   - System.Windows.Controls.DatePicker.SetWaterMarkText
   langs:
   - csharp
@@ -38,8 +41,12 @@ items:
   fullName: System.Windows.Controls.DatePicker
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DatePicker
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 32
   assemblies:
   - OpenSilver
@@ -50,6 +57,7 @@ items:
     content: 'public class DatePicker : INTERNAL_DateTimePickerBase'
     content.vb: >-
       Public Class DatePicker
+
           Inherits INTERNAL_DateTimePickerBase
   inheritance:
   - System.Object
@@ -120,13 +128,12 @@ items:
   - System.Windows.Controls.Control.Focus
   - System.Windows.Controls.Control.UseSystemFocusVisuals
   - System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
-  - System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  - System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  - System.Windows.Controls.Control.CharacterSpacingProperty
+  - System.Windows.Controls.Control.CharacterSpacing
   - System.Windows.Controls.Control.TabNavigationProperty
   - System.Windows.Controls.Control.TabNavigation
   - System.Windows.Controls.Control.FontStretchProperty
   - System.Windows.Controls.Control.FontStretch
-  - System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
@@ -151,10 +158,9 @@ items:
   - System.Windows.FrameworkElement.DataContext
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
+  - System.Windows.FrameworkElement.Triggers
   - System.Windows.FrameworkElement.LayoutUpdated
   - System.Windows.FrameworkElement.OnLayoutUpdated
-  - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.TriggersProperty
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
@@ -167,15 +173,18 @@ items:
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
   - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
-  - System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  - System.Windows.FrameworkElement.UnregisterName(System.String)
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
   - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.CustomLayout
   - System.Windows.FrameworkElement.CustomLayoutProperty
   - System.Windows.FrameworkElement.Height
@@ -198,6 +207,9 @@ items:
   - System.Windows.FrameworkElement.MaxWidthProperty
   - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualHeightProperty
+  - System.Windows.FrameworkElement.ActualSize
   - System.Windows.FrameworkElement.SizeChanged
   - System.Windows.FrameworkElement.ContextMenu
   - System.Windows.FrameworkElement.ContextMenuProperty
@@ -205,20 +217,21 @@ items:
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
+  - System.Windows.UIElement.DragOver
   - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.Clip
-  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.OnCreateAutomationPeer
   - System.Windows.UIElement.XamlSourcePath
   - System.Windows.UIElement.RenderSize
   - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.ClipProperty
   - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
   - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
@@ -233,7 +246,6 @@ items:
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
   - System.Windows.UIElement.IsVisible
-  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisibleChanged
   - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
@@ -254,6 +266,8 @@ items:
   - System.Windows.UIElement.InvalidateArrange
   - System.Windows.UIElement.InvalidateMeasure
   - System.Windows.UIElement.UpdateLayout
+  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
   - System.Windows.UIElement.MouseMove
   - System.Windows.UIElement.OnMouseMove(System.Windows.Input.MouseEventArgs)
@@ -262,6 +276,10 @@ items:
   - System.Windows.UIElement.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)
   - System.Windows.UIElement.MouseRightButtonDownEvent
   - System.Windows.UIElement.MouseRightButtonDown
+  - System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  - System.Windows.UIElement.MouseWheelEvent
+  - System.Windows.UIElement.MouseWheel
+  - System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
   - System.Windows.UIElement.MouseLeftButtonUpEvent
   - System.Windows.UIElement.MouseLeftButtonUp
   - System.Windows.UIElement.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)
@@ -271,12 +289,11 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.MouseWheelEvent
-  - System.Windows.UIElement.MouseWheel
   - System.Windows.UIElement.TextInputEvent
+  - System.Windows.UIElement.TextInput
+  - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
@@ -299,8 +316,6 @@ items:
   - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
-  - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -316,6 +331,14 @@ items:
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
@@ -328,7 +351,7 @@ items:
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   modifiers.csharp:
   - public
   - class
@@ -347,8 +370,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.BlackoutDates
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: BlackoutDates
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
     startLine: 39
   assemblies:
   - OpenSilver
@@ -356,13 +383,23 @@ items:
   summary: "\nGets or sets a collection of dates that are marked as not selectable.\n"
   example: []
   syntax:
-    content: public CalendarBlackoutDatesCollection BlackoutDates { get; }
+    content: >-
+      [NotImplemented]
+
+      public CalendarBlackoutDatesCollection BlackoutDates { get; }
     parameters: []
     return:
       type: System.Windows.Controls.CalendarBlackoutDatesCollection
       description: "\nA collection of dates that cannot be selected. The default value is an empty collection.\n"
-    content.vb: Public ReadOnly Property BlackoutDates As CalendarBlackoutDatesCollection
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property BlackoutDates As CalendarBlackoutDatesCollection
   overload: System.Windows.Controls.DatePicker.BlackoutDates*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -381,8 +418,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.SelectionBackgroundProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectionBackgroundProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
     startLine: 49
   assemblies:
   - OpenSilver
@@ -390,11 +431,21 @@ items:
   summary: "\nIdentifies the <xref href=\"System.Windows.Controls.DatePicker.SelectionBackground\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty SelectionBackgroundProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty SelectionBackgroundProperty
     return:
       type: System.Windows.DependencyProperty
       description: "\nThe identifier for the <xref href=\"System.Windows.Controls.DatePicker.SelectionBackground\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
-    content.vb: Public Shared ReadOnly SelectionBackgroundProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly SelectionBackgroundProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -415,8 +466,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.SelectionBackground
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectionBackground
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
     startLine: 57
   assemblies:
   - OpenSilver
@@ -424,13 +479,23 @@ items:
   summary: "\nGets or sets the background used for selected dates.\n"
   example: []
   syntax:
-    content: public Brush SelectionBackground { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public Brush SelectionBackground { get; set; }
     parameters: []
     return:
       type: System.Windows.Media.Brush
       description: "\nThe background used for selected dates.\n"
-    content.vb: Public Property SelectionBackground As Brush
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property SelectionBackground As Brush
   overload: System.Windows.Controls.DatePicker.SelectionBackground*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -449,8 +514,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.DisplayDateStartProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DisplayDateStartProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
     startLine: 71
   assemblies:
   - OpenSilver
@@ -458,11 +527,21 @@ items:
   summary: "\nIdentifies the <xref href=\"System.Windows.Controls.DatePicker.DisplayDateStart\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty DisplayDateStartProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty DisplayDateStartProperty
     return:
       type: System.Windows.DependencyProperty
       description: "\nThe identifier for the <xref href=\"System.Windows.Controls.DatePicker.DisplayDateStart\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
-    content.vb: Public Shared ReadOnly DisplayDateStartProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly DisplayDateStartProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -483,8 +562,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.DisplayDateStart
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DisplayDateStart
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
     startLine: 79
   assemblies:
   - OpenSilver
@@ -492,13 +575,23 @@ items:
   summary: "\nGets or sets the first date to be displayed.\n"
   example: []
   syntax:
-    content: public DateTime? DisplayDateStart { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public DateTime? DisplayDateStart { get; set; }
     parameters: []
     return:
-      type: System.Nullable{DateTime}
+      type: System.Nullable{System.DateTime}
       description: "\nThe first date to display.\n"
-    content.vb: Public Property DisplayDateStart As DateTime?
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property DisplayDateStart As Date?
   overload: System.Windows.Controls.DatePicker.DisplayDateStart*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -517,17 +610,31 @@ items:
   fullName: System.Windows.Controls.DatePicker.CalendarClosed
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CalendarClosed
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
     startLine: 90
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   syntax:
-    content: public event RoutedEventHandler CalendarClosed
+    content: >-
+      [NotImplemented]
+
+      public event RoutedEventHandler CalendarClosed
     return:
       type: System.Windows.RoutedEventHandler
-    content.vb: Public Event CalendarClosed As RoutedEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event CalendarClosed As RoutedEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -544,19 +651,76 @@ items:
   fullName: System.Windows.Controls.DatePicker.CalendarOpened
   type: Event
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: CalendarOpened
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
-    startLine: 105
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 104
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nOccurs when the drop-down\n<xref href=\"System.Windows.Controls.Calendar\" data-throw-if-not-resolved=\"false\"></xref> is opened.\n"
   example: []
   syntax:
-    content: public event RoutedEventHandler CalendarOpened
+    content: >-
+      [NotImplemented]
+
+      public event RoutedEventHandler CalendarOpened
     return:
       type: System.Windows.RoutedEventHandler
-    content.vb: Public Event CalendarOpened As RoutedEventHandler
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event CalendarOpened As RoutedEventHandler
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Controls.DatePicker.DateValidationError
+  commentId: E:System.Windows.Controls.DatePicker.DateValidationError
+  id: DateValidationError
+  parent: System.Windows.Controls.DatePicker
+  langs:
+  - csharp
+  - vb
+  name: DateValidationError
+  nameWithType: DatePicker.DateValidationError
+  fullName: System.Windows.Controls.DatePicker.DateValidationError
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DateValidationError
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 111
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nOccurs when <xref href=\"System.Windows.Controls.DatePicker.Text\" data-throw-if-not-resolved=\"false\"></xref> is assigned\na value that cannot be interpreted as a date.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public event EventHandler<DatePickerDateValidationErrorEventArgs> DateValidationError
+    return:
+      type: System.EventHandler{System.Windows.Controls.DatePickerDateValidationErrorEventArgs}
+    content.vb: >-
+      <NotImplemented>
+
+      Public Event DateValidationError As EventHandler(Of DatePickerDateValidationErrorEventArgs)
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -573,22 +737,40 @@ items:
   fullName: System.Windows.Controls.DatePicker.DisplayDate
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DisplayDate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
-    startLine: 121
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 127
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nGets or sets the date to display.\n"
   example: []
   syntax:
-    content: public DateTime DisplayDate { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public DateTime DisplayDate { get; set; }
     parameters: []
     return:
-      type: DateTime
-      description: "\nThe date to display. The default \n<see cref=\"!:DateTime.Today\"></see>.\n"
-    content.vb: Public Property DisplayDate As DateTime
+      type: System.DateTime
+      description: "\nThe date to display. The default \n<xref href=\"System.DateTime.Today\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property DisplayDate As Date
   overload: System.Windows.Controls.DatePicker.DisplayDate*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: "\nThe specified date is not in the range defined by\n<xref href=\"System.Windows.Controls.DatePicker.DisplayDateStart\" data-throw-if-not-resolved=\"false\"></xref>\nand\n<xref href=\"System.Windows.Controls.DatePicker.DisplayDateEnd\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -607,20 +789,34 @@ items:
   fullName: System.Windows.Controls.DatePicker.DisplayDateProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DisplayDateProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
-    startLine: 137
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 143
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nIdentifies the <xref href=\"System.Windows.Controls.DatePicker.DisplayDate\" data-throw-if-not-resolved=\"false\"></xref>\ndependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty DisplayDateProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty DisplayDateProperty
     return:
       type: System.Windows.DependencyProperty
       description: "\nThe identifier for the <xref href=\"System.Windows.Controls.DatePicker.DisplayDate\" data-throw-if-not-resolved=\"false\"></xref>\ndependency property.\n"
-    content.vb: Public Shared ReadOnly DisplayDateProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly DisplayDateProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -641,22 +837,36 @@ items:
   fullName: System.Windows.Controls.DatePicker.DisplayDateEnd
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DisplayDateEnd
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
-    startLine: 159
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 165
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nGets or sets the last date to be displayed.\n"
   example: []
   syntax:
-    content: public DateTime? DisplayDateEnd { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public DateTime? DisplayDateEnd { get; set; }
     parameters: []
     return:
-      type: System.Nullable{DateTime}
+      type: System.Nullable{System.DateTime}
       description: The last date to display.
-    content.vb: Public Property DisplayDateEnd As DateTime?
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property DisplayDateEnd As Date?
   overload: System.Windows.Controls.DatePicker.DisplayDateEnd*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -675,20 +885,34 @@ items:
   fullName: System.Windows.Controls.DatePicker.DisplayDateEndProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: DisplayDateEndProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
-    startLine: 175
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 181
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nIdentifies the <xref href=\"System.Windows.Controls.DatePicker.DisplayDateEnd\" data-throw-if-not-resolved=\"false\"></xref>\ndependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty DisplayDateEndProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty DisplayDateEndProperty
     return:
       type: System.Windows.DependencyProperty
       description: "\nThe identifier for the <xref href=\"System.Windows.Controls.DatePicker.DisplayDateEnd\" data-throw-if-not-resolved=\"false\"></xref>\ndependency property.\n"
-    content.vb: Public Shared ReadOnly DisplayDateEndProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly DisplayDateEndProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -709,21 +933,35 @@ items:
   fullName: System.Windows.Controls.DatePicker.IsTodayHighlighted
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsTodayHighlighted
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
-    startLine: 195
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 201
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nGets or sets a value that indicates whether the current date will be highlighted.\n"
   example: []
   syntax:
-    content: public bool IsTodayHighlighted { get; set; }
+    content: >-
+      [NotImplemented]
+
+      public bool IsTodayHighlighted { get; set; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Public Property IsTodayHighlighted As Boolean
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property IsTodayHighlighted As Boolean
   overload: System.Windows.Controls.DatePicker.IsTodayHighlighted*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -742,19 +980,33 @@ items:
   fullName: System.Windows.Controls.DatePicker.IsTodayHighlightedProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsTodayHighlightedProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\WORKINPROGRESS\DatePicker.cs
-    startLine: 206
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 212
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nIdentifies the IsTodayHighlighted dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty IsTodayHighlightedProperty
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty IsTodayHighlightedProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly IsTodayHighlightedProperty As DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly IsTodayHighlightedProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -763,6 +1015,96 @@ items:
   - Public
   - Shared
   - ReadOnly
+- uid: System.Windows.Controls.DatePicker.CalendarStyleProperty
+  commentId: F:System.Windows.Controls.DatePicker.CalendarStyleProperty
+  id: CalendarStyleProperty
+  parent: System.Windows.Controls.DatePicker
+  langs:
+  - csharp
+  - vb
+  name: CalendarStyleProperty
+  nameWithType: DatePicker.CalendarStyleProperty
+  fullName: System.Windows.Controls.DatePicker.CalendarStyleProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CalendarStyleProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 227
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty CalendarStyleProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly CalendarStyleProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Controls.DatePicker.CalendarStyle
+  commentId: P:System.Windows.Controls.DatePicker.CalendarStyle
+  id: CalendarStyle
+  parent: System.Windows.Controls.DatePicker
+  langs:
+  - csharp
+  - vb
+  name: CalendarStyle
+  nameWithType: DatePicker.CalendarStyle
+  fullName: System.Windows.Controls.DatePicker.CalendarStyle
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CalendarStyle
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/WORKINPROGRESS/DatePicker.cs
+    startLine: 236
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public Style CalendarStyle { get; set; }
+    parameters: []
+    return:
+      type: System.Windows.Style
+    content.vb: >-
+      <NotImplemented>
+
+      Public Property CalendarStyle As Style
+  overload: System.Windows.Controls.DatePicker.CalendarStyle*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Controls.DatePicker.#ctor
   commentId: M:System.Windows.Controls.DatePicker.#ctor
   id: '#ctor'
@@ -775,8 +1117,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.DatePicker()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 34
   assemblies:
   - OpenSilver
@@ -801,8 +1147,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.OnTextChanged()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnTextChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 103
   assemblies:
   - OpenSilver
@@ -830,8 +1180,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.OnEmptyText()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnEmptyText
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 108
   assemblies:
   - OpenSilver
@@ -859,8 +1213,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.GenerateCalendarOrClock()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: GenerateCalendarOrClock
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 113
   assemblies:
   - OpenSilver
@@ -878,20 +1236,24 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-- uid: System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable{DateTime})
-  commentId: M:System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable{DateTime})
-  id: SetTextFromDate(System.Nullable{DateTime})
+- uid: System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable{System.DateTime})
+  commentId: M:System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable{System.DateTime})
+  id: SetTextFromDate(System.Nullable{System.DateTime})
   parent: System.Windows.Controls.DatePicker
   langs:
   - csharp
   - vb
   name: SetTextFromDate(Nullable<DateTime>)
   nameWithType: DatePicker.SetTextFromDate(Nullable<DateTime>)
-  fullName: System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable<DateTime>)
+  fullName: System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable<System.DateTime>)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetTextFromDate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 118
   assemblies:
   - OpenSilver
@@ -900,11 +1262,11 @@ items:
     content: protected override string SetTextFromDate(DateTime? newDate)
     parameters:
     - id: newDate
-      type: System.Nullable{DateTime}
+      type: System.Nullable{System.DateTime}
     return:
       type: System.String
-    content.vb: Protected Overrides Function SetTextFromDate(newDate As DateTime?) As String
-  overridden: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{DateTime})
+    content.vb: Protected Overrides Function SetTextFromDate(newDate As Date?) As String
+  overridden: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{System.DateTime})
   overload: System.Windows.Controls.DatePicker.SetTextFromDate*
   nameWithType.vb: DatePicker.SetTextFromDate(Nullable(Of DateTime))
   modifiers.csharp:
@@ -913,22 +1275,26 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-  fullName.vb: System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable(Of DateTime))
+  fullName.vb: System.Windows.Controls.DatePicker.SetTextFromDate(System.Nullable(Of System.DateTime))
   name.vb: SetTextFromDate(Nullable(Of DateTime))
-- uid: System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable{DateTime})
-  commentId: M:System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable{DateTime})
-  id: OnSelectionChanged(System.Nullable{DateTime})
+- uid: System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable{System.DateTime})
+  commentId: M:System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable{System.DateTime})
+  id: OnSelectionChanged(System.Nullable{System.DateTime})
   parent: System.Windows.Controls.DatePicker
   langs:
   - csharp
   - vb
   name: OnSelectionChanged(Nullable<DateTime>)
   nameWithType: DatePicker.OnSelectionChanged(Nullable<DateTime>)
-  fullName: System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable<DateTime>)
+  fullName: System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable<System.DateTime>)
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnSelectionChanged
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 140
   assemblies:
   - OpenSilver
@@ -937,9 +1303,9 @@ items:
     content: protected override void OnSelectionChanged(DateTime? newSelectedDate)
     parameters:
     - id: newSelectedDate
-      type: System.Nullable{DateTime}
-    content.vb: Protected Overrides Sub OnSelectionChanged(newSelectedDate As DateTime?)
-  overridden: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{DateTime})
+      type: System.Nullable{System.DateTime}
+    content.vb: Protected Overrides Sub OnSelectionChanged(newSelectedDate As Date?)
+  overridden: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{System.DateTime})
   overload: System.Windows.Controls.DatePicker.OnSelectionChanged*
   nameWithType.vb: DatePicker.OnSelectionChanged(Nullable(Of DateTime))
   modifiers.csharp:
@@ -948,7 +1314,7 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-  fullName.vb: System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable(Of DateTime))
+  fullName.vb: System.Windows.Controls.DatePicker.OnSelectionChanged(System.Nullable(Of System.DateTime))
   name.vb: OnSelectionChanged(Nullable(Of DateTime))
 - uid: System.Windows.Controls.DatePicker.OnApplyTemplate
   commentId: M:System.Windows.Controls.DatePicker.OnApplyTemplate
@@ -962,8 +1328,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.OnApplyTemplate()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnApplyTemplate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 161
   assemblies:
   - OpenSilver
@@ -991,8 +1361,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.SelectedDate
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedDate
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 203
   assemblies:
   - OpenSilver
@@ -1003,8 +1377,8 @@ items:
     content: public DateTime? SelectedDate { get; set; }
     parameters: []
     return:
-      type: System.Nullable{DateTime}
-    content.vb: Public Property SelectedDate As DateTime?
+      type: System.Nullable{System.DateTime}
+    content.vb: Public Property SelectedDate As Date?
   overload: System.Windows.Controls.DatePicker.SelectedDate*
   modifiers.csharp:
   - public
@@ -1024,8 +1398,12 @@ items:
   fullName: System.Windows.Controls.DatePicker.SelectedDateProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedDateProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
     startLine: 215
   assemblies:
   - OpenSilver
@@ -1057,9 +1435,13 @@ items:
   fullName: System.Windows.Controls.DatePicker.SelectedDateFormatProperty
   type: Field
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedDateFormatProperty
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
-    startLine: 241
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+    startLine: 266
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1088,9 +1470,13 @@ items:
   fullName: System.Windows.Controls.DatePicker.SelectedDateFormat
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SelectedDateFormat
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
-    startLine: 247
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+    startLine: 272
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1119,9 +1505,13 @@ items:
   fullName: System.Windows.Controls.DatePicker.SetWaterMarkText()
   type: Method
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetWaterMarkText
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows.Controls\DatePicker.cs
-    startLine: 255
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/DatePicker.cs
+    startLine: 280
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1144,6 +1534,7 @@ references:
   fullName: System.Windows.Controls
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
@@ -1940,78 +2331,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+- uid: System.Windows.Controls.Control.CharacterSpacingProperty
+  commentId: F:System.Windows.Controls.Control.CharacterSpacingProperty
   parent: System.Windows.Controls.Control
-  name: OnMouseRightButtonDown(MouseButtonEventArgs)
-  nameWithType: Control.OnMouseRightButtonDown(MouseButtonEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
-    name: OnMouseRightButtonDown
-    nameWithType: Control.OnMouseRightButtonDown
-    fullName: System.Windows.Controls.Control.OnMouseRightButtonDown
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseButtonEventArgs
-    name: MouseButtonEventArgs
-    nameWithType: MouseButtonEventArgs
-    fullName: System.Windows.Input.MouseButtonEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  name: CharacterSpacingProperty
+  nameWithType: Control.CharacterSpacingProperty
+  fullName: System.Windows.Controls.Control.CharacterSpacingProperty
+- uid: System.Windows.Controls.Control.CharacterSpacing
+  commentId: P:System.Windows.Controls.Control.CharacterSpacing
   parent: System.Windows.Controls.Control
-  name: OnMouseWheel(MouseWheelEventArgs)
-  nameWithType: Control.OnMouseWheel(MouseWheelEventArgs)
-  fullName: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
-    name: OnMouseWheel
-    nameWithType: Control.OnMouseWheel
-    fullName: System.Windows.Controls.Control.OnMouseWheel
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseWheelEventArgs
-    name: MouseWheelEventArgs
-    nameWithType: MouseWheelEventArgs
-    fullName: System.Windows.Input.MouseWheelEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: CharacterSpacing
+  nameWithType: Control.CharacterSpacing
+  fullName: System.Windows.Controls.Control.CharacterSpacing
 - uid: System.Windows.Controls.Control.TabNavigationProperty
   commentId: F:System.Windows.Controls.Control.TabNavigationProperty
   parent: System.Windows.Controls.Control
@@ -2036,42 +2367,6 @@ references:
   name: FontStretch
   nameWithType: Control.FontStretch
   fullName: System.Windows.Controls.Control.FontStretch
-- uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  parent: System.Windows.Controls.Control
-  name: OnTextInput(TextCompositionEventArgs)
-  nameWithType: Control.OnTextInput(TextCompositionEventArgs)
-  fullName: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInput
-    nameWithType: Control.OnTextInput
-    fullName: System.Windows.Controls.Control.OnTextInput
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   commentId: M:System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   parent: System.Windows.Controls.Control
@@ -2552,6 +2847,12 @@ references:
   name: DataContextChanged
   nameWithType: FrameworkElement.DataContextChanged
   fullName: System.Windows.FrameworkElement.DataContextChanged
+- uid: System.Windows.FrameworkElement.Triggers
+  commentId: P:System.Windows.FrameworkElement.Triggers
+  parent: System.Windows.FrameworkElement
+  name: Triggers
+  nameWithType: FrameworkElement.Triggers
+  fullName: System.Windows.FrameworkElement.Triggers
 - uid: System.Windows.FrameworkElement.LayoutUpdated
   commentId: E:System.Windows.FrameworkElement.LayoutUpdated
   parent: System.Windows.FrameworkElement
@@ -2586,18 +2887,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.Triggers
-  commentId: P:System.Windows.FrameworkElement.Triggers
-  parent: System.Windows.FrameworkElement
-  name: Triggers
-  nameWithType: FrameworkElement.Triggers
-  fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.TriggersProperty
-  commentId: F:System.Windows.FrameworkElement.TriggersProperty
-  parent: System.Windows.FrameworkElement
-  name: TriggersProperty
-  nameWithType: FrameworkElement.TriggersProperty
-  fullName: System.Windows.FrameworkElement.TriggersProperty
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -2730,6 +3019,12 @@ references:
   name: DefaultStyleKeyProperty
   nameWithType: FrameworkElement.DefaultStyleKeyProperty
   fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.LoadedEvent
+  commentId: F:System.Windows.FrameworkElement.LoadedEvent
+  parent: System.Windows.FrameworkElement
+  name: LoadedEvent
+  nameWithType: FrameworkElement.LoadedEvent
+  fullName: System.Windows.FrameworkElement.LoadedEvent
 - uid: System.Windows.FrameworkElement.Loaded
   commentId: E:System.Windows.FrameworkElement.Loaded
   parent: System.Windows.FrameworkElement
@@ -2748,100 +3043,6 @@ references:
   name: BindingValidationError
   nameWithType: FrameworkElement.BindingValidationError
   fullName: System.Windows.FrameworkElement.BindingValidationError
-- uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  commentId: M:System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: RegisterName(String, Object)
-  nameWithType: FrameworkElement.RegisterName(String, Object)
-  fullName: System.Windows.FrameworkElement.RegisterName(System.String, System.Object)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.RegisterName(System.String,System.Object)
-    name: RegisterName
-    nameWithType: FrameworkElement.RegisterName
-    fullName: System.Windows.FrameworkElement.RegisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-  commentId: M:System.Windows.FrameworkElement.UnregisterName(System.String)
-  parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: UnregisterName(String)
-  nameWithType: FrameworkElement.UnregisterName(String)
-  fullName: System.Windows.FrameworkElement.UnregisterName(System.String)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.UnregisterName(System.String)
-    name: UnregisterName
-    nameWithType: FrameworkElement.UnregisterName
-    fullName: System.Windows.FrameworkElement.UnregisterName
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.FrameworkElement
@@ -2954,6 +3155,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoWidthOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayout
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
+- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  parent: System.Windows.FrameworkElement
+  name: IsAutoHeightOnCustomLayoutProperty
+  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
+  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
 - uid: System.Windows.FrameworkElement.CustomLayout
   commentId: P:System.Windows.FrameworkElement.CustomLayout
   parent: System.Windows.FrameworkElement
@@ -3086,6 +3311,24 @@ references:
   name: ActualHeight
   nameWithType: FrameworkElement.ActualHeight
   fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.FrameworkElement.ActualWidthProperty
+  commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualWidthProperty
+  nameWithType: FrameworkElement.ActualWidthProperty
+  fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualHeightProperty
+  commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
+  parent: System.Windows.FrameworkElement
+  name: ActualHeightProperty
+  nameWithType: FrameworkElement.ActualHeightProperty
+  fullName: System.Windows.FrameworkElement.ActualHeightProperty
+- uid: System.Windows.FrameworkElement.ActualSize
+  commentId: P:System.Windows.FrameworkElement.ActualSize
+  parent: System.Windows.FrameworkElement
+  name: ActualSize
+  nameWithType: FrameworkElement.ActualSize
+  fullName: System.Windows.FrameworkElement.ActualSize
 - uid: System.Windows.FrameworkElement.SizeChanged
   commentId: E:System.Windows.FrameworkElement.SizeChanged
   parent: System.Windows.FrameworkElement
@@ -3128,6 +3371,12 @@ references:
   name: Drop
   nameWithType: UIElement.Drop
   fullName: System.Windows.UIElement.Drop
+- uid: System.Windows.UIElement.DragOver
+  commentId: E:System.Windows.UIElement.DragOver
+  parent: System.Windows.UIElement
+  name: DragOver
+  nameWithType: UIElement.DragOver
+  fullName: System.Windows.UIElement.DragOver
 - uid: System.Windows.UIElement.OpacityMask
   commentId: P:System.Windows.UIElement.OpacityMask
   parent: System.Windows.UIElement
@@ -3164,18 +3413,6 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
-- uid: System.Windows.UIElement.ClipProperty
-  commentId: F:System.Windows.UIElement.ClipProperty
-  parent: System.Windows.UIElement
-  name: ClipProperty
-  nameWithType: UIElement.ClipProperty
-  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.OnCreateAutomationPeer
   commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
   parent: System.Windows.UIElement
@@ -3234,6 +3471,18 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
+  parent: System.Windows.UIElement
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.ClipProperty
+  commentId: F:System.Windows.UIElement.ClipProperty
+  parent: System.Windows.UIElement
+  name: ClipProperty
+  nameWithType: UIElement.ClipProperty
+  fullName: System.Windows.UIElement.ClipProperty
 - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
   parent: System.Windows.UIElement
@@ -3443,12 +3692,6 @@ references:
   name: IsVisible
   nameWithType: UIElement.IsVisible
   fullName: System.Windows.UIElement.IsVisible
-- uid: System.Windows.UIElement.IsVisibleProperty
-  commentId: F:System.Windows.UIElement.IsVisibleProperty
-  parent: System.Windows.UIElement
-  name: IsVisibleProperty
-  nameWithType: UIElement.IsVisibleProperty
-  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisibleChanged
   commentId: E:System.Windows.UIElement.IsVisibleChanged
   parent: System.Windows.UIElement
@@ -3799,6 +4042,128 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: AddHandler(RoutedEvent, Delegate, Boolean)
+  nameWithType: UIElement.AddHandler(RoutedEvent, Delegate, Boolean)
+  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Delegate, System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
+    name: AddHandler
+    nameWithType: UIElement.AddHandler
+    fullName: System.Windows.UIElement.AddHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+  parent: System.Windows.UIElement
+  isExternal: true
+  name: RemoveHandler(RoutedEvent, Delegate)
+  nameWithType: UIElement.RemoveHandler(RoutedEvent, Delegate)
+  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Delegate)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
+    name: RemoveHandler
+    nameWithType: UIElement.RemoveHandler
+    fullName: System.Windows.UIElement.RemoveHandler
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEvent
+    name: RoutedEvent
+    nameWithType: RoutedEvent
+    fullName: System.Windows.RoutedEvent
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Delegate
+    name: Delegate
+    nameWithType: Delegate
+    fullName: System.Delegate
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseMoveEvent
   commentId: F:System.Windows.UIElement.MouseMoveEvent
   parent: System.Windows.UIElement
@@ -3907,6 +4272,90 @@ references:
   name: MouseRightButtonDown
   nameWithType: UIElement.MouseRightButtonDown
   fullName: System.Windows.UIElement.MouseRightButtonDown
+- uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseRightButtonDown(MouseButtonEventArgs)
+  nameWithType: UIElement.OnMouseRightButtonDown(MouseButtonEventArgs)
+  fullName: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseRightButtonDown(System.Windows.Input.MouseButtonEventArgs)
+    name: OnMouseRightButtonDown
+    nameWithType: UIElement.OnMouseRightButtonDown
+    fullName: System.Windows.UIElement.OnMouseRightButtonDown
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseButtonEventArgs
+    name: MouseButtonEventArgs
+    nameWithType: MouseButtonEventArgs
+    fullName: System.Windows.Input.MouseButtonEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.MouseWheelEvent
+  commentId: F:System.Windows.UIElement.MouseWheelEvent
+  parent: System.Windows.UIElement
+  name: MouseWheelEvent
+  nameWithType: UIElement.MouseWheelEvent
+  fullName: System.Windows.UIElement.MouseWheelEvent
+- uid: System.Windows.UIElement.MouseWheel
+  commentId: E:System.Windows.UIElement.MouseWheel
+  parent: System.Windows.UIElement
+  name: MouseWheel
+  nameWithType: UIElement.MouseWheel
+  fullName: System.Windows.UIElement.MouseWheel
+- uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  commentId: M:System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  parent: System.Windows.UIElement
+  name: OnMouseWheel(MouseWheelEventArgs)
+  nameWithType: UIElement.OnMouseWheel(MouseWheelEventArgs)
+  fullName: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnMouseWheel(System.Windows.Input.MouseWheelEventArgs)
+    name: OnMouseWheel
+    nameWithType: UIElement.OnMouseWheel
+    fullName: System.Windows.UIElement.OnMouseWheel
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.MouseWheelEventArgs
+    name: MouseWheelEventArgs
+    nameWithType: MouseWheelEventArgs
+    fullName: System.Windows.Input.MouseWheelEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.MouseLeftButtonUpEvent
   commentId: F:System.Windows.UIElement.MouseLeftButtonUpEvent
   parent: System.Windows.UIElement
@@ -4051,24 +4500,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.MouseWheelEvent
-  commentId: F:System.Windows.UIElement.MouseWheelEvent
-  parent: System.Windows.UIElement
-  name: MouseWheelEvent
-  nameWithType: UIElement.MouseWheelEvent
-  fullName: System.Windows.UIElement.MouseWheelEvent
-- uid: System.Windows.UIElement.MouseWheel
-  commentId: E:System.Windows.UIElement.MouseWheel
-  parent: System.Windows.UIElement
-  name: MouseWheel
-  nameWithType: UIElement.MouseWheel
-  fullName: System.Windows.UIElement.MouseWheel
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
   name: TextInputEvent
   nameWithType: UIElement.TextInputEvent
   fullName: System.Windows.UIElement.TextInputEvent
+- uid: System.Windows.UIElement.TextInput
+  commentId: E:System.Windows.UIElement.TextInput
+  parent: System.Windows.UIElement
+  name: TextInput
+  nameWithType: UIElement.TextInput
+  fullName: System.Windows.UIElement.TextInput
+- uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInput(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInput(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInput
+    nameWithType: UIElement.OnTextInput
+    fullName: System.Windows.UIElement.OnTextInput
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputStartEvent
   commentId: F:System.Windows.UIElement.TextInputStartEvent
   parent: System.Windows.UIElement
@@ -4081,12 +4560,6 @@ references:
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInput
-  commentId: E:System.Windows.UIElement.TextInput
-  parent: System.Windows.UIElement
-  name: TextInput
-  nameWithType: UIElement.TextInput
-  fullName: System.Windows.UIElement.TextInput
 - uid: System.Windows.UIElement.TextInputStart
   commentId: E:System.Windows.UIElement.TextInputStart
   parent: System.Windows.UIElement
@@ -4440,128 +4913,6 @@ references:
   - name: (
     nameWithType: (
     fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: AddHandler(RoutedEvent, Object, Boolean)
-  nameWithType: UIElement.AddHandler(RoutedEvent, Object, Boolean)
-  fullName: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent, System.Object, System.Boolean)
-  spec.csharp:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Object,System.Boolean)
-    name: AddHandler
-    nameWithType: UIElement.AddHandler
-    fullName: System.Windows.UIElement.AddHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  commentId: M:System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-  parent: System.Windows.UIElement
-  isExternal: true
-  name: RemoveHandler(RoutedEvent, Object)
-  nameWithType: UIElement.RemoveHandler(RoutedEvent, Object)
-  fullName: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent, System.Object)
-  spec.csharp:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Object)
-    name: RemoveHandler
-    nameWithType: UIElement.RemoveHandler
-    fullName: System.Windows.UIElement.RemoveHandler
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEvent
-    name: RoutedEvent
-    nameWithType: RoutedEvent
-    fullName: System.Windows.RoutedEvent
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -5166,6 +5517,321 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -5533,45 +6199,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   name: InvokeOnLayoutUpdated(Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
@@ -6044,14 +6715,14 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
+  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
   isExternal: true
   name: InvokeOnLayoutUpdated(FrameworkElement, Action)
   nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, Action)
+  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
   spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -6065,16 +6736,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,Action)
+  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
     name: InvokeOnLayoutUpdated
     nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
     fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
@@ -6088,10 +6759,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Action
+  - uid: System.Action
     name: Action
     nameWithType: Action
-    fullName: Action
+    fullName: System.Action
     isExternal: true
   - name: )
     nameWithType: )
@@ -6150,14 +6821,15 @@ references:
   name: DisplayDateStart
   nameWithType: DatePicker.DisplayDateStart
   fullName: System.Windows.Controls.DatePicker.DisplayDateStart
-- uid: System.Nullable{DateTime}
-  commentId: '!:System.Nullable{DateTime}'
+- uid: System.Nullable{System.DateTime}
+  commentId: T:System.Nullable{System.DateTime}
+  parent: System
   definition: System.Nullable`1
   name: Nullable<DateTime>
   nameWithType: Nullable<DateTime>
-  fullName: System.Nullable<DateTime>
+  fullName: System.Nullable<System.DateTime>
   nameWithType.vb: Nullable(Of DateTime)
-  fullName.vb: System.Nullable(Of DateTime)
+  fullName.vb: System.Nullable(Of System.DateTime)
   name.vb: Nullable(Of DateTime)
   spec.csharp:
   - uid: System.Nullable`1
@@ -6168,10 +6840,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -6185,22 +6857,23 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
 - uid: System.Nullable`1
+  commentId: T:System.Nullable`1
   isExternal: true
-  name: Nullable<>
-  nameWithType: Nullable<>
-  fullName: System.Nullable<>
-  nameWithType.vb: Nullable(Of )
-  fullName.vb: System.Nullable(Of )
-  name.vb: Nullable(Of )
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
   spec.csharp:
   - uid: System.Nullable`1
     name: Nullable
@@ -6210,9 +6883,9 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -6225,9 +6898,9 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
@@ -6242,19 +6915,111 @@ references:
   name: Calendar
   nameWithType: Calendar
   fullName: System.Windows.Controls.Calendar
+- uid: System.Windows.Controls.DatePicker.Text
+  commentId: P:System.Windows.Controls.DatePicker.Text
+  isExternal: true
+- uid: System.EventHandler{System.Windows.Controls.DatePickerDateValidationErrorEventArgs}
+  commentId: T:System.EventHandler{System.Windows.Controls.DatePickerDateValidationErrorEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<DatePickerDateValidationErrorEventArgs>
+  nameWithType: EventHandler<DatePickerDateValidationErrorEventArgs>
+  fullName: System.EventHandler<System.Windows.Controls.DatePickerDateValidationErrorEventArgs>
+  nameWithType.vb: EventHandler(Of DatePickerDateValidationErrorEventArgs)
+  fullName.vb: System.EventHandler(Of System.Windows.Controls.DatePickerDateValidationErrorEventArgs)
+  name.vb: EventHandler(Of DatePickerDateValidationErrorEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Windows.Controls.DatePickerDateValidationErrorEventArgs
+    name: DatePickerDateValidationErrorEventArgs
+    nameWithType: DatePickerDateValidationErrorEventArgs
+    fullName: System.Windows.Controls.DatePickerDateValidationErrorEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Windows.Controls.DatePickerDateValidationErrorEventArgs
+    name: DatePickerDateValidationErrorEventArgs
+    nameWithType: DatePickerDateValidationErrorEventArgs
+    fullName: System.Windows.Controls.DatePickerDateValidationErrorEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.DateTime.Today
+  commentId: P:System.DateTime.Today
+  isExternal: true
 - uid: System.Windows.Controls.DatePicker.DisplayDateEnd
   commentId: P:System.Windows.Controls.DatePicker.DisplayDateEnd
+  isExternal: true
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
   isExternal: true
 - uid: System.Windows.Controls.DatePicker.DisplayDate*
   commentId: Overload:System.Windows.Controls.DatePicker.DisplayDate
   name: DisplayDate
   nameWithType: DatePicker.DisplayDate
   fullName: System.Windows.Controls.DatePicker.DisplayDate
-- uid: DateTime
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
   isExternal: true
   name: DateTime
   nameWithType: DateTime
-  fullName: DateTime
+  fullName: System.DateTime
 - uid: System.Windows.Controls.DatePicker.DisplayDate
   commentId: P:System.Windows.Controls.DatePicker.DisplayDate
   isExternal: true
@@ -6269,10 +7034,23 @@ references:
   nameWithType: DatePicker.IsTodayHighlighted
   fullName: System.Windows.Controls.DatePicker.IsTodayHighlighted
 - uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
   isExternal: true
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System.Windows.Controls.DatePicker.CalendarStyle*
+  commentId: Overload:System.Windows.Controls.DatePicker.CalendarStyle
+  name: CalendarStyle
+  nameWithType: DatePicker.CalendarStyle
+  fullName: System.Windows.Controls.DatePicker.CalendarStyle
+- uid: System.Windows.Style
+  commentId: T:System.Windows.Style
+  parent: System.Windows
+  name: Style
+  nameWithType: Style
+  fullName: System.Windows.Style
 - uid: System.Windows.Controls.DatePicker.#ctor*
   commentId: Overload:System.Windows.Controls.DatePicker.#ctor
   name: DatePicker
@@ -6383,18 +7161,18 @@ references:
   name: INTERNAL_CalendarOrClockBase
   nameWithType: INTERNAL_CalendarOrClockBase
   fullName: System.Windows.Controls.INTERNAL_CalendarOrClockBase
-- uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{DateTime})
-  commentId: M:System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{DateTime})
+- uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{System.DateTime})
+  commentId: M:System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{System.DateTime})
   parent: System.Windows.Controls.INTERNAL_DateTimePickerBase
   isExternal: true
   name: SetTextFromDate(Nullable<DateTime>)
   nameWithType: INTERNAL_DateTimePickerBase.SetTextFromDate(Nullable<DateTime>)
-  fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable<DateTime>)
+  fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable<System.DateTime>)
   nameWithType.vb: INTERNAL_DateTimePickerBase.SetTextFromDate(Nullable(Of DateTime))
-  fullName.vb: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable(Of DateTime))
+  fullName.vb: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable(Of System.DateTime))
   name.vb: SetTextFromDate(Nullable(Of DateTime))
   spec.csharp:
-  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{DateTime})
+  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{System.DateTime})
     name: SetTextFromDate
     nameWithType: INTERNAL_DateTimePickerBase.SetTextFromDate
     fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate
@@ -6409,10 +7187,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -6421,7 +7199,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{DateTime})
+  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate(System.Nullable{System.DateTime})
     name: SetTextFromDate
     nameWithType: INTERNAL_DateTimePickerBase.SetTextFromDate
     fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.SetTextFromDate
@@ -6436,10 +7214,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: )
     nameWithType: )
@@ -6453,22 +7231,24 @@ references:
   nameWithType: DatePicker.SetTextFromDate
   fullName: System.Windows.Controls.DatePicker.SetTextFromDate
 - uid: System.String
+  commentId: T:System.String
+  parent: System
   isExternal: true
   name: String
   nameWithType: String
   fullName: System.String
-- uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{DateTime})
-  commentId: M:System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{DateTime})
+- uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{System.DateTime})
+  commentId: M:System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{System.DateTime})
   parent: System.Windows.Controls.INTERNAL_DateTimePickerBase
   isExternal: true
   name: OnSelectionChanged(Nullable<DateTime>)
   nameWithType: INTERNAL_DateTimePickerBase.OnSelectionChanged(Nullable<DateTime>)
-  fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable<DateTime>)
+  fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable<System.DateTime>)
   nameWithType.vb: INTERNAL_DateTimePickerBase.OnSelectionChanged(Nullable(Of DateTime))
-  fullName.vb: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable(Of DateTime))
+  fullName.vb: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable(Of System.DateTime))
   name.vb: OnSelectionChanged(Nullable(Of DateTime))
   spec.csharp:
-  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{DateTime})
+  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{System.DateTime})
     name: OnSelectionChanged
     nameWithType: INTERNAL_DateTimePickerBase.OnSelectionChanged
     fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged
@@ -6483,10 +7263,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -6495,7 +7275,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{DateTime})
+  - uid: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged(System.Nullable{System.DateTime})
     name: OnSelectionChanged
     nameWithType: INTERNAL_DateTimePickerBase.OnSelectionChanged
     fullName: System.Windows.Controls.INTERNAL_DateTimePickerBase.OnSelectionChanged
@@ -6510,10 +7290,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: DateTime
+  - uid: System.DateTime
     name: DateTime
     nameWithType: DateTime
-    fullName: DateTime
+    fullName: System.DateTime
     isExternal: true
   - name: )
     nameWithType: )

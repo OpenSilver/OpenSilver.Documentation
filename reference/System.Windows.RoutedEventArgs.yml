@@ -6,8 +6,6 @@ items:
   parent: System.Windows
   children:
   - System.Windows.RoutedEventArgs.#ctor
-  - System.Windows.RoutedEventArgs.Handled
-  - System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg
   - System.Windows.RoutedEventArgs.OriginalSource
   langs:
   - csharp
@@ -17,9 +15,13 @@ items:
   fullName: System.Windows.RoutedEventArgs
   type: Class
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/RoutedEventArgs.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: RoutedEventArgs
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\RoutedEventArgs.cs
-    startLine: 32
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/RoutedEventArgs.cs
+    startLine: 25
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -29,13 +31,17 @@ items:
     content: 'public class RoutedEventArgs : EventArgs'
     content.vb: >-
       Public Class RoutedEventArgs
+
           Inherits EventArgs
   inheritance:
   - System.Object
+  - System.EventArgs
   derivedClasses:
+  - System.Windows.Controls.CalendarDateChangedEventArgs
+  - System.Windows.Controls.CalendarModeChangedEventArgs
+  - System.Windows.Controls.CleanUpVirtualizedItemEventArgs
   - System.Windows.Controls.ContentChangedEventArgs
   - System.Windows.Controls.ContextMenuEventArgs
-  - System.Windows.Controls.PopulatingEventArgs
   - System.Windows.Controls.Primitives.DragCompletedEventArgs
   - System.Windows.Controls.Primitives.DragDeltaEventArgs
   - System.Windows.Controls.Primitives.DragStartedEventArgs
@@ -45,6 +51,8 @@ items:
   - System.Windows.Controls.SpinEventArgs
   - System.Windows.Controls.SubImageRoutedEventArgs
   - System.Windows.Controls.TextChangedEventArgs
+  - System.Windows.Controls.UpDownParseErrorEventArgs
+  - System.Windows.Controls.UpDownParsingEventArgs`1
   - System.Windows.Controls.ValidationErrorEventArgs
   - System.Windows.DragEventArgs
   - System.Windows.ExceptionRoutedEventArgs
@@ -53,6 +61,15 @@ items:
   - System.Windows.Input.TextCompositionEventArgs
   - System.Windows.RoutedPropertyChangedEventArgs`1
   - System.Windows.SizeChangedEventArgs
+  inheritedMembers:
+  - System.EventArgs.Empty
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
   extensionMethods:
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
@@ -61,40 +78,6 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: System.Windows.RoutedEventArgs.Handled
-  commentId: P:System.Windows.RoutedEventArgs.Handled
-  id: Handled
-  parent: System.Windows.RoutedEventArgs
-  langs:
-  - csharp
-  - vb
-  name: Handled
-  nameWithType: RoutedEventArgs.Handled
-  fullName: System.Windows.RoutedEventArgs.Handled
-  type: Property
-  source:
-    id: Handled
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\WORKINPROGRESS\RoutedEventArgs.cs
-    startLine: 37
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nReturns a boolean flag indicating if or not this\nRoutedEvent has been handled this far in the route\n"
-  remarks: "\nInitially starts with a false value before routing\nhas begun\n"
-  example: []
-  syntax:
-    content: public bool Handled { get; set; }
-    parameters: []
-    return:
-      type: System.Boolean
-    content.vb: Public Property Handled As Boolean
-  overload: System.Windows.RoutedEventArgs.Handled*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
 - uid: System.Windows.RoutedEventArgs.#ctor
   commentId: M:System.Windows.RoutedEventArgs.#ctor
   id: '#ctor'
@@ -107,13 +90,17 @@ items:
   fullName: System.Windows.RoutedEventArgs.RoutedEventArgs()
   type: Constructor
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/RoutedEventArgs.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\RoutedEventArgs.cs
-    startLine: 40
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/RoutedEventArgs.cs
+    startLine: 35
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nInitializes a new instance of the RoutedEventArgs class.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.RoutedEventArgs\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
   example: []
   syntax:
     content: public RoutedEventArgs()
@@ -135,60 +122,31 @@ items:
   fullName: System.Windows.RoutedEventArgs.OriginalSource
   type: Property
   source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/RoutedEventArgs.cs
+      branch: releases/OpenSilver/1.1.0
+      repo: https://github.com/OpenSilver/OpenSilver.git
     id: OriginalSource
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\RoutedEventArgs.cs
-    startLine: 47
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/RoutedEventArgs.cs
+    startLine: 40
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nGets a reference to the object that raised the event.\n"
   example: []
   syntax:
-    content: public object OriginalSource { get; set; }
+    content: public object OriginalSource { get; }
     parameters: []
     return:
       type: System.Object
-    content.vb: Public Property OriginalSource As Object
+    content.vb: Public ReadOnly Property OriginalSource As Object
   overload: System.Windows.RoutedEventArgs.OriginalSource*
   modifiers.csharp:
   - public
   - get
-  - set
   modifiers.vb:
   - Public
-- uid: System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg
-  commentId: P:System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg
-  id: INTERNAL_OriginalJSEventArg
-  parent: System.Windows.RoutedEventArgs
-  langs:
-  - csharp
-  - vb
-  name: INTERNAL_OriginalJSEventArg
-  nameWithType: RoutedEventArgs.INTERNAL_OriginalJSEventArg
-  fullName: System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg
-  type: Property
-  source:
-    id: INTERNAL_OriginalJSEventArg
-    path: C:\Users\ashot\Desktop\Projects\GitHub-OpenSilver\src\Runtime\Runtime\System.Windows\RoutedEventArgs.cs
-    startLine: 78
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\n(Optional) Gets the original javascript event arg.\n"
-  example: []
-  syntax:
-    content: public object INTERNAL_OriginalJSEventArg { get; set; }
-    parameters: []
-    return:
-      type: System.Object
-    content.vb: Public Property INTERNAL_OriginalJSEventArg As Object
-  overload: System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
+  - ReadOnly
 references:
 - uid: System.Windows
   commentId: N:System.Windows
@@ -197,10 +155,304 @@ references:
   fullName: System.Windows
 - uid: System.Object
   commentId: T:System.Object
+  parent: System
   isExternal: true
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System.EventArgs.Empty
+  commentId: F:System.EventArgs.Empty
+  parent: System.EventArgs
+  isExternal: true
+  name: Empty
+  nameWithType: EventArgs.Empty
+  fullName: System.EventArgs.Empty
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -230,6 +482,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -279,16 +536,12 @@ references:
   name: ToJavaScriptObjectExtender
   nameWithType: ToJavaScriptObjectExtender
   fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.RoutedEventArgs.Handled*
-  commentId: Overload:System.Windows.RoutedEventArgs.Handled
-  name: Handled
-  nameWithType: RoutedEventArgs.Handled
-  fullName: System.Windows.RoutedEventArgs.Handled
-- uid: System.Boolean
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
+- uid: System.Windows.RoutedEventArgs
+  commentId: T:System.Windows.RoutedEventArgs
+  parent: System.Windows
+  name: RoutedEventArgs
+  nameWithType: RoutedEventArgs
+  fullName: System.Windows.RoutedEventArgs
 - uid: System.Windows.RoutedEventArgs.#ctor*
   commentId: Overload:System.Windows.RoutedEventArgs.#ctor
   name: RoutedEventArgs
@@ -299,8 +552,3 @@ references:
   name: OriginalSource
   nameWithType: RoutedEventArgs.OriginalSource
   fullName: System.Windows.RoutedEventArgs.OriginalSource
-- uid: System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg*
-  commentId: Overload:System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg
-  name: INTERNAL_OriginalJSEventArg
-  nameWithType: RoutedEventArgs.INTERNAL_OriginalJSEventArg
-  fullName: System.Windows.RoutedEventArgs.INTERNAL_OriginalJSEventArg
