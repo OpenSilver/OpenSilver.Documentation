@@ -125,3 +125,17 @@ For usual OpenSilver application the following `web.config` will work without an
 ```
 
 Here is a more detailed explanation [How to Host and deploy ASP.NET Core Blazor WebAssembly](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-6.0)
+
+#### Make sure compression is enabled from IIS
+
+Double click on compression in IIS.
+
+<img src="/images/how-to-topics/compression4.png" alt="Compression" title="Compression" style="border: 2px solid #555;" /><br />
+
+Make sure both dynamic and static content compressions are enabled.
+
+<img src="/images/how-to-topics/compression5.png" style="border: 2px solid #555;" /><br />
+
+If one of them is disabled it needs to be enabled from "Turn Windows features on or off".
+
+<img src="/images/how-to-topics/compression6.png" style="border: 2px solid #555;" /><br />
