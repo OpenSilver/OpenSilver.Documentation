@@ -26,5 +26,5 @@ dotnet restore OpenSilverApplication.sln
 
 #### 6. Go to Solution folder and run:
 ```
-msbuild OpenSilverApplication.sln /t:OpenSilverApplication_Browser:Rebuild /p:DeployOnBuild=true
+msbuild OpenSilverApplication.sln /t:Rebuild /p:DeployOnBuild=true
 ```
