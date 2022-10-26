@@ -18,15 +18,15 @@ if (m_ForceCORS && oSession.oRequest.headers.HTTPMethod == "OPTIONS") {
 
      oSession.utilCreateResponseAndBypassServer();
 
-     oSession.oResponse.headers.Add("Access-Control-AllowOrigin", oSession.oRequest.headers["Origin"]);
+     oSession.oResponse.headers.Add("Access-Control-Allow-Origin", oSession.oRequest.headers["Origin"]);
 
-     oSession.oResponse.headers.Add("Access-Control-AllowMethods", "GET, POST, PUT, DELETE, OPTIONS");
+     oSession.oResponse.headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
-     oSession.oResponse.headers.Add("Access-Control-AllowHeaders", "Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie");
+     oSession.oResponse.headers.Add("Access-Control-Allow-Headers", "Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie");
 
-     oSession.oResponse.headers.Add("Access-Control-MaxAge", "1728000");
+     oSession.oResponse.headers.Add("Access-Control-Max-Age", "1728000");
 
-     oSession.oResponse.headers.Add("Access-Control-AllowCredentials", "true");
+     oSession.oResponse.headers.Add("Access-Control-Allow-Credentials", "true");
 
      oSession.responseCode = 200;
 
@@ -38,25 +38,20 @@ if (m_ForceCORS && oSession.oRequest.headers.HTTPMethod == "OPTIONS") {
 
 if (m_ForceCORS && oSession.oRequest.headers.Exists("Origin")) {
 
-     oSession.oResponse.headers.Remove("Access-ControlAllow-Origin");
+     oSession.oResponse.headers.Remove("Access-Control-Allow-Origin");
+     oSession.oResponse.headers.Add("Access-Control-Allow-Origin", oSession.oRequest.headers["Origin"]) ;
 
-     oSession.oResponse.headers.Add("Access-Control-AllowOrigin", oSession.oRequest.headers["Origin"]) ;
+     oSession.oResponse.headers.Remove("Access-Control-Allow-Methods");
+     oSession.oResponse.headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
-     oSession.oResponse.headers.Remove("Access-ControlAllow-Methods");
+     oSession.oResponse.headers.Remove("Access-Control-Allow-Headers");
+     oSession.oResponse.headers.Add("Access-Control-Allow-Headers", "Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie");
 
-     oSession.oResponse.headers.Add("Access-Control-AllowMethods", "GET, POST, PUT, DELETE, OPTIONS");
+     oSession.oResponse.headers.Remove("Access-Control-Max-Age");
+     oSession.oResponse.headers.Add("Access-Control-Max-Age", "1728000");
 
-     oSession.oResponse.headers.Remove("Access-ControlAllow-Headers");
-
-     oSession.oResponse.headers.Add("Access-Control-AllowHeaders", "Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie");
-
-     oSession.oResponse.headers.Remove("Access-Control-MaxAge");
-
-     oSession.oResponse.headers.Add("Access-Control-MaxAge", "1728000");
-
-     oSession.oResponse.headers.Remove("Access-ControlAllow-Credentials");
-
-     oSession.oResponse.headers.Add("Access-Control-AllowCredentials", "true");
+     oSession.oResponse.headers.Remove("Access-Control-Allow-Credentials");
+     oSession.oResponse.headers.Add("Access-Control-Allow-Credentials", "true");
 
 }
 ```
