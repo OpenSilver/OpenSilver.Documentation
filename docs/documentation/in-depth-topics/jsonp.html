@@ -138,73 +138,55 @@ Therefore, we provide below a &quot;WebClientJSONP&quot; class that is able to m
 using System;
 using System.ComponentModel;
 
-namespace System.Net
+namespace JSONP.Example;
+
+public class WebClientJSONP
 {
-    public delegate void OpenReadCompletedEventHandler(object sender, OpenReadCompletedEventArgs e);
+    public event OpenReadCompletedEventHandler OpenReadCompleted;
 
-    public class WebClientJSONP
+    public void OpenReadAsync(Uri address)
     {
-        public event OpenReadCompletedEventHandler OpenReadCompleted;
-
-        public void OpenReadAsync(Uri address)
+        Action&lt;object&gt; callback = (result) =&gt;
         {
-            Action&lt;object&gt; callback = (result) =&gt;
-                {
-                    if (OpenReadCompleted != null)
-                    {
-                        string json = Interop.ExecuteJavaScript(&quot;JSON.stringify($0)&quot;, result).ToString();
-                        OpenReadCompleted(this, new OpenReadCompletedEventArgs(json, null, false, null));
-                    }
-                };
+            if (OpenReadCompleted != null)
+            {
+                string json = Interop.ExecuteJavaScript(&quot;JSON.stringify($0)&quot;, result).ToString();
+                OpenReadCompleted(this, new OpenReadCompletedEventArgs(json, null, false, null));
+            }
+        };
 
-            string url = address.ToString();
+        string url = address.ToString();
 
-            // Generate a random name for the JSONP callback method:
-            Random rd = new Random();
-            int id = rd.Next(100000,999999);
-            string callbackMethodName = &quot;callback&quot; + id;
+        // Generate a random name for the JSONP callback method:
+        Random rd = new Random();
+        int id = rd.Next(100000,999999);
+        string callbackMethodName = &quot;callback&quot; + id;
 
-            // Define the JSON callback in JavaScript and call the REST JSONP service:
-            Interop.ExecuteJavaScript(@&quot;
-                // Make the callback globally accessible so that it can be called by the result of JSONP:
-                window[$1] = function(result) { $2(result); }
+        // Define the JSON callback in JavaScript and call the REST JSONP service:
+        Interop.ExecuteJavaScript(@&quot;
+            // Make the callback globally accessible so that it can be called by the result of JSONP:
+            window[$1] = function(result) { $2(result); }
 
-                // Call the REST JSONP service:
-                var script = document.createElement('script');
-                script.setAttribute('type', 'text/javascript');
-                script.setAttribute('src', $0 + &quot;&quot;&amp;jsonp=&quot;&quot; + $1);
-                document.body.appendChild(script);
-            &quot;, url, callbackMethodName, callback);
-        }
-    }
-
-    public class OpenReadCompletedEventArgs : AsyncCompletedEventArgs
-    {
-        public OpenReadCompletedEventArgs(string result, Exception error, bool cancelled, object userState)
-            : base(error, cancelled, userState)
-        {
-            this.Result = result;
-        }
-
-        public string Result { get; private set; }
+            // Call the REST JSONP service:
+            var script = document.createElement('script');
+            script.setAttribute('type', 'text/javascript');
+            script.setAttribute('src', $0 + &quot;&quot;&amp;jsonp=&quot;&quot; + $1);
+            document.body.appendChild(script);
+        &quot;, url, callbackMethodName, callback);
     }
 }
 
-namespace System.ComponentModel
-{
-    public class AsyncCompletedEventArgs : EventArgs
-    {
-        public AsyncCompletedEventArgs(Exception error, bool cancelled, object userState)
-        {
-            this.Error = error;
-            this.Cancelled = cancelled;
-            this.UserState = userState;
-        }
+public delegate void OpenReadCompletedEventHandler(object sender, OpenReadCompletedEventArgs e);
 
-        public bool Cancelled { get; private set; }
-        public Exception Error { get; private set; }
-        public object UserState { get; private set; }
+public class OpenReadCompletedEventArgs : AsyncCompletedEventArgs
+{
+    public OpenReadCompletedEventArgs(string result, Exception error, bool cancelled, object userState)
+        : base(error, cancelled, userState)
+    {
+        this.Result = result;
     }
+
+    public string Result { get; private set; }
 }
 </code></pre>
 <p>Then, you can call the class by using this code:</p>
@@ -215,7 +197,7 @@ namespace System.ComponentModel
     wc.OpenReadAsync(&quot;http://yourwebservice/specify-your-jsonp-endpoint-here&quot;);
 }
 
-async void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
 {
     if (e.Error == null)
     {
@@ -230,39 +212,38 @@ async void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
 <ul>
 <li>You need to obtain an application Key from Microsoft in order to use the service.</li>
 <li>You need to define the class &quot;WebClientJSONP&quot; as explained in the paragraph above.</li>
-<li>You need to use the &quot;JsonConvert&quot; extension, which is available <a href="http://forums.cshtml5.com/viewtopic.php?f=7&amp;t=5478">here</a>.</li>
+<li>Use Newtonsoft.Json for the deserialization (<a href="https://www.nuget.org/packages/Newtonsoft.Json/">https://www.nuget.org/packages/Newtonsoft.Json/</a>).</li>
 </ul>
 <p>Then, you can use the following code to make the call and process the response:</p>
 <pre><code>void Main()
 {
     string key = &quot;ENTER YOUR BING MAPS REST API APPLICATION KEY HERE&quot;;
-
     string query = &quot;1 Microsoft Way, Redmond, WA&quot;;
 
-    Uri geocodeRequest = new Uri(string.Format(&quot;http://dev.virtualearth.net/REST/v1/Locations?q={0}&amp;key={1}&quot;, query, key));
+    Uri geocodeRequest = new Uri($&quot;http://dev.virtualearth.net/REST/v1/Locations?q={query}&amp;key={key}&quot;);
 
     WebClientJSONP wc = new WebClientJSONP();
     wc.OpenReadCompleted += new OpenReadCompletedEventHandler(wc_OpenReadCompleted);
     wc.OpenReadAsync(geocodeRequest);
 }
 
-async void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+void wc_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
 {
     if (e.Error == null)
     {
-        IJsonType reqRes = await JsonConvert.DeserializeObject(e.Result, ignoreErrors: true);
-        if (reqRes[&quot;resourceSets&quot;] is JsonArray
-            &amp;&amp; ((JsonArray)reqRes[&quot;resourceSets&quot;]).Count &gt; 0
-            &amp;&amp; reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;] is JsonArray
-            &amp;&amp; ((JsonArray)reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;]).Count &gt; 0)
+        dynamic reqRes = JsonConvert.DeserializeObject(e.Result);
+        if (reqRes[&quot;resourceSets&quot;] is JArray
+            &amp;&amp; ((JArray)reqRes[&quot;resourceSets&quot;]).Count &gt; 0
+            &amp;&amp; reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;] is JArray
+            &amp;&amp; ((JArray)reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;]).Count &gt; 0)
         {
-            double x = (double)reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;][0][&quot;point&quot;][&quot;coordinates&quot;][0].Value;
-            double y = (double)reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;][0][&quot;point&quot;][&quot;coordinates&quot;][1].Value;
-            string country = (string)reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;][0][&quot;address&quot;][&quot;countryRegion&quot;].Value;
-            System.Windows.MessageBox.Show(&quot;Coordinates: &quot; + x.ToString() + &quot;,&quot; + y.ToString() + Environment.NewLine + &quot;Country: &quot; + country);
+            double x = reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;][0][&quot;point&quot;][&quot;coordinates&quot;][0].Value;
+            double y = reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;][0][&quot;point&quot;][&quot;coordinates&quot;][1].Value;
+            string country = reqRes[&quot;resourceSets&quot;][0][&quot;resources&quot;][0][&quot;address&quot;][&quot;countryRegion&quot;].Value;
+            MessageBox.Show(&quot;Coordinates: &quot; + x.ToString() + &quot;,&quot; + y.ToString() + Environment.NewLine + &quot;Country: &quot; + country);
         }
         else
-            System.Windows.MessageBox.Show(&quot;No Results found&quot;);
+            MessageBox.Show(&quot;No Results found&quot;);
     }
 }
 </code></pre>

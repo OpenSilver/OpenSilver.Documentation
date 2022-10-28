@@ -39,7 +39,7 @@ To update it, you first need to verify that the paths in the "docfx.json" file a
     "src": [
       {
         "files": [
-          "../../OpenSilverDocumentation/OpenSilver/src/CSHTML5.Runtime/**.csproj"
+          "../../OpenSilverDocumentation/OpenSilver/src/OpenSilver.sln"
         ]
       }
     ],

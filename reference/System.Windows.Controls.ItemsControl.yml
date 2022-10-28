@@ -7,14 +7,10 @@ items:
   children:
   - System.Windows.Controls.ItemsControl.#ctor
   - System.Windows.Controls.ItemsControl.ClearContainerForItemOverride(System.Windows.DependencyObject,System.Object)
-  - System.Windows.Controls.ItemsControl.DisableDefaultRendering
   - System.Windows.Controls.ItemsControl.DisplayMemberPath
   - System.Windows.Controls.ItemsControl.DisplayMemberPathProperty
-  - System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem(System.Object)
   - System.Windows.Controls.ItemsControl.GetContainerForItemOverride
-  - System.Windows.Controls.ItemsControl.GetContainerFromItem(System.Object)
   - System.Windows.Controls.ItemsControl.GetItemsOwner(System.Windows.DependencyObject)
-  - System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer(System.Object)
   - System.Windows.Controls.ItemsControl.INTERNAL_OnAttachedToVisualTree
   - System.Windows.Controls.ItemsControl.IsItemItsOwnContainerOverride(System.Object)
   - System.Windows.Controls.ItemsControl.ItemContainerGenerator
@@ -29,7 +25,6 @@ items:
   - System.Windows.Controls.ItemsControl.ItemTemplate
   - System.Windows.Controls.ItemsControl.ItemTemplateProperty
   - System.Windows.Controls.ItemsControl.ManageCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
-  - System.Windows.Controls.ItemsControl.OnChildItemRemoved(System.Object)
   - System.Windows.Controls.ItemsControl.OnItemsChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
   - System.Windows.Controls.ItemsControl.OnItemsSourceChanged(System.Collections.IEnumerable,System.Collections.IEnumerable)
   - System.Windows.Controls.ItemsControl.OnItemsSourceChanged_BeforeVisualUpdate(System.Collections.IEnumerable,System.Collections.IEnumerable)
@@ -59,7 +54,6 @@ items:
     content: 'public class ItemsControl : Control'
     content.vb: >-
       Public Class ItemsControl
-
           Inherits Control
   inheritance:
   - System.Object
@@ -68,6 +62,7 @@ items:
   - System.Windows.FrameworkElement
   - System.Windows.Controls.Control
   derivedClasses:
+  - System.Windows.Controls.Accordion
   - System.Windows.Controls.HeaderedItemsControl
   - System.Windows.Controls.Primitives.MenuBase
   - System.Windows.Controls.Primitives.Selector
@@ -75,7 +70,6 @@ items:
   - System.Windows.Controls.TabControl
   - System.Windows.Controls.TreeView
   inheritedMembers:
-  - System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
   - System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
   - System.Windows.Controls.Control.ManageIsEnabled(System.Boolean)
   - System.Windows.Controls.Control.Background
@@ -154,7 +148,6 @@ items:
   - System.Windows.FrameworkElement.ArrangeOverride(System.Windows.Size)
   - System.Windows.FrameworkElement.Tag
   - System.Windows.FrameworkElement.TagProperty
-  - System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
   - System.Windows.FrameworkElement.Style
   - System.Windows.FrameworkElement.StyleProperty
   - System.Windows.FrameworkElement.DefaultStyleKey
@@ -302,16 +295,13 @@ items:
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
@@ -325,6 +315,7 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   extensionMethods:
+  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
   - System.Windows.Controls.ItemsControl.System.Windows.Controls.ItemsControlExtensions.GetItemsHost
@@ -1274,241 +1265,6 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: System.Windows.Controls.ItemsControl.DisableDefaultRendering
-  commentId: M:System.Windows.Controls.ItemsControl.DisableDefaultRendering
-  id: DisableDefaultRendering
-  parent: System.Windows.Controls.ItemsControl
-  langs:
-  - csharp
-  - vb
-  name: DisableDefaultRendering()
-  nameWithType: ItemsControl.DisableDefaultRendering()
-  fullName: System.Windows.Controls.ItemsControl.DisableDefaultRendering()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: DisableDefaultRendering
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-    startLine: 927
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nDerived classes can call this methed in their constructor if they \nwant to disable the default rendering of the ItemsControl. It can \nbe useful for example to replace the rendering with a custom \nHTML-based one.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete("Disabling default rendering is not supported anymore.")]
-
-      protected void DisableDefaultRendering()
-    content.vb: >-
-      <Obsolete("Disabling default rendering is not supported anymore.")>
-
-      Protected Sub DisableDefaultRendering
-  overload: System.Windows.Controls.ItemsControl.DisableDefaultRendering*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Disabling default rendering is not supported anymore.
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-- uid: System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer(System.Object)
-  commentId: M:System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer(System.Object)
-  id: INTERNAL_GenerateContainer(System.Object)
-  parent: System.Windows.Controls.ItemsControl
-  langs:
-  - csharp
-  - vb
-  name: INTERNAL_GenerateContainer(Object)
-  nameWithType: ItemsControl.INTERNAL_GenerateContainer(Object)
-  fullName: System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer(System.Object)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: INTERNAL_GenerateContainer
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-    startLine: 943
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nReturns the item itself if the item is already a container of the \ncorrect type, otherwise it returns null if no container is to be \ncreated, or it returns the new container otherwise.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete]
-
-      protected virtual SelectorItem INTERNAL_GenerateContainer(object item)
-    parameters:
-    - id: item
-      type: System.Object
-      description: The item to generate the container with.
-    return:
-      type: System.Windows.Controls.Primitives.SelectorItem
-      description: "\nReturns the item itself if the item is already a container of the \ncorrect type, otherwise it returns null if no container is to be \ncreated, or it returns the new container otherwise.\n"
-    content.vb: >-
-      <Obsolete>
-
-      Protected Overridable Function INTERNAL_GenerateContainer(item As Object) As SelectorItem
-  overload: System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
-- uid: System.Windows.Controls.ItemsControl.OnChildItemRemoved(System.Object)
-  commentId: M:System.Windows.Controls.ItemsControl.OnChildItemRemoved(System.Object)
-  id: OnChildItemRemoved(System.Object)
-  parent: System.Windows.Controls.ItemsControl
-  langs:
-  - csharp
-  - vb
-  name: OnChildItemRemoved(Object)
-  nameWithType: ItemsControl.OnChildItemRemoved(Object)
-  fullName: System.Windows.Controls.ItemsControl.OnChildItemRemoved(System.Object)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: OnChildItemRemoved
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-    startLine: 949
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  syntax:
-    content: >-
-      [Obsolete]
-
-      protected virtual void OnChildItemRemoved(object item)
-    parameters:
-    - id: item
-      type: System.Object
-    content.vb: >-
-      <Obsolete>
-
-      Protected Overridable Sub OnChildItemRemoved(item As Object)
-  overload: System.Windows.Controls.ItemsControl.OnChildItemRemoved*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
-- uid: System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem(System.Object)
-  commentId: M:System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem(System.Object)
-  id: GenerateFrameworkElementToRenderTheItem(System.Object)
-  parent: System.Windows.Controls.ItemsControl
-  langs:
-  - csharp
-  - vb
-  name: GenerateFrameworkElementToRenderTheItem(Object)
-  nameWithType: ItemsControl.GenerateFrameworkElementToRenderTheItem(Object)
-  fullName: System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem(System.Object)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GenerateFrameworkElementToRenderTheItem
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-    startLine: 957
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  syntax:
-    content: >-
-      [Obsolete]
-
-      protected FrameworkElement GenerateFrameworkElementToRenderTheItem(object item)
-    parameters:
-    - id: item
-      type: System.Object
-    return:
-      type: System.Windows.FrameworkElement
-    content.vb: >-
-      <Obsolete>
-
-      Protected Function GenerateFrameworkElementToRenderTheItem(item As Object) As FrameworkElement
-  overload: System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-- uid: System.Windows.Controls.ItemsControl.GetContainerFromItem(System.Object)
-  commentId: M:System.Windows.Controls.ItemsControl.GetContainerFromItem(System.Object)
-  id: GetContainerFromItem(System.Object)
-  parent: System.Windows.Controls.ItemsControl
-  langs:
-  - csharp
-  - vb
-  name: GetContainerFromItem(Object)
-  nameWithType: ItemsControl.GetContainerFromItem(Object)
-  fullName: System.Windows.Controls.ItemsControl.GetContainerFromItem(System.Object)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GetContainerFromItem
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ItemsControl.cs
-    startLine: 1002
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Controls
-  summary: "\nCreate or identify the element used to display the given item.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete]
-
-      protected virtual DependencyObject GetContainerFromItem(object item)
-    parameters:
-    - id: item
-      type: System.Object
-    return:
-      type: System.Windows.DependencyObject
-      description: "\nThe element that is used to display the given item.\n"
-    content.vb: >-
-      <Obsolete>
-
-      Protected Overridable Function GetContainerFromItem(item As Object) As DependencyObject
-  overload: System.Windows.Controls.ItemsControl.GetContainerFromItem*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - protected
-  - virtual
-  modifiers.vb:
-  - Protected
-  - Overridable
 references:
 - uid: System.Windows.Controls
   commentId: N:System.Windows.Controls
@@ -1546,12 +1302,6 @@ references:
   name: Control
   nameWithType: Control
   fullName: System.Windows.Controls.Control
-- uid: System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
-  commentId: F:System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
-  parent: System.Windows.Controls.Control
-  name: INTERNAL_DoNotApplyControlTemplate
-  nameWithType: Control.INTERNAL_DoNotApplyControlTemplate
-  fullName: System.Windows.Controls.Control.INTERNAL_DoNotApplyControlTemplate
 - uid: System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
   commentId: F:System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
   parent: System.Windows.Controls.Control
@@ -2589,42 +2339,6 @@ references:
   name: TagProperty
   nameWithType: FrameworkElement.TagProperty
   fullName: System.Windows.FrameworkElement.TagProperty
-- uid: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-  commentId: M:System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-  parent: System.Windows.FrameworkElement
-  name: INTERNAL_SetDefaultStyle(Style)
-  nameWithType: FrameworkElement.INTERNAL_SetDefaultStyle(Style)
-  fullName: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-    name: INTERNAL_SetDefaultStyle
-    nameWithType: FrameworkElement.INTERNAL_SetDefaultStyle
-    fullName: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Style
-    name: Style
-    nameWithType: Style
-    fullName: System.Windows.Style
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-    name: INTERNAL_SetDefaultStyle
-    nameWithType: FrameworkElement.INTERNAL_SetDefaultStyle
-    fullName: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Style
-    name: Style
-    nameWithType: Style
-    fullName: System.Windows.Style
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.Style
   commentId: P:System.Windows.FrameworkElement.Style
   parent: System.Windows.FrameworkElement
@@ -4554,59 +4268,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetLocalValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetLocalValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-    name: SetLocalValue
-    nameWithType: DependencyObject.SetLocalValue
-    fullName: System.Windows.DependencyObject.SetLocalValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-    name: SetLocalValue
-    nameWithType: DependencyObject.SetLocalValue
-    fullName: System.Windows.DependencyObject.SetLocalValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -4657,56 +4318,6 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  commentId: M:System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  parent: System.Windows.DependencyObject
-  name: CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  nameWithType: DependencyObject.CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  fullName: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty, System.Windows.PropertyMetadata)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-    name: CoerceCurrentValue
-    nameWithType: DependencyObject.CoerceCurrentValue
-    fullName: System.Windows.DependencyObject.CoerceCurrentValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.PropertyMetadata
-    name: PropertyMetadata
-    nameWithType: PropertyMetadata
-    fullName: System.Windows.PropertyMetadata
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-    name: CoerceCurrentValue
-    nameWithType: DependencyObject.CoerceCurrentValue
-    fullName: System.Windows.DependencyObject.CoerceCurrentValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.PropertyMetadata
-    name: PropertyMetadata
-    nameWithType: PropertyMetadata
-    fullName: System.Windows.PropertyMetadata
   - name: )
     nameWithType: )
     fullName: )
@@ -4974,42 +4585,6 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: Coerce(DependencyProperty)
-  nameWithType: DependencyObject.Coerce(DependencyProperty)
-  fullName: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-    name: Coerce
-    nameWithType: DependencyObject.Coerce
-    fullName: System.Windows.DependencyObject.Coerce
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-    name: Coerce
-    nameWithType: DependencyObject.Coerce
-    fullName: System.Windows.DependencyObject.Coerce
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
   - name: )
     nameWithType: )
     fullName: )
@@ -5428,6 +5003,35 @@ references:
     nameWithType: Object.ToString
     fullName: System.Object.ToString
     isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  parent: System.Windows.Interactivity.DependencyObjectHelper
+  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors()
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
   - name: (
     nameWithType: (
     fullName: (
@@ -6030,6 +5634,47 @@ references:
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
+- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors(DependencyObject)
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Interactivity.DependencyObjectHelper
+  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
+  parent: System.Windows.Interactivity
+  name: DependencyObjectHelper
+  nameWithType: DependencyObjectHelper
+  fullName: System.Windows.Interactivity.DependencyObjectHelper
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -6771,6 +6416,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Interactivity
+  commentId: N:System.Windows.Interactivity
+  name: System.Windows.Interactivity
+  nameWithType: System.Windows.Interactivity
+  fullName: System.Windows.Interactivity
 - uid: ToJavaScriptObjectExtender
   commentId: N:ToJavaScriptObjectExtender
   name: ToJavaScriptObjectExtender
@@ -6997,34 +6647,3 @@ references:
   name: ItemsControlFromItemContainer
   nameWithType: ItemsControl.ItemsControlFromItemContainer
   fullName: System.Windows.Controls.ItemsControl.ItemsControlFromItemContainer
-- uid: System.Windows.Controls.ItemsControl.DisableDefaultRendering*
-  commentId: Overload:System.Windows.Controls.ItemsControl.DisableDefaultRendering
-  name: DisableDefaultRendering
-  nameWithType: ItemsControl.DisableDefaultRendering
-  fullName: System.Windows.Controls.ItemsControl.DisableDefaultRendering
-- uid: System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer*
-  commentId: Overload:System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer
-  name: INTERNAL_GenerateContainer
-  nameWithType: ItemsControl.INTERNAL_GenerateContainer
-  fullName: System.Windows.Controls.ItemsControl.INTERNAL_GenerateContainer
-- uid: System.Windows.Controls.Primitives.SelectorItem
-  commentId: T:System.Windows.Controls.Primitives.SelectorItem
-  parent: System.Windows.Controls.Primitives
-  name: SelectorItem
-  nameWithType: SelectorItem
-  fullName: System.Windows.Controls.Primitives.SelectorItem
-- uid: System.Windows.Controls.ItemsControl.OnChildItemRemoved*
-  commentId: Overload:System.Windows.Controls.ItemsControl.OnChildItemRemoved
-  name: OnChildItemRemoved
-  nameWithType: ItemsControl.OnChildItemRemoved
-  fullName: System.Windows.Controls.ItemsControl.OnChildItemRemoved
-- uid: System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem*
-  commentId: Overload:System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem
-  name: GenerateFrameworkElementToRenderTheItem
-  nameWithType: ItemsControl.GenerateFrameworkElementToRenderTheItem
-  fullName: System.Windows.Controls.ItemsControl.GenerateFrameworkElementToRenderTheItem
-- uid: System.Windows.Controls.ItemsControl.GetContainerFromItem*
-  commentId: Overload:System.Windows.Controls.ItemsControl.GetContainerFromItem
-  name: GetContainerFromItem
-  nameWithType: ItemsControl.GetContainerFromItem
-  fullName: System.Windows.Controls.ItemsControl.GetContainerFromItem

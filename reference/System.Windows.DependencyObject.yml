@@ -8,8 +8,6 @@ items:
   - System.Windows.DependencyObject.#ctor
   - System.Windows.DependencyObject.CheckAccess
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
@@ -21,7 +19,6 @@ items:
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
   langs:
@@ -50,9 +47,12 @@ items:
   inheritance:
   - System.Object
   derivedClasses:
+  - Microsoft.Expression.Interactivity.Core.ComparisonCondition
+  - Microsoft.Expression.Interactivity.Core.ConditionalExpression
   - System.Windows.AssemblyPart
   - System.Windows.Automation.Peers.AutomationPeer
   - System.Windows.Controls.ColumnDefinition
+  - System.Windows.Controls.DataGridColumn
   - System.Windows.Controls.MultiScaleSubImage
   - System.Windows.Controls.RowDefinition
   - System.Windows.Controls.TextSearch
@@ -64,6 +64,9 @@ items:
   - System.Windows.Ink.Stroke
   - System.Windows.Input.TouchDevice
   - System.Windows.Input.TouchPoint
+  - System.Windows.Interactivity.Behavior
+  - System.Windows.Interactivity.TriggerAction
+  - System.Windows.Interactivity.TriggerBase
   - System.Windows.Media.Animation.ColorKeyFrame
   - System.Windows.Media.Animation.DoubleKeyFrame
   - System.Windows.Media.Animation.EasingFunctionBase
@@ -110,6 +113,7 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   extensionMethods:
+  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
@@ -194,57 +198,6 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  id: SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  langs:
-  - csharp
-  - vb
-  name: SetLocalValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetLocalValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty, System.Object)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: SetLocalValue
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
-    startLine: 270
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nSets the local value of a dependency property on a DependencyObject while not overriding a hypothetical Binding (example: when the user writes in a TextBox with a two way Binding on its Text property).\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete("Use SetCurrentValue")]
-
-      public void SetLocalValue(DependencyProperty dependencyProperty, object value)
-    parameters:
-    - id: dependencyProperty
-      type: System.Windows.DependencyProperty
-      description: The identifier of the dependency property to set.
-    - id: value
-      type: System.Object
-      description: The new local value.
-    content.vb: >-
-      <Obsolete("Use SetCurrentValue")>
-
-      Public Sub SetLocalValue(dependencyProperty As DependencyProperty, value As Object)
-  overload: System.Windows.DependencyObject.SetLocalValue*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use SetCurrentValue
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   id: SetCurrentValue(System.Windows.DependencyProperty,System.Object)
@@ -276,53 +229,6 @@ items:
       type: System.Object
     content.vb: Public Sub SetCurrentValue(dp As DependencyProperty, value As Object)
   overload: System.Windows.DependencyObject.SetCurrentValue*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  commentId: M:System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  id: CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  parent: System.Windows.DependencyObject
-  langs:
-  - csharp
-  - vb
-  name: CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  nameWithType: DependencyObject.CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  fullName: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty, System.Windows.PropertyMetadata)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: CoerceCurrentValue
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
-    startLine: 283
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: >-
-      [Obsolete("Use CoerceValue")]
-
-      public void CoerceCurrentValue(DependencyProperty dependencyProperty, PropertyMetadata propertyMetadata)
-    parameters:
-    - id: dependencyProperty
-      type: System.Windows.DependencyProperty
-    - id: propertyMetadata
-      type: System.Windows.PropertyMetadata
-    content.vb: >-
-      <Obsolete("Use CoerceValue")>
-
-      Public Sub CoerceCurrentValue(dependencyProperty As DependencyProperty, propertyMetadata As PropertyMetadata)
-  overload: System.Windows.DependencyObject.CoerceCurrentValue*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use CoerceValue
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -537,54 +443,6 @@ items:
       type: System.Object
     content.vb: Public Sub SetValue(dp As DependencyProperty, value As Object)
   overload: System.Windows.DependencyObject.SetValue*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  id: Coerce(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  langs:
-  - csharp
-  - vb
-  name: Coerce(DependencyProperty)
-  nameWithType: DependencyObject.Coerce(DependencyProperty)
-  fullName: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/DependencyObject.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Coerce
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyObject.cs
-    startLine: 475
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nRefreshes the value of the given DependencyProperty on this DependencyObject so that it fits the coercion that should be applied on it.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete("Use CoerceValue")]
-
-      public void Coerce(DependencyProperty dependencyProperty)
-    parameters:
-    - id: dependencyProperty
-      type: System.Windows.DependencyProperty
-      description: The dependencyProperty whose value we want to refresh.
-    content.vb: >-
-      <Obsolete("Use CoerceValue")>
-
-      Public Sub Coerce(dependencyProperty As DependencyProperty)
-  overload: System.Windows.DependencyObject.Coerce*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use CoerceValue
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1139,6 +997,35 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  parent: System.Windows.Interactivity.DependencyObjectHelper
+  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors()
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -1405,6 +1292,47 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors(DependencyObject)
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Interactivity.DependencyObjectHelper
+  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
+  parent: System.Windows.Interactivity
+  name: DependencyObjectHelper
+  nameWithType: DependencyObjectHelper
+  fullName: System.Windows.Interactivity.DependencyObjectHelper
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -1735,6 +1663,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Interactivity
+  commentId: N:System.Windows.Interactivity
+  name: System.Windows.Interactivity
+  nameWithType: System.Windows.Interactivity
+  fullName: System.Windows.Interactivity
 - uid: ToJavaScriptObjectExtender
   commentId: N:ToJavaScriptObjectExtender
   name: ToJavaScriptObjectExtender
@@ -1761,27 +1694,11 @@ references:
   name: DependencyProperty
   nameWithType: DependencyProperty
   fullName: System.Windows.DependencyProperty
-- uid: System.Windows.DependencyObject.SetLocalValue*
-  commentId: Overload:System.Windows.DependencyObject.SetLocalValue
-  name: SetLocalValue
-  nameWithType: DependencyObject.SetLocalValue
-  fullName: System.Windows.DependencyObject.SetLocalValue
 - uid: System.Windows.DependencyObject.SetCurrentValue*
   commentId: Overload:System.Windows.DependencyObject.SetCurrentValue
   name: SetCurrentValue
   nameWithType: DependencyObject.SetCurrentValue
   fullName: System.Windows.DependencyObject.SetCurrentValue
-- uid: System.Windows.DependencyObject.CoerceCurrentValue*
-  commentId: Overload:System.Windows.DependencyObject.CoerceCurrentValue
-  name: CoerceCurrentValue
-  nameWithType: DependencyObject.CoerceCurrentValue
-  fullName: System.Windows.DependencyObject.CoerceCurrentValue
-- uid: System.Windows.PropertyMetadata
-  commentId: T:System.Windows.PropertyMetadata
-  parent: System.Windows
-  name: PropertyMetadata
-  nameWithType: PropertyMetadata
-  fullName: System.Windows.PropertyMetadata
 - uid: System.Windows.DependencyObject.ReadLocalValue*
   commentId: Overload:System.Windows.DependencyObject.ReadLocalValue
   name: ReadLocalValue
@@ -1812,11 +1729,6 @@ references:
   name: SetValue
   nameWithType: DependencyObject.SetValue
   fullName: System.Windows.DependencyObject.SetValue
-- uid: System.Windows.DependencyObject.Coerce*
-  commentId: Overload:System.Windows.DependencyObject.Coerce
-  name: Coerce
-  nameWithType: DependencyObject.Coerce
-  fullName: System.Windows.DependencyObject.Coerce
 - uid: System.Windows.DependencyObject.CoerceValue*
   commentId: Overload:System.Windows.DependencyObject.CoerceValue
   name: CoerceValue

@@ -5,11 +5,8 @@ items:
   id: Clipboard
   parent: System.Windows
   children:
-  - System.Windows.Clipboard.ContainsText
   - System.Windows.Clipboard.ContainsTextAsync
-  - System.Windows.Clipboard.GetText
   - System.Windows.Clipboard.GetTextAsync
-  - System.Windows.Clipboard.SetText(System.String)
   - System.Windows.Clipboard.SetTextAsync(System.String)
   langs:
   - csharp
@@ -51,60 +48,6 @@ items:
   modifiers.vb:
   - Public
   - Module
-- uid: System.Windows.Clipboard.SetText(System.String)
-  commentId: M:System.Windows.Clipboard.SetText(System.String)
-  id: SetText(System.String)
-  parent: System.Windows.Clipboard
-  langs:
-  - csharp
-  - vb
-  name: SetText(String)
-  nameWithType: Clipboard.SetText(String)
-  fullName: System.Windows.Clipboard.SetText(System.String)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: SetText
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
-    startLine: 45
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nSets Unicode text data to store on the clipboard, for later access with <xref href=\"System.Windows.Clipboard.GetText\" data-throw-if-not-resolved=\"false\"></xref>.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete("Use SetTextAsync(string) instead.")]
-
-      public static void SetText(string text)
-    parameters:
-    - id: text
-      type: System.String
-      description: "\nA string that contains the Unicode text data to store on the clipboard.\n"
-    content.vb: >-
-      <Obsolete("Use SetTextAsync(string) instead.")>
-
-      Public Shared Sub SetText(text As String)
-  overload: System.Windows.Clipboard.SetText*
-  exceptions:
-  - type: System.ArgumentNullException
-    commentId: T:System.ArgumentNullException
-    description: "\ntext is null.\n"
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use SetTextAsync(string) instead.
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
 - uid: System.Windows.Clipboard.SetTextAsync(System.String)
   commentId: M:System.Windows.Clipboard.SetTextAsync(System.String)
   id: SetTextAsync(System.String)
@@ -149,55 +92,6 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: System.Windows.Clipboard.GetText
-  commentId: M:System.Windows.Clipboard.GetText
-  id: GetText
-  parent: System.Windows.Clipboard
-  langs:
-  - csharp
-  - vb
-  name: GetText()
-  nameWithType: Clipboard.GetText()
-  fullName: System.Windows.Clipboard.GetText()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GetText
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
-    startLine: 82
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nQueries the clipboard for the presence of data in the UnicodeText format.\nNot implemented in the browser. Use <xref href=\"System.Windows.Clipboard.GetTextAsync\" data-throw-if-not-resolved=\"false\"></xref> instead.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete("Use GetTextAsync() instead.")]
-
-      public static string GetText()
-    return:
-      type: System.String
-      description: "\nAlways returns <xref href=\"System.String.Empty\" data-throw-if-not-resolved=\"false\"></xref> in the browser.\n"
-    content.vb: >-
-      <Obsolete("Use GetTextAsync() instead.")>
-
-      Public Shared Function GetText As String
-  overload: System.Windows.Clipboard.GetText*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use GetTextAsync() instead.
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
 - uid: System.Windows.Clipboard.GetTextAsync
   commentId: M:System.Windows.Clipboard.GetTextAsync
   id: GetTextAsync
@@ -229,55 +123,6 @@ items:
       description: "\nIf Unicode text data is present on the system clipboard, returns a string that\ncontains the Unicode text data. Otherwise, returns an empty string.\n"
     content.vb: Public Shared Function GetTextAsync As Task(Of String)
   overload: System.Windows.Clipboard.GetTextAsync*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Clipboard.ContainsText
-  commentId: M:System.Windows.Clipboard.ContainsText
-  id: ContainsText
-  parent: System.Windows.Clipboard
-  langs:
-  - csharp
-  - vb
-  name: ContainsText()
-  nameWithType: Clipboard.ContainsText()
-  fullName: System.Windows.Clipboard.ContainsText()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Clipboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ContainsText
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Clipboard.cs
-    startLine: 101
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nQueries the clipboard for the presence of data in the UnicodeText format.\nNot implemented in the browser. Use <xref href=\"System.Windows.Clipboard.ContainsTextAsync\" data-throw-if-not-resolved=\"false\"></xref> instead.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete("Use ContainsTextAsync() instead.")]
-
-      public static bool ContainsText()
-    return:
-      type: System.Boolean
-      description: "\nAlways return false in the browser.\n"
-    content.vb: >-
-      <Obsolete("Use ContainsTextAsync() instead.")>
-
-      Public Shared Function ContainsText As Boolean
-  overload: System.Windows.Clipboard.ContainsText*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use ContainsTextAsync() instead.
   modifiers.csharp:
   - public
   - static
@@ -618,17 +463,17 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: System.Windows.Clipboard.GetText
-  commentId: M:System.Windows.Clipboard.GetText
+- uid: System.Windows.Clipboard.GetTextAsync
+  commentId: M:System.Windows.Clipboard.GetTextAsync
   isExternal: true
 - uid: System.ArgumentNullException
   commentId: T:System.ArgumentNullException
   isExternal: true
-- uid: System.Windows.Clipboard.SetText*
-  commentId: Overload:System.Windows.Clipboard.SetText
-  name: SetText
-  nameWithType: Clipboard.SetText
-  fullName: System.Windows.Clipboard.SetText
+- uid: System.Windows.Clipboard.SetTextAsync*
+  commentId: Overload:System.Windows.Clipboard.SetTextAsync
+  name: SetTextAsync
+  nameWithType: Clipboard.SetTextAsync
+  fullName: System.Windows.Clipboard.SetTextAsync
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -636,14 +481,6 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: System.Windows.Clipboard.GetTextAsync
-  commentId: M:System.Windows.Clipboard.GetTextAsync
-  isExternal: true
-- uid: System.Windows.Clipboard.SetTextAsync*
-  commentId: Overload:System.Windows.Clipboard.SetTextAsync
-  name: SetTextAsync
-  nameWithType: Clipboard.SetTextAsync
-  fullName: System.Windows.Clipboard.SetTextAsync
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -657,14 +494,6 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: System.String.Empty
-  commentId: F:System.String.Empty
-  isExternal: true
-- uid: System.Windows.Clipboard.GetText*
-  commentId: Overload:System.Windows.Clipboard.GetText
-  name: GetText
-  nameWithType: Clipboard.GetText
-  fullName: System.Windows.Clipboard.GetText
 - uid: System.Windows.Clipboard.GetTextAsync*
   commentId: Overload:System.Windows.Clipboard.GetTextAsync
   name: GetTextAsync
@@ -753,21 +582,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Clipboard.ContainsTextAsync
-  commentId: M:System.Windows.Clipboard.ContainsTextAsync
-  isExternal: true
-- uid: System.Windows.Clipboard.ContainsText*
-  commentId: Overload:System.Windows.Clipboard.ContainsText
-  name: ContainsText
-  nameWithType: Clipboard.ContainsText
-  fullName: System.Windows.Clipboard.ContainsText
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
 - uid: System.Windows.Clipboard.ContainsTextAsync*
   commentId: Overload:System.Windows.Clipboard.ContainsTextAsync
   name: ContainsTextAsync

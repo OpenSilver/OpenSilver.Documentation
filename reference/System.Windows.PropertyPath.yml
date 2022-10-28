@@ -7,7 +7,6 @@ items:
   children:
   - System.Windows.PropertyPath.#ctor(System.String)
   - System.Windows.PropertyPath.#ctor(System.String,System.Object[])
-  - System.Windows.PropertyPath.#ctor(System.String,System.String,System.Func{System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Tuple{System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Nullable{System.Int32}}}},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Func{System.Windows.DependencyObject,System.Object})
   - System.Windows.PropertyPath.#ctor(System.Windows.DependencyProperty)
   - System.Windows.PropertyPath.Path
   langs:
@@ -34,23 +33,19 @@ items:
     content: 'public sealed class PropertyPath : DependencyObject'
     content.vb: >-
       Public NotInheritable Class PropertyPath
-
           Inherits DependencyObject
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   inheritedMembers:
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
@@ -66,6 +61,7 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   extensionMethods:
+  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
@@ -198,75 +194,6 @@ items:
   - Public
   fullName.vb: System.Windows.PropertyPath.PropertyPath(System.String, System.Object())
   name.vb: PropertyPath(String, Object())
-- uid: System.Windows.PropertyPath.#ctor(System.String,System.String,System.Func{System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Tuple{System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Nullable{System.Int32}}}},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Func{System.Windows.DependencyObject,System.Object})
-  commentId: M:System.Windows.PropertyPath.#ctor(System.String,System.String,System.Func{System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Tuple{System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Nullable{System.Int32}}}},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Func{System.Windows.DependencyObject,System.Object})
-  id: '#ctor(System.String,System.String,System.Func{System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Tuple{System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Nullable{System.Int32}}}},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Action{System.Windows.DependencyObject,System.Object},System.Func{System.Windows.DependencyObject,System.Object})'
-  parent: System.Windows.PropertyPath
-  langs:
-  - csharp
-  - vb
-  name: PropertyPath(String, String, Func<DependencyObject, IEnumerable<Tuple<DependencyObject, DependencyProperty, Nullable<Int32>>>>, Action<DependencyObject, Object>, Action<DependencyObject, Object>, Action<DependencyObject, Object>, Func<DependencyObject, Object>)
-  nameWithType: PropertyPath.PropertyPath(String, String, Func<DependencyObject, IEnumerable<Tuple<DependencyObject, DependencyProperty, Nullable<Int32>>>>, Action<DependencyObject, Object>, Action<DependencyObject, Object>, Action<DependencyObject, Object>, Func<DependencyObject, Object>)
-  fullName: System.Windows.PropertyPath.PropertyPath(System.String, System.String, System.Func<System.Windows.DependencyObject, System.Collections.Generic.IEnumerable<System.Tuple<System.Windows.DependencyObject, System.Windows.DependencyProperty, System.Nullable<System.Int32>>>>, System.Action<System.Windows.DependencyObject, System.Object>, System.Action<System.Windows.DependencyObject, System.Object>, System.Action<System.Windows.DependencyObject, System.Object>, System.Func<System.Windows.DependencyObject, System.Object>)
-  type: Constructor
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/PropertyPath.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: .ctor
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/PropertyPath.cs
-    startLine: 86
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nInitializes a new Instance of the PropertyPath class based on methods to access the property from a DependencyObject.\n"
-  example: []
-  syntax:
-    content: >-
-      [Obsolete("Please use PropertyPath(string) instead. This constructor will be removed in a future release.")]
-
-      public PropertyPath(string path, string dependencyPropertyName, Func<DependencyObject, IEnumerable<Tuple<DependencyObject, DependencyProperty, int?>>> accessPropertyContainer, Action<DependencyObject, object> propertySetVisualState, Action<DependencyObject, object> propertySetAnimationValue, Action<DependencyObject, object> propertySetLocalValue, Func<DependencyObject, object> propertyGetVisualState)
-    parameters:
-    - id: path
-      type: System.String
-      description: ''
-    - id: dependencyPropertyName
-      type: System.String
-      description: The name of the property (consists only of the last part of the path we would put in the XAML).
-    - id: accessPropertyContainer
-      type: System.Func{System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Tuple{System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Nullable{System.Int32}}}}
-      description: The function that will access the object on which the property is from the DependencyObject put in its parameters(corresponds to the path in XAML without the last property).
-    - id: propertySetVisualState
-      type: System.Action{System.Windows.DependencyObject,System.Object}
-      description: The function that sets the VisualState value on the given element.
-    - id: propertySetAnimationValue
-      type: System.Action{System.Windows.DependencyObject,System.Object}
-      description: ''
-    - id: propertySetLocalValue
-      type: System.Action{System.Windows.DependencyObject,System.Object}
-      description: The function that sets the Local value on the given element.
-    - id: propertyGetVisualState
-      type: System.Func{System.Windows.DependencyObject,System.Object}
-      description: The function that gets the VisualState value on the given element.
-    content.vb: >-
-      <Obsolete("Please use PropertyPath(string) instead. This constructor will be removed in a future release.")>
-
-      Public Sub New(path As String, dependencyPropertyName As String, accessPropertyContainer As Func(Of DependencyObject, IEnumerable(Of Tuple(Of DependencyObject, DependencyProperty, Integer?))), propertySetVisualState As Action(Of DependencyObject, Object), propertySetAnimationValue As Action(Of DependencyObject, Object), propertySetLocalValue As Action(Of DependencyObject, Object), propertyGetVisualState As Func(Of DependencyObject, Object))
-  overload: System.Windows.PropertyPath.#ctor*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Please use PropertyPath(string) instead. This constructor will be removed in a future release.
-  nameWithType.vb: PropertyPath.PropertyPath(String, String, Func(Of DependencyObject, IEnumerable(Of Tuple(Of DependencyObject, DependencyProperty, Nullable(Of Int32)))), Action(Of DependencyObject, Object), Action(Of DependencyObject, Object), Action(Of DependencyObject, Object), Func(Of DependencyObject, Object))
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: System.Windows.PropertyPath.PropertyPath(System.String, System.String, System.Func(Of System.Windows.DependencyObject, System.Collections.Generic.IEnumerable(Of System.Tuple(Of System.Windows.DependencyObject, System.Windows.DependencyProperty, System.Nullable(Of System.Int32)))), System.Action(Of System.Windows.DependencyObject, System.Object), System.Action(Of System.Windows.DependencyObject, System.Object), System.Action(Of System.Windows.DependencyObject, System.Object), System.Func(Of System.Windows.DependencyObject, System.Object))
-  name.vb: PropertyPath(String, String, Func(Of DependencyObject, IEnumerable(Of Tuple(Of DependencyObject, DependencyProperty, Nullable(Of Int32)))), Action(Of DependencyObject, Object), Action(Of DependencyObject, Object), Action(Of DependencyObject, Object), Func(Of DependencyObject, Object))
 - uid: System.Windows.PropertyPath.Path
   commentId: P:System.Windows.PropertyPath.Path
   id: Path
@@ -359,59 +286,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetLocalValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetLocalValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-    name: SetLocalValue
-    nameWithType: DependencyObject.SetLocalValue
-    fullName: System.Windows.DependencyObject.SetLocalValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-    name: SetLocalValue
-    nameWithType: DependencyObject.SetLocalValue
-    fullName: System.Windows.DependencyObject.SetLocalValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -462,56 +336,6 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  commentId: M:System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  parent: System.Windows.DependencyObject
-  name: CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  nameWithType: DependencyObject.CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  fullName: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty, System.Windows.PropertyMetadata)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-    name: CoerceCurrentValue
-    nameWithType: DependencyObject.CoerceCurrentValue
-    fullName: System.Windows.DependencyObject.CoerceCurrentValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.PropertyMetadata
-    name: PropertyMetadata
-    nameWithType: PropertyMetadata
-    fullName: System.Windows.PropertyMetadata
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-    name: CoerceCurrentValue
-    nameWithType: DependencyObject.CoerceCurrentValue
-    fullName: System.Windows.DependencyObject.CoerceCurrentValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.PropertyMetadata
-    name: PropertyMetadata
-    nameWithType: PropertyMetadata
-    fullName: System.Windows.PropertyMetadata
   - name: )
     nameWithType: )
     fullName: )
@@ -779,42 +603,6 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: Coerce(DependencyProperty)
-  nameWithType: DependencyObject.Coerce(DependencyProperty)
-  fullName: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-    name: Coerce
-    nameWithType: DependencyObject.Coerce
-    fullName: System.Windows.DependencyObject.Coerce
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-    name: Coerce
-    nameWithType: DependencyObject.Coerce
-    fullName: System.Windows.DependencyObject.Coerce
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
   - name: )
     nameWithType: )
     fullName: )
@@ -1295,6 +1083,35 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  parent: System.Windows.Interactivity.DependencyObjectHelper
+  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors()
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -1561,6 +1378,47 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors(DependencyObject)
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Interactivity.DependencyObjectHelper
+  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
+  parent: System.Windows.Interactivity
+  name: DependencyObjectHelper
+  nameWithType: DependencyObjectHelper
+  fullName: System.Windows.Interactivity.DependencyObjectHelper
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -1891,6 +1749,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Interactivity
+  commentId: N:System.Windows.Interactivity
+  name: System.Windows.Interactivity
+  nameWithType: System.Windows.Interactivity
+  fullName: System.Windows.Interactivity
 - uid: ToJavaScriptObjectExtender
   commentId: N:ToJavaScriptObjectExtender
   name: ToJavaScriptObjectExtender
@@ -1954,376 +1817,6 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
-- uid: System.Func{System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Tuple{System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Nullable{System.Int32}}}}
-  commentId: T:System.Func{System.Windows.DependencyObject,System.Collections.Generic.IEnumerable{System.Tuple{System.Windows.DependencyObject,System.Windows.DependencyProperty,System.Nullable{System.Int32}}}}
-  parent: System
-  definition: System.Func`2
-  name: Func<DependencyObject, IEnumerable<Tuple<DependencyObject, DependencyProperty, Nullable<Int32>>>>
-  nameWithType: Func<DependencyObject, IEnumerable<Tuple<DependencyObject, DependencyProperty, Nullable<Int32>>>>
-  fullName: System.Func<System.Windows.DependencyObject, System.Collections.Generic.IEnumerable<System.Tuple<System.Windows.DependencyObject, System.Windows.DependencyProperty, System.Nullable<System.Int32>>>>
-  nameWithType.vb: Func(Of DependencyObject, IEnumerable(Of Tuple(Of DependencyObject, DependencyProperty, Nullable(Of Int32))))
-  fullName.vb: System.Func(Of System.Windows.DependencyObject, System.Collections.Generic.IEnumerable(Of System.Tuple(Of System.Windows.DependencyObject, System.Windows.DependencyProperty, System.Nullable(Of System.Int32))))
-  name.vb: Func(Of DependencyObject, IEnumerable(Of Tuple(Of DependencyObject, DependencyProperty, Nullable(Of Int32))))
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Tuple`3
-    name: Tuple
-    nameWithType: Tuple
-    fullName: System.Tuple
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Tuple`3
-    name: Tuple
-    nameWithType: Tuple
-    fullName: System.Tuple
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Action{System.Windows.DependencyObject,System.Object}
-  commentId: T:System.Action{System.Windows.DependencyObject,System.Object}
-  parent: System
-  definition: System.Action`2
-  name: Action<DependencyObject, Object>
-  nameWithType: Action<DependencyObject, Object>
-  fullName: System.Action<System.Windows.DependencyObject, System.Object>
-  nameWithType.vb: Action(Of DependencyObject, Object)
-  fullName.vb: System.Action(Of System.Windows.DependencyObject, System.Object)
-  name.vb: Action(Of DependencyObject, Object)
-  spec.csharp:
-  - uid: System.Action`2
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Action`2
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func{System.Windows.DependencyObject,System.Object}
-  commentId: T:System.Func{System.Windows.DependencyObject,System.Object}
-  parent: System
-  definition: System.Func`2
-  name: Func<DependencyObject, Object>
-  nameWithType: Func<DependencyObject, Object>
-  fullName: System.Func<System.Windows.DependencyObject, System.Object>
-  nameWithType.vb: Func(Of DependencyObject, Object)
-  fullName.vb: System.Func(Of System.Windows.DependencyObject, System.Object)
-  name.vb: Func(Of DependencyObject, Object)
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func`2
-  commentId: T:System.Func`2
-  isExternal: true
-  name: Func<T, TResult>
-  nameWithType: Func<T, TResult>
-  fullName: System.Func<T, TResult>
-  nameWithType.vb: Func(Of T, TResult)
-  fullName.vb: System.Func(Of T, TResult)
-  name.vb: Func(Of T, TResult)
-  spec.csharp:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Func`2
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Action`2
-  commentId: T:System.Action`2
-  isExternal: true
-  name: Action<T1, T2>
-  nameWithType: Action<T1, T2>
-  fullName: System.Action<T1, T2>
-  nameWithType.vb: Action(Of T1, T2)
-  fullName.vb: System.Action(Of T1, T2)
-  name.vb: Action(Of T1, T2)
-  spec.csharp:
-  - uid: System.Action`2
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T1
-    nameWithType: T1
-    fullName: T1
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T2
-    nameWithType: T2
-    fullName: T2
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Action`2
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T1
-    nameWithType: T1
-    fullName: T1
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T2
-    nameWithType: T2
-    fullName: T2
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.PropertyPath.Path*
   commentId: Overload:System.Windows.PropertyPath.Path
   name: Path

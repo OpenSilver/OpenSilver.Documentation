@@ -38,7 +38,6 @@ items:
   - System.Windows.FrameworkElement.INTERNAL_DoNotApplyStyle
   - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
-  - System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
   - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
   - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
   - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
@@ -108,19 +107,17 @@ items:
     content: 'public abstract class FrameworkElement : UIElement'
     content.vb: >-
       Public MustInherit Class FrameworkElement
-
           Inherits UIElement
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   - System.Windows.UIElement
   derivedClasses:
-  - CSHTML5.Native.Html.Controls.HtmlCanvas
-  - CSHTML5.Native.Html.Controls.HtmlPresenter
-  - CSHTML5.Native.Html.Controls.NativeComboBox
   - System.Windows.Controls.Border
   - System.Windows.Controls.ContentPresenter
   - System.Windows.Controls.Control
+  - System.Windows.Controls.DataVisualization.Charting.SeriesDefinition
+  - System.Windows.Controls.DataVisualization.Interpolator
   - System.Windows.Controls.Image
   - System.Windows.Controls.INTERNAL_CalendarOrClockBase
   - System.Windows.Controls.ItemsPresenter
@@ -237,16 +234,13 @@ items:
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
@@ -260,6 +254,7 @@ items:
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
   extensionMethods:
+  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
   - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
   - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
@@ -1515,51 +1510,6 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-  commentId: M:System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-  id: INTERNAL_SetDefaultStyle(System.Windows.Style)
-  parent: System.Windows.FrameworkElement
-  langs:
-  - csharp
-  - vb
-  name: INTERNAL_SetDefaultStyle(Style)
-  nameWithType: FrameworkElement.INTERNAL_SetDefaultStyle(Style)
-  fullName: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle(System.Windows.Style)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/FrameworkElement.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: INTERNAL_SetDefaultStyle
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/FrameworkElement.cs
-    startLine: 1403
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: >-
-      [Obsolete("Use DefaultStyleKey")]
-
-      protected void INTERNAL_SetDefaultStyle(Style defaultStyle)
-    parameters:
-    - id: defaultStyle
-      type: System.Windows.Style
-    content.vb: >-
-      <Obsolete("Use DefaultStyleKey")>
-
-      Protected Sub INTERNAL_SetDefaultStyle(defaultStyle As Style)
-  overload: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle*
-  attributes:
-  - type: System.ObsoleteAttribute
-    ctor: System.ObsoleteAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: Use DefaultStyleKey
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
 - uid: System.Windows.FrameworkElement.Style
   commentId: P:System.Windows.FrameworkElement.Style
   id: Style
@@ -4799,59 +4749,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetLocalValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetLocalValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-    name: SetLocalValue
-    nameWithType: DependencyObject.SetLocalValue
-    fullName: System.Windows.DependencyObject.SetLocalValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetLocalValue(System.Windows.DependencyProperty,System.Object)
-    name: SetLocalValue
-    nameWithType: DependencyObject.SetLocalValue
-    fullName: System.Windows.DependencyObject.SetLocalValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -4902,56 +4799,6 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  commentId: M:System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-  parent: System.Windows.DependencyObject
-  name: CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  nameWithType: DependencyObject.CoerceCurrentValue(DependencyProperty, PropertyMetadata)
-  fullName: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty, System.Windows.PropertyMetadata)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-    name: CoerceCurrentValue
-    nameWithType: DependencyObject.CoerceCurrentValue
-    fullName: System.Windows.DependencyObject.CoerceCurrentValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.PropertyMetadata
-    name: PropertyMetadata
-    nameWithType: PropertyMetadata
-    fullName: System.Windows.PropertyMetadata
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.CoerceCurrentValue(System.Windows.DependencyProperty,System.Windows.PropertyMetadata)
-    name: CoerceCurrentValue
-    nameWithType: DependencyObject.CoerceCurrentValue
-    fullName: System.Windows.DependencyObject.CoerceCurrentValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.PropertyMetadata
-    name: PropertyMetadata
-    nameWithType: PropertyMetadata
-    fullName: System.Windows.PropertyMetadata
   - name: )
     nameWithType: )
     fullName: )
@@ -5219,42 +5066,6 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: Coerce(DependencyProperty)
-  nameWithType: DependencyObject.Coerce(DependencyProperty)
-  fullName: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-    name: Coerce
-    nameWithType: DependencyObject.Coerce
-    fullName: System.Windows.DependencyObject.Coerce
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.Coerce(System.Windows.DependencyProperty)
-    name: Coerce
-    nameWithType: DependencyObject.Coerce
-    fullName: System.Windows.DependencyObject.Coerce
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
   - name: )
     nameWithType: )
     fullName: )
@@ -5679,6 +5490,35 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  parent: System.Windows.Interactivity.DependencyObjectHelper
+  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors()
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
@@ -6090,6 +5930,47 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  name: GetSelfAndAncestors(DependencyObject)
+  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
+  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
+    name: GetSelfAndAncestors
+    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
+    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Interactivity.DependencyObjectHelper
+  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
+  parent: System.Windows.Interactivity
+  name: DependencyObjectHelper
+  nameWithType: DependencyObjectHelper
+  fullName: System.Windows.Interactivity.DependencyObjectHelper
 - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
   isExternal: true
@@ -6609,6 +6490,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Interactivity
+  commentId: N:System.Windows.Interactivity
+  name: System.Windows.Interactivity
+  nameWithType: System.Windows.Interactivity
+  fullName: System.Windows.Interactivity
 - uid: ToJavaScriptObjectExtender
   commentId: N:ToJavaScriptObjectExtender
   name: ToJavaScriptObjectExtender
@@ -6961,22 +6847,17 @@ references:
   name: Tag
   nameWithType: FrameworkElement.Tag
   fullName: System.Windows.FrameworkElement.Tag
-- uid: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle*
-  commentId: Overload:System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle
-  name: INTERNAL_SetDefaultStyle
-  nameWithType: FrameworkElement.INTERNAL_SetDefaultStyle
-  fullName: System.Windows.FrameworkElement.INTERNAL_SetDefaultStyle
+- uid: System.Windows.FrameworkElement.Style*
+  commentId: Overload:System.Windows.FrameworkElement.Style
+  name: Style
+  nameWithType: FrameworkElement.Style
+  fullName: System.Windows.FrameworkElement.Style
 - uid: System.Windows.Style
   commentId: T:System.Windows.Style
   parent: System.Windows
   name: Style
   nameWithType: Style
   fullName: System.Windows.Style
-- uid: System.Windows.FrameworkElement.Style*
-  commentId: Overload:System.Windows.FrameworkElement.Style
-  name: Style
-  nameWithType: FrameworkElement.Style
-  fullName: System.Windows.FrameworkElement.Style
 - uid: System.Windows.FrameworkElement.Style
   commentId: P:System.Windows.FrameworkElement.Style
   parent: System.Windows.FrameworkElement
