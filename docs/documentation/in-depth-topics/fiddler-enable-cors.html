@@ -141,15 +141,15 @@ if (m_ForceCORS &amp;&amp; oSession.oRequest.headers.HTTPMethod == &quot;OPTIONS
 
      oSession.utilCreateResponseAndBypassServer();
 
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowOrigin&quot;, oSession.oRequest.headers[&quot;Origin&quot;]);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Origin&quot;, oSession.oRequest.headers[&quot;Origin&quot;]);
 
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowMethods&quot;, &quot;GET, POST, PUT, DELETE, OPTIONS&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST, PUT, DELETE, OPTIONS&quot;);
 
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowHeaders&quot;, &quot;Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie&quot;);
 
-     oSession.oResponse.headers.Add(&quot;Access-Control-MaxAge&quot;, &quot;1728000&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Max-Age&quot;, &quot;1728000&quot;);
 
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowCredentials&quot;, &quot;true&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
 
      oSession.responseCode = 200;
 
@@ -162,25 +162,20 @@ if (m_ForceCORS &amp;&amp; oSession.oRequest.headers.HTTPMethod == &quot;OPTIONS
 
 if (m_ForceCORS &amp;&amp; oSession.oRequest.headers.Exists(&quot;Origin&quot;)) {
 
-     oSession.oResponse.headers.Remove(&quot;Access-ControlAllow-Origin&quot;);
+     oSession.oResponse.headers.Remove(&quot;Access-Control-Allow-Origin&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Origin&quot;, oSession.oRequest.headers[&quot;Origin&quot;]) ;
 
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowOrigin&quot;, oSession.oRequest.headers[&quot;Origin&quot;]) ;
+     oSession.oResponse.headers.Remove(&quot;Access-Control-Allow-Methods&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Methods&quot;, &quot;GET, POST, PUT, DELETE, OPTIONS&quot;);
 
-     oSession.oResponse.headers.Remove(&quot;Access-ControlAllow-Methods&quot;);
+     oSession.oResponse.headers.Remove(&quot;Access-Control-Allow-Headers&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie&quot;);
 
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowMethods&quot;, &quot;GET, POST, PUT, DELETE, OPTIONS&quot;);
+     oSession.oResponse.headers.Remove(&quot;Access-Control-Max-Age&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Max-Age&quot;, &quot;1728000&quot;);
 
-     oSession.oResponse.headers.Remove(&quot;Access-ControlAllow-Headers&quot;);
-
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowHeaders&quot;, &quot;Content-Type, SOAPAction, Authorization, Accept, Csrf-Token, X-Requested-With, cloudSession, WbeSession, Cookie&quot;);
-
-     oSession.oResponse.headers.Remove(&quot;Access-Control-MaxAge&quot;);
-
-     oSession.oResponse.headers.Add(&quot;Access-Control-MaxAge&quot;, &quot;1728000&quot;);
-
-     oSession.oResponse.headers.Remove(&quot;Access-ControlAllow-Credentials&quot;);
-
-     oSession.oResponse.headers.Add(&quot;Access-Control-AllowCredentials&quot;, &quot;true&quot;);
+     oSession.oResponse.headers.Remove(&quot;Access-Control-Allow-Credentials&quot;);
+     oSession.oResponse.headers.Add(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
 
 }
 </code></pre>

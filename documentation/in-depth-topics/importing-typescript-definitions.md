@@ -12,96 +12,87 @@ A repository of "TypeScript Definition" files for popular libraries can be found
 
 
 ## Understanding what a "TypeScript Definition" file is
-Let's consider for example the JavaScript library ["clipboard.js" by lgarron](https://github.com/lgarron/clipboard-polyfill).
+Let's consider for example the JavaScript library ["js-url" by Rob Nova](https://github.com/websanova/js-url).
 
-Its goal is let JavaScript developers easily interact with the system clipboard by providing programmatic Copy/Paste functionality.
+Its goal is to let JavaScript developers easily parse URLs by providing several handy functions.
 
-The library comes in the form of a JS file named "clipboard.js" that looks like this:
+The library comes in the form of a JS file named "url.js" that looks like this:
 
 (note: what you see below is only a small extract of the much larger original library)
 ```
-// JavaScript library clipboard-js 0.3.1 (extract)
+// JavaScript library js-url 2.5.0 (extract)
 
-(function (name, definition) {
+(function() {
+    var url = (function() {
 
-    var clipboard = {};
+        /*
+        Some utility functions here
+        */
 
-    clipboard.copy = function (data) {
-        return new Promise(function (resolve, reject) {
-            if (typeof data !== "string" && !("text/plain" in data)) {
-                throw new Error("You must provide a text/plain type.");
-            }
-            var strData = (typeof data === "string" ? data : data["text/plain"]);
-            var copySucceeded = window.clipboardData.setData("Text", strData);
-            if (copySucceeded) {
-                resolve();
-            } else {
-                reject(new Error("Copying was rejected."));
-            }
-        });
-    };
+        return function(arg, url) {
+            var _l = {}, tmp, tmp2;
 
-    clipboard.paste = function () {
-        return new Promise(function (resolve, reject) {
-            var strData = window.clipboardData.getData("Text");
-            if (strData) {
-                resolve(strData);
-            } else {
-                // The user rejected the paste request.
-                reject(new Error("Pasting was rejected."));
-            }
-        });
-    };
+            /*
+            The magic of parsing URL
+            */
 
-    return clipboard;
-}));
+            // Return arg.
+            if (arg in _l) { return _l[arg]; }
+
+            // Return everything.
+            if (arg === '{}') { return _l; }
+
+            // Default to undefined for no match.
+            return undefined;
+        };
+    })();
+
+    window.url = url;
+})();
 ```
-By looking at the code above, you can see that the JavaScript library creates an object named "clipboard" that contains the methods "copy(data)" and "paste()".
+By looking at the code above, you can see that the JavaScript library creates a function named "url" that parses URLs.
 
-As you can see in the code above, the object is not strongly typed, meaning that the compiler has no way to know what type is expected by the "copy" method, and what type is returned by the "paste" method.
+As you can see in the code above, the object is not strongly typed, meaning that the compiler has no way to know how to call this library.
 
-It is possible to use the above library directly "as is", but you will get no intellisense, and no compile-time errors in case of mistakes. Furthermore, if you want to use the above library from your C# code in your OpenSilver project, you will need to make a lot of calls to ["Interop.ExecuteJavaScript(...)"](call-javascript-from-csharp.html)) because no C# objects exist.
+It is possible to use the above library directly "as is", but you will get no intellisense, and no compile-time errors in case of mistakes. Furthermore, if you want to use the above library from your C# code in your OpenSilver project, you will need to make a lot of calls to ["Interop.ExecuteJavaScript(...)"](call-javascript-from-csharp.md) because no C# objects exist.
 
 However, if the library comes with a "TypeScript Definition" file, or if you can create one, those issues are solved. In fact, the "TypeScript Definition" file will add strong-typing to the library, making it possible to have intellisense, compile-time error checking, and even direct calls to the library from C# thanks to the OpenSilver processing explained below.
 
-The "TypeScript Definition" file for the library mentioned above does exist, it is named "clipboad-js.d.ts", and it can be downloaded from: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/354cec620daccfa0ad167ba046651fb5fef69e8a/types/clipboard-js/index.d.ts
+The "TypeScript Definition" file for the library mentioned above does exist, it is named "js-url.d.ts", and it can be downloaded from: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/17956ab1d255c6e739a2eed81f92e76bc60665b0/types/js-url/index.d.ts
 
 This is what it looks like:
 ```
-// Type definitions for clipboard-js 0.3.1
+// Type definitions for url v1.8.6
+// Project: https://github.com/websanova/js-url
+// Definitions by: Pine Mizune <https://github.com/pine>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-declare namespace clipboard {
-
-    interface IClipboardJsStatic {
-        copy(val: string | Element): Promise<void>;
-        paste(): Promise<string>;
-    }
+interface UrlStatic {
+  (): string;
+  (pattern: string): string;
+  (pattern: number): string;
+  (pattern: string, url: string): string;
+  (pattern: number, url: string): string;
 }
 
-declare var clipboard: clipboard.IClipboardJsStatic;
-
-declare module 'clipboard-js' {
-    export = clipboard;
-}
+declare var url: UrlStatic;
 ```
-By looking at the code above, you can see that the "TypeScript Definition" file tells the compiler that the "clipboard" object has two methods, that the method "Copy" expects a string, and that the "Paste" method returns a Promise<string>.
-
-Note: to understand what the word "Promise" means in JavaScript, you can read [this guide](https://web.dev/promises/).
+By looking at the code above, you can see that the "TypeScript Definition" file tells the compiler that the "url" is a function, and it can be invoked with different parameters, and the function returns a string.
 
 
 
 ## How can I use a TypeScript Definition file in my OpenSilver project?
 
-Simply add the TypeScript Definition file to your OpenSilver project and the compiler will automatically take it into account.
+Simply add the TypeScript Definition file to your OpenSilver project, set "Build Action" to "Content" for the file, and the compiler will automatically take it into account.
 
  Usually you want to add both:
 
-* the original JavaScript library (for example "clipboard.js")
-* AND the corresponding TypeScript Definition file (for example "clipboard-js.d.ts")
+* the original JavaScript library (for example "js-url.js")
+* AND the corresponding TypeScript Definition file (for example "js-url.d.ts")
 
 
 ## Sample project
-Let's create a sample project to demonstrate the use of the "clipboard.js" and "clipboard-js.d.ts" files, as explained above.
+Let's create a sample project to demonstrate the use of the "js-url.js" and "js-url.d.ts" files, as explained above.
 
 This is what the sample project looks like:
 <br>
@@ -110,73 +101,58 @@ This is what the sample project looks like:
 
 This is the content of MainPage.xaml:
 ```
-<Page
-    x:Class="TestOpenSilverTypeScriptClipboard.MainPage"
+<sdk:Page
+    x:Class="OpenSilverTypeScriptJsUrl.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StackPanel>
-        <Button
-            Content="Click to copy some text to the clipboard"
-            Click="ButtonCopy_Click"
-            Margin="5"
-            HorizontalAlignment="Left"/>
-        <Button
-            Content="Click to paste from the clipboard"
-            Click="ButtonPaste_Click"
-            Margin="5"
-            HorizontalAlignment="Left"/>
-    </StackPanel>
-</Page>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Canvas>
+        <Button Canvas.Left="20" Canvas.Top="30" Click="Button_Click">
+            Click Me To Know Hostname
+        </Button>
+    </Canvas>
+</sdk:Page>
 ```
 And this is the content of MainPage.xaml.cs:
 ```
-using CSHTML5;
 using System.Windows;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using System.Windows.Controls;
+using OpenSilver;
 
-namespace TestOpenSilverTypeScriptClipboard
+namespace OpenSilverTypeScriptJsUrl
 {
     public partial class MainPage : Page
     {
         public MainPage()
         {
             this.InitializeComponent();
+
+            // Enter construction logic here...
             this.Loaded += MainPage_Loaded;
         }
         async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             // Load the JavaScript library:
-            await Interop.LoadJavaScriptFile("ms-appx:///TestOpenSilverTypeScriptClipboard/clipboard.js");
+            await Interop.LoadJavaScriptFile("ms-appx:///OpenSilverTypeScriptJsUrl/js-url.js");
         }
-        private void ButtonCopy_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Copy (may not function in the Simulator):
-            clipboard_js.clipboard_jsClass.clipboard.copy("copy succeeded");
-        }
-        private void ButtonPaste_Click(object sender, RoutedEventArgs e)
-        {
-            // Paste (may not function in the Simulator):
-            clipboard_js.clipboard_jsClass.clipboard.paste().then(
-                onFulfilled: (result) =>
-                {
-                    MessageBox.Show("The text pasted from the clipboard is the following: " + result);
-                },
-                onRejected: (error) =>
-                {
-                    MessageBox.Show(error.ToString());
-                });
+            var hostname = js_url.js_urlClass.url.Invoke("hostname");
+            MessageBox.Show("Current hostname: " + hostname);
         }
     }
 }
 ```
 As you can see, the JavaScript-based clipboard library is being used as if it was a C#-based library.
 
-
+You can this working example [here](https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverTypeScriptJsUrl).
 
 ## "I have a JavaScript library that needs a &lt;div&gt; or another DOM element in order to render stuff. How can I obtain it?"
 
-You can use the method [CHSTML5.Interop.GetDiv(FrameworkElement)](call-javascript-from-csharp.html#interopgetdivframeworkelement-fe) in order to get the DIV associated to a XAML element. For this method to succeed, the XAML element must be in the Visual Tree. To ensure that it is in the Visual Tree, you can read the [IsLoaded](call-javascript-from-csharp.html#frameworkelementisloaded) property, or you can place your code in the "Loaded" event handler. This approach works best with simple XAML elements, such as Border or Canvas.
+You can use the method [OpenSilver.Interop.GetDiv(FrameworkElement)](call-javascript-from-csharp.html#interopgetdivframeworkelement-fe) in order to get the DIV associated to a XAML element. For this method to succeed, the XAML element must be in the Visual Tree. To ensure that it is in the Visual Tree, you can read the [IsLoaded](call-javascript-from-csharp.html#frameworkelementisloaded) property, or you can place your code in the "Loaded" event handler. This approach works best with simple XAML elements, such as Border or Canvas.
 
 Alternatively, you can use the [HtmlPresenter control](html-presenter.md) to put arbitrary HTML/CSS code in your XAML, and then read the ".DomElement" property of the HtmlPresenter control to get a reference to the instantiated DOM element in order to pass it to the JavaScript library.
 
@@ -188,7 +164,7 @@ When you add a "TypeScript Definition" file to your OpenSilver project, the comp
 
 The generated C# classes are located in the folder "obj\Debug\FILENAME\" (where "FILENAME" is the name of the TypeScript Definition file).
 
-Here is an example of hidden C# file that is automatically generated from the TypeScript Definition file "clipboard-js.d.ts" mentioned above:
+Here is an example of hidden C# file that is automatically generated from the TypeScript Definition file "js-url.d.ts" mentioned above:
 
 
 ```
@@ -199,45 +175,66 @@ Here is an example of hidden C# file that is automatically generated from the Ty
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace clipboard_js
+namespace js_url
 {
-    public static class clipboard_jsClass
+    public static partial class js_urlClass
     {
-        public static clipboard.IClipboardJsStatic clipboard
+        public static UrlStatic url
         {
             get
             {
-                var jsObj = CSHTML5.Interop.ExecuteJavaScript("clipboard");
-                return new clipboard.IClipboardJsStatic(jsObj);
+                var jsObj = Interop.ExecuteJavaScript("url", "");
+                if (CSHTML5.Interop.IsUndefined(jsObj))
+                    return null;
+                else
+                    return JSObject.FromJavaScriptInstance<UrlStatic>(jsObj);
+            }
+            set
+            {
+                Interop.ExecuteJavaScript("url = $1", "",
+                    value.ToJavaScriptObject()
+                );
             }
         }
     }
 }
 
-namespace clipboard_js.clipboard
+namespace js_url
 {
-    public class IClipboardJsStatic
+    public partial class UrlStatic : IJSObject
     {
-        private object _jsInstance { get; set; }
-        public IClipboardJsStatic()
+        public object UnderlyingJSInstance { get; set; }
+
+        partial void Initialize();
+        public UrlStatic()
         {
-            this._jsInstance = CSHTML5.Interop.ExecuteJavaScript("new clipboard.IClipboardJsStatic()");
+            this.UnderlyingJSInstance = Interop.ExecuteJavaScript("new Object()");
+            this.Initialize();
         }
-        public IClipboardJsStatic(object jsObj)
+
+        public string Invoke()
         {
-            this._jsInstance = jsObj;
+            return Convert.ToString(Interop.ExecuteJavaScript("$0()", this.UnderlyingJSInstance));
         }
-        public object ToJavaScriptObject()
+
+        public string Invoke(string pattern)
         {
-            return this._jsInstance;
+            return Convert.ToString(Interop.ExecuteJavaScript("$0($1)", this.UnderlyingJSInstance, pattern != null ? pattern : JSObject.Undefined.UnderlyingJSInstance));
         }
-        public Promise copy(MultiType<string, object> val)
+
+        public string Invoke(double? pattern)
         {
-            return new Promise(CSHTML5.Interop.ExecuteJavaScript("$0.copy($1)", this._jsInstance, val.ToJavaScriptObject()));
+            return Convert.ToString(Interop.ExecuteJavaScript("$0($1)", this.UnderlyingJSInstance, pattern != null ? pattern : JSObject.Undefined.UnderlyingJSInstance));
         }
-        public Promise<string> paste()
+
+        public string Invoke(string pattern, string url)
         {
-            return new Promise<string>(CSHTML5.Interop.ExecuteJavaScript("$0.paste()", this._jsInstance));
+            return Convert.ToString(Interop.ExecuteJavaScript("$0($1, $2)", this.UnderlyingJSInstance, pattern != null ? pattern : JSObject.Undefined.UnderlyingJSInstance, url != null ? url : JSObject.Undefined.UnderlyingJSInstance));
+        }
+
+        public string Invoke(double? pattern, string url)
+        {
+            return Convert.ToString(Interop.ExecuteJavaScript("$0($1, $2)", this.UnderlyingJSInstance, pattern != null ? pattern : JSObject.Undefined.UnderlyingJSInstance, url != null ? url : JSObject.Undefined.UnderlyingJSInstance));
         }
     }
 }
