@@ -146,7 +146,7 @@ namespace OpenSilverTypeScriptJsUrl
     }
 }
 ```
-As you can see, the JavaScript-based clipboard library is being used as if it was a C#-based library.
+As you can see, the JavaScript-based library is being used as if it was a C#-based library.
 
 You can this working example [here](https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverTypeScriptJsUrl).
 
