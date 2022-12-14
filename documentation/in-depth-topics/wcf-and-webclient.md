@@ -9,7 +9,7 @@ OpenSilver provides support for web services and HTTP calls in multiple ways, in
 > * When adding a WCF Service Reference, please be sure to uncheck the option "Reuse types in referenced assemblies".
 > * Update the `System.ServiceModel.*` NuGet packages from v4.4 to v4.10.
 > * Some code like event handlers may not be generated, in this case include the Silverlight version of Reference.cs file into the project.
-> * Binary serialization is not fully supported, please adjust new endpoint with `basicHttpBinding` in the `web.config`.
+> * Binary serialization is not yet fully supported, please adjust new endpoint with `basicHttpBinding` in the `web.config`.
 * [HttpClient](https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-6.0)
 * The *"WebClient"* class. Use this classs to download strings from the web, as well as to communicate with REST / Web API web services. See below for a [Tutorial](#tutorial-to-easily-create-a-rest-based-clientserver-app-in-opensilver-wep-api). Please pay attention to the fact that System.Net.WebClient is not supported in the Browser for .NET 5+. However, you can use the migrated class OpenSilver.Compatibility.WebClient.
 > **Note**: to enable passing cookies (for credentials/authentication), put the following code in your App.xaml.cs constructor:
