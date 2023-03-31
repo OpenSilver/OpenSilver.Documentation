@@ -9,7 +9,7 @@ Good support in OpenSilver
 We use Open RIA Services, which is the official replacement by Microsoft when RIA Services was discontinued.
 
 - Either use version 5, but there are some API differences compared to the original RIA Services for Silverlight from 2011 
-- or use version 4.6 (recommended), but code generation is not functional at this time, you need to copy the generated files from your Silverlight solution (for now)
+- Or use version 4.6 (recommended), but code generation is not functional at this time, you need to copy the generated files from your Silverlight solution (for now)
 
 ## NuGet Packages
 
