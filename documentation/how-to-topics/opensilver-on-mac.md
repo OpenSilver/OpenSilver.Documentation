@@ -1,7 +1,6 @@
 # How to Run an OpenSilver App on Mac
 
 This guide will help you run an OpenSilver application on a Mac using the `dotnet` CLI or an IDE like Visual Studio Code.
-
 ## Prerequisites
 
 To run an OpenSilver application on Mac, you need to have the latest .NET SDK installed. At the time of writing this guide, the latest version is .NET 7, which has been tested and works well with OpenSilver. You can download the .NET SDK [here](https://dotnet.microsoft.com/en-us/download) and follow the installation instructions provided on the website.
@@ -58,7 +57,7 @@ You can also run the OpenSilver application using Visual Studio Code. Follow the
             "name": "Launch OpenSilver App",
             "type": "blazorwasm",
             "request": "launch",
-            "timeout": 30000,
+            "timeout": 60000,
             "url": "http://localhost:55592",
             "cwd": "${workspaceFolder}/OpenSilverForMac.Browser"
         }
