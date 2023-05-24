@@ -1,4 +1,4 @@
-# How to Enable Windwos Authentication on OpenSilver App
+# How to Enable Windows Authentication on OpenSilver App
 
 To enable windows authentication on Opensilver Application update `"windowsAuthentication": true,` and `"anonymousAuthentication": false,` under `iisSettings` section in `launchSettings.json`.
 
@@ -46,7 +46,7 @@ Make sure only "Basic authentication" is enabled.
 
 ### Access UserName
 
-Add following package to project:
+Add the following packages to the project:
 
 <img src="/images/how-to-topics/windows-auth3.png" alt="windows" title="Required-packages.png" style="border: 2px solid #555;" /><br />
 
@@ -111,7 +111,7 @@ Add following to the `web.config` file of project:
 ```
 Using DomainService
 
-To access username -
+To access the username in the DomainService, run this code:
 
 ```
     using OpenRiaServices.DomainServices.EntityFramework;
