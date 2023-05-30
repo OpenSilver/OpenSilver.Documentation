@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Enabling Application Trimming </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Enabling Application Trimming ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/LogoWithText2022x595TransparentBackground.png">
+                            </a>
+                            <nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"></a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="enabling-application-trimming">Enabling Application Trimming</h1>
+
+<p>By enabling application trimming, you can reduce the size of your app while simultaneously boosting its performance.</p>
+<p>To activate trimming, you'll need to adjust the csproj file of your Browser project by setting <code>&lt;PublishTrimmed&gt;true&lt;/PublishTrimmed&gt;</code>.</p>
+<p><img src="/images/how-to-topics/csproj-file-adjustment-trimming.png" alt="csproj file adjustment"></p>
+<p>Remember, trimming is only executed during the publishing stage of the application, and it may consume some time.</p>
+<p>Post-trimming, it's crucial to test your application as trimming may lead to unexpected issues. Particularly in applications using reflection, the trimmer might inadvertently remove types required at runtime. If your application uses reflection, you must provide the trimmer with information about these necessary types, both in your application's code and its dependencies.</p>
+<p>Therefore, it's essential to configure the trimmer to retain these elements.</p>
+<h2 id="configuring-the-trimmer">Configuring the Trimmer</h2>
+<p>Here's how to do it:</p>
+<ol>
+<li><p>Add <code>ILLink.Descriptors.xml</code> as an embedded resource to the Browser project.</p>
+</li>
+<li><p>Append necessary items according to the instructions available <a href="https://github.com/dotnet/linker/blob/main/docs/data-formats.md#descriptor-format">here</a>.</p>
+</li>
+</ol>
+<p>For instance:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!--
+  This file specifies the components of the BCL or Blazor packages that should not be
+  removed by the IL Linker, even if they aren't directly referenced by user code.
+  For more details, visit: 
+  https://github.com/dotnet/linker/blob/main/docs/data-formats.md#descriptor-format
+--&gt;
+&lt;linker&gt;
+  &lt;assembly fullname=&quot;Microsoft.AspNetCore.Components.Web&quot;&gt;
+    &lt;type fullname=&quot;Microsoft.AspNetCore.Components.Forms.EditContextFieldClassExtensions&quot; preserve=&quot;methods&quot; /&gt;
+  &lt;/assembly&gt;
+
+  &lt;assembly fullname=&quot;Microsoft.Extensions.Configuration.FileExtensions&quot;&gt;
+    &lt;type fullname=&quot;Microsoft.Extensions.Configuration.FileConfigurationExtensions&quot; preserve=&quot;methods&quot; /&gt;
+  &lt;/assembly&gt;
+&lt;/linker&gt;
+</code></pre>
+<p><img src="/images/how-to-topics/illink-descriptors-example.png" alt="ILLink.Descriptors.xml example"></p>
+<h2 id="mark-as-trimmable">Mark as Trimmable</h2>
+<p>By default, the trimmer operates solely on assemblies labelled as trimmable. Thus, it will most likely trim only assemblies from .NET.</p>
+<p>However, it might be beneficial to enable trimming for assemblies from your own project if it's sizable. Similarly, activating trimming for third-party libraries, loaded as dependencies, can be advantageous if you're confident they're not being used in your project.</p>
+<p>For instance, suppose your project utilizes the Telerik Library, but doesn't specifically use the MediaPlayer component. In such a case, you can safely eliminate <code>Telerik.Windows.Controls.MediaPlayer.dll</code> from the output by enabling trimming for <code>Telerik.Windows.Controls.MediaPlayer</code>:
+<img src="/images/how-to-topics/enable-trimming-mediaplayer.png" alt="Enabling trimming for Telerik.Windows.Controls.MediaPlayer"></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/how-to-topics/enable-trimming.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
