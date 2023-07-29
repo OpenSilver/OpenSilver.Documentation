@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Automated Tests on OpenSilver with Selenium </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Automated Tests on OpenSilver with Selenium ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/LogoWithText2022x595TransparentBackground.png">
+                            </a>
+                            <nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"></a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="automated-tests-on-opensilver-with-selenium">Automated Tests on OpenSilver with Selenium</h2>
+
+<p>OpenSilver is not only an evolution of Silverlight, but also a gateway to exciting new features that improve the development cycle, like executing automated UI tests the same way that we can do against any other kind of front-end framework. In this guide, we will walk you through the first steps required to set up and execute a selenium test project.</p>
+<h3 id="1-the-opensilver-solution">1. The OpenSilver Solution</h3>
+<p>First, create an OpenSilver Solution, you can follow the steps <a href="https://doc.opensilver.net/documentation/general/getting-started-tour.html">here</a>, but I will name the project <code>OpenSilverSeleniumDemo</code>, and let's replace the MainPage.xaml file contents with this:</p>
+<pre><code class="lang-xml">&lt;StackPanel Width=&quot;100&quot;&gt;
+    &lt;TextBlock Text=&quot;Add Items&quot; /&gt;
+    &lt;TextBox x:Name=&quot;txtNewItem&quot; /&gt;
+    &lt;Button x:Name=&quot;btnAdd&quot; Content=&quot;Add&quot; Click=&quot;BtnAdd_Click&quot;  /&gt;
+    &lt;ListBox x:Name=&quot;listItems&quot; Height=&quot;100&quot; /&gt;
+&lt;/StackPanel&gt;
+</code></pre>
+<p><img src="/images/how-to-topics/selenium1.png" alt="MainPage.xaml Source" title="MainPage.xaml Source"></p>
+<p>And C# code inside the MainPage.xaml.cs file:</p>
+<pre><code class="lang-c#">private void BtnAdd_Click(object sender, RoutedEventArgs e)
+{
+    if (string.IsNullOrWhiteSpace(txtNewItem.Text)) return;
+
+    listItems.Items.Add(txtNewItem.Text.Trim());
+}
+</code></pre>
+<p><img src="/images/how-to-topics/selenium2.png" alt="MainPage.xaml.cs Source" title="MainPage.xaml.cs Source"></p>
+<p>Let's recompile the solution and launch the project with the suffix &quot;.Browser&quot;. The default browser launches and the application runs.</p>
+<p><img src="/images/how-to-topics/selenium3.gif" alt="Working app" title="Working app]"></p>
+<h3 id="2-the-selenium-tests-project">2. The Selenium Tests Project</h3>
+<p>Add a new project of type &quot;Web Driver Test for Edge (.NET Core)&quot; to Solution. Keep the original solution name (<code>OpenSilverSeleniumDemo</code>), but append <code>.UiTests</code> at the end.</p>
+<p><img src="/images/how-to-topics/selenium4.gif" alt="Add Selenium Project" title="Add Selenium Project]"></p>
+<p>Let's take a look at the new project. Firstly, note that it is using MSTest, but of course, you can use the testing framework that you like more. Secondly, note that it is already included in Selenium.WebDriver nuget. If something goes wrong, you can try to use the versions in the screenshot for each nuget just for the sake of following this guide.</p>
+<p><img src="/images/how-to-topics/selenium5.png" alt="Inspect Selenium Project" title="Inspect Selenium Project]"></p>
+<p>Take a look too in the file <code>EdgeDriverTest.cs</code>. Take some time to read it. Follow the instructions to download the correct WebDriver for Microsoft Edge Browser (in this <a href="https://docs.microsoft.com/en-us/microsoft-edge/webdriver-chromium">link</a>). Don't forget to include the folder where you saved <code>msedgedriver.exe</code> to PATH as the link asked you to do it.</p>
+<p>Finally, let's check if the test is working. Open Test Explorer (menu Test -&gt; Test Explorer), and click the Run button. This will quickly open the Edge window, close and then you will see the green tick in Test Explorer (the test passes!).</p>
+<p>If you don't have experience with Selenium WebDriver, you might be confused about what is happening. Just add this line:</p>
+<pre><code class="lang-c#">Thread.Sleep(5000);
+</code></pre>
+<p>at the end of the method <code>VerifyPageTitle()</code> and execute the test again. You will observe the Edge browser launching, navigating to the Bing website, and subsequently closing. This test just verifies whether the page has the title &quot;Bing&quot;.
+We have now completed the setup for the Test project. Now let's actually test our OpenSilver page. In the next step, let's change the <code>.Tests</code> project to execute the <code>.Browser</code> project and then run our tests.</p>
+<h3 id="3-adapting-the-tests-project">3. Adapting the Tests Project</h3>
+<p>First, let's rename the test class from <code>EdgeDriverTest</code> to <code>OpenSilverSeleniumTests</code>. Second, I will create a private variable to store the app URL, then we move the line that assigns the URL to initialization because all our tests will be in this url, then the <code>VerifyPageTitle()</code> will only assert if the title is correct.</p>
+<p>For the next part, we will prepare the test runner to execute ASP.NET Core Blazor in the backend. You can ask yourself why is this needed. Well, Selenium does not care about the technology stack that we are using, it just requires some URL to navigate, and then it will run anything we want. But for any ASP.NET app, we need to run the backend in order to execute the frontend. For example, here I created a brand new MVC app, and executed it to show you what I am talking about:</p>
+<p><img src="/images/how-to-topics/selenium6.gif" alt="Default MVC Web App" title="Default MVC Web App]"></p>
+<p>You can see that while the backend is running I can navigate to url, and when the backend stops we can't.</p>
+<p>In our case, dotnet.exe will execute the Blazor Server, and the Blazor Server then will execute our app. This server then will be executed only once for all tests (not once per test method). In our guide, we will store the paths in private constants, but depending on your project you can store them in an appsettings file, or calculate via relative paths or other techniques.</p>
+<p><img src="/images/how-to-topics/selenium7.gif" alt="Blazor Server Path" title="Blazor Server Path]"></p>
+<p>TIPS:</p>
+<ul>
+<li>For <code>blazor-devserver.dll</code>, remember to get from the .net version that you are using in the project (in the sample, I got the latest from .Net6.)</li>
+<li>For your .browser project dll (in this example, <code>OpenSilverSeleniumDemo.Browser.dll</code>), remember to get the dll that is in the <code>bin</code> folder, not in the <code>obj</code> folder!</li>
+</ul>
+<p>Once you got these paths, now paste this code into your test class:</p>
+<pre><code class="lang-c#">private static Process _server;
+
+[AssemblyInitialize()]
+public static void ServerInitialize(TestContext testContext)
+{
+    _server = Process.Start(
+        dotnetPath,
+        $&quot;\&quot;{blazorServerPath}\&quot; --applicationpath \&quot;{appPath}\&quot; --urls={appUrl}&quot;);
+}
+
+[AssemblyCleanup]
+public static void TearDown()
+{
+    _server?.Kill();
+}
+</code></pre>
+<p>In MSTest, the method with <code>AssemblyInitialize</code> attribute will execute once per test run, and with <code>AssemblyCleanup</code> will execute once when all tests are finished. If you are using another test framework, use the equivalent feature. For example, in NUnit, you will use <code>OneTimeSetUp</code> and <code>OneTimeTearDown</code> methods.<br>
+In the <code>ServerInitialize</code>, we execute dotnet.exe, which executes Blazor server, which executes our OpenSilver app. We store that process variable and then, in <code>AssemblyCleanup</code>, we kill the process.<br>
+Now, update the appUrl to something pointing to localhost, for example, &quot;http://localhost:55777&quot;.
+Then, update the <code>VerifyPageTitle()</code> to check the title of our app, in this case, <code>OpenSilverSeleniumDemo</code>.</p>
+<p>This is enough for our first test. You can go to Test Explorer and click the Run button. If everything goes well, you will see a green tick in <code>VerifyPageTitle()</code> test method.</p>
+<h3 id="4-ui-tests-with-selenium">4. UI Tests with Selenium</h3>
+<p>Firstly, let's add a <code>Wait</code>. A Wait is an object from Selenium to help you wait for expected conditions. The full explanation is out of the scope of this guide, but it is enough for you to know that we will use it to check if the page is loaded, and for this, we will just check if the text &quot;Add Items&quot; is already present on the page. Let's declare it as a private field:</p>
+<pre><code class="lang-c#">private WebDriverWait _wait;
+</code></pre>
+<p>and let's instantiate it in <code>EdgeDriverInitialize()</code>:</p>
+<pre><code class="lang-c#">_wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+</code></pre>
+<p>Finally, let's create our first test method. Let's check if all the controls that we defined in the Xaml file are present on the page.</p>
+<pre><code class="lang-c#">[TestMethod]
+public void VerifyAllControlsAreLoaded()
+{
+    var label = _wait.Until(d =&gt; d.FindElement(By.XPath(&quot;//*[contains(text(),'Add Items')]&quot;)));           
+
+    var txtNewItem = _driver.FindElements(By.CssSelector(&quot;[dataid='txtNewItem']&quot;)).FirstOrDefault();
+    var btnAdd = _driver.FindElements(By.CssSelector(&quot;[dataid='btnAdd']&quot;)).FirstOrDefault();
+    var listItems = _driver.FindElements(By.CssSelector(&quot;[dataid='listItems']&quot;)).FirstOrDefault();
+
+    Assert.IsNotNull(label, &quot;Add Items label&quot;);
+    Assert.IsNotNull(txtNewItem, &quot;txtNewItem&quot;);
+    Assert.IsNotNull(btnAdd, &quot;btnAdd&quot;);
+    Assert.IsNotNull(listItems, &quot;listItems&quot;);
+}
+</code></pre>
+<p>In the first line, we use the Wait to try to find, in XPath language &quot;an element containing the text 'Add Items'&quot;. It will try it for 10 seconds, and when it finally finds it we know that the page is loaded. Then we proceed to find our next elements. Because in Xaml we used <code>x:Name</code>, OpenSilver outputs that in <code>dataid</code> attributes, then we just need the right CssSelector to find them.<br>
+<strong>TIP</strong>: Try changing the test then it fails. For example, using the wrong dataid for some element. Then, fix the test, but now change some element x:Name in Xaml (rebuild the solution) and test it again.</p>
+<h3 id="5-an-advanced-ui-test">5. An advanced UI Test</h3>
+<p>Let's type something in the textbox, click on the add button and check if this was added to the listbox. Here is the code:</p>
+<pre><code class="lang-c#">[TestMethod]
+public void VerifyWeCanAddAnItem()
+{
+    const string sampleText = &quot;OpenSilver Rocks!&quot;;
+
+    // wait until the page is loaded
+    _wait.Until(d =&gt; d.FindElement(By.XPath(&quot;//*[contains(text(),'Add Items')]&quot;)));
+
+    // get element references
+    var txtNewItem = _wait.Until(e =&gt; e.FindElement(By.CssSelector(&quot;[dataid='txtNewItem']&quot;)));
+    var btnAdd = _wait.Until(e =&gt; e.FindElement(By.CssSelector(&quot;[dataid='btnAdd']&quot;)));
+    var listItems = _wait.Until(e =&gt; e.FindElement(By.CssSelector(&quot;[dataid='listItems']&quot;)));
+
+    // type the sample text in the textbox
+    txtNewItem
+        .FindElement(By.CssSelector(&quot;[contenteditable='true']&quot;))
+        .SendKeys(sampleText);
+
+    btnAdd.Click();
+
+    var listItem = listItems.FindElements(By.XPath($&quot;//*[contains(text(),'{sampleText}')]&quot;)).FirstOrDefault();
+
+    Assert.IsNotNull(listItem);
+}
+</code></pre>
+<ol>
+<li>First, we wait until the page is loaded using the Wait object;</li>
+<li>Then we use the same technique from the past test, to get the Xaml Elements references;</li>
+<li>Next, we type in the textbox. Note that we need to find a <code>contenteditable</code> inside of the textbox. This happens because OpenSilver's textbox is not a plain Html textbox, it is a far more powerful and complex control in order to replicate the features of Xaml Textbox;</li>
+<li>We just click the button;</li>
+<li>Now we search, inside of the listbox, if we have some element containing the text that we added from the textbox</li>
+</ol>
+<p>Run the tests, and everything happens really fast! If you want to see each step happening in the browser, a common technique is to debug the test with breakpoints, or put <code>Thread.Sleep(5000);</code> between each line of code (but make sure to remove in the final code).</p>
+<h3 id="6-summary">6. Summary</h3>
+<p>You can get the complete source code for that article <a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverSeleniumDemo">here</a>.</p>
+<p>If you liked this article, and you become interested in web application development with OpenSilver using Selenium for UI testing, and you want to know more and get support in this matter, please <a href="https://opensilver.net/contact.aspx">contact us</a>!</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/selenium-automated-tests/documentation/how-to-topics/selenium-automated-tests.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
