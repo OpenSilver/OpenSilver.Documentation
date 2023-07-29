@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Performance Improvements </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Performance Improvements ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/LogoWithText2022x595TransparentBackground.png">
+                            </a>
+                            <nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"></a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="performance-improvements">Performance Improvements</h1>
+
+<p>OpenSilver is getting more performant with each release. However, you can improve the responsiveness and performance of your app by making some modifications to the client code.</p>
+<p>Before making changes, measure the performance. In some cases, you can make your code less readable, but the gain from optimization is insignificant. See how to profile the performance in the <a href="../how-to-topics/performance-profiler.html">Simulator</a> and in the <a href="../how-to-topics/performance-profiler-browser.html">Browser</a>.</p>
+<h2 id="do-not-load-hidden-ui-elements">Do not load hidden UI elements</h2>
+<p>By default, controls with <code>Collapsed</code> Visibility are added to the HTML DOM, but CSS styles are not applied until the control becomes visible. This can impact performance, especially if there are a lot of hidden controls. To address this, add the following line to <code>App.xaml.cs</code> constructor:</p>
+<p><code>Host.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded = true;</code></p>
+<p>This will cause the DOM elements for hidden controls to be created only when the control becomes visible.</p>
+<p>Note that this setting can break the UI in some cases. For example, background controls like <code>Border</code> or <code>Rectangle</code> can overflow other controls. To resolve this, try to change the <code>Canvas.ZIndex</code> property.</p>
+<p>The above setting will not work if the Visibility is bound to a property that has <code>Collapsed</code> Visibility by default and the DataContext is not available at the moment of rendering. The control will be rendered because the default value for Visibility is <code>Visible</code>. In that case, set the <code>FallbackValue</code> property in the binding.</p>
+<p><code>&lt;Grid Visibility=&quot;{Binding MyObject.Visibility, FallbackValue=Collapsed}&quot; /&gt;</code></p>
+<p>Another option is to set the <code>EnableOptimizationWhereCollapsedControlsAreLoadedLast</code> property to <code>true</code>. This will cause the browser to wait a few moments before creating the DOM elements for the UI controls that are not visible. This gives the browser engine time to draw the visible controls first, which can improve perceived performance.</p>
+<h2 id="enable-virtualization">Enable virtualization</h2>
+<p>Wherever you have a high number of controls with a scroll bar, make sure that virtualization is enabled. Virtualization will ensure that only the elements that are in the visible area of the scrollable container will be rendered. <code>DataGrid</code> control uses virtualization by default.</p>
+<p>To check whether virtualization is enabled:</p>
+<ul>
+<li><p>An easy way to know whether virtualization is enabled, check if the rendering time depends on the number of items: when virtualization is enabled, the rendering time is independent of the number of items.</p>
+</li>
+<li><p>Use the F12 developer tools to inspect the DOM tree: find the element that has the scrollbars, see what's inside it: if there is no <code>&lt;div&gt;</code> that has <code>VirtualizingStackPanel</code> in its <code>class</code> property, or if you see that all the elements are in the DOM tree in spite of them not being in the visible area, it could be that virtualization is not enabled.</p>
+</li>
+<li><p>Use the &quot;Inspect XAML tree&quot; feature of the Simulator to check whether a <code>VirtualizingStackPanel</code> is present.</p>
+</li>
+</ul>
+<p>To enable virtualization for a <code>ListBox</code> or another control that derives from <code>ItemsControl</code>:</p>
+<ol>
+<li><p>Change the <code>ItemsPanelTemplate</code> to add a <code>VirtualizingStackPanel</code> instead of the default <code>StackPanel</code>.</p>
+</li>
+<li><p>Set the <code>CustomLayout</code> property to true. One thing to keep in mind here is Silverlight does not have this property, so you might set this in code within OpenSilver compilation symbols.</p>
+<pre><code> &lt;ListBox CustomLayout=&quot;True&quot;&gt; 
+     &lt;ListBox.ItemsPanel&gt; 
+         &lt;ItemsPanelTemplate&gt; 
+             &lt;VirtualizingStackPanel/&gt; 
+         &lt;/ItemsPanelTemplate&gt; 
+     &lt;/ListBox.ItemsPanel&gt; 
+ &lt;/ListBox&gt; 
+</code></pre>
+</li>
+</ol>
+<p>Performance gains can be huge depending on the number of items. It is roughly proportional. For example, if 100 items visible on screen out of 1000, we will get a 10x performance improvement. Performance gains can even be better than proportional if by enabling virtualization we don't hit certain memory consumption thresholds that cause a high number of memory swaps.</p>
+<h2 id="simplify-the-visual-tree">Simplify the visual tree</h2>
+<p>You can look at the visual tree:</p>
+<ul>
+<li><p>Either using the &quot;inspect&quot; feature of the F12 developer tools when running in the browser (the <code>class</code> attribute of DIVs will tell you the name of the corresponding XAML type)</p>
+</li>
+<li><p>Or by clicking &quot;Inspect Visual Tree&quot; when running the app in the Simulator</p>
+</li>
+</ul>
+<p>The more XAML elements are in the visual tree, the slower the app will perform.</p>
+<p>Every page of the app and every control has XAML Styles and ControlTemplates. Many of those can be simplified, such as removing unused storyboards or replacing slow-performing controls with better performing ones.</p>
+<p>Some controls are very slow, like <code>WriteableBitmap</code> and <code>Shapes</code>. For example, a <code>Rectangle</code> and <code>Ellipse</code> could be replaced with a <code>Border</code>. <code>Viewbox</code> cause a redraw of the UI and can have performance issues. Another example is a <code>TabControl</code> style, which might have elements for all possible positions of the tab headers (left, bottom, etc.), but if in your app you know that you only use top-positioned tab headers, you can remove the other items from the <code>ControlTemplate</code>.</p>
+<p>Simplify the ControlTemplates involved in the rendering of the <code>DataGrid</code>. For example, the Cell template might have a lot of unnecessary or poorly performing UI elements in the visual tree.</p>
+<p>Performance gains are roughly proportional to the % of visible items that you remove. Hidden items have a smaller impact, but it can still be noticeable.</p>
+<p>If it is acceptable to lose minor functionality in the app, or if it is acceptable to slightly change the look of the app, we can remove minor UI elements in the styles (such as elements for mouse hover, elements for keyboard focus, storyboard, etc.), reduce the depth of the visual tree, use &quot;flat&quot; design instead of gradients and shades, etc.</p>
+<h2 id="replace-telerik-ui-controls-with-the-built-in-ones">Replace Telerik UI controls with the built-in ones</h2>
+<p>Usually, built-in controls are more performant than Telerik controls. But keep in mind that some features might be missing.</p>
+<p>For example, replace the <code>RadGridView</code> with the built-in <code>DataGrid</code>, <code>RadTabControl</code> with <code>TabControl</code>, <code>RadTileView</code> with just a simple <code>Grid</code>.</p>
+<h2 id="replace-some-controls-with-native-html-controls">Replace some controls with native HTML controls</h2>
+<p>You can try to replace the OpenSilver controls with the html elements and use css+javascript to style them, so they look/work like the original controls. This requires more works and html/css/js knowledge, but the performance gain will be very huge (like 30x better performance in some cases).</p>
+<p>It can be done for <code>ComboBox</code>, <code>TextBox</code>, etc. See <a href="https://github.com/OpenSilver/OpenSilver.ControlsKit/">https://github.com/OpenSilver/OpenSilver.ControlsKit/</a> or controls in <code>CSHTML5.Native.Html.Controls</code> namespace.</p>
+<h2 id="use-svg-instead-of-xaml-images">Use SVG instead of XAML images</h2>
+<p>Currently, <code>Shape</code> controls like <code>Line</code>, <code>Path</code>, <code>Polygon</code> and so on are being rendered via html canvas, and it is quite slow. Try to replace them either by creating SVG images or converting XAML to SVG. Use <code>HtmlPresenter</code> control to place SVG inside it.</p>
+<p>Use a tool like Inkscape to open XAML and then save it as Plain SVG. But be aware that you might need to correct the converted SVG manually, especially if the image is complex.</p>
+<h2 id="use-progressive-rendering">Use Progressive Rendering</h2>
+<p>Progressive rendering is a technique that allows you to render parts of your app before the entire app is loaded. This can improve perceived performance, as the user can start interacting with the app before it is fully loaded.</p>
+<p>Set <code>Host.Settings.ProgressiveRenderingChunkSize</code> to enable progressive rendering. Be aware, if you set a small value, close to 1, it can break UI. Optimal value is close to 10.</p>
+<p>Also, you can enable progressive loading for <code>DataGrid</code> control by setting <code>GlobalProgressiveLoadingChunkSize</code> or <code>ProgressiveLoadingRowChunkSize</code>. So that rows will start appearing immediately one after the other, instead of appearing all at once after a delay. Although the total time to load the <code>DataGrid</code> remains the same, the perception of performance is improved.</p>
+<h2 id="avoid-using-reflection-and-expressions">Avoid using Reflection and Expressions</h2>
+<p>Reflection and Expressions are very slow in Blazor. For example, replace <code>OnPropertyChanged(x =&gt; x.PropertyName)</code> with <code>OnPropertyChanged(nameof(PropertyName)</code>.</p>
+<h2 id="clientserver-communication">Client/server communication</h2>
+<p>Binary serialization is faster than text serialization, but currently some features are missing. Using ProtoBuf can improve performance significantly.</p>
+<h2 id="do-not-load-all-the-data-at-the-same-time">Do not load all the data at the same time</h2>
+<p>Show the view/page with minimal data. Then use <code>Task.Delay</code> in C# to load the heavy data and show loading indicator. This does not reduce the total loading time, but it makes the app more responsive, as it's better if a user sees something and wait for loading other than nothing displayed.</p>
+<h2 id="set-fixed-widthheight-with-customlayout">Set fixed Width/Height with CustomLayout</h2>
+<p>Fixed size will prevent additional calculations if <code>CustomLayout</code> is enabled.</p>
+<h2 id="page-caching">Page caching</h2>
+<p>If the <code>Frame</code> control is used, set <code>Page.NavigationCacheMode = NavigationCacheMode.Enabled</code> to reuse cached pages and reduce memory usage.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/in-depth-topics/performance-improvement.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
