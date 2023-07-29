@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Using WCF with VB.Net </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Using WCF with VB.Net ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/LogoWithText2022x595TransparentBackground.png">
+                            </a>
+                            <nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations">
+        
+                            </div>
+                        </div>
+                    </div>
+                    <div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"></a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="using-wcf-with-vbnet">Using WCF with VB.Net</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>VB.Net is only supported in OpenSilver 2.0+ (including 2.0 preview), it is not supported by the earlier versions. The '.Browser' and '.Simulator' projects are built on the C# programming language. However, these are primarily bootstrap helper projects, and in the vast majority of instances, VB developers will not need to modify them.</p>
+<p>OpenSilver provides support for web services and HTTP calls in multiple ways, including:</p>
+<ul>
+<li>The <em>&quot;Add Service Reference&quot;</em> feature of Visual Studio 2022. Use this feature to implement SOAP based WCF service. However, it's important to note that this tool is currently not available for VB.Net projects.</li>
+</ul>
+<blockquote>
+<p>⚠️ **Important points to notice **:</p>
+<ul>
+<li>When adding a WCF Service Reference, please be sure to uncheck the option &quot;Reuse types in referenced assemblies&quot;.</li>
+<li>Update the <code>System.ServiceModel.*</code> NuGet packages from v4.4 to v4.10.</li>
+<li>Some code like event handlers may not be generated, in this case include the Silverlight version of Reference.cs file into the project.</li>
+<li>Binary serialization is not yet fully supported, please adjust new endpoint with <code>basicHttpBinding</code> in the <code>web.config</code>.</li>
+</ul>
+</blockquote>
+<p><strong>Note</strong>: to enable passing cookies (for credentials/authentication), put the following code in your App.xaml.cs constructor:</p>
+<pre><code>Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.CredentialsMode.Enabled;
+</code></pre>
+<h2 id="sample-application">Sample application</h2>
+<p>You can download a sample application from the <a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples">examples</a> folder:</p>
+<ul>
+<li><a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/WCF-with-VB.Net">WCF-with-VB.Net</a>.</li>
+</ul>
+<h2 id="communication-between-wcf-soap-based-service-and-opensilver-vbnet20-as-a-client">Communication between WCF SOAP-based service and OpenSilver VB.Net(2.0) as a client</h2>
+<ol>
+<li><p>In a new instance of Visual Studio, create a new project of type <em>OpenSilver -&gt; Empty Application</em>.</p>
+</li>
+<li><p>Add a new project of type &quot;WCF -&gt; <em>WCF Service Application&quot;</em> with VB.Net. Let's call it &quot;WcfService1&quot;</p>
+</li>
+</ol>
+<p><strong>Note</strong>: While the WCF service code highlighted in this article is written in VB.Net, it's important to understand that it could be written in any programming language supported by the .Net framework, including C#.</p>
+<ol start="3">
+<li>Add a file <em>IService1.vb</em> with the following code:</li>
+</ol>
+<pre><code class="lang-vb">' NOTE: You can use the &quot;Rename&quot; command on the context menu to change the interface name &quot;IService1&quot; in both code and config file together.
+&lt;ServiceContract()&gt;
+Public Interface IService1
+
+    &lt;OperationContract()&gt;
+    Function GetData(ByVal value As Integer) As String
+
+    &lt;OperationContract()&gt;
+    Function GetDataUsingDataContract(ByVal composite As CompositeType) As CompositeType
+
+' TODO: Add your service operations here
+
+End Interface
+
+' Use a data contract as illustrated in the sample below to add composite types to service operations.
+
+&lt;DataContract()&gt;
+Public Class CompositeType
+
+    &lt;DataMember()&gt;
+    Public Property BoolValue() As Boolean
+
+    &lt;DataMember()&gt;
+    Public Property StringValue() As String
+
+End Class
+
+</code></pre>
+<ol start="4">
+<li>Add a file <em>Service1.svc</em> with the following code:</li>
+</ol>
+<pre><code class="lang-vb">' NOTE: You can use the &quot;Rename&quot; command on the context menu to change the class name &quot;Service1&quot; in code, svc and config file together.
+' NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.vb at the Solution Explorer and start debugging.
+Public Class Service1
+    Implements IService1
+
+    Public Sub New()
+    End Sub
+
+    Public Function GetData(ByVal value As Integer) As String Implements IService1.GetData
+        Return String.Format(&quot;You entered: {0}&quot;, value)
+    End Function
+
+    Public Function GetDataUsingDataContract(ByVal composite As CompositeType) As CompositeType Implements IService1.GetDataUsingDataContract
+        If composite Is Nothing Then
+            Throw New ArgumentNullException(&quot;composite&quot;)
+        End If
+        If composite.BoolValue Then
+            composite.StringValue &amp;= &quot;Suffix&quot;
+        End If
+        Return composite
+    End Function
+
+End Class
+
+</code></pre>
+<ol start="5">
+<li><p>Click &quot;Start Debugging&quot; (F5) and record the URL of the service. Typically, the URL follows a structure similar to this: http://localhost:{service-port-number}/Service1.svc. Keep the project running.</p>
+</li>
+<li><p>Add a new ServiceProxy Class Library: Add a new project of type <em>OpenSilver -&gt; OpenSilver Class Library</em> in C#(because C# projects have better tooling support in VS like &quot;Add Service Reference&quot; which is not present in VB.Net projects).</p>
+</li>
+<li><p>Click Project -&gt; <em>Add Service Reference</em>, and paste the URL of the service that you previously noted, which should look something like: http://localhost:{service-port-number}/Service1.svc. Click GO and then OK (use any meaningful name, here it is &quot;ServiceReference1&quot;).</p>
+</li>
+<li><p>Add the following code to ServiceProxy.cs</p>
+</li>
+</ol>
+<pre><code class="lang-c#">using ServiceReference1;
+using System;
+using System.Threading.Tasks;
+
+namespace OpenSilverServiceProxy
+{
+    public class ServiceProxy
+    {
+        private readonly Service1Client _serviceClient;
+        public ServiceProxy()
+        {
+            _serviceClient = new Service1Client();
+        }
+
+        public async Task&lt;string&gt; GetDataAsync(Int32 id)
+        {
+            return await _serviceClient.GetDataAsync(id);
+        }
+    }
+}
+
+</code></pre>
+<ol start="9">
+<li><p>Manually update the <code>System.ServiceModel.*</code> NuGet packages from v4.4 to v4.10.</p>
+</li>
+<li><p>Include a project reference to the 'ServiceProxy Class Library' within your OpenSilver VB.Net project.</p>
+</li>
+<li><p>Add the following code to MainPage.xaml.vb</p>
+</li>
+</ol>
+<pre><code class="lang-vb">Imports System
+Imports System.Collections.Generic
+Imports System.IO
+Imports System.Linq
+Imports System.Windows
+Imports System.Windows.Controls
+
+Partial Public Class MainPage
+    Inherits Page
+    Public Sub New()
+        Me.InitializeComponent()
+        Main()
+    End Sub
+
+    Public Async Sub Main()
+        Await MyFunc()
+    End Sub
+
+    Public Async Function MyFunc() As Task(Of Integer)
+        Dim proxy = New OpenSilverServiceProxy.ServiceProxy()
+
+        Dim results = Await proxy.GetDataAsync(1)
+        Console.WriteLine(results)
+    End Function
+
+End Class
+</code></pre>
+<ol start="12">
+<li>Launch the project to test your client/server application.</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../in-depth-topics/accessing-database.html">Accessing a database</a></li>
+<li><a href="http://forums.cshtml5.com/viewtopic.php?f=7&amp;t=276">WebSockets</a></li>
+<li><a href="http://forums.cshtml5.com/viewtopic.php?f=7&amp;t=8121">SignalR</a></li>
+<li><a href="../in-depth-topics/jsonp.html">JSONP</a></li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/Using-WCF-Service-with-VBnet/documentation/how-to-topics/Wcf-service-with-VBnet.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
