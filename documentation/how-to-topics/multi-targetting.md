@@ -2,7 +2,7 @@
 
 1. Create a new class library
 
-    Use the dotnet cli command `dotnet new classlib -f netstandard2.0`. Note that we explicitely asked to create a library that targets <i>.NET Standard 2.0</i> butit could have been anything else.
+    Use the dotnet cli command `dotnet new classlib -f netstandard2.0`. Note that we explicitely asked to create a library that targets <i>.NET Standard 2.0</i> but it could have been anything else.
 
 2. Edit the <i>.csproj</i> file
 
