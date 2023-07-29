@@ -18,5 +18,3 @@ Use the following command to see full list of msbuild options.
 ```
 msbuild -help
 ```
-
-Please note that `dotnet` cannot be used for building OpenSilver projects.
