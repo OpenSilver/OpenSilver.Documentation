@@ -2,7 +2,7 @@
 
 Localization enables rendering content in different cultures and languages inside OpenSilver applications.
 
-The majority of the information used here is documented on the Microsoft Blazor WebAssembly article for localization (https://learn.microsoft.com/en-us/aspnet/core/blazor/globalization-localization?view=aspnetcore-7.0&pivots=webassembly).
+The majority of the information used here is documented in the Microsoft Blazor WebAssembly article for localization (https://learn.microsoft.com/en-us/aspnet/core/blazor/globalization-localization?view=aspnetcore-7.0&pivots=webassembly).
 
 ## Localize contents based on browser language
 
