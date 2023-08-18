@@ -8,14 +8,28 @@ Good support in OpenSilver
 
 We use Open RIA Services, which is the official replacement by Microsoft when RIA Services was discontinued.
 
-- Either use version 5, but there are some API differences compared to the original RIA Services for Silverlight from 2011 
-- Or use version 4.6 (recommended), but code generation is not functional at this time, you need to copy the generated files from your Silverlight solution (for now)
+- Either use version 5, but there are some API differences compared to the original RIA Services for Silverlight from 2011, and binary serialization is not functional at this point.
+- Or use version 4.6 (recommended). This version is very similar to the Silverlight version of WCF RIA Services. It supports also binary serialization and code generation.
+
+For code generation to work with version 4.6, please make sure to reference the following package in your OpenSilver project: OpenSilver.OpenRiaServices.CodeGen.4.6
+
+Note: code generation in version 4.6 works only if there is no "custom generator" on the server-side. If this is the case, you can work around the issue by removing the custom generator or copy/paste the files generated from the Silverlight version of Open RIA Services.
 
 ## NuGet Packages
 
 #### Version 4.6 (Recommended)
-https://www.myget.org/feed/opensilver/package/nuget/OpenSilver.OpenRiaServices.Client.Core.4.6
-https://www.myget.org/feed/opensilver/package/nuget/OpenSilver.OpenRiaServices.Client.4.6
+https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client.Core.4.6
+https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client.4.6
+
+The client-side OpenSilver project should reference the latest version of the following packages:
+* OpenSilver
+* OpenSilver.OpenRiaServices.Client.Core.4.6
+* OpenSilver.OpenRiaServices.CodeGen.4.6
+
+The server-side project (.Web) usually references the following packages:
+* OpenRiaServices.Server (version 4.6.0)
+* OpenRiaServices.EntityFramework.EF4 (version 4.6.0)
+* EntityFramework (version 6.3.0)
 
 #### Version 5
 https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client.Core/
@@ -23,8 +37,15 @@ https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client/
 
 ## Example
 
-https://github.com/OpenSilver/OpenRiaServicesSamples/tree/main/CustomEndpoint
+Look at the "4_6" branch of the following repository for a working client-server example:
 https://github.com/OpenSilver/OpenRiaServicesDemo
+
+Note: make sure to run the 2 following projects simultaneously:
+* SilverlightWCFRIA.Browser (the frontend)
+* SilverlightWCFRIA.Web (the backend)
+
+Other example:
+https://github.com/OpenSilver/OpenRiaServicesSamples/tree/main/CustomEndpoint
 
 ## Source code
 
@@ -32,15 +53,20 @@ https://github.com/OpenSilver/OpenRiaServices
 
 ## Roadmap
 
-- Fix code generation in version 4.6 of Open RIA Services
+- Provide an example for the version 5.0 of Open RIA Services
+- Support server-side "custom generators"
+- Support binary serialization in version 5.0 (note: it's supported in v4.6)
 
 ## Instructions
 
+Tutorials related to Open RIA Services:
 https://github.com/OpenRIAServices/OpenRiaServices/wiki
 
 The original documentation for WCF RIA Services is still relevant and can be found at https://msdn.microsoft.com/en-us/library/ee707344(v=vs.91).aspx . Namespaces and assembly names are no longer correct since they changed with the release of OpenRiaServices.
 
 Documentation for changes since WCF RIA Services can be found under https://github.com/OpenRIAServices/OpenRiaServices/releases
+
+Refer to the "Example" section above for downloadable source code.
 
 ## A step-by-step guide to migrate Silverlight and OpenSilver projects from WCF RIA to OpenRIA Services
 
@@ -65,27 +91,27 @@ There are two types of projects: **Client-side** and **Server-Side**
 	Install-Package OpenRiaServices.Silverlight.CodeGen -Version 4.6.0
 	```
 	
-	- OpenSilver project
+    - OpenSilver project
 	```
-	Install-Package OpenRiaServices.OpenSilver.Client -Version 5.0.0-preview0003
+	Install-Package OpenSilver.OpenRiaServices.Client.Core.4.6
 	```
 
 - Server-side
     - Silverlight project
 	```
-    Install-Package OpenRiaServices.Server -Version 4.6.0
-    Install-Package OpenRiaServices.EntityFramework.EF4 -Version 4.6.0
+        Install-Package OpenRiaServices.Server -Version 4.6.0
+        Install-Package OpenRiaServices.EntityFramework.EF4 -Version 4.6.0
 	```
 	
 	- OpenSilver project
 	```
-	Install-Package OpenRiaServices.Server -Version 5.0.0-preview0003
+	Install-Package OpenRiaServices.Server -Version 4.6.0
 	Install-Package OpenRiaServices.EntityFramework.EF4 -Version 4.6.0
 	```
 	
 	Depending on project type it might be required to install other packages as well. For example if Soap and Json Ria Endpoints are used then install the following package as well.
 	```
-	Install-Package OpenRiaServices.Endpoints -Version 5.0.0-preview0003
+	Install-Package OpenRiaServices.Endpoints -Version 4.6.0
 	```
 	
 - Projects that are referenced by Server-side
@@ -93,13 +119,14 @@ There are two types of projects: **Client-side** and **Server-Side**
     Remove reference to `System.Data.Entity` and replace that with nuget package:
 
     ```
-    Install-Package EntityFramework -Version 6.0.1
+    Install-Package EntityFramework -Version 6.3.0
     ```
+
+    (or version 6.0.1)
 
     Replace `using System.Data` with using `System.Data.Entity.Core`
 
-As you can see for Silverlight projects versions **4.6.0** are used because version **5.0.0** drops Silverlight support.
-For OpenSilver project version **5.0.0-preview0003** is used. This is required for code generation and everything to work fine.
+As you can see, versions **4.6.0** are used because version **5.0.0** drops Silverlight support.
 
 #### 2. Find and replace System.ServiceModel.DomainServices* with OpenRiaServices.DomainServices* everywhere
 Use **OPENSILVER** compiler directive to keep original code working.
@@ -110,7 +137,7 @@ Please note that you can also use "Find and Replace" feature but regular express
 
 #### 3. Auto code generation
 
-If all above packages are installed with required versions then code generation will work fine.
+If all above packages are installed with required versions then code generation will work fine. In the OpenSilver version, code generator will work only if  the server side has no "custom generators". You should remove those custom generators or copy/paste the code generated from the Silverlight version of Open RIA Services.
 
 #### 4. web.config
 
@@ -160,8 +187,10 @@ The same applies for **RiaClientUseFullTypesNames** -> **OpenRiaClientUseFullTyp
 
 #### 6. Add ServerBaseUri
 
-Add the following code in Application startup. For example App.xaml.cs constructor after InitializeComponent().
+Add the following code in Application startup. For example in "App.xaml.cs" constructor after InitializeComponent().
 
+- If you are using Open RIA version 5, use the following code:
+  
 ```
 #if OPENSILVER
     DomainContext.DomainClientFactory = new OpenRiaServices.DomainServices.Client.Web.SoapDomainClientFactory()
@@ -171,4 +200,18 @@ Add the following code in Application startup. For example App.xaml.cs construct
 #endif
 ```
 
-The Uri is the Web Project Uri.
+where you should replace the URI with the one of the Web Project (.Web).
+
+- If you are using Open RIA version 4.6, use the following code:
+
+```
+((DomainClientFactory)DomainContext.DomainClientFactory).ServerBaseUri = new Uri("http://localhost:51157/");
+```
+
+where you should replace the URI with the one of the Web Project (.Web).
+
+You may also need to add the business entities types as "known types", as in this example:
+
+```
+KnownTypesHelper.AddKnownType(typeof(student));
+```
