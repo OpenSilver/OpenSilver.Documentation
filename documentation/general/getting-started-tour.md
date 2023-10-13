@@ -19,8 +19,8 @@ Once the solution is created, you will see that it has three projects.
 
 The first is where you will place the files for your application. Its structure is identical to that of a new Silverlight project: It notably contains the files
 			
-	For C# code migration :- App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs. 
-	For VB.NET code migration :- App.xaml, App.xaml.vb, MainPage.xaml and MainPage.xaml.vb. 
+	* For C# code migration :- App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs. 
+	* For VB.NET code migration :- App.xaml, App.xaml.vb, MainPage.xaml and MainPage.xaml.vb. 
 
 
 The second project, named with the suffix ".Browser", is the one you will have to launch to test your application in the browser. It plays a role similar to the ".Web" project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.
@@ -40,25 +40,25 @@ To test, let's add the following XAML code inside the MainPage.xaml file, replac
 
 ![MainPage.xaml](/images/4.MainPage.xaml.png "The modified MainPage.xaml page")  
 
-And C# code inside the MainPage.xaml.cs file:
+	*  And C# code inside the MainPage.xaml.cs file:
 	
-	```
-	void Button_Click(object sender, RoutedEventArgs e)
-	{
-	    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
-	}
-	```
-	![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
+			```
+			void Button_Click(object sender, RoutedEventArgs e)
+			{
+			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
+			}
+			```
+			![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
 
-And VB.NET code inside the MainPage.xaml.vb file:
+	*  And VB.NET code inside the MainPage.xaml.vb file:
 	
-	```
-	void Button_Click(object sender, RoutedEventArgs e)
-	{
-	    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
-	}
-	```
-	![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
+			```
+			void Button_Click(object sender, RoutedEventArgs e)
+			{
+			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
+			}
+			```
+			![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
 
 
 Let's recompile the solution and launch the project with the suffix ".Browser" . The default browser launches and the application runs.
