@@ -39,27 +39,26 @@ To test, let's add the following XAML code inside the MainPage.xaml file, replac
 ```
 
 ![MainPage.xaml](/images/4.MainPage.xaml.png "The modified MainPage.xaml page")  
-![MainPage.xaml](/images/4.MainPage.xamlWithVB.png "The modified MainPage.xaml page") 
 
 And C# code inside the MainPage.xaml.cs file:
-
-```
-void Button_Click(object sender, RoutedEventArgs e)
-{
-    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
-}
-```
-![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
+	
+	```
+	void Button_Click(object sender, RoutedEventArgs e)
+	{
+	    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
+	}
+	```
+	![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
 
 And VB.NET code inside the MainPage.xaml.vb file:
-
-```
-void Button_Click(object sender, RoutedEventArgs e)
-{
-    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
-}
-```
-![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
+	
+	```
+	void Button_Click(object sender, RoutedEventArgs e)
+	{
+	    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
+	}
+	```
+	![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
 
 
 Let's recompile the solution and launch the project with the suffix ".Browser" . The default browser launches and the application runs.
