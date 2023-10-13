@@ -67,7 +67,8 @@ In the Visual Studio solution, in addition to the main application project (the 
 * The .Simulator project is a .NET Framework type project whose purpose is to launch the app as a desktop application with a bunch of handy helpers for a developer, including the ability to debug the application.
 
 
-![OpenSilver solution](/images/3.solutionExplorer.png "The three projects of a typical OpenSilver solution")
+![OpenSilver solution](/images/3.solutionExplorer.png "The three projects of a typical OpenSilver solution for C# code")
+![OpenSilver solution](/images/3.solutionExplorerWithVB.png "The three projects of a typical OpenSilver solution for VB.NET code")
 
 ### 4. The Simulator
 
