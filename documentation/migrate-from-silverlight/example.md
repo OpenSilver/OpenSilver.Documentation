@@ -3,7 +3,7 @@
 In this tutorial we are going to migrate an example of **Silverlight** application to **OpenSilver**. The source code can be found [here](https://github.com/OpenSilver/CustomerApp).\
 It is assumed that the steps described in [Environment Setup](environment-setup.md) page are followed.
 
-The migration steps described below will allow us to avoid source file duplication and will give a possibility to share them between separate **.sln** and **.csproj** files.\
+The migration steps described below will allow us to avoid source file duplication and will give a possibility to share them between separate **.sln** and **.csproj** or **.vbproj** files.\
 The basic idea is to create a separate *OpenSilver* project with the same name and directory structure as *Silverlight* has, then by renaming solution and project names we can just copy the files to actual *Silverlight* project location and use them without manual modifications.
 
 ### About the Silverlight application
@@ -63,14 +63,16 @@ Now we can close **Visual Studio 2022**.
 #### 5. Copy files and directories from OpenSilver project to Silverlight project
 
 - Copy **CustomerApp.Browser**, **CustomerApp.Simulator** folders and **CustomerApp.OpenSilver.sln** file to Silverlight's **root** directory
-- Copy **CustomerData.OpenSilver.csproj** and **CustomerApp.OpenSilver.csproj** files to Silverlight's according projects directory
+- In case of C# code, copy **CustomerData.OpenSilver.csproj** and **CustomerApp.OpenSilver.csproj** files to Silverlight's according projects directory
+- In case of VB.NET code, copy **CustomerData.OpenSilver.vbproj** and **CustomerApp.OpenSilver.vbproj** files to Silverlight's according projects directory
 
 ![Directory Structure](/images/DirectoryStructure.png "Directory Structure")
 
 #### 6. Compile migrated project with Visual Studio 2022
 
 - Open **CustomerApp.OpenSilver.sln** located in Silverlight's project with *Visual Studio 2022*
-- In `Solution Explorer` find `AssemblyInfo.cs` for both CustomerApp and CustomerData projects and exclude them
+- For C# code, in `Solution Explorer` find `AssemblyInfo.cs` for both CustomerApp and CustomerData projects and exclude as shown below.
+- Same steps can be followed to exclude `AssemblyInfo.vb` for VB.NET code
 
 ![Exclude From Project](/images/ExcludeFromProject.png "Exclude From Project")
 
