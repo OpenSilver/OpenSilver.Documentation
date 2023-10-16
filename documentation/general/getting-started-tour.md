@@ -48,7 +48,7 @@ To test, let's add the following XAML code inside the MainPage.xaml file, replac
 			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
 			}
 			```
-			![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
+![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
 
 	*  And VB.NET code inside the MainPage.xaml.vb file:
 	
@@ -58,7 +58,7 @@ To test, let's add the following XAML code inside the MainPage.xaml file, replac
 			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
 			}
 			```
-			![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
+![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
 
 
 Let's recompile the solution and launch the project with the suffix ".Browser" . The default browser launches and the application runs.
