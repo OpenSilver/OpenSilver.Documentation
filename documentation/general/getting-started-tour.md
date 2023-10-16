@@ -53,7 +53,7 @@ To test, let's add the following XAML code inside the MainPage.xaml file, replac
 	*  And VB.NET code inside the MainPage.xaml.vb file:
 	
 			```
-			void Button_Click(object sender, RoutedEventArgs e)
+			private Sub Button_Click(sender.As.Object, .e.As.RoutedEventArgs)
 			{
 			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
 			}
@@ -84,6 +84,8 @@ The application launches. Let’s enter some text and click the button.
 Let's put a breakpoint inside the Button_Click method. It is possible to inspect the variables and to do step-by-step debugging.
 
 ![Breakpoint](/images/10.Breakpoint.png "Variables inspection at a Breakpoint")
+![Breakpoint](/images/10.Breakpoint.vb.png "Variables inspection at a Breakpoint")
+
 
 Let’s press the F5 key to continue.
 
