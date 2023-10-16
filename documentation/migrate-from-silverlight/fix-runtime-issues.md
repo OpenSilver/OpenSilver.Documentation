@@ -14,7 +14,7 @@ One of the reasons can be that client and server are running on different ports.
 
 Here is the solution.
 
-#### 1. Add the following line in App.xaml.cs. (Client).
+#### 1. Add the following line in App.xaml.cs(for C#) or App.xaml.vb(for VB.NET). (Client).
 
 ```Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.CredentialsMode.Enabled;```
 
