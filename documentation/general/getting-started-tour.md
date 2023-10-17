@@ -10,17 +10,23 @@ To create a new OpenSilver-type project, it is recommended to download the proje
 
 Then click on New Project and choose "OpenSilver Application". Note that there is also a "UWP-Compatible" version of OpenSilver, which uses the XAML dialect of UWP instead of that of Silverlight, allowing increased compatibility with Universal Platform.
 
-![Windows prompt for new project](/images/2.NewDialogProject.png "The window for creating a new project")
+![Windows prompt for new project](/images/2.NewDialogProjectWithVB.png "The window for creating a new project")
 
 Once the solution is created, you will see that it has three projects.
 
-![Solution explorer](/images/3.solutionExplorer.png "The Solution Explorer showing newly created projects")
+![Solution explorer](/images/3.solutionExplorer.png "The Solution Explorer showing newly created projects for C#")
+![Solution explorer](/images/3.solutionExplorerWithVB.png "The Solution Explorer showing newly created projects for VB.NET")
 
-The first is where you will place the files for your application. Its structure is identical to that of a new Silverlight project: it notably contains the files App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs.
+The first is where you will place the files for your application. Its structure is identical to that of a new Silverlight project: It notably contains the files
+			
+	* For C# code migration :- App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs. 
+	* For VB.NET code migration :- App.xaml, App.xaml.vb, MainPage.xaml and MainPage.xaml.vb. 
+
 
 The second project, named with the suffix ".Browser", is the one you will have to launch to test your application in the browser. It plays a role similar to the ".Web" project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.
 
-Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator below. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C # code at runtime in the "Immediate" window, things that are not possible in the browser.
+
+Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator below. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# or VB.NET code at runtime in the "Immediate" window, things that are not possible in the browser.
 
 To test, let's add the following XAML code inside the MainPage.xaml file, replacing the `<Canvas>` element:
 
@@ -32,18 +38,28 @@ To test, let's add the following XAML code inside the MainPage.xaml file, replac
 </StackPanel>
 ```
 
-![MainPage.xaml](/images/4.MainPage.xaml.png "The modified MainPage.xaml page")
+![MainPage.xaml](/images/4.MainPage.xaml.png "The modified MainPage.xaml page")  
 
-And C# code inside the MainPage.xaml.cs file:
-
-```
-void Button_Click(object sender, RoutedEventArgs e)
-{
-    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
-}
-```
-
+	*  And C# code inside the MainPage.xaml.cs file:
+	
+			```
+			void Button_Click(object sender, RoutedEventArgs e)
+			{
+			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
+			}
+			```
 ![MainPage.xaml.cs](/images/5.MainPage.xaml.cs.png "The modified MainPage.xaml.cs page")
+
+	*  And VB.NET code inside the MainPage.xaml.vb file:
+	
+			```
+			Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+			{
+			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text)
+			}
+			```
+![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
+
 
 Let's recompile the solution and launch the project with the suffix ".Browser" . The default browser launches and the application runs.
 
@@ -67,7 +83,9 @@ The application launches. Let’s enter some text and click the button.
 
 Let's put a breakpoint inside the Button_Click method. It is possible to inspect the variables and to do step-by-step debugging.
 
-![Breakpoint](/images/10.Breakpoint.png "Variables inspection at a Breakpoint")
+![Breakpoint](/images/10.Breakpoint.png "C# code Variables inspection at a Breakpoint")
+![Breakpoint](/images/10.Breakpoint.vb.png "VB.NET code Variables inspection at a Breakpoint")
+
 
 Let’s press the F5 key to continue.
 

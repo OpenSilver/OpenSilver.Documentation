@@ -12,9 +12,9 @@ In a process of client/server communication there can be a situations when authe
 One of the reasons can be that client and server are running on different ports.
 
 
-Here is the solution.
+Here is the solution for C# code.
 
-#### 1. Add the following line in App.xaml.cs. (Client).
+#### 1. Add the following line in App.xaml.cs (Client).
 
 ```Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.CredentialsMode.Enabled;```
 
