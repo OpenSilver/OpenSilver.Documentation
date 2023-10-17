@@ -105,22 +105,18 @@ One can see this auto-generated code by going to the “obj/Debug” directory o
 
 Please note in VB.NET for the above said XAML code, auto-generated code will be at file “MainPage.xaml.True.g.vb” under the “obj/Debug” directory and will look like(after compiling the project):
 
-      Dim stackPanel1 = New StackPanel() With {
-            .HorizontalAlignment = HorizontalAlignment.Left
-        }
-        Dim textBlock1 = New TextBlock() With {
-            .Text = "Enter some text below:"
-        }
+        Dim stackPanel1 = New StackPanel()
+        stackPanel1.HorizontalAlignment = HorizontalAlignment.Left
+        Dim textBlock1 = New TextBlock()
+        textBlock1.Text = "Enter some text below:"
         stackPanel1.Children.Add(textBlock1)
-        Dim textBox1 = New TextBox() With {
-            .Name = "MyTextBox1"
-        }
+        Dim textBox1 = New TextBox()
+        textBox1.Name = "MyTextBox1"
         stackPanel1.Children.Add(textBox1)
         Me.MyTextBox1 = textBox1
-        Dim button1 = New Button() With {
-            .Content = "Click me"
-        }
-        button1.Click += Button_Click
+        Dim button1 = New Button()
+        button1.Content = "Click me"
+        AddHandler button1.Click, AddressOf Button_Click
         stackPanel1.Children.Add(button1)
 
 
