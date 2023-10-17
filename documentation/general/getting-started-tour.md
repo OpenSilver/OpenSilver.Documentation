@@ -53,9 +53,9 @@ To test, let's add the following XAML code inside the MainPage.xaml file, replac
 	*  And VB.NET code inside the MainPage.xaml.vb file:
 	
 			```
-			private Sub Button_Click(sender.As.Object, .e.As.RoutedEventArgs)
+			Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
 			{
-			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text);
+			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text)
 			}
 			```
 ![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
