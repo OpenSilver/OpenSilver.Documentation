@@ -12,6 +12,8 @@ You will need Visual Studio 2022 (or newer). Install the OpenSilver VSIX Templat
 You can see a quick video demo from this tutorial here:
 > [!Video https://www.youtube.com/embed/ZyctFzWKda8?start=345&end=462]
 
+#### Detailed Steps
+
 1. Configure the Database  
 For this tutorial, we will use the AdventureWorks Lightweight database (AdventureWorksLT2022.bak). You can see instructions on how to download, restore, and setup here:
 [https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms)
@@ -32,7 +34,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 
     * Copy the ConnectionString, and edit it like this:
     ```
-    - Replace double quotes (") with &quot;
+    - Replace any double quotes with &quot;
     - Replace 'data source' with 'Server'
     ```    
     ![Choose Your Data Connection](/images/ria-business05.png)  
