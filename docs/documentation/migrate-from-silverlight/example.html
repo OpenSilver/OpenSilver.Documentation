@@ -122,9 +122,9 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="tutorial-migration-from-silverlight-application-to-opensilver">Tutorial: Migration from Silverlight application to OpenSilver</h1>
 
-<p>In this tutorial we are going to migrate an example of <strong>Silverlight</strong> application to <strong>OpenSilver</strong>. The source code can be found <a href="https://github.com/OpenSilver/CustomerApp">here</a>.<br>
+<p>In this tutorial we are going to migrate an example of <strong>Silverlight</strong> application to <strong>OpenSilver</strong>. The C#.NET source code can be found <a href="https://github.com/OpenSilver/CustomerApp">here</a>.<br>
 It is assumed that the steps described in <a href="environment-setup.html">Environment Setup</a> page are followed.</p>
-<p>The migration steps described below will allow us to avoid source file duplication and will give a possibility to share them between separate <strong>.sln</strong> and <strong>.csproj</strong> files.<br>
+<p>The migration steps described below will allow us to avoid source file duplication and will give a possibility to share them between separate <strong>.sln</strong> and <strong>.csproj</strong> or <strong>.vbproj</strong> files.<br>
 The basic idea is to create a separate <em>OpenSilver</em> project with the same name and directory structure as <em>Silverlight</em> has, then by renaming solution and project names we can just copy the files to actual <em>Silverlight</em> project location and use them without manual modifications.</p>
 <h3 id="about-the-silverlight-application">About the Silverlight application</h3>
 <p><strong>CustomerApp</strong> is a simple <em>Silverlight</em> application which shows basic customer information in a <em>Data Grid View</em> and allows to filter the information by customer name or by membership.</p>
@@ -133,7 +133,7 @@ The basic idea is to create a separate <em>OpenSilver</em> project with the same
 <p>Directory structure of the <em>Silverlight</em> application looks like this.</p>
 <p><img src="/images/SilverlightAppDirectoryStructure.png" alt="Silverlight App Directory Structure" title="Silverlight App Directory Structure"></p>
 <p>So it is a typical <em>Silverlight</em> application having an additional <em>Silverlight Class Library</em> inside (<strong>CustomerData</strong>)</p>
-<h3 id="migration-steps">Migration Steps</h3>
+<h3 id="migration-steps-for-cnet-silverlight-app">Migration Steps for C#.NET Silverlight App</h3>
 <h4 id="1-create-a-new-opensilver-project-visual-studio-2022">1. Create a new OpenSilver project (Visual Studio 2022)</h4>
 <p>In this step we are going to create a separate <em>OpenSilver</em> project having the same name as <em>Silverlight</em> application has but in a different location.</p>
 <ul>
@@ -177,7 +177,7 @@ The basic idea is to create a separate <em>OpenSilver</em> project with the same
 <h4 id="6-compile-migrated-project-with-visual-studio-2022">6. Compile migrated project with Visual Studio 2022</h4>
 <ul>
 <li>Open <strong>CustomerApp.OpenSilver.sln</strong> located in Silverlight's project with <em>Visual Studio 2022</em></li>
-<li>In <code>Solution Explorer</code> find <code>AssemblyInfo.cs</code> for both CustomerApp and CustomerData projects and exclude them</li>
+<li>For C# code, in <code>Solution Explorer</code> find <code>AssemblyInfo.cs</code> for both CustomerApp and CustomerData projects and exclude as shown below.</li>
 </ul>
 <p><img src="/images/ExcludeFromProject.png" alt="Exclude From Project" title="Exclude From Project"></p>
 <ul>
@@ -192,6 +192,24 @@ The basic idea is to create a separate <em>OpenSilver</em> project with the same
 <p>And if we click on 'Show Members' checkbox we will see filtered result</p>
 <p><img src="/images/ResultWithFilter.png" alt="Result With Filter" title="Result With Filter"></p>
 <p>Please note that in the example we didn't change a single line of Silverlight's code and we didn't fix any compilation errors. In real and much bigger projects however some errors expected to happen.</p>
+<h3 id="migration-steps-for-vbnet-silverlight-app">Migration Steps for VB.NET Silverlight App</h3>
+<p>This follows the same steps as C#.NET Silverlight App Migration. Please refer corresponding section for detailed instructions.</p>
+<h4 id="1-create-a-new-opensilver-project-visual-studio-2022-1">1. Create a new OpenSilver project (Visual Studio 2022)</h4>
+<h4 id="2-add-a-new-opensilver-class-library-1">2. Add a new <em>OpenSilver Class Library</em></h4>
+<h4 id="3-add-customerdata-as-a-project-reference-1">3. Add CustomerData as a Project Reference</h4>
+<h4 id="4-rename-opensilver-projects-1">4. Rename OpenSilver projects</h4>
+<h4 id="5-copy-files-and-directories-from-opensilver-project-to-silverlight-project-1">5. Copy files and directories from OpenSilver project to Silverlight project</h4>
+<ul>
+<li>Copy <strong>CustomerApp.Browser</strong>, <strong>CustomerApp.Simulator</strong> folders and <strong>CustomerApp.OpenSilver.sln</strong> file to Silverlight's <strong>root</strong> directory</li>
+<li>Copy <strong>CustomerData.OpenSilver.vbproj</strong> and <strong>CustomerApp.OpenSilver.vbproj</strong> files to Silverlight's according projects directory</li>
+</ul>
+<h4 id="6-compile-migrated-project-with-visual-studio-2022-1">6. Compile migrated project with Visual Studio 2022</h4>
+<ul>
+<li>Open <strong>CustomerApp.OpenSilver.sln</strong> located in Silverlight's project with <em>Visual Studio 2022</em></li>
+<li>For C# code, in <code>Solution Explorer</code> find <code>AssemblyInfo.vb</code> for both CustomerApp and CustomerData projects and exclude it</li>
+<li>Make <strong>CustomerApp.Browser</strong> as a Startup Project</li>
+<li>Rebuild the solution and just run it</li>
+</ul>
 </article>
           </div>
           

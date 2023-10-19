@@ -142,7 +142,7 @@
 <h2 id="the-general-principle">The general principle</h2>
 <p>The general principle for migrating a Silverlight application to OpenSilver consists of creating an OpenSilver-type project for each of the original Silverlight projects, then copying / pasting all the files from the original projects to the OpenSilver projects, and finally compiling the solution.</p>
 <p>In practice however, we do not want to copy/paste the files but rather share them between the original application and the migrated application, so that both applications can be maintained, at least in the short term. This also makes it easier to merge code changes in case that new developments or bug fixes are made on the original Silverlight application while we are still migrating it.</p>
-<p>To avoid manual editing of <strong>.sln</strong> and <strong>.csproj</strong> files the following steps can be taken.</p>
+<p>To avoid manual editing of <strong>.sln</strong> and <strong>.csproj</strong> or <strong>.vbproj</strong> files the following steps can be taken.</p>
 <ul>
 <li><p>Create an OpenSilver application with the same name as Silverlight application has but in different location</p>
 </li>
@@ -156,14 +156,14 @@ If the project type is a <strong>Silverlight Class Library</strong> then <strong
 <p>In Solution Explorer, right-click on project -&gt; Properties<br>
 This needs to be done in order to not broke &quot;xmlns&quot; references in XAML files.</p>
 </li>
-<li><p>Copy all <strong>.sln</strong> and <strong>.csproj</strong> files to according Silverlight project locations</p>
+<li><p>Copy all <strong>.sln</strong> and <strong>.csproj</strong> or <strong>.vbproj</strong> files to according Silverlight project locations</p>
 </li>
 </ul>
 <p>You can find more detailed instructions in this <a href="example.html">example</a>.</p>
 <h2 id="errors-are-expected">Errors are expected</h2>
 <p>Some compilation errors are expected, because OpenSilver currently supports a (fairly large) subset of Silverlight functionality, so manual work should be expected. This guide provides tips and guidance to fix those compilation errors.</p>
-<h3 id="errors-from-xamlcs-sources">Errors from .xaml.cs sources</h3>
-<p>Many different compilation errors related to UI controls can occur if the project consists of <strong>.xaml</strong> files (which Silverlight application usually does).</p>
+<h3 id="errors-from-xamlcs-or-xamlvb-sources">Errors from .xaml.cs or .xaml.vb sources</h3>
+<p>Many different compilation errors related to UI controls can occur if the project consists of <strong>.xaml</strong> files (which Silverlight application usually does). For example, errors while migrating C# code :</p>
 <p><img src="/images/XamlErrors.png" alt="xaml Errors" title="xaml Errors"></p>
 <p>This error is due to the files <strong>.g.i.cs</strong> not being generated. To fix it, click on <strong>.xaml</strong> file, go to its properties (F4), and in the advanced section choose:</p>
 <pre><code>Build Action: Content
@@ -177,14 +177,14 @@ It is a good practice to check the original <strong>Silverlight</strong> project
 <h3 id="known-issues">Known issues</h3>
 <p>Visit the &quot;<a href="../troubleshooting/common-issues-and-solutions.html">Troubleshooting</a>&quot; page for known issues and tips.</p>
 <h2 id="use-compiler-directives-to-not-break-the-original-silverlight-application">Use compiler directives to not break the original Silverlight application</h2>
-<h4 id="in-c-files">In C# files:</h4>
-<p>Every time that we need to make a change to the C# code, we are going to use the #if OPENSILVER and #if !OPENSILVER compiler directives to distinguish between the original code and the migrated one. The goes is to be able to quickly find all the places that have been modified, and also to make changes to the files without breaking the original Silverlight application. (Read above to understand why we want to avoid breaking the original Silverlight application)</p>
+<h4 id="in-c-or-vbnet-files">In C# or VBNET files:</h4>
+<p>Every time that we need to make a change to the C# or VB.NET code, we are going to use the #if OPENSILVER and #if !OPENSILVER compiler directives to distinguish between the original code and the migrated one. The goes is to be able to quickly find all the places that have been modified, and also to make changes to the files without breaking the original Silverlight application. (Read above to understand why we want to avoid breaking the original Silverlight application)</p>
 <p>It is possible that OpenSilver doesn't have required class or method implemented yet. The temporary solution for compiling the project would be to add empty classes/methods in OpenSilver &quot;Empty Namespaces&quot; folder and use that .dll instead.</p>
 <h4 id="in-xaml-files">In XAML files:</h4>
 <p>As far as XAML files are concerned, since compiler directives do not work in XAML, we recommend these 2 approaches to make changes to the XAML code without breaking the original Silverlight application:</p>
 <ul>
-<li>If it is a small change, try to do it in the C# code-behind file instead of the XAML file. To do so, first add x:Name=&quot;SOME_NAME&quot; (in XAML) to the control that you wish to modify, then make the change in the constructor in the C# code-behind, and use #if OPENSILVER compiler directive to make sure that the change does not break the original Silverlight version of the application.</li>
-<li>If the change is extensive or if it cannot be done in the C# code-behind, we recommend you to create a copy of the XAML file, and reference that copy in your OpenSilver project, while the original Silverlight application references the original file. For example, if you need to make a change to &quot;App.xaml&quot;, you should create a copy named for example &quot;App.OpenSilver.xaml&quot;, and have the OpenSilver project  reference that file instead of &quot;App.xaml&quot;. Note: the associated C# code-behind file (&quot;App.xaml.cs&quot;) can still be shared between the original and migrated projects.</li>
+<li>If it is a small change, try to do it in the C# or VB.NET code-behind file (as required) instead of the XAML file. To do so, first add x:Name=&quot;SOME_NAME&quot; (in XAML) to the control that you wish to modify, then make the change in the constructor in the C# or VB.NET code-behind, and use #if OPENSILVER compiler directive to make sure that the change does not break the original Silverlight version of the application.</li>
+<li>If the change is extensive or if it cannot be done in the C# or VB.NET code-behind, we recommend you to create a copy of the XAML file, and reference that copy in your OpenSilver project, while the original Silverlight application references the original file. For example, if you need to make a change to &quot;App.xaml&quot;, you should create a copy named for example &quot;App.OpenSilver.xaml&quot;, and have the OpenSilver project  reference that file instead of &quot;App.xaml&quot;. Note: the associated C# or VB.NET code-behind file (&quot;App.xaml.cs/App.xaml.vb&quot;) can still be shared between the original and migrated projects.</li>
 </ul>
 <h4 id="here-are-the-steps-to-copy-and-use-a-new-xaml-file">Here are the steps to copy and use a new XAML file:</h4>
 <h4 id="1-copy-xaml-file-name-that-needs-to-be-duplicated">1. Copy XAML file name that needs to be duplicated</h4>
@@ -197,18 +197,18 @@ It is a good practice to check the original <strong>Silverlight</strong> project
 <p><img src="/images/xaml_copy/3.png" alt="Choose control type" title="Choose control type"></p>
 <p>If it is not the case then we can simply create any of given controls and then rename and modify as needed.</p>
 <h4 id="4-change-namespace">4. Change namespace</h4>
-<p>Visual Studio will automatically generate a namespace which might not be the one we wanted. Copy the namespace from original .cs file and replace it in both <strong>.OpenSilver.xaml</strong> and <strong>.OpenSilver.xaml.cs</strong> files.</p>
+<p>Visual Studio will automatically generate a namespace which might not be the one we wanted. Copy the namespace from original .cs or .vb file and replace it in both <strong>.OpenSilver.xaml</strong> and <strong>.OpenSilver.xaml.cs</strong> or <strong>.OpenSilver.xaml.vb</strong> files. Below is example from C#</p>
 <p><img src="/images/xaml_copy/4.png" alt="Change namespace" title="Change namespace">
 <img src="/images/xaml_copy/5.png" alt="Change namespace" title="Change namespace"></p>
 <h4 id="5-exclude-the-original-one-from-project">5. Exclude the original one from project</h4>
-<p>We can exclude the original <strong>.xaml</strong> and <strong>.cs</strong> files from project because now we have new ones.</p>
+<p>We can exclude the original <strong>.xaml</strong> and <strong>.cs</strong> or <strong>.vb</strong> files from project because now we have new ones. The below steps shows how to exclude a <strong>.cs</strong> file. The same steps can be followed for <strong>.vb</strong> file.</p>
 <p><img src="/images/xaml_copy/6.png" alt="Exclude project" title="Exclude project"></p>
 <p>Here is how it looks like after</p>
 <p><img src="/images/xaml_copy/7.png" alt="Excluded project" title="Excluded project"></p>
 <p>To see the files that are not part of the project click <strong>Show All Files</strong> button in <strong>Projects Explorer</strong></p>
 <p><img src="/images/xaml_copy/8.png" alt="Show all files" title="Show all files"></p>
-<p>Please note that it is also possible to replace only .xaml file and share the original .cs.
-For that we can just exlude (or remove) <strong>.OpenSilver.xaml.cs</strong> from project and include the original <strong>.xaml.cs</strong></p>
+<p>Please note that it is also possible to replace only .xaml file and share the original .cs or .vb file.
+For example, in C# migration, we can just exlude (or remove) <strong>.OpenSilver.xaml.cs</strong> from project and include the original <strong>.xaml.cs</strong></p>
 <p>It will look little bit odd though because now .xaml.cs will not be shown as a direct child for .OpenSilver.xaml in Solution Explorer.</p>
 <p><img src="/images/xaml_copy/9.png" alt="Share .cs file" title="Share .cs file"></p>
 </article>

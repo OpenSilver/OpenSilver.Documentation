@@ -128,12 +128,61 @@
 <p>An OpenSilver project is none other than a .NET Standard type project that references the OpenSilver NuGet package. The presence of this NuGet package has several consequences.</p>
 <h3 id="1-references">1. References</h3>
 <p>First, the NuGet package will add a reference to the &quot;OpenSilver.dll&quot; assembly, which contains the implementation of the XAML classes. For example, the &quot;Button&quot; and &quot;TextBox&quot; classes are located there.
-These classes can be seen by going to the &quot;<a href="https://github.com/OpenSilver/OpenSilver/tree/master/src/Runtime/Runtime">src/Runtime/Runtime</a>&quot; directory of the OpenSilver source code on GitHub, at the address: <a href="https://github.com/OpenSilver/OpenSilver">https://github.com/OpenSilver/OpenSilver</a></p>
-<p>Low-level elements, such as the &quot;TextBox&quot;, &quot;MediaElement&quot; or &quot;WebBrowser&quot; controls, contain a method named &quot;CreateDomElement&quot;, which specifies how they should render in HTML.</p>
+These classes can be seen by going to the &quot;<a href="https://github.com/OpenSilver/OpenSilver/tree/master/src/Runtime/Runtime">src/Runtime/Runtime</a>&quot; directory of the OpenSilver C# source code on GitHub, at the address: <a href="https://github.com/OpenSilver/OpenSilver">https://github.com/OpenSilver/OpenSilver</a></p>
+<ol>
+<li>Low-level elements, such as the &quot;TextBox&quot;, &quot;MediaElement&quot; or &quot;WebBrowser&quot; controls, contain a method named &quot;CreateDomElement&quot;, which specifies how they should render in HTML.</li>
+</ol>
 <p>For example, &quot;TextBox&quot; will create a <code>&lt;div&gt;</code> in html, &quot;MediaElement&quot; will create a tag <code>&lt;video&gt;</code> in html and &quot;WebBrowser&quot; will create a <code>&lt;iframe&gt;</code> in html.</p>
-<p><img src="/images/12.SourceCode.png" alt="Source Code" title="The source code of the WebBrowser control"></p>
-<p>In addition, there is a correspondence that is made between XAML properties and CSS properties. For example, the property “Foreground” in XAML will have as equivalent the property “color” in CSS. As another example, the &quot;Source&quot; property of the &quot;WebBrowser&quot; control will have as equivalent the &quot;src&quot; property of <code>&lt;iframe&gt;</code>.</p>
+<ul>
+<li><p>For C# Code
+<img src="/images/12.SourceCode.png" alt="Source Code" title="The source code of the WebBrowser control"></p>
+</li>
+<li><p>For VB.NET Code</p>
+<pre><code>Public Overrides Function CreateDomElement(ByVal parentRef As Object, &lt;Out&gt; ByRef domElementWhereToPlaceChildren As Object) As Object
+  Dim outerDiv As Object
+  Dim outerDivStyle = INTERNAL_HtmlDomManager.CreateDomLayoutElementAppendItAndGetStyle(&quot;div&quot;, parentRef, Me, outerDiv)
+  outerDivStyle.width = &quot;100%&quot;
+  outerDivStyle.height = &quot;100%&quot;
+
+  Dim iFrameStyle = INTERNAL_HtmlDomManager.CreateDomElementAppendItAndGetStyle(&quot;iframe&quot;, outerDiv, Me, _iFrame)
+  iFrameStyle.width = &quot;100%&quot;
+  iFrameStyle.height = &quot;100%&quot;
+  iFrameStyle.border = &quot;none&quot;
+
+  DisposeJsCallbacks()
+  _jsCallbackOnIframeLoaded = JavaScriptCallback.Create(OnIframeLoad, True)
+
+  Dim sIFrame As String = INTERNAL_InteropImplementation.GetVariableStringForJS(_iFrame)
+  OpenSilver.Interop.ExecuteJavaScriptFastAsync($&quot;{sIFrame}.onload = {INTERNAL_InteropImplementation.GetVariableStringForJS(_jsCallbackOnIframeLoaded)}&quot;)
+</code></pre>
+</li>
+</ul>
+<ol start="2">
+<li>In addition, there is a correspondence that is made between XAML properties and CSS properties. For example, the property “Foreground” in XAML will have as equivalent the property “color” in CSS. As another example, the &quot;Source&quot; property of the &quot;WebBrowser&quot; control will have as equivalent the &quot;src&quot; property of <code>&lt;iframe&gt;</code>.</li>
+</ol>
 <p><img src="/images/13.ForegroundProperties.png" alt="Properties Definition" title="The definition of the Foreground property"></p>
+<p>VB.NET Code example</p>
+<pre><code>''' &lt;summary&gt;
+''' Gets or sets a brush that describes the foreground color.
+''' &lt;/summary&gt;
+Public Property Foreground As Brush
+    Get
+        Return CType(GetValue(ForegroundProperty), Brush)
+    End Get
+    Set(ByVal value As Brush)
+        SetValue(ForegroundProperty, value)
+    End Set
+End Property
+
+''' &lt;summary&gt;
+''' Identifies the &lt;seecref=&quot;Control.Foreground&quot;/&gt; dependency property.
+''' &lt;/summary&gt;
+Public Shared ReadOnly ForegroundProperty As DependencyProperty = DependencyProperty.Register(NameOf(Foreground), GetType(Brush), GetType(Control), New PropertyMetadata(New SolidColorBrush(Colors.Black)) With {
+
+
+.MethodToUpdateDom2 = UpdateDomOnForegroundChanged
+})
+</code></pre>
 <h3 id="2-the-compiler">2. The compiler</h3>
 <p>Next, the NuGet package adds a few steps to the Msbuild compilation.</p>
 <p>This can be seen by opening the contents of the NuGet package where it is installed (usually in C:\Users\%USERNAME%\.Nuget\packages\opensilver). By opening the &quot;build&quot; directory, it is possible to see the presence of two .target files, which will alter the behavior of Msbuild.</p>
@@ -158,6 +207,21 @@ stackPanel1.Children.Add(button1);
 </code></pre>
 <p>One can see this auto-generated code by going to the “obj/Debug” directory of the project and by opening the “MainPage.xaml.True.g.cs” file (after compiling the project).</p>
 <p><img src="/images/15.autoGeneratedCode.png" alt="Generated Code" title="The auto-generated MainPage.xaml.True.g.cs file"></p>
+<p>Please note in VB.NET for the above said XAML code, auto-generated code will be at file “MainPage.xaml.True.g.vb” under the “obj/Debug” directory and will look like(after compiling the project):</p>
+<pre><code>    Dim stackPanel1 = New StackPanel()
+    stackPanel1.HorizontalAlignment = HorizontalAlignment.Left
+    Dim textBlock1 = New TextBlock()
+    textBlock1.Text = &quot;Enter some text below:&quot;
+    stackPanel1.Children.Add(textBlock1)
+    Dim textBox1 = New TextBox()
+    textBox1.Name = &quot;MyTextBox1&quot;
+    stackPanel1.Children.Add(textBox1)
+    Me.MyTextBox1 = textBox1
+    Dim button1 = New Button()
+    button1.Content = &quot;Click me&quot;
+    AddHandler button1.Click, AddressOf Button_Click
+    stackPanel1.Children.Add(button1)
+</code></pre>
 <h3 id="3-the-satellite-projects">3. The satellite projects</h3>
 <p>In the Visual Studio solution, in addition to the main application project (the one containing App.xaml), we mentioned two other projects, which serve as entry points:</p>
 <ul>
@@ -166,7 +230,8 @@ stackPanel1.Children.Add(button1);
 <li><p>The .Simulator project is a .NET Framework type project whose purpose is to launch the app as a desktop application with a bunch of handy helpers for a developer, including the ability to debug the application.</p>
 </li>
 </ul>
-<p><img src="/images/3.solutionExplorer.png" alt="OpenSilver solution" title="The three projects of a typical OpenSilver solution"></p>
+<p><img src="/images/3.solutionExplorer.png" alt="OpenSilver solution" title="The three projects of a typical OpenSilver solution for C# code">
+<img src="/images/3.solutionExplorerWithVB.png" alt="OpenSilver solution" title="The three projects of a typical OpenSilver solution for VB.NET code"></p>
 <h3 id="4-the-simulator">4. The Simulator</h3>
 <p>The Simulator is a tool which is distributed as a NuGet package. Usually it is located in the &quot;C:\Users\%USERNAME%\.Nuget\packages\opensilver.simulator&quot;.</p>
 <p>It is a WPF-type application that contains an embedded Chromium browser. The goal of the Simulator is to allow debugging the application with the very powerful tools of the .NET Framework. It also allows to inspect the XAML visual tree.</p>
