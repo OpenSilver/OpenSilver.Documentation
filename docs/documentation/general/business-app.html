@@ -140,13 +140,13 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 </li>
 <li><p>In Visual Studios's Solution Explorer, right-click the .Web project, click Add, and then click New Item.</p>
 </li>
-<li><p>Select the &quot;ADO.NET Entity Data Model&quot; template. Change the name to &quot;AdventureWorks.edmx&quot;, and then click Add.
+<li><p>Select the &quot;ADO.NET Entity Data Model&quot; template. Change the name to &quot;AdventureWorks&quot;, and then click Add.
 <img src="/images/ria-business02.png" alt="ADO.NET Entity Data Model"></p>
 </li>
 <li><p>On the Choose Model Contents page, click &quot;EF Designer from database&quot;, and then click Next.
 <img src="/images/ria-business03.png" alt="EF Designer from database"></p>
 </li>
-<li><p>On the Choose Your Data Connection page, create a connection to the AdventureWorks database.
+<li><p><a name="database-connection"></a>On the Choose Your Data Connection page, create a connection to the AdventureWorks database.
 <img src="/images/ria-business04.png" alt="Connection Properties"></p>
 <ul>
 <li>Copy the ConnectionString, and edit it like this:</li>
@@ -156,26 +156,31 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 </code></pre>
 <p><img src="/images/ria-business05.png" alt="Choose Your Data Connection"></p>
 <ul>
-<li>Go to Web.config file, and add this new entry with the updated connection string from the previous step:</li>
+<li>Go to Web.config file, and add this new entry into the <connectionstrings>&gt; section, using the updated connection string from the previous step:</connectionstrings></li>
 </ul>
 <pre><code class="lang-xml">&lt;add name=&quot;AdventureWorksLT2022Entities&quot; 
      connectionString=&quot;&lt;paste the edited connectionString here&gt;&quot; 
      providerName=&quot;System.Data.EntityClient&quot; /&gt;
 </code></pre>
 </li>
-<li><p>On the Choose Your Database Objects page, expand the Tables node, select everything from the SalesLT schema, and click Finish
-<img src="/images/ria-business06.png" alt="Choose Your Database Objects"></p>
+<li><p>On the Choose Your Database Objects page, expand the Tables node, select everything from the SalesLT schema, and click Finish</p>
 </li>
+</ol>
+<p><img src="/images/ria-business06.png" alt="Choose Your Database Objects"></p>
+<ol start="8">
 <li><p>The database is configured in the .Web project and the entity data model appears in the designer (Build the solution).
 <img src="/images/ria-business07.png" alt="Data Model"></p>
 </li>
 <li><p>Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click New Item, select the &quot;Domain Service&quot; template. Name the new item &quot;OrganizationService&quot;.
 <img src="/images/ria-business08.png" alt="Add New Domain Item"></p>
 </li>
-<li><p>In the Add New Domain Service Class dialog box, select Customers from the Entities list.<br>
-Ensure that the &quot;Enable client access&quot; and &quot;Generate associated classes for metadata&quot; check boxes are selected. Click Ok.<br>
-<img src="/images/ria-business09.png" alt="Add New Domain Service"></p>
+<li><p>In the Add New Domain Service Class dialog box, select Customers from the Entities list.</p>
 </li>
+</ol>
+<p>Note: if the list is empty, please rebuild the solution, and open the dialog again.</p>
+<p>Ensure that the &quot;Enable client access&quot; and &quot;Generate associated classes for metadata&quot; check boxes are selected. Click Ok.<br>
+<img src="/images/ria-business09.png" alt="Add New Domain Service"></p>
+<ol start="11">
 <li><p>Build the solution.<br>
 Building the solution generates the Domain Context and entities in the client project.<br>
 On the client side, the Domain <code>Service</code> class has the suffix <code>Context</code>. So the <code>OrganizationService</code> becomes <code>OrganizationContext</code>.<br>
@@ -208,11 +213,19 @@ _context.Load(_context.GetCustomersQuery());
 <img src="/images/ria-business13.png" alt="Final"></li>
 </ol>
 <h3 id="troubleshooting-and-known-issues">Troubleshooting and Known Issues</h3>
+<h4 id="running-the-application">Running the application:</h4>
 <ul>
-<li>Make sure to run both the .Web project (for the server side) and .Browser project (for the client side). Look at errors in the browser console if it doesn't work.</li>
-<li>You need to install the &quot;Open RIA Tooling&quot; to get the dialog to add a new domain service (the link is in the OpenSilver RIA documentation)</li>
+<li>Make sure to run both the .Web project (for the server side) and .Browser project (for the client side)</li>
+<li>If you have an error that says &quot;<strong>No connection string named 'cshtml5dbEntities' could be found in the application config file.</strong>&quot;, make sure that you have added an entry to the Web.Config file as explained at <a href="#database-connection">this step</a>.</li>
+<li>If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there</li>
+<li>If you see an error related to CORS (such as &quot;<strong>Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.</strong>&quot;), then <a href="https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors">configure CORS on the server-side</a>, or work around CORS entirely by <a href="https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks">running your browser with disabled security</a></li>
 <li>If you receive <code>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)</code> error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated.
 <img src="/images/ria-business14.png" alt="SQLite Interop Error"></li>
+</ul>
+<h4 id="creating-the-application">Creating the application:</h4>
+<ul>
+<li>If you don't see the &quot;Add New Domain Service Class&quot; dialog, make sure to install the latest VSIX of OpenSilver.</li>
+<li>If the &quot;Add New Domain Service Class&quot; dialog is empty, make sure to rebuild the solution, and try again.</li>
 </ul>
 <h3 id="see-also">See Also</h3>
 <ul>
