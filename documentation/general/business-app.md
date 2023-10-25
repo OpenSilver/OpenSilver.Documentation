@@ -23,13 +23,13 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 
 3. In Visual Studios's Solution Explorer, right-click the .Web project, click Add, and then click New Item.
 
-4. Select the "ADO.NET Entity Data Model" template. Change the name to "AdventureWorks.edmx", and then click Add.
+4. Select the "ADO.NET Entity Data Model" template. Change the name to "AdventureWorks", and then click Add.
 ![ADO.NET Entity Data Model](/images/ria-business02.png)
 
 5. On the Choose Model Contents page, click "EF Designer from database", and then click Next.
 ![EF Designer from database](/images/ria-business03.png)
 
-6. On the Choose Your Data Connection page, create a connection to the AdventureWorks database.
+6. <a name="database-connection"></a>On the Choose Your Data Connection page, create a connection to the AdventureWorks database.
 ![Connection Properties](/images/ria-business04.png)
 
     * Copy the ConnectionString, and edit it like this:
@@ -39,7 +39,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
     ```    
     ![Choose Your Data Connection](/images/ria-business05.png)  
 
-    * Go to Web.config file, and add this new entry with the updated connection string from the previous step:
+    * Go to Web.config file, and add this new entry into the <connectionStrings>> section, using the updated connection string from the previous step:
     ```xml
     <add name="AdventureWorksLT2022Entities" 
          connectionString="<paste the edited connectionString here>" 
@@ -47,6 +47,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
     ```
 
 7. On the Choose Your Database Objects page, expand the Tables node, select everything from the SalesLT schema, and click Finish
+
 ![Choose Your Database Objects](/images/ria-business06.png)
 
 8. The database is configured in the .Web project and the entity data model appears in the designer (Build the solution).
@@ -55,7 +56,10 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 9. Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click New Item, select the "Domain Service" template. Name the new item "OrganizationService".
 ![Add New Domain Item](/images/ria-business08.png)
 
-10. In the Add New Domain Service Class dialog box, select Customers from the Entities list.  
+10. In the Add New Domain Service Class dialog box, select Customers from the Entities list.
+
+Note: if the list is empty, please rebuild the solution, and open the dialog again.
+
 Ensure that the "Enable client access" and "Generate associated classes for metadata" check boxes are selected. Click Ok.  
 ![Add New Domain Service](/images/ria-business09.png)
 
@@ -92,10 +96,17 @@ The result will be like this:
 
 ### Troubleshooting and Known Issues
 
-* Make sure to run both the .Web project (for the server side) and .Browser project (for the client side). Look at errors in the browser console if it doesn't work.
-* You need to install the "Open RIA Tooling" to get the dialog to add a new domain service (the link is in the OpenSilver RIA documentation)
+#### Running the application:
+* Make sure to run both the .Web project (for the server side) and .Browser project (for the client side)
+* If you have an error that says "**No connection string named 'cshtml5dbEntities' could be found in the application config file.**", make sure that you have added an entry to the Web.Config file as explained at [this step](#database-connection).
+* If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there
+* If you see an error related to CORS (such as "**Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.**"), then [configure CORS on the server-side](https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors), or work around CORS entirely by [running your browser with disabled security](https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks)
 * If you receive `Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)` error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated.
 ![SQLite Interop Error](/images/ria-business14.png)
+
+#### Creating the application:
+* If you don't see the "Add New Domain Service Class" dialog, make sure to install the latest VSIX of OpenSilver.
+* If the "Add New Domain Service Class" dialog is empty, make sure to rebuild the solution, and try again.
 
 ### See Also
 * [OpenSilver Information about Open RIA Services](https://doc.opensilver.net/documentation/3rd-party-libraries/ria-services.html)  
