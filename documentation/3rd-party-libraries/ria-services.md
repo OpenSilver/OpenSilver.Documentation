@@ -35,16 +35,28 @@ The server-side project (.Web) usually references the following packages:
 https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client.Core/
 https://www.nuget.org/packages/OpenSilver.OpenRiaServices.Client/
 
-## Example
+## Tutorials
 
-Look at the "4_6" branch of the following repository for a working client-server example:
+* [Tutorial to create a new OpenSilver business application with Open RIA Services](https://doc.opensilver.net/documentation/general/business-app.html)
+* [Tutorial to migrate Silverlight and OpenSilver projects from WCF RIA Services to Open RIA Services](#Migrate-from-WCF-RIA-to-Open-RIA)
+
+## Examples
+
+There are many examples:
+
+* For a real-world, open-source sample OpenSilver application that uses Open RIA Services, check the "SampleCRM" at the following URL:
+https://github.com/OpenSilver/SampleCRM
+
+* You can also create a new OpenSilver client/server application with RIA Services by using the "OpenSilver Business Application" project template present in OpenSilver 2.0 and newer.
+
+* For another example, look at the "4_6" branch of the following repository for a working client-server example:
 https://github.com/OpenSilver/OpenRiaServicesDemo
 
 Note: make sure to run the 2 following projects simultaneously:
 * SilverlightWCFRIA.Browser (the frontend)
 * SilverlightWCFRIA.Web (the backend)
 
-Other example:
+Other sample application:
 https://github.com/OpenSilver/OpenRiaServicesSamples/tree/main/CustomEndpoint
 
 ## Source code
@@ -68,7 +80,8 @@ Documentation for changes since WCF RIA Services can be found under https://gith
 
 Refer to the "Example" section above for downloadable source code.
 
-## A step-by-step guide to migrate Silverlight and OpenSilver projects from WCF RIA to OpenRIA Services
+
+## <a name="Migrate-from-WCF-RIA-to-Open-RIA"></a>A step-by-step guide to migrate Silverlight and OpenSilver projects from WCF RIA to OpenRIA Services
 
 In [this](https://doc.opensilver.net/documentation/migrate-from-silverlight/example.html) example it is shown how to migrate **Silverlight** application to **OpenSilver**.\
 If the project uses **WCF RIA** services then the beginning steps are the same but then compilation errors are expected.
