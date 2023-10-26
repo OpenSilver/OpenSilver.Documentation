@@ -162,6 +162,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
      connectionString=&quot;&lt;paste the edited connectionString here&gt;&quot; 
      providerName=&quot;System.Data.EntityClient&quot; /&gt;
 </code></pre>
+<p>Make sure that the &quot;name&quot; property is correct and that the connection string contains the password.</p>
 </li>
 <li><p>On the Choose Your Database Objects page, expand the Tables node, select everything from the SalesLT schema, and click Finish</p>
 </li>
@@ -174,20 +175,24 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 <li><p>Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click New Item, select the &quot;Domain Service&quot; template. Name the new item &quot;OrganizationService&quot;.
 <img src="/images/ria-business08.png" alt="Add New Domain Item"></p>
 </li>
-<li><p>In the Add New Domain Service Class dialog box, select Customers from the Entities list.</p>
+<li><p>In the <code>Add New Domain Service Class</code> dialog box, select Customers from the Entities list.</p>
 </li>
 </ol>
 <p>Note: if the list is empty, please rebuild the solution, and open the dialog again.</p>
 <p>Ensure that the &quot;Enable client access&quot; and &quot;Generate associated classes for metadata&quot; check boxes are selected. Click Ok.<br>
 <img src="/images/ria-business09.png" alt="Add New Domain Service"></p>
 <ol start="11">
-<li><p>Build the solution.<br>
-Building the solution generates the Domain Context and entities in the client project.<br>
-On the client side, the Domain <code>Service</code> class has the suffix <code>Context</code>. So the <code>OrganizationService</code> becomes <code>OrganizationContext</code>.<br>
-<img src="/images/ria-business10.png" alt="Services and Contexts"></p>
-</li>
-<li><p>Open file <code>Views\Home.xaml</code>, and include this code inside of the StackPanel:</p>
-</li>
+<li>Build the solution.<br>
+Building the solution generates the Domain Context and entities in the client project.</li>
+</ol>
+<p>For your information, in terms of naming, there are 2 cases:</p>
+<ul>
+<li>If the Service class on the server-side inherits from <code>DbDomainService&lt;T&gt;</code> (which is the case if you used the Add New Domain Service Class, on the client side), then the Domain <code>Service</code> class will have the same name as on the server-side. So the generated client-side <code>OrganizationService</code> class will have the same name as the server-side <code>OrganizationService</code> class.</li>
+<li>If the Service classe on the server-side inherits from <code>DomainService</code>, then on the client side, the Domain <code>Service</code> class will have the suffix <code>Context</code>. So the <code>OrganizationService</code> becomes <code>OrganizationContext</code>.<br>
+<img src="/images/ria-business10.png" alt="Services and Contexts"></li>
+</ul>
+<ol start="13">
+<li>Open file <code>Views\Home.xaml</code>, and include this code inside of the StackPanel:</li>
 </ol>
 <pre><code class="lang-xml">&lt;DataGrid x:Name=&quot;dataGridCustomers&quot;
           Height=&quot;200&quot;/&gt;
@@ -200,6 +205,9 @@ On the client side, the Domain <code>Service</code> class has the suffix <code>C
 <ol start="13">
 <li>And in <code>Views\Home.xaml.cs</code>, include this private field:</li>
 </ol>
+<pre><code class="lang-c#">private readonly OrganizationService _context = new OrganizationService();
+</code></pre>
+<p>or the following one if you are in the second case described above:</p>
 <pre><code class="lang-c#">private readonly OrganizationContext _context = new OrganizationContext();
 </code></pre>
 <p>and after <code>InitializeComponent()</code> call, add this:</p>
@@ -219,6 +227,7 @@ _context.Load(_context.GetCustomersQuery());
 <li>If you have an error that says &quot;<strong>No connection string named 'cshtml5dbEntities' could be found in the application config file.</strong>&quot;, make sure that you have added an entry to the Web.Config file as explained at <a href="#database-connection">this step</a>.</li>
 <li>If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there</li>
 <li>If you see an error related to CORS (such as &quot;<strong>Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.</strong>&quot;), then <a href="https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors">configure CORS on the server-side</a>, or work around CORS entirely by <a href="https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks">running your browser with disabled security</a></li>
+<li>If you get some other &quot;Error 500&quot; on the server side, make sure that the &quot;.Web&quot; project is running under the &quot;x64&quot; platform target.</li>
 <li>If you receive <code>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)</code> error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated.
 <img src="/images/ria-business14.png" alt="SQLite Interop Error"></li>
 </ul>
