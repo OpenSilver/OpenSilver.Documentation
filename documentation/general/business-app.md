@@ -45,6 +45,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
          connectionString="<paste the edited connectionString here>" 
          providerName="System.Data.EntityClient" />
     ```
+    Make sure that the "name" property is correct and that the connection string contains the password.
 
 7. On the Choose Your Database Objects page, expand the Tables node, select everything from the SalesLT schema, and click Finish
 
@@ -56,7 +57,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 9. Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click New Item, select the "Domain Service" template. Name the new item "OrganizationService".
 ![Add New Domain Item](/images/ria-business08.png)
 
-10. In the Add New Domain Service Class dialog box, select Customers from the Entities list.
+10. In the `Add New Domain Service Class` dialog box, select Customers from the Entities list.
 
 Note: if the list is empty, please rebuild the solution, and open the dialog again.
 
@@ -65,10 +66,13 @@ Ensure that the "Enable client access" and "Generate associated classes for meta
 
 11. Build the solution.  
 Building the solution generates the Domain Context and entities in the client project.  
-On the client side, the Domain `Service` class has the suffix `Context`. So the `OrganizationService` becomes `OrganizationContext`.  
+
+For your information, in terms of naming, there are 2 cases:
+* If the Service class on the server-side inherits from `DbDomainService<T>` (which is the case if you used the Add New Domain Service Class, on the client side), then the Domain `Service` class will have the same name as on the server-side. So the generated client-side `OrganizationService` class will have the same name as the server-side `OrganizationService` class.
+* If the Service classe on the server-side inherits from `DomainService`, then on the client side, the Domain `Service` class will have the suffix `Context`. So the `OrganizationService` becomes `OrganizationContext`.  
 ![Services and Contexts](/images/ria-business10.png)
 
-12. Open file `Views\Home.xaml`, and include this code inside of the StackPanel:
+13. Open file `Views\Home.xaml`, and include this code inside of the StackPanel:
 ```xml
 <DataGrid x:Name="dataGridCustomers"
           Height="200"/>
@@ -80,6 +84,10 @@ The result will be like this:
 ![Xaml Code](/images/ria-business11.png)
 
 13. And in `Views\Home.xaml.cs`, include this private field:
+```c#
+private readonly OrganizationService _context = new OrganizationService();
+```
+or the following one if you are in the second case described above:
 ```c#
 private readonly OrganizationContext _context = new OrganizationContext();
 ```        
@@ -101,6 +109,7 @@ The result will be like this:
 * If you have an error that says "**No connection string named 'cshtml5dbEntities' could be found in the application config file.**", make sure that you have added an entry to the Web.Config file as explained at [this step](#database-connection).
 * If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there
 * If you see an error related to CORS (such as "**Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.**"), then [configure CORS on the server-side](https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors), or work around CORS entirely by [running your browser with disabled security](https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks)
+* If you get some other "Error 500" on the server side, make sure that the ".Web" project is running under the "x64" platform target.
 * If you receive `Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)` error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated.
 ![SQLite Interop Error](/images/ria-business14.png)
 
