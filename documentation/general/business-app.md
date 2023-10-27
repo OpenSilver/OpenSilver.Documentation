@@ -4,6 +4,16 @@ RIA Services (Rich Internet Application Services) is a powerful framework that s
 
 OpenSilver includes a project template that lets you leverage Open RIA Services to easily create complex client/server business applications.
 
+### Table of Contents
+
+[Getting Started](#getting-started)
+
+[Tutorial](#tutorial)
+
+[Troubleshooting and Known Issues](#troubleshooting-and-known-issues)
+
+[See Also](#see-also)
+
 ### Getting Started
 You will need Visual Studio 2022 (or newer). Install the OpenSilver VSIX Templates from [here](https://opensilver.net/download.aspx). These templates include the OpenSilver Business Application Template. 
 
@@ -104,7 +114,7 @@ The result will be like this:
 
 ### Troubleshooting and Known Issues
 
-#### Running the application:
+#### Issues at design-time:
 * Make sure to run both the .Web project (for the server side) and .Browser project (for the client side)
 * If you have an error that says "**No connection string named '(...)' could be found in the application config file.**", make sure that you have added an entry to the Web.Config file as explained at [this step](#database-connection).
 * If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there
@@ -113,7 +123,7 @@ The result will be like this:
 * If you receive `Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)` error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated.
 ![SQLite Interop Error](/images/ria-business14.png)
 
-#### Creating the application:
+#### Issues at design-time:
 * If you don't see the "Add New Domain Service Class" dialog, make sure to install the latest VSIX of OpenSilver.
 * If the "Add New Domain Service Class" dialog is empty, make sure to rebuild the solution, and try again.
 
