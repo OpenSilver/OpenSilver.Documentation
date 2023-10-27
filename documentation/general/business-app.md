@@ -106,7 +106,7 @@ The result will be like this:
 
 #### Running the application:
 * Make sure to run both the .Web project (for the server side) and .Browser project (for the client side)
-* If you have an error that says "**No connection string named 'cshtml5dbEntities' could be found in the application config file.**", make sure that you have added an entry to the Web.Config file as explained at [this step](#database-connection).
+* If you have an error that says "**No connection string named '(...)' could be found in the application config file.**", make sure that you have added an entry to the Web.Config file as explained at [this step](#database-connection).
 * If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there
 * If you see an error related to CORS (such as "**Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.**"), then [configure CORS on the server-side](https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors), or work around CORS entirely by [running your browser with disabled security](https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks)
 * If you get some other "Error 500" on the server side, make sure that the ".Web" project is running under the "x64" platform target.
