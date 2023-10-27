@@ -124,6 +124,11 @@
 
 <p>RIA Services (Rich Internet Application Services) is a powerful framework that simplifies the development of data-driven applications for the web. With RIA Services, you can easily create business applications that offer rich user experiences and efficient data access. This documentation will guide you through the process of creating a business application using OpenRIA Services (the evolved Open Source version of WCF RIA Services) using OpenSilver.</p>
 <p>OpenSilver includes a project template that lets you leverage Open RIA Services to easily create complex client/server business applications.</p>
+<h3 id="table-of-contents">Table of Contents</h3>
+<p><a href="#getting-started">Getting Started</a></p>
+<p><a href="#tutorial">Tutorial</a></p>
+<p><a href="#troubleshooting-and-known-issues">Troubleshooting and Known Issues</a></p>
+<p><a href="#see-also">See Also</a></p>
 <h3 id="getting-started">Getting Started</h3>
 <p>You will need Visual Studio 2022 (or newer). Install the OpenSilver VSIX Templates from <a href="https://opensilver.net/download.aspx">here</a>. These templates include the OpenSilver Business Application Template.</p>
 <h3 id="tutorial">Tutorial</h3>
@@ -221,17 +226,17 @@ _context.Load(_context.GetCustomersQuery());
 <img src="/images/ria-business13.png" alt="Final"></li>
 </ol>
 <h3 id="troubleshooting-and-known-issues">Troubleshooting and Known Issues</h3>
-<h4 id="running-the-application">Running the application:</h4>
+<h4 id="issues-at-design-time">Issues at design-time:</h4>
 <ul>
 <li>Make sure to run both the .Web project (for the server side) and .Browser project (for the client side)</li>
 <li>If you have an error that says &quot;<strong>No connection string named '(...)' could be found in the application config file.</strong>&quot;, make sure that you have added an entry to the Web.Config file as explained at <a href="#database-connection">this step</a>.</li>
 <li>If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there</li>
 <li>If you see an error related to CORS (such as &quot;<strong>Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.</strong>&quot;), then <a href="https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors">configure CORS on the server-side</a>, or work around CORS entirely by <a href="https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks">running your browser with disabled security</a></li>
 <li>If you get some other &quot;Error 500&quot; on the server side, make sure that the &quot;.Web&quot; project is running under the &quot;x64&quot; platform target.</li>
-<li>If you receive <code>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)</code> error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated.
+<li>If you receive <code>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)</code> error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated. You can also try stopping IIS Express from the system tray, and restarting the whole IIS by running the following commands in a Command Line with Administrator Privileges: <code>net stop winnat</code> and then <code>net start winnat</code>
 <img src="/images/ria-business14.png" alt="SQLite Interop Error"></li>
 </ul>
-<h4 id="creating-the-application">Creating the application:</h4>
+<h4 id="issues-at-design-time-1">Issues at design-time:</h4>
 <ul>
 <li>If you don't see the &quot;Add New Domain Service Class&quot; dialog, make sure to install the latest VSIX of OpenSilver.</li>
 <li>If the &quot;Add New Domain Service Class&quot; dialog is empty, make sure to rebuild the solution, and try again.</li>
