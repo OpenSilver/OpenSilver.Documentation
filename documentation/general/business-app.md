@@ -42,20 +42,8 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 6. <a name="database-connection"></a>On the Choose Your Data Connection page, create a connection to the AdventureWorks database.
 ![Connection Properties](/images/ria-business04.png)
 
-    * Copy the ConnectionString, and edit it like this:
-    ```
-    - Replace any double quotes with &quot;
-    - Replace 'data source' with 'Server'
-    ```    
+    * IMPORTANT: Copy the ConnectionString that is shown in the dialog, and save it somewhere (it will be useful in a later step), then click Next:
     ![Choose Your Data Connection](/images/ria-business05.png)  
-
-    * Go to Web.config file, and add this new entry into the <connectionStrings>> section, using the updated connection string from the previous step:
-    ```xml
-    <add name="AdventureWorksLT2022Entities" 
-         connectionString="<paste the edited connectionString here>" 
-         providerName="System.Data.EntityClient" />
-    ```
-    Make sure that the "name" property is correct and that the connection string contains the password.
 
 7. On the Choose Your Database Objects page, expand the Tables node, select everything from the SalesLT schema, and click Finish
 
@@ -64,17 +52,55 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 8. The database is configured in the .Web project and the entity data model appears in the designer (Build the solution).
 ![Data Model](/images/ria-business07.png)
 
-9. Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click New Item, select the "Domain Service" template. Name the new item "OrganizationService".
+9. Make sure that the ConnectionString is properly configured in the Web.Config file. To do so:
+    * Take the connection string that you copied in one of the previous steps.
+    * Edit it like this:
+    ```
+    - Replace any double quotes (") with &quot;
+    - Replace 'data source' with 'Server'
+    ```
+    For example, replace the following ConnectionString:
+    ```
+    metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string="data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true";
+    ```
+    with this one:
+    ```
+    metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;
+    ```
+    * Go to Web.config file, and add this new entry into the <connectionStrings>> section, using the updated connection string from the previous step:
+    ```xml
+    <add name="AdventureWorksLT2022Entities" 
+         connectionString="<paste the edited connectionString here>" 
+         providerName="System.Data.EntityClient" />
+    ```
+    Make sure that the "name" property is correct and that the connection string contains the password.
+
+    Here is an example of valid setting in the Web.Config:
+
+    ```xml
+    <connectionStrings>
+        <add name="DefaultConnection" connectionString="Data Source=|DataDirectory|database\OpenSilverBusinessApplication1.db;Version=3;New=True;Compress=True;" providerName="System.Data.EntityClient"/>
+        <add name="AdventureWorksLT2022Entities" connectionString="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-CACBBSGA;initial catalog=AdventureWorksLT2022;trusted_connection=true&quot;" providerName="System.Data.EntityClient" />
+    </connectionStrings>
+    ```
+        
+   Screenshot:
+   ![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/bb8a1ab0-0945-4acd-b4ef-4b2a16ad9bb6)
+
+11. Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click New Item, select the "Domain Service" template. Name the new item "OrganizationService".
+
+Note: if you don't see the "Domain Service" item in the "Add New Item" dialog, make sure that you have downloaded the latest OpenSilver Visual Studio Extension (VSIX).
+
 ![Add New Domain Item](/images/ria-business08.png)
 
-10. In the `Add New Domain Service Class` dialog box, select Customers from the Entities list.
+11. In the `Add New Domain Service Class` dialog box, select Customers from the Entities list.
 
 Note: if the list is empty, please rebuild the solution, and open the dialog again.
 
 Ensure that the "Enable client access" and "Generate associated classes for metadata" check boxes are selected. Click Ok.  
 ![Add New Domain Service](/images/ria-business09.png)
 
-11. Build the solution.  
+12. Build the solution.  
 Building the solution generates the Domain Context and entities in the client project.  
 
 For your information, in terms of naming, there are 2 cases:
