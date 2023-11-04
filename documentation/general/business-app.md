@@ -10,6 +10,8 @@ OpenSilver includes a project template that lets you leverage Open RIA Services 
 
 [Tutorial](#tutorial)
 
+[Source Code](#source-code)
+
 [Troubleshooting and Known Issues](#troubleshooting-and-known-issues)
 
 [See Also](#see-also)
@@ -28,24 +30,24 @@ You can see a quick video demo from this tutorial here:
 For this tutorial, we will use the AdventureWorks Lightweight database (AdventureWorksLT2022.bak). You can see instructions on how to download, restore, and setup here:
 [https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms](https://learn.microsoft.com/en-us/sql/samples/adventureworks-install-configure?view=sql-server-ver16&tabs=ssms)
 
-2. Create a new OpenSilver Business Application Project
+2. Create a new "OpenSilver Business Application Project"
 ![OpenSilver Ria Services Business Application](/images/ria-business01.png)
 
-3. In Visual Studios's Solution Explorer, right-click the .Web project, click Add, and then click New Item.
+3. In Visual Studios's Solution Explorer, right-click the .Web project, click Add, and then click "New Item".
 
 4. Select the "ADO.NET Entity Data Model" template. Change the name to "AdventureWorks", and then click Add.
 ![ADO.NET Entity Data Model](/images/ria-business02.png)
 
-5. On the Choose Model Contents page, click "EF Designer from database", and then click Next.
+5. On the "Choose Model Contents" page, click "EF Designer from database", and then click Next.
 ![EF Designer from database](/images/ria-business03.png)
 
-6. <a name="database-connection"></a>On the Choose Your Data Connection page, create a connection to the AdventureWorks database.
+6. <a name="database-connection"></a>On the "Choose Your Data Connection" page, create a connection to the "AdventureWorks" database.
 ![Connection Properties](/images/ria-business04.png)
 
-    * IMPORTANT: Copy the ConnectionString that is shown in the dialog, and save it somewhere (it will be useful in a later step), then click Next:
+    * IMPORTANT: Copy the ConnectionString that is shown in the dialog, and save it somewhere (it will be useful in a later step), then click Next:  
     ![Choose Your Data Connection](/images/ria-business05.png)  
 
-7. On the Choose Your Database Objects page, expand the Tables node, select everything from the SalesLT schema, and click Finish
+7. On the "Choose Your Database Objects and Settings" page, expand the "Tables" node, select everything from the "SalesLT" schema, and click "Finish"
 
 ![Choose Your Database Objects](/images/ria-business06.png)
 
@@ -67,10 +69,10 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
     ```
     metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;
     ```
-    * Go to Web.config file, and add this new entry into the <connectionStrings>> section, using the updated connection string from the previous step:
+    * Go to Web.config file, and add this new entry into the \<connectionStrings\> section, using the updated connection string from the previous step:
     ```xml
     <add name="AdventureWorksLT2022Entities" 
-         connectionString="<paste the edited connectionString here>" 
+         connectionString="(paste the edited connectionString here)" 
          providerName="System.Data.EntityClient" />
     ```
     Make sure that the "name" property is correct and that the connection string contains the password.
@@ -84,10 +86,10 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
     </connectionStrings>
     ```
         
-   Screenshot:
+   Screenshot:  
    ![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/bb8a1ab0-0945-4acd-b4ef-4b2a16ad9bb6)
 
-11. Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click New Item, select the "Domain Service" template. Name the new item "OrganizationService".
+10. Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click "New Item", select the "Domain Service" template. Name the new item "OrganizationService".
 
 Note: if you don't see the "Domain Service" item in the "Add New Item" dialog, make sure that you have downloaded the latest OpenSilver Visual Studio Extension (VSIX).
 
@@ -104,7 +106,7 @@ Ensure that the "Enable client access" and "Generate associated classes for meta
 Building the solution generates the Domain Context and entities in the client project.  
 
 For your information, in terms of naming, there are 2 cases:
-* If the Service class on the server-side inherits from `DbDomainService<T>` (which is the case if you used the Add New Domain Service Class, on the client side), then the Domain `Service` class will have the same name as on the server-side. So the generated client-side `OrganizationService` class will have the same name as the server-side `OrganizationService` class.
+* If the Service class on the server-side inherits from `DbDomainService<T>` (which is the case if you used the "Add New Domain Service Class", on the client side), then the Domain `Service` class will have the same name as on the server-side. So the generated client-side `OrganizationService` class will have the same name as the server-side `OrganizationService` class.
 * If the Service classe on the server-side inherits from `DomainService`, then on the client side, the Domain `Service` class will have the suffix `Context`. So the `OrganizationService` becomes `OrganizationContext`.  
 ![Services and Contexts](/images/ria-business10.png)
 
@@ -132,11 +134,15 @@ and after `InitializeComponent()` call, add this:
 dataGridCustomers.ItemsSource = _context.Customers;
 _context.Load(_context.GetCustomersQuery());
 ```
-The result will be like this:
+The result will be like this:  
 ![C# Code](/images/ria-business12.png)
 
 14. Execute the ".Web" project, then execute the ".Browser" project and check the results:
 ![Final](/images/ria-business13.png)
+
+### Source Code
+
+You can get the complete source code for that article [here](https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverBusinessApplicationDemo).
 
 ### Troubleshooting and Known Issues
 
@@ -148,8 +154,6 @@ The result will be like this:
 * If you get some other "Error 500" on the server side, make sure that the ".Web" project is running under the "x64" platform target.
 * If you receive `Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)` error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated. You can also try stopping IIS Express from the system tray, and restarting the whole IIS by running the following commands in a Command Line with Administrator Privileges: `net stop winnat` and then `net start winnat`
 ![SQLite Interop Error](/images/ria-business14.png)
-
-#### Issues at design-time:
 * If you don't see the "Add New Domain Service Class" dialog, make sure to install the latest VSIX of OpenSilver.
 * If the "Add New Domain Service Class" dialog is empty, make sure to rebuild the solution, and try again.
 
