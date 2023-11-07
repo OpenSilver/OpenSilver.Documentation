@@ -147,7 +147,7 @@
 <h3 id="2-the-selenium-tests-project">2. The Selenium Tests Project</h3>
 <p>Add a new project of type &quot;Web Driver Test for Edge (.NET Core)&quot; to Solution. Keep the original solution name (<code>OpenSilverSeleniumDemo</code>), but append <code>.UiTests</code> at the end.</p>
 <p><img src="/images/how-to-topics/selenium4.gif" alt="Add Selenium Project" title="Add Selenium Project]"></p>
-<p>Let's take a look at the new project. Firstly, note that it is using MSTest, but of course, you can use the testing framework that you like more. Secondly, note that it is already included in Selenium.WebDriver nuget. If something goes wrong, you can try to use the versions in the screenshot for each nuget just for the sake of following this guide.</p>
+<p>Let's take a look at the new project. Firstly, note that it is using MSTest, but of course, you can use the testing framework that you like more. Secondly, note that it is already included in Selenium.WebDriver nuget. If something goes wrong, you can try to use the versions in the screenshot for each nuget just for the sake of following this guide. Note this test project is generated for the Target Framework <code>netcoreapp2.1</code>, you can try changing to some most recent versions like <code>net6.0</code>, <code>net7.0</code>, or <code>net8.0</code>.</p>
 <p><img src="/images/how-to-topics/selenium5.png" alt="Inspect Selenium Project" title="Inspect Selenium Project]"></p>
 <p>Take a look too in the file <code>EdgeDriverTest.cs</code>. Take some time to read it. Follow the instructions to download the correct WebDriver for Microsoft Edge Browser (in this <a href="https://docs.microsoft.com/en-us/microsoft-edge/webdriver-chromium">link</a>). Don't forget to include the folder where you saved <code>msedgedriver.exe</code> to PATH as the link asked you to do it.</p>
 <p>Finally, let's check if the test is working. Open Test Explorer (menu Test -&gt; Test Explorer), and click the Run button. This will quickly open the Edge window, close and then you will see the green tick in Test Explorer (the test passes!).</p>
@@ -232,7 +232,8 @@ public void VerifyWeCanAddAnItem()
 
     // type the sample text in the textbox
     txtNewItem
-        .FindElement(By.CssSelector(&quot;[contenteditable='true']&quot;))
+        .FindElement(By.CssSelector(&quot;[contenteditable='true']&quot;)) // OpenSilver 1.x
+        //.FindElement(By.TagName(&quot;textarea&quot;)) // OpenSilver 2.x
         .SendKeys(sampleText);
 
     btnAdd.Click();
@@ -245,7 +246,7 @@ public void VerifyWeCanAddAnItem()
 <ol>
 <li>First, we wait until the page is loaded using the Wait object;</li>
 <li>Then we use the same technique from the past test, to get the Xaml Elements references;</li>
-<li>Next, we type in the textbox. Note that we need to find a <code>contenteditable</code> inside of the textbox. This happens because OpenSilver's textbox is not a plain Html textbox, it is a far more powerful and complex control in order to replicate the features of Xaml Textbox;</li>
+<li>Next, we type in the textbox. Note that we need to find a <code>contenteditable</code> (or a <code>textarea</code> for OpenSilver 2.x) inside of the textbox. This happens because OpenSilver's textbox is not a plain Html textbox, it is a far more powerful and complex control in order to replicate the features of Xaml Textbox;</li>
 <li>We just click the button;</li>
 <li>Now we search, inside of the listbox, if we have some element containing the text that we added from the textbox</li>
 </ol>

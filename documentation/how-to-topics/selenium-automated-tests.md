@@ -39,7 +39,7 @@ Add a new project of type "Web Driver Test for Edge (.NET Core)" to Solution. Ke
 
 ![Add Selenium Project](/images/how-to-topics/selenium4.gif "Add Selenium Project]")
 
-Let's take a look at the new project. Firstly, note that it is using MSTest, but of course, you can use the testing framework that you like more. Secondly, note that it is already included in Selenium.WebDriver nuget. If something goes wrong, you can try to use the versions in the screenshot for each nuget just for the sake of following this guide.
+Let's take a look at the new project. Firstly, note that it is using MSTest, but of course, you can use the testing framework that you like more. Secondly, note that it is already included in Selenium.WebDriver nuget. If something goes wrong, you can try to use the versions in the screenshot for each nuget just for the sake of following this guide. Note this test project is generated for the Target Framework `netcoreapp2.1`, you can try changing to some most recent versions like `net6.0`, `net7.0`, or `net8.0`.
 
 ![Inspect Selenium Project](/images/how-to-topics/selenium5.png "Inspect Selenium Project]")
 
@@ -146,7 +146,8 @@ public void VerifyWeCanAddAnItem()
 
     // type the sample text in the textbox
     txtNewItem
-        .FindElement(By.CssSelector("[contenteditable='true']"))
+        .FindElement(By.CssSelector("[contenteditable='true']")) // OpenSilver 1.x
+        //.FindElement(By.TagName("textarea")) // OpenSilver 2.x
         .SendKeys(sampleText);
 
     btnAdd.Click();
@@ -158,7 +159,7 @@ public void VerifyWeCanAddAnItem()
 ```
 1. First, we wait until the page is loaded using the Wait object;
 2. Then we use the same technique from the past test, to get the Xaml Elements references;
-3. Next, we type in the textbox. Note that we need to find a `contenteditable` inside of the textbox. This happens because OpenSilver's textbox is not a plain Html textbox, it is a far more powerful and complex control in order to replicate the features of Xaml Textbox;
+3. Next, we type in the textbox. Note that we need to find a `contenteditable` (or a `textarea` for OpenSilver 2.x) inside of the textbox. This happens because OpenSilver's textbox is not a plain Html textbox, it is a far more powerful and complex control in order to replicate the features of Xaml Textbox;
 4. We just click the button;
 5. Now we search, inside of the listbox, if we have some element containing the text that we added from the textbox
 
