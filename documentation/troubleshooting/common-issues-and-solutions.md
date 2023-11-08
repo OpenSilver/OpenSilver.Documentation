@@ -16,7 +16,7 @@
 
 - All XAML files in the project need to have the following properties: Build Action = Content, CustomTool = MSBuild:Compile
 
-- Killing "msbuild.exe" process may fix some rare issues that appear after updating to a newer OpenSilver NuGet package or when working with multiple instances of Visual Studio.
+- Killing the "msbuild.exe" process or restarting Visual Studio may fix some rare issues that appear after updating to a newer OpenSilver NuGet package or when working with multiple instances of Visual Studio.
 
 ### Debugging
 
@@ -28,7 +28,7 @@
 
 - XAML auto-completion and intellisense may sometime not show up.
 
-- If you only change XAML files without changing C# or VB.NET files, you need to manually Rebuild the solution to see the changes reflected in your app.
+- If you only change XAML files without changing C# or VB.NET files, you may need to manually Rebuild the solution to see the changes reflected in your app.
 
 ### WCF and client/server communication
 
@@ -39,7 +39,7 @@
 - To enable passing cookies (eg. for credentials/authentication), set the "[DefaultSoapCredentialsMode](../in-depth-topics/wcf-and-webclient.html)" parameter.
 
 #### Code trimming and WCF/SOAP data contract serialization
-Code trimming is an optimization that can reduce the size of a published Open Silver application, thus improving both performance and start-up time. For more information you can read the official documentation [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/configure-trimmer?view=aspnetcore-6.0).
+Code trimming is an optimization that can reduce the size of a published OpenSilver application, thus improving both performance and start-up time. For more information you can read the official documentation [here](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/configure-trimmer?view=aspnetcore-6.0).
 
 However, in some scenarios, is it possible that code trimming breaks .NET serialization and/or deserialization that rely heavily on Reflection.
 

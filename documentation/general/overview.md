@@ -2,7 +2,7 @@
 
 ## What is OpenSilver?
 
-OpenSilver is an open-source replacement for Microsoft Silverlight. It is a development tool allowing developers to write web applications using .NET, C#, VB.NET, and XAML, as with Silverlight, with the notable difference that applications created with OpenSilver run on all current browsers, including Chrome, Edge, Firefox and Safari, without the need to install a plugin.
+OpenSilver is an open-source replacement for Microsoft Silverlight. It is a development tool allowing developers to write web applications using .NET, C#, VB.NET, and XAML, like Silverlight was. A notable difference with Silverlight is that applications created with OpenSilver run on all current browsers, including Chrome, Edge, Firefox and Safari, without requiring any plugin.
 
 The OpenSilver project was first announced in March 2020 (Technical Preview) by Userware, a French company founded in 2007 specializing in Microsoft development technologies, which had already been working since 2014 on the conversion from C # / XAML to HTML / JavaScript, as part of its other product called [CSHTML5](http://cshtml5.com).
 OpenSilver can be downloaded from [OpenSilver.NET](https://OpenSilver.NET). The site also contains sample applications and case studies.
@@ -17,7 +17,7 @@ On the user side, Silverlight enabled the display of rich content in web pages, 
 
 On the developer side, Silverlight enabled the creation of web applications using .NET, C# or VB.NET and XAML, that is to say very powerful technologies which until then had been reserved for Windows application development.
 
-With the advent and rapid spread of smartphones (iPhone, Android, etc.) and tablets, it has become increasingly difficult to install plugins on Internet browsers. So, little by little, even the Windows versions of the main Internet browsers decided to stop supporting plugins. So that was the end for Adobe Flash and Microsoft Silverlight, which today no longer run on Safari, Chrome, Edge nor Firefox. The last notable version of Silverlight, version 5, was released in December 2011. Then, in 2012, Microsoft announced that Silverlight would only be supported for another ten years, until October 12, 2021, and would only be supported on Microsoft Internet Explorer.
+With the advent and rapid spread of smartphones (iPhone, Android, etc.) and tablets, it has become increasingly difficult to install plugins on Internet browsers. So, little by little, even the Windows versions of the main Internet browsers decided to stop supporting plugins. That was the end for Adobe Flash and Microsoft Silverlight, which today no longer run on Safari, Chrome, Edge nor Firefox. The last notable version of Silverlight, version 5, was released in December 2011. Then, in 2012, Microsoft announced that Silverlight would only be supported for another ten years, until October 12, 2021, and would only be supported on Microsoft Internet Explorer.
 
 This has been a major problem for many companies that had invested several years of development in their Silverlight applications, particularly in the area of ​​enterprise applications. The need has arisen to find a replacement for Silverlight so as not to throw away all these years of development, hence the birth of OpenSilver.
 
@@ -35,7 +35,7 @@ The general principle for migrating a Silverlight application to OpenSilver cons
 
 In practice some compilation errors are expected, since OpenSilver currently supports a (fairly large) subset of Silverlight functionality. Particularly in the area of third-party libraries, some manual work may be required if a particular library is not yet supported.
 
-Userware, the company behind the open-source OpenSilver project, is currently working on compatibility with third-party components and has already successfully implemented many components of the Telerik UI suite. Userware has also been able to reach a good level of support for RIA Services, PRISM, MEF, MvvmLight, SharpZipLib, Newtonsoft, and other Silverlight libraries.
+Userware, the company behind the open-source project OpenSilver, is currently working on compatibility with third-party components and has already successfully implemented many components of the Telerik UI suite. Userware has also been able to reach a good level of support for RIA Services, PRISM, MEF, MvvmLight, SharpZipLib, Newtonsoft, and other Silverlight libraries.
 
 When a functionality is not available, the developer has several possibilities: bypass it with alternative C# or VB.Net code and XAML, use a .NET Standard library which provides equivalent functionality, [develop it in JavaScript](javascript-interop-and-libraries.md), or [import an existing JavaScript library](javascript-interop-and-libraries.md#how-to-import-javascript-libraries).
 

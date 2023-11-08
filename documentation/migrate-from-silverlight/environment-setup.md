@@ -29,7 +29,7 @@ It is recommended that the Silverlight development environment is tested by atte
 
   Notes:
   - In some cases the original application may have been created with an older version of Visual Studio (usually 2010, 2012, or 2013). In such case, you should either install one of those older versions of VS, or attempt to update the Silverlight solution to a more recent version of VS.
-  - There is an unofficial VS extension that allows to open and run Silverlight solutions from more recent versions of VS, such as VS 2019. However, it may cause regressions and it is not approach that we recommend. It is called "Silverlight for Visual Studio" by Rami Abughazaleh. The VS 2019 version can be found [here](https://marketplace.visualstudio.com/items?itemName=RamiAbughazaleh.SilverlightProjectSystem).
+  - There is an unofficial VS extension that allows to open and run Silverlight solutions from more recent versions of VS, such as VS 2019. However, it may cause regressions, which is why we do not recommend this approach. It is called "Silverlight for Visual Studio" by Rami Abughazaleh. The VS 2019 version can be found [here](https://marketplace.visualstudio.com/items?itemName=RamiAbughazaleh.SilverlightProjectSystem).
 
 Depending on the libraries that the Silverlight application is using, you may also need the following components:
 

@@ -1,7 +1,7 @@
 # How to Call JavaScript from C#
 ## General Concepts
 
-* A OpenSilver project is mainly written in C# and XAMP. When you compile the project, your OpenSilver code gets automatically compiled into WebAssembly.
+* A OpenSilver project is mainly written in C# and XAML. When you compile the project, your OpenSilver code gets automatically compiled into WebAssembly.
 
 * If you want, you can place JavaScript code directly inside your C# code by calling the "Interop.ExecuteJavaScript" method.
 

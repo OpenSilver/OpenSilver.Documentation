@@ -8,11 +8,11 @@
 
 ### Fixing cookie-related issues:
 
-In a process of client/server communication there can be a situations when authentication cookies not sent to the server in subseqent requests by client and as a result server rejects to send data back.\
-One of the reasons can be that client and server are running on different ports.
+In a process of client/server communication there can be a situations when authentication cookies are not sent to the server in subsequent requests by the client and as a result, the server refuses to send data back.\
+One possible reason is that the client and the server are running on different ports.
 
 
-Here is the solution for C# code.
+Here is the solution with C# code.
 
 #### 1. Add the following line in App.xaml.cs (Client).
 
@@ -25,7 +25,7 @@ HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "http://lo
 HttpContext.Current.Response.AddHeader("Access-Control-Allow-Credentials", "true");
 ```
 
-55591 is assumed to be a port which client uses
+Here, replace "55591" with the port used by the client
 
 [Here](https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#to-add-cors-to-your-web-service-recommended-simply-follow-these-steps) is how to add Global.asax and CORS.
 
