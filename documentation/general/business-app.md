@@ -106,7 +106,7 @@ Ensure that the "Enable client access" and "Generate associated classes for meta
 Building the solution generates the Domain Context and entities in the client project.  
 
 For your information, in terms of naming, there are 2 cases:
-* If the Service class on the server-side inherits from `DbDomainService<T>` (which is the case if you used the "Add New Domain Service Class", on the client side), then the Domain `Service` class will have the same name as on the server-side. So the generated client-side `OrganizationService` class will have the same name as the server-side `OrganizationService` class.
+* If the Service class on the server-side inherits from `DbDomainService<T>` (which is the case if you used the "Add New Domain Service Class", on the server side), then the Domain `Service` class will have the same name as on the server-side. So the generated client-side `OrganizationService` class will have the same name as the server-side `OrganizationService` class.
 * If the Service classe on the server-side inherits from `DomainService`, then on the client side, the Domain `Service` class will have the suffix `Context`. So the `OrganizationService` becomes `OrganizationContext`.  
 ![Services and Contexts](/images/ria-business10.png)
 
