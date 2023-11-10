@@ -126,18 +126,21 @@
 <p>OpenSilver is distributed as a NuGet package (on <a href="https://www.nuget.org/packages/OpenSilver">NuGet.org</a>) and as a <a href="https://www.opensilver.net/download.aspx">VSIX extension</a> for Visual Studio 2019 (or higher) containing the project templates.</p>
 <p>To create a new OpenSilver-type project, it is recommended to download the project templates first. To do that, go to <a href="https://OpenSilver.NET">https://OpenSilver.NET</a> , click Download, log in with your Microsoft account and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.</p>
 <p><img src="/images/1.OpenSilverWebsite.png" alt="OpenSilver Website" title="The OpenSilver.NET site"></p>
-<p>Then click on New Project and choose &quot;OpenSilver Application&quot;. Note that there is also a &quot;UWP-Compatible&quot; version of OpenSilver, which uses the XAML dialect of UWP instead of that of Silverlight, allowing increased compatibility with Universal Platform.</p>
+<p>Next, open Visual Studio and click on &quot;Create a new project&quot; and choose &quot;OpenSilver Application&quot;. Note that there is also a &quot;UWP-Compatible&quot; version of OpenSilver, which uses the XAML dialect of UWP instead of that of Silverlight, allowing increased compatibility with Universal Platform.</p>
 <p><img src="/images/2.NewDialogProjectWithVB.png" alt="Windows prompt for new project" title="The window for creating a new project"></p>
 <p>Once the solution is created, you will see that it has three projects.</p>
 <p><img src="/images/3.solutionExplorer.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for C#">
 <img src="/images/3.solutionExplorerWithVB.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for VB.NET"></p>
-<p>The first is where you will place the files for your application. Its structure is identical to that of a new Silverlight project: It notably contains the files</p>
+<p>The first one is where you will place the files for your application. Its structure is identical to that of a new Silverlight project. It notably contains the files:</p>
 <pre><code>* For C# code migration :- App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs. 
 * For VB.NET code migration :- App.xaml, App.xaml.vb, MainPage.xaml and MainPage.xaml.vb. 
 </code></pre>
 <p>The second project, named with the suffix &quot;.Browser&quot;, is the one you will have to launch to test your application in the browser. It plays a role similar to the &quot;.Web&quot; project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.</p>
-<p>Finally the third project, named with the suffix &quot;.Simulator&quot; is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator below. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# or VB.NET code at runtime in the &quot;Immediate&quot; window, things that are not possible in the browser.</p>
-<p>To test, let's add the following XAML code inside the MainPage.xaml file, replacing the <code>&lt;Canvas&gt;</code> element:</p>
+<p>Finally the third project, named with the suffix &quot;.Simulator&quot; is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# or VB.NET code at runtime in the &quot;Immediate&quot; window, things that are not possible in the browser.</p>
+<h4 id="as-a-test-lets-create-a-button-in-out-xaml-application">As a test, let's create a Button in out Xaml application:</h4>
+<ol>
+<li>Add the following XAML code inside the MainPage.xaml file, replacing the <code>&lt;Canvas&gt;</code> element:</li>
+</ol>
 <pre><code>&lt;StackPanel HorizontalAlignment=&quot;Left&quot;&gt;
   &lt;TextBlock Text=&quot;Enter some text below:&quot;/&gt;
   &lt;TextBox x:Name=&quot;MyTextBox1&quot;/&gt;
@@ -145,41 +148,45 @@
 &lt;/StackPanel&gt;
 </code></pre>
 <p><img src="/images/4.MainPage.xaml.png" alt="MainPage.xaml" title="The modified MainPage.xaml page"></p>
-<pre><code>*  And C# code inside the MainPage.xaml.cs file:
-
-		```
-		void Button_Click(object sender, RoutedEventArgs e)
-		{
-		    MessageBox.Show(&quot;You entered the following text: &quot; + MyTextBox1.Text);
-		}
-		```
+<ol start="2">
+<li>Add the following code:</li>
+</ol>
+<ul>
+<li>In C#</li>
+</ul>
+<p>Inside the MainPage.xaml.cs file:</p>
+<pre><code>			void Button_Click(object sender, RoutedEventArgs e)
+			{
+			    MessageBox.Show(&quot;You entered the following text: &quot; + MyTextBox1.Text);
+			}
 </code></pre>
 <p><img src="/images/5.MainPage.xaml.cs.png" alt="MainPage.xaml.cs" title="The modified MainPage.xaml.cs page"></p>
-<pre><code>*  And VB.NET code inside the MainPage.xaml.vb file:
-
-		```
-		Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-		{
-		    MessageBox.Show(&quot;You entered the following text: &quot; + MyTextBox1.Text)
-		}
-		```
+<ul>
+<li>In VB.NET</li>
+</ul>
+<p>Inside the MainPage.xaml.vb file:</p>
+<pre><code>			Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+			{
+			    MessageBox.Show(&quot;You entered the following text: &quot; + MyTextBox1.Text)
+			}
 </code></pre>
 <p><img src="/images/5.MainPage.xaml.vb.png" alt="MainPage.xaml.vb" title="The modified MainPage.xaml.vb page"></p>
-<p>Let's recompile the solution and launch the project with the suffix &quot;.Browser&quot; . The default browser launches and the application runs.</p>
+<h4 id="now-that-the-modifications-are-done-we-can-test-our-application">Now that the modifications are done, we can test our application.</h4>
+<p>Let's recompile the solution and launch the project with the suffix &quot;.Browser&quot;. The default browser opens and the application runs.</p>
 <p><img src="/images/6.AppBrowser.png" alt="application displaying a message in the browser" title="The application running in the browser"></p>
-<p>Let’s enter some text and press the button. A dialog box appears with the text entered.</p>
+<p>Now, if we enter some text and press the button. A dialog box will appear with the text entered.</p>
 <p><img src="/images/7.DialogBrowser.png" alt="application displaying a message in the browser" title="The application displaying a message in the browser"></p>
-<p>To see that the application runs in WebAssembly (currently in interpreted mode), let’s go to the browser development tools (Chrome in this example) by pressing the F12 key, then go to the &quot;Network&quot; tab and refresh the page by pressing F5. Microsoft .NET assemblies (such as &quot;mscorlib.dll&quot; and &quot;System.dll&quot;) are downloaded by the browser instead of JavaScript files.</p>
+<p>To see that the application runs in WebAssembly (currently in interpreted mode), we can go to the browser development tools (Chrome in this example) by pressing the F12 key, then go to the &quot;Network&quot; tab and refresh the page by pressing F5. Microsoft .NET assemblies (such as &quot;mscorlib.dll&quot; and &quot;System.dll&quot;) are downloaded by the browser instead of JavaScript files.</p>
 <p><img src="/images/8.NetworkTab.png" alt="Network tab" title="Network tab in Chrome's development tools"></p>
 <p>Now let's go back to Visual Studio and launch the project with the suffix &quot;.Simulator&quot;</p>
 <p>Note: if a message indicates that the Simulator is not configured, simply open the &quot;Package Manager Console&quot; and wait for the Simulator to be automatically configured, then restart the project.</p>
-<p>The application launches. Let’s enter some text and click the button.</p>
+<p>The simulator appears and shows the application. Like before, we can enter some text and click the button to make a idalog box appear.</p>
 <p><img src="/images/9.AppSimulator.png" alt="Application in the Simulator" title="The application running in the Simulator"></p>
-<p>Let's put a breakpoint inside the Button_Click method. It is possible to inspect the variables and to do step-by-step debugging.</p>
+<p>Let's put a breakpoint inside the Button_Click method, then press the button. It is possible to inspect the variables and to do step-by-step debugging.</p>
 <p><img src="/images/10.Breakpoint.png" alt="Breakpoint" title="C# code Variables inspection at a Breakpoint">
 <img src="/images/10.Breakpoint.vb.png" alt="Breakpoint" title="VB.NET code Variables inspection at a Breakpoint"></p>
-<p>Let’s press the F5 key to continue.</p>
-<p>From the Simulator window, let’s press &quot;Inspect Visual Tree&quot; (in the top right corner) to explore the visual tree that constitutes the UI of the application.</p>
+<p>Once done, press the F5 key to continue.</p>
+<p>In the Simulator window, there is an &quot;Inspect Visual Tree&quot; button in the top right corner. Pressing it will open a panel letting you explore the visual tree that constitutes the UI of the application.</p>
 <p><img src="/images/11.VisualTree.png" alt="Breakpoint" title="The Simulator visual tree inspector"></p>
 </article>
           </div>

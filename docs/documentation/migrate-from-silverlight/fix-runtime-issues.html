@@ -126,16 +126,16 @@
 <h3 id="video-best-practices-for-identifying-reporting-and-fixing-opensilver-rendering-issues">[Video] Best practices for identifying, reporting, and fixing OpenSilver rendering issues:</h3>
 <div class="embeddedvideo"><iframe src="https://www.youtube-nocookie.com/embed/OE52Z2g66bg" frameborder="0" allowfullscreen="true"></iframe></div>
 <h3 id="fixing-cookie-related-issues">Fixing cookie-related issues:</h3>
-<p>In a process of client/server communication there can be a situations when authentication cookies not sent to the server in subseqent requests by client and as a result server rejects to send data back.<br>
-One of the reasons can be that client and server are running on different ports.</p>
-<p>Here is the solution for C# code.</p>
+<p>In a process of client/server communication there can be a situations when authentication cookies are not sent to the server in subsequent requests by the client and as a result, the server refuses to send data back.<br>
+One possible reason is that the client and the server are running on different ports.</p>
+<p>Here is the solution with C# code.</p>
 <h4 id="1-add-the-following-line-in-appxamlcs-client">1. Add the following line in App.xaml.cs (Client).</h4>
 <p><code>Application.Current.Host.Settings.DefaultSoapCredentialsMode = System.Net.CredentialsMode.Enabled;</code></p>
 <h4 id="2-add-the-following-lines-in-globalasaxcs-in-application_beginrequest-function">2. Add the following lines in Global.asax.cs in Application_BeginRequest function</h4>
 <pre><code>HttpContext.Current.Response.AddHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;http://localhost:55591&quot;);
 HttpContext.Current.Response.AddHeader(&quot;Access-Control-Allow-Credentials&quot;, &quot;true&quot;);
 </code></pre>
-<p>55591 is assumed to be a port which client uses</p>
+<p>Here, replace &quot;55591&quot; with the port used by the client</p>
 <p><a href="https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#to-add-cors-to-your-web-service-recommended-simply-follow-these-steps">Here</a> is how to add Global.asax and CORS.</p>
 <h2 id="work-in-progress-documentation-check-back-soon">(WORK IN PROGRESS DOCUMENTATION, CHECK BACK SOON)</h2>
 </article>
