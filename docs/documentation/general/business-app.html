@@ -146,9 +146,12 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 </li>
 <li><p>In Visual Studios's Solution Explorer, right-click the .Web project, click Add, and then click &quot;New Item&quot;.</p>
 </li>
-<li><p>Select the &quot;ADO.NET Entity Data Model&quot; template. Change the name to &quot;AdventureWorks&quot;, and then click Add.
-<img src="/images/ria-business02.png" alt="ADO.NET Entity Data Model"></p>
+<li><p>Select the &quot;ADO.NET Entity Data Model&quot; template.</p>
 </li>
+</ol>
+<p><strong>Change the name to <code>AdventureWorks</code></strong> (instead of &quot;Model1&quot;), and then click Add.</p>
+<p><img src="/images/ria-business02.png" alt="ADO.NET Entity Data Model"></p>
+<ol start="5">
 <li><p>On the &quot;Choose Model Contents&quot; page, click &quot;EF Designer from database&quot;, and then click Next.
 <img src="/images/ria-business03.png" alt="EF Designer from database"></p>
 </li>
@@ -170,17 +173,15 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 <li><p>Make sure that the ConnectionString is properly configured in the Web.Config file. To do so:</p>
 <ul>
 <li>Take the connection string that you copied in one of the previous steps.</li>
-<li>Edit it like this:</li>
+<li>Replace any double quotes (&quot;) with <code>&amp;quot;</code></li>
 </ul>
-<pre><code>- Replace any double quotes (&quot;) with &amp;quot;
-- Replace 'data source' with 'Server'
-</code></pre>
-<p>For example, replace the following ConnectionString:</p>
-<pre><code>metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;;
+<p>For instance, replace the following example connection string:</p>
+<pre><code>metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;;
 </code></pre>
 <p>with this one:</p>
-<pre><code>metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&amp;quot;
+<pre><code>metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&amp;quot;
 </code></pre>
+<p>(Note that the connection string above is just an example. You may need to adapt it based on your configuration. Refer to the &quot;Choose Your Data Connection&quot; dialog shown before to know what your connection string should look like.)</p>
 <ul>
 <li>Go to Web.config file, and add this new entry into the &lt;connectionStrings&gt; section, using the updated connection string from the previous step:</li>
 </ul>
@@ -192,11 +193,10 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 <p>Here is an example of valid setting in the Web.Config:</p>
 <pre><code class="lang-xml">&lt;connectionStrings&gt;
     &lt;add name=&quot;DefaultConnection&quot; connectionString=&quot;Data Source=|DataDirectory|database\OpenSilverBusinessApplication1.db;Version=3;New=True;Compress=True;&quot; providerName=&quot;System.Data.EntityClient&quot;/&gt;
-    &lt;add name=&quot;AdventureWorksLT2022Entities&quot; connectionString=&quot;metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=LAPTOP-CACBBSGA;initial catalog=AdventureWorksLT2022;trusted_connection=true&amp;quot;&quot; providerName=&quot;System.Data.EntityClient&quot; /&gt;
+    &lt;add name=&quot;AdventureWorksLT2022Entities&quot; connectionString=&quot;metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=LAPTOP-CACBBSGA;initial catalog=AdventureWorksLT2022;trusted_connection=true&amp;quot;&quot; providerName=&quot;System.Data.EntityClient&quot; /&gt;
 &lt;/connectionStrings&gt;
 </code></pre>
-<p>Screenshot:<br>
-<img src="https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/bb8a1ab0-0945-4acd-b4ef-4b2a16ad9bb6" alt="image"></p>
+<p>(Note that the connection string above is just an example. You may need to adapt it based on your configuration.)</p>
 </li>
 <li><p>Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click &quot;New Item&quot;, select the &quot;Domain Service&quot; template. Name the new item &quot;OrganizationService&quot;.</p>
 </li>
@@ -251,15 +251,20 @@ _context.Load(_context.GetCustomersQuery());
 <h3 id="source-code">Source Code</h3>
 <p>You can get the complete source code for that article <a href="https://github.com/OpenSilver/OpenSilver.Documentation/tree/master/examples/OpenSilverBusinessApplicationDemo">here</a>.</p>
 <h3 id="troubleshooting-and-known-issues">Troubleshooting and Known Issues</h3>
-<h4 id="issues-at-design-time">Issues at design-time:</h4>
+<h4 id="issues-that-you-may-encounter-at-runtime">Issues that you may encounter at runtime:</h4>
 <ul>
-<li>Make sure to run both the .Web project (for the server side) and .Browser project (for the client side)</li>
+<li>Make sure to <strong>run both the .Web project</strong> (for the server side) and <strong>.Browser project</strong> (for the client side).</li>
 <li>If you have an error that says &quot;<strong>No connection string named '(...)' could be found in the application config file.</strong>&quot;, make sure that you have added an entry to the Web.Config file as explained at <a href="#database-connection">this step</a>.</li>
-<li>If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there</li>
+<li>If your application doesn't run or has some runtime errors, <strong>open the browser console (F12)</strong> and look at the errors listed there.</li>
 <li>If you see an error related to CORS (such as &quot;<strong>Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.</strong>&quot;), then <a href="https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors">configure CORS on the server-side</a>, or work around CORS entirely by <a href="https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks">running your browser with disabled security</a></li>
-<li>If you get some other &quot;Error 500&quot; on the server side, make sure that the &quot;.Web&quot; project is running under the &quot;x64&quot; platform target.</li>
-<li>If you receive <code>Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)</code> error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated. You can also try stopping IIS Express from the system tray, and restarting the whole IIS by running the following commands in a Command Line with Administrator Privileges: <code>net stop winnat</code> and then <code>net start winnat</code>
+<li>If you receive the error &quot;<strong>Unable to load DLL 'SQLite.Interop.dll'</strong>: The specified module could not be found. (Exception from HRESULT: 0x8007007E)&quot;, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated. You can also try stopping IIS Express from the system tray, and restarting the whole IIS by running the following commands in a Command Line with Administrator Privileges: <code>net stop winnat</code> and then <code>net start winnat</code>
 <img src="/images/ria-business14.png" alt="SQLite Interop Error"></li>
+<li>If you get some other &quot;<strong>Error 500</strong>&quot; on the server side, make sure that the &quot;.Web&quot; project is running under the &quot;x64&quot; platform target.</li>
+<li>If you get the other &quot;<strong>Unable to load the specified metadata resource</strong>&quot;, it indicates that the Connection String in the Web.Config file is incorrect. Specifically, the &quot;metadata=&quot; part should have a different value. Make sure that you have properly copied the string that was shown when creating the EDMX file (see screenshot below). Note: if you have placed your EDMX file inside a subfolder of the .Web project, you'll need to specify the folder name there too. For example, if your file &quot;AdventureWorks.edmx&quot; is located inside a folder named &quot;MyFolder&quot;, your connection string should be like this: metadata=res://<em>/MyFolder.AdventureWorks.csdl|res://</em>/MyFolder.AdventureWorks.ssdl|res://*/MyFolder.AdventureWorks.msl;   (...)
+<img src="https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/4a5f5714-22da-44e1-b5bc-4c1704648919" alt="image"></li>
+</ul>
+<h4 id="issues-that-you-may-encounter-at-design-time">Issues that you may encounter at design-time:</h4>
+<ul>
 <li>If you don't see the &quot;Add New Domain Service Class&quot; dialog, make sure to install the latest VSIX of OpenSilver.</li>
 <li>If the &quot;Add New Domain Service Class&quot; dialog is empty, make sure to rebuild the solution, and try again.</li>
 </ul>
