@@ -56,19 +56,18 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 
 9. Make sure that the ConnectionString is properly configured in the Web.Config file. To do so:
     * Take the connection string that you copied in one of the previous steps.
-    * Edit it like this:
+    * Replace any double quotes (") with ```&quot;```
+
+    For instance, replace the following example connection string:
     ```
-    - Replace any double quotes (") with &quot;
-    - Replace 'data source' with 'Server'
-    ```
-    For example, replace the following ConnectionString:
-    ```
-    metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string="data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true";
+    metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string="data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true";
     ```
     with this one:
     ```
-    metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;
+    metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;
     ```
+    (Note that the connection string above is just an example. You may need to adapt it based on your configuration. Refer to the "Choose Your Data Connection" dialog shown before to know what your connection string should look like.
+    
     * Go to Web.config file, and add this new entry into the \<connectionStrings\> section, using the updated connection string from the previous step:
     ```xml
     <add name="AdventureWorksLT2022Entities" 
@@ -146,14 +145,18 @@ You can get the complete source code for that article [here](https://github.com/
 
 ### Troubleshooting and Known Issues
 
-#### Issues at design-time:
-* Make sure to run both the .Web project (for the server side) and .Browser project (for the client side)
+#### Issues that you may encounter at runtime:
+* Make sure to **run both the .Web project** (for the server side) and **.Browser project** (for the client side).
 * If you have an error that says "**No connection string named '(...)' could be found in the application config file.**", make sure that you have added an entry to the Web.Config file as explained at [this step](#database-connection).
-* If your application doesn't run or has some runtime errors, open the browser console (F12) and look at the errors listed there
+* If your application doesn't run or has some runtime errors, **open the browser console (F12)** and look at the errors listed there.
 * If you see an error related to CORS (such as "**Access to fetch at 'http://localhost:54837/...' from origin 'http://localhost:55591' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.**"), then [configure CORS on the server-side](https://doc.opensilver.net/documentation/in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors), or work around CORS entirely by [running your browser with disabled security](https://simplelocalize.io/blog/posts/what-is-cors/#3-disable-browser-cors-checks)
-* If you get some other "Error 500" on the server side, make sure that the ".Web" project is running under the "x64" platform target.
-* If you receive `Unable to load DLL 'SQLite.Interop.dll': The specified module could not be found. (Exception from HRESULT: 0x8007007E)` error, this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated. You can also try stopping IIS Express from the system tray, and restarting the whole IIS by running the following commands in a Command Line with Administrator Privileges: `net stop winnat` and then `net start winnat`
+* If you receive the error "**Unable to load DLL 'SQLite.Interop.dll'**: The specified module could not be found. (Exception from HRESULT: 0x8007007E)", this is a known issue where SQLite sometimes does not generate x86/x64 folders inside of the bin folder of the .Web project. Most of the times you just need to Clean and then Build the project until these folders are generated. You can also try stopping IIS Express from the system tray, and restarting the whole IIS by running the following commands in a Command Line with Administrator Privileges: `net stop winnat` and then `net start winnat`
 ![SQLite Interop Error](/images/ria-business14.png)
+* If you get some other "**Error 500**" on the server side, make sure that the ".Web" project is running under the "x64" platform target.
+* If you get the other "**Unable to load the specified metadata resource**", it indicates that the Connection String in the Web.Config file is incorrect. Specifically, the "metadata=" part should have a different value. Make sure that you have properly copied the string that was shown when creating the EDMX file (see screenshot below). Note: if you have placed your EDMX file inside a subfolder of the .Web project, you'll need to specify the folder name there too. For example, if your file "AdventureWorks.edmx" is located inside a folder named "MyFolder", your connection string should be like this: metadata=res://*/MyFolder.AdventureWorks.csdl|res://*/MyFolder.AdventureWorks.ssdl|res://*/MyFolder.AdventureWorks.msl;   (...)
+![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/4a5f5714-22da-44e1-b5bc-4c1704648919)
+
+#### Issues that you may encounter at design-time:
 * If you don't see the "Add New Domain Service Class" dialog, make sure to install the latest VSIX of OpenSilver.
 * If the "Add New Domain Service Class" dialog is empty, make sure to rebuild the solution, and try again.
 
