@@ -63,11 +63,11 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 
     For instance, replace the following example connection string:
     ```
-    metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string="data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true";
+    metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string="data source=localhost;initial catalog=AdventureWorksLT2019;trusted_connection=true";
     ```
     with this one:
     ```
-    metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;
+    metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;
     ```
     (Note that the connection string above is just an example. You may need to adapt it based on your configuration. Refer to the "Choose Your Data Connection" dialog shown before to know what your connection string should look like.)
     
@@ -84,7 +84,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
     ```xml
     <connectionStrings>
         <add name="DefaultConnection" connectionString="Data Source=|DataDirectory|database\OpenSilverBusinessApplication1.db;Version=3;New=True;Compress=True;" providerName="System.Data.EntityClient"/>
-        <add name="AdventureWorksLT2022Entities" connectionString="metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-CACBBSGA;initial catalog=AdventureWorksLT2022;trusted_connection=true&quot;" providerName="System.Data.EntityClient" />
+        <add name="AdventureWorksLT2022Entities" connectionString="metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=AdventureWorksLT2022;trusted_connection=true&quot;" providerName="System.Data.EntityClient" />
     </connectionStrings>
     ```
     (Note that the connection string above is just an example. You may need to adapt it based on your configuration.)
