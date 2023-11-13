@@ -35,7 +35,10 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
 
 3. In Visual Studios's Solution Explorer, right-click the .Web project, click Add, and then click "New Item".
 
-4. Select the "ADO.NET Entity Data Model" template. Change the name to "AdventureWorks", and then click Add.
+4. Select the "ADO.NET Entity Data Model" template.
+
+**Change the name to ```AdventureWorks```** (instead of "Model1"), and then click Add.
+
 ![ADO.NET Entity Data Model](/images/ria-business02.png)
 
 5. On the "Choose Model Contents" page, click "EF Designer from database", and then click Next.
@@ -66,7 +69,7 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
     ```
     metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-JJKBBSSK;initial catalog=AdventureWorksLT2019;trusted_connection=true&quot;
     ```
-    (Note that the connection string above is just an example. You may need to adapt it based on your configuration. Refer to the "Choose Your Data Connection" dialog shown before to know what your connection string should look like.
+    (Note that the connection string above is just an example. You may need to adapt it based on your configuration. Refer to the "Choose Your Data Connection" dialog shown before to know what your connection string should look like.)
     
     * Go to Web.config file, and add this new entry into the \<connectionStrings\> section, using the updated connection string from the previous step:
     ```xml
@@ -81,12 +84,10 @@ For this tutorial, we will use the AdventureWorks Lightweight database (Adventur
     ```xml
     <connectionStrings>
         <add name="DefaultConnection" connectionString="Data Source=|DataDirectory|database\OpenSilverBusinessApplication1.db;Version=3;New=True;Compress=True;" providerName="System.Data.EntityClient"/>
-        <add name="AdventureWorksLT2022Entities" connectionString="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-CACBBSGA;initial catalog=AdventureWorksLT2022;trusted_connection=true&quot;" providerName="System.Data.EntityClient" />
+        <add name="AdventureWorksLT2022Entities" connectionString="metadata=res://*/AdventureWorks.csdl|res://*/AdventureWorks.ssdl|res://*/AdventureWorks.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=LAPTOP-CACBBSGA;initial catalog=AdventureWorksLT2022;trusted_connection=true&quot;" providerName="System.Data.EntityClient" />
     </connectionStrings>
     ```
-        
-   Screenshot:  
-   ![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/bb8a1ab0-0945-4acd-b4ef-4b2a16ad9bb6)
+    (Note that the connection string above is just an example. You may need to adapt it based on your configuration.)
 
 10. Now that we configured the database, let's proceed to the Open RIA configuration. In Solution Explorer, right-click the .Web project, click Add, and then click "New Item", select the "Domain Service" template. Name the new item "OrganizationService".
 
