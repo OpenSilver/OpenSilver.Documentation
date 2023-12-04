@@ -19,12 +19,12 @@ There are two types of licenses for the OpenSilver Compatibility TelerikUI Packa
 
 To do so using Visual Studio, start by right-clicking on the  OpenSilver project in the Solution Explorer, and click "Manage NuGet Packages...":
 
-<img src="/images/3rd-party-libraries/telerik-manage-packages.png" alt="Manage NuGet Packages..." />
+![Manage NuGet Packages](https://github.com/OpenSilver/OpenSilver.Documentation/assets/13891601/a34d831c-4eff-4c81-b075-6e2802b5861d)
 
 
 Then, click on the "Settings" icon near "Package Sources":
 
-<img src="/images/3rd-party-libraries/telerik-change-package-sources.png" alt="Manage NuGet Packages..." />
+![Manage NuGet Packages](https://github.com/OpenSilver/OpenSilver.Documentation/assets/13891601/0b69ee9b-2be3-4a39-9a3d-323fd3a5bb84)
 
 
 Then, add the package source (note: the actual feed URL varies: please use the one that you received by email from Userware):
@@ -34,13 +34,15 @@ Then, add the package source (note: the actual feed URL varies: please use the o
 
 Finally, select the newly-added feed and install the package:
 
-<img src="/images/3rd-party-libraries/telerik-install-the-package.png" alt="Manage NuGet Packages..." />
+![Manage NuGet Packages](https://github.com/OpenSilver/OpenSilver.Documentation/assets/13891601/7cd2e903-cf92-4534-8c0e-380d0f4248bf)
+
 
 4. Add the license file to your project. The license file is the file named "OpenSilver.Compatibility.TelerikUI.license.json" which had been sent to you by Userware when you obtained the Trial or Perpetual license. This file should be added as an "Embedded Resource" into the OpenSilver project, as show in the screenshot below.
 
 Follow the red borders on the picture to check that everything is done correctly:
 
-<img src="/images/3rd-party-libraries/telerik-license.png" alt="Example of licensing" />
+![Example of Licensing](https://github.com/OpenSilver/OpenSilver.Documentation/assets/13891601/93193902-3bf9-463d-94c7-9f34ff2c20f4)
+
 
 ### Where can I find examples of use of Telerik controls in OpenSilver?
 
