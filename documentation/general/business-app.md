@@ -216,11 +216,11 @@ Then, delete the existing `<membership>` and `<roleManager>` sections, and repla
 3. Follow the wizard to connect to your SQL Server database and click Next until you are done creating the tables and stored procedures
 ![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/3614342a-e2c3-420a-93cc-0345c261136f)
 
-##### - To create the ASP.NET Membership database (with Schema version 1) in Azure DB:
+##### - To create the ASP.NET Membership database (with Schema version 1) in Azure SQL:
 
 Since the file `aspnet_regsql.exe` won't work with Azure SQL, a working solution consists in the following:
 1. Start by using a local SQL Server instance such as one created with `SQL Server Developer Edition` or just any other one, and follow the instructions above to create the ASP.NET Membership database there.
-2. Then, export the database (schema+data) to a format that can be re-imported in Azure SQL. To do so, you can use `SQL Server Management Studio` (SSMS): right-click on the database that you created at the previous step, choose `Tasks` -> `Generate Scripts`:
+2. Then, export that database (schema+data) to a format that can be re-imported in Azure SQL. To do so, you can use `SQL Server Management Studio` (SSMS): right-click on the database that you created at the previous step, choose `Tasks` -> `Generate Scripts`:
 ![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/0888ddbd-7e57-4e4b-8630-7d4fad206bf1)
 Follow the wizard, specifying that you want to export everything. Make sure to click "Advanced" and choose `Microsoft Azure SQL Database` under `Script for the database engine type`:
 ![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/c8d2a4c4-53f2-4499-8664-2bbff9c06dea)
