@@ -14,7 +14,7 @@ OpenSilver includes a project template that lets you leverage Open RIA Services 
 
 [Troubleshooting and Known Issues](#troubleshooting-and-known-issues)
 
-[How to replace SQLite with SQL Server for Authentication/Membership/Roles](#user-content-how-to-replace-sqlite-with-sql-server-for-authenticationmembershiproles)
+[How to replace SQLite with SQL Server for Authentication/Membership/Roles](#how-to-replace-sqlite-with-sql-server-for-authenticationmembershiproles)
 
 [See Also](#see-also)
 
@@ -177,8 +177,21 @@ In the `<ConnectionString>` section, replace the SQLite connection string with t
 </connectionStrings>
 ```
 
-Then, delete the existing `<membership>` and `<roleManager>` sections, and replace them with the following ones:
+Then, delete the existing `<profile>`, `<membership>` and `<roleManager>` sections, and replace them with the following ones (note: make sure to double-check the `connectionStringName` property).
+
 ```xml
+	<profile defaultProvider="AspNetSqlProfileProvider">
+		<providers>
+			<clear />
+			<add name="AspNetSqlProfileProvider"
+				type="System.Web.Profile.SqlProfileProvider"
+				connectionStringName="AspNetMembershipDBConnection"
+				applicationName="/" />
+		</providers>
+		<properties>
+			<add name="FriendlyName" type="System.String"/>
+		</properties>
+	</profile>
 	<membership defaultProvider="AspNetSqlMembershipProvider">
 		<providers>
 			<clear />
