@@ -177,8 +177,8 @@ In the `<ConnectionString>` section, replace the SQLite connection string with t
 </connectionStrings>
 ```
 
-```xml
 Then, delete the existing `<membership>` and `<roleManager>` sections, and replace them with the following ones:
+```xml
 	<membership defaultProvider="AspNetSqlMembershipProvider">
 		<providers>
 			<clear />
