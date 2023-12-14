@@ -14,6 +14,8 @@ OpenSilver includes a project template that lets you leverage Open RIA Services 
 
 [Troubleshooting and Known Issues](#troubleshooting-and-known-issues)
 
+[How to replace SQLite with SQL Server for Authentication/Membership/Roles](#user-content-how-to-replace-sqlite-with-sql-server-for-authenticationmembershiproles)
+
 [See Also](#see-also)
 
 ### Getting Started
@@ -160,6 +162,71 @@ You can get the complete source code for that article [here](https://github.com/
 #### Issues that you may encounter at design-time:
 * If you don't see the "Add New Domain Service Class" dialog, make sure to install the latest VSIX of OpenSilver.
 * If the "Add New Domain Service Class" dialog is empty, make sure to rebuild the solution, and try again.
+
+
+### How to replace SQLite with SQL Server for Authentication/Membership/Roles:
+
+The `Business Application` project template comes with built-in Authentication/Membership/Roles management using SQLite. You can replace SQLite with SQL Server or Azure SQL by creating a database that contains the default ASP.NET Membership tables and stored procedures (using Schema version 1) in your instance of SQL Server or Azure SQL, and then changing the file `Web.Config` (located inside the project with the `.Web` suffix) to make the Connection String point to the newly created database. Be sure to also update the sections `<Membership>` and `<Role>` in `Web.Config`. Read below for details:
+
+##### - To properly configure Web.Config:
+
+In the `<ConnectionString>` section, replace the SQLite connection string with the one for SQL Server or Azure SQL. This is what it usually looks like:
+```xml
+<connectionStrings>
+	<add name="AspNetMembershipDBConnection" connectionString="data source=<SERVER_URL_GOES_HERE>;initial catalog=<DATABASE_NAME_GOES_HERE>;persist security info=True;user id=<USER_ID_GOES_HERE>;password=<USER_PASSWORD_GOES_HERE>;MultipleActiveResultSets=True" providerName="System.Data.EntityClient" />
+</connectionStrings>
+```
+
+```xml
+Then, delete the existing `<membership>` and `<roleManager>` sections, and replace them with the following ones:
+	<membership defaultProvider="AspNetSqlMembershipProvider">
+		<providers>
+			<clear />
+			<add name="AspNetSqlMembershipProvider"
+				type="System.Web.Security.SqlMembershipProvider"
+				connectionStringName="AspNetMembershipDBConnection"
+				enablePasswordRetrieval="false"
+				enablePasswordReset="true"
+				requiresQuestionAndAnswer="false"
+				requiresUniqueEmail="false"
+				maxInvalidPasswordAttempts="5"
+				minRequiredPasswordLength="6"
+				minRequiredNonalphanumericCharacters="0"
+				passwordAttemptWindow="10"
+				applicationName="/"/>
+		</providers>
+	</membership>
+	<roleManager enabled="true" defaultProvider="AspNetSqlRoleProvider">
+		<providers>
+			<clear />
+			<add name="AspNetWindowsTokenRoleProvider" type="System.Web.Security.WindowsTokenRoleProvider" applicationName="/" />
+			<add name="AspNetSqlRoleProvider"
+				type="System.Web.Security.SqlRoleProvider"
+				connectionStringName="AspNetMembershipDBConnection"
+				applicationName="/" />
+		</providers>
+	</roleManager>
+```
+
+##### - To create the ASP.NET Membership database (with Schema version 1) in your instance of SQL Server:
+
+1. Navigate to the following folder on your disk: `C:\Windows\Microsoft.NET\Framework\v2.0.50727`
+2. Execute the file `aspnet_regsql.exe`
+![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/71cc5e25-9b58-4f82-b1bb-94b202b7dfd4)
+3. Follow the wizard to connect to your SQL Server database and click Next until you are done creating the tables and stored procedures
+![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/3614342a-e2c3-420a-93cc-0345c261136f)
+
+##### - To create the ASP.NET Membership database (with Schema version 1) in Azure DB:
+
+Since the file `aspnet_regsql.exe` won't work with Azure SQL, a working solution consists in the following:
+1. Start by using a local SQL Server instance such as one created with `SQL Server Developer Edition` or just any other one, and follow the instructions above to create the ASP.NET Membership database there.
+2. Then, export the database (schema+data) to a format that can be re-imported in Azure SQL. To do so, you can use `SQL Server Management Studio` (SSMS): right-click on the database that you created at the previous step, choose `Tasks` -> `Generate Scripts`:
+![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/0888ddbd-7e57-4e4b-8630-7d4fad206bf1)
+Follow the wizard, specifying that you want to export everything. Make sure to click "Advanced" and choose `Microsoft Azure SQL Database` under `Script for the database engine type`:
+![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/c8d2a4c4-53f2-4499-8664-2bbff9c06dea)
+Also, be sure to choose `Schema and data` under `Types of data to script`:
+![image](https://github.com/OpenSilver/OpenSilver.Documentation/assets/8248552/3638b9a7-5468-43cb-9a3c-c5a1e071a08d)
+3. Create a new database on Azure SQL and run the SQL script that you exported at the previous step. To do so, you can use `SQL Server Management Studio` (SSMS): start by connecting to Azure DB, then right-click to create a new database, give it the same name as the locally created one, then right-click the new database, click "Run Query..." and run the SQL script that you created at the previous step.
 
 ### See Also
 * [OpenSilver Information about Open RIA Services](https://doc.opensilver.net/documentation/3rd-party-libraries/ria-services.html)  
