@@ -157,6 +157,25 @@ These classes can be seen by going to the &quot;<a href="https://github.com/Open
   OpenSilver.Interop.ExecuteJavaScriptFastAsync($&quot;{sIFrame}.onload = {INTERNAL_InteropImplementation.GetVariableStringForJS(_jsCallbackOnIframeLoaded)}&quot;)
 </code></pre>
 </li>
+<li><p>For F# Code</p>
+<pre><code>override this.CreateDomElement(parentRef: obj, domElementWhereToPlaceChildren : byref&lt;obj&gt;) =
+    let mutable outerDiv = null
+    let outerDivStyle = INTERNAL_HtmlDomManager.CreateDomLayoutElementAppendItAndGetStyle(&quot;div&quot;, parentRef, this, &amp;outerDiv)
+    outerDivStyle.width &lt;- &quot;100%&quot;
+    outerDivStyle.height &lt;- &quot;100%&quot;
+
+    let iFrameStyle = INTERNAL_HtmlDomManager.CreateDomElementAppendItAndGetStyle(&quot;iframe&quot;, outerDiv, this, &amp;_iFrame)
+    iFrameStyle.width &lt;- &quot;100%&quot;
+    iFrameStyle.height &lt;- &quot;100%&quot;
+    iFrameStyle.border &lt;- &quot;none&quot;
+
+    DisposeJsCallbacks()
+    _jsCallbackOnIframeLoaded &lt;- JavaScriptCallback.Create(OnIframeLoad, true);
+
+    let sIFrame = INTERNAL_InteropImplementation.GetVariableStringForJS(_iFrame)
+    OpenSilver.Interop.ExecuteJavaScriptFastAsync($&quot;{sIFrame}.onload = {INTERNAL_InteropImplementation.GetVariableStringForJS(_jsCallbackOnIframeLoaded)}&quot;)
+</code></pre>
+</li>
 </ul>
 <ol start="2">
 <li>In addition, there is a correspondence that is made between certain XAML properties and CSS properties. For example, the property “Foreground” in XAML will have as equivalent the property “color” in CSS. As another example, the &quot;Source&quot; property of the &quot;WebBrowser&quot; control will have as equivalent the &quot;src&quot; property of <code>&lt;iframe&gt;</code>.</li>
@@ -184,11 +203,26 @@ Public Shared ReadOnly ForegroundProperty As DependencyProperty = DependencyProp
 .MethodToUpdateDom2 = UpdateDomOnForegroundChanged
 })
 </code></pre>
+<p>F# Code example</p>
+<pre><code>/// Gets or sets a brush that describes the foreground color.
+member this.Foreground
+    with get() = this.GetValue(Control.ForegroundProperty) :?&gt; Brush
+    and set(value) = this.SetValue(Control.ForegroundProperty, value :&gt; Brush)
+
+/// Identifies the &lt;seecref=&quot;Control.Foreground&quot;/&gt; dependency property.
+static member val ForegroundProperty = 
+    DependencyProperty.Register(
+        &quot;Foreground&quot;,
+        typeof&lt;Brush&gt;,
+        typeof&lt;Control&gt;,
+        new PropertyMetadata(defaultValue = SolidColorBrush(Colors.Black), MethodToUpdateDom = Control.UpdateDomOnForegroundChanged)
+    ) with get, set
+</code></pre>
 <h3 id="2-the-compiler">2. The compiler</h3>
 <p>Next, the NuGet package adds a few steps to the Msbuild compilation.</p>
 <p>This can be seen by opening the contents of the NuGet package where it is installed (usually in C:\Users\%USERNAME%\.Nuget\packages\opensilver). By opening the &quot;build&quot; directory, it is possible to see the presence of two .target files, which will alter the behavior of Msbuild.</p>
 <p><img src="/images/14.FolderBuild.png" alt="Folder Build" title="The contents of the Build directory in the NuGet package"></p>
-<p>One of the key compilation steps is the conversion of XAML files to auto-generated C#/VB.NET files. In fact, the compiler replaces XAML files with strictly equivalent C#/VB.NET code. For example, in C#, the following XAML code:</p>
+<p>One of the key compilation steps is the conversion of XAML files to auto-generated C#(or VB.NET or F#) files. In fact, the compiler replaces XAML files with strictly equivalent C#(or VB.NET or F#) code. For example, in C#, the following XAML code:</p>
 <pre><code>&lt;StackPanel HorizontalAlignment=&quot;Left&quot;&gt;
   &lt;TextBlock Text=&quot;Enter some text below:&quot;/&gt;
   &lt;TextBox x:Name=&quot;MyTextBox1&quot;/&gt;
@@ -222,6 +256,19 @@ stackPanel1.Children.Add(button1);
     button1.Content = &quot;Click me&quot;
     AddHandler button1.Click, AddressOf Button_Click
     stackPanel1.Children.Add(button1)
+</code></pre>
+<p>Please note in F# for the above said XAML code, auto-generated code will be at file “MainPage.xaml.True.g.fs under the “obj/Debug” directory and will look like this (after compiling the project):</p>
+<pre><code>    let stackPanel1 = new StackPanel()
+    stackPanel1.HorizontalAlignment &lt;- Left
+    let textBlock1 = new TextBlock()
+    textBlock1.Text &lt;- @&quot;Enter some text below:&quot;
+    stackPanel1.Children.Add(textBlock1) |&gt; ignore
+    let textBox1 = new TextBox()
+    textBox1.Name &lt;- &quot;MyTextBox1&quot;
+    stackPanel1.Children.Add(textBox1) |&gt; ignore
+    let button1 = new Button()
+    button1.Content &lt;- @&quot;Click me&quot;
+    stackPanel1.Children.Add(button1) |&gt; ignore
 </code></pre>
 <h3 id="3-the-satellite-projects">3. The satellite projects</h3>
 <p>In the Visual Studio solution, in addition to the main application project (the one containing App.xaml), we mentioned two other projects, which serve as entry points:</p>

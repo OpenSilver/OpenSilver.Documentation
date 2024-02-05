@@ -16,17 +16,19 @@ Once the solution is created, you will see that it has three projects.
 
 ![Solution explorer](/images/3.solutionExplorer.png "The Solution Explorer showing newly created projects for C#")
 ![Solution explorer](/images/3.solutionExplorerWithVB.png "The Solution Explorer showing newly created projects for VB.NET")
+![Solution explorer](/images/3.solutionExplorerWithFS.png "The Solution Explorer showing newly created projects for F#")
 
 The first one is where you will place the files for your application. Its structure is identical to that of a new Silverlight project. It notably contains the files:
 			
 	* For C# code migration :- App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs. 
 	* For VB.NET code migration :- App.xaml, App.xaml.vb, MainPage.xaml and MainPage.xaml.vb. 
+	* For F# code migration :- App.xaml, App.xaml.fs, MainPage.xaml and MainPage.xaml.fs. 
 
 
 The second project, named with the suffix ".Browser", is the one you will have to launch to test your application in the browser. It plays a role similar to the ".Web" project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.
 
 
-Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# or VB.NET code at runtime in the "Immediate" window, things that are not possible in the browser.
+Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C#(or VB.NET or F#) code at runtime in the "Immediate" window, things that are not possible in the browser.
 
 #### As a test, let's create a Button in out Xaml application:
 
@@ -67,6 +69,16 @@ Inside the MainPage.xaml.vb file:
 ```
 ![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
 
+- In F#
+
+Inside the MainPage.xaml.fs file:
+	
+```
+            member private this.Button_Click(sender: obj, e: RoutedEventArgs) =
+                MessageBox.Show("Vous avez saisi le texte suivant :" + this.MyTextBox1.Text) |> ignore
+```
+![MainPage.xaml.fs](/images/5.MainPage.xaml.fs.png "The modified MainPage.xaml.fs page")
+
 #### Now that the modifications are done, we can test our application.
 
 Let's recompile the solution and launch the project with the suffix ".Browser". The default browser opens and the application runs.
@@ -93,6 +105,7 @@ Let's put a breakpoint inside the Button_Click method, then press the button. It
 
 ![Breakpoint](/images/10.Breakpoint.png "C# code Variables inspection at a Breakpoint")
 ![Breakpoint](/images/10.Breakpoint.vb.png "VB.NET code Variables inspection at a Breakpoint")
+![Breakpoint](/images/10.Breakpoint.fs.png "F# code Variables inspection at a Breakpoint")
 
 
 Once done, press the F5 key to continue.
