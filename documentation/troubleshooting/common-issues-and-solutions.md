@@ -28,7 +28,7 @@
 
 - XAML auto-completion and intellisense may sometime not show up.
 
-- If you only change XAML files without changing C# or VB.NET files, you may need to manually Rebuild the solution to see the changes reflected in your app.
+- If you only change XAML files without changing C#(or VB.NET or F#) files, you may need to manually Rebuild the solution to see the changes reflected in your app.
 
 ### WCF and client/server communication
 

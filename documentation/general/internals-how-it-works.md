@@ -39,7 +39,25 @@ These classes can be seen by going to the "[src/Runtime/Runtime](https://github.
           Dim sIFrame As String = INTERNAL_InteropImplementation.GetVariableStringForJS(_iFrame)
           OpenSilver.Interop.ExecuteJavaScriptFastAsync($"{sIFrame}.onload = {INTERNAL_InteropImplementation.GetVariableStringForJS(_jsCallbackOnIframeLoaded)}")
        
-  
+  * For F# Code
+    
+        override this.CreateDomElement(parentRef: obj, domElementWhereToPlaceChildren : byref<obj>) =
+            let mutable outerDiv = null
+            let outerDivStyle = INTERNAL_HtmlDomManager.CreateDomLayoutElementAppendItAndGetStyle("div", parentRef, this, &outerDiv)
+            outerDivStyle.width <- "100%"
+            outerDivStyle.height <- "100%"
+
+            let iFrameStyle = INTERNAL_HtmlDomManager.CreateDomElementAppendItAndGetStyle("iframe", outerDiv, this, &_iFrame)
+            iFrameStyle.width <- "100%"
+            iFrameStyle.height <- "100%"
+            iFrameStyle.border <- "none"
+
+            DisposeJsCallbacks()
+            _jsCallbackOnIframeLoaded <- JavaScriptCallback.Create(OnIframeLoad, true);
+
+            let sIFrame = INTERNAL_InteropImplementation.GetVariableStringForJS(_iFrame)
+            OpenSilver.Interop.ExecuteJavaScriptFastAsync($"{sIFrame}.onload = {INTERNAL_InteropImplementation.GetVariableStringForJS(_jsCallbackOnIframeLoaded)}")
+
 2. In addition, there is a correspondence that is made between certain XAML properties and CSS properties. For example, the property “Foreground” in XAML will have as equivalent the property “color” in CSS. As another example, the "Source" property of the "WebBrowser" control will have as equivalent the "src" property of `<iframe>`.
 
 ![Properties Definition](/images/13.ForegroundProperties.png "The definition of the Foreground property")
@@ -67,6 +85,22 @@ VB.NET Code example
     .MethodToUpdateDom2 = UpdateDomOnForegroundChanged
     })
 
+F# Code example
+
+    /// Gets or sets a brush that describes the foreground color.
+    member this.Foreground
+        with get() = this.GetValue(Control.ForegroundProperty) :?> Brush
+        and set(value) = this.SetValue(Control.ForegroundProperty, value :> Brush)
+
+    /// Identifies the <seecref="Control.Foreground"/> dependency property.
+    static member val ForegroundProperty = 
+        DependencyProperty.Register(
+            "Foreground",
+            typeof<Brush>,
+            typeof<Control>,
+            new PropertyMetadata(defaultValue = SolidColorBrush(Colors.Black), MethodToUpdateDom = Control.UpdateDomOnForegroundChanged)
+        ) with get, set
+
 ### 2. The compiler
 
 Next, the NuGet package adds a few steps to the Msbuild compilation.
@@ -75,7 +109,7 @@ This can be seen by opening the contents of the NuGet package where it is instal
 
 ![Folder Build](/images/14.FolderBuild.png "The contents of the Build directory in the NuGet package")
 
-One of the key compilation steps is the conversion of XAML files to auto-generated C#/VB.NET files. In fact, the compiler replaces XAML files with strictly equivalent C#/VB.NET code. For example, in C#, the following XAML code:
+One of the key compilation steps is the conversion of XAML files to auto-generated C#(or VB.NET or F#) files. In fact, the compiler replaces XAML files with strictly equivalent C#(or VB.NET or F#) code. For example, in C#, the following XAML code:
 
 ```
 <StackPanel HorizontalAlignment="Left">
@@ -118,6 +152,19 @@ Please note in VB.NET for the above said XAML code, auto-generated code will be 
         AddHandler button1.Click, AddressOf Button_Click
         stackPanel1.Children.Add(button1)
 
+Please note in F# for the above said XAML code, auto-generated code will be at file “MainPage.xaml.True.g.fs under the “obj/Debug” directory and will look like this (after compiling the project):
+
+        let stackPanel1 = new StackPanel()
+        stackPanel1.HorizontalAlignment <- Left
+        let textBlock1 = new TextBlock()
+        textBlock1.Text <- @"Enter some text below:"
+        stackPanel1.Children.Add(textBlock1) |> ignore
+        let textBox1 = new TextBox()
+        textBox1.Name <- "MyTextBox1"
+        stackPanel1.Children.Add(textBox1) |> ignore
+        let button1 = new Button()
+        button1.Content <- @"Click me"
+        stackPanel1.Children.Add(button1) |> ignore
 
 ### 3. The satellite projects
 

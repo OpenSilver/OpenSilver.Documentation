@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interop between C#/VB.NET and JavaScript, importing JS libraries, and importing TypeScript Definitions </title>
+    <title>Interop between C#(or VB.NET or F#) and JavaScript, importing JS libraries, and importing TypeScript Definitions </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interop between C#/VB.NET and JavaScript, importing JS libraries, and importing TypeScript Definitions ">
+    <meta name="title" content="Interop between C#(or VB.NET or F#) and JavaScript, importing JS libraries, and importing TypeScript Definitions ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -120,10 +120,10 @@
         <div class="article row grid-right">
           <div class="col-md-8">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="interop-between-cvbnet-and-javascript-importing-js-libraries-and-importing-typescript-definitions">Interop between C#/VB.NET and JavaScript, importing JS libraries, and importing TypeScript Definitions</h1>
+<h1 id="interop-between-cor-vbnet-or-f-and-javascript-importing-js-libraries-and-importing-typescript-definitions">Interop between C#(or VB.NET or F#) and JavaScript, importing JS libraries, and importing TypeScript Definitions</h1>
 
-<h2 id="how-to-interact-between-cvbnet-and-javascript">How to interact between C#/VB.NET and JavaScript?</h2>
-<p>OpenSilver contains an easy-to-use API that allows to call JavaScript code from C#/VB.NET code. The opposite is also possible by exposing entry points to the JavaScript context.</p>
+<h2 id="how-to-interact-between-cor-vbnet-or-f-and-javascript">How to interact between C#(or VB.NET or F#) and JavaScript?</h2>
+<p>OpenSilver contains an easy-to-use API that allows to call JavaScript code from C#(or VB.NET or F#) code. The opposite is also possible by exposing entry points to the JavaScript context.</p>
 <p>This API allows to get out of the .NET world in order to interact with the browser, to access low-level functionalities, to extend the framework, to manually manipulate HTML and CSS, and to interact with JavaScript libraries.</p>
 <p>This API is widely used for example by the &quot;<a href="https://github.com/OpenSilver/OpenSilver/tree/master/src/Runtime/Runtime">OpenSilver.Runtime</a>&quot; project, which contains the implementation of controls like TextBox via HTML and CSS.</p>
 <p>The general syntax is as follows:</p>
@@ -136,6 +136,11 @@
 <li>VB.NET</li>
 </ul>
 <pre><code>Dim result = Interop.ExecuteJavaScript(&quot;any JS code&quot;, params)
+</code></pre>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>let result = Interop.ExecuteJavaScript(&quot;any JS code&quot;, params)
 </code></pre>
 <p>Here is an example showing how to display a native browser dialog:</p>
 <ul>
@@ -153,8 +158,15 @@
     Interop.ExecuteJavaScript(&quot;alert($0)&quot;, text)
 End Sub
 </code></pre>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>static member displayAlert(text: string) =
+    Interop.ExecuteJavaScript(&quot;alert($0)&quot;, text)
+End Sub
+</code></pre>
 <p>In the JavaScript code passed as first argument, &quot;$0&quot; will be substituted with the first subsequent argument, which in this instance is the variable &quot;text.&quot; If there are additional arguments, &quot;$1&quot; will be substituted with the second argument, and so forth. When you use strings as parameters, the result will be the same as replacing the &quot;$0&quot; placeholders with the corresponding strings. The main purpose of this syntax is to preserve strong typing for the cases where the types are more complex, as will be illustrated below.</p>
-<p>This API also allows you to retrieve objects from the JavaScript context into the C#/VB.NET context. This will in turn let you chain several calls, as shown in the following example:</p>
+<p>This API also allows you to retrieve objects from the JavaScript context into the C#(or VB.NET or F#) context. This will in turn let you chain several calls, as shown in the following example:</p>
 <ul>
 <li>C#</li>
 </ul>
@@ -172,6 +184,15 @@ Dim jsWindow As Object = Interop.ExecuteJavaScript(&quot;window&quot;)
 Dim location As Object = Interop.ExecuteJavaScript(&quot;$0.location&quot;, jsWindow)
 Dim currentUrl As String = Interop.ExecuteJavaScript(&quot;$0.href&quot;, location).ToString()
 MessageBox.Show(&quot;The current URL is: &quot; &amp; currentUrl)
+</code></pre>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>// Let's get the current URL by chaining multiple JavaScript calls in our F#:
+let jsWindow = Interop.ExecuteJavaScript(&quot;window&quot;)
+let location = Interop.ExecuteJavaScript(&quot;$0.location&quot;, jsWindow)
+let currentUrl = Interop.ExecuteJavaScript(&quot;$0.href&quot;, location).ToString()
+MessageBox.Show(&quot;The current URL is: &quot; + currentUrl) |&gt; ignore
 </code></pre>
 <p>Another feature is the support of events, &quot;delegates&quot; and &quot;callbacks&quot;. Here is an example showing how to asynchronously obtain the GPS coordinates of the user, via the browser:</p>
 <ul>
@@ -201,8 +222,20 @@ Private Sub GpsReceived(ByVal jsEventArgs As Object)
     MessageBox.Show(&quot;Latitude: &quot; &amp; lat.ToString() &amp; &quot;  Longitude: &quot; &amp; lon.ToString())
 End Sub
 </code></pre>
-<p>To allow the call of C#/VB.NET code from JavaScript, the developer can simply expose entry points by exposing &quot;delegates&quot;, as shown in the example above.</p>
-<p>Here is another example showing how to expose a C#/VB.NET method taking an argument of type String so that it can be called from JavaScript:</p>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>member this.getGpsPosition() =
+    let gpsReceivedDelegate : Delegate = upcast Func&lt;obj, unit&gt;(fun obj -&gt; this.GpsReceived(obj))
+    Interop.ExecuteJavaScript(@&quot;navigator.geolocation.getCurrentPosition($0);&quot;, gpsReceivedDelegate)
+
+member this.GpsReceived(jsEventArgs: obj) =
+    let lat = Convert.ToDouble(Interop.ExecuteJavaScript(&quot;$0.coords.latitude&quot;, jsEventArgs))
+    let lon = Convert.ToDouble(Interop.ExecuteJavaScript(&quot;$0.coords.longitude&quot;, jsEventArgs))
+    MessageBox.Show(sprintf &quot;Latitude: %f  Longitude: %f&quot; lat lon) |&gt; ignore
+</code></pre>
+<p>To allow the call of C#(or VB.NET or F#) code from JavaScript, the developer can simply expose entry points by exposing &quot;delegates&quot;, as shown in the example above.</p>
+<p>Here is another example showing how to expose a C#(or VB.NET or F#) method taking an argument of type String so that it can be called from JavaScript:</p>
 <ul>
 <li>C#</li>
 </ul>
@@ -213,7 +246,13 @@ End Sub
 </ul>
 <pre><code>Interop.ExecuteJavaScript(&quot;window.MyCSharpEntryPoint = $0&quot;, CType(AddressOf MyMethod, Action(Of String)))
 </code></pre>
-<p>Furthermore, the API provides access to the HTML visual tree (the DOM) from C#/VB.NET, in order to manually manipulate HTML and CSS. To do this, developers can call the method <code>Interop.GetDiv(UIElement)</code>, which gives access to the corresponding <code>div</code> of the specified XAML element.</p>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>let actionDelegate : Delegate = upcast Func&lt;string, unit&gt;(fun str -&gt; this.MyMethod(str))
+Interop.ExecuteJavaScript(&quot;window.MyCSharpEntryPoint = $0&quot;, actionDelegate);
+</code></pre>
+<p>Furthermore, the API provides access to the HTML visual tree (the DOM) from C#(or VB.NET or F#), in order to manually manipulate HTML and CSS. To do this, developers can call the method <code>Interop.GetDiv(UIElement)</code>, which gives access to the corresponding <code>div</code> of the specified XAML element.</p>
 <p>Here is an example that shows how to manually change the background color of the XAML DataGrid by manipulating the corresponding HTML and CSS (note: this is not very useful because the DataGrid already has a Background property, but it is suitable for demonstration purposes):</p>
 <ul>
 <li>C#</li>
@@ -244,6 +283,20 @@ AddHandler xamlDataGrid.Loaded, Sub(s, e)
                                     Interop.ExecuteJavaScript(&quot;$0.style.backgroundColor = 'red' &quot;, correspondingDiv)
                                 End Sub
 </code></pre>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>let xamlDataGrid = DataGrid()
+
+// Let's subscribe to the &quot;Loaded&quot; event to ensure that the DataGrid is in the HTML tree:
+xamlDataGrid.Loaded.Add(fun e -&gt;
+    // We get the &lt;div&gt; that corresponds to the DataGrid in the HTML tree:
+    let correspondingDiv = Interop.GetDiv(xamlDataGrid)
+
+    // We change the background color via CSS:
+    Interop.ExecuteJavaScript(&quot;$0.style.backgroundColor = 'red'&quot;, correspondingDiv) |&gt; ignore
+)
+</code></pre>
 <p>It is worth noting that the OpenSilver runtime contains a XAML control called &quot;HtmlPresenter&quot;, which allows to easily place and mix HTML code inside XAML code.</p>
 <p>All of these features are demonstrated in the sample open-source application called &quot;OpenSilver Showcase&quot; which is available online at <a href="https://opensilver.net/gallery/">https://opensilver.net/gallery/</a></p>
 <h2 id="how-to-import-javascript-libraries">How to import JavaScript libraries?</h2>
@@ -259,6 +312,11 @@ AddHandler xamlDataGrid.Loaded, Sub(s, e)
 <li>VB.NET</li>
 </ul>
 <pre><code>Await Interop.LoadJavaScriptFile(&quot;https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js&quot;)
+</code></pre>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>let! result = await Interop.LoadJavaScriptFile(&quot;https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js&quot;) |&gt; Async.AwaitTask
 </code></pre>
 <p>The .js file can be located online, as in the example above, or it can be placed inside the application project (of type OpenSilver). In the latter case, it will be accessible using any of the following URL formats:</p>
 <ul>
@@ -276,12 +334,17 @@ AddHandler xamlDataGrid.Loaded, Sub(s, e)
 </ul>
 <pre><code>Await Interop.LoadJavaScriptFile(&quot;ms-appx:///MyProject/FileSaver.min.js&quot;)
 </code></pre>
+<ul>
+<li>F#</li>
+</ul>
+<pre><code>let! result = Interop.LoadJavaScriptFile(&quot;https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js&quot;) |&gt; Async.AwaitTask
+</code></pre>
 <p>There are also other methods like <code>Interop.LoadCSSFile</code>, which are documented <a href="https://doc.opensilver.net/reference/OpenSilver.Interop.html">on the site</a> and demonstrated in the sample application called &quot;OpenSilver Showcase&quot;.</p>
-<p>Userware, the company behind the open-source project OpenSilver, is currently working on providing NuGet packages specific to well-known JavaScript components, allowing to use them directly from XAML and C#/VB.NET without having to manually code JavaScript calls.</p>
+<p>Userware, the company behind the open-source project OpenSilver, is currently working on providing NuGet packages specific to well-known JavaScript components, allowing to use them directly from XAML and C#(or VB.NET or F#) without having to manually code JavaScript calls.</p>
 <p>For example, packages for Telerik Kendo UI, Syncfusion Essential JS and DevExpress DevExtreme are already available and can be seen in the &quot;Showcase&quot; application, which can be found <a href="https://opensilver.net/gallery/">here</a> on the OpenSilver website. They contain some of the main controls, such as the DataGrid, the RichTextEditor and the Spreadsheet component. Their source code is on GitHub.</p>
 <h2 id="how-to-import-typescript-definition-files">How to import “TypeScript Definition” files?</h2>
 <p>To avoid having to manually make calls to the <code>Interop</code> API to interact with JavaScript libraries, OpenSilver includes the possibility of importing &quot;TypeScript Definition&quot; files, the extension of which is &quot;.d.ts&quot;. These are relatively short files that accompany most JavaScript libraries and their purpose is to provide strong typing to the libraries in question.</p>
-<p>Normally these files are intended for developers of TypeScript applications, but OpenSilver has diverted their use in order to auto-generate strongly typed C#/VB.NET wrapper classes that allow to interact with JavaScript libraries in pure C#/VB.NET, that is to say without any manual call to JavaScript.</p>
+<p>Normally these files are intended for developers of TypeScript applications, but OpenSilver has diverted their use in order to auto-generate strongly typed C#(or VB.NET or F#) wrapper classes that allow to interact with JavaScript libraries in pure C#(or VB.NET or F#), that is to say without any manual call to JavaScript.</p>
 <p>To use these files, developers can simply copy/paste them into an OpenSilver project and compile the project. The auto-generated files can be seen in the “obj/Debug” subfolder of the project.</p>
 <p>In the current version, some advanced features of TypeScript are not yet supported, so a little clean up inside the TypeScript Definition file is often necessary to keep only the essentials.</p>
 <p>Many examples are available in the GitHub of CSHTML5, which is a sister product also maintained by Userware. Its GitHub is accessible at the following address: <a href="https://github.com/cshtml5?tab=repositories">https://github.com/cshtml5?tab=repositories</a></p>

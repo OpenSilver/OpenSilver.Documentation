@@ -130,13 +130,15 @@
 <p><img src="/images/2.NewDialogProjectWithVB.png" alt="Windows prompt for new project" title="The window for creating a new project"></p>
 <p>Once the solution is created, you will see that it has three projects.</p>
 <p><img src="/images/3.solutionExplorer.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for C#">
-<img src="/images/3.solutionExplorerWithVB.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for VB.NET"></p>
+<img src="/images/3.solutionExplorerWithVB.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for VB.NET">
+<img src="/images/3.solutionExplorerWithFS.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for F#"></p>
 <p>The first one is where you will place the files for your application. Its structure is identical to that of a new Silverlight project. It notably contains the files:</p>
 <pre><code>* For C# code migration :- App.xaml, App.xaml.cs, MainPage.xaml and MainPage.xaml.cs. 
 * For VB.NET code migration :- App.xaml, App.xaml.vb, MainPage.xaml and MainPage.xaml.vb. 
+* For F# code migration :- App.xaml, App.xaml.fs, MainPage.xaml and MainPage.xaml.fs. 
 </code></pre>
 <p>The second project, named with the suffix &quot;.Browser&quot;, is the one you will have to launch to test your application in the browser. It plays a role similar to the &quot;.Web&quot; project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.</p>
-<p>Finally the third project, named with the suffix &quot;.Simulator&quot; is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# or VB.NET code at runtime in the &quot;Immediate&quot; window, things that are not possible in the browser.</p>
+<p>Finally the third project, named with the suffix &quot;.Simulator&quot; is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C#(or VB.NET or F#) code at runtime in the &quot;Immediate&quot; window, things that are not possible in the browser.</p>
 <h4 id="as-a-test-lets-create-a-button-in-out-xaml-application">As a test, let's create a Button in out Xaml application:</h4>
 <ol>
 <li>Add the following XAML code inside the MainPage.xaml file, replacing the <code>&lt;Canvas&gt;</code> element:</li>
@@ -171,6 +173,14 @@
 			}
 </code></pre>
 <p><img src="/images/5.MainPage.xaml.vb.png" alt="MainPage.xaml.vb" title="The modified MainPage.xaml.vb page"></p>
+<ul>
+<li>In F#</li>
+</ul>
+<p>Inside the MainPage.xaml.fs file:</p>
+<pre><code>            member private this.Button_Click(sender: obj, e: RoutedEventArgs) =
+                MessageBox.Show(&quot;Vous avez saisi le texte suivant :&quot; + this.MyTextBox1.Text) |&gt; ignore
+</code></pre>
+<p><img src="/images/5.MainPage.xaml.fs.png" alt="MainPage.xaml.fs" title="The modified MainPage.xaml.fs page"></p>
 <h4 id="now-that-the-modifications-are-done-we-can-test-our-application">Now that the modifications are done, we can test our application.</h4>
 <p>Let's recompile the solution and launch the project with the suffix &quot;.Browser&quot;. The default browser opens and the application runs.</p>
 <p><img src="/images/6.AppBrowser.png" alt="application displaying a message in the browser" title="The application running in the browser"></p>
@@ -184,7 +194,8 @@
 <p><img src="/images/9.AppSimulator.png" alt="Application in the Simulator" title="The application running in the Simulator"></p>
 <p>Let's put a breakpoint inside the Button_Click method, then press the button. It is possible to inspect the variables and to do step-by-step debugging.</p>
 <p><img src="/images/10.Breakpoint.png" alt="Breakpoint" title="C# code Variables inspection at a Breakpoint">
-<img src="/images/10.Breakpoint.vb.png" alt="Breakpoint" title="VB.NET code Variables inspection at a Breakpoint"></p>
+<img src="/images/10.Breakpoint.vb.png" alt="Breakpoint" title="VB.NET code Variables inspection at a Breakpoint">
+<img src="/images/10.Breakpoint.fs.png" alt="Breakpoint" title="F# code Variables inspection at a Breakpoint"></p>
 <p>Once done, press the F5 key to continue.</p>
 <p>In the Simulator window, there is an &quot;Inspect Visual Tree&quot; button in the top right corner. Pressing it will open a panel letting you explore the visual tree that constitutes the UI of the application.</p>
 <p><img src="/images/11.VisualTree.png" alt="Breakpoint" title="The Simulator visual tree inspector"></p>
@@ -196,7 +207,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/general/getting-started-tour.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/fsharp-update/documentation/general/getting-started-tour.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
