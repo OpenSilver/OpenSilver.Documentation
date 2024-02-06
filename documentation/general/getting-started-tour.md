@@ -28,7 +28,7 @@ The first one is where you will place the files for your application. Its struct
 The second project, named with the suffix ".Browser", is the one you will have to launch to test your application in the browser. It plays a role similar to the ".Web" project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.
 
 
-Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C#(or VB.NET or F#) code at runtime in the "Immediate" window, things that are not possible in the browser.
+Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# (or VB.NET or F#) code at runtime in the "Immediate" window, things that are not possible in the browser.
 
 #### As a test, let's create a Button in out Xaml application:
 

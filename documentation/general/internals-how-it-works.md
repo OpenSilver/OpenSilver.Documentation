@@ -109,7 +109,7 @@ This can be seen by opening the contents of the NuGet package where it is instal
 
 ![Folder Build](/images/14.FolderBuild.png "The contents of the Build directory in the NuGet package")
 
-One of the key compilation steps is the conversion of XAML files to auto-generated C#(or VB.NET or F#) files. In fact, the compiler replaces XAML files with strictly equivalent C#(or VB.NET or F#) code. For example, in C#, the following XAML code:
+One of the key compilation steps is the conversion of XAML files to auto-generated C# (or VB.NET or F#) files. In fact, the compiler replaces XAML files with strictly equivalent C# (or VB.NET or F#) code. For example, in C#, the following XAML code:
 
 ```
 <StackPanel HorizontalAlignment="Left">
