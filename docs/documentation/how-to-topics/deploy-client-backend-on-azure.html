@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Deploying an OpenSilver Application </title>
+    <title>Hosting both OpenSilver app and its backend on a single Azure Web App </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Deploying an OpenSilver Application ">
+    <meta name="title" content="Hosting both OpenSilver app and its backend on a single Azure Web App ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../../styles/docfx.css">
     <link rel="stylesheet" href="../../styles/main.css">
     <meta property="docfx:navrel" content="../../toc.html">
-    <meta property="docfx:tocrel" content="../../fusion/toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
     
     
     
@@ -110,58 +110,40 @@
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
-        
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
-        </div>
-        <div class="article row grid-right">
+        <div class="article row grid">
           <div class="col-md-8">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="deploying-an-opensilver-application">Deploying an OpenSilver Application</h1>
+<h2 id="hosting-both-opensilver-app-and-its-backend-on-a-single-azure-web-app">Hosting both OpenSilver app and its backend on a single Azure Web App</h2>
 
-<p>This guide provides detailed instructions on how to deploy OpenSilver applications to various hosting environments. Since OpenSilver apps are static, they're <strong>compatible with any file server</strong>. Deployment primarily involves the <code>.Browser</code> project, which functions as a standard Blazor WebAssembly application, meaning general Blazor WebAssembly deployment instructions apply and can enhance your deployment strategy.</p>
-<h2 id="understanding-the-deployment-process">Understanding the Deployment Process</h2>
-<p>The <code>.Browser</code> project within your OpenSilver application is essentially a Blazor WebAssembly (WASM) application. This compatibility with Blazor WASM means that deployment processes and environments suitable for Blazor WASM applications are also applicable to OpenSilver applications. Before deploying, ensure your application is thoroughly tested and ready for production.</p>
-<h3 id="pre-requisites">Pre-requisites</h3>
-<ul>
-<li>A fully developed OpenSilver application.</li>
-<li>Access to your deployment target (Azure, IIS, GitHub Pages, etc.).</li>
-<li>Familiarity with Blazor WebAssembly deployment strategies, as detailed in the <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-8.0#standalone-deployment">official Microsoft documentation</a>.</li>
-</ul>
-<h3 id="deployment-targets">Deployment Targets</h3>
-<p>OpenSilver applications can be deployed to various environments, including cloud services, dedicated servers, and static file hosting services. The choice of environment depends on your specific requirements, such as scalability, availability, and cost.</p>
-<h4 id="1-azure">1. Azure</h4>
-<p>Deploying to Azure provides scalability, security, and reliability. Azure's integration with Visual Studio simplifies the deployment process for OpenSilver apps. Follow the <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-8.0#deploy-from-visual-studio">Blazor WebAssembly deployment guide for Azure</a> to get started.</p>
-<p>To publish the backend on the same Azure Web App, refer to <a href="../how-to-topics/deploy-client-backend-on-azure.html">this guide</a>.</p>
-<h4 id="2-internet-information-services-iis">2. Internet Information Services (IIS)</h4>
-<p>IIS is a flexible, secure, and manageable Web server for hosting web applications, including OpenSilver apps. Deployment to IIS involves configuring the server to host the static files of your application. Detailed instructions are available in the <a href="../how-to-topics/add-site-to-iis.html">OpenSilver documentation for IIS deployment</a>.</p>
-<h4 id="3-github-pages-or-any-static-file-hosting">3. GitHub Pages or Any Static File Hosting</h4>
-<p>GitHub Pages offers a straightforward way to deploy static applications, making it an excellent option for OpenSilver apps. Since OpenSilver apps are static, they're well-suited for any static file hosting service. Guides for deploying to GitHub Pages and other static hosting services can be found in the <a href="../how-to-topics/any-static-hosting.html">OpenSilver documentation</a>.</p>
-<h3 id="deployment-steps">Deployment Steps</h3>
-<p>To deploy your OpenSilver application, follow these revised steps:</p>
+<p>This guide demonstrates how to deploy an OpenSilver app to the root and the server to a sub-path, such as <code>/api</code>, on the same Azure Web App.</p>
 <ol>
-<li><p><strong>Publish the <code>.Browser</code> Project</strong>: Use Visual Studio's context menu or a command line to publish the project. For command line publishing, navigate to the <code>.Browser</code> folder and execute <code>dotnet publish -c Release</code>.
-This will generate the deployment package in an output folder similar to bin\Release\net7.0\publish.</p>
+<li><p>In the Azure Web App settings, add a virtual directory for the backend. For example, set the virtual path to <code>/api</code> and the physical path to <code>site\api</code>, with the type set as <code>Application</code>.</p>
 </li>
-<li><p><strong>Prepare the Deployment Package</strong>: Locate the published files in the output directory specified in the publish step. This folder contains all the necessary files to deploy your application.</p>
+<li><p>If your <code>.Browser</code> project does not have a <code>web.config</code> file, add it (you can use an example from <a href="enable-trimming.html">this article</a>). Then set <code>&lt;PublishIISAssets&gt;true&lt;/PublishIISAssets&gt;</code> in the <code>.csproj</code> file.</p>
 </li>
-<li><p><strong>Configure the Hosting Environment</strong>: Set up your chosen deployment target according to its requirements. This might involve configuring server settings, setting up domain names, and ensuring security measures are in place.</p>
-</li>
-<li><p><strong>Upload Your Application</strong>: Transfer the deployment package to your hosting environment. This could be through FTP, Git, or direct file upload, depending on the platform.</p>
-</li>
-<li><p><strong>Test the Deployment</strong>: Once deployed, thoroughly test your application to ensure it functions correctly in the production environment.</p>
+<li><p>Insert the following rule in your <code>web.config</code> file, to bypass <code>/api</code> calls, allowing them to be handled by the backend app:</p>
 </li>
 </ol>
-<h3 id="best-practices-and-troubleshooting">Best Practices and Troubleshooting</h3>
-<ul>
-<li><strong>Use HTTPS</strong>: For security and privacy, ensure your application is served over HTTPS.</li>
-<li><strong>Enable Compression</strong>: To improve loading times, enable compression for static files.</li>
-<li><strong>Browser Compatibility</strong>: Test your application on various browsers and devices to ensure compatibility.</li>
-<li><strong>Troubleshooting</strong>: Common deployment issues often relate to path configurations, server settings, and browser caching. Refer to the <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-8.0#troubleshooting">Blazor deployment troubleshooting guide</a> for solutions.</li>
-</ul>
+<pre><code>&lt;configuration&gt;
+    &lt;system.webServer&gt;
+        &lt;rewrite&gt;
+            &lt;rules&gt;
+                &lt;rule name=&quot;API Rule&quot; stopProcessing=&quot;true&quot;&gt;
+                    &lt;match url=&quot;api/(.*)&quot; /&gt;
+                    &lt;action type=&quot;None&quot; /&gt;
+                &lt;/rule&gt;
+                &lt;!--Other rules--&gt;
+            &lt;/rules&gt;
+        &lt;/rewrite&gt;
+    &lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</code></pre>
+<ol start="4">
+<li>Ensure you updated the server URL in the client app to <code>https://your-site-name.azurewebsites.net/api/</code>.</li>
+<li>Publish the <code>.Browser</code> project from Visual Studio using the publish profile that you can get on the Azure portal.</li>
+<li>Publish the backend project by importing the same publish profile, but modify the Site name to <code>your-site-name/api</code>.</li>
+</ol>
+<p><img src="/images/how-to-topics/vs-publish-azure.png" alt="VS Publish on Azure"></p>
 </article>
           </div>
           
@@ -170,7 +152,7 @@ This will generate the deployment package in an output folder similar to bin\Rel
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/general/deployment.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/how-to-topics/deploy-client-backend-on-azure.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
