@@ -20,6 +20,8 @@ OpenSilver applications can be deployed to various environments, including cloud
 
 Deploying to Azure provides scalability, security, and reliability. Azure's integration with Visual Studio simplifies the deployment process for OpenSilver apps. Follow the [Blazor WebAssembly deployment guide for Azure](https://learn.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-8.0#deploy-from-visual-studio) to get started.
 
+To publish the backend on the same Azure Web App, refer to [this guide](../how-to-topics/deploy-client-backend-on-azure.md).
+
 #### 2. Internet Information Services (IIS)
 
 IIS is a flexible, secure, and manageable Web server for hosting web applications, including OpenSilver apps. Deployment to IIS involves configuring the server to host the static files of your application. Detailed instructions are available in the [OpenSilver documentation for IIS deployment](../how-to-topics/add-site-to-iis.md).
