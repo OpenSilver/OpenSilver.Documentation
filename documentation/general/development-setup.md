@@ -61,7 +61,7 @@ Below, you'll find a detailed document about how to set up your Development Envi
 2. **Install the WebAssembly Tools:**
    - Type the following command and press Enter:
      ```bash
-     dotnet workload install wasm-tools
+     dotnet workload install wasm-tools-net7
      ```
 
 ## 5. Download and Install the IIS URL Rewrite Module
