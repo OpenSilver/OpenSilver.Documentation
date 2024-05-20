@@ -22,7 +22,7 @@ Below, you'll find a detailed document about how to set up your Development Envi
    - Once the download is complete, run the installer file from your Downloads folder.
 
 4. **Install Visual Studio 2022:**
-   - When prompted, select the workloads you wish to install. For general development, choose “.NET desktop development” and “ASP.NET and web development”.
+   - When prompted, select the workloads you wish to install. Make sure you have at least: “.NET desktop development” and “ASP.NET and web development” selected.
    - Click "Install" and wait for the installation to complete.
 
 5. **Complete the Setup:**
@@ -31,20 +31,14 @@ Below, you'll find a detailed document about how to set up your Development Envi
 ## 2. Install the OpenSilver Plugin for Visual Studio
 
 ### Step-by-Step Instructions:
-1. **Open Visual Studio 2022:**
-   - Launch Visual Studio 2022.
+1. **Download:**
+   - Get it from [Opensilver download page](https://forms.opensilver.net/download.aspx)
 
-2. **Access the Extensions Menu:**
-   - Navigate to “Extensions” on the menu bar, then select “Manage Extensions”.
-
-3. **Search for OpenSilver:**
-   - In the search bar of the Manage Extensions window, type “OpenSilver” and press enter.
-
-4. **Install OpenSilver:**
-   - Find the OpenSilver extension in the list and click “Download”. After downloading, you may need to close Visual Studio to initiate the installation.
-
-5. **Restart Visual Studio:**
-   - Restart Visual Studio to complete the installation of the OpenSilver plugin.
+2. **Install:**
+   - Close any Visual Studio instance you may have running
+   - Double click it and follow the steps.
+   - Make sure you select "Visual Studio 2022" as the version of VS to install the plugin for
+   - When you'll restart Visual Studio 2022, the OpenSilver plugin will be installed.
 
 ## 3. Download .NET 7
 
@@ -53,7 +47,7 @@ Below, you'll find a detailed document about how to set up your Development Envi
    - Access the .NET 7 official download page at [Download .NET 7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
 
 2. **Select the Appropriate SDK:**
-   - Choose the SDK according to your operating system (Windows, macOS, Linux).
+   - Choose the SDK according to your Windows operating system.
 
 3. **Download and Install the SDK:**
    - Click the download link and run the installer after the download completes.
