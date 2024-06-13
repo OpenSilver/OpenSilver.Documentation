@@ -63,9 +63,8 @@ Inside the MainPage.xaml.vb file:
 	
 ```
 			Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-			{
 			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text)
-			}
+			End Sub
 ```
 ![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
 
