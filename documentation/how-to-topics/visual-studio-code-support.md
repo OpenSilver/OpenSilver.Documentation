@@ -94,11 +94,7 @@ All you have to do is start typing and a list of suggestions will appear much li
 #### Known limitations
 At the moment the IntelliSense like support has some limitations. For example before he can recognize elements marked with the x:Name attribute require the project to be rebuilt to be available. 
 
-<<<<<<<<< Temporary merge branch 1
-Also template support is not complete and will be improved in a future release.
-=========
 Also static resource names, named colors, custom controls in data template support is not complete and will be improved in a future release.
->>>>>>>>> Temporary merge branch 2
 
-## What if I have another question?
+## What should I do if I have additional questions?
 Please contact us for any questions at: [https://opensilver.net/contact.aspx](https://opensilver.net/contact.aspx)
