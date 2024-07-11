@@ -15,6 +15,8 @@ That way you can create new projects on any platform like Linux, MacOS or Window
 .net core CLI has a different, more modern, templating approach than Visual Studio and OpenSilver provides support for this cross platform technology.
 
 Download the OpenSilver CLI package and install it by issuing this command in the CLI (you have to move in the .\nugetpkg folder to find the package created by Visual Studio):
+
+After you can isntall it by issuing this command in the CLI (you have to move in the .\nugetpkg folder to find the package created by Visual Studio):
 	
 	dotnet new install .\OpenSilver.CLI.Templates.3.0.0.nupkg
 
