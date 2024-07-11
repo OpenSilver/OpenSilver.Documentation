@@ -1,6 +1,12 @@
 # Getting Started - Guided tour of the creation of a new OpenSilver application
 
-The development experience with OpenSilver is very similar to that of Silverlight, WPF and Universal Platform.
+The development experience with OpenSilver is very similar to that of Silverlight, WPF and Universal Platform. You can use Visual Studio 2019 on Windows (recommended) or VS Code on Windows, macOS, or Linux.
+
+## Option 1: Using the CLI and VS Code (for Windows, macOS or Linux)
+
+Please refer to the [VS Code Support](/documentation/how-to-topics/visual-studio-code-support.html) page.
+
+## Option 2 (Recommended): Using Visual Studio on Windows
 
 OpenSilver is distributed as a NuGet package (on [NuGet.org](https://www.nuget.org/packages/OpenSilver)) and as a [VSIX extension](https://www.opensilver.net/download.aspx) for Visual Studio 2019 (or higher) containing the project templates.
 
