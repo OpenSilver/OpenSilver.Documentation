@@ -2,6 +2,9 @@
 OpenSilver comes with a Visual Studio Code extensions and a dotnet CLI library of templates that provide support for OpenSilver projects. 
 The OpenSilver extension, provides IntelliSense-like support for XAML files within Visual Studio Code and more, and OpenSilver Templates nuget package, which allows you to create new OpenSilver projects and items from within Visual Studio Code.
 
+## Prerequisites
+You need the [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) extension installed in order to use the OpenSilver Extension for VS Code.
+
 ## OpenSilver dotnet CLI templates
 OpenSilver support two ways to create a new project starting from a template, the first one is the classic VSIX that install in VisualStudio few ready to use templates. The second option is using the cross-platform .net core CLI interface.
 
@@ -54,10 +57,13 @@ A common scenario, after the prerequisites above are installed, includes:
 Depending on you specific configuration and environment more steps may be necessary. In case you need help you can contact us at: [https://opensilver.net/contact.aspx](https://opensilver.net/contact.aspx)
 
 ## The Visual Studio Code extension
+
+The extension for VS Code can be downloaded from: https://opensilver.net/download
+
 The Visual Studio code extension is designed to enhance productivity and simplify the creation and coding of OpenSilver projects within Visual Studio Code. 
 It provides IntelliSense-like support from XAML files within Visual Studio Code and simplifies the creation and coding of OpenSilver projects within Visual Studio Code. The Visual Studio code extension includes OpenSilver CLI templates for C#, Visual Basic, and F#, allowing for easy project creation. Additionally, it offers commands to create new items such as classes and resource files, all within the Visual Studio Code workspace. 
 
-**Note:** In order to be able to create new project within Visual Studio code you need the [OpenSilver CLI Templates package](https://github.com/OpenSilver/OpenSilver.VSIX). Each templates target OpenSilver 3.0.0 and .net version 8.x.
+**Note:** In order to be able to create new project within Visual Studio code you need the [OpenSilver CLI Templates package](https://www.nuget.org/packages/OpenSilver.Templates). Each templates target OpenSilver 3.0.0 and .net version 8.x.
 
 ### Commands provided
 The extension introduces new commands, such as building the solution (a necessary step to enable IntelliSense-like experience for XAML files) and creating new project items. These commands are grouped under the **OpenSilver** category and can be accessed via the command palette.
