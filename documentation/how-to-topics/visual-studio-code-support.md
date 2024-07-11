@@ -1,7 +1,6 @@
 # Visual Studio Code support
 OpenSilver comes with a Visual Studio Code extensions and a dotnet CLI library of templates that provide support for OpenSilver projects. 
-The OpenSilver extension, provides IntelliSense-like support for XAML files within Visual Studio Code and more. 
-The OpenSilver CLI Templates package, which allows you to create new OpenSilver projects and items from within Visual Studio Code.
+The OpenSilver extension, provides IntelliSense-like support for XAML files within Visual Studio Code and more, and OpenSilver Templates nuget package, which allows you to create new OpenSilver projects and items from within Visual Studio Code.
 
 ## OpenSilver dotnet CLI templates
 OpenSilver support two ways to create a new project starting from a template, the first one is the classic VSIX that install in VisualStudio few ready to use templates. The second option is using the cross-platform .net core CLI interface.
@@ -14,7 +13,7 @@ That way you can create new projects on any platform like Linux, MacOS or Window
 ### How to intall the CLI templates
 .net core CLI has a different, more modern, templating approach than Visual Studio and OpenSilver provides support for this cross platform technology.
 
-Download the OpenSilver CLI package and install it by issuing this command in the CLI (you have to move in the .\nugetpkg folder to find the package created by Visual Studio):
+Download the OpenSilver Templates package (from the [OpenSilver.Templates nuget download page](https://www.nuget.org/packages/OpenSilver.Templates)) and install it by issuing this command in the CLI:
 	
 	dotnet new install .\OpenSilver.CLI.Templates.3.0.0.nupkg
 
@@ -95,7 +94,7 @@ All you have to do is start typing and a list of suggestions will appear much li
 #### Known limitations
 At the moment the IntelliSense like support has some limitations. For example before he can recognize elements marked with the x:Name attribute require the project to be rebuilt to be available. 
 
-Also static resource names, named colors, custom controls in data template support is not complete and will be improved in a future release.
+**Note:** Static resource names, named colors, custom controls in data template support is not complete and will be improved in a future release.
 
 ## What if I have another question?
 Please contact us for any questions at: [https://opensilver.net/contact.aspx](https://opensilver.net/contact.aspx)
