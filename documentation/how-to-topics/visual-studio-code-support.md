@@ -13,7 +13,7 @@ The .NET Command-Line Interface (CLI) is a cross-platform toolchain for developi
 
 That way you can create new projects on any platform like Linux, MacOS or Windows and then use your favorite IDE for development, like VSCode.
 
-### How to intall the CLI templates
+### How to install the CLI templates
 .net core CLI has a different, more modern, templating approach than Visual Studio and OpenSilver provides support for this cross platform technology.
 
 Download the OpenSilver Templates package (from the [OpenSilver.Templates nuget download page](https://www.nuget.org/packages/OpenSilver.Templates)) and install it by issuing this command in the CLI:
