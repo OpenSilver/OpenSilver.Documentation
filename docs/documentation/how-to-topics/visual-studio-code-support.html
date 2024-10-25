@@ -122,87 +122,98 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="visual-studio-code-support">Visual Studio Code support</h1>
 
-<p>OpenSilver comes with a Visual Studio Code extensions and a dotnet CLI library of templates that provide support for OpenSilver projects.
-The OpenSilver extension, provides IntelliSense-like support for XAML files within Visual Studio Code and more, and OpenSilver Templates nuget package, which allows you to create new OpenSilver projects and items from within Visual Studio Code.</p>
+<p>OpenSilver comes with a Visual Studio Code extension and a dotnet CLI library of templates that provide support for OpenSilver projects.
+The OpenSilver extension simplifies working with XAML files within Visual Studio Code, while the OpenSilver Templates NuGet package allows you to create new OpenSilver projects and items from within Visual Studio Code.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>You need the <a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit">C# Dev Kit</a> extension installed in order to use the OpenSilver Extension for VS Code.</p>
 <h2 id="opensilver-dotnet-cli-templates">OpenSilver dotnet CLI templates</h2>
-<p>OpenSilver support two ways to create a new project starting from a template, the first one is the classic VSIX that install in VisualStudio few ready to use templates. The second option is using the cross-platform .net core CLI interface.</p>
-<h3 id="what-is-the-net-cli">What is the .net CLI?</h3>
-<p>The .NET Command-Line Interface (CLI) is a cross-platform toolchain for developing, building, running, and publishing .NET applications1. The .NET CLI is included with the .NET SDK and now OpenSilver supports also this workflow.</p>
-<p>That way you can create new projects on any platform like Linux, MacOS or Windows and then use your favorite IDE for development, like VSCode.</p>
-<h3 id="how-to-intall-the-cli-templates">How to intall the CLI templates</h3>
-<p>.net core CLI has a different, more modern, templating approach than Visual Studio and OpenSilver provides support for this cross platform technology.</p>
-<p>Download the OpenSilver Templates package (from the <a href="https://www.nuget.org/packages/OpenSilver.Templates">OpenSilver.Templates nuget download page</a>) and install it by issuing this command in the CLI:</p>
-<pre><code>dotnet new install .\OpenSilver.CLI.Templates.3.0.0.nupkg
+<p>OpenSilver supports two ways to create a new project starting from a template.
+The first is the classic VSIX that installs a few ready-to-use templates in Visual Studio.
+The second option is using the cross-platform .NET CLI interface.</p>
+<h3 id="what-is-the-net-cli">What is the .NET CLI?</h3>
+<p>The .NET Command-Line Interface (CLI) is a cross-platform toolchain for developing, building, running, and publishing .NET applications.
+The .NET CLI is included with the .NET SDK, and now OpenSilver also supports this workflow.</p>
+<p>This allows you to create new projects on any platform like Linux, macOS, or Windows, and then use your favorite IDE for development, like VS Code.</p>
+<h3 id="how-to-install-the-cli-templates">How to install the CLI templates</h3>
+<p>The .NET CLI has a different, more modern, templating approach than Visual Studio, and OpenSilver provides support for this cross-platform technology.</p>
+<p>Simply run the following command in the CLI to install the OpenSilver Templates:</p>
+<pre><code>dotnet new install OpenSilver.Templates
 </code></pre>
-<p>From now on you will have three new templates available via the CLI, on any platform.</p>
+<p>From now on, you will have three new templates available via the CLI on any platform.</p>
 <p>You can list the available .NET CLI templates by using the command:</p>
-<pre><code>dotnet new --list or dotnet new -l 
+<pre><code>dotnet new --list
 </code></pre>
-<p>This command will display the pre-installed .NET Core project templates. The list includes details such as the name of the templates, the short name of the template, default programming language, and the template tags. That way you should see three new templates under the category OpenSilver.CLI.Tools</p>
+<p>This command will display the pre-installed .NET Core project templates.
+The list includes details such as the name of the templates, the short name of the template, default programming language, and the template tags.
+You should see three new templates listed among the available .NET templates.</p>
 <h3 id="create-your-first-opensilver-project-via-the-cli">Create your first OpenSilver project via the CLI</h3>
-<p>In order to create your first OpenSilver app you have to choose the available template you want to use (WebApp, Business app etc). and then issue the command:</p>
+<p>To create your first OpenSilver app, choose the available template you want to use (e.g., WebApp, Business app) and issue the command:</p>
 <pre><code>dotnet new opensilverapp -n MyProject
 </code></pre>
-<p>This will create in the current directory an new OpenSilver web project called &quot;MyProject&quot;. Remember that you must use the short name of the template not the full template name. Our templates will also take care of restoring the necessary nuget packages from the default repositories.</p>
-<p>For more information about the command line switches you can run this command to get all the information you need for each template.</p>
+<p>This will create a new OpenSilver web project called &quot;MyProject&quot; in the current directory.
+Remember to use the short name of the template, not the full template name.
+The templates will also take care of restoring the necessary NuGet packages from the default repositories.</p>
+<p>For more information about the command-line switches, you can run the following command:</p>
+<pre><code>dotnet new opensilverapp --help
+</code></pre>
 <h3 id="running-the-project">Running the project</h3>
-<p>After you have created your project you can run it and debug in VS Code. Please note that it can require some manual steps depending on your configuration. In any the extension rely on the following extensions provided by Microsoft:</p>
+<p>After creating your project, you can run it and debug in VS Code.
+Please note that some manual steps may be required depending on your configuration.
+The extension relies on the following extensions provided by Microsoft:</p>
 <ul>
 <li>C# Dev Toolkit</li>
 <li>C# Support</li>
-<li>.net 8 SDK with wasm/blazor workload</li>
+<li>.NET 8 SDK with WASM/Blazor workload</li>
 </ul>
-<p>Also you require (if not installed the extension will try to install it for you) the <strong>.net framework 8 SDK and the blazor wasm workload</strong>.</p>
-<p>A common scenario, after the prerequisites above are installed, includes:</p>
-<ul>
-<li>Go to the debug panel</li>
-<li>Click on run button</li>
-<li>VSCode will ask for which debug adapter to use, select C#</li>
-<li>At that point the build will start and you should see a browser opening</li>
-</ul>
-<p>Depending on you specific configuration and environment more steps may be necessary. In case you need help you can contact us at: <a href="https://opensilver.net/contact.aspx">https://opensilver.net/contact.aspx</a></p>
+<p>You will also need the <strong>.NET Framework 8 SDK and the Blazor WASM workload</strong> (the extension will try to install these if they are not already installed).</p>
+<p>A common scenario after the prerequisites are installed includes:</p>
+<ol>
+<li>Go to the debug panel.</li>
+<li>Click the run button.</li>
+<li>VS Code will ask which debug adapter to use; select C#.</li>
+<li>The build will start, and you should see a browser opening.</li>
+</ol>
+<p>Depending on your specific configuration and environment, more steps may be necessary.
+If you need help, you can contact us at: <a href="https://opensilver.net/contact.aspx">https://opensilver.net/contact.aspx</a>.</p>
 <h2 id="the-visual-studio-code-extension">The Visual Studio Code extension</h2>
-<p>The extension for VS Code can be downloaded from: <a href="https://opensilver.net/download">https://opensilver.net/download</a></p>
-<p>The Visual Studio code extension is designed to enhance productivity and simplify the creation and coding of OpenSilver projects within Visual Studio Code.
-It provides IntelliSense-like support from XAML files within Visual Studio Code and simplifies the creation and coding of OpenSilver projects within Visual Studio Code. The Visual Studio code extension includes OpenSilver CLI templates for C#, Visual Basic, and F#, allowing for easy project creation. Additionally, it offers commands to create new items such as classes and resource files, all within the Visual Studio Code workspace.</p>
-<p><strong>Note:</strong> In order to be able to create new project within Visual Studio code you need the <a href="https://www.nuget.org/packages/OpenSilver.Templates">OpenSilver CLI Templates package</a>. Each templates target OpenSilver 3.0.0 and .net version 8.x.</p>
+<p>The extension for VS Code can be downloaded from: <a href="https://opensilver.net/download">https://opensilver.net/download</a>.</p>
+<p>The Visual Studio Code extension is designed to enhance productivity by simplifying the creation and coding of OpenSilver projects within Visual Studio Code.
+The built-in XAML Designer tool simplifies changing the XAML files. The extension includes OpenSilver CLI templates for C#, Visual Basic, and F#, allowing for easy project creation.
+Additionally, it offers commands to create new items such as classes and resource files, all within the Visual Studio Code workspace.</p>
+<p><strong>Note:</strong> In order to create new projects within Visual Studio Code, you need the <a href="https://www.nuget.org/packages/OpenSilver.Templates">OpenSilver CLI Templates package</a>.</p>
 <h3 id="commands-provided">Commands provided</h3>
-<p>The extension introduces new commands, such as building the solution (a necessary step to enable IntelliSense-like experience for XAML files) and creating new project items. These commands are grouped under the <strong>OpenSilver</strong> category and can be accessed via the command palette.</p>
+<p>The extension introduces new commands, such as building the solution and creating new project items.
+These commands are grouped under the <strong>OpenSilver</strong> category and can be accessed via the command palette.</p>
 <p>The available commands are:</p>
 <ul>
 <li>New project items
 <ul>
-<li>opensilver.newProject: &quot;Create a new OpenSilver Project&quot;</li>
-<li>opensilver.newChildWindow: &quot;Create a new OpenSilver child window&quot;</li>
-<li>opensilver.newUserControl: &quot;Create a new OpenSilver user control&quot;</li>
-<li>opensilver.newPage: &quot;Create a new OpenSilver page&quot;</li>
-<li>opensilver.newClass: &quot;Create a new C# class&quot;</li>
-<li>opensilver.newResource: &quot;Create a new XAML Resource file&quot;</li>
-<li>opensilver.newDictionary: &quot;Create a new resource dictionary file&quot;</li>
+<li>opensilver.newApplication: &quot;Create a new OpenSilver Application&quot;</li>
+<li>opensilver.newProject: &quot;Add a new OpenSilver Class Library&quot;</li>
+<li>opensilver.newChildWindow: &quot;Create a new OpenSilver Child Window&quot;</li>
+<li>opensilver.newUserControl: &quot;Create a new OpenSilver User Control&quot;</li>
+<li>opensilver.newPage: &quot;Create a new OpenSilver Page&quot;</li>
+<li>opensilver.newClass: &quot;Create a new Class&quot;</li>
+<li>opensilver.newResourceFile: &quot;Create a new Resource(.resx) file&quot;</li>
+<li>opensilver.newXamlResourceDictionary: &quot;Create a new XAML Resource Dictionary file&quot;</li>
 </ul>
 </li>
 <li>Other
 <ul>
-<li>opensilver.compileProject: &quot;Compile the project&quot;</li>
+<li>opensilver.compileSolution: &quot;Compile the Application&quot;</li>
+<li>opensilver.showXamlDesigner: &quot;Show the Xaml Designer&quot;</li>
+<li>opensilver.formatXaml: &quot;Format the XAML file&quot;</li>
 </ul>
 </li>
 </ul>
-<p><strong>Note:</strong> Each item creation command prompts you for the file name, namespace, and location. The namespace is stored in the Visual Studio cache, so the next time you're prompted for a namespace, your last choice is preserved and proposed. You can always choose to enter a new namespace, your previous input will be discarded.</p>
-<h3 id="create-a-project-from-the-homepage">Create a project from the homepage</h3>
-<p>The extension adds a new command button to the homepage. When you open a new instance of Visual Studio Code, you'll notice a new button labeled 'Create OpenSilver Project.' Clicking this button opens the command palette, where you can choose from different templates (such as application, OpenRia-enabled application, and class library).</p>
-<p><img src="/images/vscodeCreateNewProject.png" alt="New project" title="New project command button"></p>
-<p>After selecting a project template, you'll be prompted to enter a solution name and location. A new solution, compatible with Visual Studio and the C# dev toolkit, will then be created.</p>
-<h3 id="intellisense-support">Intellisense support</h3>
-<p>If the project you're working on is compiled the extension will provide IntelliSense-like support for XAML files. This includes code completion, parameter info, quick info, and member lists. The IntelliSense-like support is available for XAML files only.</p>
-<p><img src="/images/vscodeIntellisense.png" alt="VSCode Intellisense in action" title="VSCode Intellisense in action"></p>
-<p>All you have to do is start typing and a list of suggestions will appear much like in Visual Studio. You can use the arrow keys to navigate through the suggestions and press Enter to select one.</p>
-<h4 id="known-limitations">Known limitations</h4>
-<p>At the moment the IntelliSense like support has some limitations. For example before he can recognize elements marked with the x:Name attribute require the project to be rebuilt to be available.</p>
-<p>Also static resource names, named colors, custom controls in data template support is not complete and will be improved in a future release.</p>
+<h3 id="create-an-application-from-the-homepage">Create an Application from the homepage</h3>
+<p>The extension adds a new command button to the homepage.
+When you open a new instance of Visual Studio Code, you'll notice a new button labeled &quot;Create OpenSilver Application&quot;.
+Clicking this button opens the command palette, where you can choose from different templates.</p>
+<p>After selecting a project template, you'll be prompted to enter a solution name and location.
+A new solution, compatible with Visual Studio and the C# Dev Toolkit, will then be created.</p>
 <h2 id="what-should-i-do-if-i-have-additional-questions">What should I do if I have additional questions?</h2>
-<p>Please contact us for any questions at: <a href="https://opensilver.net/contact.aspx">https://opensilver.net/contact.aspx</a></p>
+<p>Please contact us for any questions at: <a href="https://opensilver.net/contact.aspx">https://opensilver.net/contact.aspx</a>.</p>
 </article>
           </div>
           
