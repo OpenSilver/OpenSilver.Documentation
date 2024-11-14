@@ -143,22 +143,16 @@
 <li><p>Use the &quot;Inspect XAML tree&quot; feature of the Simulator to check whether a <code>VirtualizingStackPanel</code> is present.</p>
 </li>
 </ul>
-<p>To enable virtualization for a <code>ListBox</code> or another control that derives from <code>ItemsControl</code>:</p>
-<ol>
-<li><p>Change the <code>ItemsPanelTemplate</code> to add a <code>VirtualizingStackPanel</code> instead of the default <code>StackPanel</code>.</p>
-</li>
-<li><p>Set the <code>CustomLayout</code> property to true. One thing to keep in mind here is Silverlight does not have this property, so you might set this in code within OpenSilver compilation symbols.</p>
-<pre><code> &lt;ListBox CustomLayout=&quot;True&quot;&gt; 
-     &lt;ListBox.ItemsPanel&gt; 
-         &lt;ItemsPanelTemplate&gt; 
-             &lt;VirtualizingStackPanel/&gt; 
-         &lt;/ItemsPanelTemplate&gt; 
-     &lt;/ListBox.ItemsPanel&gt; 
- &lt;/ListBox&gt; 
+<p>To enable virtualization for a <code>ListBox</code> or another control that derives from <code>ItemsControl</code>, change the <code>ItemsPanelTemplate</code> to add a <code>VirtualizingStackPanel</code> instead of the default <code>StackPanel</code>.</p>
+<pre><code>    &lt;ListBox&gt; 
+        &lt;ListBox.ItemsPanel&gt; 
+            &lt;ItemsPanelTemplate&gt; 
+                &lt;VirtualizingStackPanel/&gt; 
+            &lt;/ItemsPanelTemplate&gt; 
+        &lt;/ListBox.ItemsPanel&gt; 
+    &lt;/ListBox&gt; 
 </code></pre>
-</li>
-</ol>
-<p>Performance gains can be huge depending on the number of items. It is roughly proportional. For example, if 100 items visible on screen out of 1000, we will get a 10x performance improvement. Performance gains can even be better than proportional if by enabling virtualization we don't hit certain memory consumption thresholds that cause a high number of memory swaps.</p>
+<p>Performance gains can be significant depending on the number of items. It is roughly proportional. For example, if 100 items visible on screen out of 1000, we will get a 10x performance improvement. Performance gains can even be better than proportional if by enabling virtualization we don't hit certain memory consumption thresholds that cause a high number of memory swaps.</p>
 <h2 id="simplify-the-visual-tree">Simplify the visual tree</h2>
 <p>You can look at the visual tree:</p>
 <ul>
@@ -192,10 +186,12 @@
 <p>Binary serialization is faster than text serialization, but currently some features are missing. Using ProtoBuf can improve performance significantly.</p>
 <h2 id="do-not-load-all-the-data-at-the-same-time">Do not load all the data at the same time</h2>
 <p>Show the view/page with minimal data. Then use <code>Task.Delay</code> in C# to load the heavy data and show loading indicator. This does not reduce the total loading time, but it makes the app more responsive, as it's better if a user sees something and wait for loading other than nothing displayed.</p>
-<h2 id="set-fixed-widthheight-with-customlayout">Set fixed Width/Height with CustomLayout</h2>
-<p>Fixed size will prevent additional calculations if <code>CustomLayout</code> is enabled.</p>
+<h2 id="set-fixed-widthheight-in-more-places">Set fixed Width/Height in more places</h2>
+<p>Fixed size will prevent additional calculations when the layout is updated.</p>
 <h2 id="page-caching">Page caching</h2>
 <p>If the <code>Frame</code> control is used, set <code>Page.NavigationCacheMode = NavigationCacheMode.Enabled</code> to reuse cached pages and reduce memory usage.</p>
+<h2 id="host-the-app-in-https-rather-than-http">Host the app in HTTPS rather than HTTP</h2>
+<p>In some scenarios, cachine of the application files will work only if the application is hosted in HTTPS.</p>
 </article>
           </div>
           
