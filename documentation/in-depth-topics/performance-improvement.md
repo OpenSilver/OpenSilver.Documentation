@@ -112,4 +112,14 @@ If the `Frame` control is used, set `Page.NavigationCacheMode = NavigationCacheM
 
 ## Host the app in HTTPS rather than HTTP
 
-In some scenarios, cachine of the application files will work only if the application is hosted in HTTPS. 
+In some scenarios, caching of the application files will work only if the application is hosted in HTTPS. 
+
+## Enable WASM SIMD
+
+If you are sure that your users have an up-to-date browser (read note below), you can improve the performance of your application by enabling WASM SIMD.
+
+To do so, edit the ".CSPROJ" file of the project that has the ".Browser" suffix, and replace the line <WasmEnableSIMD>false</WasmEnableSIMD> with <WasmEnableSIMD>true</WasmEnableSIMD>
+
+Note that this setting will prevent the application from running on older browsers. Specifically, the application will not run on old versions of Edge, Chrome or Firefox released prior to 2021, and Safari versions released prior to 2023.
+
+
