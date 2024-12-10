@@ -29,7 +29,7 @@
                         <div class="header_in">
                             <div id="hamb_menu" class="hamb show_sm"></div>
                             <a class="logo" href="https://opensilver.net/">
-                                <img src="/images/OpenSilver_3_0_Logo_HighRes.png">
+                                <img src="/images/OpenSilver-3.1-Logo-MidRes.png">
                             </a>
                             <!--<nav class="hide_sm">
                                 <ul>
@@ -122,22 +122,18 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="troubleshooting">Troubleshooting</h1>
 
-<h2 id="known-issues-and-tips">Known issues and tips:</h2>
-<h3 id="compilation-errors">Compilation errors</h3>
+<h2 id="common-issues-and-solutions">Common issues and solutions:</h2>
+<h3 id="wcf-and-clientserver-communication">WCF and client/server communication</h3>
 <ul>
-<li>To improve the accuracy of the &quot;Error List&quot; window, select &quot;Build only&quot;, as shown in the screenshot below:</li>
-</ul>
-<p><img src="/images/view-only-build-errors-small.png" alt="Select 'Build Only' to see only relevant errors" title="Select 'Build Only' to see only relevant errors"></p>
-<ul>
-<li><p>The &quot;Error List&quot; window may display misleading errors. Please only refer to the content of the &quot;Output&quot; window (Ctrl+W, O) to know if a compilation has succeeded. If there are compilation errors when rebuilding a project, please search for the very first error that appears in the &quot;Output&quot; window (Ctrl+W, O).</p>
+<li><p>For REST calls, use HttpClient instead of WebClient.</p>
 </li>
-<li><p>The XAML editor sometimes displays misleading errors during design-time, which do not affect the ability to compile and run the application.</p>
+<li><p>The browser security context may require that you enable cross-domain calls by <a href="../in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors">configuring CORS</a> and the SameSite attribute.</p>
 </li>
-<li><p>If you have trouble rebuilding the solution, please delete the 'obj' folders and try again.</p>
+<li><p>When adding a <a href="../in-depth-topics/wcf-and-webclient.html">WCF Service Reference</a>, please uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.7. When configuring a WCF Service Reference, temporarily add a reference to the &quot;System.dll&quot; assembly, then configure the service, and remove the reference after you are done.</p>
 </li>
-<li><p>All XAML files in the project need to have the following properties: Build Action = Content, CustomTool = MSBuild:Compile</p>
+<li><p>To enable passing cookies (eg. for credentials/authentication), set the &quot;<a href="../in-depth-topics/wcf-and-webclient.html">DefaultSoapCredentialsMode</a>&quot; parameter.</p>
 </li>
-<li><p>Killing the &quot;msbuild.exe&quot; process or restarting Visual Studio may fix some rare issues that appear after updating to a newer OpenSilver NuGet package or when working with multiple instances of Visual Studio.</p>
+<li><p>For applications using RIA Services (like the &quot;Business Application&quot; template), be sure to refer to the tutorial and the &quot;Troubleshooting&quot; section of the <a href="../general/business-app.html">Business Applications documentation</a>.</p>
 </li>
 </ul>
 <h3 id="debugging">Debugging</h3>
@@ -147,36 +143,22 @@
 <li><p>Disabling code optimisation may help if you experience debugging issues (right click the project-&gt;Properties-&gt;Build-&gt;uncheck &quot;optimize code&quot;)</p>
 </li>
 </ul>
-<h3 id="design-time">Design-time</h3>
+<h3 id="xaml-files">XAML files</h3>
 <ul>
-<li><p>XAML auto-completion and intellisense may sometime not show up.</p>
+<li><p>All XAML files in the project need to have the following properties: Build Action = Content, CustomTool = MSBuild:Compile</p>
 </li>
 <li><p>If you only change XAML files without changing C# (or VB.NET or F#) files, you may need to manually Rebuild the solution to see the changes reflected in your app.</p>
 </li>
 </ul>
-<h3 id="wcf-and-clientserver-communication">WCF and client/server communication</h3>
-<ul>
-<li><p>The browser security context may require that you enable cross-domain calls by <a href="../in-depth-topics/wcf-and-webclient.html#adding-support-for-cross-domain-calls-cors">configuring CORS</a> and the SameSite attribute.</p>
-</li>
-<li><p>When adding a <a href="../in-depth-topics/wcf-and-webclient.html">WCF Service Reference</a>, please uncheck the option &quot;Reuse types in referenced assemblies&quot;, and update the NuGet packages from v4.4 to v4.7. When configuring a WCF Service Reference, temporarily add a reference to the &quot;System.dll&quot; assembly, then configure the service, and remove the reference after you are done.</p>
-</li>
-<li><p>To enable passing cookies (eg. for credentials/authentication), set the &quot;<a href="../in-depth-topics/wcf-and-webclient.html">DefaultSoapCredentialsMode</a>&quot; parameter.</p>
-</li>
-</ul>
-<h4 id="code-trimming-and-wcfsoap-data-contract-serialization">Code trimming and WCF/SOAP data contract serialization</h4>
+<h3 id="other">Other</h3>
+<h4 id="common-issues-with-code-trimming-and-wcfsoap-data-contract-serialization">Common issues with code trimming and WCF/SOAP data contract serialization</h4>
 <p>Code trimming is an optimization that can reduce the size of a published OpenSilver application, thus improving both performance and start-up time. For more information you can read the official documentation <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/configure-trimmer?view=aspnetcore-6.0">here</a>.</p>
 <p>However, in some scenarios, is it possible that code trimming breaks .NET serialization and/or deserialization that rely heavily on Reflection.</p>
 <p>If you receive an error on data contract serialization or deserialization (or if you use Reflection in your application) you can disable code trimming.</p>
 <p>To do so, just edit the “.Browser” project file and make sure that the <strong>PublishTrimmed</strong> flag is set to False. Below you will find an example.</p>
 <p><img src="https://user-images.githubusercontent.com/93962591/158984083-c10f6e4c-0147-434f-b977-97c2ac268dfe.png" alt="image"></p>
 <p>If disabling trimming helps to solve the issue, please, consider reverting trimming and configure trimming rules. To do this, please, follow the instructions <a href="https://github.com/dotnet/linker/blob/main/docs/data-formats.md#descriptor-format">here</a>.</p>
-<h3 id="performance">Performance</h3>
-<ul>
-<li>Performance has been greatly improved in the past few months and will keep improving with every upcoming release. Please keep an eye on the <a href="https://github.com/OpenSilver/OpenSilver/commits/develop">commits history</a> for updates.</li>
-</ul>
 <h2 id="faq---other-issues-and-solutions">FAQ - Other issues and solutions</h2>
-<h3 id="-where-is-the-workinprogress-package">&gt; Where is the &quot;WorkInProgress&quot; package?</h3>
-<p>The &quot;WorkInProgress&quot; package has been merged into the OpenSilver package and will no longer be updated (<a href="https://www.opensilver.net/permalinks/wip_discontinued.aspx">learn more</a>).</p>
 <h3 id="-i-am-getting-error-msb4018-the-resolveblazorruntimedependencies-task-failed-unexpectedly-when-i-compile">&gt; I am getting &quot;Error MSB4018: The &quot;ResolveBlazorRuntimeDependencies&quot; task failed unexpectedly.&quot; when I compile.</h3>
 <p>Make sure that all the projects in your solution use the exact same OpenSilver NuGet package name and version.</p>
 <p>For example, this error may occur if one project references the &quot;OpenSilver&quot; package while another project references the &quot;OpenSilver.WorkInProgress&quot; package.</p>
