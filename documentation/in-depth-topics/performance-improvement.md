@@ -4,22 +4,6 @@ OpenSilver is getting more performant with each release. However, you can improv
 
 Before making changes, measure the performance. In some cases, you can make your code less readable, but the gain from optimization is insignificant. See how to profile the performance in the [Simulator](../how-to-topics/performance-profiler.md) and in the [Browser](../how-to-topics/performance-profiler-browser.md).
 
-## Do not load hidden UI elements 
-
-By default, controls with `Collapsed` Visibility are added to the HTML DOM, but CSS styles are not applied until the control becomes visible. This can impact performance, especially if there are a lot of hidden controls. To address this, add the following line to `App.xaml.cs` constructor: 
-
-`Host.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded = true;`
-
-This will cause the DOM elements for hidden controls to be created only when the control becomes visible. 
-
-Note that this setting can break the UI in some cases. For example, background controls like `Border` or `Rectangle` can overflow other controls. To resolve this, try to change the `Canvas.ZIndex` property. 
-
-The above setting will not work if the Visibility is bound to a property that has `Collapsed` Visibility by default and the DataContext is not available at the moment of rendering. The control will be rendered because the default value for Visibility is `Visible`. In that case, set the `FallbackValue` property in the binding.
-
-`<Grid Visibility="{Binding MyObject.Visibility, FallbackValue=Collapsed}" />`
-
-Another option is to set the `EnableOptimizationWhereCollapsedControlsAreLoadedLast` property to `true`. This will cause the browser to wait a few moments before creating the DOM elements for the UI controls that are not visible. This gives the browser engine time to draw the visible controls first, which can improve perceived performance. 
-
 ## Enable virtualization
 
 Wherever you have a high number of controls with a scroll bar, make sure that virtualization is enabled. Virtualization will ensure that only the elements that are in the visible area of the scrollable container will be rendered. `DataGrid` control uses virtualization by default. 
@@ -56,7 +40,7 @@ The more XAML elements are in the visual tree, the slower the app will perform.
 
 Every page of the app and every control has XAML Styles and ControlTemplates. Many of those can be simplified, such as removing unused storyboards or replacing slow-performing controls with better performing ones.
 
-Some controls are very slow, like `WriteableBitmap` and `Shapes`. For example, a `Rectangle` and `Ellipse` could be replaced with a `Border`. `Viewbox` cause a redraw of the UI and can have performance issues. Another example is a `TabControl` style, which might have elements for all possible positions of the tab headers (left, bottom, etc.), but if in your app you know that you only use top-positioned tab headers, you can remove the other items from the `ControlTemplate`.
+Some controls are very slow, like `WriteableBitmap`. For example, `Viewbox` cause a redraw of the UI and can have performance issues. Another example is a `TabControl` style, which might have elements for all possible positions of the tab headers (left, bottom, etc.), but if in your app you know that you only use top-positioned tab headers, you can remove the other items from the `ControlTemplate`.
 
 Simplify the ControlTemplates involved in the rendering of the `DataGrid`. For example, the Cell template might have a lot of unnecessary or poorly performing UI elements in the visual tree. 
 
@@ -75,12 +59,6 @@ For example, replace the `RadGridView` with the built-in `DataGrid`, `RadTabCont
 You can try to replace the OpenSilver controls with the html elements and use css+javascript to style them, so they look/work like the original controls. This requires more works and html/css/js knowledge, but the performance gain will be very huge (like 30x better performance in some cases).  
 
 It can be done for `ComboBox`, `TextBox`, etc. See https://github.com/OpenSilver/OpenSilver.ControlsKit/ or controls in `CSHTML5.Native.Html.Controls` namespace. 
-
-## Use SVG instead of XAML images 
-
-Currently, `Shape` controls like `Line`, `Path`, `Polygon` and so on are being rendered via html canvas, and it is quite slow. Try to replace them either by creating SVG images or converting XAML to SVG. Use `HtmlPresenter` control to place SVG inside it.
-
-Use a tool like Inkscape to open XAML and then save it as Plain SVG. But be aware that you might need to correct the converted SVG manually, especially if the image is complex. 
 
 ## Use Progressive Rendering
 
