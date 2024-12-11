@@ -1,22 +1,26 @@
 # Getting Started - Guided tour of the creation of a new OpenSilver application
 
-The development experience with OpenSilver is very similar to that of Silverlight, WPF and Universal Platform. You can use Visual Studio 2019 on Windows (recommended) or VS Code on Windows, macOS, or Linux.
+The development experience with OpenSilver is very similar to that of Silverlight, WPF, and Universal Platform. You can use Visual Studio on Windows (recommended) or VS Code on Windows, macOS, or Linux.
 
-## Option 1: Using the CLI and VS Code (for Windows, macOS or Linux)
+## Option 1: Using the CLI and VS Code (for Windows, macOS, or Linux)
 
 Please refer to the [VS Code Support](/documentation/how-to-topics/visual-studio-code-support.html) page.
 
 ## Option 2 (Recommended): Using Visual Studio on Windows
 
-OpenSilver is distributed as a NuGet package (on [NuGet.org](https://www.nuget.org/packages/OpenSilver)) and as a [VSIX extension](https://www.opensilver.net/download.aspx) for Visual Studio 2019 (or higher) containing the project templates.
+OpenSilver is distributed as a NuGet package (on [NuGet.org](https://www.nuget.org/packages/OpenSilver)) and as a [VSIX extension](https://www.opensilver.net/download.aspx) for Visual Studio containing the project templates.
 
-To create a new OpenSilver-type project, it is recommended to download the project templates first. To do that, go to https://OpenSilver.NET , click Download, log in with your Microsoft account and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.
+To create a new OpenSilver-type project, it is recommended to download the project templates first. To do that, go to https://OpenSilver.NET , click Download, log in with your Microsoft account, and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.
 
 ![OpenSilver Website](/images/1.OpenSilverWebsite.png "The OpenSilver.NET site")
 
-Next, open Visual Studio and click on "Create a new project" and choose "OpenSilver Application". Note that there is also a "UWP-Compatible" version of OpenSilver, which uses the XAML dialect of UWP instead of that of Silverlight, allowing increased compatibility with Universal Platform.
+Next, open Visual Studio and click on "Create a new project" and choose "OpenSilver Application".
 
 ![Windows prompt for new project](/images/2.NewDialogProjectWithVB.png "The window for creating a new project")
+
+Next, choose the UI Theme and .NET version.
+
+![OpenSilver Configuration Window](/images/OpenSilverConfigurationWindow.png "OpenSilver Configuration Window")
 
 Once the solution is created, you will see that it has three projects.
 
@@ -36,19 +40,21 @@ The second project, named with the suffix ".Browser", is the one you will have t
 
 Finally the third project, named with the suffix ".Simulator" is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# (or VB.NET or F#) code at runtime in the "Immediate" window, things that are not possible in the browser.
 
-#### As a test, let's create a Button in out Xaml application:
+#### As a test, let's create a Button in our OpenSilver application:
 
-1. Add the following XAML code inside the MainPage.xaml file, replacing the `<Canvas>` element:
+1. Add the following XAML code inside the MainPage.xaml file, replacing the `<Grid>` element:
 
 ```
-<StackPanel HorizontalAlignment="Left">
-  <TextBlock Text="Enter some text below:"/>
-  <TextBox x:Name="MyTextBox1"/>
-  <Button Content="Click me" Click="Button_Click"/>
-</StackPanel>
+    <StackPanel HorizontalAlignment="Left" Margin="10">
+        <TextBlock Text="Enter some text below:" FontSize="14"/>
+        <TextBox x:Name="MyTextBox1" Margin="5"/>
+        <Button Content="Click me" Click="Button_Click"/>
+    </StackPanel>
 ```
 
 ![MainPage.xaml](/images/4.MainPage.xaml.png "The modified MainPage.xaml page")  
+
+Note: OpenSilver 3.0 [introduced](https://opensilver.net/announcements/3-0/) an enhanced drag-and-drop UI designer that shows a preview of XAML pages and allows to develop your app quickly.
 
 2. Add the following code:
 
@@ -69,9 +75,8 @@ Inside the MainPage.xaml.vb file:
 	
 ```
 			Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-			{
 			    MessageBox.Show("You entered the following text: " + MyTextBox1.Text)
-			}
+			End Sub
 ```
 ![MainPage.xaml.vb](/images/5.MainPage.xaml.vb.png "The modified MainPage.xaml.vb page")
 
@@ -101,9 +106,8 @@ To see that the application runs in WebAssembly (currently in interpreted mode),
 
 Now let's go back to Visual Studio and launch the project with the suffix ".Simulator"
 
-Note: if a message indicates that the Simulator is not configured, simply open the "Package Manager Console" and wait for the Simulator to be automatically configured, then restart the project.
 
-The simulator appears and shows the application. Like before, we can enter some text and click the button to make a idalog box appear.
+The simulator appears and shows the application. Like before, we can enter some text and click the button to make a dialog box appear.
 
 ![Application in the Simulator](/images/9.AppSimulator.png "The application running in the Simulator")
 
