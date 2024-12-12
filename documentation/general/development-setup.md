@@ -44,7 +44,7 @@ Below, you'll find a detailed document about how to set up your Development Envi
 
 ### Step-by-Step Instructions:
 1. **Go to the .NET Download Page:**
-   - Access the .NET 9 official download page at [Download .NET 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0).
+   - Access the .NET official download page at [Download .NET](https://dotnet.microsoft.com/en-us/download).
 
 2. **Select the Appropriate SDK:**
    - Choose the SDK according to your Windows operating system.

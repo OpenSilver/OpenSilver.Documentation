@@ -1,6 +1,6 @@
 ## How to enable and run AOT compilation
 
-1. Verify that .NET 6.0 (or higher) is installed. To do this, open a command prompt and run the command
+1. Verify that .NET 7.0 (or higher) is installed. To do this, open a command prompt and run the command
 ```
 dotnet --info
 ```
