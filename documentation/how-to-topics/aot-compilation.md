@@ -1,21 +1,19 @@
 ## How to enable and run AOT compilation
 
-1. Verify that .NET 6.0 is installed. To do this, open a command prompt and run the command
+1. Verify that .NET 7.0 (or higher) is installed. To do this, open a command prompt and run the command
 ```
 dotnet --info
 ```
 
 <img src="/images/how-to-topics/dotnet-info.png" alt="Dotnet info" /><br />
 
-2. If you have Preview version of .NET 6 then uninstall it and install stable one.
-
-3. Install the .NET WebAssembly build tools.
+2. Install the .NET WebAssembly build tools.
 Run the following command from an elevated command prompt (Administrative mode).
 ``` 
 dotnet workload install wasm-tools
 ```
 
-4. To enable WebAssembly AOT compilation in your Blazor WebAssembly project, add the following property to your project file.
+3. To enable WebAssembly AOT compilation in your Blazor WebAssembly project, add the following property to your project file.
 
 ```
 <RunAOTCompilation>true</RunAOTCompilation>
@@ -23,12 +21,12 @@ dotnet workload install wasm-tools
 
 <img src="/images/how-to-topics/run-aot-compilation.png" alt="Enable AOT compilation" /><br />
 
-5. Verify that your app uses correct packages.
+4. Verify that your app uses correct packages.
 
 <img src="/images/how-to-topics/verify-packages.png" alt="Preview"/><br />
 
 
-6. Create Publish Profile.
+5. Create Publish Profile.
 
 <img src="/images/how-to-topics/create-publish-profile.png" alt="Profile" width="700"/><br />
 
@@ -36,7 +34,7 @@ dotnet workload install wasm-tools
 
 <img src="/images/how-to-topics/folder-location.png" alt="Folder Location" width="700"/><br />
 
-7. Publish. It will take time.
+6. Publish. It will take time.
 
 Try to change publishing settings If it does not work.
 

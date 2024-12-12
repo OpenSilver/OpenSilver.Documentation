@@ -5,8 +5,8 @@ Below, you'll find a detailed document about how to set up your Development Envi
 ## Contents
 1. Install the Latest Version of Visual Studio 2022
 2. Install the OpenSilver Plugin for Visual Studio
-3. Download .NET 7
-4. Install WebAssembly Tools for .NET 7
+3. Download .NET SDK
+4. Install WebAssembly Tools for .NET
 5. Download and Install the IIS URL Rewrite Module
 
 ## 1. Install the Latest Version of Visual Studio 2022
@@ -40,11 +40,11 @@ Below, you'll find a detailed document about how to set up your Development Envi
    - Make sure you select "Visual Studio 2022" as the version of VS to install the plugin for
    - When you'll restart Visual Studio 2022, the OpenSilver plugin will be installed.
 
-## 3. Download .NET 7
+## 3. Download .NET SDK
 
 ### Step-by-Step Instructions:
 1. **Go to the .NET Download Page:**
-   - Access the .NET 7 official download page at [Download .NET 7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0).
+   - Access the .NET official download page at [Download .NET](https://dotnet.microsoft.com/en-us/download).
 
 2. **Select the Appropriate SDK:**
    - Choose the SDK according to your Windows operating system.
@@ -52,7 +52,7 @@ Below, you'll find a detailed document about how to set up your Development Envi
 3. **Download and Install the SDK:**
    - Click the download link and run the installer after the download completes.
 
-## 4. Install WebAssembly Tools for .NET 7
+## 4. Install WebAssembly Tools for .NET
 
 ### Step-by-Step Instructions:
 1. **Open a Command Prompt or Terminal:**
@@ -61,7 +61,7 @@ Below, you'll find a detailed document about how to set up your Development Envi
 2. **Install the WebAssembly Tools:**
    - Type the following command and press Enter:
      ```bash
-     dotnet workload install wasm-tools-net7
+     dotnet workload install wasm-tools
      ```
 
 ## 5. Download and Install the IIS URL Rewrite Module

@@ -4,7 +4,7 @@
 
 #### 1. Install profiling tools
 
-By default profiling tools are installed with **Visual Studio 2019**. If that's not the case then it can be installed using **Visual Studio Installer**.
+By default profiling tools are installed with **Visual Studio**. If that's not the case then it can be installed using **Visual Studio Installer**.
  
 <img src="/images/how-to-topics/install-net-profiling.png" alt="Install NET profiling tools" /><br />
 

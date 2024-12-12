@@ -105,7 +105,7 @@ F# Code example
 
 Next, the NuGet package adds a few steps to the Msbuild compilation.
 
-This can be seen by opening the contents of the NuGet package where it is installed (usually in C:\Users&#92;%USERNAME%&#92;.Nuget\packages\opensilver\). By opening the "build" directory, it is possible to see the presence of two .target files, which will alter the behavior of Msbuild.
+This can be seen by opening the contents of the NuGet package where it is installed (usually in C:\Users&#92;%USERNAME%&#92;.Nuget\packages\opensilver\). By opening the "build" directory, it is possible to see the presence of several .target files, which will alter the behavior of Msbuild.
 
 ![Folder Build](/images/14.FolderBuild.png "The contents of the Build directory in the NuGet package")
 
