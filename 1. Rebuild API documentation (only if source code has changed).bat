@@ -1,2 +1,2 @@
-docfx\docfx.exe metadata --property Configuration=SL --filter filterConfig.yml
+docfx\docfx.exe metadata --property Configuration=Release --filter filterConfig.yml
 pause
