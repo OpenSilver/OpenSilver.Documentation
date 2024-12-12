@@ -6,6 +6,7 @@ items:
   parent: System
   children:
   - System.Settings.#ctor
+  - System.Settings.DefaultResourceLookupMode
   - System.Settings.DefaultSoapCredentialsMode
   - System.Settings.EnableAutoZoom
   - System.Settings.EnableBindingErrorsLogging
@@ -16,17 +17,13 @@ items:
   - System.Settings.EnableHTMLAccess
   - System.Settings.EnableInteropLogging
   - System.Settings.EnableInvalidPropertyMetadataDefaultValueExceptions
-  - System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  - System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
   - System.Settings.EnableOptimizationWhereCollapsedControlsAreNotRendered
   - System.Settings.EnablePerformanceLogging
-  - System.Settings.EnableProgressiveRendering
   - System.Settings.EnableRedrawRegions
   - System.Settings.EnableWebRequestsLogging
   - System.Settings.MaxFrameRate
-  - System.Settings.PopupMoveDelay
+  - System.Settings.ProgressiveRenderingChunkSize
   - System.Settings.ScrollDebounce
-  - System.Settings.UseResizeSensor
   - System.Settings.Windowless
   langs:
   - csharp
@@ -38,11 +35,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Settings
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 31
+    startLine: 24
   assemblies:
   - OpenSilver
   namespace: System
@@ -59,8 +56,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - class
@@ -81,11 +76,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 47
+    startLine: 54
   assemblies:
   - OpenSilver
   namespace: System
@@ -95,6 +90,41 @@ items:
   overload: System.Settings.#ctor*
   modifiers.csharp:
   - public
+  modifiers.vb:
+  - Public
+- uid: System.Settings.DefaultResourceLookupMode
+  commentId: P:System.Settings.DefaultResourceLookupMode
+  id: DefaultResourceLookupMode
+  parent: System.Settings
+  langs:
+  - csharp
+  - vb
+  name: DefaultResourceLookupMode
+  nameWithType: Settings.DefaultResourceLookupMode
+  fullName: System.Settings.DefaultResourceLookupMode
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Settings.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DefaultResourceLookupMode
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
+    startLine: 65
+  assemblies:
+  - OpenSilver
+  namespace: System
+  syntax:
+    content: public InheritanceBehavior DefaultResourceLookupMode { get; set; }
+    parameters: []
+    return:
+      type: System.Windows.InheritanceBehavior
+    content.vb: Public Property DefaultResourceLookupMode As InheritanceBehavior
+  overload: System.Settings.DefaultResourceLookupMode*
+  modifiers.csharp:
+  - public
+  - get
+  - set
   modifiers.vb:
   - Public
 - uid: System.Settings.ScrollDebounce
@@ -111,11 +141,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ScrollDebounce
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 57
+    startLine: 67
   assemblies:
   - OpenSilver
   namespace: System
@@ -146,11 +176,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: DefaultSoapCredentialsMode
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 59
+    startLine: 73
   assemblies:
   - OpenSilver
   namespace: System
@@ -181,11 +211,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableBindingErrorsLogging
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 61
+    startLine: 75
   assemblies:
   - OpenSilver
   namespace: System
@@ -216,11 +246,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableBindingErrorsThrowing
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 63
+    startLine: 77
   assemblies:
   - OpenSilver
   namespace: System
@@ -251,11 +281,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableWebRequestsLogging
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 65
+    startLine: 79
   assemblies:
   - OpenSilver
   namespace: System
@@ -266,44 +296,6 @@ items:
       type: System.Boolean
     content.vb: Public Property EnableWebRequestsLogging As Boolean
   overload: System.Settings.EnableWebRequestsLogging*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Settings.UseResizeSensor
-  commentId: P:System.Settings.UseResizeSensor
-  id: UseResizeSensor
-  parent: System.Settings
-  langs:
-  - csharp
-  - vb
-  name: UseResizeSensor
-  nameWithType: Settings.UseResizeSensor
-  fullName: System.Settings.UseResizeSensor
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: UseResizeSensor
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 72
-  assemblies:
-  - OpenSilver
-  namespace: System
-  summary: "\nGets or sets a value determining whether or not to use the resizeSensor.js library\ninstead of the ResizeObserver API to listen for size change event in Html.\n"
-  remarks: Should probably be removed once we get the ResizeObserver fully working.
-  example: []
-  syntax:
-    content: public bool UseResizeSensor { get; set; }
-    parameters: []
-    return:
-      type: System.Boolean
-    content.vb: Public Property UseResizeSensor As Boolean
-  overload: System.Settings.UseResizeSensor*
   modifiers.csharp:
   - public
   - get
@@ -324,11 +316,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableInteropLogging
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 74
+    startLine: 88
   assemblies:
   - OpenSilver
   namespace: System
@@ -359,11 +351,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnablePerformanceLogging
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 80
+    startLine: 94
   assemblies:
   - OpenSilver
   namespace: System
@@ -394,11 +386,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableOptimizationWhereCollapsedControlsAreNotRendered
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 91
+    startLine: 105
   assemblies:
   - OpenSilver
   namespace: System
@@ -417,109 +409,38 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
-  commentId: P:System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
-  id: EnableOptimizationWhereCollapsedControlsAreNotLoaded
+- uid: System.Settings.ProgressiveRenderingChunkSize
+  commentId: P:System.Settings.ProgressiveRenderingChunkSize
+  id: ProgressiveRenderingChunkSize
   parent: System.Settings
   langs:
   - csharp
   - vb
-  name: EnableOptimizationWhereCollapsedControlsAreNotLoaded
-  nameWithType: Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
-  fullName: System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
+  name: ProgressiveRenderingChunkSize
+  nameWithType: Settings.ProgressiveRenderingChunkSize
+  fullName: System.Settings.ProgressiveRenderingChunkSize
   type: Property
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: EnableOptimizationWhereCollapsedControlsAreNotLoaded
+    id: ProgressiveRenderingChunkSize
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 102
+    startLine: 120
   assemblies:
   - OpenSilver
   namespace: System
-  summary: "\nWhen True, do not create the DOM elements for the UI elements that are not visible.\nThe DOM elements are created later, when the control becomes visible.\nEnabling this option results in significantly improved performance if there are many hidden elements.\n"
+  summary: "\nGets or sets the number of children in a Panel to render progressively in a batch.\nSetting this option can improve performance.\nValue of 0 or less means progressive rendering is disabled.\nThe default value is 0.\n"
+  remarks: "\nA value close to 1 can break UI in some cases.\n"
   example: []
   syntax:
-    content: public bool EnableOptimizationWhereCollapsedControlsAreNotLoaded { get; set; }
+    content: public int ProgressiveRenderingChunkSize { get; set; }
     parameters: []
     return:
-      type: System.Boolean
-    content.vb: Public Property EnableOptimizationWhereCollapsedControlsAreNotLoaded As Boolean
-  overload: System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  commentId: P:System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  id: EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  parent: System.Settings
-  langs:
-  - csharp
-  - vb
-  name: EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  nameWithType: Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  fullName: System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: EnableOptimizationWhereCollapsedControlsAreLoadedLast
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 113
-  assemblies:
-  - OpenSilver
-  namespace: System
-  summary: "\nWait a few moments before creating the DOM elements for the UI elements that are not visible.\nThe goal is to give the time to the browser engine to draw the visible ones, in order to improve the perceived performance.\nThe DOM elements are created immediately after the browser engine has finished drawing (when the UI thread is available).\n"
-  example: []
-  syntax:
-    content: public bool EnableOptimizationWhereCollapsedControlsAreLoadedLast { get; set; }
-    parameters: []
-    return:
-      type: System.Boolean
-    content.vb: Public Property EnableOptimizationWhereCollapsedControlsAreLoadedLast As Boolean
-  overload: System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Settings.EnableProgressiveRendering
-  commentId: P:System.Settings.EnableProgressiveRendering
-  id: EnableProgressiveRendering
-  parent: System.Settings
-  langs:
-  - csharp
-  - vb
-  name: EnableProgressiveRendering
-  nameWithType: Settings.EnableProgressiveRendering
-  fullName: System.Settings.EnableProgressiveRendering
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: EnableProgressiveRendering
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 119
-  assemblies:
-  - OpenSilver
-  namespace: System
-  syntax:
-    content: public bool EnableProgressiveRendering { get; set; }
-    parameters: []
-    return:
-      type: System.Boolean
-    content.vb: Public Property EnableProgressiveRendering As Boolean
-  overload: System.Settings.EnableProgressiveRendering*
+      type: System.Int32
+    content.vb: Public Property ProgressiveRenderingChunkSize As Integer
+  overload: System.Settings.ProgressiveRenderingChunkSize*
   modifiers.csharp:
   - public
   - get
@@ -540,11 +461,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableInvalidPropertyMetadataDefaultValueExceptions
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 125
+    startLine: 126
   assemblies:
   - OpenSilver
   namespace: System
@@ -555,43 +476,6 @@ items:
       type: System.Boolean
     content.vb: Public Property EnableInvalidPropertyMetadataDefaultValueExceptions As Boolean
   overload: System.Settings.EnableInvalidPropertyMetadataDefaultValueExceptions*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Settings.PopupMoveDelay
-  commentId: P:System.Settings.PopupMoveDelay
-  id: PopupMoveDelay
-  parent: System.Settings
-  langs:
-  - csharp
-  - vb
-  name: PopupMoveDelay
-  nameWithType: Settings.PopupMoveDelay
-  fullName: System.Settings.PopupMoveDelay
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: PopupMoveDelay
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 131
-  assemblies:
-  - OpenSilver
-  namespace: System
-  summary: "\nGets or sets the interval between each refresh of the position an element attached to another (for example Popups or Tooltips attached to a certain element).\nNote: A refresh interval too low might negatively impact performances\n"
-  example: []
-  syntax:
-    content: public TimeSpan PopupMoveDelay { get; set; }
-    parameters: []
-    return:
-      type: System.TimeSpan
-    content.vb: Public Property PopupMoveDelay As TimeSpan
-  overload: System.Settings.PopupMoveDelay*
   modifiers.csharp:
   - public
   - get
@@ -612,11 +496,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Windowless
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 144
+    startLine: 143
   assemblies:
   - OpenSilver
   namespace: System
@@ -636,6 +520,82 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Settings.EnableHTMLAccess
+  commentId: P:System.Settings.EnableHTMLAccess
+  id: EnableHTMLAccess
+  parent: System.Settings
+  langs:
+  - csharp
+  - vb
+  name: EnableHTMLAccess
+  nameWithType: Settings.EnableHTMLAccess
+  fullName: System.Settings.EnableHTMLAccess
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Settings.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: EnableHTMLAccess
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
+    startLine: 159
+  assemblies:
+  - OpenSilver
+  namespace: System
+  summary: "\nGets a value that indicates whether the Silverlight plug-in allows hosted content\nor its runtime to access the HTML DOM.\n"
+  example: []
+  syntax:
+    content: public bool EnableHTMLAccess { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: "\ntrue if hosted content can access the browser DOM; otherwise, false.\n"
+    content.vb: Public ReadOnly Property EnableHTMLAccess As Boolean
+  overload: System.Settings.EnableHTMLAccess*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Settings.MaxFrameRate
+  commentId: P:System.Settings.MaxFrameRate
+  id: MaxFrameRate
+  parent: System.Settings
+  langs:
+  - csharp
+  - vb
+  name: MaxFrameRate
+  nameWithType: Settings.MaxFrameRate
+  fullName: System.Settings.MaxFrameRate
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Settings.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: MaxFrameRate
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
+    startLine: 168
+  assemblies:
+  - OpenSilver
+  namespace: System
+  summary: "\nGets or sets the maximum number of frames to render per second.\n"
+  example: []
+  syntax:
+    content: public int MaxFrameRate { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: "\nAn integer value that specifies the maximum number of frames to render per second.\nThe default value is 60.\n"
+    content.vb: Public Property MaxFrameRate As Integer
+  overload: System.Settings.MaxFrameRate*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: System.Settings.EnableAutoZoom
   commentId: P:System.Settings.EnableAutoZoom
   id: EnableAutoZoom
@@ -650,11 +610,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableAutoZoom
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 162
+    startLine: 182
   assemblies:
   - OpenSilver
   namespace: System
@@ -668,7 +628,7 @@ items:
     parameters: []
     return:
       type: System.Boolean
-      description: "\ntrue if Silverlight responds to the browser zoom setting; otherwise, false. The\ndefault is true if there is no handler for the <xref href=\"System.Windows.Interop.Content.Zoomed\" data-throw-if-not-resolved=\"false\"></xref>\nevent; otherwise, the default is false.\n"
+      description: "\ntrue if Silverlight responds to the browser zoom setting; otherwise, false. The\ndefault is true.\n"
     content.vb: >-
       <NotImplemented>
 
@@ -698,11 +658,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableCacheVisualization
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 173
+    startLine: 193
   assemblies:
   - OpenSilver
   namespace: System
@@ -746,11 +706,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableFrameRateCounter
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 185
+    startLine: 205
   assemblies:
   - OpenSilver
   namespace: System
@@ -794,11 +754,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableGPUAcceleration
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 195
+    startLine: 215
   assemblies:
   - OpenSilver
   namespace: System
@@ -828,54 +788,6 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Settings.EnableHTMLAccess
-  commentId: P:System.Settings.EnableHTMLAccess
-  id: EnableHTMLAccess
-  parent: System.Settings
-  langs:
-  - csharp
-  - vb
-  name: EnableHTMLAccess
-  nameWithType: Settings.EnableHTMLAccess
-  fullName: System.Settings.EnableHTMLAccess
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: EnableHTMLAccess
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 205
-  assemblies:
-  - OpenSilver
-  namespace: System
-  summary: "\nGets a value that indicates whether the Silverlight plug-in allows hosted content\nor its runtime to access the HTML DOM.\n"
-  example: []
-  syntax:
-    content: >-
-      [NotImplemented]
-
-      public bool EnableHTMLAccess { get; }
-    parameters: []
-    return:
-      type: System.Boolean
-      description: "\ntrue if hosted content can access the browser DOM; otherwise, false.\n"
-    content.vb: >-
-      <NotImplemented>
-
-      Public ReadOnly Property EnableHTMLAccess As Boolean
-  overload: System.Settings.EnableHTMLAccess*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
 - uid: System.Settings.EnableRedrawRegions
   commentId: P:System.Settings.EnableRedrawRegions
   id: EnableRedrawRegions
@@ -890,11 +802,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EnableRedrawRegions
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 216
+    startLine: 226
   assemblies:
   - OpenSilver
   namespace: System
@@ -914,54 +826,6 @@ items:
 
       Public Property EnableRedrawRegions As Boolean
   overload: System.Settings.EnableRedrawRegions*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: System.Settings.MaxFrameRate
-  commentId: P:System.Settings.MaxFrameRate
-  id: MaxFrameRate
-  parent: System.Settings
-  langs:
-  - csharp
-  - vb
-  name: MaxFrameRate
-  nameWithType: Settings.MaxFrameRate
-  fullName: System.Settings.MaxFrameRate
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Settings.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: MaxFrameRate
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Settings.cs
-    startLine: 226
-  assemblies:
-  - OpenSilver
-  namespace: System
-  summary: "\nGets or sets the maximum number of frames to render per second.\n"
-  example: []
-  syntax:
-    content: >-
-      [NotImplemented]
-
-      public int MaxFrameRate { get; set; }
-    parameters: []
-    return:
-      type: System.Int32
-      description: "\nAn integer value that specifies the maximum number of frames to render per second.\nThe default value is 60.\n"
-    content.vb: >-
-      <NotImplemented>
-
-      Public Property MaxFrameRate As Integer
-  overload: System.Settings.MaxFrameRate*
   attributes:
   - type: OpenSilver.NotImplementedAttribute
     ctor: OpenSilver.NotImplementedAttribute.#ctor
@@ -1264,89 +1128,27 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
 - uid: System.Settings.#ctor*
   commentId: Overload:System.Settings.#ctor
   name: Settings
   nameWithType: Settings.Settings
   fullName: System.Settings.Settings
+- uid: System.Settings.DefaultResourceLookupMode*
+  commentId: Overload:System.Settings.DefaultResourceLookupMode
+  name: DefaultResourceLookupMode
+  nameWithType: Settings.DefaultResourceLookupMode
+  fullName: System.Settings.DefaultResourceLookupMode
+- uid: System.Windows.InheritanceBehavior
+  commentId: T:System.Windows.InheritanceBehavior
+  parent: System.Windows
+  name: InheritanceBehavior
+  nameWithType: InheritanceBehavior
+  fullName: System.Windows.InheritanceBehavior
+- uid: System.Windows
+  commentId: N:System.Windows
+  name: System.Windows
+  nameWithType: System.Windows
+  fullName: System.Windows
 - uid: System.Settings.ScrollDebounce*
   commentId: Overload:System.Settings.ScrollDebounce
   name: ScrollDebounce
@@ -1397,11 +1199,6 @@ references:
   name: EnableWebRequestsLogging
   nameWithType: Settings.EnableWebRequestsLogging
   fullName: System.Settings.EnableWebRequestsLogging
-- uid: System.Settings.UseResizeSensor*
-  commentId: Overload:System.Settings.UseResizeSensor
-  name: UseResizeSensor
-  nameWithType: Settings.UseResizeSensor
-  fullName: System.Settings.UseResizeSensor
 - uid: System.Settings.EnableInteropLogging*
   commentId: Overload:System.Settings.EnableInteropLogging
   name: EnableInteropLogging
@@ -1417,39 +1214,38 @@ references:
   name: EnableOptimizationWhereCollapsedControlsAreNotRendered
   nameWithType: Settings.EnableOptimizationWhereCollapsedControlsAreNotRendered
   fullName: System.Settings.EnableOptimizationWhereCollapsedControlsAreNotRendered
-- uid: System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded*
-  commentId: Overload:System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
-  name: EnableOptimizationWhereCollapsedControlsAreNotLoaded
-  nameWithType: Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
-  fullName: System.Settings.EnableOptimizationWhereCollapsedControlsAreNotLoaded
-- uid: System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast*
-  commentId: Overload:System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  name: EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  nameWithType: Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-  fullName: System.Settings.EnableOptimizationWhereCollapsedControlsAreLoadedLast
-- uid: System.Settings.EnableProgressiveRendering*
-  commentId: Overload:System.Settings.EnableProgressiveRendering
-  name: EnableProgressiveRendering
-  nameWithType: Settings.EnableProgressiveRendering
-  fullName: System.Settings.EnableProgressiveRendering
+- uid: System.Settings.ProgressiveRenderingChunkSize*
+  commentId: Overload:System.Settings.ProgressiveRenderingChunkSize
+  name: ProgressiveRenderingChunkSize
+  nameWithType: Settings.ProgressiveRenderingChunkSize
+  fullName: System.Settings.ProgressiveRenderingChunkSize
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
 - uid: System.Settings.EnableInvalidPropertyMetadataDefaultValueExceptions*
   commentId: Overload:System.Settings.EnableInvalidPropertyMetadataDefaultValueExceptions
   name: EnableInvalidPropertyMetadataDefaultValueExceptions
   nameWithType: Settings.EnableInvalidPropertyMetadataDefaultValueExceptions
   fullName: System.Settings.EnableInvalidPropertyMetadataDefaultValueExceptions
-- uid: System.Settings.PopupMoveDelay*
-  commentId: Overload:System.Settings.PopupMoveDelay
-  name: PopupMoveDelay
-  nameWithType: Settings.PopupMoveDelay
-  fullName: System.Settings.PopupMoveDelay
 - uid: System.Settings.Windowless*
   commentId: Overload:System.Settings.Windowless
   name: Windowless
   nameWithType: Settings.Windowless
   fullName: System.Settings.Windowless
-- uid: System.Windows.Interop.Content.Zoomed
-  commentId: E:System.Windows.Interop.Content.Zoomed
-  isExternal: true
+- uid: System.Settings.EnableHTMLAccess*
+  commentId: Overload:System.Settings.EnableHTMLAccess
+  name: EnableHTMLAccess
+  nameWithType: Settings.EnableHTMLAccess
+  fullName: System.Settings.EnableHTMLAccess
+- uid: System.Settings.MaxFrameRate*
+  commentId: Overload:System.Settings.MaxFrameRate
+  name: MaxFrameRate
+  nameWithType: Settings.MaxFrameRate
+  fullName: System.Settings.MaxFrameRate
 - uid: System.Settings.EnableAutoZoom*
   commentId: Overload:System.Settings.EnableAutoZoom
   name: EnableAutoZoom
@@ -1470,25 +1266,8 @@ references:
   name: EnableGPUAcceleration
   nameWithType: Settings.EnableGPUAcceleration
   fullName: System.Settings.EnableGPUAcceleration
-- uid: System.Settings.EnableHTMLAccess*
-  commentId: Overload:System.Settings.EnableHTMLAccess
-  name: EnableHTMLAccess
-  nameWithType: Settings.EnableHTMLAccess
-  fullName: System.Settings.EnableHTMLAccess
 - uid: System.Settings.EnableRedrawRegions*
   commentId: Overload:System.Settings.EnableRedrawRegions
   name: EnableRedrawRegions
   nameWithType: Settings.EnableRedrawRegions
   fullName: System.Settings.EnableRedrawRegions
-- uid: System.Settings.MaxFrameRate*
-  commentId: Overload:System.Settings.MaxFrameRate
-  name: MaxFrameRate
-  nameWithType: Settings.MaxFrameRate
-  fullName: System.Settings.MaxFrameRate
-- uid: System.Int32
-  commentId: T:System.Int32
-  parent: System
-  isExternal: true
-  name: Int32
-  nameWithType: Int32
-  fullName: System.Int32

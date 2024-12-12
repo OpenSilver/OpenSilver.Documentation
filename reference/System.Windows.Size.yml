@@ -14,9 +14,13 @@ items:
   - System.Windows.Size.Height
   - System.Windows.Size.IsEmpty
   - System.Windows.Size.op_Equality(System.Windows.Size,System.Windows.Size)
+  - System.Windows.Size.op_Explicit(System.Windows.Size)~System.Windows.Point
+  - System.Windows.Size.op_Explicit(System.Windows.Size)~System.Windows.Vector
   - System.Windows.Size.op_Inequality(System.Windows.Size,System.Windows.Size)
   - System.Windows.Size.Parse(System.String)
+  - System.Windows.Size.System#IFormattable#ToString(System.String,System.IFormatProvider)
   - System.Windows.Size.ToString
+  - System.Windows.Size.ToString(System.IFormatProvider)
   - System.Windows.Size.Width
   langs:
   - csharp
@@ -28,25 +32,27 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Size
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 26
+    startLine: 21
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nDescribes the width and height of an object.\n"
   example: []
   syntax:
-    content: public struct Size
-    content.vb: Public Structure Size
+    content: 'public struct Size : IFormattable'
+    content.vb: >-
+      Public Structure Size
+          Implements IFormattable
+  implements:
+  - System.IFormattable
   inheritedMembers:
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetType
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - struct
@@ -67,27 +73,31 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 37
+    startLine: 39
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nInitializes a new instance of the Windows.Foundation.Size\nstructure and assigns it an initial width and height.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> structure and assigns it\nan initial width and height.\n"
   example: []
   syntax:
     content: public Size(double width, double height)
     parameters:
     - id: width
       type: System.Double
-      description: The initial width of the instance of Windows.Foundation.Size.
+      description: "\nThe initial width of the instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     - id: height
       type: System.Double
-      description: The initial height of the instance of Windows.Foundation.Size.
+      description: "\nThe initial height of the instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Sub New(width As Double, height As Double)
   overload: System.Windows.Size.#ctor*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nwidth or height are less than 0.\n"
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -106,111 +116,27 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Parse
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 47
+    startLine: 59
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nReturns an instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> from a converted <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
   syntax:
     content: public static Size Parse(string source)
     parameters:
     - id: source
       type: System.String
+      description: "\nA <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> value to parse to a <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> value.\n"
     return:
       type: System.Windows.Size
+      description: "\nAn instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Shared Function Parse(source As String) As Size
   overload: System.Windows.Size.Parse*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Size.op_Inequality(System.Windows.Size,System.Windows.Size)
-  commentId: M:System.Windows.Size.op_Inequality(System.Windows.Size,System.Windows.Size)
-  id: op_Inequality(System.Windows.Size,System.Windows.Size)
-  parent: System.Windows.Size
-  langs:
-  - csharp
-  - vb
-  name: Inequality(Size, Size)
-  nameWithType: Size.Inequality(Size, Size)
-  fullName: System.Windows.Size.Inequality(System.Windows.Size, System.Windows.Size)
-  type: Operator
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Inequality
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 76
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nCompares two instances of Windows.Foundation.Size for\ninequality."
-  example: []
-  syntax:
-    content: public static bool operator !=(Size size1, Size size2)
-    parameters:
-    - id: size1
-      type: System.Windows.Size
-      description: The first instance of Windows.Foundation.Size to compare.
-    - id: size2
-      type: System.Windows.Size
-      description: The second instance of Windows.Foundation.Size to compare.
-    return:
-      type: System.Boolean
-      description: "\ntrue if the instances of Windows.Foundation.Size are not equal; otherwise\nfalse.\n"
-    content.vb: Public Shared Operator <>(size1 As Size, size2 As Size) As Boolean
-  overload: System.Windows.Size.op_Inequality*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Size.op_Equality(System.Windows.Size,System.Windows.Size)
-  commentId: M:System.Windows.Size.op_Equality(System.Windows.Size,System.Windows.Size)
-  id: op_Equality(System.Windows.Size,System.Windows.Size)
-  parent: System.Windows.Size
-  langs:
-  - csharp
-  - vb
-  name: Equality(Size, Size)
-  nameWithType: Size.Equality(Size, Size)
-  fullName: System.Windows.Size.Equality(System.Windows.Size, System.Windows.Size)
-  type: Operator
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Equality
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 90
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nCompares two instances of Windows.Foundation.Size for\nequality."
-  example: []
-  syntax:
-    content: public static bool operator ==(Size size1, Size size2)
-    parameters:
-    - id: size1
-      type: System.Windows.Size
-      description: The first instance of Windows.Foundation.Size to compare.
-    - id: size2
-      type: System.Windows.Size
-      description: The second instance of Windows.Foundation.Size to compare.
-    return:
-      type: System.Boolean
-      description: "\ntrue if the two instances of Windows.Foundation.Size are equal; otherwise\nfalse.\n"
-    content.vb: Public Shared Operator =(size1 As Size, size2 As Size) As Boolean
-  overload: System.Windows.Size.op_Equality*
   modifiers.csharp:
   - public
   - static
@@ -231,21 +157,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Empty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 98
+    startLine: 94
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets a value that represents a static empty Windows.Foundation.Size.\n"
+  summary: "\nGets a value that represents a static empty <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public static readonly Size Empty { get; }
     parameters: []
     return:
       type: System.Windows.Size
+      description: "\nAn empty instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Shared ReadOnly Property Empty As Size
   overload: System.Windows.Size.Empty*
   modifiers.csharp:
@@ -257,43 +184,6 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Size.Height
-  commentId: P:System.Windows.Size.Height
-  id: Height
-  parent: System.Windows.Size
-  langs:
-  - csharp
-  - vb
-  name: Height
-  nameWithType: Size.Height
-  fullName: System.Windows.Size.Height
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Height
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 108
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nGets or sets the height of this instance of Windows.Foundation.Size in pixels. The default is 0. The value cannot be negative.\n"
-  example: []
-  syntax:
-    content: public double Height { get; set; }
-    parameters: []
-    return:
-      type: System.Double
-    content.vb: Public Property Height As Double
-  overload: System.Windows.Size.Height*
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
 - uid: System.Windows.Size.IsEmpty
   commentId: P:System.Windows.Size.IsEmpty
   id: IsEmpty
@@ -308,15 +198,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsEmpty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 132
+    startLine: 104
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets a value that indicates whether this instance of\nWindows.Foundation.Size is Windows.Foundation.Size.Empty.\n"
+  summary: "\nGets a value that indicates whether this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> is <xref href=\"System.Windows.Size.Empty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public readonly bool IsEmpty { get; }
@@ -332,6 +222,48 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Windows.Size.Height
+  commentId: P:System.Windows.Size.Height
+  id: Height
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: Size.Height
+  fullName: System.Windows.Size.Height
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Height
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 116
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the height of this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public double Height { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+      description: "\nThe <xref href=\"System.Windows.Size.Height\" data-throw-if-not-resolved=\"false\"></xref> of this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>, in pixels.\nThe default is 0. The value cannot be negative.\n"
+    content.vb: Public Property Height As Double
+  overload: System.Windows.Size.Height*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nSpecified a value less than 0.\n"
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Size.Width
   commentId: P:System.Windows.Size.Width
   id: Width
@@ -346,68 +278,34 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Width
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 143
+    startLine: 140
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets or sets the width of this instance of Windows.Foundation.Size.\n"
+  summary: "\nGets or sets the width of this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public double Width { get; set; }
     parameters: []
     return:
       type: System.Double
+      description: "\nThe <xref href=\"System.Windows.Size.Width\" data-throw-if-not-resolved=\"false\"></xref> of this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>, in pixels.\nThe default value is 0. The value cannot be negative.\n"
     content.vb: Public Property Width As Double
   overload: System.Windows.Size.Width*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nSpecified a value less than 0.\n"
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Size.Equals(System.Windows.Size,System.Windows.Size)
-  commentId: M:System.Windows.Size.Equals(System.Windows.Size,System.Windows.Size)
-  id: Equals(System.Windows.Size,System.Windows.Size)
-  parent: System.Windows.Size
-  langs:
-  - csharp
-  - vb
-  name: Equals(Size, Size)
-  nameWithType: Size.Equals(Size, Size)
-  fullName: System.Windows.Size.Equals(System.Windows.Size, System.Windows.Size)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Equals
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 163
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public static bool Equals(Size size1, Size size2)
-    parameters:
-    - id: size1
-      type: System.Windows.Size
-    - id: size2
-      type: System.Windows.Size
-    return:
-      type: System.Boolean
-    content.vb: Public Shared Function Equals(size1 As Size, size2 As Size) As Boolean
-  overload: System.Windows.Size.Equals*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
 - uid: System.Windows.Size.Equals(System.Object)
   commentId: M:System.Windows.Size.Equals(System.Object)
   id: Equals(System.Object)
@@ -422,25 +320,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 181
+    startLine: 163
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nCompares an object to an instance of Windows.Foundation.Size\nfor equality.\n"
+  summary: "\nCompares an object to an instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> for equality.\n"
   example: []
   syntax:
     content: public override bool Equals(object o)
     parameters:
     - id: o
       type: System.Object
-      description: The System.Object to compare.
+      description: "\nThe object to compare.\n"
     return:
       type: System.Boolean
-      description: true if the sizes are equal; otherwise, false.
+      description: "\ntrue if the sizes are equal; otherwise, false.\n"
     content.vb: Public Overrides Function Equals(o As Object) As Boolean
   overridden: System.ValueType.Equals(System.Object)
   overload: System.Windows.Size.Equals*
@@ -464,31 +362,75 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 197
+    startLine: 174
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nCompares a value to an instance of Windows.Foundation.Size\nfor equality.\n"
+  summary: "\nCompares a value to an instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> for equality.\n"
   example: []
   syntax:
     content: public bool Equals(Size value)
     parameters:
     - id: value
       type: System.Windows.Size
-      description: The size to compare to this current instance of Windows.Foundation.Size.
+      description: "\nThe size to compare to this current instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     return:
       type: System.Boolean
-      description: true if the instances of Windows.Foundation.Size are equal; otherwise, false.
+      description: "\ntrue if the instances of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> are equal; otherwise, false.\n"
     content.vb: Public Function Equals(value As Size) As Boolean
   overload: System.Windows.Size.Equals*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.Size.Equals(System.Windows.Size,System.Windows.Size)
+  commentId: M:System.Windows.Size.Equals(System.Windows.Size,System.Windows.Size)
+  id: Equals(System.Windows.Size,System.Windows.Size)
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: Equals(Size, Size)
+  nameWithType: Size.Equals(Size, Size)
+  fullName: System.Windows.Size.Equals(System.Windows.Size, System.Windows.Size)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Equals
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 188
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCompares two instances of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> for equality.\n"
+  example: []
+  syntax:
+    content: public static bool Equals(Size size1, Size size2)
+    parameters:
+    - id: size1
+      type: System.Windows.Size
+      description: "\nThe first instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: size2
+      type: System.Windows.Size
+      description: "\nThe second instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the instances of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> are equal; otherwise, false.\n"
+    content.vb: Public Shared Function Equals(size1 As Size, size2 As Size) As Boolean
+  overload: System.Windows.Size.Equals*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: System.Windows.Size.GetHashCode
   commentId: M:System.Windows.Size.GetHashCode
   id: GetHashCode
@@ -503,21 +445,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetHashCode
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 206
+    startLine: 196
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets the hash code for this instance of Windows.Foundation.Size.\n"
+  summary: "\nGets the hash code for this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override int GetHashCode()
     return:
       type: System.Int32
-      description: The hash code for this instance of Windows.Foundation.Size.
+      description: "\nThe hash code for this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Overrides Function GetHashCode As Integer
   overridden: System.ValueType.GetHashCode
   overload: System.Windows.Size.GetHashCode*
@@ -541,21 +483,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Size.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
-    startLine: 223
+    startLine: 215
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nReturns a string representation of this Windows.Foundation.Size.\n"
+  summary: "\nReturns a string representation of this <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override string ToString()
     return:
       type: System.String
-      description: A string representation of this Windows.Foundation.Size.
+      description: "\nA string representation of this <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Overrides Function ToString As String
   overridden: System.ValueType.ToString
   overload: System.Windows.Size.ToString*
@@ -565,12 +507,275 @@ items:
   modifiers.vb:
   - Public
   - Overrides
+- uid: System.Windows.Size.ToString(System.IFormatProvider)
+  commentId: M:System.Windows.Size.ToString(System.IFormatProvider)
+  id: ToString(System.IFormatProvider)
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: ToString(IFormatProvider)
+  nameWithType: Size.ToString(IFormatProvider)
+  fullName: System.Windows.Size.ToString(System.IFormatProvider)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ToString
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 226
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nReturns a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public string ToString(IFormatProvider provider)
+    parameters:
+    - id: provider
+      type: System.IFormatProvider
+      description: "\nAn object that provides a way to control formatting.\n"
+    return:
+      type: System.String
+      description: "\nA <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> that represents this <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> object.\n"
+    content.vb: Public Function ToString(provider As IFormatProvider) As String
+  overload: System.Windows.Size.ToString*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Size.System#IFormattable#ToString(System.String,System.IFormatProvider)
+  commentId: M:System.Windows.Size.System#IFormattable#ToString(System.String,System.IFormatProvider)
+  id: System#IFormattable#ToString(System.String,System.IFormatProvider)
+  isEii: true
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: IFormattable.ToString(String, IFormatProvider)
+  nameWithType: Size.IFormattable.ToString(String, IFormatProvider)
+  fullName: System.Windows.Size.System.IFormattable.ToString(System.String, System.IFormatProvider)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.IFormattable.ToString
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 237
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCreates a string representation of this object based on the format string\nand IFormatProvider passed in.\nIf the provider is null, the CurrentCulture is used.\nSee the documentation for IFormattable for more information.\n"
+  example: []
+  syntax:
+    content: string IFormattable.ToString(string format, IFormatProvider provider)
+    parameters:
+    - id: format
+      type: System.String
+    - id: provider
+      type: System.IFormatProvider
+    return:
+      type: System.String
+      description: "\nA string representation of this object.\n"
+    content.vb: Function System.IFormattable.ToString(format As String, provider As IFormatProvider) As String Implements IFormattable.ToString
+  overload: System.Windows.Size.System#IFormattable#ToString*
+  implements:
+  - System.IFormattable.ToString(System.String,System.IFormatProvider)
+  nameWithType.vb: Size.System.IFormattable.ToString(String, IFormatProvider)
+  name.vb: System.IFormattable.ToString(String, IFormatProvider)
+- uid: System.Windows.Size.op_Equality(System.Windows.Size,System.Windows.Size)
+  commentId: M:System.Windows.Size.op_Equality(System.Windows.Size,System.Windows.Size)
+  id: op_Equality(System.Windows.Size,System.Windows.Size)
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: Equality(Size, Size)
+  nameWithType: Size.Equality(Size, Size)
+  fullName: System.Windows.Size.Equality(System.Windows.Size, System.Windows.Size)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Equality
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 251
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCompares two instances of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> for equality.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(Size size1, Size size2)
+    parameters:
+    - id: size1
+      type: System.Windows.Size
+      description: "\nThe first instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: size2
+      type: System.Windows.Size
+      description: "\nThe second instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the two instances of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> are equal; otherwise false.\n"
+    content.vb: Public Shared Operator =(size1 As Size, size2 As Size) As Boolean
+  overload: System.Windows.Size.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Size.op_Inequality(System.Windows.Size,System.Windows.Size)
+  commentId: M:System.Windows.Size.op_Inequality(System.Windows.Size,System.Windows.Size)
+  id: op_Inequality(System.Windows.Size,System.Windows.Size)
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: Inequality(Size, Size)
+  nameWithType: Size.Inequality(Size, Size)
+  fullName: System.Windows.Size.Inequality(System.Windows.Size, System.Windows.Size)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Inequality
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 266
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCompares two instances of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> for inequality.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(Size size1, Size size2)
+    parameters:
+    - id: size1
+      type: System.Windows.Size
+      description: "\nThe first instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: size2
+      type: System.Windows.Size
+      description: "\nThe second instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the instances of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> are not equal; otherwise false.\n"
+    content.vb: Public Shared Operator <>(size1 As Size, size2 As Size) As Boolean
+  overload: System.Windows.Size.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Size.op_Explicit(System.Windows.Size)~System.Windows.Point
+  commentId: M:System.Windows.Size.op_Explicit(System.Windows.Size)~System.Windows.Point
+  id: op_Explicit(System.Windows.Size)~System.Windows.Point
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: Explicit(Size to Point)
+  nameWithType: Size.Explicit(Size to Point)
+  fullName: System.Windows.Size.Explicit(System.Windows.Size to System.Windows.Point)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Explicit
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 277
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nExplicitly converts an instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to an instance of <xref href=\"System.Windows.Point\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static explicit operator Point(Size size)
+    parameters:
+    - id: size
+      type: System.Windows.Size
+      description: "\nThe <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> value to be converted.\n"
+    return:
+      type: System.Windows.Point
+      description: "\nA <xref href=\"System.Windows.Point\" data-throw-if-not-resolved=\"false\"></xref> equal in value to this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Narrowing Operator CType(size As Size) As Point
+  overload: System.Windows.Size.op_Explicit*
+  nameWithType.vb: Size.Narrowing(Size to Point)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: System.Windows.Size.Narrowing(System.Windows.Size to System.Windows.Point)
+  name.vb: Narrowing(Size to Point)
+- uid: System.Windows.Size.op_Explicit(System.Windows.Size)~System.Windows.Vector
+  commentId: M:System.Windows.Size.op_Explicit(System.Windows.Size)~System.Windows.Vector
+  id: op_Explicit(System.Windows.Size)~System.Windows.Vector
+  parent: System.Windows.Size
+  langs:
+  - csharp
+  - vb
+  name: Explicit(Size to Vector)
+  nameWithType: Size.Explicit(Size to Vector)
+  fullName: System.Windows.Size.Explicit(System.Windows.Size to System.Windows.Vector)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Size.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Explicit
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Size.cs
+    startLine: 288
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nExplicitly converts an instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> to an instance of <xref href=\"System.Windows.Vector\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static explicit operator Vector(Size size)
+    parameters:
+    - id: size
+      type: System.Windows.Size
+      description: "\nThe <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> value to be converted.\n"
+    return:
+      type: System.Windows.Vector
+      description: "\nA <xref href=\"System.Windows.Vector\" data-throw-if-not-resolved=\"false\"></xref> equal in value to this instance of <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Narrowing Operator CType(size As Size) As Vector
+  overload: System.Windows.Size.op_Explicit*
+  nameWithType.vb: Size.Narrowing(Size to Vector)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: System.Windows.Size.Narrowing(System.Windows.Size to System.Windows.Vector)
+  name.vb: Narrowing(Size to Vector)
 references:
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
+- uid: System.IFormattable
+  commentId: T:System.IFormattable
+  parent: System
+  isExternal: true
+  name: IFormattable
+  nameWithType: IFormattable
+  fullName: System.IFormattable
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
@@ -716,35 +921,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -752,60 +933,15 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
+- uid: System.Windows.Size
+  commentId: T:System.Windows.Size
+  parent: System.Windows
+  name: Size
+  nameWithType: Size
+  fullName: System.Windows.Size
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
   isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: System
-  commentId: N:System
-  name: System
-  nameWithType: System
-  fullName: System
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
 - uid: System.Windows.Size.#ctor*
   commentId: Overload:System.Windows.Size.#ctor
   name: Size
@@ -818,11 +954,6 @@ references:
   name: Double
   nameWithType: Double
   fullName: System.Double
-- uid: System.Windows.Size.Parse*
-  commentId: Overload:System.Windows.Size.Parse
-  name: Parse
-  nameWithType: Size.Parse
-  fullName: System.Windows.Size.Parse
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -830,17 +961,24 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: System.Windows.Size
-  commentId: T:System.Windows.Size
-  parent: System.Windows
-  name: Size
-  nameWithType: Size
-  fullName: System.Windows.Size
-- uid: System.Windows.Size.op_Inequality*
-  commentId: Overload:System.Windows.Size.op_Inequality
-  name: Inequality
-  nameWithType: Size.Inequality
-  fullName: System.Windows.Size.Inequality
+- uid: System.Windows.Size.Parse*
+  commentId: Overload:System.Windows.Size.Parse
+  name: Parse
+  nameWithType: Size.Parse
+  fullName: System.Windows.Size.Parse
+- uid: System.Windows.Size.Empty*
+  commentId: Overload:System.Windows.Size.Empty
+  name: Empty
+  nameWithType: Size.Empty
+  fullName: System.Windows.Size.Empty
+- uid: System.Windows.Size.Empty
+  commentId: P:System.Windows.Size.Empty
+  isExternal: true
+- uid: System.Windows.Size.IsEmpty*
+  commentId: Overload:System.Windows.Size.IsEmpty
+  name: IsEmpty
+  nameWithType: Size.IsEmpty
+  fullName: System.Windows.Size.IsEmpty
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -848,36 +986,22 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: System.Windows.Size.op_Equality*
-  commentId: Overload:System.Windows.Size.op_Equality
-  name: Equality
-  nameWithType: Size.Equality
-  fullName: System.Windows.Size.Equality
-- uid: System.Windows.Size.Empty*
-  commentId: Overload:System.Windows.Size.Empty
-  name: Empty
-  nameWithType: Size.Empty
-  fullName: System.Windows.Size.Empty
+- uid: System.Windows.Size.Height
+  commentId: P:System.Windows.Size.Height
+  isExternal: true
 - uid: System.Windows.Size.Height*
   commentId: Overload:System.Windows.Size.Height
   name: Height
   nameWithType: Size.Height
   fullName: System.Windows.Size.Height
-- uid: System.Windows.Size.IsEmpty*
-  commentId: Overload:System.Windows.Size.IsEmpty
-  name: IsEmpty
-  nameWithType: Size.IsEmpty
-  fullName: System.Windows.Size.IsEmpty
+- uid: System.Windows.Size.Width
+  commentId: P:System.Windows.Size.Width
+  isExternal: true
 - uid: System.Windows.Size.Width*
   commentId: Overload:System.Windows.Size.Width
   name: Width
   nameWithType: Size.Width
   fullName: System.Windows.Size.Width
-- uid: System.Windows.Size.Equals*
-  commentId: Overload:System.Windows.Size.Equals
-  name: Equals
-  nameWithType: Size.Equals
-  fullName: System.Windows.Size.Equals
 - uid: System.ValueType.Equals(System.Object)
   commentId: M:System.ValueType.Equals(System.Object)
   parent: System.ValueType
@@ -919,6 +1043,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Size.Equals*
+  commentId: Overload:System.Windows.Size.Equals
+  name: Equals
+  nameWithType: Size.Equals
+  fullName: System.Windows.Size.Equals
 - uid: System.ValueType
   commentId: T:System.ValueType
   parent: System
@@ -1005,3 +1134,104 @@ references:
   name: ToString
   nameWithType: Size.ToString
   fullName: System.Windows.Size.ToString
+- uid: System.IFormatProvider
+  commentId: T:System.IFormatProvider
+  parent: System
+  isExternal: true
+  name: IFormatProvider
+  nameWithType: IFormatProvider
+  fullName: System.IFormatProvider
+- uid: System.Windows.Size.System#IFormattable#ToString*
+  commentId: Overload:System.Windows.Size.System#IFormattable#ToString
+  name: IFormattable.ToString
+  nameWithType: Size.IFormattable.ToString
+  fullName: System.Windows.Size.System.IFormattable.ToString
+  nameWithType.vb: Size.System.IFormattable.ToString
+  name.vb: System.IFormattable.ToString
+- uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+  commentId: M:System.IFormattable.ToString(System.String,System.IFormatProvider)
+  parent: System.IFormattable
+  isExternal: true
+  name: ToString(String, IFormatProvider)
+  nameWithType: IFormattable.ToString(String, IFormatProvider)
+  fullName: System.IFormattable.ToString(System.String, System.IFormatProvider)
+  spec.csharp:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    nameWithType: IFormattable.ToString
+    fullName: System.IFormattable.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    nameWithType: IFormatProvider
+    fullName: System.IFormatProvider
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    nameWithType: IFormattable.ToString
+    fullName: System.IFormattable.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    nameWithType: IFormatProvider
+    fullName: System.IFormatProvider
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Size.op_Equality*
+  commentId: Overload:System.Windows.Size.op_Equality
+  name: Equality
+  nameWithType: Size.Equality
+  fullName: System.Windows.Size.Equality
+- uid: System.Windows.Size.op_Inequality*
+  commentId: Overload:System.Windows.Size.op_Inequality
+  name: Inequality
+  nameWithType: Size.Inequality
+  fullName: System.Windows.Size.Inequality
+- uid: System.Windows.Point
+  commentId: T:System.Windows.Point
+  parent: System.Windows
+  name: Point
+  nameWithType: Point
+  fullName: System.Windows.Point
+- uid: System.Windows.Size.op_Explicit*
+  commentId: Overload:System.Windows.Size.op_Explicit
+  name: Explicit
+  nameWithType: Size.Explicit
+  fullName: System.Windows.Size.Explicit
+  nameWithType.vb: Size.Narrowing
+  fullName.vb: System.Windows.Size.Narrowing
+  name.vb: Narrowing
+- uid: System.Windows.Vector
+  commentId: T:System.Windows.Vector
+  parent: System.Windows
+  name: Vector
+  nameWithType: Vector
+  fullName: System.Windows.Vector

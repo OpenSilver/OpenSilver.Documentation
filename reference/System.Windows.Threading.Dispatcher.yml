@@ -5,10 +5,10 @@ items:
   id: Dispatcher
   parent: System.Windows.Threading
   children:
-  - System.Windows.Threading.Dispatcher.#ctor
   - System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)
   - System.Windows.Threading.Dispatcher.BeginInvoke(System.Delegate,System.Object[])
   - System.Windows.Threading.Dispatcher.CheckAccess
+  - System.Windows.Threading.Dispatcher.CurrentDispatcher
   - System.Windows.Threading.Dispatcher.DisableProcessing
   - System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
   langs:
@@ -20,20 +20,20 @@ items:
   type: Class
   source:
     remote:
-      path: src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Dispatcher
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-    startLine: 56
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+    startLine: 26
   assemblies:
   - OpenSilver
   namespace: System.Windows.Threading
-  summary: "\nProvides the core event message dispatcher. Instances of this type are responsible\nfor processing the window messages and dispatching the events to the client.\n"
+  summary: "\nProvides services for managing the queue of work items for a thread.\n"
   example: []
   syntax:
-    content: public class Dispatcher
-    content.vb: Public Class Dispatcher
+    content: public sealed class Dispatcher
+    content.vb: Public NotInheritable Class Dispatcher
   inheritance:
   - System.Object
   inheritedMembers:
@@ -44,14 +44,54 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
+  - sealed
   - class
   modifiers.vb:
   - Public
+  - NotInheritable
   - Class
+- uid: System.Windows.Threading.Dispatcher.CurrentDispatcher
+  commentId: P:System.Windows.Threading.Dispatcher.CurrentDispatcher
+  id: CurrentDispatcher
+  parent: System.Windows.Threading.Dispatcher
+  langs:
+  - csharp
+  - vb
+  name: CurrentDispatcher
+  nameWithType: Dispatcher.CurrentDispatcher
+  fullName: System.Windows.Threading.Dispatcher.CurrentDispatcher
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CurrentDispatcher
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+    startLine: 56
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Threading
+  summary: "\nGets the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref> for the thread currently executing\nand creates a new <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref> if one is not already associated\nwith the thread.\n"
+  example: []
+  syntax:
+    content: public static Dispatcher CurrentDispatcher { get; }
+    parameters: []
+    return:
+      type: System.Windows.Threading.Dispatcher
+      description: "\nThe dispatcher associated with the current thread.\n"
+    content.vb: Public Shared ReadOnly Property CurrentDispatcher As Dispatcher
+  overload: System.Windows.Threading.Dispatcher.CurrentDispatcher*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
 - uid: System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)
   commentId: M:System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)
   id: BeginInvoke(System.Action)
@@ -65,126 +105,32 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: BeginInvoke
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-    startLine: 108
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+    startLine: 86
   assemblies:
   - OpenSilver
   namespace: System.Windows.Threading
-  summary: "\nExecutes the specified delegate asynchronously on the thread that the System.Windows.Threading.Dispatcher was created on.\n"
+  summary: "\nExecutes the specified delegate asynchronously on the thread the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref>\nis associated with.\n"
   example: []
   syntax:
-    content: public DispatcherOperation BeginInvoke(Action method)
+    content: public DispatcherOperation BeginInvoke(Action a)
     parameters:
-    - id: method
+    - id: a
       type: System.Action
-      description: "\nThe delegate to a method, which is\npushed onto the System.Windows.Threading.Dispatcher event queue.\n"
+      description: "\nA delegate to a method that takes no arguments and does not return a value, which\nis pushed onto the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref> event queue.\n"
     return:
       type: System.Windows.Threading.DispatcherOperation
-    content.vb: Public Function BeginInvoke(method As Action) As DispatcherOperation
+      description: "\nAn object, which is returned immediately after <xref href=\"System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)\" data-throw-if-not-resolved=\"false\"></xref> is \ncalled, that represents the operation that has been posted to the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref>\nqueue.\n"
+    content.vb: Public Function BeginInvoke(a As Action) As DispatcherOperation
   overload: System.Windows.Threading.Dispatcher.BeginInvoke*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Threading.Dispatcher.#ctor
-  commentId: M:System.Windows.Threading.Dispatcher.#ctor
-  id: '#ctor'
-  parent: System.Windows.Threading.Dispatcher
-  langs:
-  - csharp
-  - vb
-  name: Dispatcher()
-  nameWithType: Dispatcher.Dispatcher()
-  fullName: System.Windows.Threading.Dispatcher.Dispatcher()
-  type: Constructor
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: .ctor
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-    startLine: 183
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Threading
-  syntax:
-    content: public Dispatcher()
-    content.vb: Public Sub New
-  overload: System.Windows.Threading.Dispatcher.#ctor*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Threading.Dispatcher.DisableProcessing
-  commentId: M:System.Windows.Threading.Dispatcher.DisableProcessing
-  id: DisableProcessing
-  parent: System.Windows.Threading.Dispatcher
-  langs:
-  - csharp
-  - vb
-  name: DisableProcessing()
-  nameWithType: Dispatcher.DisableProcessing()
-  fullName: System.Windows.Threading.Dispatcher.DisableProcessing()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: DisableProcessing
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-    startLine: 191
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Threading
-  syntax:
-    content: public IDisposable DisableProcessing()
-    return:
-      type: System.IDisposable
-    content.vb: Public Function DisableProcessing As IDisposable
-  overload: System.Windows.Threading.Dispatcher.DisableProcessing*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
-  commentId: M:System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
-  id: InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
-  parent: System.Windows.Threading.Dispatcher
-  langs:
-  - csharp
-  - vb
-  name: InvokeAsync(Action, DispatcherPriority)
-  nameWithType: Dispatcher.InvokeAsync(Action, DispatcherPriority)
-  fullName: System.Windows.Threading.Dispatcher.InvokeAsync(System.Action, System.Windows.Threading.DispatcherPriority)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: InvokeAsync
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-    startLine: 206
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Threading
-  syntax:
-    content: public DispatcherOperation InvokeAsync(Action callback, DispatcherPriority priority = DispatcherPriority.Normal)
-    parameters:
-    - id: callback
-      type: System.Action
-    - id: priority
-      type: System.Windows.Threading.DispatcherPriority
-    return:
-      type: System.Windows.Threading.DispatcherOperation
-    content.vb: Public Function InvokeAsync(callback As Action, priority As DispatcherPriority = DispatcherPriority.Normal) As DispatcherOperation
-  overload: System.Windows.Threading.Dispatcher.InvokeAsync*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\n<code data-dev-comment-type=\"paramref\" class=\"paramref\">a</code> is null.\n"
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -202,24 +148,29 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: BeginInvoke
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-    startLine: 261
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+    startLine: 112
   assemblies:
   - OpenSilver
   namespace: System.Windows.Threading
+  summary: "\nExecutes the specified delegate asynchronously with the specified array of arguments\non the thread the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref> is associated with.\n"
+  example: []
   syntax:
     content: public DispatcherOperation BeginInvoke(Delegate d, params object[] args)
     parameters:
     - id: d
       type: System.Delegate
+      description: "\nA delegate to a method that takes multiple arguments, which is pushed onto the\n<xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref> event queue.\n"
     - id: args
       type: System.Object[]
+      description: "\nAn array of objects to pass as arguments to the specified method.\n"
     return:
       type: System.Windows.Threading.DispatcherOperation
+      description: "\nAn object, which is returned immediately after <xref href=\"System.Windows.Threading.Dispatcher.BeginInvoke(System.Delegate%2cSystem.Object%5b%5d)\" data-throw-if-not-resolved=\"false\"></xref>\nis called, that represents the operation that has been posted to the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref>\nqueue.\n"
     content.vb: Public Function BeginInvoke(d As  Delegate, ParamArray args As Object()) As DispatcherOperation
   overload: System.Windows.Threading.Dispatcher.BeginInvoke*
   nameWithType.vb: Dispatcher.BeginInvoke(Delegate, Object())
@@ -242,21 +193,101 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: CheckAccess
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs
-    startLine: 269
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+    startLine: 120
   assemblies:
   - OpenSilver
   namespace: System.Windows.Threading
+  summary: "\nDetermines whether the calling thread is the thread associated with this <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
   syntax:
     content: public bool CheckAccess()
     return:
       type: System.Boolean
+      description: "\ntrue if the calling thread is the thread associated with this <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, false.\n"
     content.vb: Public Function CheckAccess As Boolean
   overload: System.Windows.Threading.Dispatcher.CheckAccess*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
+  commentId: M:System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
+  id: InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
+  parent: System.Windows.Threading.Dispatcher
+  langs:
+  - csharp
+  - vb
+  name: InvokeAsync(Action, DispatcherPriority)
+  nameWithType: Dispatcher.InvokeAsync(Action, DispatcherPriority)
+  fullName: System.Windows.Threading.Dispatcher.InvokeAsync(System.Action, System.Windows.Threading.DispatcherPriority)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: InvokeAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+    startLine: 137
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Threading
+  summary: "\nExecutes the specified <xref href=\"System.Action\" data-throw-if-not-resolved=\"false\"></xref> asynchronously at the specified priority on the thread \nthe <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref> is associated with.\n"
+  example: []
+  syntax:
+    content: public DispatcherOperation InvokeAsync(Action a, DispatcherPriority priority = DispatcherPriority.Normal)
+    parameters:
+    - id: a
+      type: System.Action
+      description: "\nA delegate to invoke through the dispatcher.\n"
+    - id: priority
+      type: System.Windows.Threading.DispatcherPriority
+      description: "\nThe priority that determines the order in which the specified callback is invoked relative to the \nother pending operations in the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    return:
+      type: System.Windows.Threading.DispatcherOperation
+      description: "\nAn object, which is returned immediately after <xref href=\"System.Windows.Threading.Dispatcher.InvokeAsync(System.Action%2cSystem.Windows.Threading.DispatcherPriority)\" data-throw-if-not-resolved=\"false\"></xref>\nis called, that can be used to interact with the delegate as it is pending execution in the event queue.\n"
+    content.vb: Public Function InvokeAsync(a As Action, priority As DispatcherPriority = DispatcherPriority.Normal) As DispatcherOperation
+  overload: System.Windows.Threading.Dispatcher.InvokeAsync*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Threading.Dispatcher.DisableProcessing
+  commentId: M:System.Windows.Threading.Dispatcher.DisableProcessing
+  id: DisableProcessing
+  parent: System.Windows.Threading.Dispatcher
+  langs:
+  - csharp
+  - vb
+  name: DisableProcessing()
+  nameWithType: Dispatcher.DisableProcessing()
+  fullName: System.Windows.Threading.Dispatcher.DisableProcessing()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DisableProcessing
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs
+    startLine: 164
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Threading
+  summary: "\nDisables processing of the <xref href=\"System.Windows.Threading.Dispatcher\" data-throw-if-not-resolved=\"false\"></xref> queue.\n"
+  example: []
+  syntax:
+    content: public DispatcherProcessingDisabled DisableProcessing()
+    return:
+      type: System.Windows.Threading.DispatcherProcessingDisabled
+      description: "\nA structure used to re-enable dispatcher processing.\n"
+    content.vb: Public Function DisableProcessing As DispatcherProcessingDisabled
+  overload: System.Windows.Threading.Dispatcher.DisableProcessing*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -553,89 +584,28 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
   nameWithType: System
   fullName: System
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
+- uid: System.Windows.Threading.Dispatcher
+  commentId: T:System.Windows.Threading.Dispatcher
+  parent: System.Windows.Threading
+  name: Dispatcher
+  nameWithType: Dispatcher
+  fullName: System.Windows.Threading.Dispatcher
+- uid: System.Windows.Threading.Dispatcher.CurrentDispatcher*
+  commentId: Overload:System.Windows.Threading.Dispatcher.CurrentDispatcher
+  name: CurrentDispatcher
+  nameWithType: Dispatcher.CurrentDispatcher
+  fullName: System.Windows.Threading.Dispatcher.CurrentDispatcher
+- uid: System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)
+  commentId: M:System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)
   isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
 - uid: System.Windows.Threading.Dispatcher.BeginInvoke*
   commentId: Overload:System.Windows.Threading.Dispatcher.BeginInvoke
   name: BeginInvoke
@@ -654,34 +624,9 @@ references:
   name: DispatcherOperation
   nameWithType: DispatcherOperation
   fullName: System.Windows.Threading.DispatcherOperation
-- uid: System.Windows.Threading.Dispatcher.#ctor*
-  commentId: Overload:System.Windows.Threading.Dispatcher.#ctor
-  name: Dispatcher
-  nameWithType: Dispatcher.Dispatcher
-  fullName: System.Windows.Threading.Dispatcher.Dispatcher
-- uid: System.Windows.Threading.Dispatcher.DisableProcessing*
-  commentId: Overload:System.Windows.Threading.Dispatcher.DisableProcessing
-  name: DisableProcessing
-  nameWithType: Dispatcher.DisableProcessing
-  fullName: System.Windows.Threading.Dispatcher.DisableProcessing
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
+- uid: System.Windows.Threading.Dispatcher.BeginInvoke(System.Delegate,System.Object[])
+  commentId: M:System.Windows.Threading.Dispatcher.BeginInvoke(System.Delegate,System.Object[])
   isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Windows.Threading.Dispatcher.InvokeAsync*
-  commentId: Overload:System.Windows.Threading.Dispatcher.InvokeAsync
-  name: InvokeAsync
-  nameWithType: Dispatcher.InvokeAsync
-  fullName: System.Windows.Threading.Dispatcher.InvokeAsync
-- uid: System.Windows.Threading.DispatcherPriority
-  commentId: T:System.Windows.Threading.DispatcherPriority
-  parent: System.Windows.Threading
-  name: DispatcherPriority
-  nameWithType: DispatcherPriority
-  fullName: System.Windows.Threading.DispatcherPriority
 - uid: System.Delegate
   commentId: T:System.Delegate
   parent: System
@@ -727,3 +672,28 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
+  commentId: M:System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)
+  isExternal: true
+- uid: System.Windows.Threading.Dispatcher.InvokeAsync*
+  commentId: Overload:System.Windows.Threading.Dispatcher.InvokeAsync
+  name: InvokeAsync
+  nameWithType: Dispatcher.InvokeAsync
+  fullName: System.Windows.Threading.Dispatcher.InvokeAsync
+- uid: System.Windows.Threading.DispatcherPriority
+  commentId: T:System.Windows.Threading.DispatcherPriority
+  parent: System.Windows.Threading
+  name: DispatcherPriority
+  nameWithType: DispatcherPriority
+  fullName: System.Windows.Threading.DispatcherPriority
+- uid: System.Windows.Threading.Dispatcher.DisableProcessing*
+  commentId: Overload:System.Windows.Threading.Dispatcher.DisableProcessing
+  name: DisableProcessing
+  nameWithType: Dispatcher.DisableProcessing
+  fullName: System.Windows.Threading.Dispatcher.DisableProcessing
+- uid: System.Windows.Threading.DispatcherProcessingDisabled
+  commentId: T:System.Windows.Threading.DispatcherProcessingDisabled
+  parent: System.Windows.Threading
+  name: DispatcherProcessingDisabled
+  nameWithType: DispatcherProcessingDisabled
+  fullName: System.Windows.Threading.DispatcherProcessingDisabled

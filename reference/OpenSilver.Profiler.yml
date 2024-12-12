@@ -21,11 +21,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Profiler
     path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-    startLine: 42
+    startLine: 23
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -65,35 +65,23 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: StartMeasuringTime
     path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-    startLine: 59
+    startLine: 38
   assemblies:
   - OpenSilver
   namespace: OpenSilver
   summary: "\nAllows measuring the cumulative time between the start and the end of the measure. It returns a number that you need to pass to the &quot;StopMeasuringTime()&quot; method.\n"
   example: []
   syntax:
-    content: >-
-      [JSReplacement("performance.now()")]
-
-      public static long StartMeasuringTime()
+    content: public static long StartMeasuringTime()
     return:
       type: System.Int64
       description: A number that you need to pass to the &quot;StopMeasuringTime()&quot; method.
-    content.vb: >-
-      <JSReplacement("performance.now()")>
-
-      Public Shared Function StartMeasuringTime As Long
+    content.vb: Public Shared Function StartMeasuringTime As Long
   overload: OpenSilver.Profiler.StartMeasuringTime*
-  attributes:
-  - type: JSIL.Meta.JSReplacementAttribute
-    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: performance.now()
   modifiers.csharp:
   - public
   - static
@@ -114,21 +102,18 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: StopMeasuringTime
     path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-    startLine: 80
+    startLine: 48
   assemblies:
   - OpenSilver
   namespace: OpenSilver
   summary: "\nAllows measuring the time between the start and the end of the measure. The result is &quot;accrued&quot;, meaning that it is cumulative if executed multiple times. You can see the result by calling &quot;ViewProfilerResults()&quot; from the browser console.\n"
   example: []
   syntax:
-    content: >-
-      [JSReplacement("document.addToPerformanceCounters($measureDescription, $numberReturnedByTheStartMeasuringTimeMethod)")]
-
-      public static void StopMeasuringTime(string measureDescription, long numberReturnedByTheStartMeasuringTimeMethod)
+    content: public static void StopMeasuringTime(string measureDescription, long numberReturnedByTheStartMeasuringTimeMethod)
     parameters:
     - id: measureDescription
       type: System.String
@@ -136,17 +121,8 @@ items:
     - id: numberReturnedByTheStartMeasuringTimeMethod
       type: System.Int64
       description: The number returned by the call to &quot;StartMeasuringTime()&quot;. It is used to calculate the time elapsed between the start and the end of the measure.
-    content.vb: >-
-      <JSReplacement("document.addToPerformanceCounters($measureDescription, $numberReturnedByTheStartMeasuringTimeMethod)")>
-
-      Public Shared Sub StopMeasuringTime(measureDescription As String, numberReturnedByTheStartMeasuringTimeMethod As Long)
+    content.vb: Public Shared Sub StopMeasuringTime(measureDescription As String, numberReturnedByTheStartMeasuringTimeMethod As Long)
   overload: OpenSilver.Profiler.StopMeasuringTime*
-  attributes:
-  - type: JSIL.Meta.JSReplacementAttribute
-    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: document.addToPerformanceCounters($measureDescription, $numberReturnedByTheStartMeasuringTimeMethod)
   modifiers.csharp:
   - public
   - static
@@ -167,11 +143,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ViewProfilerResults
     path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-    startLine: 114
+    startLine: 69
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -201,33 +177,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ConsoleTime
     path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-    startLine: 160
+    startLine: 113
   assemblies:
   - OpenSilver
   namespace: OpenSilver
   syntax:
-    content: >-
-      [JSReplacement("console.time($label)")]
-
-      public static void ConsoleTime(string label)
+    content: public static void ConsoleTime(string label)
     parameters:
     - id: label
       type: System.String
-    content.vb: >-
-      <JSReplacement("console.time($label)")>
-
-      Public Shared Sub ConsoleTime(label As String)
+    content.vb: Public Shared Sub ConsoleTime(label As String)
   overload: OpenSilver.Profiler.ConsoleTime*
-  attributes:
-  - type: JSIL.Meta.JSReplacementAttribute
-    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: console.time($label)
   modifiers.csharp:
   - public
   - static
@@ -248,33 +212,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ConsoleTimeEnd
     path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-    startLine: 170
+    startLine: 119
   assemblies:
   - OpenSilver
   namespace: OpenSilver
   syntax:
-    content: >-
-      [JSReplacement("console.timeEnd($label)")]
-
-      public static void ConsoleTimeEnd(string label)
+    content: public static void ConsoleTimeEnd(string label)
     parameters:
     - id: label
       type: System.String
-    content.vb: >-
-      <JSReplacement("console.timeEnd($label)")>
-
-      Public Shared Sub ConsoleTimeEnd(label As String)
+    content.vb: Public Shared Sub ConsoleTimeEnd(label As String)
   overload: OpenSilver.Profiler.ConsoleTimeEnd*
-  attributes:
-  - type: JSIL.Meta.JSReplacementAttribute
-    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: console.timeEnd($label)
   modifiers.csharp:
   - public
   - static
@@ -295,33 +247,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ConsoleTimeLog
     path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Profiler/Profiler.cs
-    startLine: 180
+    startLine: 125
   assemblies:
   - OpenSilver
   namespace: OpenSilver
   syntax:
-    content: >-
-      [JSReplacement("console.timeLog($label)")]
-
-      public static void ConsoleTimeLog(string label)
+    content: public static void ConsoleTimeLog(string label)
     parameters:
     - id: label
       type: System.String
-    content.vb: >-
-      <JSReplacement("console.timeLog($label)")>
-
-      Public Shared Sub ConsoleTimeLog(label As String)
+    content.vb: Public Shared Sub ConsoleTimeLog(label As String)
   overload: OpenSilver.Profiler.ConsoleTimeLog*
-  attributes:
-  - type: JSIL.Meta.JSReplacementAttribute
-    ctor: JSIL.Meta.JSReplacementAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: console.timeLog($label)
   modifiers.csharp:
   - public
   - static

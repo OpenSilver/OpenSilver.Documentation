@@ -5,9 +5,18 @@ items:
   id: KeyTime
   parent: System.Windows.Media.Animation
   children:
+  - System.Windows.Media.Animation.KeyTime.Equals(System.Object)
+  - System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime)
+  - System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
   - System.Windows.Media.Animation.KeyTime.FromTimeSpan(System.TimeSpan)
+  - System.Windows.Media.Animation.KeyTime.GetHashCode
+  - System.Windows.Media.Animation.KeyTime.op_Equality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
   - System.Windows.Media.Animation.KeyTime.op_Implicit(System.TimeSpan)~System.Windows.Media.Animation.KeyTime
+  - System.Windows.Media.Animation.KeyTime.op_Inequality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
   - System.Windows.Media.Animation.KeyTime.TimeSpan
+  - System.Windows.Media.Animation.KeyTime.ToString
+  - System.Windows.Media.Animation.KeyTime.Type
+  - System.Windows.Media.Animation.KeyTime.Uniform
   langs:
   - csharp
   - vb
@@ -18,30 +27,26 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: KeyTime
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-    startLine: 24
+    startLine: 18
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
   summary: "\nSpecifies when a particular key frame should take place during an animation.\n"
   example: []
   syntax:
-    content: public struct KeyTime
+    content: public readonly struct KeyTime
     content.vb: Public Structure KeyTime
   inheritedMembers:
-  - System.ValueType.Equals(System.Object)
-  - System.ValueType.GetHashCode
-  - System.ValueType.ToString
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetType
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
+  - readonly
   - struct
   modifiers.vb:
   - Public
@@ -60,33 +65,78 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: FromTimeSpan
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-    startLine: 40
+    startLine: 45
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nCreates a new System.Windows.Media.Animation.KeyTime instance, with the System.Windows.Media.Animation.KeyTimeType\nproperty initialized to the value of the specified parameter.\n"
+  summary: "\nCreates a new <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>, using the supplied <xref href=\"System.Windows.Media.Animation.KeyTime.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public static KeyTime FromTimeSpan(TimeSpan timeSpan)
     parameters:
     - id: timeSpan
       type: System.TimeSpan
-      description: The value of the new System.Windows.Media.Animation.KeyTime.
+      description: "\nThe value of the new <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     return:
       type: System.Windows.Media.Animation.KeyTime
-      description: "\nA new System.Windows.Media.Animation.KeyTime instance, initialized to the value\nof timeSpan.\n"
+      description: "\nA new <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>, initialized to the value of timeSpan.\n"
     content.vb: Public Shared Function FromTimeSpan(timeSpan As TimeSpan) As KeyTime
   overload: System.Windows.Media.Animation.KeyTime.FromTimeSpan*
+  exceptions:
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: "\nThe specified timeSpan is outside the allowed range.\n"
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
+- uid: System.Windows.Media.Animation.KeyTime.Uniform
+  commentId: P:System.Windows.Media.Animation.KeyTime.Uniform
+  id: Uniform
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: Uniform
+  nameWithType: KeyTime.Uniform
+  fullName: System.Windows.Media.Animation.KeyTime.Uniform
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Uniform
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 63
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nGets a uniform value, which divides the allotted time of the animation evenly\nbetween key frames.\n"
+  example: []
+  syntax:
+    content: public static readonly KeyTime Uniform { get; }
+    parameters: []
+    return:
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nA uniform value, which divides the allotted time of the animation evenly between\nkey frames.\n"
+    content.vb: Public Shared ReadOnly Property Uniform As KeyTime
+  overload: System.Windows.Media.Animation.KeyTime.Uniform*
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  - get
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
 - uid: System.Windows.Media.Animation.KeyTime.TimeSpan
   commentId: P:System.Windows.Media.Animation.KeyTime.TimeSpan
   id: TimeSpan
@@ -101,29 +151,367 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TimeSpan
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-    startLine: 51
+    startLine: 76
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nGets the time when the key frame ends, expressed as a time relative to the\nbeginning of the animation.\n"
+  summary: "\nGets the time when the key frame ends, expressed as a time relative to the beginning\nof the animation.\n"
   example: []
   syntax:
-    content: public TimeSpan TimeSpan { get; }
+    content: public readonly TimeSpan TimeSpan { get; }
     parameters: []
     return:
       type: System.TimeSpan
+      description: "\nThe time when the key frame ends, expressed as a time relative to the beginning\nof the animation.\n"
     content.vb: Public ReadOnly Property TimeSpan As TimeSpan
   overload: System.Windows.Media.Animation.KeyTime.TimeSpan*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nIf this instance is not of type <xref href=\"System.Windows.Media.Animation.KeyTimeType.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   modifiers.csharp:
   - public
+  - readonly
   - get
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Windows.Media.Animation.KeyTime.Type
+  commentId: P:System.Windows.Media.Animation.KeyTime.Type
+  id: Type
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: Type
+  nameWithType: KeyTime.Type
+  fullName: System.Windows.Media.Animation.KeyTime.Type
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Type
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 95
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nGets the <xref href=\"System.Windows.Media.Animation.KeyTimeType\" data-throw-if-not-resolved=\"false\"></xref> value this instance represents.\n"
+  example: []
+  syntax:
+    content: public readonly KeyTimeType Type { get; }
+    parameters: []
+    return:
+      type: System.Windows.Media.Animation.KeyTimeType
+      description: "\nOne of the enumeration values.\n"
+    content.vb: Public ReadOnly Property Type As KeyTimeType
+  overload: System.Windows.Media.Animation.KeyTime.Type*
+  modifiers.csharp:
+  - public
+  - readonly
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime)
+  commentId: M:System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime)
+  id: Equals(System.Windows.Media.Animation.KeyTime)
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: Equals(KeyTime)
+  nameWithType: KeyTime.Equals(KeyTime)
+  fullName: System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Equals
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 107
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nIndicates whether a specified <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> is equal to this \n<xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public readonly bool Equals(KeyTime value)
+    parameters:
+    - id: value
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nThe <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> to compare with this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if value is equal to this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, false.\n"
+    content.vb: Public Function Equals(value As KeyTime) As Boolean
+  overload: System.Windows.Media.Animation.KeyTime.Equals*
+  modifiers.csharp:
+  - public
+  - readonly
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Animation.KeyTime.Equals(System.Object)
+  commentId: M:System.Windows.Media.Animation.KeyTime.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: Equals(Object)
+  nameWithType: KeyTime.Equals(Object)
+  fullName: System.Windows.Media.Animation.KeyTime.Equals(System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Equals
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 119
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nIndicates whether a <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> is equal to this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override readonly bool Equals(object value)
+    parameters:
+    - id: value
+      type: System.Object
+      description: "\nThe <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> to compare with this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if value is a <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> that represents the same length \nof time as this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, false.\n"
+    content.vb: Public Overrides Function Equals(value As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: System.Windows.Media.Animation.KeyTime.Equals*
+  modifiers.csharp:
+  - public
+  - override
+  - readonly
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: System.Windows.Media.Animation.KeyTime.GetHashCode
+  commentId: M:System.Windows.Media.Animation.KeyTime.GetHashCode
+  id: GetHashCode
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: KeyTime.GetHashCode()
+  fullName: System.Windows.Media.Animation.KeyTime.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GetHashCode
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 127
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nReturns a hash code representing this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override readonly int GetHashCode()
+    return:
+      type: System.Int32
+      description: "\nA hash code identifier.\n"
+    content.vb: Public Overrides Function GetHashCode As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: System.Windows.Media.Animation.KeyTime.GetHashCode*
+  modifiers.csharp:
+  - public
+  - override
+  - readonly
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: System.Windows.Media.Animation.KeyTime.ToString
+  commentId: M:System.Windows.Media.Animation.KeyTime.ToString
+  id: ToString
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: KeyTime.ToString()
+  fullName: System.Windows.Media.Animation.KeyTime.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ToString
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 135
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nReturns a string representation of this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public override readonly string ToString()
+    return:
+      type: System.String
+      description: "\nA string representation of this <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.ValueType.ToString
+  overload: System.Windows.Media.Animation.KeyTime.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  - readonly
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  commentId: M:System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  id: Equals(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: Equals(KeyTime, KeyTime)
+  nameWithType: KeyTime.Equals(KeyTime, KeyTime)
+  fullName: System.Windows.Media.Animation.KeyTime.Equals(System.Windows.Media.Animation.KeyTime, System.Windows.Media.Animation.KeyTime)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Equals
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 155
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nIndicates whether two <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> values are equal.\n"
+  example: []
+  syntax:
+    content: public static bool Equals(KeyTime keyTime1, KeyTime keyTime2)
+    parameters:
+    - id: keyTime1
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nThe first value to compare.\n"
+    - id: keyTime2
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nThe second value to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the values of keyTime1 and keyTime2 are equal; otherwise, false.\n"
+    content.vb: Public Shared Function Equals(keyTime1 As KeyTime, keyTime2 As KeyTime) As Boolean
+  overload: System.Windows.Media.Animation.KeyTime.Equals*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Media.Animation.KeyTime.op_Equality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  commentId: M:System.Windows.Media.Animation.KeyTime.op_Equality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  id: op_Equality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: Equality(KeyTime, KeyTime)
+  nameWithType: KeyTime.Equality(KeyTime, KeyTime)
+  fullName: System.Windows.Media.Animation.KeyTime.Equality(System.Windows.Media.Animation.KeyTime, System.Windows.Media.Animation.KeyTime)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Equality
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 175
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nCompares two <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> values for equality.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(KeyTime keyTime1, KeyTime keyTime2)
+    parameters:
+    - id: keyTime1
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nThe first value to compare.\n"
+    - id: keyTime2
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nThe second value to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if keyTime1 and keyTime2 are equal; otherwise, false.\n"
+    content.vb: Public Shared Operator =(keyTime1 As KeyTime, keyTime2 As KeyTime) As Boolean
+  overload: System.Windows.Media.Animation.KeyTime.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Media.Animation.KeyTime.op_Inequality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  commentId: M:System.Windows.Media.Animation.KeyTime.op_Inequality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  id: op_Inequality(System.Windows.Media.Animation.KeyTime,System.Windows.Media.Animation.KeyTime)
+  parent: System.Windows.Media.Animation.KeyTime
+  langs:
+  - csharp
+  - vb
+  name: Inequality(KeyTime, KeyTime)
+  nameWithType: KeyTime.Inequality(KeyTime, KeyTime)
+  fullName: System.Windows.Media.Animation.KeyTime.Inequality(System.Windows.Media.Animation.KeyTime, System.Windows.Media.Animation.KeyTime)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Inequality
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
+    startLine: 189
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nCompares two <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref> values for inequality.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(KeyTime keyTime1, KeyTime keyTime2)
+    parameters:
+    - id: keyTime1
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nThe first value to compare.\n"
+    - id: keyTime2
+      type: System.Windows.Media.Animation.KeyTime
+      description: "\nThe second value to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if keyTime1 and keyTime2 are not equal; otherwise, false.\n"
+    content.vb: Public Shared Operator <>(keyTime1 As KeyTime, keyTime2 As KeyTime) As Boolean
+  overload: System.Windows.Media.Animation.KeyTime.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: System.Windows.Media.Animation.KeyTime.op_Implicit(System.TimeSpan)~System.Windows.Media.Animation.KeyTime
   commentId: M:System.Windows.Media.Animation.KeyTime.op_Implicit(System.TimeSpan)~System.Windows.Media.Animation.KeyTime
   id: op_Implicit(System.TimeSpan)~System.Windows.Media.Animation.KeyTime
@@ -138,25 +526,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: op_Implicit
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/KeyTime.cs
-    startLine: 146
+    startLine: 200
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nImplicitly creates a KeyTime value from a Time value.\n"
+  summary: "\nImplicitly converts a <xref href=\"System.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> to a <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public static implicit operator KeyTime(TimeSpan timeSpan)
     parameters:
     - id: timeSpan
       type: System.TimeSpan
-      description: The Time value.
+      description: "\nThe <xref href=\"System.Windows.Media.Animation.KeyTime.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> value to convert.\n"
     return:
       type: System.Windows.Media.Animation.KeyTime
-      description: A new KeyTime.
+      description: "\nThe created <xref href=\"System.Windows.Media.Animation.KeyTime\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Shared Widening Operator CType(timeSpan As TimeSpan) As KeyTime
   overload: System.Windows.Media.Animation.KeyTime.op_Implicit*
   nameWithType.vb: KeyTime.Widening(TimeSpan to KeyTime)
@@ -174,109 +562,6 @@ references:
   name: System.Windows.Media.Animation
   nameWithType: System.Windows.Media.Animation
   fullName: System.Windows.Media.Animation
-- uid: System.ValueType.Equals(System.Object)
-  commentId: M:System.ValueType.Equals(System.Object)
-  parent: System.ValueType
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: ValueType.Equals(Object)
-  fullName: System.ValueType.Equals(System.Object)
-  spec.csharp:
-  - uid: System.ValueType.Equals(System.Object)
-    name: Equals
-    nameWithType: ValueType.Equals
-    fullName: System.ValueType.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ValueType.Equals(System.Object)
-    name: Equals
-    nameWithType: ValueType.Equals
-    fullName: System.ValueType.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.ValueType.GetHashCode
-  commentId: M:System.ValueType.GetHashCode
-  parent: System.ValueType
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: ValueType.GetHashCode()
-  fullName: System.ValueType.GetHashCode()
-  spec.csharp:
-  - uid: System.ValueType.GetHashCode
-    name: GetHashCode
-    nameWithType: ValueType.GetHashCode
-    fullName: System.ValueType.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ValueType.GetHashCode
-    name: GetHashCode
-    nameWithType: ValueType.GetHashCode
-    fullName: System.ValueType.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.ValueType.ToString
-  commentId: M:System.ValueType.ToString
-  parent: System.ValueType
-  isExternal: true
-  name: ToString()
-  nameWithType: ValueType.ToString()
-  fullName: System.ValueType.ToString()
-  spec.csharp:
-  - uid: System.ValueType.ToString
-    name: ToString
-    nameWithType: ValueType.ToString
-    fullName: System.ValueType.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ValueType.ToString
-    name: ToString
-    nameWithType: ValueType.ToString
-    fullName: System.ValueType.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
@@ -422,42 +707,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.ValueType
-  commentId: T:System.ValueType
-  parent: System
-  isExternal: true
-  name: ValueType
-  nameWithType: ValueType
-  fullName: System.ValueType
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -465,60 +714,23 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
 - uid: System
   commentId: N:System
   name: System
   nameWithType: System
   fullName: System
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
+- uid: System.Windows.Media.Animation.KeyTime
+  commentId: T:System.Windows.Media.Animation.KeyTime
+  parent: System.Windows.Media.Animation
+  name: KeyTime
+  nameWithType: KeyTime
+  fullName: System.Windows.Media.Animation.KeyTime
+- uid: System.Windows.Media.Animation.KeyTime.TimeSpan
+  commentId: P:System.Windows.Media.Animation.KeyTime.TimeSpan
+  isExternal: true
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
 - uid: System.Windows.Media.Animation.KeyTime.FromTimeSpan*
   commentId: Overload:System.Windows.Media.Animation.KeyTime.FromTimeSpan
   name: FromTimeSpan
@@ -531,17 +743,189 @@ references:
   name: TimeSpan
   nameWithType: TimeSpan
   fullName: System.TimeSpan
-- uid: System.Windows.Media.Animation.KeyTime
-  commentId: T:System.Windows.Media.Animation.KeyTime
-  parent: System.Windows.Media.Animation
-  name: KeyTime
-  nameWithType: KeyTime
-  fullName: System.Windows.Media.Animation.KeyTime
+- uid: System.Windows.Media.Animation.KeyTime.Uniform*
+  commentId: Overload:System.Windows.Media.Animation.KeyTime.Uniform
+  name: Uniform
+  nameWithType: KeyTime.Uniform
+  fullName: System.Windows.Media.Animation.KeyTime.Uniform
+- uid: System.Windows.Media.Animation.KeyTimeType.TimeSpan
+  commentId: F:System.Windows.Media.Animation.KeyTimeType.TimeSpan
+  isExternal: true
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
 - uid: System.Windows.Media.Animation.KeyTime.TimeSpan*
   commentId: Overload:System.Windows.Media.Animation.KeyTime.TimeSpan
   name: TimeSpan
   nameWithType: KeyTime.TimeSpan
   fullName: System.Windows.Media.Animation.KeyTime.TimeSpan
+- uid: System.Windows.Media.Animation.KeyTimeType
+  commentId: T:System.Windows.Media.Animation.KeyTimeType
+  parent: System.Windows.Media.Animation
+  name: KeyTimeType
+  nameWithType: KeyTimeType
+  fullName: System.Windows.Media.Animation.KeyTimeType
+- uid: System.Windows.Media.Animation.KeyTime.Type*
+  commentId: Overload:System.Windows.Media.Animation.KeyTime.Type
+  name: Type
+  nameWithType: KeyTime.Type
+  fullName: System.Windows.Media.Animation.KeyTime.Type
+- uid: System.Windows.Media.Animation.KeyTime.Equals*
+  commentId: Overload:System.Windows.Media.Animation.KeyTime.Equals
+  name: Equals
+  nameWithType: KeyTime.Equals
+  fullName: System.Windows.Media.Animation.KeyTime.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: ValueType.Equals(Object)
+  fullName: System.ValueType.Equals(System.Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    nameWithType: ValueType.Equals
+    fullName: System.ValueType.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    nameWithType: ValueType.Equals
+    fullName: System.ValueType.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    nameWithType: ValueType.GetHashCode
+    fullName: System.ValueType.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    nameWithType: ValueType.GetHashCode
+    fullName: System.ValueType.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Media.Animation.KeyTime.GetHashCode*
+  commentId: Overload:System.Windows.Media.Animation.KeyTime.GetHashCode
+  name: GetHashCode
+  nameWithType: KeyTime.GetHashCode
+  fullName: System.Windows.Media.Animation.KeyTime.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    nameWithType: ValueType.ToString
+    fullName: System.ValueType.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    nameWithType: ValueType.ToString
+    fullName: System.ValueType.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Media.Animation.KeyTime.ToString*
+  commentId: Overload:System.Windows.Media.Animation.KeyTime.ToString
+  name: ToString
+  nameWithType: KeyTime.ToString
+  fullName: System.Windows.Media.Animation.KeyTime.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Windows.Media.Animation.KeyTime.op_Equality*
+  commentId: Overload:System.Windows.Media.Animation.KeyTime.op_Equality
+  name: Equality
+  nameWithType: KeyTime.Equality
+  fullName: System.Windows.Media.Animation.KeyTime.Equality
+- uid: System.Windows.Media.Animation.KeyTime.op_Inequality*
+  commentId: Overload:System.Windows.Media.Animation.KeyTime.op_Inequality
+  name: Inequality
+  nameWithType: KeyTime.Inequality
+  fullName: System.Windows.Media.Animation.KeyTime.Inequality
 - uid: System.Windows.Media.Animation.KeyTime.op_Implicit*
   commentId: Overload:System.Windows.Media.Animation.KeyTime.op_Implicit
   name: Implicit

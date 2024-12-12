@@ -6,19 +6,29 @@ items:
   parent: System.Windows
   children:
   - System.Windows.Duration.#ctor(System.TimeSpan)
+  - System.Windows.Duration.Add(System.Windows.Duration)
   - System.Windows.Duration.Automatic
+  - System.Windows.Duration.Compare(System.Windows.Duration,System.Windows.Duration)
   - System.Windows.Duration.Equals(System.Object)
   - System.Windows.Duration.Equals(System.Windows.Duration)
   - System.Windows.Duration.Equals(System.Windows.Duration,System.Windows.Duration)
   - System.Windows.Duration.Forever
   - System.Windows.Duration.GetHashCode
   - System.Windows.Duration.HasTimeSpan
+  - System.Windows.Duration.op_Addition(System.Windows.Duration,System.Windows.Duration)
   - System.Windows.Duration.op_Equality(System.Windows.Duration,System.Windows.Duration)
+  - System.Windows.Duration.op_GreaterThan(System.Windows.Duration,System.Windows.Duration)
+  - System.Windows.Duration.op_GreaterThanOrEqual(System.Windows.Duration,System.Windows.Duration)
   - System.Windows.Duration.op_Implicit(System.TimeSpan)~System.Windows.Duration
   - System.Windows.Duration.op_Inequality(System.Windows.Duration,System.Windows.Duration)
+  - System.Windows.Duration.op_LessThan(System.Windows.Duration,System.Windows.Duration)
+  - System.Windows.Duration.op_LessThanOrEqual(System.Windows.Duration,System.Windows.Duration)
   - System.Windows.Duration.op_Subtraction(System.Windows.Duration,System.Windows.Duration)
   - System.Windows.Duration.op_UnaryPlus(System.Windows.Duration)
+  - System.Windows.Duration.Plus(System.Windows.Duration)
+  - System.Windows.Duration.Subtract(System.Windows.Duration)
   - System.Windows.Duration.TimeSpan
+  - System.Windows.Duration.ToString
   langs:
   - csharp
   - vb
@@ -29,26 +39,23 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Duration
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 25
+    startLine: 20
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nRepresents the duration of time that a Windows.UI.Xaml.Media.Animation.Timeline\nis active.\n"
+  summary: "\nRepresents the duration of time that a <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> is active.\n"
   example: []
   syntax:
     content: public struct Duration
     content.vb: Public Structure Duration
   inheritedMembers:
-  - System.ValueType.ToString
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetType
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - struct
@@ -69,245 +76,32 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 37
+    startLine: 35
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nInitializes a new instance of the Windows.UI.Xaml.Duration structure with\nthe supplied System.TimeSpan value.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> structure with the\nsupplied <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> value.\n"
   example: []
   syntax:
     content: public Duration(TimeSpan timeSpan)
     parameters:
     - id: timeSpan
       type: System.TimeSpan
-      description: Represents the initial time interval of this duration.
+      description: "\nRepresents the initial time interval of this duration.\n"
     content.vb: Public Sub New(timeSpan As TimeSpan)
   overload: System.Windows.Duration.#ctor*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\ntimeSpan evaluates as less than <xref href=\"System.TimeSpan.Zero\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.Duration.op_Subtraction(System.Windows.Duration,System.Windows.Duration)
-  commentId: M:System.Windows.Duration.op_Subtraction(System.Windows.Duration,System.Windows.Duration)
-  id: op_Subtraction(System.Windows.Duration,System.Windows.Duration)
-  parent: System.Windows.Duration
-  langs:
-  - csharp
-  - vb
-  name: Subtraction(Duration, Duration)
-  nameWithType: Duration.Subtraction(Duration, Duration)
-  fullName: System.Windows.Duration.Subtraction(System.Windows.Duration, System.Windows.Duration)
-  type: Operator
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Subtraction
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 61
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nSubtracts the value of one Windows.UI.Xaml.Duration from another.\n"
-  example: []
-  syntax:
-    content: public static Duration operator -(Duration t1, Duration t2)
-    parameters:
-    - id: t1
-      type: System.Windows.Duration
-      description: The first Windows.UI.Xaml.Duration.
-    - id: t2
-      type: System.Windows.Duration
-      description: The Windows.UI.Xaml.Duration to subtract.
-    return:
-      type: System.Windows.Duration
-      description: ''
-    content.vb: Public Shared Operator -(t1 As Duration, t2 As Duration) As Duration
-  overload: System.Windows.Duration.op_Subtraction*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Duration.op_Inequality(System.Windows.Duration,System.Windows.Duration)
-  commentId: M:System.Windows.Duration.op_Inequality(System.Windows.Duration,System.Windows.Duration)
-  id: op_Inequality(System.Windows.Duration,System.Windows.Duration)
-  parent: System.Windows.Duration
-  langs:
-  - csharp
-  - vb
-  name: Inequality(Duration, Duration)
-  nameWithType: Duration.Inequality(Duration, Duration)
-  fullName: System.Windows.Duration.Inequality(System.Windows.Duration, System.Windows.Duration)
-  type: Operator
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Inequality
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 95
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nDetermines if two Windows.UI.Xaml.Duration cases are not equal.\n"
-  example: []
-  syntax:
-    content: public static bool operator !=(Duration t1, Duration t2)
-    parameters:
-    - id: t1
-      type: System.Windows.Duration
-      description: The first Windows.UI.Xaml.Duration to compare.
-    - id: t2
-      type: System.Windows.Duration
-      description: The second Windows.UI.Xaml.Duration to compare.
-    return:
-      type: System.Boolean
-      description: "\ntrue if exactly one of t1 or t2 represent a value, or if they both represent\nvalues that are not equal; otherwise, false.\n"
-    content.vb: Public Shared Operator <>(t1 As Duration, t2 As Duration) As Boolean
-  overload: System.Windows.Duration.op_Inequality*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Duration.op_UnaryPlus(System.Windows.Duration)
-  commentId: M:System.Windows.Duration.op_UnaryPlus(System.Windows.Duration)
-  id: op_UnaryPlus(System.Windows.Duration)
-  parent: System.Windows.Duration
-  langs:
-  - csharp
-  - vb
-  name: UnaryPlus(Duration)
-  nameWithType: Duration.UnaryPlus(Duration)
-  fullName: System.Windows.Duration.UnaryPlus(System.Windows.Duration)
-  type: Operator
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_UnaryPlus
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 105
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nReturns the specified Windows.UI.Xaml.Duration.\n"
-  example: []
-  syntax:
-    content: public static Duration operator +(Duration duration)
-    parameters:
-    - id: duration
-      type: System.Windows.Duration
-      description: The Windows.UI.Xaml.Duration to get.
-    return:
-      type: System.Windows.Duration
-      description: The Windows.UI.Xaml.Duration operation result.
-    content.vb: Public Shared Operator +(duration As Duration) As Duration
-  overload: System.Windows.Duration.op_UnaryPlus*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Duration.op_Equality(System.Windows.Duration,System.Windows.Duration)
-  commentId: M:System.Windows.Duration.op_Equality(System.Windows.Duration,System.Windows.Duration)
-  id: op_Equality(System.Windows.Duration,System.Windows.Duration)
-  parent: System.Windows.Duration
-  langs:
-  - csharp
-  - vb
-  name: Equality(Duration, Duration)
-  nameWithType: Duration.Equality(Duration, Duration)
-  fullName: System.Windows.Duration.Equality(System.Windows.Duration, System.Windows.Duration)
-  type: Operator
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Equality
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 154
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nDetermines whether two Windows.UI.Xaml.Duration cases are equal.\n"
-  example: []
-  syntax:
-    content: public static bool operator ==(Duration t1, Duration t2)
-    parameters:
-    - id: t1
-      type: System.Windows.Duration
-      description: The first Windows.UI.Xaml.Duration to compare.
-    - id: t2
-      type: System.Windows.Duration
-      description: The second Windows.UI.Xaml.Duration to compare.
-    return:
-      type: System.Boolean
-      description: "\ntrue if both Windows.UI.Xaml.Duration values have equal property values,\nor if all Windows.UI.Xaml.Duration values are null. Otherwise, this method\nreturns false.\n"
-    content.vb: Public Shared Operator =(t1 As Duration, t2 As Duration) As Boolean
-  overload: System.Windows.Duration.op_Equality*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Duration.op_Implicit(System.TimeSpan)~System.Windows.Duration
-  commentId: M:System.Windows.Duration.op_Implicit(System.TimeSpan)~System.Windows.Duration
-  id: op_Implicit(System.TimeSpan)~System.Windows.Duration
-  parent: System.Windows.Duration
-  langs:
-  - csharp
-  - vb
-  name: Implicit(TimeSpan to Duration)
-  nameWithType: Duration.Implicit(TimeSpan to Duration)
-  fullName: System.Windows.Duration.Implicit(System.TimeSpan to System.Windows.Duration)
-  type: Operator
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Implicit
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 187
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nImplicitly creates a Duration from a given System.TimeSpan.\n"
-  example: []
-  syntax:
-    content: public static implicit operator Duration(TimeSpan timeSpan)
-    parameters:
-    - id: timeSpan
-      type: System.TimeSpan
-      description: System.TimeSpan from which a Duration is implicitly created.
-    return:
-      type: System.Windows.Duration
-      description: A created Duration.
-    content.vb: Public Shared Widening Operator CType(timeSpan As TimeSpan) As Duration
-  overload: System.Windows.Duration.op_Implicit*
-  nameWithType.vb: Duration.Widening(TimeSpan to Duration)
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: System.Windows.Duration.Widening(System.TimeSpan to System.Windows.Duration)
-  name.vb: Widening(TimeSpan to Duration)
 - uid: System.Windows.Duration.Automatic
   commentId: P:System.Windows.Duration.Automatic
   id: Automatic
@@ -322,21 +116,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Automatic
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 199
+    startLine: 52
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets a Windows.UI.Xaml.Duration value that is automatically determined.\n"
+  summary: "\nGets a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> value that is automatically determined.\n"
   example: []
   syntax:
     content: public static readonly Duration Automatic { get; }
     parameters: []
     return:
       type: System.Windows.Duration
+      description: "\nA <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> initialized to an automatic value.\n"
     content.vb: Public Shared ReadOnly Property Automatic As Duration
   overload: System.Windows.Duration.Automatic*
   modifiers.csharp:
@@ -362,21 +157,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Forever
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 213
+    startLine: 60
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets a Windows.UI.Xaml.Duration value that represents an infinite interval.\n"
+  summary: "\nGets a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> value that represents an infinite interval.\n"
   example: []
   syntax:
     content: public static readonly Duration Forever { get; }
     parameters: []
     return:
       type: System.Windows.Duration
+      description: "\nA <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> initialized to a forever value.\n"
     content.vb: Public Shared ReadOnly Property Forever As Duration
   overload: System.Windows.Duration.Forever*
   modifiers.csharp:
@@ -402,21 +198,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: HasTimeSpan
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 228
+    startLine: 69
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets a value that indicates if this Windows.UI.Xaml.Duration represents a\nSystem.TimeSpan value.\n"
+  summary: "\nGets a value that indicates if this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> represents a <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref>\nvalue.\n"
   example: []
   syntax:
     content: public readonly bool HasTimeSpan { get; }
     parameters: []
     return:
       type: System.Boolean
+      description: "\ntrue if this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> is a <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> value; otherwise, false.\n"
     content.vb: Public ReadOnly Property HasTimeSpan As Boolean
   overload: System.Windows.Duration.HasTimeSpan*
   modifiers.csharp:
@@ -440,23 +237,28 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TimeSpan
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 247
+    startLine: 80
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets the System.TimeSpan value that this Windows.UI.Xaml.Duration represents.\n"
+  summary: "\nGets the <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> value that this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> represents.\n"
   example: []
   syntax:
     content: public readonly TimeSpan TimeSpan { get; }
     parameters: []
     return:
       type: System.TimeSpan
+      description: "\nThe <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> value that this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> represents.\n"
     content.vb: Public ReadOnly Property TimeSpan As TimeSpan
   overload: System.Windows.Duration.TimeSpan*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> does not represent a <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   modifiers.csharp:
   - public
   - readonly
@@ -464,41 +266,41 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Windows.Duration.Equals(System.Windows.Duration)
-  commentId: M:System.Windows.Duration.Equals(System.Windows.Duration)
-  id: Equals(System.Windows.Duration)
+- uid: System.Windows.Duration.Add(System.Windows.Duration)
+  commentId: M:System.Windows.Duration.Add(System.Windows.Duration)
+  id: Add(System.Windows.Duration)
   parent: System.Windows.Duration
   langs:
   - csharp
   - vb
-  name: Equals(Duration)
-  nameWithType: Duration.Equals(Duration)
-  fullName: System.Windows.Duration.Equals(System.Windows.Duration)
+  name: Add(Duration)
+  nameWithType: Duration.Add(Duration)
+  fullName: System.Windows.Duration.Add(System.Windows.Duration)
   type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Equals
+    id: Add
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 293
+    startLine: 106
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nDetermines whether a specified Windows.UI.Xaml.Duration is equal to this\nWindows.UI.Xaml.Duration.\n"
+  summary: "\nAdds the value of the specified <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: public bool Equals(Duration duration)
+    content: public Duration Add(Duration duration)
     parameters:
     - id: duration
       type: System.Windows.Duration
-      description: The Windows.UI.Xaml.Duration to check for equality.
+      description: "\nAn instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> that represents the value of the current\ninstance plus duration.\n"
     return:
-      type: System.Boolean
-      description: true if duration is equal to this Windows.UI.Xaml.Duration; otherwise, false.
-    content.vb: Public Function Equals(duration As Duration) As Boolean
-  overload: System.Windows.Duration.Equals*
+      type: System.Windows.Duration
+      description: "\nIf each involved <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> has values, a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>\nthat represents the combined values. Otherwise this method returns null.\n"
+    content.vb: Public Function Add(duration As Duration) As Duration
+  overload: System.Windows.Duration.Add*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -517,25 +319,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 317
+    startLine: 117
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nDetermines whether a specified object is equal to a Windows.UI.Xaml.Duration.\n"
+  summary: "\nDetermines whether a specified object is equal to a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override bool Equals(object value)
     parameters:
     - id: value
       type: System.Object
-      description: Object to check for equality.
+      description: "\nObject to check for equality.\n"
     return:
       type: System.Boolean
-      description: true if value is equal to this Windows.UI.Xaml.Duration; otherwise, false.
+      description: "\ntrue if value is equal to this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, false.\n"
     content.vb: Public Overrides Function Equals(value As Object) As Boolean
   overridden: System.ValueType.Equals(System.Object)
   overload: System.Windows.Duration.Equals*
@@ -545,6 +347,45 @@ items:
   modifiers.vb:
   - Public
   - Overrides
+- uid: System.Windows.Duration.Equals(System.Windows.Duration)
+  commentId: M:System.Windows.Duration.Equals(System.Windows.Duration)
+  id: Equals(System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Equals(Duration)
+  nameWithType: Duration.Equals(Duration)
+  fullName: System.Windows.Duration.Equals(System.Windows.Duration)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Equals
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 128
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines whether a specified <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> is equal to this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public bool Equals(Duration duration)
+    parameters:
+    - id: duration
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to check for equality.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if duration is equal to this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, false.\n"
+    content.vb: Public Function Equals(duration As Duration) As Boolean
+  overload: System.Windows.Duration.Equals*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Duration.Equals(System.Windows.Duration,System.Windows.Duration)
   commentId: M:System.Windows.Duration.Equals(System.Windows.Duration,System.Windows.Duration)
   id: Equals(System.Windows.Duration,System.Windows.Duration)
@@ -559,28 +400,28 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 332
+    startLine: 159
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nDetermines whether two Windows.UI.Xaml.Duration values are equal.\n"
+  summary: "\nDetermines whether two <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> values are equal.\n"
   example: []
   syntax:
     content: public static bool Equals(Duration t1, Duration t2)
     parameters:
     - id: t1
       type: System.Windows.Duration
-      description: First Windows.UI.Xaml.Duration to compare.
+      description: "\nFirst <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
     - id: t2
       type: System.Windows.Duration
-      description: Second Windows.UI.Xaml.Duration to compare.
+      description: "\nSecond <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
     return:
       type: System.Boolean
-      description: true if t1 is equal to t2; otherwise, false.
+      description: "\ntrue if t1 is equal to t2; otherwise, false.\n"
     content.vb: Public Shared Function Equals(t1 As Duration, t2 As Duration) As Boolean
   overload: System.Windows.Duration.Equals*
   modifiers.csharp:
@@ -603,11 +444,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Duration.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetHashCode
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
-    startLine: 341
+    startLine: 167
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -617,7 +458,7 @@ items:
     content: public override int GetHashCode()
     return:
       type: System.Int32
-      description: The hash code identifier.
+      description: "\nThe hash code identifier.\n"
     content.vb: Public Overrides Function GetHashCode As Integer
   overridden: System.ValueType.GetHashCode
   overload: System.Windows.Duration.GetHashCode*
@@ -627,43 +468,621 @@ items:
   modifiers.vb:
   - Public
   - Overrides
+- uid: System.Windows.Duration.Subtract(System.Windows.Duration)
+  commentId: M:System.Windows.Duration.Subtract(System.Windows.Duration)
+  id: Subtract(System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Subtract(Duration)
+  nameWithType: Duration.Subtract(Duration)
+  fullName: System.Windows.Duration.Subtract(System.Windows.Duration)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Subtract
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 188
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nSubtracts the specified <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> from this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public Duration Subtract(Duration duration)
+    parameters:
+    - id: duration
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to subtract from this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    return:
+      type: System.Windows.Duration
+      description: "\nThe subtracted <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function Subtract(duration As Duration) As Duration
+  overload: System.Windows.Duration.Subtract*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Duration.ToString
+  commentId: M:System.Windows.Duration.ToString
+  id: ToString
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: Duration.ToString()
+  fullName: System.Windows.Duration.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ToString
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 196
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nConverts a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> representation.\n"
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: "\nA <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> representation of this <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Overrides Function ToString As String
+  overridden: System.ValueType.ToString
+  overload: System.Windows.Duration.ToString*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: System.Windows.Duration.op_Implicit(System.TimeSpan)~System.Windows.Duration
+  commentId: M:System.Windows.Duration.op_Implicit(System.TimeSpan)~System.Windows.Duration
+  id: op_Implicit(System.TimeSpan)~System.Windows.Duration
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Implicit(TimeSpan to Duration)
+  nameWithType: Duration.Implicit(TimeSpan to Duration)
+  fullName: System.Windows.Duration.Implicit(System.TimeSpan to System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Implicit
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 232
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nImplicitly creates a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> from a given <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static implicit operator Duration(TimeSpan timeSpan)
+    parameters:
+    - id: timeSpan
+      type: System.TimeSpan
+      description: "\n<xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> from which a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> is implicitly created.\n"
+    return:
+      type: System.Windows.Duration
+      description: "\nA created <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Widening Operator CType(timeSpan As TimeSpan) As Duration
+  overload: System.Windows.Duration.op_Implicit*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\ntimeSpan evaluates as less than <xref href=\"System.TimeSpan.Zero\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  nameWithType.vb: Duration.Widening(TimeSpan to Duration)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: System.Windows.Duration.Widening(System.TimeSpan to System.Windows.Duration)
+  name.vb: Widening(TimeSpan to Duration)
+- uid: System.Windows.Duration.op_Addition(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_Addition(System.Windows.Duration,System.Windows.Duration)
+  id: op_Addition(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Addition(Duration, Duration)
+  nameWithType: Duration.Addition(Duration, Duration)
+  fullName: System.Windows.Duration.Addition(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Addition
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 258
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nAdds two <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> values together.\n"
+  example: []
+  syntax:
+    content: public static Duration operator +(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe first <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to add.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe second <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to add.\n"
+    return:
+      type: System.Windows.Duration
+      description: "\nIf both <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> values have <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> values, this method\nreturns the sum of those two values. If either value is set to <xref href=\"System.Windows.Duration.Automatic\" data-throw-if-not-resolved=\"false\"></xref>,\nthe method returns <xref href=\"System.Windows.Duration.Automatic\" data-throw-if-not-resolved=\"false\"></xref>. If either value is set to <xref href=\"System.Windows.Duration.Forever\" data-throw-if-not-resolved=\"false\"></xref>, \nthe method returns <xref href=\"System.Windows.Duration.Forever\" data-throw-if-not-resolved=\"false\"></xref>. If either t1 or t2 has no value, this method \nreturns null.\n"
+    content.vb: Public Shared Operator +(t1 As Duration, t2 As Duration) As Duration
+  overload: System.Windows.Duration.op_Addition*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_Subtraction(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_Subtraction(System.Windows.Duration,System.Windows.Duration)
+  id: op_Subtraction(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Subtraction(Duration, Duration)
+  nameWithType: Duration.Subtraction(Duration, Duration)
+  fullName: System.Windows.Duration.Subtraction(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Subtraction
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 294
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nSubtracts the value of one <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> from another.\n"
+  example: []
+  syntax:
+    content: public static Duration operator -(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe first <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to subtract.\n"
+    return:
+      type: System.Windows.Duration
+      description: "\nIf each <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> has values, a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> that represents\nthe value of t1 minus t2. If t1 has a value of <xref href=\"System.Windows.Duration.Forever\" data-throw-if-not-resolved=\"false\"></xref> and t2 has a \nvalue of <xref href=\"System.Windows.Duration.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref>, this method returns <xref href=\"System.Windows.Duration.Forever\" data-throw-if-not-resolved=\"false\"></xref>.\nOtherwise this method returns null.\n"
+    content.vb: Public Shared Operator -(t1 As Duration, t2 As Duration) As Duration
+  overload: System.Windows.Duration.op_Subtraction*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_Equality(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_Equality(System.Windows.Duration,System.Windows.Duration)
+  id: op_Equality(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Equality(Duration, Duration)
+  nameWithType: Duration.Equality(Duration, Duration)
+  fullName: System.Windows.Duration.Equality(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Equality
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 334
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines whether two <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> cases are equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe first <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe second <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if both <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> values have equal property values, or if\nall <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> values are null. Otherwise, this method returns false.\n"
+    content.vb: Public Shared Operator =(t1 As Duration, t2 As Duration) As Boolean
+  overload: System.Windows.Duration.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_Inequality(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_Inequality(System.Windows.Duration,System.Windows.Duration)
+  id: op_Inequality(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Inequality(Duration, Duration)
+  nameWithType: Duration.Inequality(Duration, Duration)
+  fullName: System.Windows.Duration.Inequality(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Inequality
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 349
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines if two <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> cases are not equal.\n"
+  example: []
+  syntax:
+    content: public static bool operator !=(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe first <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe second <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if exactly one of t1 or t2 represent a value, or if they both represent\nvalues that are not equal; otherwise, false.\n"
+    content.vb: Public Shared Operator <>(t1 As Duration, t2 As Duration) As Boolean
+  overload: System.Windows.Duration.op_Inequality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_GreaterThan(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_GreaterThan(System.Windows.Duration,System.Windows.Duration)
+  id: op_GreaterThan(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: GreaterThan(Duration, Duration)
+  nameWithType: Duration.GreaterThan(Duration, Duration)
+  fullName: System.Windows.Duration.GreaterThan(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_GreaterThan
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 363
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines if one <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> is greater than another.\n"
+  example: []
+  syntax:
+    content: public static bool operator>(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> value to compare.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe second <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> value to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if both t1 and t2 have values and t1 is greater than t2; otherwise, false.\n"
+    content.vb: Public Shared Operator>(t1 As Duration, t2 As Duration) As Boolean
+  overload: System.Windows.Duration.op_GreaterThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_GreaterThanOrEqual(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_GreaterThanOrEqual(System.Windows.Duration,System.Windows.Duration)
+  id: op_GreaterThanOrEqual(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: GreaterThanOrEqual(Duration, Duration)
+  nameWithType: Duration.GreaterThanOrEqual(Duration, Duration)
+  fullName: System.Windows.Duration.GreaterThanOrEqual(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_GreaterThanOrEqual
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 401
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines whether a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> is greater than or equal to another.\n"
+  example: []
+  syntax:
+    content: public static bool operator >=(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe first instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe second instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if both t1 and t2 have values and t1 is greater than or equal to t2; otherwise,\nfalse.\n"
+    content.vb: Public Shared Operator >=(t1 As Duration, t2 As Duration) As Boolean
+  overload: System.Windows.Duration.op_GreaterThanOrEqual*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_LessThan(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_LessThan(System.Windows.Duration,System.Windows.Duration)
+  id: op_LessThan(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: LessThan(Duration, Duration)
+  nameWithType: Duration.LessThan(Duration, Duration)
+  fullName: System.Windows.Duration.LessThan(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_LessThan
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 431
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines if a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> is less than the value of another instance.\n"
+  example: []
+  syntax:
+    content: public static bool operator <(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe first <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe second <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if both t1 and t2 have values and t1 is less than t2; otherwise, false.\n"
+    content.vb: Public Shared Operator <(t1 As Duration, t2 As Duration) As Boolean
+  overload: System.Windows.Duration.op_LessThan*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_LessThanOrEqual(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_LessThanOrEqual(System.Windows.Duration,System.Windows.Duration)
+  id: op_LessThanOrEqual(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: LessThanOrEqual(Duration, Duration)
+  nameWithType: Duration.LessThanOrEqual(Duration, Duration)
+  fullName: System.Windows.Duration.LessThanOrEqual(System.Windows.Duration, System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_LessThanOrEqual
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 469
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines if a <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> is less than or equal to another.\n"
+  example: []
+  syntax:
+    content: public static bool operator <=(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if both t1 and t2 have values and t1 is less than or equal to t2; otherwise,\nfalse.\n"
+    content.vb: Public Shared Operator <=(t1 As Duration, t2 As Duration) As Boolean
+  overload: System.Windows.Duration.op_LessThanOrEqual*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.Compare(System.Windows.Duration,System.Windows.Duration)
+  commentId: M:System.Windows.Duration.Compare(System.Windows.Duration,System.Windows.Duration)
+  id: Compare(System.Windows.Duration,System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Compare(Duration, Duration)
+  nameWithType: Duration.Compare(Duration, Duration)
+  fullName: System.Windows.Duration.Compare(System.Windows.Duration, System.Windows.Duration)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Compare
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 501
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCompares one <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> value to another.\n"
+  example: []
+  syntax:
+    content: public static int Compare(Duration t1, Duration t2)
+    parameters:
+    - id: t1
+      type: System.Windows.Duration
+      description: "\nThe first instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    - id: t2
+      type: System.Windows.Duration
+      description: "\nThe second instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to compare.\n"
+    return:
+      type: System.Int32
+      description: "\nIf t1 is less than t2, a negative value that represents the difference. If t1\nis equal to t2, a value of 0. If t1 is greater than t2, a positive value that\nrepresents the difference.\n"
+    content.vb: Public Shared Function Compare(t1 As Duration, t2 As Duration) As Integer
+  overload: System.Windows.Duration.Compare*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.Plus(System.Windows.Duration)
+  commentId: M:System.Windows.Duration.Plus(System.Windows.Duration)
+  id: Plus(System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: Plus(Duration)
+  nameWithType: Duration.Plus(Duration)
+  fullName: System.Windows.Duration.Plus(System.Windows.Duration)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Plus
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 544
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nReturns the specified instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static Duration Plus(Duration duration)
+    parameters:
+    - id: duration
+      type: System.Windows.Duration
+      description: "\nThe instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to get.\n"
+    return:
+      type: System.Windows.Duration
+      description: "\nAn instance of <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function Plus(duration As Duration) As Duration
+  overload: System.Windows.Duration.Plus*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Duration.op_UnaryPlus(System.Windows.Duration)
+  commentId: M:System.Windows.Duration.op_UnaryPlus(System.Windows.Duration)
+  id: op_UnaryPlus(System.Windows.Duration)
+  parent: System.Windows.Duration
+  langs:
+  - csharp
+  - vb
+  name: UnaryPlus(Duration)
+  nameWithType: Duration.UnaryPlus(Duration)
+  fullName: System.Windows.Duration.UnaryPlus(System.Windows.Duration)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Duration.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_UnaryPlus
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Duration.cs
+    startLine: 555
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nReturns the specified <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public static Duration operator +(Duration duration)
+    parameters:
+    - id: duration
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> to get.\n"
+    return:
+      type: System.Windows.Duration
+      description: "\nThe <xref href=\"System.Windows.Duration\" data-throw-if-not-resolved=\"false\"></xref> operation result.\n"
+    content.vb: Public Shared Operator +(duration As Duration) As Duration
+  overload: System.Windows.Duration.op_UnaryPlus*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 references:
+- uid: System.Windows.Media.Animation.Timeline
+  commentId: T:System.Windows.Media.Animation.Timeline
+  parent: System.Windows.Media.Animation
+  name: Timeline
+  nameWithType: Timeline
+  fullName: System.Windows.Media.Animation.Timeline
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
-- uid: System.ValueType.ToString
-  commentId: M:System.ValueType.ToString
-  parent: System.ValueType
-  isExternal: true
-  name: ToString()
-  nameWithType: ValueType.ToString()
-  fullName: System.ValueType.ToString()
-  spec.csharp:
-  - uid: System.ValueType.ToString
-    name: ToString
-    nameWithType: ValueType.ToString
-    fullName: System.ValueType.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.ValueType.ToString
-    name: ToString
-    nameWithType: ValueType.ToString
-    fullName: System.ValueType.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
@@ -809,42 +1228,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.ValueType
-  commentId: T:System.ValueType
-  parent: System
-  isExternal: true
-  name: ValueType
-  nameWithType: ValueType
-  fullName: System.ValueType
+- uid: System.Windows.Media.Animation
+  commentId: N:System.Windows.Media.Animation
+  name: System.Windows.Media.Animation
+  nameWithType: System.Windows.Media.Animation
+  fullName: System.Windows.Media.Animation
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -852,60 +1240,26 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
 - uid: System
   commentId: N:System
   name: System
   nameWithType: System
   fullName: System
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
+- uid: System.Windows.Duration
+  commentId: T:System.Windows.Duration
+  parent: System.Windows
+  name: Duration
+  nameWithType: Duration
+  fullName: System.Windows.Duration
+- uid: System.Windows.Duration.TimeSpan
+  commentId: P:System.Windows.Duration.TimeSpan
+  isExternal: true
+- uid: System.TimeSpan.Zero
+  commentId: F:System.TimeSpan.Zero
+  isExternal: true
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
 - uid: System.Windows.Duration.#ctor*
   commentId: Overload:System.Windows.Duration.#ctor
   name: Duration
@@ -918,47 +1272,6 @@ references:
   name: TimeSpan
   nameWithType: TimeSpan
   fullName: System.TimeSpan
-- uid: System.Windows.Duration.op_Subtraction*
-  commentId: Overload:System.Windows.Duration.op_Subtraction
-  name: Subtraction
-  nameWithType: Duration.Subtraction
-  fullName: System.Windows.Duration.Subtraction
-- uid: System.Windows.Duration
-  commentId: T:System.Windows.Duration
-  parent: System.Windows
-  name: Duration
-  nameWithType: Duration
-  fullName: System.Windows.Duration
-- uid: System.Windows.Duration.op_Inequality*
-  commentId: Overload:System.Windows.Duration.op_Inequality
-  name: Inequality
-  nameWithType: Duration.Inequality
-  fullName: System.Windows.Duration.Inequality
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
-- uid: System.Windows.Duration.op_UnaryPlus*
-  commentId: Overload:System.Windows.Duration.op_UnaryPlus
-  name: UnaryPlus
-  nameWithType: Duration.UnaryPlus
-  fullName: System.Windows.Duration.UnaryPlus
-- uid: System.Windows.Duration.op_Equality*
-  commentId: Overload:System.Windows.Duration.op_Equality
-  name: Equality
-  nameWithType: Duration.Equality
-  fullName: System.Windows.Duration.Equality
-- uid: System.Windows.Duration.op_Implicit*
-  commentId: Overload:System.Windows.Duration.op_Implicit
-  name: Implicit
-  nameWithType: Duration.Implicit
-  fullName: System.Windows.Duration.Implicit
-  nameWithType.vb: Duration.Widening
-  fullName.vb: System.Windows.Duration.Widening
-  name.vb: Widening
 - uid: System.Windows.Duration.Automatic*
   commentId: Overload:System.Windows.Duration.Automatic
   name: Automatic
@@ -974,16 +1287,26 @@ references:
   name: HasTimeSpan
   nameWithType: Duration.HasTimeSpan
   fullName: System.Windows.Duration.HasTimeSpan
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
 - uid: System.Windows.Duration.TimeSpan*
   commentId: Overload:System.Windows.Duration.TimeSpan
   name: TimeSpan
   nameWithType: Duration.TimeSpan
   fullName: System.Windows.Duration.TimeSpan
-- uid: System.Windows.Duration.Equals*
-  commentId: Overload:System.Windows.Duration.Equals
-  name: Equals
-  nameWithType: Duration.Equals
-  fullName: System.Windows.Duration.Equals
+- uid: System.Windows.Duration.Add*
+  commentId: Overload:System.Windows.Duration.Add
+  name: Add
+  nameWithType: Duration.Add
+  fullName: System.Windows.Duration.Add
 - uid: System.ValueType.Equals(System.Object)
   commentId: M:System.ValueType.Equals(System.Object)
   parent: System.ValueType
@@ -1025,6 +1348,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Duration.Equals*
+  commentId: Overload:System.Windows.Duration.Equals
+  name: Equals
+  nameWithType: Duration.Equals
+  fullName: System.Windows.Duration.Equals
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
 - uid: System.ValueType.GetHashCode
   commentId: M:System.ValueType.GetHashCode
   parent: System.ValueType
@@ -1068,3 +1403,120 @@ references:
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
+- uid: System.Windows.Duration.Subtract*
+  commentId: Overload:System.Windows.Duration.Subtract
+  name: Subtract
+  nameWithType: Duration.Subtract
+  fullName: System.Windows.Duration.Subtract
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    nameWithType: ValueType.ToString
+    fullName: System.ValueType.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    nameWithType: ValueType.ToString
+    fullName: System.ValueType.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Duration.ToString*
+  commentId: Overload:System.Windows.Duration.ToString
+  name: ToString
+  nameWithType: Duration.ToString
+  fullName: System.Windows.Duration.ToString
+- uid: System.Windows.Duration.op_Implicit*
+  commentId: Overload:System.Windows.Duration.op_Implicit
+  name: Implicit
+  nameWithType: Duration.Implicit
+  fullName: System.Windows.Duration.Implicit
+  nameWithType.vb: Duration.Widening
+  fullName.vb: System.Windows.Duration.Widening
+  name.vb: Widening
+- uid: System.Windows.Duration.Automatic
+  commentId: P:System.Windows.Duration.Automatic
+  isExternal: true
+- uid: System.Windows.Duration.Forever
+  commentId: P:System.Windows.Duration.Forever
+  isExternal: true
+- uid: System.Windows.Duration.op_Addition*
+  commentId: Overload:System.Windows.Duration.op_Addition
+  name: Addition
+  nameWithType: Duration.Addition
+  fullName: System.Windows.Duration.Addition
+- uid: System.Windows.Duration.op_Subtraction*
+  commentId: Overload:System.Windows.Duration.op_Subtraction
+  name: Subtraction
+  nameWithType: Duration.Subtraction
+  fullName: System.Windows.Duration.Subtraction
+- uid: System.Windows.Duration.op_Equality*
+  commentId: Overload:System.Windows.Duration.op_Equality
+  name: Equality
+  nameWithType: Duration.Equality
+  fullName: System.Windows.Duration.Equality
+- uid: System.Windows.Duration.op_Inequality*
+  commentId: Overload:System.Windows.Duration.op_Inequality
+  name: Inequality
+  nameWithType: Duration.Inequality
+  fullName: System.Windows.Duration.Inequality
+- uid: System.Windows.Duration.op_GreaterThan*
+  commentId: Overload:System.Windows.Duration.op_GreaterThan
+  name: GreaterThan
+  nameWithType: Duration.GreaterThan
+  fullName: System.Windows.Duration.GreaterThan
+- uid: System.Windows.Duration.op_GreaterThanOrEqual*
+  commentId: Overload:System.Windows.Duration.op_GreaterThanOrEqual
+  name: GreaterThanOrEqual
+  nameWithType: Duration.GreaterThanOrEqual
+  fullName: System.Windows.Duration.GreaterThanOrEqual
+- uid: System.Windows.Duration.op_LessThan*
+  commentId: Overload:System.Windows.Duration.op_LessThan
+  name: LessThan
+  nameWithType: Duration.LessThan
+  fullName: System.Windows.Duration.LessThan
+- uid: System.Windows.Duration.op_LessThanOrEqual*
+  commentId: Overload:System.Windows.Duration.op_LessThanOrEqual
+  name: LessThanOrEqual
+  nameWithType: Duration.LessThanOrEqual
+  fullName: System.Windows.Duration.LessThanOrEqual
+- uid: System.Windows.Duration.Compare*
+  commentId: Overload:System.Windows.Duration.Compare
+  name: Compare
+  nameWithType: Duration.Compare
+  fullName: System.Windows.Duration.Compare
+- uid: System.Windows.Duration.Plus*
+  commentId: Overload:System.Windows.Duration.Plus
+  name: Plus
+  nameWithType: Duration.Plus
+  fullName: System.Windows.Duration.Plus
+- uid: System.Windows.Duration.op_UnaryPlus*
+  commentId: Overload:System.Windows.Duration.op_UnaryPlus
+  name: UnaryPlus
+  nameWithType: Duration.UnaryPlus
+  fullName: System.Windows.Duration.UnaryPlus

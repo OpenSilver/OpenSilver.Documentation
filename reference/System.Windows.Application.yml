@@ -6,6 +6,7 @@ items:
   parent: System.Windows
   children:
   - System.Windows.Application.#ctor
+  - System.Windows.Application.#ctor(System.String)
   - System.Windows.Application.ApplicationLifetimeObjects
   - System.Windows.Application.CheckAndDownloadUpdateAsync
   - System.Windows.Application.CheckAndDownloadUpdateCompleted
@@ -19,8 +20,6 @@ items:
   - System.Windows.Application.Install
   - System.Windows.Application.InstallState
   - System.Windows.Application.InstallStateChanged
-  - System.Windows.Application.INTERNAL_RaiseReloadedEvent
-  - System.Windows.Application.INTERNAL_Reloaded
   - System.Windows.Application.IsRunningOutOfBrowser
   - System.Windows.Application.LoadComponent(System.Object,OpenSilver.Internal.Xaml.IXamlComponentLoader)
   - System.Windows.Application.LoadComponent(System.Object,System.Uri)
@@ -29,8 +28,8 @@ items:
   - System.Windows.Application.OnLaunched(System.ApplicationModel.Activation.LaunchActivatedEventArgs)
   - System.Windows.Application.Resources
   - System.Windows.Application.RootVisual
-  - System.Windows.Application.RunApplication(System.Action)
   - System.Windows.Application.Startup
+  - System.Windows.Application.Theme
   - System.Windows.Application.TryFindResource(System.Object)
   - System.Windows.Application.UnhandledException
   - System.Windows.Application.Windows
@@ -44,11 +43,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Application
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 35
+    startLine: 27
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -67,8 +66,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - class
@@ -89,11 +86,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Current
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 66
+    startLine: 51
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -128,11 +125,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 72
+    startLine: 53
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -144,6 +141,114 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.Application.#ctor(System.String)
+  commentId: M:System.Windows.Application.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: Application(String)
+  nameWithType: Application.Application(String)
+  fullName: System.Windows.Application.Application(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: .ctor
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 58
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  syntax:
+    content: public Application(string rootDivId)
+    parameters:
+    - id: rootDivId
+      type: System.String
+    content.vb: Public Sub New(rootDivId As String)
+  overload: System.Windows.Application.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Application.Theme
+  commentId: P:System.Windows.Application.Theme
+  id: Theme
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: Theme
+  nameWithType: Application.Theme
+  fullName: System.Windows.Application.Theme
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Theme
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 111
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the <xref href=\"OpenSilver.Theming.Theme\" data-throw-if-not-resolved=\"false\"></xref> used across this <xref href=\"System.Windows.Application\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public Theme Theme { get; set; }
+    parameters: []
+    return:
+      type: OpenSilver.Theming.Theme
+    content.vb: Public Property Theme As Theme
+  overload: System.Windows.Application.Theme*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Application.Windows
+  commentId: P:System.Windows.Application.Windows
+  id: Windows
+  parent: System.Windows.Application
+  langs:
+  - csharp
+  - vb
+  name: Windows
+  nameWithType: Application.Windows
+  fullName: System.Windows.Application.Windows
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Application.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Windows
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
+    startLine: 136
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets a collection of the <xref href=\"System.Windows.Window\" data-throw-if-not-resolved=\"false\"></xref> instances that have been created.\n"
+  example: []
+  syntax:
+    content: public WindowCollection Windows { get; }
+    parameters: []
+    return:
+      type: System.Windows.WindowCollection
+      description: "\nA collection of the windows used by the application.\n"
+    content.vb: Public ReadOnly Property Windows As WindowCollection
+  overload: System.Windows.Application.Windows*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
 - uid: System.Windows.Application.ApplicationLifetimeObjects
   commentId: P:System.Windows.Application.ApplicationLifetimeObjects
   id: ApplicationLifetimeObjects
@@ -158,11 +263,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ApplicationLifetimeObjects
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 174
+    startLine: 138
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -193,11 +298,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Resources
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 308
+    startLine: 197
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -230,11 +335,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnLaunched
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 381
+    startLine: 322
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -268,11 +373,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Startup
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 388
+    startLine: 329
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -301,15 +406,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: RootVisual
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 397
+    startLine: 335
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets or sets the main application UI. This is an alias for: Window.Current.Content\n"
+  summary: "\nGets or sets the main application UI. This is an alias for the \n<xref href=\"System.Windows.Window.Content\" data-throw-if-not-resolved=\"false\"></xref> of this application&apos;s <xref href=\"System.Windows.Application.MainWindow\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public UIElement RootVisual { get; set; }
@@ -338,11 +443,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: MainWindow
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 423
+    startLine: 349
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -375,11 +480,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetResourceString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 456
+    startLine: 376
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -416,11 +521,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TryFindResource
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 522
+    startLine: 437
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -455,11 +560,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadComponent
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 533
+    startLine: 458
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -496,11 +601,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadComponent
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 561
+    startLine: 485
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -533,95 +638,34 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetResourceStream
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 634
+    startLine: 532
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nReturns a resource stream for a resource data file that is located at the\nspecified System.Uri (see WPF Application Resource, Content, and Data Files).\n"
+  summary: "\nReturns a resource file from a location in the application package.\n"
   example: []
   syntax:
-    content: public static async Task<StreamResourceInfo> GetResourceStream(Uri uriResource)
+    content: public static Task<StreamResourceInfo> GetResourceStream(Uri uriResource)
     parameters:
     - id: uriResource
       type: System.Uri
-      description: The System.Uri that maps to an embedded resource.
+      description: "\nA relative URI that identifies the resource file to be loaded. The URI is relative\nto the application package and does not need a leading forward slash.\n"
     return:
       type: System.Threading.Tasks.Task{System.Windows.Resources.StreamResourceInfo}
-      description: "\nA System.Windows.Resources.StreamResourceInfo that contains a resource stream\nfor resource data file that is located at the specified System.Uri.\n"
+      description: "\nA <xref href=\"System.Windows.Resources.StreamResourceInfo\" data-throw-if-not-resolved=\"false\"></xref> that contains the stream for the desired resource \nfile.\n"
     content.vb: Public Shared Function GetResourceStream(uriResource As Uri) As Task(Of StreamResourceInfo)
   overload: System.Windows.Application.GetResourceStream*
-  modifiers.csharp:
-  - public
-  - static
-  - async
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Application.INTERNAL_Reloaded
-  commentId: E:System.Windows.Application.INTERNAL_Reloaded
-  id: INTERNAL_Reloaded
-  parent: System.Windows.Application
-  langs:
-  - csharp
-  - vb
-  name: INTERNAL_Reloaded
-  nameWithType: Application.INTERNAL_Reloaded
-  fullName: System.Windows.Application.INTERNAL_Reloaded
-  type: Event
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: INTERNAL_Reloaded
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 657
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public static event EventHandler INTERNAL_Reloaded
-    return:
-      type: System.EventHandler
-    content.vb: Public Shared Event INTERNAL_Reloaded As EventHandler
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Application.INTERNAL_RaiseReloadedEvent
-  commentId: M:System.Windows.Application.INTERNAL_RaiseReloadedEvent
-  id: INTERNAL_RaiseReloadedEvent
-  parent: System.Windows.Application
-  langs:
-  - csharp
-  - vb
-  name: INTERNAL_RaiseReloadedEvent()
-  nameWithType: Application.INTERNAL_RaiseReloadedEvent()
-  fullName: System.Windows.Application.INTERNAL_RaiseReloadedEvent()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: INTERNAL_RaiseReloadedEvent
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 662
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nIntended to be called by the Simulator when navigating back from an external page.\n"
-  example: []
-  syntax:
-    content: public static void INTERNAL_RaiseReloadedEvent()
-    content.vb: Public Shared Sub INTERNAL_RaiseReloadedEvent
-  overload: System.Windows.Application.INTERNAL_RaiseReloadedEvent*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nuriResource is null.\n"
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nuriResource is an absolute URI.\n"
   modifiers.csharp:
   - public
   - static
@@ -642,11 +686,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Exit
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 677
+    startLine: 573
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -675,11 +719,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnExit
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 691
+    startLine: 587
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -713,11 +757,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Host
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 703
+    startLine: 597
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -730,89 +774,6 @@ items:
       type: System.Windows.Host
     content.vb: Public ReadOnly Property Host As Host
   overload: System.Windows.Application.Host*
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: System.Windows.Application.RunApplication(System.Action)
-  commentId: M:System.Windows.Application.RunApplication(System.Action)
-  id: RunApplication(System.Action)
-  parent: System.Windows.Application
-  langs:
-  - csharp
-  - vb
-  name: RunApplication(Action)
-  nameWithType: Application.RunApplication(Action)
-  fullName: System.Windows.Application.RunApplication(System.Action)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Application.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: RunApplication
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Application.cs
-    startLine: 719
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nThe entry point of the application needs to be wrapped by this method\nto ensure correction functioning of the application.\n"
-  example: []
-  syntax:
-    content: public static void RunApplication(Action entryPoint)
-    parameters:
-    - id: entryPoint
-      type: System.Action
-      description: ''
-    content.vb: Public Shared Sub RunApplication(entryPoint As Action)
-  overload: System.Windows.Application.RunApplication*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.Application.Windows
-  commentId: P:System.Windows.Application.Windows
-  id: Windows
-  parent: System.Windows.Application
-  langs:
-  - csharp
-  - vb
-  name: Windows
-  nameWithType: Application.Windows
-  fullName: System.Windows.Application.Windows
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Windows
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 49
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: >-
-      [NotImplemented]
-
-      public WindowCollection Windows { get; }
-    parameters: []
-    return:
-      type: System.Windows.WindowCollection
-    content.vb: >-
-      <NotImplemented>
-
-      Public ReadOnly Property Windows As WindowCollection
-  overload: System.Windows.Application.Windows*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   - get
@@ -833,11 +794,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: UnhandledException
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 55
+    startLine: 32
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -866,11 +827,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: InstallStateChanged
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 59
+    startLine: 36
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -909,11 +870,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsRunningOutOfBrowser
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 78
+    startLine: 46
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -954,11 +915,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: InstallState
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 86
+    startLine: 54
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1002,11 +963,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: HasElevatedPermissions
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 89
+    startLine: 57
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1047,11 +1008,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetResourceStream
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 92
+    startLine: 60
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1096,11 +1057,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Install
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 101
+    startLine: 69
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1145,11 +1106,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: CheckAndDownloadUpdateCompleted
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 118
+    startLine: 86
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1186,11 +1147,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: CheckAndDownloadUpdateAsync
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/WORKINPROGRESS/Application.cs
-    startLine: 120
+    startLine: 88
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1504,89 +1465,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
   nameWithType: System
   fullName: System
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
 - uid: System.Windows.Application.Current*
   commentId: Overload:System.Windows.Application.Current
   name: Current
@@ -1603,6 +1486,46 @@ references:
   name: Application
   nameWithType: Application.Application
   fullName: System.Windows.Application.Application
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: OpenSilver.Theming.Theme
+  commentId: T:OpenSilver.Theming.Theme
+  parent: OpenSilver.Theming
+  name: Theme
+  nameWithType: Theme
+  fullName: OpenSilver.Theming.Theme
+- uid: System.Windows.Application.Theme*
+  commentId: Overload:System.Windows.Application.Theme
+  name: Theme
+  nameWithType: Application.Theme
+  fullName: System.Windows.Application.Theme
+- uid: OpenSilver.Theming
+  commentId: N:OpenSilver.Theming
+  name: OpenSilver.Theming
+  nameWithType: OpenSilver.Theming
+  fullName: OpenSilver.Theming
+- uid: System.Windows.Window
+  commentId: T:System.Windows.Window
+  parent: System.Windows
+  name: Window
+  nameWithType: Window
+  fullName: System.Windows.Window
+- uid: System.Windows.Application.Windows*
+  commentId: Overload:System.Windows.Application.Windows
+  name: Windows
+  nameWithType: Application.Windows
+  fullName: System.Windows.Application.Windows
+- uid: System.Windows.WindowCollection
+  commentId: T:System.Windows.WindowCollection
+  parent: System.Windows
+  name: WindowCollection
+  nameWithType: WindowCollection
+  fullName: System.Windows.WindowCollection
 - uid: System.Windows.Application.ApplicationLifetimeObjects*
   commentId: Overload:System.Windows.Application.ApplicationLifetimeObjects
   name: ApplicationLifetimeObjects
@@ -1654,6 +1577,12 @@ references:
   name: StartupEventHandler
   nameWithType: StartupEventHandler
   fullName: System.Windows.StartupEventHandler
+- uid: System.Windows.Window.Content
+  commentId: P:System.Windows.Window.Content
+  isExternal: true
+- uid: System.Windows.Application.MainWindow
+  commentId: P:System.Windows.Application.MainWindow
+  isExternal: true
 - uid: System.Windows.Application.RootVisual*
   commentId: Overload:System.Windows.Application.RootVisual
   name: RootVisual
@@ -1670,12 +1599,6 @@ references:
   name: MainWindow
   nameWithType: Application.MainWindow
   fullName: System.Windows.Application.MainWindow
-- uid: System.Windows.Window
-  commentId: T:System.Windows.Window
-  parent: System.Windows
-  name: Window
-  nameWithType: Window
-  fullName: System.Windows.Window
 - uid: System.Windows.Application.GetResourceString*
   commentId: Overload:System.Windows.Application.GetResourceString
   name: GetResourceString
@@ -1798,6 +1721,18 @@ references:
   name: OpenSilver.Internal.Xaml
   nameWithType: OpenSilver.Internal.Xaml
   fullName: OpenSilver.Internal.Xaml
+- uid: System.Windows.Resources.StreamResourceInfo
+  commentId: T:System.Windows.Resources.StreamResourceInfo
+  parent: System.Windows.Resources
+  name: StreamResourceInfo
+  nameWithType: StreamResourceInfo
+  fullName: System.Windows.Resources.StreamResourceInfo
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
 - uid: System.Windows.Application.GetResourceStream*
   commentId: Overload:System.Windows.Application.GetResourceStream
   name: GetResourceStream
@@ -1845,6 +1780,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Resources
+  commentId: N:System.Windows.Resources
+  name: System.Windows.Resources
+  nameWithType: System.Windows.Resources
+  fullName: System.Windows.Resources
 - uid: System.EventHandler
   commentId: T:System.EventHandler
   parent: System
@@ -1852,11 +1792,6 @@ references:
   name: EventHandler
   nameWithType: EventHandler
   fullName: System.EventHandler
-- uid: System.Windows.Application.INTERNAL_RaiseReloadedEvent*
-  commentId: Overload:System.Windows.Application.INTERNAL_RaiseReloadedEvent
-  name: INTERNAL_RaiseReloadedEvent
-  nameWithType: Application.INTERNAL_RaiseReloadedEvent
-  fullName: System.Windows.Application.INTERNAL_RaiseReloadedEvent
 - uid: System.Windows.Application.OnExit*
   commentId: Overload:System.Windows.Application.OnExit
   name: OnExit
@@ -1880,29 +1815,6 @@ references:
   name: Host
   nameWithType: Host
   fullName: System.Windows.Host
-- uid: System.Windows.Application.RunApplication*
-  commentId: Overload:System.Windows.Application.RunApplication
-  name: RunApplication
-  nameWithType: Application.RunApplication
-  fullName: System.Windows.Application.RunApplication
-- uid: System.Action
-  commentId: T:System.Action
-  parent: System
-  isExternal: true
-  name: Action
-  nameWithType: Action
-  fullName: System.Action
-- uid: System.Windows.Application.Windows*
-  commentId: Overload:System.Windows.Application.Windows
-  name: Windows
-  nameWithType: Application.Windows
-  fullName: System.Windows.Application.Windows
-- uid: System.Windows.WindowCollection
-  commentId: T:System.Windows.WindowCollection
-  parent: System.Windows
-  name: WindowCollection
-  nameWithType: WindowCollection
-  fullName: System.Windows.WindowCollection
 - uid: System.EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}
   commentId: T:System.EventHandler{System.Windows.ApplicationUnhandledExceptionEventArgs}
   parent: System
@@ -2015,17 +1927,6 @@ references:
   name: HasElevatedPermissions
   nameWithType: Application.HasElevatedPermissions
   fullName: System.Windows.Application.HasElevatedPermissions
-- uid: System.Windows.Resources.StreamResourceInfo
-  commentId: T:System.Windows.Resources.StreamResourceInfo
-  parent: System.Windows.Resources
-  name: StreamResourceInfo
-  nameWithType: StreamResourceInfo
-  fullName: System.Windows.Resources.StreamResourceInfo
-- uid: System.Windows.Resources
-  commentId: N:System.Windows.Resources
-  name: System.Windows.Resources
-  nameWithType: System.Windows.Resources
-  fullName: System.Windows.Resources
 - uid: System.InvalidOperationException
   commentId: T:System.InvalidOperationException
   isExternal: true

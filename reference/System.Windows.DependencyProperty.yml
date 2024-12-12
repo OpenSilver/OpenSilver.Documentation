@@ -5,13 +5,31 @@ items:
   id: DependencyProperty
   parent: System.Windows
   children:
+  - System.Windows.DependencyProperty.AddOwner(System.Type)
+  - System.Windows.DependencyProperty.AddOwner(System.Type,System.Windows.PropertyMetadata)
+  - System.Windows.DependencyProperty.DefaultMetadata
   - System.Windows.DependencyProperty.GetMetadata(System.Type)
+  - System.Windows.DependencyProperty.GlobalIndex
   - System.Windows.DependencyProperty.IsAttached
+  - System.Windows.DependencyProperty.IsValidType(System.Object)
+  - System.Windows.DependencyProperty.IsValidValue(System.Object)
+  - System.Windows.DependencyProperty.Name
   - System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata)
+  - System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata,System.Windows.DependencyPropertyKey)
+  - System.Windows.DependencyProperty.OwnerType
+  - System.Windows.DependencyProperty.PropertyType
+  - System.Windows.DependencyProperty.ReadOnly
   - System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  - System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
   - System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  - System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  - System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  - System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  - System.Windows.DependencyProperty.RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  - System.Windows.DependencyProperty.RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
   - System.Windows.DependencyProperty.ToString
   - System.Windows.DependencyProperty.UnsetValue
+  - System.Windows.DependencyProperty.ValidateValueCallback
   langs:
   - csharp
   - vb
@@ -22,15 +40,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: DependencyProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 28
+    startLine: 19
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nRepresents a dependency property that is registered with the dependency property\nsystem. Dependency properties provide support for value expressions, data\nbinding, animation, and property change notification.\n"
+  summary: "\nRepresents a dependency property that is registered with the Silverlight \ndependency property system. Dependency properties provide support for value \nexpressions, data binding, animation, and property change notification.\n"
   example: []
   syntax:
     content: public class DependencyProperty
@@ -44,48 +62,855 @@ items:
   - System.Object.GetType
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: System.Windows.DependencyProperty.UnsetValue
-  commentId: F:System.Windows.DependencyProperty.UnsetValue
-  id: UnsetValue
+- uid: System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  commentId: M:System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  id: Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
   parent: System.Windows.DependencyProperty
   langs:
   - csharp
   - vb
-  name: UnsetValue
-  nameWithType: DependencyProperty.UnsetValue
-  fullName: System.Windows.DependencyProperty.UnsetValue
-  type: Field
+  name: Register(String, Type, Type, PropertyMetadata)
+  nameWithType: DependencyProperty.Register(String, Type, Type, PropertyMetadata)
+  fullName: System.Windows.DependencyProperty.Register(System.String, System.Type, System.Type, System.Windows.PropertyMetadata)
+  type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: UnsetValue
+    id: Register
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 32
+    startLine: 53
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nRegisters a dependency property with the specified property name, property type,\nowner type, and property metadata for the property.\n"
+  example: []
   syntax:
-    content: public static readonly object UnsetValue
+    content: public static DependencyProperty Register(string name, Type propertyType, Type ownerType, PropertyMetadata typeMetadata)
+    parameters:
+    - id: name
+      type: System.String
+      description: "\nThe name of the dependency property to register.\n"
+    - id: propertyType
+      type: System.Type
+      description: "\nThe type of the property.\n"
+    - id: ownerType
+      type: System.Type
+      description: "\nThe owner type that is registering the dependency property.\n"
+    - id: typeMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nA property metadata instance. This can contain a <xref href=\"System.Windows.PropertyChangedCallback\" data-throw-if-not-resolved=\"false\"></xref>\nimplementation reference.\n"
     return:
-      type: System.Object
-    content.vb: Public Shared ReadOnly UnsetValue As Object
+      type: System.Windows.DependencyProperty
+      description: "\nA dependency property identifier that should be used to set the value of a public\nstatic readonly field in your class. The identifier is then used both by your\nown code and any third-party user code to reference the dependency property later,\nfor operations such as setting its value programmatically, or attaching a <xref href=\"System.Windows.Data.Binding\" data-throw-if-not-resolved=\"false\"></xref>\nin code.\n"
+    content.vb: Public Shared Function Register(name As String, propertyType As Type, ownerType As Type, typeMetadata As PropertyMetadata) As DependencyProperty
+  overload: System.Windows.DependencyProperty.Register*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nA required parameter was null (check the exception for the name of the missing parameter).\n"
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nA parameter was out of range, for instance name was an empty string.-or-Attempted\nto register with a propertyType that does not match a default value specified\nin the typeMetadata.\n"
   modifiers.csharp:
   - public
   - static
-  - readonly
   modifiers.vb:
   - Public
   - Shared
+- uid: System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  commentId: M:System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  id: Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: Register(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  nameWithType: DependencyProperty.Register(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  fullName: System.Windows.DependencyProperty.Register(System.String, System.Type, System.Type, System.Windows.PropertyMetadata, System.Windows.ValidateValueCallback)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Register
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 72
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRegister a Dependency Property\n"
+  example: []
+  syntax:
+    content: public static DependencyProperty Register(string name, Type propertyType, Type ownerType, PropertyMetadata typeMetadata, ValidateValueCallback validateValueCallback)
+    parameters:
+    - id: name
+      type: System.String
+      description: Name of property
+    - id: propertyType
+      type: System.Type
+      description: Type of the property
+    - id: ownerType
+      type: System.Type
+      description: Type that is registering the property
+    - id: typeMetadata
+      type: System.Windows.PropertyMetadata
+      description: Metadata to use if current type doesn&apos;t specify type-specific metadata
+    - id: validateValueCallback
+      type: System.Windows.ValidateValueCallback
+      description: Provides additional value validation outside automatic type validation
+    return:
+      type: System.Windows.DependencyProperty
+      description: Dependency Property
+    content.vb: Public Shared Function Register(name As String, propertyType As Type, ownerType As Type, typeMetadata As PropertyMetadata, validateValueCallback As ValidateValueCallback) As DependencyProperty
+  overload: System.Windows.DependencyProperty.Register*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.DependencyProperty.RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  commentId: M:System.Windows.DependencyProperty.RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  id: RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: RegisterReadOnly(String, Type, Type, PropertyMetadata)
+  nameWithType: DependencyProperty.RegisterReadOnly(String, Type, Type, PropertyMetadata)
+  fullName: System.Windows.DependencyProperty.RegisterReadOnly(System.String, System.Type, System.Type, System.Windows.PropertyMetadata)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RegisterReadOnly
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 119
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRegisters a read-only dependency property, with the specified property type,\nowner type, and property metadata.\n"
+  example: []
+  syntax:
+    content: public static DependencyPropertyKey RegisterReadOnly(string name, Type propertyType, Type ownerType, PropertyMetadata typeMetadata)
+    parameters:
+    - id: name
+      type: System.String
+      description: "\nThe name of the dependency property to register.\n"
+    - id: propertyType
+      type: System.Type
+      description: "\nThe type of the property.\n"
+    - id: ownerType
+      type: System.Type
+      description: "\nThe owner type that is registering the dependency property.\n"
+    - id: typeMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nProperty metadata for the dependency property.\n"
+    return:
+      type: System.Windows.DependencyPropertyKey
+      description: "\nA dependency property key that should be used to set the value of a static read-only\nfield in your class, which is then used to reference the dependency property.\n"
+    content.vb: Public Shared Function RegisterReadOnly(name As String, propertyType As Type, ownerType As Type, typeMetadata As PropertyMetadata) As DependencyPropertyKey
+  overload: System.Windows.DependencyProperty.RegisterReadOnly*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.DependencyProperty.RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  commentId: M:System.Windows.DependencyProperty.RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  id: RegisterReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: RegisterReadOnly(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  nameWithType: DependencyProperty.RegisterReadOnly(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  fullName: System.Windows.DependencyProperty.RegisterReadOnly(System.String, System.Type, System.Type, System.Windows.PropertyMetadata, System.Windows.ValidateValueCallback)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RegisterReadOnly
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 133
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nSimple registration, metadata, validation, and a read-only property\nkey.  Calling this version restricts the property such that it can\nonly be set via the corresponding overload of DependencyObject.SetValue.\n"
+  example: []
+  syntax:
+    content: public static DependencyPropertyKey RegisterReadOnly(string name, Type propertyType, Type ownerType, PropertyMetadata typeMetadata, ValidateValueCallback validateValueCallback)
+    parameters:
+    - id: name
+      type: System.String
+    - id: propertyType
+      type: System.Type
+    - id: ownerType
+      type: System.Type
+    - id: typeMetadata
+      type: System.Windows.PropertyMetadata
+    - id: validateValueCallback
+      type: System.Windows.ValidateValueCallback
+    return:
+      type: System.Windows.DependencyPropertyKey
+    content.vb: Public Shared Function RegisterReadOnly(name As String, propertyType As Type, ownerType As Type, typeMetadata As PropertyMetadata, validateValueCallback As ValidateValueCallback) As DependencyPropertyKey
+  overload: System.Windows.DependencyProperty.RegisterReadOnly*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  commentId: M:System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  id: RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: RegisterAttachedReadOnly(String, Type, Type, PropertyMetadata)
+  nameWithType: DependencyProperty.RegisterAttachedReadOnly(String, Type, Type, PropertyMetadata)
+  fullName: System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String, System.Type, System.Type, System.Windows.PropertyMetadata)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RegisterAttachedReadOnly
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 203
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRegisters a read-only attached property, with the specified property type, owner\ntype, and property metadata.\n"
+  example: []
+  syntax:
+    content: public static DependencyPropertyKey RegisterAttachedReadOnly(string name, Type propertyType, Type ownerType, PropertyMetadata defaultMetadata)
+    parameters:
+    - id: name
+      type: System.String
+      description: "\nThe name of the dependency property to register.\n"
+    - id: propertyType
+      type: System.Type
+      description: "\nThe type of the property.\n"
+    - id: ownerType
+      type: System.Type
+      description: "\nThe owner type that is registering the dependency property.\n"
+    - id: defaultMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nProperty metadata for the dependency property.\n"
+    return:
+      type: System.Windows.DependencyPropertyKey
+      description: "\nA dependency property key that should be used to set the value of a static read-only\nfield in your class, which is then used to reference the dependency property later.\n"
+    content.vb: Public Shared Function RegisterAttachedReadOnly(name As String, propertyType As Type, ownerType As Type, defaultMetadata As PropertyMetadata) As DependencyPropertyKey
+  overload: System.Windows.DependencyProperty.RegisterAttachedReadOnly*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  commentId: M:System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  id: RegisterAttachedReadOnly(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: RegisterAttachedReadOnly(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  nameWithType: DependencyProperty.RegisterAttachedReadOnly(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  fullName: System.Windows.DependencyProperty.RegisterAttachedReadOnly(System.String, System.Type, System.Type, System.Windows.PropertyMetadata, System.Windows.ValidateValueCallback)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RegisterAttachedReadOnly
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 236
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRegisters a read-only attached property, with the specified property type, owner\ntype, property metadata, and a validation callback.\n"
+  example: []
+  syntax:
+    content: public static DependencyPropertyKey RegisterAttachedReadOnly(string name, Type propertyType, Type ownerType, PropertyMetadata defaultMetadata, ValidateValueCallback validateValueCallback)
+    parameters:
+    - id: name
+      type: System.String
+      description: "\nThe name of the dependency property to register.\n"
+    - id: propertyType
+      type: System.Type
+      description: "\nThe type of the property.\n"
+    - id: ownerType
+      type: System.Type
+      description: "\nThe owner type that is registering the dependency property.\n"
+    - id: defaultMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nProperty metadata for the dependency property.\n"
+    - id: validateValueCallback
+      type: System.Windows.ValidateValueCallback
+      description: "\nA reference to a user-created callback that should perform any custom validation\nof the dependency property value beyond typical type validation.\n"
+    return:
+      type: System.Windows.DependencyPropertyKey
+      description: "\nA dependency property key that should be used to set the value of a static read-only\nfield in your class, which is then used to reference the dependency property.\n"
+    content.vb: Public Shared Function RegisterAttachedReadOnly(name As String, propertyType As Type, ownerType As Type, defaultMetadata As PropertyMetadata, validateValueCallback As ValidateValueCallback) As DependencyPropertyKey
+  overload: System.Windows.DependencyProperty.RegisterAttachedReadOnly*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  commentId: M:System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  id: RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: RegisterAttached(String, Type, Type, PropertyMetadata)
+  nameWithType: DependencyProperty.RegisterAttached(String, Type, Type, PropertyMetadata)
+  fullName: System.Windows.DependencyProperty.RegisterAttached(System.String, System.Type, System.Type, System.Windows.PropertyMetadata)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RegisterAttached
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 295
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRegisters an attached dependency property with the specified property name, property\ntype, owner type, and property metadata for the property.\n"
+  example: []
+  syntax:
+    content: public static DependencyProperty RegisterAttached(string name, Type propertyType, Type ownerType, PropertyMetadata defaultMetadata)
+    parameters:
+    - id: name
+      type: System.String
+      description: "\nThe name of the dependency property to register.\n"
+    - id: propertyType
+      type: System.Type
+      description: "\nThe type of the property.\n"
+    - id: ownerType
+      type: System.Type
+      description: "\nThe owner type that is registering the dependency property.\n"
+    - id: defaultMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nA property metadata instance. This can contain a <xref href=\"System.Windows.PropertyChangedCallback\" data-throw-if-not-resolved=\"false\"></xref>\nimplementation reference.\n"
+    return:
+      type: System.Windows.DependencyProperty
+      description: "\nA dependency property identifier that should be used to set the value of a public\nstatic readonly field in your class. That identifier is then used to reference\nthe attached property later, for operations such as setting its value programmatically,\nor attaching a <xref href=\"System.Windows.Data.Binding\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared Function RegisterAttached(name As String, propertyType As Type, ownerType As Type, defaultMetadata As PropertyMetadata) As DependencyProperty
+  overload: System.Windows.DependencyProperty.RegisterAttached*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  commentId: M:System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  id: RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata,System.Windows.ValidateValueCallback)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: RegisterAttached(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  nameWithType: DependencyProperty.RegisterAttached(String, Type, Type, PropertyMetadata, ValidateValueCallback)
+  fullName: System.Windows.DependencyProperty.RegisterAttached(System.String, System.Type, System.Type, System.Windows.PropertyMetadata, System.Windows.ValidateValueCallback)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RegisterAttached
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 332
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRegisters an attached property with the specified property type, owner type,\nproperty metadata, and value validation callback for the property.\n"
+  example: []
+  syntax:
+    content: public static DependencyProperty RegisterAttached(string name, Type propertyType, Type ownerType, PropertyMetadata defaultMetadata, ValidateValueCallback validateValueCallback)
+    parameters:
+    - id: name
+      type: System.String
+      description: "\nThe name of the dependency property to register.\n"
+    - id: propertyType
+      type: System.Type
+      description: "\nThe type of the property.\n"
+    - id: ownerType
+      type: System.Type
+      description: "\nThe owner type that is registering the dependency property.\n"
+    - id: defaultMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nProperty metadata for the dependency property. This can include the default value\nas well as other characteristics.\n"
+    - id: validateValueCallback
+      type: System.Windows.ValidateValueCallback
+      description: "\nA reference to a callback that should perform any custom validation of the dependency\nproperty value beyond typical type validation.\n"
+    return:
+      type: System.Windows.DependencyProperty
+      description: "\nA dependency property identifier that should be used to set the value of a public\nstatic readonly field in your class. That identifier is then used to reference\nthe dependency property later, for operations such as setting its value programmatically\nor obtaining metadata.\n"
+    content.vb: Public Shared Function RegisterAttached(name As String, propertyType As Type, ownerType As Type, defaultMetadata As PropertyMetadata, validateValueCallback As ValidateValueCallback) As DependencyProperty
+  overload: System.Windows.DependencyProperty.RegisterAttached*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata)
+  commentId: M:System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata)
+  id: OverrideMetadata(System.Type,System.Windows.PropertyMetadata)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: OverrideMetadata(Type, PropertyMetadata)
+  nameWithType: DependencyProperty.OverrideMetadata(Type, PropertyMetadata)
+  fullName: System.Windows.DependencyProperty.OverrideMetadata(System.Type, System.Windows.PropertyMetadata)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OverrideMetadata
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 584
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nSpecifies alternate metadata for this dependency property when it is present\non instances of a specified type, overriding the metadata that existed for the\ndependency property as it was inherited from base types.\n"
+  example: []
+  syntax:
+    content: public void OverrideMetadata(Type forType, PropertyMetadata typeMetadata)
+    parameters:
+    - id: forType
+      type: System.Type
+      description: "\nThe type where this dependency property is inherited and where the provided alternate\nmetadata will be applied.\n"
+    - id: typeMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nThe metadata to apply to the dependency property on the overriding type.\n"
+    content.vb: Public Sub OverrideMetadata(forType As Type, typeMetadata As PropertyMetadata)
+  overload: System.Windows.DependencyProperty.OverrideMetadata*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nAn attempt was made to override metadata on a read-only dependency property (that\noperation cannot be done using this signature).\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata,System.Windows.DependencyPropertyKey)
+  commentId: M:System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata,System.Windows.DependencyPropertyKey)
+  id: OverrideMetadata(System.Type,System.Windows.PropertyMetadata,System.Windows.DependencyPropertyKey)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: OverrideMetadata(Type, PropertyMetadata, DependencyPropertyKey)
+  nameWithType: DependencyProperty.OverrideMetadata(Type, PropertyMetadata, DependencyPropertyKey)
+  fullName: System.Windows.DependencyProperty.OverrideMetadata(System.Type, System.Windows.PropertyMetadata, System.Windows.DependencyPropertyKey)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OverrideMetadata
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 613
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nSupplies alternate metadata for a read-only dependency property when it is present\non instances of a specified type, overriding the metadata that was provided in\nthe initial dependency property registration. You must pass the <xref href=\"System.Windows.DependencyPropertyKey\" data-throw-if-not-resolved=\"false\"></xref>\nfor the read-only dependency property to avoid raising an exception.\n"
+  example: []
+  syntax:
+    content: public void OverrideMetadata(Type forType, PropertyMetadata typeMetadata, DependencyPropertyKey key)
+    parameters:
+    - id: forType
+      type: System.Type
+      description: "\nThe type where this dependency property is inherited and where the provided alternate\nmetadata will be applied.\n"
+    - id: typeMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nThe metadata to apply to the dependency property on the overriding type.\n"
+    - id: key
+      type: System.Windows.DependencyPropertyKey
+      description: "\nThe access key for a read-only dependency property.\n"
+    content.vb: Public Sub OverrideMetadata(forType As Type, typeMetadata As PropertyMetadata, key As DependencyPropertyKey)
+  overload: System.Windows.DependencyProperty.OverrideMetadata*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.DependencyProperty.GetMetadata(System.Type)
+  commentId: M:System.Windows.DependencyProperty.GetMetadata(System.Type)
+  id: GetMetadata(System.Type)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: GetMetadata(Type)
+  nameWithType: DependencyProperty.GetMetadata(Type)
+  fullName: System.Windows.DependencyProperty.GetMetadata(System.Type)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GetMetadata
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 714
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nRetrieves the property metadata value for the dependency property as registered\nto the specified <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public PropertyMetadata GetMetadata(Type forType)
+    parameters:
+    - id: forType
+      type: System.Type
+      description: "\nThe specific type from which to retrieve the dependency property metadata.\n"
+    return:
+      type: System.Windows.PropertyMetadata
+      description: "\nA property metadata object.\n"
+    content.vb: Public Function GetMetadata(forType As Type) As PropertyMetadata
+  overload: System.Windows.DependencyProperty.GetMetadata*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\n<code data-dev-comment-type=\"paramref\" class=\"paramref\">forType</code> is null.\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.DependencyProperty.AddOwner(System.Type)
+  commentId: M:System.Windows.DependencyProperty.AddOwner(System.Type)
+  id: AddOwner(System.Type)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: AddOwner(Type)
+  nameWithType: DependencyProperty.AddOwner(Type)
+  fullName: System.Windows.DependencyProperty.AddOwner(System.Type)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: AddOwner
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 850
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nAdds another type as an owner of a dependency property that has already been\nregistered.\n"
+  example: []
+  syntax:
+    content: public DependencyProperty AddOwner(Type ownerType)
+    parameters:
+    - id: ownerType
+      type: System.Type
+      description: "\nThe type to add as an owner of this dependency property.\n"
+    return:
+      type: System.Windows.DependencyProperty
+      description: "\nA reference to the original <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref> identifier that\nidentifies the dependency property. This identifier should be exposed by the\nadding class as a public static readonly field.\n"
+    content.vb: Public Function AddOwner(ownerType As Type) As DependencyProperty
+  overload: System.Windows.DependencyProperty.AddOwner*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.DependencyProperty.AddOwner(System.Type,System.Windows.PropertyMetadata)
+  commentId: M:System.Windows.DependencyProperty.AddOwner(System.Type,System.Windows.PropertyMetadata)
+  id: AddOwner(System.Type,System.Windows.PropertyMetadata)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: AddOwner(Type, PropertyMetadata)
+  nameWithType: DependencyProperty.AddOwner(Type, PropertyMetadata)
+  fullName: System.Windows.DependencyProperty.AddOwner(System.Type, System.Windows.PropertyMetadata)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: AddOwner
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 873
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nAdds another type as an owner of a dependency property that has already been\nregistered, providing dependency property metadata for the dependency property\nas it will exist on the provided owner type.\n"
+  example: []
+  syntax:
+    content: public DependencyProperty AddOwner(Type ownerType, PropertyMetadata typeMetadata)
+    parameters:
+    - id: ownerType
+      type: System.Type
+      description: "\nThe type to add as owner of this dependency property.\n"
+    - id: typeMetadata
+      type: System.Windows.PropertyMetadata
+      description: "\nThe metadata that qualifies the dependency property as it exists on the provided\ntype.\n"
+    return:
+      type: System.Windows.DependencyProperty
+      description: "\nA reference to the original <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref> identifier that\nidentifies the dependency property. This identifier should be exposed by the\nadding class as a public static readonly field.\n"
+    content.vb: Public Function AddOwner(ownerType As Type, typeMetadata As PropertyMetadata) As DependencyProperty
+  overload: System.Windows.DependencyProperty.AddOwner*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.DependencyProperty.Name
+  commentId: P:System.Windows.DependencyProperty.Name
+  id: Name
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: DependencyProperty.Name
+  fullName: System.Windows.DependencyProperty.Name
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Name
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 908
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the name of the <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public string Name { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Name As String
+  overload: System.Windows.DependencyProperty.Name*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.DependencyProperty.PropertyType
+  commentId: P:System.Windows.DependencyProperty.PropertyType
+  id: PropertyType
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: PropertyType
+  nameWithType: DependencyProperty.PropertyType
+  fullName: System.Windows.DependencyProperty.PropertyType
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: PropertyType
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 913
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the type that the <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref> uses for its value.\n"
+  example: []
+  syntax:
+    content: public Type PropertyType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Public ReadOnly Property PropertyType As Type
+  overload: System.Windows.DependencyProperty.PropertyType*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.DependencyProperty.OwnerType
+  commentId: P:System.Windows.DependencyProperty.OwnerType
+  id: OwnerType
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: OwnerType
+  nameWithType: DependencyProperty.OwnerType
+  fullName: System.Windows.DependencyProperty.OwnerType
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OwnerType
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 919
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the type of the object that registered the <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref> with the\nproperty system, or added itself as owner of the property.\n"
+  example: []
+  syntax:
+    content: public Type OwnerType { get; }
+    parameters: []
+    return:
+      type: System.Type
+    content.vb: Public ReadOnly Property OwnerType As Type
+  overload: System.Windows.DependencyProperty.OwnerType*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.DependencyProperty.DefaultMetadata
+  commentId: P:System.Windows.DependencyProperty.DefaultMetadata
+  id: DefaultMetadata
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: DefaultMetadata
+  nameWithType: DependencyProperty.DefaultMetadata
+  fullName: System.Windows.DependencyProperty.DefaultMetadata
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DefaultMetadata
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 924
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the default metadata of the <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public PropertyMetadata DefaultMetadata { get; }
+    parameters: []
+    return:
+      type: System.Windows.PropertyMetadata
+    content.vb: Public ReadOnly Property DefaultMetadata As PropertyMetadata
+  overload: System.Windows.DependencyProperty.DefaultMetadata*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.DependencyProperty.ValidateValueCallback
+  commentId: P:System.Windows.DependencyProperty.ValidateValueCallback
+  id: ValidateValueCallback
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: ValidateValueCallback
+  nameWithType: DependencyProperty.ValidateValueCallback
+  fullName: System.Windows.DependencyProperty.ValidateValueCallback
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ValidateValueCallback
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 929
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the value validation callback for the <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public ValidateValueCallback ValidateValueCallback { get; }
+    parameters: []
+    return:
+      type: System.Windows.ValidateValueCallback
+    content.vb: Public ReadOnly Property ValidateValueCallback As ValidateValueCallback
+  overload: System.Windows.DependencyProperty.ValidateValueCallback*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.DependencyProperty.GlobalIndex
+  commentId: P:System.Windows.DependencyProperty.GlobalIndex
+  id: GlobalIndex
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: GlobalIndex
+  nameWithType: DependencyProperty.GlobalIndex
+  fullName: System.Windows.DependencyProperty.GlobalIndex
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GlobalIndex
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 934
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets an internally generated value that uniquely identifies the <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public int GlobalIndex { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property GlobalIndex As Integer
+  overload: System.Windows.DependencyProperty.GlobalIndex*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
   - ReadOnly
 - uid: System.Windows.DependencyProperty.IsAttached
   commentId: P:System.Windows.DependencyProperty.IsAttached
@@ -101,11 +926,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsAttached
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 38
+    startLine: 936
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -122,134 +947,122 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Windows.DependencyProperty.GetMetadata(System.Type)
-  commentId: M:System.Windows.DependencyProperty.GetMetadata(System.Type)
-  id: GetMetadata(System.Type)
+- uid: System.Windows.DependencyProperty.IsValidType(System.Object)
+  commentId: M:System.Windows.DependencyProperty.IsValidType(System.Object)
+  id: IsValidType(System.Object)
   parent: System.Windows.DependencyProperty
   langs:
   - csharp
   - vb
-  name: GetMetadata(Type)
-  nameWithType: DependencyProperty.GetMetadata(Type)
-  fullName: System.Windows.DependencyProperty.GetMetadata(System.Type)
+  name: IsValidType(Object)
+  nameWithType: DependencyProperty.IsValidType(Object)
+  fullName: System.Windows.DependencyProperty.IsValidType(System.Object)
   type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GetMetadata
+    id: IsValidType
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 49
+    startLine: 984
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  syntax:
-    content: public PropertyMetadata GetMetadata(Type type)
-    parameters:
-    - id: type
-      type: System.Type
-    return:
-      type: System.Windows.PropertyMetadata
-    content.vb: Public Function GetMetadata(type As Type) As PropertyMetadata
-  overload: System.Windows.DependencyProperty.GetMetadata*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
-  commentId: M:System.Windows.DependencyProperty.RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
-  id: RegisterAttached(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
-  parent: System.Windows.DependencyProperty
-  langs:
-  - csharp
-  - vb
-  name: RegisterAttached(String, Type, Type, PropertyMetadata)
-  nameWithType: DependencyProperty.RegisterAttached(String, Type, Type, PropertyMetadata)
-  fullName: System.Windows.DependencyProperty.RegisterAttached(System.String, System.Type, System.Type, System.Windows.PropertyMetadata)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: RegisterAttached
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 124
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public static DependencyProperty RegisterAttached(string name, Type propertyType, Type ownerType, PropertyMetadata typeMetadata)
-    parameters:
-    - id: name
-      type: System.String
-    - id: propertyType
-      type: System.Type
-    - id: ownerType
-      type: System.Type
-    - id: typeMetadata
-      type: System.Windows.PropertyMetadata
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared Function RegisterAttached(name As String, propertyType As Type, ownerType As Type, typeMetadata As PropertyMetadata) As DependencyProperty
-  overload: System.Windows.DependencyProperty.RegisterAttached*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
-  commentId: M:System.Windows.DependencyProperty.Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
-  id: Register(System.String,System.Type,System.Type,System.Windows.PropertyMetadata)
-  parent: System.Windows.DependencyProperty
-  langs:
-  - csharp
-  - vb
-  name: Register(String, Type, Type, PropertyMetadata)
-  nameWithType: DependencyProperty.Register(String, Type, Type, PropertyMetadata)
-  fullName: System.Windows.DependencyProperty.Register(System.String, System.Type, System.Type, System.Windows.PropertyMetadata)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Register
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 198
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nRegisters a dependency property with the specified property name, property type, owner type, and property metadata.\n"
+  summary: "\nDetermines whether a specified value is acceptable for this dependency property&apos;s\ntype, as checked against the property type provided in the original dependency\nproperty registration.\n"
   example: []
   syntax:
-    content: public static DependencyProperty Register(string name, Type propertyType, Type ownerType, PropertyMetadata typeMetadata)
+    content: public bool IsValidType(object value)
     parameters:
-    - id: name
-      type: System.String
-      description: The property name.
-    - id: propertyType
-      type: System.Type
-      description: The type of the property.
-    - id: ownerType
-      type: System.Type
-      description: The type of the property&apos;s owner.
-    - id: typeMetadata
-      type: System.Windows.PropertyMetadata
-      description: The property metadata.
+    - id: value
+      type: System.Object
+      description: "\nThe value to check.\n"
     return:
-      type: System.Windows.DependencyProperty
-      description: The DependencyProperty.
-    content.vb: Public Shared Function Register(name As String, propertyType As Type, ownerType As Type, typeMetadata As PropertyMetadata) As DependencyProperty
-  overload: System.Windows.DependencyProperty.Register*
+      type: System.Boolean
+      description: "\ntrue if the specified value is the registered property type or an acceptable\nderived type; otherwise, false.\n"
+    content.vb: Public Function IsValidType(value As Object) As Boolean
+  overload: System.Windows.DependencyProperty.IsValidType*
   modifiers.csharp:
   - public
-  - static
   modifiers.vb:
   - Public
-  - Shared
+- uid: System.Windows.DependencyProperty.IsValidValue(System.Object)
+  commentId: M:System.Windows.DependencyProperty.IsValidValue(System.Object)
+  id: IsValidValue(System.Object)
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: IsValidValue(Object)
+  nameWithType: DependencyProperty.IsValidValue(Object)
+  fullName: System.Windows.DependencyProperty.IsValidValue(System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IsValidValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 1001
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nDetermines whether the provided value is accepted for the type of property through\nbasic type checking, and also potentially if it is within the allowed range of\nvalues for that type.\n"
+  example: []
+  syntax:
+    content: public bool IsValidValue(object value)
+    parameters:
+    - id: value
+      type: System.Object
+      description: "\nThe value to check.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the value is acceptable and is of the correct type or a derived type;\notherwise, false.\n"
+    content.vb: Public Function IsValidValue(value As Object) As Boolean
+  overload: System.Windows.DependencyProperty.IsValidValue*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.DependencyProperty.ReadOnly
+  commentId: P:System.Windows.DependencyProperty.ReadOnly
+  id: ReadOnly
+  parent: System.Windows.DependencyProperty
+  langs:
+  - csharp
+  - vb
+  name: ReadOnly
+  nameWithType: DependencyProperty.ReadOnly
+  fullName: System.Windows.DependencyProperty.ReadOnly
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ReadOnly
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
+    startLine: 1024
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets a value that indicates whether the dependency property identified by this\n<xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref> instance is a read-only dependency property.\n"
+  example: []
+  syntax:
+    content: public bool ReadOnly { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: "\ntrue if the dependency property is read-only; otherwise, false.\n"
+    content.vb: Public ReadOnly Property ReadOnly As Boolean
+  overload: System.Windows.DependencyProperty.ReadOnly*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
 - uid: System.Windows.DependencyProperty.ToString
   commentId: M:System.Windows.DependencyProperty.ToString
   id: ToString
@@ -264,21 +1077,20 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 261
+    startLine: 1112
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nReturns the DependencyProperty as a string.\n"
+  summary: "\nReturns the string representation of the <xref href=\"System.Windows.DependencyProperty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override string ToString()
     return:
       type: System.String
-      description: The DependencyProperty as a string.
     content.vb: Public Overrides Function ToString As String
   overridden: System.Object.ToString
   overload: System.Windows.DependencyProperty.ToString*
@@ -288,41 +1100,44 @@ items:
   modifiers.vb:
   - Public
   - Overrides
-- uid: System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata)
-  commentId: M:System.Windows.DependencyProperty.OverrideMetadata(System.Type,System.Windows.PropertyMetadata)
-  id: OverrideMetadata(System.Type,System.Windows.PropertyMetadata)
+- uid: System.Windows.DependencyProperty.UnsetValue
+  commentId: F:System.Windows.DependencyProperty.UnsetValue
+  id: UnsetValue
   parent: System.Windows.DependencyProperty
   langs:
   - csharp
   - vb
-  name: OverrideMetadata(Type, PropertyMetadata)
-  nameWithType: DependencyProperty.OverrideMetadata(Type, PropertyMetadata)
-  fullName: System.Windows.DependencyProperty.OverrideMetadata(System.Type, System.Windows.PropertyMetadata)
-  type: Method
+  name: UnsetValue
+  nameWithType: DependencyProperty.UnsetValue
+  fullName: System.Windows.DependencyProperty.UnsetValue
+  type: Field
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: OverrideMetadata
+    id: UnsetValue
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/DependencyProperty.cs
-    startLine: 293
+    startLine: 1212
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nSpecifies a static value that is used by the property system rather than null\nto indicate that the property exists, but does not have its value set by the\nproperty system.\n"
+  example: []
   syntax:
-    content: public void OverrideMetadata(Type newOwnerType, PropertyMetadata typeMetadata)
-    parameters:
-    - id: newOwnerType
-      type: System.Type
-    - id: typeMetadata
-      type: System.Windows.PropertyMetadata
-    content.vb: Public Sub OverrideMetadata(newOwnerType As Type, typeMetadata As PropertyMetadata)
-  overload: System.Windows.DependencyProperty.OverrideMetadata*
+    content: public static readonly object UnsetValue
+    return:
+      type: System.Object
+      description: "\nThe sentinel value for an unset value.\n"
+    content.vb: Public Shared ReadOnly UnsetValue As Object
   modifiers.csharp:
   - public
+  - static
+  - readonly
   modifiers.vb:
   - Public
+  - Shared
+  - ReadOnly
 references:
 - uid: System.Windows
   commentId: N:System.Windows
@@ -584,106 +1399,41 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
   nameWithType: System
   fullName: System
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
+- uid: System.Windows.PropertyChangedCallback
+  commentId: T:System.Windows.PropertyChangedCallback
+  parent: System.Windows
+  name: PropertyChangedCallback
+  nameWithType: PropertyChangedCallback
+  fullName: System.Windows.PropertyChangedCallback
+- uid: System.Windows.Data.Binding
+  commentId: T:System.Windows.Data.Binding
+  parent: System.Windows.Data
+  name: Binding
+  nameWithType: Binding
+  fullName: System.Windows.Data.Binding
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
   isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.DependencyProperty.IsAttached*
-  commentId: Overload:System.Windows.DependencyProperty.IsAttached
-  name: IsAttached
-  nameWithType: DependencyProperty.IsAttached
-  fullName: System.Windows.DependencyProperty.IsAttached
-- uid: System.Boolean
-  commentId: T:System.Boolean
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+- uid: System.Windows.DependencyProperty.Register*
+  commentId: Overload:System.Windows.DependencyProperty.Register
+  name: Register
+  nameWithType: DependencyProperty.Register
+  fullName: System.Windows.DependencyProperty.Register
+- uid: System.String
+  commentId: T:System.String
   parent: System
   isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
-- uid: System.Windows.DependencyProperty.GetMetadata*
-  commentId: Overload:System.Windows.DependencyProperty.GetMetadata
-  name: GetMetadata
-  nameWithType: DependencyProperty.GetMetadata
-  fullName: System.Windows.DependencyProperty.GetMetadata
+  name: String
+  nameWithType: String
+  fullName: System.String
 - uid: System.Type
   commentId: T:System.Type
   parent: System
@@ -697,29 +1447,126 @@ references:
   name: PropertyMetadata
   nameWithType: PropertyMetadata
   fullName: System.Windows.PropertyMetadata
-- uid: System.Windows.DependencyProperty.RegisterAttached*
-  commentId: Overload:System.Windows.DependencyProperty.RegisterAttached
-  name: RegisterAttached
-  nameWithType: DependencyProperty.RegisterAttached
-  fullName: System.Windows.DependencyProperty.RegisterAttached
-- uid: System.String
-  commentId: T:System.String
-  parent: System
-  isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
 - uid: System.Windows.DependencyProperty
   commentId: T:System.Windows.DependencyProperty
   parent: System.Windows
   name: DependencyProperty
   nameWithType: DependencyProperty
   fullName: System.Windows.DependencyProperty
-- uid: System.Windows.DependencyProperty.Register*
-  commentId: Overload:System.Windows.DependencyProperty.Register
-  name: Register
-  nameWithType: DependencyProperty.Register
-  fullName: System.Windows.DependencyProperty.Register
+- uid: System.Windows.Data
+  commentId: N:System.Windows.Data
+  name: System.Windows.Data
+  nameWithType: System.Windows.Data
+  fullName: System.Windows.Data
+- uid: System.Windows.ValidateValueCallback
+  commentId: T:System.Windows.ValidateValueCallback
+  parent: System.Windows
+  name: ValidateValueCallback
+  nameWithType: ValidateValueCallback
+  fullName: System.Windows.ValidateValueCallback
+- uid: System.Windows.DependencyProperty.RegisterReadOnly*
+  commentId: Overload:System.Windows.DependencyProperty.RegisterReadOnly
+  name: RegisterReadOnly
+  nameWithType: DependencyProperty.RegisterReadOnly
+  fullName: System.Windows.DependencyProperty.RegisterReadOnly
+- uid: System.Windows.DependencyPropertyKey
+  commentId: T:System.Windows.DependencyPropertyKey
+  parent: System.Windows
+  name: DependencyPropertyKey
+  nameWithType: DependencyPropertyKey
+  fullName: System.Windows.DependencyPropertyKey
+- uid: System.Windows.DependencyProperty.RegisterAttachedReadOnly*
+  commentId: Overload:System.Windows.DependencyProperty.RegisterAttachedReadOnly
+  name: RegisterAttachedReadOnly
+  nameWithType: DependencyProperty.RegisterAttachedReadOnly
+  fullName: System.Windows.DependencyProperty.RegisterAttachedReadOnly
+- uid: System.Windows.DependencyProperty.RegisterAttached*
+  commentId: Overload:System.Windows.DependencyProperty.RegisterAttached
+  name: RegisterAttached
+  nameWithType: DependencyProperty.RegisterAttached
+  fullName: System.Windows.DependencyProperty.RegisterAttached
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: System.Windows.DependencyProperty.OverrideMetadata*
+  commentId: Overload:System.Windows.DependencyProperty.OverrideMetadata
+  name: OverrideMetadata
+  nameWithType: DependencyProperty.OverrideMetadata
+  fullName: System.Windows.DependencyProperty.OverrideMetadata
+- uid: System.Windows.DependencyProperty.GetMetadata*
+  commentId: Overload:System.Windows.DependencyProperty.GetMetadata
+  name: GetMetadata
+  nameWithType: DependencyProperty.GetMetadata
+  fullName: System.Windows.DependencyProperty.GetMetadata
+- uid: System.Windows.DependencyProperty.AddOwner*
+  commentId: Overload:System.Windows.DependencyProperty.AddOwner
+  name: AddOwner
+  nameWithType: DependencyProperty.AddOwner
+  fullName: System.Windows.DependencyProperty.AddOwner
+- uid: System.Windows.DependencyProperty.Name*
+  commentId: Overload:System.Windows.DependencyProperty.Name
+  name: Name
+  nameWithType: DependencyProperty.Name
+  fullName: System.Windows.DependencyProperty.Name
+- uid: System.Windows.DependencyProperty.PropertyType*
+  commentId: Overload:System.Windows.DependencyProperty.PropertyType
+  name: PropertyType
+  nameWithType: DependencyProperty.PropertyType
+  fullName: System.Windows.DependencyProperty.PropertyType
+- uid: System.Windows.DependencyProperty.OwnerType*
+  commentId: Overload:System.Windows.DependencyProperty.OwnerType
+  name: OwnerType
+  nameWithType: DependencyProperty.OwnerType
+  fullName: System.Windows.DependencyProperty.OwnerType
+- uid: System.Windows.DependencyProperty.DefaultMetadata*
+  commentId: Overload:System.Windows.DependencyProperty.DefaultMetadata
+  name: DefaultMetadata
+  nameWithType: DependencyProperty.DefaultMetadata
+  fullName: System.Windows.DependencyProperty.DefaultMetadata
+- uid: System.Windows.DependencyProperty.ValidateValueCallback*
+  commentId: Overload:System.Windows.DependencyProperty.ValidateValueCallback
+  name: ValidateValueCallback
+  nameWithType: DependencyProperty.ValidateValueCallback
+  fullName: System.Windows.DependencyProperty.ValidateValueCallback
+- uid: System.Windows.DependencyProperty.GlobalIndex*
+  commentId: Overload:System.Windows.DependencyProperty.GlobalIndex
+  name: GlobalIndex
+  nameWithType: DependencyProperty.GlobalIndex
+  fullName: System.Windows.DependencyProperty.GlobalIndex
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Windows.DependencyProperty.IsAttached*
+  commentId: Overload:System.Windows.DependencyProperty.IsAttached
+  name: IsAttached
+  nameWithType: DependencyProperty.IsAttached
+  fullName: System.Windows.DependencyProperty.IsAttached
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: System.Windows.DependencyProperty.IsValidType*
+  commentId: Overload:System.Windows.DependencyProperty.IsValidType
+  name: IsValidType
+  nameWithType: DependencyProperty.IsValidType
+  fullName: System.Windows.DependencyProperty.IsValidType
+- uid: System.Windows.DependencyProperty.IsValidValue*
+  commentId: Overload:System.Windows.DependencyProperty.IsValidValue
+  name: IsValidValue
+  nameWithType: DependencyProperty.IsValidValue
+  fullName: System.Windows.DependencyProperty.IsValidValue
+- uid: System.Windows.DependencyProperty.ReadOnly*
+  commentId: Overload:System.Windows.DependencyProperty.ReadOnly
+  name: ReadOnly
+  nameWithType: DependencyProperty.ReadOnly
+  fullName: System.Windows.DependencyProperty.ReadOnly
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -756,8 +1603,3 @@ references:
   name: ToString
   nameWithType: DependencyProperty.ToString
   fullName: System.Windows.DependencyProperty.ToString
-- uid: System.Windows.DependencyProperty.OverrideMetadata*
-  commentId: Overload:System.Windows.DependencyProperty.OverrideMetadata
-  name: OverrideMetadata
-  nameWithType: DependencyProperty.OverrideMetadata
-  fullName: System.Windows.DependencyProperty.OverrideMetadata

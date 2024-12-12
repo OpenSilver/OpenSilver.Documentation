@@ -6,6 +6,7 @@ items:
   parent: System.Windows.Documents
   children:
   - System.Windows.Documents.InlineCollection.Add(System.String)
+  - System.Windows.Documents.InlineCollection.System#Collections#IList#Add(System.Object)
   langs:
   - csharp
   - vb
@@ -16,50 +17,73 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Documents/InlineCollection.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: InlineCollection
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Documents/InlineCollection.cs
-    startLine: 30
+    startLine: 20
   assemblies:
   - OpenSilver
   namespace: System.Windows.Documents
+  summary: "\nRepresents a collection of <xref href=\"System.Windows.Documents.Inline\" data-throw-if-not-resolved=\"false\"></xref> elements.\n"
+  example: []
   syntax:
-    content: 'public class InlineCollection : TextElementCollection<Inline>, ICollection<Inline>, IEnumerable<Inline>, IList, ICollection, IEnumerable'
+    content: 'public class InlineCollection : TextElementCollection<Inline>, IDependencyObject, IList<Inline>, ICollection<Inline>, IEnumerable<Inline>, IList, ICollection, IEnumerable'
     content.vb: >-
       Public Class InlineCollection
           Inherits TextElementCollection(Of Inline)
-          Implements ICollection(Of Inline), IEnumerable(Of Inline), IList, ICollection, IEnumerable
+          Implements IDependencyObject, IList(Of Inline), ICollection(Of Inline), IEnumerable(Of Inline), IList, ICollection, IEnumerable
   inheritance:
   - System.Object
+  - System.Windows.DependencyObject
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
   - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
   implements:
+  - System.Collections.Generic.IList{System.Windows.Documents.Inline}
   - System.Collections.Generic.ICollection{System.Windows.Documents.Inline}
   - System.Collections.Generic.IEnumerable{System.Windows.Documents.Inline}
   - System.Collections.IList
   - System.Collections.ICollection
   - System.Collections.IEnumerable
   inheritedMembers:
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Count
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.IsReadOnly
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Item(System.Int32)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#IsFixedSize
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#SyncRoot
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#IsSynchronized
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Add(System.Windows.Documents.Inline)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Add(System.Object)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Clear
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Contains(System.Windows.Documents.Inline)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Contains(System.Object)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.CopyTo(System.Windows.Documents.Inline[],System.Int32)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.GetEnumerator
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#IndexOf(System.Object)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Insert(System.Int32,System.Object)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Remove(System.Windows.Documents.Inline)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Remove(System.Object)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.RemoveAt(System.Int32)
-  - System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IEnumerable#GetEnumerator
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CountProperty
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Count
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Item(System.Int32)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsFixedSize
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsReadOnly
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsSynchronized
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.SyncRoot
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.GetEnumerator
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Add(System.Windows.Documents.Inline)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Clear
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Contains(System.Windows.Documents.Inline)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CopyTo(System.Array,System.Int32)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CopyTo(System.Windows.Documents.Inline[],System.Int32)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IndexOf(System.Windows.Documents.Inline)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Insert(System.Int32,System.Windows.Documents.Inline)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Remove(System.Windows.Documents.Inline)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.RemoveAt(System.Int32)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IEnumerable#GetEnumerator
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Remove(System.Object)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#RemoveAt(System.Int32)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Insert(System.Int32,System.Object)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#IndexOf(System.Object)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Contains(System.Object)
+  - System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Item(System.Int32)
+  - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
+  - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  - System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  - System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.Dispatcher
+  - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
+  - System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
+  - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  - System.Windows.DependencyObject.CheckAccess
+  - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetHashCode
@@ -67,8 +91,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - class
@@ -89,11 +111,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Documents/InlineCollection.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Add
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Documents/InlineCollection.cs
-    startLine: 40
+    startLine: 27
   assemblies:
   - OpenSilver
   namespace: System.Windows.Documents
@@ -108,7 +130,49 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.Documents.InlineCollection.System#Collections#IList#Add(System.Object)
+  commentId: M:System.Windows.Documents.InlineCollection.System#Collections#IList#Add(System.Object)
+  id: System#Collections#IList#Add(System.Object)
+  isEii: true
+  parent: System.Windows.Documents.InlineCollection
+  langs:
+  - csharp
+  - vb
+  name: IList.Add(Object)
+  nameWithType: InlineCollection.IList.Add(Object)
+  fullName: System.Windows.Documents.InlineCollection.System.Collections.IList.Add(System.Object)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Documents/InlineCollection.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: System.Collections.IList.Add
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Documents/InlineCollection.cs
+    startLine: 37
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Documents
+  syntax:
+    content: int IList.Add(object value)
+    parameters:
+    - id: value
+      type: System.Object
+    return:
+      type: System.Int32
+    content.vb: Function System.Collections.IList.Add(value As Object) As Integer Implements IList.Add
+  overload: System.Windows.Documents.InlineCollection.System#Collections#IList#Add*
+  implements:
+  - System.Collections.IList.Add(System.Object)
+  nameWithType.vb: InlineCollection.System.Collections.IList.Add(Object)
+  name.vb: System.Collections.IList.Add(Object)
 references:
+- uid: System.Windows.Documents.Inline
+  commentId: T:System.Windows.Documents.Inline
+  parent: System.Windows.Documents
+  name: Inline
+  nameWithType: Inline
+  fullName: System.Windows.Documents.Inline
 - uid: System.Windows.Documents
   commentId: N:System.Windows.Documents
   name: System.Windows.Documents
@@ -121,6 +185,52 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Windows.DependencyObject
+  commentId: T:System.Windows.DependencyObject
+  parent: System.Windows
+  name: DependencyObject
+  nameWithType: DependencyObject
+  fullName: System.Windows.DependencyObject
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  commentId: T:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  parent: System.Windows
+  definition: System.Windows.PresentationFrameworkCollection`1
+  name: PresentationFrameworkCollection<Inline>
+  nameWithType: PresentationFrameworkCollection<Inline>
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline)
+  name.vb: PresentationFrameworkCollection(Of Inline)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1
+    name: PresentationFrameworkCollection
+    nameWithType: PresentationFrameworkCollection
+    fullName: System.Windows.PresentationFrameworkCollection
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1
+    name: PresentationFrameworkCollection
+    nameWithType: PresentationFrameworkCollection
+    fullName: System.Windows.PresentationFrameworkCollection
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
   commentId: T:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
   parent: System.Windows.Documents
@@ -151,6 +261,48 @@ references:
     name: TextElementCollection
     nameWithType: TextElementCollection
     fullName: System.Windows.Documents.TextElementCollection
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.IList{System.Windows.Documents.Inline}
+  commentId: T:System.Collections.Generic.IList{System.Windows.Documents.Inline}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IList`1
+  name: IList<Inline>
+  nameWithType: IList<Inline>
+  fullName: System.Collections.Generic.IList<System.Windows.Documents.Inline>
+  nameWithType.vb: IList(Of Inline)
+  fullName.vb: System.Collections.Generic.IList(Of System.Windows.Documents.Inline)
+  name.vb: IList(Of Inline)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -266,39 +418,39 @@ references:
   name: IEnumerable
   nameWithType: IEnumerable
   fullName: System.Collections.IEnumerable
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Count
-  commentId: P:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Count
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.Count
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CountProperty
+  commentId: F:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CountProperty
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.CountProperty
+  name: CountProperty
+  nameWithType: PresentationFrameworkCollection<Inline>.CountProperty
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.CountProperty
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).CountProperty
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).CountProperty
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Count
+  commentId: P:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Count
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.Count
   name: Count
-  nameWithType: TextElementCollection<Inline>.Count
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Count
-  nameWithType.vb: TextElementCollection(Of Inline).Count
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Count
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.IsReadOnly
-  commentId: P:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.IsReadOnly
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.IsReadOnly
-  name: IsReadOnly
-  nameWithType: TextElementCollection<Inline>.IsReadOnly
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.IsReadOnly
-  nameWithType.vb: TextElementCollection(Of Inline).IsReadOnly
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).IsReadOnly
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Item(System.Int32)
-  commentId: P:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Item(System.Int32)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.Item(System.Int32)
+  nameWithType: PresentationFrameworkCollection<Inline>.Count
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Count
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).Count
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Count
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Item(System.Int32)
+  commentId: P:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Item(System.Int32)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.Item(System.Int32)
   name: Item[Int32]
-  nameWithType: TextElementCollection<Inline>.Item[Int32]
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Item[System.Int32]
-  nameWithType.vb: TextElementCollection(Of Inline).Item(Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Item(System.Int32)
+  nameWithType: PresentationFrameworkCollection<Inline>.Item[Int32]
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Item[System.Int32]
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).Item(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Item(System.Int32)
   name.vb: Item(Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Item(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Item(System.Int32)
     name: Item
-    nameWithType: TextElementCollection<Inline>.Item
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Item
+    nameWithType: PresentationFrameworkCollection<Inline>.Item
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Item
   - name: '['
     nameWithType: '['
     fullName: '['
@@ -311,10 +463,10 @@ references:
     nameWithType: ']'
     fullName: ']'
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Item(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Item(System.Int32)
     name: Item
-    nameWithType: TextElementCollection(Of Inline).Item
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Item
+    nameWithType: PresentationFrameworkCollection(Of Inline).Item
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Item
   - name: (
     nameWithType: (
     fullName: (
@@ -326,50 +478,87 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#IsFixedSize
-  commentId: P:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#IsFixedSize
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IsFixedSize
-  name: IList.IsFixedSize
-  nameWithType: TextElementCollection<Inline>.IList.IsFixedSize
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.IsFixedSize
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.IList.IsFixedSize
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.IsFixedSize
-  name.vb: System.Collections.IList.IsFixedSize
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#SyncRoot
-  commentId: P:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#SyncRoot
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#SyncRoot
-  name: ICollection.SyncRoot
-  nameWithType: TextElementCollection<Inline>.ICollection.SyncRoot
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.ICollection.SyncRoot
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.ICollection.SyncRoot
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.ICollection.SyncRoot
-  name.vb: System.Collections.ICollection.SyncRoot
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#IsSynchronized
-  commentId: P:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#IsSynchronized
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#IsSynchronized
-  name: ICollection.IsSynchronized
-  nameWithType: TextElementCollection<Inline>.ICollection.IsSynchronized
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.ICollection.IsSynchronized
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.ICollection.IsSynchronized
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.ICollection.IsSynchronized
-  name.vb: System.Collections.ICollection.IsSynchronized
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Add(System.Windows.Documents.Inline)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Add(System.Windows.Documents.Inline)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.Add(`0)
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsFixedSize
+  commentId: P:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsFixedSize
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.IsFixedSize
+  name: IsFixedSize
+  nameWithType: PresentationFrameworkCollection<Inline>.IsFixedSize
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.IsFixedSize
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).IsFixedSize
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).IsFixedSize
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsReadOnly
+  commentId: P:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsReadOnly
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.IsReadOnly
+  name: IsReadOnly
+  nameWithType: PresentationFrameworkCollection<Inline>.IsReadOnly
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.IsReadOnly
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).IsReadOnly
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).IsReadOnly
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsSynchronized
+  commentId: P:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IsSynchronized
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.IsSynchronized
+  name: IsSynchronized
+  nameWithType: PresentationFrameworkCollection<Inline>.IsSynchronized
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.IsSynchronized
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).IsSynchronized
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).IsSynchronized
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.SyncRoot
+  commentId: P:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.SyncRoot
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.SyncRoot
+  name: SyncRoot
+  nameWithType: PresentationFrameworkCollection<Inline>.SyncRoot
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.SyncRoot
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).SyncRoot
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).SyncRoot
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.GetEnumerator
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.GetEnumerator
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: PresentationFrameworkCollection<Inline>.GetEnumerator()
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.GetEnumerator()
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).GetEnumerator()
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).GetEnumerator()
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: PresentationFrameworkCollection<Inline>.GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: PresentationFrameworkCollection(Of Inline).GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Add(System.Windows.Documents.Inline)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Add(System.Windows.Documents.Inline)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.Add(`0)
   name: Add(Inline)
-  nameWithType: TextElementCollection<Inline>.Add(Inline)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Add(System.Windows.Documents.Inline)
-  nameWithType.vb: TextElementCollection(Of Inline).Add(Inline)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Add(System.Windows.Documents.Inline)
+  nameWithType: PresentationFrameworkCollection<Inline>.Add(Inline)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Add(System.Windows.Documents.Inline)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).Add(Inline)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Add(System.Windows.Documents.Inline)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Add(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Add(`0)
     name: Add
-    nameWithType: TextElementCollection<Inline>.Add
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Add
+    nameWithType: PresentationFrameworkCollection<Inline>.Add
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Add
   - name: (
     nameWithType: (
     fullName: (
@@ -381,10 +570,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Add(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Add(`0)
     name: Add
-    nameWithType: TextElementCollection(Of Inline).Add
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Add
+    nameWithType: PresentationFrameworkCollection(Of Inline).Add
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Add
   - name: (
     nameWithType: (
     fullName: (
@@ -395,62 +584,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Add(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Add(System.Object)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Add(System.Object)
-  name: IList.Add(Object)
-  nameWithType: TextElementCollection<Inline>.IList.Add(Object)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Add(System.Object)
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.IList.Add(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Add(System.Object)
-  name.vb: System.Collections.IList.Add(Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Add(System.Object)
-    name: IList.Add
-    nameWithType: TextElementCollection<Inline>.IList.Add
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Add
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Add(System.Object)
-    name: System.Collections.IList.Add
-    nameWithType: TextElementCollection(Of Inline).System.Collections.IList.Add
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Add
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Clear
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Clear
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.Clear
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Clear
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Clear
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.Clear
   name: Clear()
-  nameWithType: TextElementCollection<Inline>.Clear()
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Clear()
-  nameWithType.vb: TextElementCollection(Of Inline).Clear()
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Clear()
+  nameWithType: PresentationFrameworkCollection<Inline>.Clear()
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Clear()
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).Clear()
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Clear()
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Clear
+  - uid: System.Windows.PresentationFrameworkCollection`1.Clear
     name: Clear
-    nameWithType: TextElementCollection<Inline>.Clear
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Clear
+    nameWithType: PresentationFrameworkCollection<Inline>.Clear
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Clear
   - name: (
     nameWithType: (
     fullName: (
@@ -458,30 +605,30 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Clear
+  - uid: System.Windows.PresentationFrameworkCollection`1.Clear
     name: Clear
-    nameWithType: TextElementCollection(Of Inline).Clear
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Clear
+    nameWithType: PresentationFrameworkCollection(Of Inline).Clear
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Clear
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Contains(System.Windows.Documents.Inline)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Contains(System.Windows.Documents.Inline)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.Contains(`0)
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Contains(System.Windows.Documents.Inline)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Contains(System.Windows.Documents.Inline)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.Contains(`0)
   name: Contains(Inline)
-  nameWithType: TextElementCollection<Inline>.Contains(Inline)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Contains(System.Windows.Documents.Inline)
-  nameWithType.vb: TextElementCollection(Of Inline).Contains(Inline)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Contains(System.Windows.Documents.Inline)
+  nameWithType: PresentationFrameworkCollection<Inline>.Contains(Inline)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Contains(System.Windows.Documents.Inline)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).Contains(Inline)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Contains(System.Windows.Documents.Inline)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Contains(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Contains(`0)
     name: Contains
-    nameWithType: TextElementCollection<Inline>.Contains
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Contains
+    nameWithType: PresentationFrameworkCollection<Inline>.Contains
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Contains
   - name: (
     nameWithType: (
     fullName: (
@@ -493,10 +640,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Contains(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Contains(`0)
     name: Contains
-    nameWithType: TextElementCollection(Of Inline).Contains
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Contains
+    nameWithType: PresentationFrameworkCollection(Of Inline).Contains
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Contains
   - name: (
     nameWithType: (
     fullName: (
@@ -507,63 +654,78 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Contains(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Contains(System.Object)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Contains(System.Object)
-  name: IList.Contains(Object)
-  nameWithType: TextElementCollection<Inline>.IList.Contains(Object)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Contains(System.Object)
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.IList.Contains(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Contains(System.Object)
-  name.vb: System.Collections.IList.Contains(Object)
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CopyTo(System.Array,System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CopyTo(System.Array,System.Int32)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.CopyTo(System.Array,System.Int32)
+  name: CopyTo(Array, Int32)
+  nameWithType: PresentationFrameworkCollection<Inline>.CopyTo(Array, Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.CopyTo(System.Array, System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).CopyTo(Array, Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).CopyTo(System.Array, System.Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Contains(System.Object)
-    name: IList.Contains
-    nameWithType: TextElementCollection<Inline>.IList.Contains
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Contains
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: PresentationFrameworkCollection<Inline>.CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.CopyTo
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Contains(System.Object)
-    name: System.Collections.IList.Contains
-    nameWithType: TextElementCollection(Of Inline).System.Collections.IList.Contains
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Contains
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: PresentationFrameworkCollection(Of Inline).CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).CopyTo
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.CopyTo(System.Windows.Documents.Inline[],System.Int32)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.CopyTo(System.Windows.Documents.Inline[],System.Int32)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.CopyTo(`0[],System.Int32)
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CopyTo(System.Windows.Documents.Inline[],System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.CopyTo(System.Windows.Documents.Inline[],System.Int32)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.CopyTo(`0[],System.Int32)
   name: CopyTo(Inline[], Int32)
-  nameWithType: TextElementCollection<Inline>.CopyTo(Inline[], Int32)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.CopyTo(System.Windows.Documents.Inline[], System.Int32)
-  nameWithType.vb: TextElementCollection(Of Inline).CopyTo(Inline(), Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).CopyTo(System.Windows.Documents.Inline(), System.Int32)
+  nameWithType: PresentationFrameworkCollection<Inline>.CopyTo(Inline[], Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.CopyTo(System.Windows.Documents.Inline[], System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).CopyTo(Inline(), Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).CopyTo(System.Windows.Documents.Inline(), System.Int32)
   name.vb: CopyTo(Inline(), Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.CopyTo(`0[],System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(`0[],System.Int32)
     name: CopyTo
-    nameWithType: TextElementCollection<Inline>.CopyTo
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.CopyTo
+    nameWithType: PresentationFrameworkCollection<Inline>.CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.CopyTo
   - name: (
     nameWithType: (
     fullName: (
@@ -586,10 +748,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.CopyTo(`0[],System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(`0[],System.Int32)
     name: CopyTo
-    nameWithType: TextElementCollection(Of Inline).CopyTo
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).CopyTo
+    nameWithType: PresentationFrameworkCollection(Of Inline).CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).CopyTo
   - name: (
     nameWithType: (
     fullName: (
@@ -611,152 +773,59 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-  name: ICollection.CopyTo(Array, Int32)
-  nameWithType: TextElementCollection<Inline>.ICollection.CopyTo(Array, Int32)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.ICollection.CopyTo(System.Array, System.Int32)
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.ICollection.CopyTo(Array, Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.ICollection.CopyTo(System.Array, System.Int32)
-  name.vb: System.Collections.ICollection.CopyTo(Array, Int32)
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IndexOf(System.Windows.Documents.Inline)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.IndexOf(System.Windows.Documents.Inline)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.IndexOf(`0)
+  name: IndexOf(Inline)
+  nameWithType: PresentationFrameworkCollection<Inline>.IndexOf(Inline)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.IndexOf(System.Windows.Documents.Inline)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).IndexOf(Inline)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).IndexOf(System.Windows.Documents.Inline)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-    name: ICollection.CopyTo
-    nameWithType: TextElementCollection<Inline>.ICollection.CopyTo
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.ICollection.CopyTo
+  - uid: System.Windows.PresentationFrameworkCollection`1.IndexOf(`0)
+    name: IndexOf
+    nameWithType: PresentationFrameworkCollection<Inline>.IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.IndexOf
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Array
-    name: Array
-    nameWithType: Array
-    fullName: System.Array
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-    name: System.Collections.ICollection.CopyTo
-    nameWithType: TextElementCollection(Of Inline).System.Collections.ICollection.CopyTo
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.ICollection.CopyTo
+  - uid: System.Windows.PresentationFrameworkCollection`1.IndexOf(`0)
+    name: IndexOf
+    nameWithType: PresentationFrameworkCollection(Of Inline).IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).IndexOf
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Array
-    name: Array
-    nameWithType: Array
-    fullName: System.Array
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.GetEnumerator
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.GetEnumerator
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.GetEnumerator
-  name: GetEnumerator()
-  nameWithType: TextElementCollection<Inline>.GetEnumerator()
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.GetEnumerator()
-  nameWithType.vb: TextElementCollection(Of Inline).GetEnumerator()
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).GetEnumerator()
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Insert(System.Int32,System.Windows.Documents.Inline)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Insert(System.Int32,System.Windows.Documents.Inline)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.Insert(System.Int32,`0)
+  name: Insert(Int32, Inline)
+  nameWithType: PresentationFrameworkCollection<Inline>.Insert(Int32, Inline)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Insert(System.Int32, System.Windows.Documents.Inline)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).Insert(Int32, Inline)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Insert(System.Int32, System.Windows.Documents.Inline)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.GetEnumerator
-    name: GetEnumerator
-    nameWithType: TextElementCollection<Inline>.GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.GetEnumerator
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.GetEnumerator
-    name: GetEnumerator
-    nameWithType: TextElementCollection(Of Inline).GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).GetEnumerator
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#IndexOf(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#IndexOf(System.Object)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IndexOf(System.Object)
-  name: IList.IndexOf(Object)
-  nameWithType: TextElementCollection<Inline>.IList.IndexOf(Object)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.IndexOf(System.Object)
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.IList.IndexOf(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.IndexOf(System.Object)
-  name.vb: System.Collections.IList.IndexOf(Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IndexOf(System.Object)
-    name: IList.IndexOf
-    nameWithType: TextElementCollection<Inline>.IList.IndexOf
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.IndexOf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IndexOf(System.Object)
-    name: System.Collections.IList.IndexOf
-    nameWithType: TextElementCollection(Of Inline).System.Collections.IList.IndexOf
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.IndexOf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Insert(System.Int32,System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Insert(System.Int32,System.Object)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
-  name: IList.Insert(Int32, Object)
-  nameWithType: TextElementCollection<Inline>.IList.Insert(Int32, Object)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Insert(System.Int32, System.Object)
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.IList.Insert(Int32, Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Insert(System.Int32, System.Object)
-  name.vb: System.Collections.IList.Insert(Int32, Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
-    name: IList.Insert
-    nameWithType: TextElementCollection<Inline>.IList.Insert
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Insert
+  - uid: System.Windows.PresentationFrameworkCollection`1.Insert(System.Int32,`0)
+    name: Insert
+    nameWithType: PresentationFrameworkCollection<Inline>.Insert
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Insert
   - name: (
     nameWithType: (
     fullName: (
@@ -768,19 +837,18 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
-    name: System.Collections.IList.Insert
-    nameWithType: TextElementCollection(Of Inline).System.Collections.IList.Insert
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Insert
+  - uid: System.Windows.PresentationFrameworkCollection`1.Insert(System.Int32,`0)
+    name: Insert
+    nameWithType: PresentationFrameworkCollection(Of Inline).Insert
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Insert
   - name: (
     nameWithType: (
     fullName: (
@@ -792,28 +860,27 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - uid: System.Windows.Documents.Inline
+    name: Inline
+    nameWithType: Inline
+    fullName: System.Windows.Documents.Inline
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Remove(System.Windows.Documents.Inline)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.Remove(System.Windows.Documents.Inline)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.Remove(`0)
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Remove(System.Windows.Documents.Inline)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.Remove(System.Windows.Documents.Inline)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.Remove(`0)
   name: Remove(Inline)
-  nameWithType: TextElementCollection<Inline>.Remove(Inline)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Remove(System.Windows.Documents.Inline)
-  nameWithType.vb: TextElementCollection(Of Inline).Remove(Inline)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Remove(System.Windows.Documents.Inline)
+  nameWithType: PresentationFrameworkCollection<Inline>.Remove(Inline)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Remove(System.Windows.Documents.Inline)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).Remove(Inline)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Remove(System.Windows.Documents.Inline)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Remove(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Remove(`0)
     name: Remove
-    nameWithType: TextElementCollection<Inline>.Remove
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.Remove
+    nameWithType: PresentationFrameworkCollection<Inline>.Remove
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.Remove
   - name: (
     nameWithType: (
     fullName: (
@@ -825,10 +892,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Remove(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Remove(`0)
     name: Remove
-    nameWithType: TextElementCollection(Of Inline).Remove
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).Remove
+    nameWithType: PresentationFrameworkCollection(Of Inline).Remove
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).Remove
   - name: (
     nameWithType: (
     fullName: (
@@ -839,62 +906,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Remove(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IList#Remove(System.Object)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Remove(System.Object)
-  name: IList.Remove(Object)
-  nameWithType: TextElementCollection<Inline>.IList.Remove(Object)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Remove(System.Object)
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.IList.Remove(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Remove(System.Object)
-  name.vb: System.Collections.IList.Remove(Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Remove(System.Object)
-    name: IList.Remove
-    nameWithType: TextElementCollection<Inline>.IList.Remove
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IList.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Remove(System.Object)
-    name: System.Collections.IList.Remove
-    nameWithType: TextElementCollection(Of Inline).System.Collections.IList.Remove
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.RemoveAt(System.Int32)
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.RemoveAt(System.Int32)
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.RemoveAt(System.Int32)
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.RemoveAt(System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.RemoveAt(System.Int32)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.RemoveAt(System.Int32)
   name: RemoveAt(Int32)
-  nameWithType: TextElementCollection<Inline>.RemoveAt(Int32)
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.RemoveAt(System.Int32)
-  nameWithType.vb: TextElementCollection(Of Inline).RemoveAt(Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).RemoveAt(System.Int32)
+  nameWithType: PresentationFrameworkCollection<Inline>.RemoveAt(Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.RemoveAt(System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).RemoveAt(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).RemoveAt(System.Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.RemoveAt(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.RemoveAt(System.Int32)
     name: RemoveAt
-    nameWithType: TextElementCollection<Inline>.RemoveAt
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.RemoveAt
+    nameWithType: PresentationFrameworkCollection<Inline>.RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.RemoveAt
   - name: (
     nameWithType: (
     fullName: (
@@ -907,10 +932,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.RemoveAt(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.RemoveAt(System.Int32)
     name: RemoveAt
-    nameWithType: TextElementCollection(Of Inline).RemoveAt
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).RemoveAt
+    nameWithType: PresentationFrameworkCollection(Of Inline).RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).RemoveAt
   - name: (
     nameWithType: (
     fullName: (
@@ -922,21 +947,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IEnumerable#GetEnumerator
-  commentId: M:System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}.System#Collections#IEnumerable#GetEnumerator
-  parent: System.Windows.Documents.TextElementCollection{System.Windows.Documents.Inline}
-  definition: System.Windows.Documents.TextElementCollection`1.System#Collections#IEnumerable#GetEnumerator
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IEnumerable#GetEnumerator
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IEnumerable#GetEnumerator
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.System#Collections#IEnumerable#GetEnumerator
   name: IEnumerable.GetEnumerator()
-  nameWithType: TextElementCollection<Inline>.IEnumerable.GetEnumerator()
-  fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IEnumerable.GetEnumerator()
-  nameWithType.vb: TextElementCollection(Of Inline).System.Collections.IEnumerable.GetEnumerator()
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IEnumerable.GetEnumerator()
+  nameWithType: PresentationFrameworkCollection<Inline>.IEnumerable.GetEnumerator()
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IEnumerable.GetEnumerator()
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).System.Collections.IEnumerable.GetEnumerator()
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IEnumerable.GetEnumerator()
   name.vb: System.Collections.IEnumerable.GetEnumerator()
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IEnumerable#GetEnumerator
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IEnumerable#GetEnumerator
     name: IEnumerable.GetEnumerator
-    nameWithType: TextElementCollection<Inline>.IEnumerable.GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection<System.Windows.Documents.Inline>.System.Collections.IEnumerable.GetEnumerator
+    nameWithType: PresentationFrameworkCollection<Inline>.IEnumerable.GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IEnumerable.GetEnumerator
   - name: (
     nameWithType: (
     fullName: (
@@ -944,13 +969,782 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IEnumerable#GetEnumerator
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IEnumerable#GetEnumerator
     name: System.Collections.IEnumerable.GetEnumerator
-    nameWithType: TextElementCollection(Of Inline).System.Collections.IEnumerable.GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection(Of System.Windows.Documents.Inline).System.Collections.IEnumerable.GetEnumerator
+    nameWithType: PresentationFrameworkCollection(Of Inline).System.Collections.IEnumerable.GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IEnumerable.GetEnumerator
   - name: (
     nameWithType: (
     fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Remove(System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Remove(System.Object)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Remove(System.Object)
+  name: IList.Remove(Object)
+  nameWithType: PresentationFrameworkCollection<Inline>.IList.Remove(Object)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Remove(System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Remove(Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Remove(System.Object)
+  name.vb: System.Collections.IList.Remove(Object)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Remove(System.Object)
+    name: IList.Remove
+    nameWithType: PresentationFrameworkCollection<Inline>.IList.Remove
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Remove
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Remove(System.Object)
+    name: System.Collections.IList.Remove
+    nameWithType: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Remove
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Remove
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#RemoveAt(System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#RemoveAt(System.Int32)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#RemoveAt(System.Int32)
+  name: IList.RemoveAt(Int32)
+  nameWithType: PresentationFrameworkCollection<Inline>.IList.RemoveAt(Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.RemoveAt(System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).System.Collections.IList.RemoveAt(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.RemoveAt(System.Int32)
+  name.vb: System.Collections.IList.RemoveAt(Int32)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#RemoveAt(System.Int32)
+    name: IList.RemoveAt
+    nameWithType: PresentationFrameworkCollection<Inline>.IList.RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.RemoveAt
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#RemoveAt(System.Int32)
+    name: System.Collections.IList.RemoveAt
+    nameWithType: PresentationFrameworkCollection(Of Inline).System.Collections.IList.RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.RemoveAt
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Insert(System.Int32,System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Insert(System.Int32,System.Object)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
+  name: IList.Insert(Int32, Object)
+  nameWithType: PresentationFrameworkCollection<Inline>.IList.Insert(Int32, Object)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Insert(System.Int32, System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Insert(Int32, Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Insert(System.Int32, System.Object)
+  name.vb: System.Collections.IList.Insert(Int32, Object)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
+    name: IList.Insert
+    nameWithType: PresentationFrameworkCollection<Inline>.IList.Insert
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Insert
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
+    name: System.Collections.IList.Insert
+    nameWithType: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Insert
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Insert
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#IndexOf(System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#IndexOf(System.Object)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#IndexOf(System.Object)
+  name: IList.IndexOf(Object)
+  nameWithType: PresentationFrameworkCollection<Inline>.IList.IndexOf(Object)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.IndexOf(System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).System.Collections.IList.IndexOf(Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.IndexOf(System.Object)
+  name.vb: System.Collections.IList.IndexOf(Object)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#IndexOf(System.Object)
+    name: IList.IndexOf
+    nameWithType: PresentationFrameworkCollection<Inline>.IList.IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.IndexOf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#IndexOf(System.Object)
+    name: System.Collections.IList.IndexOf
+    nameWithType: PresentationFrameworkCollection(Of Inline).System.Collections.IList.IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.IndexOf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Contains(System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Contains(System.Object)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Contains(System.Object)
+  name: IList.Contains(Object)
+  nameWithType: PresentationFrameworkCollection<Inline>.IList.Contains(Object)
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Contains(System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Contains(Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Contains(System.Object)
+  name.vb: System.Collections.IList.Contains(Object)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Contains(System.Object)
+    name: IList.Contains
+    nameWithType: PresentationFrameworkCollection<Inline>.IList.Contains
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Contains
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Contains(System.Object)
+    name: System.Collections.IList.Contains
+    nameWithType: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Contains
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Contains
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Item(System.Int32)
+  commentId: P:System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}.System#Collections#IList#Item(System.Int32)
+  parent: System.Windows.PresentationFrameworkCollection{System.Windows.Documents.Inline}
+  definition: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Item(System.Int32)
+  name: IList.Item[Int32]
+  nameWithType: PresentationFrameworkCollection<Inline>.IList.Item[Int32]
+  fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Item[System.Int32]
+  nameWithType.vb: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Item(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Item(System.Int32)
+  name.vb: System.Collections.IList.Item(Int32)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Item(System.Int32)
+    name: IList.Item
+    nameWithType: PresentationFrameworkCollection<Inline>.IList.Item
+    fullName: System.Windows.PresentationFrameworkCollection<System.Windows.Documents.Inline>.System.Collections.IList.Item
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Item(System.Int32)
+    name: System.Collections.IList.Item
+    nameWithType: PresentationFrameworkCollection(Of Inline).System.Collections.IList.Item
+    fullName: System.Windows.PresentationFrameworkCollection(Of System.Windows.Documents.Inline).System.Collections.IList.Item
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetValue(DependencyProperty)
+  nameWithType: DependencyObject.GetValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
+    name: GetValue
+    nameWithType: DependencyObject.GetValue
+    fullName: System.Windows.DependencyObject.GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
+    name: GetValue
+    nameWithType: DependencyObject.GetValue
+    fullName: System.Windows.DependencyObject.GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetCurrentValue(DependencyProperty, Object)
+  nameWithType: DependencyObject.SetCurrentValue(DependencyProperty, Object)
+  fullName: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
+    name: SetCurrentValue
+    nameWithType: DependencyObject.SetCurrentValue
+    fullName: System.Windows.DependencyObject.SetCurrentValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
+    name: SetCurrentValue
+    nameWithType: DependencyObject.SetCurrentValue
+    fullName: System.Windows.DependencyObject.SetCurrentValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: ReadLocalValue(DependencyProperty)
+  nameWithType: DependencyObject.ReadLocalValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
+    name: ReadLocalValue
+    nameWithType: DependencyObject.ReadLocalValue
+    fullName: System.Windows.DependencyObject.ReadLocalValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
+    name: ReadLocalValue
+    nameWithType: DependencyObject.ReadLocalValue
+    fullName: System.Windows.DependencyObject.ReadLocalValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetValue(DependencyProperty, Object)
+  nameWithType: DependencyObject.SetValue(DependencyProperty, Object)
+  fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetValue(DependencyPropertyKey, Object)
+  nameWithType: DependencyObject.SetValue(DependencyPropertyKey, Object)
+  fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  commentId: M:System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  parent: System.Windows.DependencyObject
+  name: OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  nameWithType: DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  fullName: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: CoerceValue(DependencyProperty)
+  nameWithType: DependencyObject.CoerceValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
+    name: CoerceValue
+    nameWithType: DependencyObject.CoerceValue
+    fullName: System.Windows.DependencyObject.CoerceValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
+    name: CoerceValue
+    nameWithType: DependencyObject.CoerceValue
+    fullName: System.Windows.DependencyObject.CoerceValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.Dispatcher
+  commentId: P:System.Windows.DependencyObject.Dispatcher
+  parent: System.Windows.DependencyObject
+  name: Dispatcher
+  nameWithType: DependencyObject.Dispatcher
+  fullName: System.Windows.DependencyObject.Dispatcher
+- uid: System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
+  commentId: M:System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
+  parent: System.Windows.DependencyObject
+  name: INTERNAL_OnAttachedToVisualTree()
+  nameWithType: DependencyObject.INTERNAL_OnAttachedToVisualTree()
+  fullName: System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree()
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
+    name: INTERNAL_OnAttachedToVisualTree
+    nameWithType: DependencyObject.INTERNAL_OnAttachedToVisualTree
+    fullName: System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
+    name: INTERNAL_OnAttachedToVisualTree
+    nameWithType: DependencyObject.INTERNAL_OnAttachedToVisualTree
+    fullName: System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
+  commentId: M:System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
+  parent: System.Windows.DependencyObject
+  name: INTERNAL_OnDetachedFromVisualTree()
+  nameWithType: DependencyObject.INTERNAL_OnDetachedFromVisualTree()
+  fullName: System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree()
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
+    name: INTERNAL_OnDetachedFromVisualTree
+    nameWithType: DependencyObject.INTERNAL_OnDetachedFromVisualTree
+    fullName: System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
+    name: INTERNAL_OnDetachedFromVisualTree
+    nameWithType: DependencyObject.INTERNAL_OnDetachedFromVisualTree
+    fullName: System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: ClearValue(DependencyProperty)
+  nameWithType: DependencyObject.ClearValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  commentId: M:System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  parent: System.Windows.DependencyObject
+  name: ClearValue(DependencyPropertyKey)
+  nameWithType: DependencyObject.ClearValue(DependencyPropertyKey)
+  fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.CheckAccess
+  commentId: M:System.Windows.DependencyObject.CheckAccess
+  parent: System.Windows.DependencyObject
+  name: CheckAccess()
+  nameWithType: DependencyObject.CheckAccess()
+  fullName: System.Windows.DependencyObject.CheckAccess()
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.CheckAccess
+    name: CheckAccess
+    nameWithType: DependencyObject.CheckAccess
+    fullName: System.Windows.DependencyObject.CheckAccess
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.CheckAccess
+    name: CheckAccess
+    nameWithType: DependencyObject.CheckAccess
+    fullName: System.Windows.DependencyObject.CheckAccess
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  commentId: M:System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  parent: System.Windows.DependencyObject
+  name: GetAnimationBaseValue(DependencyProperty)
+  nameWithType: DependencyObject.GetAnimationBaseValue(DependencyProperty)
+  fullName: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
+    name: GetAnimationBaseValue
+    nameWithType: DependencyObject.GetAnimationBaseValue
+    fullName: System.Windows.DependencyObject.GetAnimationBaseValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
   - name: )
     nameWithType: )
     fullName: )
@@ -1233,40 +2027,52 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
   nameWithType: System
   fullName: System
+- uid: System.Windows
+  commentId: N:System.Windows
+  name: System.Windows
+  nameWithType: System.Windows
+  fullName: System.Windows
+- uid: System.Windows.PresentationFrameworkCollection`1
+  commentId: T:System.Windows.PresentationFrameworkCollection`1
+  name: PresentationFrameworkCollection<T>
+  nameWithType: PresentationFrameworkCollection<T>
+  fullName: System.Windows.PresentationFrameworkCollection<T>
+  nameWithType.vb: PresentationFrameworkCollection(Of T)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T)
+  name.vb: PresentationFrameworkCollection(Of T)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1
+    name: PresentationFrameworkCollection
+    nameWithType: PresentationFrameworkCollection
+    fullName: System.Windows.PresentationFrameworkCollection
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1
+    name: PresentationFrameworkCollection
+    nameWithType: PresentationFrameworkCollection
+    fullName: System.Windows.PresentationFrameworkCollection
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.Documents.TextElementCollection`1
   commentId: T:System.Windows.Documents.TextElementCollection`1
   name: TextElementCollection<T>
@@ -1303,6 +2109,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Collections.Generic.IList`1
+  commentId: T:System.Collections.Generic.IList`1
+  isExternal: true
+  name: IList<T>
+  nameWithType: IList<T>
+  fullName: System.Collections.Generic.IList<T>
+  nameWithType.vb: IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
+  name.vb: IList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IList`1
+    name: IList
+    nameWithType: IList
+    fullName: System.Collections.Generic.IList
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: System.Collections.Generic.ICollection`1
   commentId: T:System.Collections.Generic.ICollection`1
   isExternal: true
@@ -1342,11 +2192,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: System.Collections.Generic.IEnumerable`1
   commentId: T:System.Collections.Generic.IEnumerable`1
   isExternal: true
@@ -1392,34 +2237,34 @@ references:
   name: System.Collections
   nameWithType: System.Collections
   fullName: System.Collections
-- uid: System.Windows.Documents.TextElementCollection`1.Count
-  commentId: P:System.Windows.Documents.TextElementCollection`1.Count
+- uid: System.Windows.PresentationFrameworkCollection`1.CountProperty
+  commentId: F:System.Windows.PresentationFrameworkCollection`1.CountProperty
+  name: CountProperty
+  nameWithType: PresentationFrameworkCollection<T>.CountProperty
+  fullName: System.Windows.PresentationFrameworkCollection<T>.CountProperty
+  nameWithType.vb: PresentationFrameworkCollection(Of T).CountProperty
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).CountProperty
+- uid: System.Windows.PresentationFrameworkCollection`1.Count
+  commentId: P:System.Windows.PresentationFrameworkCollection`1.Count
   name: Count
-  nameWithType: TextElementCollection<T>.Count
-  fullName: System.Windows.Documents.TextElementCollection<T>.Count
-  nameWithType.vb: TextElementCollection(Of T).Count
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).Count
-- uid: System.Windows.Documents.TextElementCollection`1.IsReadOnly
-  commentId: P:System.Windows.Documents.TextElementCollection`1.IsReadOnly
-  name: IsReadOnly
-  nameWithType: TextElementCollection<T>.IsReadOnly
-  fullName: System.Windows.Documents.TextElementCollection<T>.IsReadOnly
-  nameWithType.vb: TextElementCollection(Of T).IsReadOnly
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).IsReadOnly
-- uid: System.Windows.Documents.TextElementCollection`1.Item(System.Int32)
-  commentId: P:System.Windows.Documents.TextElementCollection`1.Item(System.Int32)
+  nameWithType: PresentationFrameworkCollection<T>.Count
+  fullName: System.Windows.PresentationFrameworkCollection<T>.Count
+  nameWithType.vb: PresentationFrameworkCollection(Of T).Count
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).Count
+- uid: System.Windows.PresentationFrameworkCollection`1.Item(System.Int32)
+  commentId: P:System.Windows.PresentationFrameworkCollection`1.Item(System.Int32)
   isExternal: true
   name: Item[Int32]
-  nameWithType: TextElementCollection<T>.Item[Int32]
-  fullName: System.Windows.Documents.TextElementCollection<T>.Item[System.Int32]
-  nameWithType.vb: TextElementCollection(Of T).Item(Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).Item(System.Int32)
+  nameWithType: PresentationFrameworkCollection<T>.Item[Int32]
+  fullName: System.Windows.PresentationFrameworkCollection<T>.Item[System.Int32]
+  nameWithType.vb: PresentationFrameworkCollection(Of T).Item(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).Item(System.Int32)
   name.vb: Item(Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Item(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Item(System.Int32)
     name: Item
-    nameWithType: TextElementCollection<T>.Item
-    fullName: System.Windows.Documents.TextElementCollection<T>.Item
+    nameWithType: PresentationFrameworkCollection<T>.Item
+    fullName: System.Windows.PresentationFrameworkCollection<T>.Item
   - name: '['
     nameWithType: '['
     fullName: '['
@@ -1432,10 +2277,10 @@ references:
     nameWithType: ']'
     fullName: ']'
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Item(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Item(System.Int32)
     name: Item
-    nameWithType: TextElementCollection(Of T).Item
-    fullName: System.Windows.Documents.TextElementCollection(Of T).Item
+    nameWithType: PresentationFrameworkCollection(Of T).Item
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).Item
   - name: (
     nameWithType: (
     fullName: (
@@ -1447,42 +2292,75 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IsFixedSize
-  commentId: P:System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IsFixedSize
-  name: IList.IsFixedSize
-  nameWithType: TextElementCollection<T>.IList.IsFixedSize
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.IsFixedSize
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.IList.IsFixedSize
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.IsFixedSize
-  name.vb: System.Collections.IList.IsFixedSize
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#SyncRoot
-  commentId: P:System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#SyncRoot
-  name: ICollection.SyncRoot
-  nameWithType: TextElementCollection<T>.ICollection.SyncRoot
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.ICollection.SyncRoot
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.ICollection.SyncRoot
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.ICollection.SyncRoot
-  name.vb: System.Collections.ICollection.SyncRoot
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#IsSynchronized
-  commentId: P:System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#IsSynchronized
-  name: ICollection.IsSynchronized
-  nameWithType: TextElementCollection<T>.ICollection.IsSynchronized
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.ICollection.IsSynchronized
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.ICollection.IsSynchronized
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.ICollection.IsSynchronized
-  name.vb: System.Collections.ICollection.IsSynchronized
-- uid: System.Windows.Documents.TextElementCollection`1.Add(`0)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.Add(`0)
+- uid: System.Windows.PresentationFrameworkCollection`1.IsFixedSize
+  commentId: P:System.Windows.PresentationFrameworkCollection`1.IsFixedSize
+  name: IsFixedSize
+  nameWithType: PresentationFrameworkCollection<T>.IsFixedSize
+  fullName: System.Windows.PresentationFrameworkCollection<T>.IsFixedSize
+  nameWithType.vb: PresentationFrameworkCollection(Of T).IsFixedSize
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).IsFixedSize
+- uid: System.Windows.PresentationFrameworkCollection`1.IsReadOnly
+  commentId: P:System.Windows.PresentationFrameworkCollection`1.IsReadOnly
+  name: IsReadOnly
+  nameWithType: PresentationFrameworkCollection<T>.IsReadOnly
+  fullName: System.Windows.PresentationFrameworkCollection<T>.IsReadOnly
+  nameWithType.vb: PresentationFrameworkCollection(Of T).IsReadOnly
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).IsReadOnly
+- uid: System.Windows.PresentationFrameworkCollection`1.IsSynchronized
+  commentId: P:System.Windows.PresentationFrameworkCollection`1.IsSynchronized
+  name: IsSynchronized
+  nameWithType: PresentationFrameworkCollection<T>.IsSynchronized
+  fullName: System.Windows.PresentationFrameworkCollection<T>.IsSynchronized
+  nameWithType.vb: PresentationFrameworkCollection(Of T).IsSynchronized
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).IsSynchronized
+- uid: System.Windows.PresentationFrameworkCollection`1.SyncRoot
+  commentId: P:System.Windows.PresentationFrameworkCollection`1.SyncRoot
+  name: SyncRoot
+  nameWithType: PresentationFrameworkCollection<T>.SyncRoot
+  fullName: System.Windows.PresentationFrameworkCollection<T>.SyncRoot
+  nameWithType.vb: PresentationFrameworkCollection(Of T).SyncRoot
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).SyncRoot
+- uid: System.Windows.PresentationFrameworkCollection`1.GetEnumerator
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.GetEnumerator
+  name: GetEnumerator()
+  nameWithType: PresentationFrameworkCollection<T>.GetEnumerator()
+  fullName: System.Windows.PresentationFrameworkCollection<T>.GetEnumerator()
+  nameWithType.vb: PresentationFrameworkCollection(Of T).GetEnumerator()
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: PresentationFrameworkCollection<T>.GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection<T>.GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.GetEnumerator
+    name: GetEnumerator
+    nameWithType: PresentationFrameworkCollection(Of T).GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).GetEnumerator
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection`1.Add(`0)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.Add(`0)
   name: Add(T)
-  nameWithType: TextElementCollection<T>.Add(T)
-  fullName: System.Windows.Documents.TextElementCollection<T>.Add(T)
-  nameWithType.vb: TextElementCollection(Of T).Add(T)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).Add(T)
+  nameWithType: PresentationFrameworkCollection<T>.Add(T)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.Add(T)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).Add(T)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).Add(T)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Add(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Add(`0)
     name: Add
-    nameWithType: TextElementCollection<T>.Add
-    fullName: System.Windows.Documents.TextElementCollection<T>.Add
+    nameWithType: PresentationFrameworkCollection<T>.Add
+    fullName: System.Windows.PresentationFrameworkCollection<T>.Add
   - name: (
     nameWithType: (
     fullName: (
@@ -1493,10 +2371,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Add(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Add(`0)
     name: Add
-    nameWithType: TextElementCollection(Of T).Add
-    fullName: System.Windows.Documents.TextElementCollection(Of T).Add
+    nameWithType: PresentationFrameworkCollection(Of T).Add
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).Add
   - name: (
     nameWithType: (
     fullName: (
@@ -1506,59 +2384,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Add(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Add(System.Object)
-  isExternal: true
-  name: IList.Add(Object)
-  nameWithType: TextElementCollection<T>.IList.Add(Object)
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Add(System.Object)
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.IList.Add(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Add(System.Object)
-  name.vb: System.Collections.IList.Add(Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Add(System.Object)
-    name: IList.Add
-    nameWithType: TextElementCollection<T>.IList.Add
-    fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Add
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Add(System.Object)
-    name: System.Collections.IList.Add
-    nameWithType: TextElementCollection(Of T).System.Collections.IList.Add
-    fullName: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Add
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.Clear
-  commentId: M:System.Windows.Documents.TextElementCollection`1.Clear
+- uid: System.Windows.PresentationFrameworkCollection`1.Clear
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.Clear
   name: Clear()
-  nameWithType: TextElementCollection<T>.Clear()
-  fullName: System.Windows.Documents.TextElementCollection<T>.Clear()
-  nameWithType.vb: TextElementCollection(Of T).Clear()
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).Clear()
+  nameWithType: PresentationFrameworkCollection<T>.Clear()
+  fullName: System.Windows.PresentationFrameworkCollection<T>.Clear()
+  nameWithType.vb: PresentationFrameworkCollection(Of T).Clear()
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).Clear()
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Clear
+  - uid: System.Windows.PresentationFrameworkCollection`1.Clear
     name: Clear
-    nameWithType: TextElementCollection<T>.Clear
-    fullName: System.Windows.Documents.TextElementCollection<T>.Clear
+    nameWithType: PresentationFrameworkCollection<T>.Clear
+    fullName: System.Windows.PresentationFrameworkCollection<T>.Clear
   - name: (
     nameWithType: (
     fullName: (
@@ -1566,28 +2403,28 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Clear
+  - uid: System.Windows.PresentationFrameworkCollection`1.Clear
     name: Clear
-    nameWithType: TextElementCollection(Of T).Clear
-    fullName: System.Windows.Documents.TextElementCollection(Of T).Clear
+    nameWithType: PresentationFrameworkCollection(Of T).Clear
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).Clear
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.Contains(`0)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.Contains(`0)
+- uid: System.Windows.PresentationFrameworkCollection`1.Contains(`0)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.Contains(`0)
   name: Contains(T)
-  nameWithType: TextElementCollection<T>.Contains(T)
-  fullName: System.Windows.Documents.TextElementCollection<T>.Contains(T)
-  nameWithType.vb: TextElementCollection(Of T).Contains(T)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).Contains(T)
+  nameWithType: PresentationFrameworkCollection<T>.Contains(T)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.Contains(T)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).Contains(T)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).Contains(T)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Contains(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Contains(`0)
     name: Contains
-    nameWithType: TextElementCollection<T>.Contains
-    fullName: System.Windows.Documents.TextElementCollection<T>.Contains
+    nameWithType: PresentationFrameworkCollection<T>.Contains
+    fullName: System.Windows.PresentationFrameworkCollection<T>.Contains
   - name: (
     nameWithType: (
     fullName: (
@@ -1598,10 +2435,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Contains(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Contains(`0)
     name: Contains
-    nameWithType: TextElementCollection(Of T).Contains
-    fullName: System.Windows.Documents.TextElementCollection(Of T).Contains
+    nameWithType: PresentationFrameworkCollection(Of T).Contains
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).Contains
   - name: (
     nameWithType: (
     fullName: (
@@ -1611,61 +2448,76 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Contains(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Contains(System.Object)
+- uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(System.Array,System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.CopyTo(System.Array,System.Int32)
   isExternal: true
-  name: IList.Contains(Object)
-  nameWithType: TextElementCollection<T>.IList.Contains(Object)
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Contains(System.Object)
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.IList.Contains(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Contains(System.Object)
-  name.vb: System.Collections.IList.Contains(Object)
+  name: CopyTo(Array, Int32)
+  nameWithType: PresentationFrameworkCollection<T>.CopyTo(Array, Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.CopyTo(System.Array, System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).CopyTo(Array, Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).CopyTo(System.Array, System.Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Contains(System.Object)
-    name: IList.Contains
-    nameWithType: TextElementCollection<T>.IList.Contains
-    fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Contains
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: PresentationFrameworkCollection<T>.CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection<T>.CopyTo
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Contains(System.Object)
-    name: System.Collections.IList.Contains
-    nameWithType: TextElementCollection(Of T).System.Collections.IList.Contains
-    fullName: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Contains
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(System.Array,System.Int32)
+    name: CopyTo
+    nameWithType: PresentationFrameworkCollection(Of T).CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).CopyTo
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
+  - uid: System.Array
+    name: Array
+    nameWithType: Array
+    fullName: System.Array
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.CopyTo(`0[],System.Int32)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.CopyTo(`0[],System.Int32)
+- uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(`0[],System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.CopyTo(`0[],System.Int32)
   isExternal: true
   name: CopyTo(T[], Int32)
-  nameWithType: TextElementCollection<T>.CopyTo(T[], Int32)
-  fullName: System.Windows.Documents.TextElementCollection<T>.CopyTo(T[], System.Int32)
-  nameWithType.vb: TextElementCollection(Of T).CopyTo(T(), Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).CopyTo(T(), System.Int32)
+  nameWithType: PresentationFrameworkCollection<T>.CopyTo(T[], Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.CopyTo(T[], System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).CopyTo(T(), Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).CopyTo(T(), System.Int32)
   name.vb: CopyTo(T(), Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.CopyTo(`0[],System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(`0[],System.Int32)
     name: CopyTo
-    nameWithType: TextElementCollection<T>.CopyTo
-    fullName: System.Windows.Documents.TextElementCollection<T>.CopyTo
+    nameWithType: PresentationFrameworkCollection<T>.CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection<T>.CopyTo
   - name: (
     nameWithType: (
     fullName: (
@@ -1687,10 +2539,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.CopyTo(`0[],System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.CopyTo(`0[],System.Int32)
     name: CopyTo
-    nameWithType: TextElementCollection(Of T).CopyTo
-    fullName: System.Windows.Documents.TextElementCollection(Of T).CopyTo
+    nameWithType: PresentationFrameworkCollection(Of T).CopyTo
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).CopyTo
   - name: (
     nameWithType: (
     fullName: (
@@ -1711,147 +2563,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
+- uid: System.Windows.PresentationFrameworkCollection`1.IndexOf(`0)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.IndexOf(`0)
+  name: IndexOf(T)
+  nameWithType: PresentationFrameworkCollection<T>.IndexOf(T)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.IndexOf(T)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).IndexOf(T)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).IndexOf(T)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.IndexOf(`0)
+    name: IndexOf
+    nameWithType: PresentationFrameworkCollection<T>.IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection<T>.IndexOf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.IndexOf(`0)
+    name: IndexOf
+    nameWithType: PresentationFrameworkCollection(Of T).IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).IndexOf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection`1.Insert(System.Int32,`0)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.Insert(System.Int32,`0)
   isExternal: true
-  name: ICollection.CopyTo(Array, Int32)
-  nameWithType: TextElementCollection<T>.ICollection.CopyTo(Array, Int32)
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.ICollection.CopyTo(System.Array, System.Int32)
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.ICollection.CopyTo(Array, Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.ICollection.CopyTo(System.Array, System.Int32)
-  name.vb: System.Collections.ICollection.CopyTo(Array, Int32)
+  name: Insert(Int32, T)
+  nameWithType: PresentationFrameworkCollection<T>.Insert(Int32, T)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.Insert(System.Int32, T)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).Insert(Int32, T)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).Insert(System.Int32, T)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-    name: ICollection.CopyTo
-    nameWithType: TextElementCollection<T>.ICollection.CopyTo
-    fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.ICollection.CopyTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Array
-    name: Array
-    nameWithType: Array
-    fullName: System.Array
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#ICollection#CopyTo(System.Array,System.Int32)
-    name: System.Collections.ICollection.CopyTo
-    nameWithType: TextElementCollection(Of T).System.Collections.ICollection.CopyTo
-    fullName: System.Windows.Documents.TextElementCollection(Of T).System.Collections.ICollection.CopyTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Array
-    name: Array
-    nameWithType: Array
-    fullName: System.Array
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.GetEnumerator
-  commentId: M:System.Windows.Documents.TextElementCollection`1.GetEnumerator
-  name: GetEnumerator()
-  nameWithType: TextElementCollection<T>.GetEnumerator()
-  fullName: System.Windows.Documents.TextElementCollection<T>.GetEnumerator()
-  nameWithType.vb: TextElementCollection(Of T).GetEnumerator()
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).GetEnumerator()
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.GetEnumerator
-    name: GetEnumerator
-    nameWithType: TextElementCollection<T>.GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection<T>.GetEnumerator
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.GetEnumerator
-    name: GetEnumerator
-    nameWithType: TextElementCollection(Of T).GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection(Of T).GetEnumerator
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IndexOf(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IndexOf(System.Object)
-  isExternal: true
-  name: IList.IndexOf(Object)
-  nameWithType: TextElementCollection<T>.IList.IndexOf(Object)
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.IndexOf(System.Object)
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.IList.IndexOf(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.IndexOf(System.Object)
-  name.vb: System.Collections.IList.IndexOf(Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IndexOf(System.Object)
-    name: IList.IndexOf
-    nameWithType: TextElementCollection<T>.IList.IndexOf
-    fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.IndexOf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#IndexOf(System.Object)
-    name: System.Collections.IList.IndexOf
-    nameWithType: TextElementCollection(Of T).System.Collections.IList.IndexOf
-    fullName: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.IndexOf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
-  isExternal: true
-  name: IList.Insert(Int32, Object)
-  nameWithType: TextElementCollection<T>.IList.Insert(Int32, Object)
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Insert(System.Int32, System.Object)
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.IList.Insert(Int32, Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Insert(System.Int32, System.Object)
-  name.vb: System.Collections.IList.Insert(Int32, Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
-    name: IList.Insert
-    nameWithType: TextElementCollection<T>.IList.Insert
-    fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Insert
+  - uid: System.Windows.PresentationFrameworkCollection`1.Insert(System.Int32,`0)
+    name: Insert
+    nameWithType: PresentationFrameworkCollection<T>.Insert
+    fullName: System.Windows.PresentationFrameworkCollection<T>.Insert
   - name: (
     nameWithType: (
     fullName: (
@@ -1863,19 +2622,17 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
-    name: System.Collections.IList.Insert
-    nameWithType: TextElementCollection(Of T).System.Collections.IList.Insert
-    fullName: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Insert
+  - uid: System.Windows.PresentationFrameworkCollection`1.Insert(System.Int32,`0)
+    name: Insert
+    nameWithType: PresentationFrameworkCollection(Of T).Insert
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).Insert
   - name: (
     nameWithType: (
     fullName: (
@@ -1887,26 +2644,24 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - name: T
+    nameWithType: T
+    fullName: T
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.Remove(`0)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.Remove(`0)
+- uid: System.Windows.PresentationFrameworkCollection`1.Remove(`0)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.Remove(`0)
   name: Remove(T)
-  nameWithType: TextElementCollection<T>.Remove(T)
-  fullName: System.Windows.Documents.TextElementCollection<T>.Remove(T)
-  nameWithType.vb: TextElementCollection(Of T).Remove(T)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).Remove(T)
+  nameWithType: PresentationFrameworkCollection<T>.Remove(T)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.Remove(T)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).Remove(T)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).Remove(T)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.Remove(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Remove(`0)
     name: Remove
-    nameWithType: TextElementCollection<T>.Remove
-    fullName: System.Windows.Documents.TextElementCollection<T>.Remove
+    nameWithType: PresentationFrameworkCollection<T>.Remove
+    fullName: System.Windows.PresentationFrameworkCollection<T>.Remove
   - name: (
     nameWithType: (
     fullName: (
@@ -1917,10 +2672,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.Remove(`0)
+  - uid: System.Windows.PresentationFrameworkCollection`1.Remove(`0)
     name: Remove
-    nameWithType: TextElementCollection(Of T).Remove
-    fullName: System.Windows.Documents.TextElementCollection(Of T).Remove
+    nameWithType: PresentationFrameworkCollection(Of T).Remove
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).Remove
   - name: (
     nameWithType: (
     fullName: (
@@ -1930,60 +2685,19 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Remove(System.Object)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Remove(System.Object)
-  isExternal: true
-  name: IList.Remove(Object)
-  nameWithType: TextElementCollection<T>.IList.Remove(Object)
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Remove(System.Object)
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.IList.Remove(Object)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Remove(System.Object)
-  name.vb: System.Collections.IList.Remove(Object)
-  spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Remove(System.Object)
-    name: IList.Remove
-    nameWithType: TextElementCollection<T>.IList.Remove
-    fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IList.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IList#Remove(System.Object)
-    name: System.Collections.IList.Remove
-    nameWithType: TextElementCollection(Of T).System.Collections.IList.Remove
-    fullName: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IList.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.RemoveAt(System.Int32)
-  commentId: M:System.Windows.Documents.TextElementCollection`1.RemoveAt(System.Int32)
+- uid: System.Windows.PresentationFrameworkCollection`1.RemoveAt(System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.RemoveAt(System.Int32)
   isExternal: true
   name: RemoveAt(Int32)
-  nameWithType: TextElementCollection<T>.RemoveAt(Int32)
-  fullName: System.Windows.Documents.TextElementCollection<T>.RemoveAt(System.Int32)
-  nameWithType.vb: TextElementCollection(Of T).RemoveAt(Int32)
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).RemoveAt(System.Int32)
+  nameWithType: PresentationFrameworkCollection<T>.RemoveAt(Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.RemoveAt(System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).RemoveAt(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).RemoveAt(System.Int32)
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.RemoveAt(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.RemoveAt(System.Int32)
     name: RemoveAt
-    nameWithType: TextElementCollection<T>.RemoveAt
-    fullName: System.Windows.Documents.TextElementCollection<T>.RemoveAt
+    nameWithType: PresentationFrameworkCollection<T>.RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection<T>.RemoveAt
   - name: (
     nameWithType: (
     fullName: (
@@ -1996,10 +2710,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.RemoveAt(System.Int32)
+  - uid: System.Windows.PresentationFrameworkCollection`1.RemoveAt(System.Int32)
     name: RemoveAt
-    nameWithType: TextElementCollection(Of T).RemoveAt
-    fullName: System.Windows.Documents.TextElementCollection(Of T).RemoveAt
+    nameWithType: PresentationFrameworkCollection(Of T).RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).RemoveAt
   - name: (
     nameWithType: (
     fullName: (
@@ -2011,19 +2725,19 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IEnumerable#GetEnumerator
-  commentId: M:System.Windows.Documents.TextElementCollection`1.System#Collections#IEnumerable#GetEnumerator
+- uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IEnumerable#GetEnumerator
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.System#Collections#IEnumerable#GetEnumerator
   name: IEnumerable.GetEnumerator()
-  nameWithType: TextElementCollection<T>.IEnumerable.GetEnumerator()
-  fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IEnumerable.GetEnumerator()
-  nameWithType.vb: TextElementCollection(Of T).System.Collections.IEnumerable.GetEnumerator()
-  fullName.vb: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IEnumerable.GetEnumerator()
+  nameWithType: PresentationFrameworkCollection<T>.IEnumerable.GetEnumerator()
+  fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IEnumerable.GetEnumerator()
+  nameWithType.vb: PresentationFrameworkCollection(Of T).System.Collections.IEnumerable.GetEnumerator()
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IEnumerable.GetEnumerator()
   name.vb: System.Collections.IEnumerable.GetEnumerator()
   spec.csharp:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IEnumerable#GetEnumerator
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IEnumerable#GetEnumerator
     name: IEnumerable.GetEnumerator
-    nameWithType: TextElementCollection<T>.IEnumerable.GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection<T>.System.Collections.IEnumerable.GetEnumerator
+    nameWithType: PresentationFrameworkCollection<T>.IEnumerable.GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IEnumerable.GetEnumerator
   - name: (
     nameWithType: (
     fullName: (
@@ -2031,27 +2745,30 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.Documents.TextElementCollection`1.System#Collections#IEnumerable#GetEnumerator
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IEnumerable#GetEnumerator
     name: System.Collections.IEnumerable.GetEnumerator
-    nameWithType: TextElementCollection(Of T).System.Collections.IEnumerable.GetEnumerator
-    fullName: System.Windows.Documents.TextElementCollection(Of T).System.Collections.IEnumerable.GetEnumerator
+    nameWithType: PresentationFrameworkCollection(Of T).System.Collections.IEnumerable.GetEnumerator
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IEnumerable.GetEnumerator
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
+- uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Remove(System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Remove(System.Object)
   isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
+  name: IList.Remove(Object)
+  nameWithType: PresentationFrameworkCollection<T>.IList.Remove(Object)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Remove(System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).System.Collections.IList.Remove(Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Remove(System.Object)
+  name.vb: System.Collections.IList.Remove(Object)
   spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Remove(System.Object)
+    name: IList.Remove
+    nameWithType: PresentationFrameworkCollection<T>.IList.Remove
+    fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Remove
   - name: (
     nameWithType: (
     fullName: (
@@ -2064,10 +2781,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Remove(System.Object)
+    name: System.Collections.IList.Remove
+    nameWithType: PresentationFrameworkCollection(Of T).System.Collections.IList.Remove
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Remove
   - name: (
     nameWithType: (
     fullName: (
@@ -2079,17 +2796,227 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
+- uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#RemoveAt(System.Int32)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#RemoveAt(System.Int32)
+  isExternal: true
+  name: IList.RemoveAt(Int32)
+  nameWithType: PresentationFrameworkCollection<T>.IList.RemoveAt(Int32)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.RemoveAt(System.Int32)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).System.Collections.IList.RemoveAt(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.RemoveAt(System.Int32)
+  name.vb: System.Collections.IList.RemoveAt(Int32)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#RemoveAt(System.Int32)
+    name: IList.RemoveAt
+    nameWithType: PresentationFrameworkCollection<T>.IList.RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.RemoveAt
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#RemoveAt(System.Int32)
+    name: System.Collections.IList.RemoveAt
+    nameWithType: PresentationFrameworkCollection(Of T).System.Collections.IList.RemoveAt
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.RemoveAt
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
+  isExternal: true
+  name: IList.Insert(Int32, Object)
+  nameWithType: PresentationFrameworkCollection<T>.IList.Insert(Int32, Object)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Insert(System.Int32, System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).System.Collections.IList.Insert(Int32, Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Insert(System.Int32, System.Object)
+  name.vb: System.Collections.IList.Insert(Int32, Object)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
+    name: IList.Insert
+    nameWithType: PresentationFrameworkCollection<T>.IList.Insert
+    fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Insert
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Insert(System.Int32,System.Object)
+    name: System.Collections.IList.Insert
+    nameWithType: PresentationFrameworkCollection(Of T).System.Collections.IList.Insert
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Insert
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#IndexOf(System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#IndexOf(System.Object)
+  isExternal: true
+  name: IList.IndexOf(Object)
+  nameWithType: PresentationFrameworkCollection<T>.IList.IndexOf(Object)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.IndexOf(System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).System.Collections.IList.IndexOf(Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.IndexOf(System.Object)
+  name.vb: System.Collections.IList.IndexOf(Object)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#IndexOf(System.Object)
+    name: IList.IndexOf
+    nameWithType: PresentationFrameworkCollection<T>.IList.IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.IndexOf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#IndexOf(System.Object)
+    name: System.Collections.IList.IndexOf
+    nameWithType: PresentationFrameworkCollection(Of T).System.Collections.IList.IndexOf
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.IndexOf
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Contains(System.Object)
+  commentId: M:System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Contains(System.Object)
+  isExternal: true
+  name: IList.Contains(Object)
+  nameWithType: PresentationFrameworkCollection<T>.IList.Contains(Object)
+  fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Contains(System.Object)
+  nameWithType.vb: PresentationFrameworkCollection(Of T).System.Collections.IList.Contains(Object)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Contains(System.Object)
+  name.vb: System.Collections.IList.Contains(Object)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Contains(System.Object)
+    name: IList.Contains
+    nameWithType: PresentationFrameworkCollection<T>.IList.Contains
+    fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Contains
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Contains(System.Object)
+    name: System.Collections.IList.Contains
+    nameWithType: PresentationFrameworkCollection(Of T).System.Collections.IList.Contains
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Contains
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Item(System.Int32)
+  commentId: P:System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Item(System.Int32)
+  isExternal: true
+  name: IList.Item[Int32]
+  nameWithType: PresentationFrameworkCollection<T>.IList.Item[Int32]
+  fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Item[System.Int32]
+  nameWithType.vb: PresentationFrameworkCollection(Of T).System.Collections.IList.Item(Int32)
+  fullName.vb: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Item(System.Int32)
+  name.vb: System.Collections.IList.Item(Int32)
+  spec.csharp:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Item(System.Int32)
+    name: IList.Item
+    nameWithType: PresentationFrameworkCollection<T>.IList.Item
+    fullName: System.Windows.PresentationFrameworkCollection<T>.System.Collections.IList.Item
+  - name: '['
+    nameWithType: '['
+    fullName: '['
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ']'
+    nameWithType: ']'
+    fullName: ']'
+  spec.vb:
+  - uid: System.Windows.PresentationFrameworkCollection`1.System#Collections#IList#Item(System.Int32)
+    name: System.Collections.IList.Item
+    nameWithType: PresentationFrameworkCollection(Of T).System.Collections.IList.Item
+    fullName: System.Windows.PresentationFrameworkCollection(Of T).System.Collections.IList.Item
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.Documents.InlineCollection.Add*
   commentId: Overload:System.Windows.Documents.InlineCollection.Add
   name: Add
@@ -2102,3 +3029,58 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: System.Windows.Documents.InlineCollection.System#Collections#IList#Add*
+  commentId: Overload:System.Windows.Documents.InlineCollection.System#Collections#IList#Add
+  name: IList.Add
+  nameWithType: InlineCollection.IList.Add
+  fullName: System.Windows.Documents.InlineCollection.System.Collections.IList.Add
+  nameWithType.vb: InlineCollection.System.Collections.IList.Add
+  name.vb: System.Collections.IList.Add
+- uid: System.Collections.IList.Add(System.Object)
+  commentId: M:System.Collections.IList.Add(System.Object)
+  parent: System.Collections.IList
+  isExternal: true
+  name: Add(Object)
+  nameWithType: IList.Add(Object)
+  fullName: System.Collections.IList.Add(System.Object)
+  spec.csharp:
+  - uid: System.Collections.IList.Add(System.Object)
+    name: Add
+    nameWithType: IList.Add
+    fullName: System.Collections.IList.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Collections.IList.Add(System.Object)
+    name: Add
+    nameWithType: IList.Add
+    fullName: System.Collections.IList.Add
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

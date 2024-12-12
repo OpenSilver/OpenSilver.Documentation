@@ -8,12 +8,9 @@ items:
   - System.Windows.Media.Imaging.BitmapImage.#ctor
   - System.Windows.Media.Imaging.BitmapImage.#ctor(System.Uri)
   - System.Windows.Media.Imaging.BitmapImage.CreateOptions
+  - System.Windows.Media.Imaging.BitmapImage.CreateOptionsProperty
   - System.Windows.Media.Imaging.BitmapImage.ImageFailed
   - System.Windows.Media.Imaging.BitmapImage.ImageOpened
-  - System.Windows.Media.Imaging.BitmapImage.INTERNAL_NameOfAssemblyThatSetTheSourceUri
-  - System.Windows.Media.Imaging.BitmapImage.OnImageFailed
-  - System.Windows.Media.Imaging.BitmapImage.OnImageOpened
-  - System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged
   - System.Windows.Media.Imaging.BitmapImage.UriSource
   - System.Windows.Media.Imaging.BitmapImage.UriSourceChanged
   - System.Windows.Media.Imaging.BitmapImage.UriSourceProperty
@@ -27,49 +24,45 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: BitmapImage
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 29
+    startLine: 26
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Imaging
-  summary: "\nProvides the practical object source type for the Source and ImageSource properties.\n"
+  summary: "\nProvides the practical object source type for the <xref href=\"System.Windows.Controls.Image.Source\" data-throw-if-not-resolved=\"false\"></xref>\nand <xref href=\"System.Windows.Media.ImageBrush.ImageSource\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
   example: []
   syntax:
-    content: 'public sealed class BitmapImage : BitmapSource'
+    content: 'public sealed class BitmapImage : BitmapSource, IDependencyObject'
     content.vb: >-
       Public NotInheritable Class BitmapImage
           Inherits BitmapSource
+          Implements IDependencyObject
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   - System.Windows.Media.ImageSource
   - System.Windows.Media.Imaging.BitmapSource
   inheritedMembers:
-  - System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamAsBase64String
-  - System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamSource
-  - System.Windows.Media.Imaging.BitmapSource.INTERNAL_DataURL
   - System.Windows.Media.Imaging.BitmapSource.SetSource(System.IO.Stream)
-  - System.Windows.Media.Imaging.BitmapSource.SetSource(System.String)
-  - System.Windows.Media.Imaging.BitmapSource.PixelHeight
   - System.Windows.Media.Imaging.BitmapSource.PixelHeightProperty
-  - System.Windows.Media.Imaging.BitmapSource.PixelWidth
+  - System.Windows.Media.Imaging.BitmapSource.PixelHeight
   - System.Windows.Media.Imaging.BitmapSource.PixelWidthProperty
+  - System.Windows.Media.Imaging.BitmapSource.PixelWidth
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  - System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  - System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
   - System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
   - System.Windows.DependencyObject.CheckAccess
   - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
   - System.Object.Equals(System.Object)
@@ -79,17 +72,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   modifiers.csharp:
   - public
   - sealed
@@ -112,15 +94,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 34
+    startLine: 35
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Imaging
-  summary: "\nInitializes a new instance of the BitmapImage class.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Media.Imaging.BitmapImage\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
   example: []
   syntax:
     content: public BitmapImage()
@@ -144,94 +126,26 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 39
+    startLine: 43
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Imaging
-  summary: "\nInitializes a new instance of the BitmapImage class with the specified path to the source.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Media.Imaging.BitmapImage\" data-throw-if-not-resolved=\"false\"></xref> class, using the supplied URI.\n"
   example: []
   syntax:
     content: public BitmapImage(Uri uriSource)
     parameters:
     - id: uriSource
       type: System.Uri
-      description: The path to the source of the image.
+      description: "\nThe URI that references the source graphics file for the image.\n"
     content.vb: Public Sub New(uriSource As Uri)
   overload: System.Windows.Media.Imaging.BitmapImage.#ctor*
   modifiers.csharp:
   - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.Imaging.BitmapImage.INTERNAL_NameOfAssemblyThatSetTheSourceUri
-  commentId: F:System.Windows.Media.Imaging.BitmapImage.INTERNAL_NameOfAssemblyThatSetTheSourceUri
-  id: INTERNAL_NameOfAssemblyThatSetTheSourceUri
-  parent: System.Windows.Media.Imaging.BitmapImage
-  langs:
-  - csharp
-  - vb
-  name: INTERNAL_NameOfAssemblyThatSetTheSourceUri
-  nameWithType: BitmapImage.INTERNAL_NameOfAssemblyThatSetTheSourceUri
-  fullName: System.Windows.Media.Imaging.BitmapImage.INTERNAL_NameOfAssemblyThatSetTheSourceUri
-  type: Field
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: INTERNAL_NameOfAssemblyThatSetTheSourceUri
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 45
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Imaging
-  syntax:
-    content: public string INTERNAL_NameOfAssemblyThatSetTheSourceUri
-    return:
-      type: System.String
-    content.vb: Public INTERNAL_NameOfAssemblyThatSetTheSourceUri As String
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.Imaging.BitmapImage.UriSource
-  commentId: P:System.Windows.Media.Imaging.BitmapImage.UriSource
-  id: UriSource
-  parent: System.Windows.Media.Imaging.BitmapImage
-  langs:
-  - csharp
-  - vb
-  name: UriSource
-  nameWithType: BitmapImage.UriSource
-  fullName: System.Windows.Media.Imaging.BitmapImage.UriSource
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: UriSource
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 111
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Imaging
-  summary: "\nGets or sets the Uniform Resource Identifier (URI) of the graphics source\nfile that generated this BitmapImage.\n\nReturns an object describing the of the graphics source file that generated this BitmapImage.\n"
-  example: []
-  syntax:
-    content: public Uri UriSource { get; set; }
-    parameters: []
-    return:
-      type: System.Uri
-    content.vb: Public Property UriSource As Uri
-  overload: System.Windows.Media.Imaging.BitmapImage.UriSource*
-  modifiers.csharp:
-  - public
-  - get
-  - set
   modifiers.vb:
   - Public
 - uid: System.Windows.Media.Imaging.BitmapImage.UriSourceProperty
@@ -248,15 +162,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: UriSourceProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 131
+    startLine: 51
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Imaging
-  summary: "\nIdentifies the UriSource dependency property.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Media.Imaging.BitmapImage.UriSource\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty UriSourceProperty
@@ -271,195 +185,91 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Media.Imaging.BitmapImage.ImageFailed
-  commentId: E:System.Windows.Media.Imaging.BitmapImage.ImageFailed
-  id: ImageFailed
+- uid: System.Windows.Media.Imaging.BitmapImage.UriSource
+  commentId: P:System.Windows.Media.Imaging.BitmapImage.UriSource
+  id: UriSource
   parent: System.Windows.Media.Imaging.BitmapImage
   langs:
   - csharp
   - vb
-  name: ImageFailed
-  nameWithType: BitmapImage.ImageFailed
-  fullName: System.Windows.Media.Imaging.BitmapImage.ImageFailed
-  type: Event
+  name: UriSource
+  nameWithType: BitmapImage.UriSource
+  fullName: System.Windows.Media.Imaging.BitmapImage.UriSource
+  type: Property
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ImageFailed
+    id: UriSource
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 158
+    startLine: 64
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Imaging
-  summary: "\nOccurs when there is an error associated with image retrieval or format.\n"
+  summary: "\nGets or sets the URI of the graphics source file that generated this <xref href=\"System.Windows.Media.Imaging.BitmapImage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: public event ExceptionRoutedEventHandler ImageFailed
+    content: public Uri UriSource { get; set; }
+    parameters: []
     return:
-      type: System.Windows.ExceptionRoutedEventHandler
-    content.vb: Public Event ImageFailed As ExceptionRoutedEventHandler
+      type: System.Uri
+      description: "\nThe URI of the graphics source file that generated this <xref href=\"System.Windows.Media.Imaging.BitmapImage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Property UriSource As Uri
+  overload: System.Windows.Media.Imaging.BitmapImage.UriSource*
   modifiers.csharp:
   - public
+  - get
+  - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Media.Imaging.BitmapImage.OnImageFailed
-  commentId: M:System.Windows.Media.Imaging.BitmapImage.OnImageFailed
-  id: OnImageFailed
+- uid: System.Windows.Media.Imaging.BitmapImage.CreateOptionsProperty
+  commentId: F:System.Windows.Media.Imaging.BitmapImage.CreateOptionsProperty
+  id: CreateOptionsProperty
   parent: System.Windows.Media.Imaging.BitmapImage
   langs:
   - csharp
   - vb
-  name: OnImageFailed()
-  nameWithType: BitmapImage.OnImageFailed()
-  fullName: System.Windows.Media.Imaging.BitmapImage.OnImageFailed()
-  type: Method
+  name: CreateOptionsProperty
+  nameWithType: BitmapImage.CreateOptionsProperty
+  fullName: System.Windows.Media.Imaging.BitmapImage.CreateOptionsProperty
+  type: Field
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: OnImageFailed
+    id: CreateOptionsProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 159
+    startLine: 100
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Imaging
-  syntax:
-    content: protected void OnImageFailed()
-    content.vb: Protected Sub OnImageFailed
-  overload: System.Windows.Media.Imaging.BitmapImage.OnImageFailed*
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-- uid: System.Windows.Media.Imaging.BitmapImage.ImageOpened
-  commentId: E:System.Windows.Media.Imaging.BitmapImage.ImageOpened
-  id: ImageOpened
-  parent: System.Windows.Media.Imaging.BitmapImage
-  langs:
-  - csharp
-  - vb
-  name: ImageOpened
-  nameWithType: BitmapImage.ImageOpened
-  fullName: System.Windows.Media.Imaging.BitmapImage.ImageOpened
-  type: Event
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ImageOpened
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 173
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Imaging
-  summary: "\nOccurs when the image source is downloaded and decoded with no failure. You can use this event to determine the size of an image before rendering it.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Media.Imaging.BitmapImage.CreateOptions\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
-    content: public event RoutedEventHandler ImageOpened
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty CreateOptionsProperty
     return:
-      type: System.Windows.RoutedEventHandler
-    content.vb: Public Event ImageOpened As RoutedEventHandler
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly CreateOptionsProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
   modifiers.csharp:
   - public
+  - static
+  - readonly
   modifiers.vb:
   - Public
-- uid: System.Windows.Media.Imaging.BitmapImage.OnImageOpened
-  commentId: M:System.Windows.Media.Imaging.BitmapImage.OnImageOpened
-  id: OnImageOpened
-  parent: System.Windows.Media.Imaging.BitmapImage
-  langs:
-  - csharp
-  - vb
-  name: OnImageOpened()
-  nameWithType: BitmapImage.OnImageOpened()
-  fullName: System.Windows.Media.Imaging.BitmapImage.OnImageOpened()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: OnImageOpened
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 174
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Imaging
-  syntax:
-    content: protected void OnImageOpened()
-    content.vb: Protected Sub OnImageOpened
-  overload: System.Windows.Media.Imaging.BitmapImage.OnImageOpened*
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-- uid: System.Windows.Media.Imaging.BitmapImage.UriSourceChanged
-  commentId: E:System.Windows.Media.Imaging.BitmapImage.UriSourceChanged
-  id: UriSourceChanged
-  parent: System.Windows.Media.Imaging.BitmapImage
-  langs:
-  - csharp
-  - vb
-  name: UriSourceChanged
-  nameWithType: BitmapImage.UriSourceChanged
-  fullName: System.Windows.Media.Imaging.BitmapImage.UriSourceChanged
-  type: Event
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: UriSourceChanged
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 207
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Imaging
-  summary: "\nOccurs when the UriSource is changed\n"
-  example: []
-  syntax:
-    content: public event EventHandler UriSourceChanged
-    return:
-      type: System.EventHandler
-    content.vb: Public Event UriSourceChanged As EventHandler
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged
-  commentId: M:System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged
-  id: OnUriSourceChanged
-  parent: System.Windows.Media.Imaging.BitmapImage
-  langs:
-  - csharp
-  - vb
-  name: OnUriSourceChanged()
-  nameWithType: BitmapImage.OnUriSourceChanged()
-  fullName: System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: OnUriSourceChanged
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 208
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Imaging
-  syntax:
-    content: protected void OnUriSourceChanged()
-    content.vb: Protected Sub OnUriSourceChanged
-  overload: System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged*
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
+  - Shared
+  - ReadOnly
 - uid: System.Windows.Media.Imaging.BitmapImage.CreateOptions
   commentId: P:System.Windows.Media.Imaging.BitmapImage.CreateOptions
   id: CreateOptions
@@ -474,14 +284,16 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateOptions
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
-    startLine: 216
+    startLine: 114
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Imaging
+  summary: "\nGets or sets the <xref href=\"System.Windows.Media.Imaging.BitmapCreateOptions\" data-throw-if-not-resolved=\"false\"></xref> for a <xref href=\"System.Windows.Media.Imaging.BitmapImage\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
   syntax:
     content: >-
       [NotImplemented]
@@ -490,6 +302,7 @@ items:
     parameters: []
     return:
       type: System.Windows.Media.Imaging.BitmapCreateOptions
+      description: "\nThe <xref href=\"System.Windows.Media.Imaging.BitmapCreateOptions\" data-throw-if-not-resolved=\"false\"></xref> used for this <xref href=\"System.Windows.Media.Imaging.BitmapImage\" data-throw-if-not-resolved=\"false\"></xref>.\nThe default is <xref href=\"System.Windows.Media.Imaging.BitmapCreateOptions.DelayCreation\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: >-
       <NotImplemented>
 
@@ -505,7 +318,112 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: System.Windows.Media.Imaging.BitmapImage.ImageFailed
+  commentId: E:System.Windows.Media.Imaging.BitmapImage.ImageFailed
+  id: ImageFailed
+  parent: System.Windows.Media.Imaging.BitmapImage
+  langs:
+  - csharp
+  - vb
+  name: ImageFailed
+  nameWithType: BitmapImage.ImageFailed
+  fullName: System.Windows.Media.Imaging.BitmapImage.ImageFailed
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ImageFailed
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
+    startLine: 124
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Imaging
+  summary: "\nOccurs when there is an error associated with image retrieval or format.\n"
+  example: []
+  syntax:
+    content: public event ExceptionRoutedEventHandler ImageFailed
+    return:
+      type: System.Windows.ExceptionRoutedEventHandler
+    content.vb: Public Event ImageFailed As ExceptionRoutedEventHandler
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Imaging.BitmapImage.ImageOpened
+  commentId: E:System.Windows.Media.Imaging.BitmapImage.ImageOpened
+  id: ImageOpened
+  parent: System.Windows.Media.Imaging.BitmapImage
+  langs:
+  - csharp
+  - vb
+  name: ImageOpened
+  nameWithType: BitmapImage.ImageOpened
+  fullName: System.Windows.Media.Imaging.BitmapImage.ImageOpened
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ImageOpened
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
+    startLine: 140
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Imaging
+  summary: "\nOccurs when the image source is downloaded and decoded with no failure. You can\nuse this event to determine the size of an image before rendering it.\n"
+  example: []
+  syntax:
+    content: public event RoutedEventHandler ImageOpened
+    return:
+      type: System.Windows.RoutedEventHandler
+    content.vb: Public Event ImageOpened As RoutedEventHandler
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Imaging.BitmapImage.UriSourceChanged
+  commentId: E:System.Windows.Media.Imaging.BitmapImage.UriSourceChanged
+  id: UriSourceChanged
+  parent: System.Windows.Media.Imaging.BitmapImage
+  langs:
+  - csharp
+  - vb
+  name: UriSourceChanged
+  nameWithType: BitmapImage.UriSourceChanged
+  fullName: System.Windows.Media.Imaging.BitmapImage.UriSourceChanged
+  type: Event
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: UriSourceChanged
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Imaging/BitmapImage.cs
+    startLine: 155
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Imaging
+  summary: "\nOccurs when the <xref href=\"System.Windows.Media.Imaging.BitmapImage.UriSource\" data-throw-if-not-resolved=\"false\"></xref> is changed.\n"
+  example: []
+  syntax:
+    content: public event EventHandler UriSourceChanged
+    return:
+      type: System.EventHandler
+    content.vb: Public Event UriSourceChanged As EventHandler
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 references:
+- uid: System.Windows.Controls.Image.Source
+  commentId: P:System.Windows.Controls.Image.Source
+  isExternal: true
+- uid: System.Windows.Media.ImageBrush.ImageSource
+  commentId: P:System.Windows.Media.ImageBrush.ImageSource
+  isExternal: true
 - uid: System.Windows.Media.Imaging
   commentId: N:System.Windows.Media.Imaging
   name: System.Windows.Media.Imaging
@@ -536,24 +454,6 @@ references:
   name: BitmapSource
   nameWithType: BitmapSource
   fullName: System.Windows.Media.Imaging.BitmapSource
-- uid: System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamAsBase64String
-  commentId: P:System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamAsBase64String
-  parent: System.Windows.Media.Imaging.BitmapSource
-  name: INTERNAL_StreamAsBase64String
-  nameWithType: BitmapSource.INTERNAL_StreamAsBase64String
-  fullName: System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamAsBase64String
-- uid: System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamSource
-  commentId: P:System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamSource
-  parent: System.Windows.Media.Imaging.BitmapSource
-  name: INTERNAL_StreamSource
-  nameWithType: BitmapSource.INTERNAL_StreamSource
-  fullName: System.Windows.Media.Imaging.BitmapSource.INTERNAL_StreamSource
-- uid: System.Windows.Media.Imaging.BitmapSource.INTERNAL_DataURL
-  commentId: P:System.Windows.Media.Imaging.BitmapSource.INTERNAL_DataURL
-  parent: System.Windows.Media.Imaging.BitmapSource
-  name: INTERNAL_DataURL
-  nameWithType: BitmapSource.INTERNAL_DataURL
-  fullName: System.Windows.Media.Imaging.BitmapSource.INTERNAL_DataURL
 - uid: System.Windows.Media.Imaging.BitmapSource.SetSource(System.IO.Stream)
   commentId: M:System.Windows.Media.Imaging.BitmapSource.SetSource(System.IO.Stream)
   parent: System.Windows.Media.Imaging.BitmapSource
@@ -593,69 +493,30 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Media.Imaging.BitmapSource.SetSource(System.String)
-  commentId: M:System.Windows.Media.Imaging.BitmapSource.SetSource(System.String)
-  parent: System.Windows.Media.Imaging.BitmapSource
-  isExternal: true
-  name: SetSource(String)
-  nameWithType: BitmapSource.SetSource(String)
-  fullName: System.Windows.Media.Imaging.BitmapSource.SetSource(System.String)
-  spec.csharp:
-  - uid: System.Windows.Media.Imaging.BitmapSource.SetSource(System.String)
-    name: SetSource
-    nameWithType: BitmapSource.SetSource
-    fullName: System.Windows.Media.Imaging.BitmapSource.SetSource
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Media.Imaging.BitmapSource.SetSource(System.String)
-    name: SetSource
-    nameWithType: BitmapSource.SetSource
-    fullName: System.Windows.Media.Imaging.BitmapSource.SetSource
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Media.Imaging.BitmapSource.PixelHeight
-  commentId: P:System.Windows.Media.Imaging.BitmapSource.PixelHeight
-  parent: System.Windows.Media.Imaging.BitmapSource
-  name: PixelHeight
-  nameWithType: BitmapSource.PixelHeight
-  fullName: System.Windows.Media.Imaging.BitmapSource.PixelHeight
 - uid: System.Windows.Media.Imaging.BitmapSource.PixelHeightProperty
   commentId: F:System.Windows.Media.Imaging.BitmapSource.PixelHeightProperty
   parent: System.Windows.Media.Imaging.BitmapSource
   name: PixelHeightProperty
   nameWithType: BitmapSource.PixelHeightProperty
   fullName: System.Windows.Media.Imaging.BitmapSource.PixelHeightProperty
-- uid: System.Windows.Media.Imaging.BitmapSource.PixelWidth
-  commentId: P:System.Windows.Media.Imaging.BitmapSource.PixelWidth
+- uid: System.Windows.Media.Imaging.BitmapSource.PixelHeight
+  commentId: P:System.Windows.Media.Imaging.BitmapSource.PixelHeight
   parent: System.Windows.Media.Imaging.BitmapSource
-  name: PixelWidth
-  nameWithType: BitmapSource.PixelWidth
-  fullName: System.Windows.Media.Imaging.BitmapSource.PixelWidth
+  name: PixelHeight
+  nameWithType: BitmapSource.PixelHeight
+  fullName: System.Windows.Media.Imaging.BitmapSource.PixelHeight
 - uid: System.Windows.Media.Imaging.BitmapSource.PixelWidthProperty
   commentId: F:System.Windows.Media.Imaging.BitmapSource.PixelWidthProperty
   parent: System.Windows.Media.Imaging.BitmapSource
   name: PixelWidthProperty
   nameWithType: BitmapSource.PixelWidthProperty
   fullName: System.Windows.Media.Imaging.BitmapSource.PixelWidthProperty
+- uid: System.Windows.Media.Imaging.BitmapSource.PixelWidth
+  commentId: P:System.Windows.Media.Imaging.BitmapSource.PixelWidth
+  parent: System.Windows.Media.Imaging.BitmapSource
+  name: PixelWidth
+  nameWithType: BitmapSource.PixelWidth
+  fullName: System.Windows.Media.Imaging.BitmapSource.PixelWidth
 - uid: System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   commentId: M:System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   parent: System.Windows.DependencyObject
@@ -781,184 +642,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetVisualStateValue(DependencyProperty)
-  nameWithType: DependencyObject.GetVisualStateValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetVisualStateValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetVisualStateValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetAnimationValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetAnimationValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetAnimationValue(DependencyProperty)
-  nameWithType: DependencyObject.GetAnimationValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -1009,6 +692,95 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetValue(DependencyPropertyKey, Object)
+  nameWithType: DependencyObject.SetValue(DependencyPropertyKey, Object)
+  fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  commentId: M:System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  parent: System.Windows.DependencyObject
+  name: OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  nameWithType: DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  fullName: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -1143,6 +915,42 @@ references:
     name: DependencyProperty
     nameWithType: DependencyProperty
     fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  commentId: M:System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  parent: System.Windows.DependencyObject
+  name: ClearValue(DependencyPropertyKey)
+  nameWithType: DependencyObject.ClearValue(DependencyPropertyKey)
+  fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
   - name: )
     nameWithType: )
     fullName: )
@@ -1489,296 +1297,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Interactivity.DependencyObjectHelper
-  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors()
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors()
-  nameWithType: VisualTreeExtensions.GetVisualAncestors()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren()
-  nameWithType: VisualTreeExtensions.GetVisualChildren()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants()
-  nameWithType: VisualTreeExtensions.GetVisualDescendants()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings()
-  nameWithType: VisualTreeExtensions.GetVisualSiblings()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
@@ -1794,392 +1312,11 @@ references:
   name: System.Windows.Media
   nameWithType: System.Windows.Media
   fullName: System.Windows.Media
-- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors(DependencyObject)
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity.DependencyObjectHelper
-  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
-  parent: System.Windows.Interactivity
-  name: DependencyObjectHelper
-  nameWithType: DependencyObjectHelper
-  fullName: System.Windows.Interactivity.DependencyObjectHelper
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestors(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions
-  commentId: T:System.Windows.Controls.Primitives.VisualTreeExtensions
-  parent: System.Windows.Controls.Primitives
-  name: VisualTreeExtensions
-  nameWithType: VisualTreeExtensions
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildren(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendants(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblings(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity
-  commentId: N:System.Windows.Interactivity
-  name: System.Windows.Interactivity
-  nameWithType: System.Windows.Interactivity
-  fullName: System.Windows.Interactivity
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives
-  commentId: N:System.Windows.Controls.Primitives
-  name: System.Windows.Controls.Primitives
-  nameWithType: System.Windows.Controls.Primitives
-  fullName: System.Windows.Controls.Primitives
+- uid: System.Windows.Media.Imaging.BitmapImage
+  commentId: T:System.Windows.Media.Imaging.BitmapImage
+  name: BitmapImage
+  nameWithType: BitmapImage
+  fullName: System.Windows.Media.Imaging.BitmapImage
 - uid: System.Windows.Media.Imaging.BitmapImage.#ctor*
   commentId: Overload:System.Windows.Media.Imaging.BitmapImage.#ctor
   name: BitmapImage
@@ -2192,46 +1329,49 @@ references:
   name: Uri
   nameWithType: Uri
   fullName: System.Uri
-- uid: System.String
-  commentId: T:System.String
-  parent: System
+- uid: System.Windows.Media.Imaging.BitmapImage.UriSource
+  commentId: P:System.Windows.Media.Imaging.BitmapImage.UriSource
   isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
-- uid: System.Windows.Media.Imaging.BitmapImage.UriSource*
-  commentId: Overload:System.Windows.Media.Imaging.BitmapImage.UriSource
-  name: UriSource
-  nameWithType: BitmapImage.UriSource
-  fullName: System.Windows.Media.Imaging.BitmapImage.UriSource
 - uid: System.Windows.DependencyProperty
   commentId: T:System.Windows.DependencyProperty
   parent: System.Windows
   name: DependencyProperty
   nameWithType: DependencyProperty
   fullName: System.Windows.DependencyProperty
+- uid: System.Windows.Media.Imaging.BitmapImage.UriSource*
+  commentId: Overload:System.Windows.Media.Imaging.BitmapImage.UriSource
+  name: UriSource
+  nameWithType: BitmapImage.UriSource
+  fullName: System.Windows.Media.Imaging.BitmapImage.UriSource
+- uid: System.Windows.Media.Imaging.BitmapImage.CreateOptions
+  commentId: P:System.Windows.Media.Imaging.BitmapImage.CreateOptions
+  isExternal: true
+- uid: System.Windows.Media.Imaging.BitmapCreateOptions
+  commentId: T:System.Windows.Media.Imaging.BitmapCreateOptions
+  parent: System.Windows.Media.Imaging
+  name: BitmapCreateOptions
+  nameWithType: BitmapCreateOptions
+  fullName: System.Windows.Media.Imaging.BitmapCreateOptions
+- uid: System.Windows.Media.Imaging.BitmapCreateOptions.DelayCreation
+  commentId: F:System.Windows.Media.Imaging.BitmapCreateOptions.DelayCreation
+  isExternal: true
+- uid: System.Windows.Media.Imaging.BitmapImage.CreateOptions*
+  commentId: Overload:System.Windows.Media.Imaging.BitmapImage.CreateOptions
+  name: CreateOptions
+  nameWithType: BitmapImage.CreateOptions
+  fullName: System.Windows.Media.Imaging.BitmapImage.CreateOptions
 - uid: System.Windows.ExceptionRoutedEventHandler
   commentId: T:System.Windows.ExceptionRoutedEventHandler
   parent: System.Windows
   name: ExceptionRoutedEventHandler
   nameWithType: ExceptionRoutedEventHandler
   fullName: System.Windows.ExceptionRoutedEventHandler
-- uid: System.Windows.Media.Imaging.BitmapImage.OnImageFailed*
-  commentId: Overload:System.Windows.Media.Imaging.BitmapImage.OnImageFailed
-  name: OnImageFailed
-  nameWithType: BitmapImage.OnImageFailed
-  fullName: System.Windows.Media.Imaging.BitmapImage.OnImageFailed
 - uid: System.Windows.RoutedEventHandler
   commentId: T:System.Windows.RoutedEventHandler
   parent: System.Windows
   name: RoutedEventHandler
   nameWithType: RoutedEventHandler
   fullName: System.Windows.RoutedEventHandler
-- uid: System.Windows.Media.Imaging.BitmapImage.OnImageOpened*
-  commentId: Overload:System.Windows.Media.Imaging.BitmapImage.OnImageOpened
-  name: OnImageOpened
-  nameWithType: BitmapImage.OnImageOpened
-  fullName: System.Windows.Media.Imaging.BitmapImage.OnImageOpened
 - uid: System.EventHandler
   commentId: T:System.EventHandler
   parent: System
@@ -2239,19 +1379,3 @@ references:
   name: EventHandler
   nameWithType: EventHandler
   fullName: System.EventHandler
-- uid: System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged*
-  commentId: Overload:System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged
-  name: OnUriSourceChanged
-  nameWithType: BitmapImage.OnUriSourceChanged
-  fullName: System.Windows.Media.Imaging.BitmapImage.OnUriSourceChanged
-- uid: System.Windows.Media.Imaging.BitmapImage.CreateOptions*
-  commentId: Overload:System.Windows.Media.Imaging.BitmapImage.CreateOptions
-  name: CreateOptions
-  nameWithType: BitmapImage.CreateOptions
-  fullName: System.Windows.Media.Imaging.BitmapImage.CreateOptions
-- uid: System.Windows.Media.Imaging.BitmapCreateOptions
-  commentId: T:System.Windows.Media.Imaging.BitmapCreateOptions
-  parent: System.Windows.Media.Imaging
-  name: BitmapCreateOptions
-  nameWithType: BitmapCreateOptions
-  fullName: System.Windows.Media.Imaging.BitmapCreateOptions

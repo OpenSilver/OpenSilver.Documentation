@@ -11,8 +11,18 @@ items:
   - System.Windows.Deployment.EntryPointAssemblyProperty
   - System.Windows.Deployment.EntryPointType
   - System.Windows.Deployment.EntryPointTypeProperty
+  - System.Windows.Deployment.ExternalCallersFromCrossDomain
+  - System.Windows.Deployment.ExternalCallersFromCrossDomainProperty
+  - System.Windows.Deployment.ExternalParts
+  - System.Windows.Deployment.ExternalPartsProperty
+  - System.Windows.Deployment.InBrowserSettings
+  - System.Windows.Deployment.InBrowserSettingsProperty
   - System.Windows.Deployment.OutOfBrowserSettings
+  - System.Windows.Deployment.OutOfBrowserSettingsProperty
   - System.Windows.Deployment.Parts
+  - System.Windows.Deployment.PartsProperty
+  - System.Windows.Deployment.RuntimeVersion
+  - System.Windows.Deployment.RuntimeVersionProperty
   langs:
   - csharp
   - vb
@@ -23,21 +33,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Deployment
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 26
+    startLine: 19
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nProvides application part and localization information in the application manifest\nwhen deploying a Silverlight-based application.\n"
   example: []
   syntax:
-    content: 'public sealed class Deployment : DependencyObject'
+    content: 'public sealed class Deployment : DependencyObject, IDependencyObject'
     content.vb: >-
       Public NotInheritable Class Deployment
           Inherits DependencyObject
+          Implements IDependencyObject
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
@@ -45,16 +56,15 @@ items:
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  - System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  - System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
   - System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
   - System.Windows.DependencyObject.CheckAccess
   - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
   - System.Object.Equals(System.Object)
@@ -64,17 +74,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   modifiers.csharp:
   - public
   - sealed
@@ -97,11 +96,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 36
+    startLine: 29
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -133,11 +132,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Current
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 49
+    startLine: 42
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -172,7 +171,7 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EntryPointAssemblyProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
@@ -209,11 +208,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EntryPointAssembly
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 81
+    startLine: 76
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -247,11 +246,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EntryPointTypeProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 86
+    startLine: 88
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -284,11 +283,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: EntryPointType
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 101
+    startLine: 98
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -308,6 +307,53 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Windows.Deployment.OutOfBrowserSettingsProperty
+  commentId: F:System.Windows.Deployment.OutOfBrowserSettingsProperty
+  id: OutOfBrowserSettingsProperty
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: OutOfBrowserSettingsProperty
+  nameWithType: Deployment.OutOfBrowserSettingsProperty
+  fullName: System.Windows.Deployment.OutOfBrowserSettingsProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OutOfBrowserSettingsProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 129
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.Deployment.OutOfBrowserSettings\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty OutOfBrowserSettingsProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly OutOfBrowserSettingsProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
 - uid: System.Windows.Deployment.OutOfBrowserSettings
   commentId: P:System.Windows.Deployment.OutOfBrowserSettings
   id: OutOfBrowserSettings
@@ -322,14 +368,16 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OutOfBrowserSettings
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 121
+    startLine: 138
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nGets an object that contains information about the application that is used for\nout-of-browser support.\n"
+  example: []
   syntax:
     content: >-
       [NotImplemented]
@@ -338,6 +386,7 @@ items:
     parameters: []
     return:
       type: System.Windows.OutOfBrowserSettings
+      description: "\nInformation about the application that is used for out-of-browser support.\n"
     content.vb: >-
       <NotImplemented>
 
@@ -353,6 +402,148 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Windows.Deployment.InBrowserSettingsProperty
+  commentId: F:System.Windows.Deployment.InBrowserSettingsProperty
+  id: InBrowserSettingsProperty
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: InBrowserSettingsProperty
+  nameWithType: Deployment.InBrowserSettingsProperty
+  fullName: System.Windows.Deployment.InBrowserSettingsProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: InBrowserSettingsProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 152
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.Deployment.InBrowserSettings\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty InBrowserSettingsProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly InBrowserSettingsProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Deployment.InBrowserSettings
+  commentId: P:System.Windows.Deployment.InBrowserSettings
+  id: InBrowserSettings
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: InBrowserSettings
+  nameWithType: Deployment.InBrowserSettings
+  fullName: System.Windows.Deployment.InBrowserSettings
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: InBrowserSettings
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 162
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets an object that contains information about the application that is used for\nin-browser support.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public InBrowserSettings InBrowserSettings { get; }
+    parameters: []
+    return:
+      type: System.Windows.InBrowserSettings
+      description: "\nAn object that contains information about the application that is used for in-browser\nsupport.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property InBrowserSettings As InBrowserSettings
+  overload: System.Windows.Deployment.InBrowserSettings*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Deployment.PartsProperty
+  commentId: F:System.Windows.Deployment.PartsProperty
+  id: PartsProperty
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: PartsProperty
+  nameWithType: Deployment.PartsProperty
+  fullName: System.Windows.Deployment.PartsProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: PartsProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 176
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.Deployment.Parts\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty PartsProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly PartsProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
 - uid: System.Windows.Deployment.Parts
   commentId: P:System.Windows.Deployment.Parts
   id: Parts
@@ -367,14 +558,16 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Deployment.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Parts
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
-    startLine: 124
+    startLine: 184
   assemblies:
   - OpenSilver
   namespace: System.Windows
+  summary: "\nGets a collection of assembly parts that are included in the deployment.\n"
+  example: []
   syntax:
     content: >-
       [NotImplemented]
@@ -383,11 +576,297 @@ items:
     parameters: []
     return:
       type: System.Windows.AssemblyPartCollection
+      description: "\nThe collection of assembly parts. The default is an empty collection.\n"
     content.vb: >-
       <NotImplemented>
 
       Public ReadOnly Property Parts As AssemblyPartCollection
   overload: System.Windows.Deployment.Parts*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Deployment.ExternalPartsProperty
+  commentId: F:System.Windows.Deployment.ExternalPartsProperty
+  id: ExternalPartsProperty
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: ExternalPartsProperty
+  nameWithType: Deployment.ExternalPartsProperty
+  fullName: System.Windows.Deployment.ExternalPartsProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExternalPartsProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 198
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.Deployment.ExternalParts\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty ExternalPartsProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly ExternalPartsProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Deployment.ExternalParts
+  commentId: P:System.Windows.Deployment.ExternalParts
+  id: ExternalParts
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: ExternalParts
+  nameWithType: Deployment.ExternalParts
+  fullName: System.Windows.Deployment.ExternalParts
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExternalParts
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 207
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets a collection of <xref href=\"System.Windows.ExternalPart\" data-throw-if-not-resolved=\"false\"></xref> instances that represent the\nexternal assemblies required by the application.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public ExternalPartCollection ExternalParts { get; }
+    parameters: []
+    return:
+      type: System.Windows.ExternalPartCollection
+      description: "\nThe collection of external assembly parts. The default is an empty collection.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property ExternalParts As ExternalPartCollection
+  overload: System.Windows.Deployment.ExternalParts*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Deployment.ExternalCallersFromCrossDomainProperty
+  commentId: F:System.Windows.Deployment.ExternalCallersFromCrossDomainProperty
+  id: ExternalCallersFromCrossDomainProperty
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: ExternalCallersFromCrossDomainProperty
+  nameWithType: Deployment.ExternalCallersFromCrossDomainProperty
+  fullName: System.Windows.Deployment.ExternalCallersFromCrossDomainProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExternalCallersFromCrossDomainProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 221
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.Deployment.ExternalCallersFromCrossDomain\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty ExternalCallersFromCrossDomainProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly ExternalCallersFromCrossDomainProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Deployment.ExternalCallersFromCrossDomain
+  commentId: P:System.Windows.Deployment.ExternalCallersFromCrossDomain
+  id: ExternalCallersFromCrossDomain
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: ExternalCallersFromCrossDomain
+  nameWithType: Deployment.ExternalCallersFromCrossDomain
+  fullName: System.Windows.Deployment.ExternalCallersFromCrossDomain
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExternalCallersFromCrossDomain
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 230
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets a value that indicates the level of access that cross-domain callers have\nto the Silverlight-based application in this deployment.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public CrossDomainAccess ExternalCallersFromCrossDomain { get; }
+    parameters: []
+    return:
+      type: System.Windows.CrossDomainAccess
+      description: "\nA value that indicates the access level of cross-domain callers.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property ExternalCallersFromCrossDomain As CrossDomainAccess
+  overload: System.Windows.Deployment.ExternalCallersFromCrossDomain*
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Deployment.RuntimeVersionProperty
+  commentId: F:System.Windows.Deployment.RuntimeVersionProperty
+  id: RuntimeVersionProperty
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: RuntimeVersionProperty
+  nameWithType: Deployment.RuntimeVersionProperty
+  fullName: System.Windows.Deployment.RuntimeVersionProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RuntimeVersionProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 244
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIdentifies the <xref href=\"System.Windows.Deployment.RuntimeVersion\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public static readonly DependencyProperty RuntimeVersionProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: >-
+      <NotImplemented>
+
+      Public Shared ReadOnly RuntimeVersionProperty As DependencyProperty
+  attributes:
+  - type: OpenSilver.NotImplementedAttribute
+    ctor: OpenSilver.NotImplementedAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Deployment.RuntimeVersion
+  commentId: P:System.Windows.Deployment.RuntimeVersion
+  id: RuntimeVersion
+  parent: System.Windows.Deployment
+  langs:
+  - csharp
+  - vb
+  name: RuntimeVersion
+  nameWithType: Deployment.RuntimeVersion
+  fullName: System.Windows.Deployment.RuntimeVersion
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Deployment.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RuntimeVersion
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Deployment.cs
+    startLine: 252
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the Silverlight runtime version that this deployment supports.\n"
+  example: []
+  syntax:
+    content: >-
+      [NotImplemented]
+
+      public string RuntimeVersion { get; }
+    parameters: []
+    return:
+      type: System.String
+      description: "\nThe Silverlight runtime version that this deployment supports.\n"
+    content.vb: >-
+      <NotImplemented>
+
+      Public ReadOnly Property RuntimeVersion As String
+  overload: System.Windows.Deployment.RuntimeVersion*
   attributes:
   - type: OpenSilver.NotImplementedAttribute
     ctor: OpenSilver.NotImplementedAttribute.#ctor
@@ -542,184 +1021,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetVisualStateValue(DependencyProperty)
-  nameWithType: DependencyObject.GetVisualStateValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetVisualStateValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetVisualStateValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetAnimationValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetAnimationValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetAnimationValue(DependencyProperty)
-  nameWithType: DependencyObject.GetAnimationValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -770,6 +1071,95 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetValue(DependencyPropertyKey, Object)
+  nameWithType: DependencyObject.SetValue(DependencyPropertyKey, Object)
+  fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  commentId: M:System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  parent: System.Windows.DependencyObject
+  name: OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  nameWithType: DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  fullName: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -904,6 +1294,42 @@ references:
     name: DependencyProperty
     nameWithType: DependencyProperty
     fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  commentId: M:System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  parent: System.Windows.DependencyObject
+  name: ClearValue(DependencyPropertyKey)
+  nameWithType: DependencyObject.ClearValue(DependencyPropertyKey)
+  fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
   - name: )
     nameWithType: )
     fullName: )
@@ -1250,687 +1676,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Interactivity.DependencyObjectHelper
-  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors()
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors()
-  nameWithType: VisualTreeExtensions.GetVisualAncestors()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren()
-  nameWithType: VisualTreeExtensions.GetVisualChildren()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants()
-  nameWithType: VisualTreeExtensions.GetVisualDescendants()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings()
-  nameWithType: VisualTreeExtensions.GetVisualSiblings()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
   nameWithType: System
   fullName: System
-- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors(DependencyObject)
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity.DependencyObjectHelper
-  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
-  parent: System.Windows.Interactivity
-  name: DependencyObjectHelper
-  nameWithType: DependencyObjectHelper
-  fullName: System.Windows.Interactivity.DependencyObjectHelper
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestors(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions
-  commentId: T:System.Windows.Controls.Primitives.VisualTreeExtensions
-  parent: System.Windows.Controls.Primitives
-  name: VisualTreeExtensions
-  nameWithType: VisualTreeExtensions
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildren(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendants(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblings(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity
-  commentId: N:System.Windows.Interactivity
-  name: System.Windows.Interactivity
-  nameWithType: System.Windows.Interactivity
-  fullName: System.Windows.Interactivity
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives
-  commentId: N:System.Windows.Controls.Primitives
-  name: System.Windows.Controls.Primitives
-  nameWithType: System.Windows.Controls.Primitives
-  fullName: System.Windows.Controls.Primitives
 - uid: System.Windows.Deployment
   commentId: T:System.Windows.Deployment
   parent: System.Windows
@@ -1993,6 +1743,9 @@ references:
   name: EntryPointType
   nameWithType: Deployment.EntryPointType
   fullName: System.Windows.Deployment.EntryPointType
+- uid: System.Windows.Deployment.OutOfBrowserSettings
+  commentId: P:System.Windows.Deployment.OutOfBrowserSettings
+  isExternal: true
 - uid: System.Windows.Deployment.OutOfBrowserSettings*
   commentId: Overload:System.Windows.Deployment.OutOfBrowserSettings
   name: OutOfBrowserSettings
@@ -2004,6 +1757,23 @@ references:
   name: OutOfBrowserSettings
   nameWithType: OutOfBrowserSettings
   fullName: System.Windows.OutOfBrowserSettings
+- uid: System.Windows.Deployment.InBrowserSettings
+  commentId: P:System.Windows.Deployment.InBrowserSettings
+  isExternal: true
+- uid: System.Windows.Deployment.InBrowserSettings*
+  commentId: Overload:System.Windows.Deployment.InBrowserSettings
+  name: InBrowserSettings
+  nameWithType: Deployment.InBrowserSettings
+  fullName: System.Windows.Deployment.InBrowserSettings
+- uid: System.Windows.InBrowserSettings
+  commentId: T:System.Windows.InBrowserSettings
+  parent: System.Windows
+  name: InBrowserSettings
+  nameWithType: InBrowserSettings
+  fullName: System.Windows.InBrowserSettings
+- uid: System.Windows.Deployment.Parts
+  commentId: P:System.Windows.Deployment.Parts
+  isExternal: true
 - uid: System.Windows.Deployment.Parts*
   commentId: Overload:System.Windows.Deployment.Parts
   name: Parts
@@ -2015,3 +1785,44 @@ references:
   name: AssemblyPartCollection
   nameWithType: AssemblyPartCollection
   fullName: System.Windows.AssemblyPartCollection
+- uid: System.Windows.Deployment.ExternalParts
+  commentId: P:System.Windows.Deployment.ExternalParts
+  isExternal: true
+- uid: System.Windows.ExternalPart
+  commentId: T:System.Windows.ExternalPart
+  name: ExternalPart
+  nameWithType: ExternalPart
+  fullName: System.Windows.ExternalPart
+- uid: System.Windows.Deployment.ExternalParts*
+  commentId: Overload:System.Windows.Deployment.ExternalParts
+  name: ExternalParts
+  nameWithType: Deployment.ExternalParts
+  fullName: System.Windows.Deployment.ExternalParts
+- uid: System.Windows.ExternalPartCollection
+  commentId: T:System.Windows.ExternalPartCollection
+  parent: System.Windows
+  name: ExternalPartCollection
+  nameWithType: ExternalPartCollection
+  fullName: System.Windows.ExternalPartCollection
+- uid: System.Windows.Deployment.ExternalCallersFromCrossDomain
+  commentId: P:System.Windows.Deployment.ExternalCallersFromCrossDomain
+  isExternal: true
+- uid: System.Windows.Deployment.ExternalCallersFromCrossDomain*
+  commentId: Overload:System.Windows.Deployment.ExternalCallersFromCrossDomain
+  name: ExternalCallersFromCrossDomain
+  nameWithType: Deployment.ExternalCallersFromCrossDomain
+  fullName: System.Windows.Deployment.ExternalCallersFromCrossDomain
+- uid: System.Windows.CrossDomainAccess
+  commentId: T:System.Windows.CrossDomainAccess
+  parent: System.Windows
+  name: CrossDomainAccess
+  nameWithType: CrossDomainAccess
+  fullName: System.Windows.CrossDomainAccess
+- uid: System.Windows.Deployment.RuntimeVersion
+  commentId: P:System.Windows.Deployment.RuntimeVersion
+  isExternal: true
+- uid: System.Windows.Deployment.RuntimeVersion*
+  commentId: Overload:System.Windows.Deployment.RuntimeVersion
+  name: RuntimeVersion
+  nameWithType: Deployment.RuntimeVersion
+  fullName: System.Windows.Deployment.RuntimeVersion

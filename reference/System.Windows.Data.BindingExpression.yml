@@ -19,20 +19,20 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: BindingExpression
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-    startLine: 37
+    startLine: 29
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
   summary: "\nContains information about a single instance of a <xref href=\"System.Windows.Data.Binding\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: 'public class BindingExpression : BindingExpressionBase'
+    content: 'public sealed class BindingExpression : BindingExpressionBase'
     content.vb: >-
-      Public Class BindingExpression
+      Public NotInheritable Class BindingExpression
           Inherits BindingExpressionBase
   inheritance:
   - System.Object
@@ -46,13 +46,13 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
+  - sealed
   - class
   modifiers.vb:
   - Public
+  - NotInheritable
   - Class
 - uid: System.Windows.Data.BindingExpression.TargetProperty
   commentId: P:System.Windows.Data.BindingExpression.TargetProperty
@@ -68,11 +68,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TargetProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-    startLine: 89
+    startLine: 83
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -105,11 +105,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ParentBinding
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-    startLine: 94
+    startLine: 88
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -142,15 +142,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: DataItem
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-    startLine: 100
+    startLine: 93
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
-  summary: "\nGets the binding source object that this <xref href=\"System.Windows.Data.BindingExpression\" data-throw-if-not-resolved=\"false\"></xref>\nuses.\n"
+  summary: "\nGets the binding source object that this <xref href=\"System.Windows.Data.BindingExpression\" data-throw-if-not-resolved=\"false\"></xref> uses.\n"
   example: []
   syntax:
     content: public object DataItem { get; }
@@ -179,11 +179,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: UpdateSource
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingExpression.cs
-    startLine: 106
+    startLine: 102
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -193,6 +193,10 @@ items:
     content: public void UpdateSource()
     content.vb: Public Sub UpdateSource
   overload: System.Windows.Data.BindingExpression.UpdateSource*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe <xref href=\"System.Windows.Data.BindingExpression\" data-throw-if-not-resolved=\"false\"></xref> is detached from the binding target.\n"
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -507,35 +511,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
@@ -546,55 +521,6 @@ references:
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
 - uid: System.Windows.Data.BindingExpression.TargetProperty*
   commentId: Overload:System.Windows.Data.BindingExpression.TargetProperty
   name: TargetProperty
@@ -624,6 +550,9 @@ references:
   fullName: System.Windows.Data.BindingExpression.DataItem
 - uid: System.Windows.Data.BindingMode.TwoWay
   commentId: F:System.Windows.Data.BindingMode.TwoWay
+  isExternal: true
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
   isExternal: true
 - uid: System.Windows.Data.BindingExpression.UpdateSource*
   commentId: Overload:System.Windows.Data.BindingExpression.UpdateSource

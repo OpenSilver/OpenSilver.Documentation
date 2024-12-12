@@ -17,6 +17,7 @@ items:
   - System.Windows.Controls.ChildWindow.OnApplyTemplate
   - System.Windows.Controls.ChildWindow.OnClosed(System.EventArgs)
   - System.Windows.Controls.ChildWindow.OnClosing(System.ComponentModel.CancelEventArgs)
+  - System.Windows.Controls.ChildWindow.OnCreateAutomationPeer
   - System.Windows.Controls.ChildWindow.OnOpened
   - System.Windows.Controls.ChildWindow.OverlayBrush
   - System.Windows.Controls.ChildWindow.OverlayBrushProperty
@@ -36,21 +37,47 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ChildWindow
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 62
+    startLine: 24
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
   summary: "\nProvides a window that can be displayed over a parent window and blocks\ninteraction with the parent window.\n"
   example: []
   syntax:
-    content: 'public class ChildWindow : ContentControl'
+    content: >-
+      [TemplatePart(Name = "Chrome", Type = typeof(FrameworkElement))]
+
+      [TemplatePart(Name = "CloseButton", Type = typeof(ButtonBase))]
+
+      [TemplatePart(Name = "ContentPresenter", Type = typeof(FrameworkElement))]
+
+      [TemplatePart(Name = "ContentRoot", Type = typeof(FrameworkElement))]
+
+      [TemplatePart(Name = "Overlay", Type = typeof(Panel))]
+
+      [TemplatePart(Name = "Root", Type = typeof(FrameworkElement))]
+
+      public class ChildWindow : ContentControl, IControl, IFrameworkElement, IUIElement, IDependencyObject
     content.vb: >-
+      <TemplatePart(Name:="Chrome", Type:=GetType(FrameworkElement))>
+
+      <TemplatePart(Name:="CloseButton", Type:=GetType(ButtonBase))>
+
+      <TemplatePart(Name:="ContentPresenter", Type:=GetType(FrameworkElement))>
+
+      <TemplatePart(Name:="ContentRoot", Type:=GetType(FrameworkElement))>
+
+      <TemplatePart(Name:="Overlay", Type:=GetType(Panel))>
+
+      <TemplatePart(Name:="Root", Type:=GetType(FrameworkElement))>
+
       Public Class ChildWindow
           Inherits ContentControl
+          Implements IControl, IFrameworkElement, IUIElement, IDependencyObject
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
@@ -64,10 +91,8 @@ items:
   - System.Windows.Controls.ContentControl.ContentTemplate
   - System.Windows.Controls.ContentControl.ContentTemplateProperty
   - System.Windows.Controls.ContentControl.OnContentChanged(System.Object,System.Object)
-  - System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
-  - System.Windows.Controls.ContentControl.MeasureOverride(System.Windows.Size)
-  - System.Windows.Controls.ContentControl.ArrangeOverride(System.Windows.Size)
-  - System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
+  - System.Windows.Controls.ContentControl.LogicalChildren
+  - System.Windows.Controls.Control.EnableBaseControlHandlingOfVisualStates
   - System.Windows.Controls.Control.ManageIsEnabled(System.Boolean)
   - System.Windows.Controls.Control.Background
   - System.Windows.Controls.Control.BackgroundProperty
@@ -97,36 +122,50 @@ items:
   - System.Windows.Controls.Control.TabIndexProperty
   - System.Windows.Controls.Control.IsTabStop
   - System.Windows.Controls.Control.IsTabStopProperty
+  - System.Windows.Controls.Control.TabNavigation
+  - System.Windows.Controls.Control.TabNavigationProperty
   - System.Windows.Controls.Control.Template
   - System.Windows.Controls.Control.TemplateProperty
   - System.Windows.Controls.Control.ApplyTemplate
   - System.Windows.Controls.Control.GetTemplateChild(System.String)
   - System.Windows.Controls.Control.Focus
-  - System.Windows.Controls.Control.UseSystemFocusVisuals
+  - System.Windows.Controls.Control.HandlesScrolling
+  - System.Windows.Controls.Control.OnGotFocus(System.Windows.RoutedEventArgs)
+  - System.Windows.Controls.Control.OnLostFocus(System.Windows.RoutedEventArgs)
   - System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
   - System.Windows.Controls.Control.CharacterSpacingProperty
   - System.Windows.Controls.Control.CharacterSpacing
-  - System.Windows.Controls.Control.TabNavigationProperty
-  - System.Windows.Controls.Control.TabNavigation
   - System.Windows.Controls.Control.FontStretchProperty
   - System.Windows.Controls.Control.FontStretch
   - System.Windows.Controls.Control.OnDrop(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragEnter(System.Windows.DragEventArgs)
   - System.Windows.Controls.Control.OnDragLeave(System.Windows.DragEventArgs)
-  - System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.Controls.Control.OnTextInputUpdate(System.Windows.Input.TextCompositionEventArgs)
+  - System.Windows.Controls.Control.MeasureOverride(System.Windows.Size)
+  - System.Windows.Controls.Control.ArrangeOverride(System.Windows.Size)
+  - System.Windows.FrameworkElement.LayoutUpdated
+  - System.Windows.FrameworkElement.SizeChanged
+  - System.Windows.FrameworkElement.ResourceLookupMode
+  - System.Windows.FrameworkElement.StyleProperty
+  - System.Windows.FrameworkElement.Style
+  - System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  - System.Windows.FrameworkElement.DefaultStyleKey
+  - System.Windows.FrameworkElement.OverridesDefaultStyleProperty
+  - System.Windows.FrameworkElement.OverridesDefaultStyle
+  - System.Windows.FrameworkElement.OnVisualParentChanged(System.Windows.DependencyObject)
+  - System.Windows.FrameworkElement.VisualChildrenCount
+  - System.Windows.FrameworkElement.GetVisualChild(System.Int32)
   - System.Windows.FrameworkElement.Parent
-  - System.Windows.FrameworkElement.INTERNAL_DoNotApplyStyle
+  - System.Windows.FrameworkElement.AddLogicalChild(System.Object)
+  - System.Windows.FrameworkElement.RemoveLogicalChild(System.Object)
+  - System.Windows.FrameworkElement.TemplatedParent
   - System.Windows.FrameworkElement.Resources
   - System.Windows.FrameworkElement.IsLoaded
-  - System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(System.Object,System.Object@)
+  - System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty,System.Windows.Data.BindingBase)
   - System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty,System.Windows.Data.Binding)
   - System.Windows.FrameworkElement.GetBindingExpression(System.Windows.DependencyProperty)
   - System.Windows.FrameworkElement.Cursor
   - System.Windows.FrameworkElement.CursorProperty
-  - System.Windows.FrameworkElement.IsEnabled
-  - System.Windows.FrameworkElement.IsEnabledProperty
-  - System.Windows.FrameworkElement.IsEnabledChanged
   - System.Windows.FrameworkElement.FindName(System.String)
   - System.Windows.FrameworkElement.Name
   - System.Windows.FrameworkElement.NameProperty
@@ -134,31 +173,24 @@ items:
   - System.Windows.FrameworkElement.DataContextProperty
   - System.Windows.FrameworkElement.DataContextChanged
   - System.Windows.FrameworkElement.Triggers
-  - System.Windows.FrameworkElement.LayoutUpdated
-  - System.Windows.FrameworkElement.OnLayoutUpdated
   - System.Windows.FrameworkElement.FlowDirectionProperty
   - System.Windows.FrameworkElement.FlowDirection
   - System.Windows.FrameworkElement.LanguageProperty
   - System.Windows.FrameworkElement.Language
+  - System.Windows.FrameworkElement.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
   - System.Windows.FrameworkElement.Tag
   - System.Windows.FrameworkElement.TagProperty
-  - System.Windows.FrameworkElement.Style
-  - System.Windows.FrameworkElement.StyleProperty
-  - System.Windows.FrameworkElement.DefaultStyleKey
-  - System.Windows.FrameworkElement.DefaultStyleKeyProperty
   - System.Windows.FrameworkElement.LoadedEvent
   - System.Windows.FrameworkElement.Loaded
   - System.Windows.FrameworkElement.Unloaded
   - System.Windows.FrameworkElement.BindingValidationError
+  - System.Windows.FrameworkElement.ContextMenuProperty
+  - System.Windows.FrameworkElement.ContextMenu
+  - System.Windows.FrameworkElement.ContextMenuOpening
+  - System.Windows.FrameworkElement.ToolTipProperty
+  - System.Windows.FrameworkElement.ToolTip
   - System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
-  - System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
-  - System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
-  - System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
-  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
-  - System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
-  - System.Windows.FrameworkElement.CustomLayout
-  - System.Windows.FrameworkElement.CustomLayoutProperty
+  - System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - System.Windows.FrameworkElement.Height
   - System.Windows.FrameworkElement.HeightProperty
   - System.Windows.FrameworkElement.Width
@@ -177,50 +209,55 @@ items:
   - System.Windows.FrameworkElement.MaxHeightProperty
   - System.Windows.FrameworkElement.MaxWidth
   - System.Windows.FrameworkElement.MaxWidthProperty
-  - System.Windows.FrameworkElement.ActualWidth
-  - System.Windows.FrameworkElement.ActualHeight
   - System.Windows.FrameworkElement.ActualWidthProperty
+  - System.Windows.FrameworkElement.ActualWidth
   - System.Windows.FrameworkElement.ActualHeightProperty
-  - System.Windows.FrameworkElement.ActualSize
-  - System.Windows.FrameworkElement.SizeChanged
-  - System.Windows.FrameworkElement.ContextMenu
-  - System.Windows.FrameworkElement.ContextMenuProperty
-  - System.Windows.FrameworkElement.ContextMenuOpening
+  - System.Windows.FrameworkElement.ActualHeight
+  - System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
+  - System.Windows.UIElement.RenderSize
+  - System.Windows.UIElement.DesiredSize
+  - System.Windows.UIElement.InvalidateMeasure
+  - System.Windows.UIElement.InvalidateArrange
+  - System.Windows.UIElement.Measure(System.Windows.Size)
+  - System.Windows.UIElement.Arrange(System.Windows.Rect)
+  - System.Windows.UIElement.UpdateLayout
   - System.Windows.UIElement.DragEnter
   - System.Windows.UIElement.DragLeave
   - System.Windows.UIElement.Drop
   - System.Windows.UIElement.DragOver
-  - System.Windows.UIElement.OpacityMask
-  - System.Windows.UIElement.OpacityMaskProperty
   - System.Windows.UIElement.CacheMode
   - System.Windows.UIElement.CacheModeProperty
   - System.Windows.UIElement.Projection
   - System.Windows.UIElement.ProjectionProperty
-  - System.Windows.UIElement.OnCreateAutomationPeer
+  - System.Windows.UIElement.VisualParent
+  - System.Windows.UIElement.AddVisualChild(System.Windows.UIElement)
+  - System.Windows.UIElement.RemoveVisualChild(System.Windows.UIElement)
+  - System.Windows.UIElement.OnVisualChildrenChanged(System.Windows.DependencyObject,System.Windows.DependencyObject)
   - System.Windows.UIElement.XamlSourcePath
-  - System.Windows.UIElement.RenderSize
-  - System.Windows.UIElement.DesiredSize
   - System.Windows.UIElement.ClipToBounds
   - System.Windows.UIElement.ClipToBoundsProperty
-  - System.Windows.UIElement.Clip
   - System.Windows.UIElement.ClipProperty
-  - System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
-  - System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
-  - System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
-  - System.Windows.UIElement.Effect
+  - System.Windows.UIElement.Clip
+  - System.Windows.UIElement.IsEnabledProperty
+  - System.Windows.UIElement.IsEnabled
+  - System.Windows.UIElement.IsEnabledChanged
   - System.Windows.UIElement.EffectProperty
-  - System.Windows.UIElement.RenderTransform
+  - System.Windows.UIElement.Effect
   - System.Windows.UIElement.RenderTransformProperty
-  - System.Windows.UIElement.RenderTransformOrigin
+  - System.Windows.UIElement.RenderTransform
   - System.Windows.UIElement.RenderTransformOriginProperty
+  - System.Windows.UIElement.RenderTransformOrigin
   - System.Windows.UIElement.UseLayoutRounding
   - System.Windows.UIElement.UseLayoutRoundingProperty
   - System.Windows.UIElement.Visibility
   - System.Windows.UIElement.VisibilityProperty
+  - System.Windows.UIElement.IsVisibleProperty
   - System.Windows.UIElement.IsVisible
   - System.Windows.UIElement.IsVisibleChanged
-  - System.Windows.UIElement.Opacity
   - System.Windows.UIElement.OpacityProperty
+  - System.Windows.UIElement.Opacity
+  - System.Windows.UIElement.OpacityMaskProperty
+  - System.Windows.UIElement.OpacityMask
   - System.Windows.UIElement.IsHitTestVisible
   - System.Windows.UIElement.IsHitTestVisibleProperty
   - System.Windows.UIElement.AllowDrop
@@ -228,16 +265,8 @@ items:
   - System.Windows.UIElement.CaptureMouse
   - System.Windows.UIElement.IsMouseCaptured
   - System.Windows.UIElement.ReleaseMouseCapture
-  - System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
-  - System.Windows.UIElement.LostMouseCapture
   - System.Windows.UIElement.AllowScrollOnTouchMove
   - System.Windows.UIElement.AllowScrollOnTouchMoveProperty
-  - System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
-  - System.Windows.UIElement.Arrange(System.Windows.Rect)
-  - System.Windows.UIElement.Measure(System.Windows.Size)
-  - System.Windows.UIElement.InvalidateArrange
-  - System.Windows.UIElement.InvalidateMeasure
-  - System.Windows.UIElement.UpdateLayout
   - System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
   - System.Windows.UIElement.RemoveHandler(System.Windows.RoutedEvent,System.Delegate)
   - System.Windows.UIElement.MouseMoveEvent
@@ -261,12 +290,13 @@ items:
   - System.Windows.UIElement.MouseLeaveEvent
   - System.Windows.UIElement.MouseLeave
   - System.Windows.UIElement.OnMouseLeave(System.Windows.Input.MouseEventArgs)
+  - System.Windows.UIElement.TextInputStartEvent
+  - System.Windows.UIElement.TextInputStart
+  - System.Windows.UIElement.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
   - System.Windows.UIElement.TextInputEvent
   - System.Windows.UIElement.TextInput
   - System.Windows.UIElement.OnTextInput(System.Windows.Input.TextCompositionEventArgs)
-  - System.Windows.UIElement.TextInputStartEvent
   - System.Windows.UIElement.TextInputUpdateEvent
-  - System.Windows.UIElement.TextInputStart
   - System.Windows.UIElement.TextInputUpdate
   - System.Windows.UIElement.TappedEvent
   - System.Windows.UIElement.Tapped
@@ -282,23 +312,21 @@ items:
   - System.Windows.UIElement.OnKeyUp(System.Windows.Input.KeyEventArgs)
   - System.Windows.UIElement.GotFocusEvent
   - System.Windows.UIElement.GotFocus
-  - System.Windows.UIElement.OnGotFocus(System.Windows.RoutedEventArgs)
   - System.Windows.UIElement.LostFocusEvent
   - System.Windows.UIElement.LostFocus
-  - System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
+  - System.Windows.UIElement.LostMouseCapture
+  - System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
   - System.Windows.UIElement.INTERNAL_AttachToDomEvents
   - System.Windows.UIElement.INTERNAL_DetachFromDomEvents
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  - System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
   - System.Windows.DependencyObject.CheckAccess
   - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
   - System.Object.Equals(System.Object)
@@ -308,20 +336,67 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  - System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
+  attributes:
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Chrome
+    - name: Type
+      type: System.Type
+      value: System.Windows.FrameworkElement
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: CloseButton
+    - name: Type
+      type: System.Type
+      value: System.Windows.Controls.Primitives.ButtonBase
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: ContentPresenter
+    - name: Type
+      type: System.Type
+      value: System.Windows.FrameworkElement
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: ContentRoot
+    - name: Type
+      type: System.Type
+      value: System.Windows.FrameworkElement
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Overlay
+    - name: Type
+      type: System.Type
+      value: System.Windows.Controls.Panel
+  - type: System.Windows.TemplatePartAttribute
+    ctor: System.Windows.TemplatePartAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Root
+    - name: Type
+      type: System.Type
+      value: System.Windows.FrameworkElement
   modifiers.csharp:
   - public
   - class
@@ -342,15 +417,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: HasCloseButton
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 122
+    startLine: 107
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nGets or sets a value indicating whether the\nChildWindow has a close\nbutton.\n"
+  summary: "\nGets or sets a value indicating whether the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> has a close\nbutton.\n"
   example: []
   syntax:
     content: public bool HasCloseButton { get; set; }
@@ -380,21 +455,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: HasCloseButtonProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 136
+    startLine: 119
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nIdentifies the HasCloseButton\ndependency property.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Controls.ChildWindow.HasCloseButton\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty HasCloseButtonProperty
     return:
       type: System.Windows.DependencyProperty
-      description: "\nThe identifier for the HasCloseButton\ndependency property.\n"
+      description: "\nThe identifier for the <xref href=\"System.Windows.Controls.ChildWindow.HasCloseButton\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
     content.vb: Public Shared ReadOnly HasCloseButtonProperty As DependencyProperty
   modifiers.csharp:
   - public
@@ -418,11 +493,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OverlayBrush
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 179
+    startLine: 156
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -433,7 +508,7 @@ items:
     parameters: []
     return:
       type: System.Windows.Media.Brush
-      description: "\nThe visual brush that is used to cover the parent window when the\nChildWindow is open. The\ndefault is null.\n"
+      description: "\nThe visual brush that is used to cover the parent window when the\n<xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> is open. The default is null.\n"
     content.vb: Public Property OverlayBrush As Brush
   overload: System.Windows.Controls.ChildWindow.OverlayBrush*
   modifiers.csharp:
@@ -456,21 +531,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OverlayBrushProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 193
+    startLine: 168
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nIdentifies the OverlayBrush\ndependency property.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Controls.ChildWindow.OverlayBrush\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty OverlayBrushProperty
     return:
       type: System.Windows.DependencyProperty
-      description: "\nThe identifier for the OverlayBrush\ndependency property.\n"
+      description: "\nThe identifier for the <xref href=\"System.Windows.Controls.ChildWindow.OverlayBrush\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
     content.vb: Public Shared ReadOnly OverlayBrushProperty As DependencyProperty
   modifiers.csharp:
   - public
@@ -494,11 +569,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OverlayOpacity
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 229
+    startLine: 198
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -509,7 +584,7 @@ items:
     parameters: []
     return:
       type: System.Double
-      description: "\nThe opacity of the overlay brush that is used to cover the parent\nwindow when the ChildWindow\nis open. The default is 1.0.\n"
+      description: "\nThe opacity of the overlay brush that is used to cover the parent\nwindow when the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> is open. The default is 1.0.\n"
     content.vb: Public Property OverlayOpacity As Double
   overload: System.Windows.Controls.ChildWindow.OverlayOpacity*
   modifiers.csharp:
@@ -532,21 +607,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OverlayOpacityProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 243
+    startLine: 210
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nIdentifies the OverlayOpacity\ndependency property.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Controls.ChildWindow.OverlayOpacity\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty OverlayOpacityProperty
     return:
       type: System.Windows.DependencyProperty
-      description: "\nThe identifier for the OverlayOpacity\ndependency property.\n"
+      description: "\nThe identifier for the <xref href=\"System.Windows.Controls.ChildWindow.OverlayOpacity\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
     content.vb: Public Shared ReadOnly OverlayOpacityProperty As DependencyProperty
   modifiers.csharp:
   - public
@@ -570,15 +645,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Title
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 292
+    startLine: 249
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nGets or sets the title that is displayed in the frame of the\nChildWindow.\n"
+  summary: "\nGets or sets the title that is displayed in the frame of the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public object Title { get; set; }
@@ -608,21 +683,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TitleProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 306
+    startLine: 261
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nIdentifies the ChildWindow.Title&quot; />\ndependency property.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Controls.ChildWindow.Title\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty TitleProperty
     return:
       type: System.Windows.DependencyProperty
-      description: "\nThe identifier for the ChildWindow\ndependency property.\n"
+      description: "\nThe identifier for the <xref href=\"System.Windows.Controls.ChildWindow.Title\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
     content.vb: Public Shared ReadOnly TitleProperty As DependencyProperty
   modifiers.csharp:
   - public
@@ -646,15 +721,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsModal
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 321
+    startLine: 274
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nGets or sets a value indicating whether the ChildWindow is modal.\n"
+  summary: "\nGets or sets a value indicating whether the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> is modal.\n"
   example: []
   syntax:
     content: public bool IsModal { get; set; }
@@ -663,6 +738,10 @@ items:
       type: System.Boolean
     content.vb: Public Property IsModal As Boolean
   overload: System.Windows.Controls.ChildWindow.IsModal*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> was open when attempting the modify IsModal.\n"
   modifiers.csharp:
   - public
   - get
@@ -683,20 +762,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsModalProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 329
+    startLine: 286
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nIdetifies the ChildWindow.IsModal dependency property.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Controls.ChildWindow.IsModal\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty IsModalProperty
     return:
       type: System.Windows.DependencyProperty
+      description: "\nThe identifier for the <xref href=\"System.Windows.Controls.ChildWindow.IsModal\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
     content.vb: Public Shared ReadOnly IsModalProperty As DependencyProperty
   modifiers.csharp:
   - public
@@ -720,15 +800,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 462
+    startLine: 429
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nInitializes a new instance of the\nChildWindow class.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
   example: []
   syntax:
     content: public ChildWindow()
@@ -752,15 +832,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Closed
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 491
+    startLine: 438
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nOccurs when the ChildWindow\nis closed.\n"
+  summary: "\nOccurs when the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> is closed.\n"
   example: []
   syntax:
     content: public event EventHandler Closed
@@ -785,15 +865,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Closing
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 497
+    startLine: 443
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nOccurs when the ChildWindow\nis closing.\n"
+  summary: "\nOccurs when the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> is closing.\n"
   example: []
   syntax:
     content: public event EventHandler<CancelEventArgs> Closing
@@ -818,24 +898,36 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: DialogResult
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 524
+    startLine: 462
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nGets or sets a value indicating whether the\nChildWindow was accepted or\ncanceled.\n"
+  summary: "\nGets or sets a value indicating whether the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> was \naccepted or canceled.\n"
   example: []
   syntax:
-    content: public bool? DialogResult { get; set; }
+    content: >-
+      [TypeConverter(typeof(NullableBoolConverter))]
+
+      public bool? DialogResult { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Boolean}
       description: "\nTrue if the child window was accepted; false if the child window was\ncanceled. The default is null.\n"
-    content.vb: Public Property DialogResult As Boolean?
+    content.vb: >-
+      <TypeConverter(GetType(NullableBoolConverter))>
+
+      Public Property DialogResult As Boolean?
   overload: System.Windows.Controls.ChildWindow.DialogResult*
+  attributes:
+  - type: System.ComponentModel.TypeConverterAttribute
+    ctor: System.ComponentModel.TypeConverterAttribute.#ctor(System.Type)
+    arguments:
+    - type: System.Type
+      value: System.Windows.NullableBoolConverter
   modifiers.csharp:
   - public
   - get
@@ -856,15 +948,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Close
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 804
+    startLine: 650
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nCloses a ChildWindow.\n"
+  summary: "\nCloses a <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public void Close()
@@ -888,15 +980,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnApplyTemplate
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 1123
+    startLine: 968
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nBuilds the visual tree for the\nChildWindow control when a\nnew template is applied.\n"
+  summary: "\nBuilds the visual tree for the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> control when a\nnew template is applied.\n"
   example: []
   syntax:
     content: public override void OnApplyTemplate()
@@ -923,15 +1015,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnClosed
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 1242
+    startLine: 1063
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nRaises the ChildWindow.Closed event.\n"
+  summary: "\nRaises the <xref href=\"System.Windows.Controls.ChildWindow.Closed\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
   example: []
   syntax:
     content: protected virtual void OnClosed(EventArgs e)
@@ -961,15 +1053,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnClosing
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 1258
+    startLine: 1079
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nRaises the ChildWindow.Closing event.\n"
+  summary: "\nRaises the <xref href=\"System.Windows.Controls.ChildWindow.Closing\" data-throw-if-not-resolved=\"false\"></xref> event.\n"
   example: []
   syntax:
     content: protected virtual void OnClosing(CancelEventArgs e)
@@ -985,6 +1077,44 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
+- uid: System.Windows.Controls.ChildWindow.OnCreateAutomationPeer
+  commentId: M:System.Windows.Controls.ChildWindow.OnCreateAutomationPeer
+  id: OnCreateAutomationPeer
+  parent: System.Windows.Controls.ChildWindow
+  langs:
+  - csharp
+  - vb
+  name: OnCreateAutomationPeer()
+  nameWithType: ChildWindow.OnCreateAutomationPeer()
+  fullName: System.Windows.Controls.ChildWindow.OnCreateAutomationPeer()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: OnCreateAutomationPeer
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
+    startLine: 1096
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Controls
+  summary: "\nReturns a <xref href=\"System.Windows.Automation.Peers.ChildWindowAutomationPeer\" data-throw-if-not-resolved=\"false\"></xref> for use by the \nSilverlight automation infrastructure.\n"
+  example: []
+  syntax:
+    content: protected override AutomationPeer OnCreateAutomationPeer()
+    return:
+      type: System.Windows.Automation.Peers.AutomationPeer
+      description: "\n<xref href=\"System.Windows.Automation.Peers.ChildWindowAutomationPeer\" data-throw-if-not-resolved=\"false\"></xref> for the <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> object.\n"
+    content.vb: Protected Overrides Function OnCreateAutomationPeer As AutomationPeer
+  overridden: System.Windows.UIElement.OnCreateAutomationPeer
+  overload: System.Windows.Controls.ChildWindow.OnCreateAutomationPeer*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
 - uid: System.Windows.Controls.ChildWindow.OnOpened
   commentId: M:System.Windows.Controls.ChildWindow.OnOpened
   id: OnOpened
@@ -999,15 +1129,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OnOpened
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 1287
+    startLine: 1104
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nThis method is called every time a\nChildWindow is displayed.\n"
+  summary: "\nThis method is called every time a <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> is displayed.\n"
   example: []
   syntax:
     content: protected virtual void OnOpened()
@@ -1033,15 +1163,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Show
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 1362
+    startLine: 1176
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
-  summary: "\nOpens a ChildWindow and\nreturns without waiting for the\nChildWindow to close.\n"
+  summary: "\nOpens a <xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> and\nreturns without waiting for the\n<xref href=\"System.Windows.Controls.ChildWindow\" data-throw-if-not-resolved=\"false\"></xref> to close.\n"
   example: []
   syntax:
     content: public void Show()
@@ -1069,11 +1199,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ShowAndWait
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Controls/ChildWindow.cs
-    startLine: 1439
+    startLine: 1240
   assemblies:
   - OpenSilver
   namespace: System.Windows.Controls
@@ -1215,112 +1345,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
-  commentId: M:System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
+- uid: System.Windows.Controls.ContentControl.LogicalChildren
+  commentId: P:System.Windows.Controls.ContentControl.LogicalChildren
   parent: System.Windows.Controls.ContentControl
-  name: INTERNAL_OnAttachedToVisualTree()
-  nameWithType: ContentControl.INTERNAL_OnAttachedToVisualTree()
-  fullName: System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree()
-  spec.csharp:
-  - uid: System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
-    name: INTERNAL_OnAttachedToVisualTree
-    nameWithType: ContentControl.INTERNAL_OnAttachedToVisualTree
-    fullName: System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
-    name: INTERNAL_OnAttachedToVisualTree
-    nameWithType: ContentControl.INTERNAL_OnAttachedToVisualTree
-    fullName: System.Windows.Controls.ContentControl.INTERNAL_OnAttachedToVisualTree
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.ContentControl.MeasureOverride(System.Windows.Size)
-  commentId: M:System.Windows.Controls.ContentControl.MeasureOverride(System.Windows.Size)
-  parent: System.Windows.Controls.ContentControl
-  name: MeasureOverride(Size)
-  nameWithType: ContentControl.MeasureOverride(Size)
-  fullName: System.Windows.Controls.ContentControl.MeasureOverride(System.Windows.Size)
-  spec.csharp:
-  - uid: System.Windows.Controls.ContentControl.MeasureOverride(System.Windows.Size)
-    name: MeasureOverride
-    nameWithType: ContentControl.MeasureOverride
-    fullName: System.Windows.Controls.ContentControl.MeasureOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Size
-    name: Size
-    nameWithType: Size
-    fullName: System.Windows.Size
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ContentControl.MeasureOverride(System.Windows.Size)
-    name: MeasureOverride
-    nameWithType: ContentControl.MeasureOverride
-    fullName: System.Windows.Controls.ContentControl.MeasureOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Size
-    name: Size
-    nameWithType: Size
-    fullName: System.Windows.Size
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.ContentControl.ArrangeOverride(System.Windows.Size)
-  commentId: M:System.Windows.Controls.ContentControl.ArrangeOverride(System.Windows.Size)
-  parent: System.Windows.Controls.ContentControl
-  name: ArrangeOverride(Size)
-  nameWithType: ContentControl.ArrangeOverride(Size)
-  fullName: System.Windows.Controls.ContentControl.ArrangeOverride(System.Windows.Size)
-  spec.csharp:
-  - uid: System.Windows.Controls.ContentControl.ArrangeOverride(System.Windows.Size)
-    name: ArrangeOverride
-    nameWithType: ContentControl.ArrangeOverride
-    fullName: System.Windows.Controls.ContentControl.ArrangeOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Size
-    name: Size
-    nameWithType: Size
-    fullName: System.Windows.Size
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ContentControl.ArrangeOverride(System.Windows.Size)
-    name: ArrangeOverride
-    nameWithType: ContentControl.ArrangeOverride
-    fullName: System.Windows.Controls.ContentControl.ArrangeOverride
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Size
-    name: Size
-    nameWithType: Size
-    fullName: System.Windows.Size
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
-  commentId: F:System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
+  name: LogicalChildren
+  nameWithType: ContentControl.LogicalChildren
+  fullName: System.Windows.Controls.ContentControl.LogicalChildren
+- uid: System.Windows.Controls.Control.EnableBaseControlHandlingOfVisualStates
+  commentId: P:System.Windows.Controls.Control.EnableBaseControlHandlingOfVisualStates
   parent: System.Windows.Controls.Control
-  name: DisableBaseControlHandlingOfVisualStates
-  nameWithType: Control.DisableBaseControlHandlingOfVisualStates
-  fullName: System.Windows.Controls.Control.DisableBaseControlHandlingOfVisualStates
+  name: EnableBaseControlHandlingOfVisualStates
+  nameWithType: Control.EnableBaseControlHandlingOfVisualStates
+  fullName: System.Windows.Controls.Control.EnableBaseControlHandlingOfVisualStates
 - uid: System.Windows.Controls.Control.ManageIsEnabled(System.Boolean)
   commentId: M:System.Windows.Controls.Control.ManageIsEnabled(System.Boolean)
   parent: System.Windows.Controls.Control
@@ -1528,6 +1564,18 @@ references:
   name: IsTabStopProperty
   nameWithType: Control.IsTabStopProperty
   fullName: System.Windows.Controls.Control.IsTabStopProperty
+- uid: System.Windows.Controls.Control.TabNavigation
+  commentId: P:System.Windows.Controls.Control.TabNavigation
+  parent: System.Windows.Controls.Control
+  name: TabNavigation
+  nameWithType: Control.TabNavigation
+  fullName: System.Windows.Controls.Control.TabNavigation
+- uid: System.Windows.Controls.Control.TabNavigationProperty
+  commentId: F:System.Windows.Controls.Control.TabNavigationProperty
+  parent: System.Windows.Controls.Control
+  name: TabNavigationProperty
+  nameWithType: Control.TabNavigationProperty
+  fullName: System.Windows.Controls.Control.TabNavigationProperty
 - uid: System.Windows.Controls.Control.Template
   commentId: P:System.Windows.Controls.Control.Template
   parent: System.Windows.Controls.Control
@@ -1635,12 +1683,84 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Control.UseSystemFocusVisuals
-  commentId: P:System.Windows.Controls.Control.UseSystemFocusVisuals
+- uid: System.Windows.Controls.Control.HandlesScrolling
+  commentId: P:System.Windows.Controls.Control.HandlesScrolling
   parent: System.Windows.Controls.Control
-  name: UseSystemFocusVisuals
-  nameWithType: Control.UseSystemFocusVisuals
-  fullName: System.Windows.Controls.Control.UseSystemFocusVisuals
+  name: HandlesScrolling
+  nameWithType: Control.HandlesScrolling
+  fullName: System.Windows.Controls.Control.HandlesScrolling
+- uid: System.Windows.Controls.Control.OnGotFocus(System.Windows.RoutedEventArgs)
+  commentId: M:System.Windows.Controls.Control.OnGotFocus(System.Windows.RoutedEventArgs)
+  parent: System.Windows.Controls.Control
+  name: OnGotFocus(RoutedEventArgs)
+  nameWithType: Control.OnGotFocus(RoutedEventArgs)
+  fullName: System.Windows.Controls.Control.OnGotFocus(System.Windows.RoutedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.Control.OnGotFocus(System.Windows.RoutedEventArgs)
+    name: OnGotFocus
+    nameWithType: Control.OnGotFocus
+    fullName: System.Windows.Controls.Control.OnGotFocus
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEventArgs
+    name: RoutedEventArgs
+    nameWithType: RoutedEventArgs
+    fullName: System.Windows.RoutedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Control.OnGotFocus(System.Windows.RoutedEventArgs)
+    name: OnGotFocus
+    nameWithType: Control.OnGotFocus
+    fullName: System.Windows.Controls.Control.OnGotFocus
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEventArgs
+    name: RoutedEventArgs
+    nameWithType: RoutedEventArgs
+    fullName: System.Windows.RoutedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Control.OnLostFocus(System.Windows.RoutedEventArgs)
+  commentId: M:System.Windows.Controls.Control.OnLostFocus(System.Windows.RoutedEventArgs)
+  parent: System.Windows.Controls.Control
+  name: OnLostFocus(RoutedEventArgs)
+  nameWithType: Control.OnLostFocus(RoutedEventArgs)
+  fullName: System.Windows.Controls.Control.OnLostFocus(System.Windows.RoutedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.Controls.Control.OnLostFocus(System.Windows.RoutedEventArgs)
+    name: OnLostFocus
+    nameWithType: Control.OnLostFocus
+    fullName: System.Windows.Controls.Control.OnLostFocus
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEventArgs
+    name: RoutedEventArgs
+    nameWithType: RoutedEventArgs
+    fullName: System.Windows.RoutedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Control.OnLostFocus(System.Windows.RoutedEventArgs)
+    name: OnLostFocus
+    nameWithType: Control.OnLostFocus
+    fullName: System.Windows.Controls.Control.OnLostFocus
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.RoutedEventArgs
+    name: RoutedEventArgs
+    nameWithType: RoutedEventArgs
+    fullName: System.Windows.RoutedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
   commentId: M:System.Windows.Controls.Control.CreateDomElement(System.Object,System.Object@)
   parent: System.Windows.Controls.Control
@@ -1708,18 +1828,6 @@ references:
   name: CharacterSpacing
   nameWithType: Control.CharacterSpacing
   fullName: System.Windows.Controls.Control.CharacterSpacing
-- uid: System.Windows.Controls.Control.TabNavigationProperty
-  commentId: F:System.Windows.Controls.Control.TabNavigationProperty
-  parent: System.Windows.Controls.Control
-  name: TabNavigationProperty
-  nameWithType: Control.TabNavigationProperty
-  fullName: System.Windows.Controls.Control.TabNavigationProperty
-- uid: System.Windows.Controls.Control.TabNavigation
-  commentId: P:System.Windows.Controls.Control.TabNavigation
-  parent: System.Windows.Controls.Control
-  name: TabNavigation
-  nameWithType: Control.TabNavigation
-  fullName: System.Windows.Controls.Control.TabNavigation
 - uid: System.Windows.Controls.Control.FontStretchProperty
   commentId: F:System.Windows.Controls.Control.FontStretchProperty
   parent: System.Windows.Controls.Control
@@ -1840,42 +1948,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
-  commentId: M:System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
-  parent: System.Windows.Controls.Control
-  name: OnTextInputStart(TextCompositionEventArgs)
-  nameWithType: Control.OnTextInputStart(TextCompositionEventArgs)
-  fullName: System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
-  spec.csharp:
-  - uid: System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInputStart
-    nameWithType: Control.OnTextInputStart
-    fullName: System.Windows.Controls.Control.OnTextInputStart
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Control.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
-    name: OnTextInputStart
-    nameWithType: Control.OnTextInputStart
-    fullName: System.Windows.Controls.Control.OnTextInputStart
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.TextCompositionEventArgs
-    name: TextCompositionEventArgs
-    nameWithType: TextCompositionEventArgs
-    fullName: System.Windows.Input.TextCompositionEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.Controls.Control.OnTextInputUpdate(System.Windows.Input.TextCompositionEventArgs)
   commentId: M:System.Windows.Controls.Control.OnTextInputUpdate(System.Windows.Input.TextCompositionEventArgs)
   parent: System.Windows.Controls.Control
@@ -1912,18 +1984,303 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Controls.Control.MeasureOverride(System.Windows.Size)
+  commentId: M:System.Windows.Controls.Control.MeasureOverride(System.Windows.Size)
+  parent: System.Windows.Controls.Control
+  name: MeasureOverride(Size)
+  nameWithType: Control.MeasureOverride(Size)
+  fullName: System.Windows.Controls.Control.MeasureOverride(System.Windows.Size)
+  spec.csharp:
+  - uid: System.Windows.Controls.Control.MeasureOverride(System.Windows.Size)
+    name: MeasureOverride
+    nameWithType: Control.MeasureOverride
+    fullName: System.Windows.Controls.Control.MeasureOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Size
+    name: Size
+    nameWithType: Size
+    fullName: System.Windows.Size
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Control.MeasureOverride(System.Windows.Size)
+    name: MeasureOverride
+    nameWithType: Control.MeasureOverride
+    fullName: System.Windows.Controls.Control.MeasureOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Size
+    name: Size
+    nameWithType: Size
+    fullName: System.Windows.Size
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.Control.ArrangeOverride(System.Windows.Size)
+  commentId: M:System.Windows.Controls.Control.ArrangeOverride(System.Windows.Size)
+  parent: System.Windows.Controls.Control
+  name: ArrangeOverride(Size)
+  nameWithType: Control.ArrangeOverride(Size)
+  fullName: System.Windows.Controls.Control.ArrangeOverride(System.Windows.Size)
+  spec.csharp:
+  - uid: System.Windows.Controls.Control.ArrangeOverride(System.Windows.Size)
+    name: ArrangeOverride
+    nameWithType: Control.ArrangeOverride
+    fullName: System.Windows.Controls.Control.ArrangeOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Size
+    name: Size
+    nameWithType: Size
+    fullName: System.Windows.Size
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Controls.Control.ArrangeOverride(System.Windows.Size)
+    name: ArrangeOverride
+    nameWithType: Control.ArrangeOverride
+    fullName: System.Windows.Controls.Control.ArrangeOverride
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Size
+    name: Size
+    nameWithType: Size
+    fullName: System.Windows.Size
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.FrameworkElement.LayoutUpdated
+  commentId: E:System.Windows.FrameworkElement.LayoutUpdated
+  parent: System.Windows.FrameworkElement
+  name: LayoutUpdated
+  nameWithType: FrameworkElement.LayoutUpdated
+  fullName: System.Windows.FrameworkElement.LayoutUpdated
+- uid: System.Windows.FrameworkElement.SizeChanged
+  commentId: E:System.Windows.FrameworkElement.SizeChanged
+  parent: System.Windows.FrameworkElement
+  name: SizeChanged
+  nameWithType: FrameworkElement.SizeChanged
+  fullName: System.Windows.FrameworkElement.SizeChanged
+- uid: System.Windows.FrameworkElement.ResourceLookupMode
+  commentId: P:System.Windows.FrameworkElement.ResourceLookupMode
+  parent: System.Windows.FrameworkElement
+  name: ResourceLookupMode
+  nameWithType: FrameworkElement.ResourceLookupMode
+  fullName: System.Windows.FrameworkElement.ResourceLookupMode
+- uid: System.Windows.FrameworkElement.StyleProperty
+  commentId: F:System.Windows.FrameworkElement.StyleProperty
+  parent: System.Windows.FrameworkElement
+  name: StyleProperty
+  nameWithType: FrameworkElement.StyleProperty
+  fullName: System.Windows.FrameworkElement.StyleProperty
+- uid: System.Windows.FrameworkElement.Style
+  commentId: P:System.Windows.FrameworkElement.Style
+  parent: System.Windows.FrameworkElement
+  name: Style
+  nameWithType: FrameworkElement.Style
+  fullName: System.Windows.FrameworkElement.Style
+- uid: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  commentId: F:System.Windows.FrameworkElement.DefaultStyleKeyProperty
+  parent: System.Windows.FrameworkElement
+  name: DefaultStyleKeyProperty
+  nameWithType: FrameworkElement.DefaultStyleKeyProperty
+  fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
+- uid: System.Windows.FrameworkElement.DefaultStyleKey
+  commentId: P:System.Windows.FrameworkElement.DefaultStyleKey
+  parent: System.Windows.FrameworkElement
+  name: DefaultStyleKey
+  nameWithType: FrameworkElement.DefaultStyleKey
+  fullName: System.Windows.FrameworkElement.DefaultStyleKey
+- uid: System.Windows.FrameworkElement.OverridesDefaultStyleProperty
+  commentId: F:System.Windows.FrameworkElement.OverridesDefaultStyleProperty
+  parent: System.Windows.FrameworkElement
+  name: OverridesDefaultStyleProperty
+  nameWithType: FrameworkElement.OverridesDefaultStyleProperty
+  fullName: System.Windows.FrameworkElement.OverridesDefaultStyleProperty
+- uid: System.Windows.FrameworkElement.OverridesDefaultStyle
+  commentId: P:System.Windows.FrameworkElement.OverridesDefaultStyle
+  parent: System.Windows.FrameworkElement
+  name: OverridesDefaultStyle
+  nameWithType: FrameworkElement.OverridesDefaultStyle
+  fullName: System.Windows.FrameworkElement.OverridesDefaultStyle
+- uid: System.Windows.FrameworkElement.OnVisualParentChanged(System.Windows.DependencyObject)
+  commentId: M:System.Windows.FrameworkElement.OnVisualParentChanged(System.Windows.DependencyObject)
+  parent: System.Windows.FrameworkElement
+  name: OnVisualParentChanged(DependencyObject)
+  nameWithType: FrameworkElement.OnVisualParentChanged(DependencyObject)
+  fullName: System.Windows.FrameworkElement.OnVisualParentChanged(System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.FrameworkElement.OnVisualParentChanged(System.Windows.DependencyObject)
+    name: OnVisualParentChanged
+    nameWithType: FrameworkElement.OnVisualParentChanged
+    fullName: System.Windows.FrameworkElement.OnVisualParentChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.FrameworkElement.OnVisualParentChanged(System.Windows.DependencyObject)
+    name: OnVisualParentChanged
+    nameWithType: FrameworkElement.OnVisualParentChanged
+    fullName: System.Windows.FrameworkElement.OnVisualParentChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.FrameworkElement.VisualChildrenCount
+  commentId: P:System.Windows.FrameworkElement.VisualChildrenCount
+  parent: System.Windows.FrameworkElement
+  name: VisualChildrenCount
+  nameWithType: FrameworkElement.VisualChildrenCount
+  fullName: System.Windows.FrameworkElement.VisualChildrenCount
+- uid: System.Windows.FrameworkElement.GetVisualChild(System.Int32)
+  commentId: M:System.Windows.FrameworkElement.GetVisualChild(System.Int32)
+  parent: System.Windows.FrameworkElement
+  isExternal: true
+  name: GetVisualChild(Int32)
+  nameWithType: FrameworkElement.GetVisualChild(Int32)
+  fullName: System.Windows.FrameworkElement.GetVisualChild(System.Int32)
+  spec.csharp:
+  - uid: System.Windows.FrameworkElement.GetVisualChild(System.Int32)
+    name: GetVisualChild
+    nameWithType: FrameworkElement.GetVisualChild
+    fullName: System.Windows.FrameworkElement.GetVisualChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.FrameworkElement.GetVisualChild(System.Int32)
+    name: GetVisualChild
+    nameWithType: FrameworkElement.GetVisualChild
+    fullName: System.Windows.FrameworkElement.GetVisualChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.FrameworkElement.Parent
   commentId: P:System.Windows.FrameworkElement.Parent
   parent: System.Windows.FrameworkElement
   name: Parent
   nameWithType: FrameworkElement.Parent
   fullName: System.Windows.FrameworkElement.Parent
-- uid: System.Windows.FrameworkElement.INTERNAL_DoNotApplyStyle
-  commentId: F:System.Windows.FrameworkElement.INTERNAL_DoNotApplyStyle
+- uid: System.Windows.FrameworkElement.AddLogicalChild(System.Object)
+  commentId: M:System.Windows.FrameworkElement.AddLogicalChild(System.Object)
   parent: System.Windows.FrameworkElement
-  name: INTERNAL_DoNotApplyStyle
-  nameWithType: FrameworkElement.INTERNAL_DoNotApplyStyle
-  fullName: System.Windows.FrameworkElement.INTERNAL_DoNotApplyStyle
+  isExternal: true
+  name: AddLogicalChild(Object)
+  nameWithType: FrameworkElement.AddLogicalChild(Object)
+  fullName: System.Windows.FrameworkElement.AddLogicalChild(System.Object)
+  spec.csharp:
+  - uid: System.Windows.FrameworkElement.AddLogicalChild(System.Object)
+    name: AddLogicalChild
+    nameWithType: FrameworkElement.AddLogicalChild
+    fullName: System.Windows.FrameworkElement.AddLogicalChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.FrameworkElement.AddLogicalChild(System.Object)
+    name: AddLogicalChild
+    nameWithType: FrameworkElement.AddLogicalChild
+    fullName: System.Windows.FrameworkElement.AddLogicalChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.FrameworkElement.RemoveLogicalChild(System.Object)
+  commentId: M:System.Windows.FrameworkElement.RemoveLogicalChild(System.Object)
+  parent: System.Windows.FrameworkElement
+  isExternal: true
+  name: RemoveLogicalChild(Object)
+  nameWithType: FrameworkElement.RemoveLogicalChild(Object)
+  fullName: System.Windows.FrameworkElement.RemoveLogicalChild(System.Object)
+  spec.csharp:
+  - uid: System.Windows.FrameworkElement.RemoveLogicalChild(System.Object)
+    name: RemoveLogicalChild
+    nameWithType: FrameworkElement.RemoveLogicalChild
+    fullName: System.Windows.FrameworkElement.RemoveLogicalChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.FrameworkElement.RemoveLogicalChild(System.Object)
+    name: RemoveLogicalChild
+    nameWithType: FrameworkElement.RemoveLogicalChild
+    fullName: System.Windows.FrameworkElement.RemoveLogicalChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.FrameworkElement.TemplatedParent
+  commentId: P:System.Windows.FrameworkElement.TemplatedParent
+  parent: System.Windows.FrameworkElement
+  name: TemplatedParent
+  nameWithType: FrameworkElement.TemplatedParent
+  fullName: System.Windows.FrameworkElement.TemplatedParent
 - uid: System.Windows.FrameworkElement.Resources
   commentId: P:System.Windows.FrameworkElement.Resources
   parent: System.Windows.FrameworkElement
@@ -1936,58 +2293,53 @@ references:
   name: IsLoaded
   nameWithType: FrameworkElement.IsLoaded
   fullName: System.Windows.FrameworkElement.IsLoaded
-- uid: System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(System.Object,System.Object@)
-  commentId: M:System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(System.Object,System.Object@)
+- uid: System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty,System.Windows.Data.BindingBase)
+  commentId: M:System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty,System.Windows.Data.BindingBase)
   parent: System.Windows.FrameworkElement
-  isExternal: true
-  name: CreateDomElement_WorkaroundBridgeInheritanceBug(Object, Object)
-  nameWithType: FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(Object, Object)
-  fullName: System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(System.Object, System.Object)
+  name: SetBinding(DependencyProperty, BindingBase)
+  nameWithType: FrameworkElement.SetBinding(DependencyProperty, BindingBase)
+  fullName: System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty, System.Windows.Data.BindingBase)
   spec.csharp:
-  - uid: System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(System.Object,System.Object@)
-    name: CreateDomElement_WorkaroundBridgeInheritanceBug
-    nameWithType: FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug
-    fullName: System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug
+  - uid: System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty,System.Windows.Data.BindingBase)
+    name: SetBinding
+    nameWithType: FrameworkElement.SetBinding
+    fullName: System.Windows.FrameworkElement.SetBinding
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - uid: System.Windows.Data.BindingBase
+    name: BindingBase
+    nameWithType: BindingBase
+    fullName: System.Windows.Data.BindingBase
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug(System.Object,System.Object@)
-    name: CreateDomElement_WorkaroundBridgeInheritanceBug
-    nameWithType: FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug
-    fullName: System.Windows.FrameworkElement.CreateDomElement_WorkaroundBridgeInheritanceBug
+  - uid: System.Windows.FrameworkElement.SetBinding(System.Windows.DependencyProperty,System.Windows.Data.BindingBase)
+    name: SetBinding
+    nameWithType: FrameworkElement.SetBinding
+    fullName: System.Windows.FrameworkElement.SetBinding
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - uid: System.Windows.DependencyProperty
+    name: DependencyProperty
+    nameWithType: DependencyProperty
+    fullName: System.Windows.DependencyProperty
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
+  - uid: System.Windows.Data.BindingBase
+    name: BindingBase
+    nameWithType: BindingBase
+    fullName: System.Windows.Data.BindingBase
   - name: )
     nameWithType: )
     fullName: )
@@ -2089,24 +2441,6 @@ references:
   name: CursorProperty
   nameWithType: FrameworkElement.CursorProperty
   fullName: System.Windows.FrameworkElement.CursorProperty
-- uid: System.Windows.FrameworkElement.IsEnabled
-  commentId: P:System.Windows.FrameworkElement.IsEnabled
-  parent: System.Windows.FrameworkElement
-  name: IsEnabled
-  nameWithType: FrameworkElement.IsEnabled
-  fullName: System.Windows.FrameworkElement.IsEnabled
-- uid: System.Windows.FrameworkElement.IsEnabledProperty
-  commentId: F:System.Windows.FrameworkElement.IsEnabledProperty
-  parent: System.Windows.FrameworkElement
-  name: IsEnabledProperty
-  nameWithType: FrameworkElement.IsEnabledProperty
-  fullName: System.Windows.FrameworkElement.IsEnabledProperty
-- uid: System.Windows.FrameworkElement.IsEnabledChanged
-  commentId: E:System.Windows.FrameworkElement.IsEnabledChanged
-  parent: System.Windows.FrameworkElement
-  name: IsEnabledChanged
-  nameWithType: FrameworkElement.IsEnabledChanged
-  fullName: System.Windows.FrameworkElement.IsEnabledChanged
 - uid: System.Windows.FrameworkElement.FindName(System.String)
   commentId: M:System.Windows.FrameworkElement.FindName(System.String)
   parent: System.Windows.FrameworkElement
@@ -2182,40 +2516,6 @@ references:
   name: Triggers
   nameWithType: FrameworkElement.Triggers
   fullName: System.Windows.FrameworkElement.Triggers
-- uid: System.Windows.FrameworkElement.LayoutUpdated
-  commentId: E:System.Windows.FrameworkElement.LayoutUpdated
-  parent: System.Windows.FrameworkElement
-  name: LayoutUpdated
-  nameWithType: FrameworkElement.LayoutUpdated
-  fullName: System.Windows.FrameworkElement.LayoutUpdated
-- uid: System.Windows.FrameworkElement.OnLayoutUpdated
-  commentId: M:System.Windows.FrameworkElement.OnLayoutUpdated
-  parent: System.Windows.FrameworkElement
-  name: OnLayoutUpdated()
-  nameWithType: FrameworkElement.OnLayoutUpdated()
-  fullName: System.Windows.FrameworkElement.OnLayoutUpdated()
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.OnLayoutUpdated
-    name: OnLayoutUpdated
-    nameWithType: FrameworkElement.OnLayoutUpdated
-    fullName: System.Windows.FrameworkElement.OnLayoutUpdated
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.OnLayoutUpdated
-    name: OnLayoutUpdated
-    nameWithType: FrameworkElement.OnLayoutUpdated
-    fullName: System.Windows.FrameworkElement.OnLayoutUpdated
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.FrameworkElement.FlowDirectionProperty
   commentId: F:System.Windows.FrameworkElement.FlowDirectionProperty
   parent: System.Windows.FrameworkElement
@@ -2240,6 +2540,42 @@ references:
   name: Language
   nameWithType: FrameworkElement.Language
   fullName: System.Windows.FrameworkElement.Language
+- uid: System.Windows.FrameworkElement.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  commentId: M:System.Windows.FrameworkElement.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  parent: System.Windows.FrameworkElement
+  name: OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  nameWithType: FrameworkElement.OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  fullName: System.Windows.FrameworkElement.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.FrameworkElement.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: FrameworkElement.OnPropertyChanged
+    fullName: System.Windows.FrameworkElement.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.FrameworkElement.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: FrameworkElement.OnPropertyChanged
+    fullName: System.Windows.FrameworkElement.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.FrameworkElement.Tag
   commentId: P:System.Windows.FrameworkElement.Tag
   parent: System.Windows.FrameworkElement
@@ -2252,30 +2588,6 @@ references:
   name: TagProperty
   nameWithType: FrameworkElement.TagProperty
   fullName: System.Windows.FrameworkElement.TagProperty
-- uid: System.Windows.FrameworkElement.Style
-  commentId: P:System.Windows.FrameworkElement.Style
-  parent: System.Windows.FrameworkElement
-  name: Style
-  nameWithType: FrameworkElement.Style
-  fullName: System.Windows.FrameworkElement.Style
-- uid: System.Windows.FrameworkElement.StyleProperty
-  commentId: F:System.Windows.FrameworkElement.StyleProperty
-  parent: System.Windows.FrameworkElement
-  name: StyleProperty
-  nameWithType: FrameworkElement.StyleProperty
-  fullName: System.Windows.FrameworkElement.StyleProperty
-- uid: System.Windows.FrameworkElement.DefaultStyleKey
-  commentId: P:System.Windows.FrameworkElement.DefaultStyleKey
-  parent: System.Windows.FrameworkElement
-  name: DefaultStyleKey
-  nameWithType: FrameworkElement.DefaultStyleKey
-  fullName: System.Windows.FrameworkElement.DefaultStyleKey
-- uid: System.Windows.FrameworkElement.DefaultStyleKeyProperty
-  commentId: F:System.Windows.FrameworkElement.DefaultStyleKeyProperty
-  parent: System.Windows.FrameworkElement
-  name: DefaultStyleKeyProperty
-  nameWithType: FrameworkElement.DefaultStyleKeyProperty
-  fullName: System.Windows.FrameworkElement.DefaultStyleKeyProperty
 - uid: System.Windows.FrameworkElement.LoadedEvent
   commentId: F:System.Windows.FrameworkElement.LoadedEvent
   parent: System.Windows.FrameworkElement
@@ -2300,6 +2612,36 @@ references:
   name: BindingValidationError
   nameWithType: FrameworkElement.BindingValidationError
   fullName: System.Windows.FrameworkElement.BindingValidationError
+- uid: System.Windows.FrameworkElement.ContextMenuProperty
+  commentId: F:System.Windows.FrameworkElement.ContextMenuProperty
+  parent: System.Windows.FrameworkElement
+  name: ContextMenuProperty
+  nameWithType: FrameworkElement.ContextMenuProperty
+  fullName: System.Windows.FrameworkElement.ContextMenuProperty
+- uid: System.Windows.FrameworkElement.ContextMenu
+  commentId: P:System.Windows.FrameworkElement.ContextMenu
+  parent: System.Windows.FrameworkElement
+  name: ContextMenu
+  nameWithType: FrameworkElement.ContextMenu
+  fullName: System.Windows.FrameworkElement.ContextMenu
+- uid: System.Windows.FrameworkElement.ContextMenuOpening
+  commentId: E:System.Windows.FrameworkElement.ContextMenuOpening
+  parent: System.Windows.FrameworkElement
+  name: ContextMenuOpening
+  nameWithType: FrameworkElement.ContextMenuOpening
+  fullName: System.Windows.FrameworkElement.ContextMenuOpening
+- uid: System.Windows.FrameworkElement.ToolTipProperty
+  commentId: F:System.Windows.FrameworkElement.ToolTipProperty
+  parent: System.Windows.FrameworkElement
+  name: ToolTipProperty
+  nameWithType: FrameworkElement.ToolTipProperty
+  fullName: System.Windows.FrameworkElement.ToolTipProperty
+- uid: System.Windows.FrameworkElement.ToolTip
+  commentId: P:System.Windows.FrameworkElement.ToolTip
+  parent: System.Windows.FrameworkElement
+  name: ToolTip
+  nameWithType: FrameworkElement.ToolTip
+  fullName: System.Windows.FrameworkElement.ToolTip
 - uid: System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   commentId: M:System.Windows.FrameworkElement.INTERNAL_OnDetachedFromVisualTree
   parent: System.Windows.FrameworkElement
@@ -2328,17 +2670,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
-  commentId: M:System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
+- uid: System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
+  commentId: M:System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   parent: System.Windows.FrameworkElement
-  name: OnAfterApplyHorizontalAlignmentAndWidth()
-  nameWithType: FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth()
-  fullName: System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth()
+  name: INTERNAL_OnAttachedToVisualTree()
+  nameWithType: FrameworkElement.INTERNAL_OnAttachedToVisualTree()
+  fullName: System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree()
   spec.csharp:
-  - uid: System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
-    name: OnAfterApplyHorizontalAlignmentAndWidth
-    nameWithType: FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
-    fullName: System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
+  - uid: System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
+    name: INTERNAL_OnAttachedToVisualTree
+    nameWithType: FrameworkElement.INTERNAL_OnAttachedToVisualTree
+    fullName: System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - name: (
     nameWithType: (
     fullName: (
@@ -2346,80 +2688,16 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
-    name: OnAfterApplyHorizontalAlignmentAndWidth
-    nameWithType: FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
-    fullName: System.Windows.FrameworkElement.OnAfterApplyHorizontalAlignmentAndWidth
+  - uid: System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
+    name: INTERNAL_OnAttachedToVisualTree
+    nameWithType: FrameworkElement.INTERNAL_OnAttachedToVisualTree
+    fullName: System.Windows.FrameworkElement.INTERNAL_OnAttachedToVisualTree
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-  commentId: M:System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-  parent: System.Windows.FrameworkElement
-  name: OnAfterApplyVerticalAlignmentAndWidth()
-  nameWithType: FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth()
-  fullName: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth()
-  spec.csharp:
-  - uid: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-    name: OnAfterApplyVerticalAlignmentAndWidth
-    nameWithType: FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-    fullName: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-    name: OnAfterApplyVerticalAlignmentAndWidth
-    nameWithType: FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-    fullName: System.Windows.FrameworkElement.OnAfterApplyVerticalAlignmentAndWidth
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
-  commentId: P:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
-  parent: System.Windows.FrameworkElement
-  name: IsAutoWidthOnCustomLayout
-  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayout
-  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayout
-- uid: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
-  commentId: F:System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
-  parent: System.Windows.FrameworkElement
-  name: IsAutoWidthOnCustomLayoutProperty
-  nameWithType: FrameworkElement.IsAutoWidthOnCustomLayoutProperty
-  fullName: System.Windows.FrameworkElement.IsAutoWidthOnCustomLayoutProperty
-- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
-  commentId: P:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
-  parent: System.Windows.FrameworkElement
-  name: IsAutoHeightOnCustomLayout
-  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayout
-  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayout
-- uid: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
-  commentId: F:System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
-  parent: System.Windows.FrameworkElement
-  name: IsAutoHeightOnCustomLayoutProperty
-  nameWithType: FrameworkElement.IsAutoHeightOnCustomLayoutProperty
-  fullName: System.Windows.FrameworkElement.IsAutoHeightOnCustomLayoutProperty
-- uid: System.Windows.FrameworkElement.CustomLayout
-  commentId: P:System.Windows.FrameworkElement.CustomLayout
-  parent: System.Windows.FrameworkElement
-  name: CustomLayout
-  nameWithType: FrameworkElement.CustomLayout
-  fullName: System.Windows.FrameworkElement.CustomLayout
-- uid: System.Windows.FrameworkElement.CustomLayoutProperty
-  commentId: F:System.Windows.FrameworkElement.CustomLayoutProperty
-  parent: System.Windows.FrameworkElement
-  name: CustomLayoutProperty
-  nameWithType: FrameworkElement.CustomLayoutProperty
-  fullName: System.Windows.FrameworkElement.CustomLayoutProperty
 - uid: System.Windows.FrameworkElement.Height
   commentId: P:System.Windows.FrameworkElement.Height
   parent: System.Windows.FrameworkElement
@@ -2528,60 +2806,234 @@ references:
   name: MaxWidthProperty
   nameWithType: FrameworkElement.MaxWidthProperty
   fullName: System.Windows.FrameworkElement.MaxWidthProperty
-- uid: System.Windows.FrameworkElement.ActualWidth
-  commentId: P:System.Windows.FrameworkElement.ActualWidth
-  parent: System.Windows.FrameworkElement
-  name: ActualWidth
-  nameWithType: FrameworkElement.ActualWidth
-  fullName: System.Windows.FrameworkElement.ActualWidth
-- uid: System.Windows.FrameworkElement.ActualHeight
-  commentId: P:System.Windows.FrameworkElement.ActualHeight
-  parent: System.Windows.FrameworkElement
-  name: ActualHeight
-  nameWithType: FrameworkElement.ActualHeight
-  fullName: System.Windows.FrameworkElement.ActualHeight
 - uid: System.Windows.FrameworkElement.ActualWidthProperty
   commentId: F:System.Windows.FrameworkElement.ActualWidthProperty
   parent: System.Windows.FrameworkElement
   name: ActualWidthProperty
   nameWithType: FrameworkElement.ActualWidthProperty
   fullName: System.Windows.FrameworkElement.ActualWidthProperty
+- uid: System.Windows.FrameworkElement.ActualWidth
+  commentId: P:System.Windows.FrameworkElement.ActualWidth
+  parent: System.Windows.FrameworkElement
+  name: ActualWidth
+  nameWithType: FrameworkElement.ActualWidth
+  fullName: System.Windows.FrameworkElement.ActualWidth
 - uid: System.Windows.FrameworkElement.ActualHeightProperty
   commentId: F:System.Windows.FrameworkElement.ActualHeightProperty
   parent: System.Windows.FrameworkElement
   name: ActualHeightProperty
   nameWithType: FrameworkElement.ActualHeightProperty
   fullName: System.Windows.FrameworkElement.ActualHeightProperty
-- uid: System.Windows.FrameworkElement.ActualSize
-  commentId: P:System.Windows.FrameworkElement.ActualSize
+- uid: System.Windows.FrameworkElement.ActualHeight
+  commentId: P:System.Windows.FrameworkElement.ActualHeight
   parent: System.Windows.FrameworkElement
-  name: ActualSize
-  nameWithType: FrameworkElement.ActualSize
-  fullName: System.Windows.FrameworkElement.ActualSize
-- uid: System.Windows.FrameworkElement.SizeChanged
-  commentId: E:System.Windows.FrameworkElement.SizeChanged
-  parent: System.Windows.FrameworkElement
-  name: SizeChanged
-  nameWithType: FrameworkElement.SizeChanged
-  fullName: System.Windows.FrameworkElement.SizeChanged
-- uid: System.Windows.FrameworkElement.ContextMenu
-  commentId: P:System.Windows.FrameworkElement.ContextMenu
-  parent: System.Windows.FrameworkElement
-  name: ContextMenu
-  nameWithType: FrameworkElement.ContextMenu
-  fullName: System.Windows.FrameworkElement.ContextMenu
-- uid: System.Windows.FrameworkElement.ContextMenuProperty
-  commentId: F:System.Windows.FrameworkElement.ContextMenuProperty
-  parent: System.Windows.FrameworkElement
-  name: ContextMenuProperty
-  nameWithType: FrameworkElement.ContextMenuProperty
-  fullName: System.Windows.FrameworkElement.ContextMenuProperty
-- uid: System.Windows.FrameworkElement.ContextMenuOpening
-  commentId: E:System.Windows.FrameworkElement.ContextMenuOpening
-  parent: System.Windows.FrameworkElement
-  name: ContextMenuOpening
-  nameWithType: FrameworkElement.ContextMenuOpening
-  fullName: System.Windows.FrameworkElement.ContextMenuOpening
+  name: ActualHeight
+  nameWithType: FrameworkElement.ActualHeight
+  fullName: System.Windows.FrameworkElement.ActualHeight
+- uid: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
+  commentId: M:System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
+  parent: System.Windows.UIElement
+  name: TransformToVisual(UIElement)
+  nameWithType: UIElement.TransformToVisual(UIElement)
+  fullName: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
+  spec.csharp:
+  - uid: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
+    name: TransformToVisual
+    nameWithType: UIElement.TransformToVisual
+    fullName: System.Windows.UIElement.TransformToVisual
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.UIElement
+    name: UIElement
+    nameWithType: UIElement
+    fullName: System.Windows.UIElement
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
+    name: TransformToVisual
+    nameWithType: UIElement.TransformToVisual
+    fullName: System.Windows.UIElement.TransformToVisual
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.UIElement
+    name: UIElement
+    nameWithType: UIElement
+    fullName: System.Windows.UIElement
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RenderSize
+  commentId: P:System.Windows.UIElement.RenderSize
+  parent: System.Windows.UIElement
+  name: RenderSize
+  nameWithType: UIElement.RenderSize
+  fullName: System.Windows.UIElement.RenderSize
+- uid: System.Windows.UIElement.DesiredSize
+  commentId: P:System.Windows.UIElement.DesiredSize
+  parent: System.Windows.UIElement
+  name: DesiredSize
+  nameWithType: UIElement.DesiredSize
+  fullName: System.Windows.UIElement.DesiredSize
+- uid: System.Windows.UIElement.InvalidateMeasure
+  commentId: M:System.Windows.UIElement.InvalidateMeasure
+  parent: System.Windows.UIElement
+  name: InvalidateMeasure()
+  nameWithType: UIElement.InvalidateMeasure()
+  fullName: System.Windows.UIElement.InvalidateMeasure()
+  spec.csharp:
+  - uid: System.Windows.UIElement.InvalidateMeasure
+    name: InvalidateMeasure
+    nameWithType: UIElement.InvalidateMeasure
+    fullName: System.Windows.UIElement.InvalidateMeasure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.InvalidateMeasure
+    name: InvalidateMeasure
+    nameWithType: UIElement.InvalidateMeasure
+    fullName: System.Windows.UIElement.InvalidateMeasure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.InvalidateArrange
+  commentId: M:System.Windows.UIElement.InvalidateArrange
+  parent: System.Windows.UIElement
+  name: InvalidateArrange()
+  nameWithType: UIElement.InvalidateArrange()
+  fullName: System.Windows.UIElement.InvalidateArrange()
+  spec.csharp:
+  - uid: System.Windows.UIElement.InvalidateArrange
+    name: InvalidateArrange
+    nameWithType: UIElement.InvalidateArrange
+    fullName: System.Windows.UIElement.InvalidateArrange
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.InvalidateArrange
+    name: InvalidateArrange
+    nameWithType: UIElement.InvalidateArrange
+    fullName: System.Windows.UIElement.InvalidateArrange
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.Measure(System.Windows.Size)
+  commentId: M:System.Windows.UIElement.Measure(System.Windows.Size)
+  parent: System.Windows.UIElement
+  name: Measure(Size)
+  nameWithType: UIElement.Measure(Size)
+  fullName: System.Windows.UIElement.Measure(System.Windows.Size)
+  spec.csharp:
+  - uid: System.Windows.UIElement.Measure(System.Windows.Size)
+    name: Measure
+    nameWithType: UIElement.Measure
+    fullName: System.Windows.UIElement.Measure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Size
+    name: Size
+    nameWithType: Size
+    fullName: System.Windows.Size
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.Measure(System.Windows.Size)
+    name: Measure
+    nameWithType: UIElement.Measure
+    fullName: System.Windows.UIElement.Measure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Size
+    name: Size
+    nameWithType: Size
+    fullName: System.Windows.Size
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.Arrange(System.Windows.Rect)
+  commentId: M:System.Windows.UIElement.Arrange(System.Windows.Rect)
+  parent: System.Windows.UIElement
+  name: Arrange(Rect)
+  nameWithType: UIElement.Arrange(Rect)
+  fullName: System.Windows.UIElement.Arrange(System.Windows.Rect)
+  spec.csharp:
+  - uid: System.Windows.UIElement.Arrange(System.Windows.Rect)
+    name: Arrange
+    nameWithType: UIElement.Arrange
+    fullName: System.Windows.UIElement.Arrange
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Rect
+    name: Rect
+    nameWithType: Rect
+    fullName: System.Windows.Rect
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.Arrange(System.Windows.Rect)
+    name: Arrange
+    nameWithType: UIElement.Arrange
+    fullName: System.Windows.UIElement.Arrange
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Rect
+    name: Rect
+    nameWithType: Rect
+    fullName: System.Windows.Rect
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.UpdateLayout
+  commentId: M:System.Windows.UIElement.UpdateLayout
+  parent: System.Windows.UIElement
+  name: UpdateLayout()
+  nameWithType: UIElement.UpdateLayout()
+  fullName: System.Windows.UIElement.UpdateLayout()
+  spec.csharp:
+  - uid: System.Windows.UIElement.UpdateLayout
+    name: UpdateLayout
+    nameWithType: UIElement.UpdateLayout
+    fullName: System.Windows.UIElement.UpdateLayout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.UpdateLayout
+    name: UpdateLayout
+    nameWithType: UIElement.UpdateLayout
+    fullName: System.Windows.UIElement.UpdateLayout
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.DragEnter
   commentId: E:System.Windows.UIElement.DragEnter
   parent: System.Windows.UIElement
@@ -2606,18 +3058,6 @@ references:
   name: DragOver
   nameWithType: UIElement.DragOver
   fullName: System.Windows.UIElement.DragOver
-- uid: System.Windows.UIElement.OpacityMask
-  commentId: P:System.Windows.UIElement.OpacityMask
-  parent: System.Windows.UIElement
-  name: OpacityMask
-  nameWithType: UIElement.OpacityMask
-  fullName: System.Windows.UIElement.OpacityMask
-- uid: System.Windows.UIElement.OpacityMaskProperty
-  commentId: F:System.Windows.UIElement.OpacityMaskProperty
-  parent: System.Windows.UIElement
-  name: OpacityMaskProperty
-  nameWithType: UIElement.OpacityMaskProperty
-  fullName: System.Windows.UIElement.OpacityMaskProperty
 - uid: System.Windows.UIElement.CacheMode
   commentId: P:System.Windows.UIElement.CacheMode
   parent: System.Windows.UIElement
@@ -2642,31 +3082,131 @@ references:
   name: ProjectionProperty
   nameWithType: UIElement.ProjectionProperty
   fullName: System.Windows.UIElement.ProjectionProperty
-- uid: System.Windows.UIElement.OnCreateAutomationPeer
-  commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
+- uid: System.Windows.UIElement.VisualParent
+  commentId: P:System.Windows.UIElement.VisualParent
   parent: System.Windows.UIElement
-  name: OnCreateAutomationPeer()
-  nameWithType: UIElement.OnCreateAutomationPeer()
-  fullName: System.Windows.UIElement.OnCreateAutomationPeer()
+  name: VisualParent
+  nameWithType: UIElement.VisualParent
+  fullName: System.Windows.UIElement.VisualParent
+- uid: System.Windows.UIElement.AddVisualChild(System.Windows.UIElement)
+  commentId: M:System.Windows.UIElement.AddVisualChild(System.Windows.UIElement)
+  parent: System.Windows.UIElement
+  name: AddVisualChild(UIElement)
+  nameWithType: UIElement.AddVisualChild(UIElement)
+  fullName: System.Windows.UIElement.AddVisualChild(System.Windows.UIElement)
   spec.csharp:
-  - uid: System.Windows.UIElement.OnCreateAutomationPeer
-    name: OnCreateAutomationPeer
-    nameWithType: UIElement.OnCreateAutomationPeer
-    fullName: System.Windows.UIElement.OnCreateAutomationPeer
+  - uid: System.Windows.UIElement.AddVisualChild(System.Windows.UIElement)
+    name: AddVisualChild
+    nameWithType: UIElement.AddVisualChild
+    fullName: System.Windows.UIElement.AddVisualChild
   - name: (
     nameWithType: (
     fullName: (
+  - uid: System.Windows.UIElement
+    name: UIElement
+    nameWithType: UIElement
+    fullName: System.Windows.UIElement
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.UIElement.OnCreateAutomationPeer
-    name: OnCreateAutomationPeer
-    nameWithType: UIElement.OnCreateAutomationPeer
-    fullName: System.Windows.UIElement.OnCreateAutomationPeer
+  - uid: System.Windows.UIElement.AddVisualChild(System.Windows.UIElement)
+    name: AddVisualChild
+    nameWithType: UIElement.AddVisualChild
+    fullName: System.Windows.UIElement.AddVisualChild
   - name: (
     nameWithType: (
     fullName: (
+  - uid: System.Windows.UIElement
+    name: UIElement
+    nameWithType: UIElement
+    fullName: System.Windows.UIElement
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.RemoveVisualChild(System.Windows.UIElement)
+  commentId: M:System.Windows.UIElement.RemoveVisualChild(System.Windows.UIElement)
+  parent: System.Windows.UIElement
+  name: RemoveVisualChild(UIElement)
+  nameWithType: UIElement.RemoveVisualChild(UIElement)
+  fullName: System.Windows.UIElement.RemoveVisualChild(System.Windows.UIElement)
+  spec.csharp:
+  - uid: System.Windows.UIElement.RemoveVisualChild(System.Windows.UIElement)
+    name: RemoveVisualChild
+    nameWithType: UIElement.RemoveVisualChild
+    fullName: System.Windows.UIElement.RemoveVisualChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.UIElement
+    name: UIElement
+    nameWithType: UIElement
+    fullName: System.Windows.UIElement
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.RemoveVisualChild(System.Windows.UIElement)
+    name: RemoveVisualChild
+    nameWithType: UIElement.RemoveVisualChild
+    fullName: System.Windows.UIElement.RemoveVisualChild
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.UIElement
+    name: UIElement
+    nameWithType: UIElement
+    fullName: System.Windows.UIElement
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.UIElement.OnVisualChildrenChanged(System.Windows.DependencyObject,System.Windows.DependencyObject)
+  commentId: M:System.Windows.UIElement.OnVisualChildrenChanged(System.Windows.DependencyObject,System.Windows.DependencyObject)
+  parent: System.Windows.UIElement
+  name: OnVisualChildrenChanged(DependencyObject, DependencyObject)
+  nameWithType: UIElement.OnVisualChildrenChanged(DependencyObject, DependencyObject)
+  fullName: System.Windows.UIElement.OnVisualChildrenChanged(System.Windows.DependencyObject, System.Windows.DependencyObject)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnVisualChildrenChanged(System.Windows.DependencyObject,System.Windows.DependencyObject)
+    name: OnVisualChildrenChanged
+    nameWithType: UIElement.OnVisualChildrenChanged
+    fullName: System.Windows.UIElement.OnVisualChildrenChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnVisualChildrenChanged(System.Windows.DependencyObject,System.Windows.DependencyObject)
+    name: OnVisualChildrenChanged
+    nameWithType: UIElement.OnVisualChildrenChanged
+    fullName: System.Windows.UIElement.OnVisualChildrenChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Windows.DependencyObject
+    name: DependencyObject
+    nameWithType: DependencyObject
+    fullName: System.Windows.DependencyObject
   - name: )
     nameWithType: )
     fullName: )
@@ -2676,18 +3216,6 @@ references:
   name: XamlSourcePath
   nameWithType: UIElement.XamlSourcePath
   fullName: System.Windows.UIElement.XamlSourcePath
-- uid: System.Windows.UIElement.RenderSize
-  commentId: P:System.Windows.UIElement.RenderSize
-  parent: System.Windows.UIElement
-  name: RenderSize
-  nameWithType: UIElement.RenderSize
-  fullName: System.Windows.UIElement.RenderSize
-- uid: System.Windows.UIElement.DesiredSize
-  commentId: P:System.Windows.UIElement.DesiredSize
-  parent: System.Windows.UIElement
-  name: DesiredSize
-  nameWithType: UIElement.DesiredSize
-  fullName: System.Windows.UIElement.DesiredSize
 - uid: System.Windows.UIElement.ClipToBounds
   commentId: P:System.Windows.UIElement.ClipToBounds
   parent: System.Windows.UIElement
@@ -2700,197 +3228,72 @@ references:
   name: ClipToBoundsProperty
   nameWithType: UIElement.ClipToBoundsProperty
   fullName: System.Windows.UIElement.ClipToBoundsProperty
-- uid: System.Windows.UIElement.Clip
-  commentId: P:System.Windows.UIElement.Clip
-  parent: System.Windows.UIElement
-  name: Clip
-  nameWithType: UIElement.Clip
-  fullName: System.Windows.UIElement.Clip
 - uid: System.Windows.UIElement.ClipProperty
   commentId: F:System.Windows.UIElement.ClipProperty
   parent: System.Windows.UIElement
   name: ClipProperty
   nameWithType: UIElement.ClipProperty
   fullName: System.Windows.UIElement.ClipProperty
-- uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
-  commentId: M:System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
+- uid: System.Windows.UIElement.Clip
+  commentId: P:System.Windows.UIElement.Clip
   parent: System.Windows.UIElement
-  isExternal: true
-  name: CreateDomChildWrapper(Object, Object, Int32)
-  nameWithType: UIElement.CreateDomChildWrapper(Object, Object, Int32)
-  fullName: System.Windows.UIElement.CreateDomChildWrapper(System.Object, System.Object, System.Int32)
-  spec.csharp:
-  - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
-    name: CreateDomChildWrapper
-    nameWithType: UIElement.CreateDomChildWrapper
-    fullName: System.Windows.UIElement.CreateDomChildWrapper
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.CreateDomChildWrapper(System.Object,System.Object@,System.Int32)
-    name: CreateDomChildWrapper
-    nameWithType: UIElement.CreateDomChildWrapper
-    fullName: System.Windows.UIElement.CreateDomChildWrapper
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int32
-    name: Int32
-    nameWithType: Int32
-    fullName: System.Int32
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
-  commentId: M:System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
+  name: Clip
+  nameWithType: UIElement.Clip
+  fullName: System.Windows.UIElement.Clip
+- uid: System.Windows.UIElement.IsEnabledProperty
+  commentId: F:System.Windows.UIElement.IsEnabledProperty
   parent: System.Windows.UIElement
-  name: GetDomElementWhereToPlaceChild(UIElement)
-  nameWithType: UIElement.GetDomElementWhereToPlaceChild(UIElement)
-  fullName: System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
-  spec.csharp:
-  - uid: System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
-    name: GetDomElementWhereToPlaceChild
-    nameWithType: UIElement.GetDomElementWhereToPlaceChild
-    fullName: System.Windows.UIElement.GetDomElementWhereToPlaceChild
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.GetDomElementWhereToPlaceChild(System.Windows.UIElement)
-    name: GetDomElementWhereToPlaceChild
-    nameWithType: UIElement.GetDomElementWhereToPlaceChild
-    fullName: System.Windows.UIElement.GetDomElementWhereToPlaceChild
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
-  commentId: M:System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
+  name: IsEnabledProperty
+  nameWithType: UIElement.IsEnabledProperty
+  fullName: System.Windows.UIElement.IsEnabledProperty
+- uid: System.Windows.UIElement.IsEnabled
+  commentId: P:System.Windows.UIElement.IsEnabled
   parent: System.Windows.UIElement
-  name: GetChildsWrapper(UIElement)
-  nameWithType: UIElement.GetChildsWrapper(UIElement)
-  fullName: System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
-  spec.csharp:
-  - uid: System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
-    name: GetChildsWrapper
-    nameWithType: UIElement.GetChildsWrapper
-    fullName: System.Windows.UIElement.GetChildsWrapper
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.GetChildsWrapper(System.Windows.UIElement)
-    name: GetChildsWrapper
-    nameWithType: UIElement.GetChildsWrapper
-    fullName: System.Windows.UIElement.GetChildsWrapper
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.Effect
-  commentId: P:System.Windows.UIElement.Effect
+  name: IsEnabled
+  nameWithType: UIElement.IsEnabled
+  fullName: System.Windows.UIElement.IsEnabled
+- uid: System.Windows.UIElement.IsEnabledChanged
+  commentId: E:System.Windows.UIElement.IsEnabledChanged
   parent: System.Windows.UIElement
-  name: Effect
-  nameWithType: UIElement.Effect
-  fullName: System.Windows.UIElement.Effect
+  name: IsEnabledChanged
+  nameWithType: UIElement.IsEnabledChanged
+  fullName: System.Windows.UIElement.IsEnabledChanged
 - uid: System.Windows.UIElement.EffectProperty
   commentId: F:System.Windows.UIElement.EffectProperty
   parent: System.Windows.UIElement
   name: EffectProperty
   nameWithType: UIElement.EffectProperty
   fullName: System.Windows.UIElement.EffectProperty
-- uid: System.Windows.UIElement.RenderTransform
-  commentId: P:System.Windows.UIElement.RenderTransform
+- uid: System.Windows.UIElement.Effect
+  commentId: P:System.Windows.UIElement.Effect
   parent: System.Windows.UIElement
-  name: RenderTransform
-  nameWithType: UIElement.RenderTransform
-  fullName: System.Windows.UIElement.RenderTransform
+  name: Effect
+  nameWithType: UIElement.Effect
+  fullName: System.Windows.UIElement.Effect
 - uid: System.Windows.UIElement.RenderTransformProperty
   commentId: F:System.Windows.UIElement.RenderTransformProperty
   parent: System.Windows.UIElement
   name: RenderTransformProperty
   nameWithType: UIElement.RenderTransformProperty
   fullName: System.Windows.UIElement.RenderTransformProperty
-- uid: System.Windows.UIElement.RenderTransformOrigin
-  commentId: P:System.Windows.UIElement.RenderTransformOrigin
+- uid: System.Windows.UIElement.RenderTransform
+  commentId: P:System.Windows.UIElement.RenderTransform
   parent: System.Windows.UIElement
-  name: RenderTransformOrigin
-  nameWithType: UIElement.RenderTransformOrigin
-  fullName: System.Windows.UIElement.RenderTransformOrigin
+  name: RenderTransform
+  nameWithType: UIElement.RenderTransform
+  fullName: System.Windows.UIElement.RenderTransform
 - uid: System.Windows.UIElement.RenderTransformOriginProperty
   commentId: F:System.Windows.UIElement.RenderTransformOriginProperty
   parent: System.Windows.UIElement
   name: RenderTransformOriginProperty
   nameWithType: UIElement.RenderTransformOriginProperty
   fullName: System.Windows.UIElement.RenderTransformOriginProperty
+- uid: System.Windows.UIElement.RenderTransformOrigin
+  commentId: P:System.Windows.UIElement.RenderTransformOrigin
+  parent: System.Windows.UIElement
+  name: RenderTransformOrigin
+  nameWithType: UIElement.RenderTransformOrigin
+  fullName: System.Windows.UIElement.RenderTransformOrigin
 - uid: System.Windows.UIElement.UseLayoutRounding
   commentId: P:System.Windows.UIElement.UseLayoutRounding
   parent: System.Windows.UIElement
@@ -2915,6 +3318,12 @@ references:
   name: VisibilityProperty
   nameWithType: UIElement.VisibilityProperty
   fullName: System.Windows.UIElement.VisibilityProperty
+- uid: System.Windows.UIElement.IsVisibleProperty
+  commentId: F:System.Windows.UIElement.IsVisibleProperty
+  parent: System.Windows.UIElement
+  name: IsVisibleProperty
+  nameWithType: UIElement.IsVisibleProperty
+  fullName: System.Windows.UIElement.IsVisibleProperty
 - uid: System.Windows.UIElement.IsVisible
   commentId: P:System.Windows.UIElement.IsVisible
   parent: System.Windows.UIElement
@@ -2927,18 +3336,30 @@ references:
   name: IsVisibleChanged
   nameWithType: UIElement.IsVisibleChanged
   fullName: System.Windows.UIElement.IsVisibleChanged
-- uid: System.Windows.UIElement.Opacity
-  commentId: P:System.Windows.UIElement.Opacity
-  parent: System.Windows.UIElement
-  name: Opacity
-  nameWithType: UIElement.Opacity
-  fullName: System.Windows.UIElement.Opacity
 - uid: System.Windows.UIElement.OpacityProperty
   commentId: F:System.Windows.UIElement.OpacityProperty
   parent: System.Windows.UIElement
   name: OpacityProperty
   nameWithType: UIElement.OpacityProperty
   fullName: System.Windows.UIElement.OpacityProperty
+- uid: System.Windows.UIElement.Opacity
+  commentId: P:System.Windows.UIElement.Opacity
+  parent: System.Windows.UIElement
+  name: Opacity
+  nameWithType: UIElement.Opacity
+  fullName: System.Windows.UIElement.Opacity
+- uid: System.Windows.UIElement.OpacityMaskProperty
+  commentId: F:System.Windows.UIElement.OpacityMaskProperty
+  parent: System.Windows.UIElement
+  name: OpacityMaskProperty
+  nameWithType: UIElement.OpacityMaskProperty
+  fullName: System.Windows.UIElement.OpacityMaskProperty
+- uid: System.Windows.UIElement.OpacityMask
+  commentId: P:System.Windows.UIElement.OpacityMask
+  parent: System.Windows.UIElement
+  name: OpacityMask
+  nameWithType: UIElement.OpacityMask
+  fullName: System.Windows.UIElement.OpacityMask
 - uid: System.Windows.UIElement.IsHitTestVisible
   commentId: P:System.Windows.UIElement.IsHitTestVisible
   parent: System.Windows.UIElement
@@ -3025,48 +3446,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
-  commentId: M:System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
-  parent: System.Windows.UIElement
-  name: OnLostMouseCapture(MouseEventArgs)
-  nameWithType: UIElement.OnLostMouseCapture(MouseEventArgs)
-  fullName: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
-  spec.csharp:
-  - uid: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
-    name: OnLostMouseCapture
-    nameWithType: UIElement.OnLostMouseCapture
-    fullName: System.Windows.UIElement.OnLostMouseCapture
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseEventArgs
-    name: MouseEventArgs
-    nameWithType: MouseEventArgs
-    fullName: System.Windows.Input.MouseEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
-    name: OnLostMouseCapture
-    nameWithType: UIElement.OnLostMouseCapture
-    fullName: System.Windows.UIElement.OnLostMouseCapture
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Input.MouseEventArgs
-    name: MouseEventArgs
-    nameWithType: MouseEventArgs
-    fullName: System.Windows.Input.MouseEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.LostMouseCapture
-  commentId: E:System.Windows.UIElement.LostMouseCapture
-  parent: System.Windows.UIElement
-  name: LostMouseCapture
-  nameWithType: UIElement.LostMouseCapture
-  fullName: System.Windows.UIElement.LostMouseCapture
 - uid: System.Windows.UIElement.AllowScrollOnTouchMove
   commentId: P:System.Windows.UIElement.AllowScrollOnTouchMove
   parent: System.Windows.UIElement
@@ -3079,198 +3458,6 @@ references:
   name: AllowScrollOnTouchMoveProperty
   nameWithType: UIElement.AllowScrollOnTouchMoveProperty
   fullName: System.Windows.UIElement.AllowScrollOnTouchMoveProperty
-- uid: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
-  commentId: M:System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
-  parent: System.Windows.UIElement
-  name: TransformToVisual(UIElement)
-  nameWithType: UIElement.TransformToVisual(UIElement)
-  fullName: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
-  spec.csharp:
-  - uid: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
-    name: TransformToVisual
-    nameWithType: UIElement.TransformToVisual
-    fullName: System.Windows.UIElement.TransformToVisual
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.TransformToVisual(System.Windows.UIElement)
-    name: TransformToVisual
-    nameWithType: UIElement.TransformToVisual
-    fullName: System.Windows.UIElement.TransformToVisual
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.Arrange(System.Windows.Rect)
-  commentId: M:System.Windows.UIElement.Arrange(System.Windows.Rect)
-  parent: System.Windows.UIElement
-  name: Arrange(Rect)
-  nameWithType: UIElement.Arrange(Rect)
-  fullName: System.Windows.UIElement.Arrange(System.Windows.Rect)
-  spec.csharp:
-  - uid: System.Windows.UIElement.Arrange(System.Windows.Rect)
-    name: Arrange
-    nameWithType: UIElement.Arrange
-    fullName: System.Windows.UIElement.Arrange
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Rect
-    name: Rect
-    nameWithType: Rect
-    fullName: System.Windows.Rect
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.Arrange(System.Windows.Rect)
-    name: Arrange
-    nameWithType: UIElement.Arrange
-    fullName: System.Windows.UIElement.Arrange
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Rect
-    name: Rect
-    nameWithType: Rect
-    fullName: System.Windows.Rect
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.Measure(System.Windows.Size)
-  commentId: M:System.Windows.UIElement.Measure(System.Windows.Size)
-  parent: System.Windows.UIElement
-  name: Measure(Size)
-  nameWithType: UIElement.Measure(Size)
-  fullName: System.Windows.UIElement.Measure(System.Windows.Size)
-  spec.csharp:
-  - uid: System.Windows.UIElement.Measure(System.Windows.Size)
-    name: Measure
-    nameWithType: UIElement.Measure
-    fullName: System.Windows.UIElement.Measure
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Size
-    name: Size
-    nameWithType: Size
-    fullName: System.Windows.Size
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.Measure(System.Windows.Size)
-    name: Measure
-    nameWithType: UIElement.Measure
-    fullName: System.Windows.UIElement.Measure
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.Size
-    name: Size
-    nameWithType: Size
-    fullName: System.Windows.Size
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.InvalidateArrange
-  commentId: M:System.Windows.UIElement.InvalidateArrange
-  parent: System.Windows.UIElement
-  name: InvalidateArrange()
-  nameWithType: UIElement.InvalidateArrange()
-  fullName: System.Windows.UIElement.InvalidateArrange()
-  spec.csharp:
-  - uid: System.Windows.UIElement.InvalidateArrange
-    name: InvalidateArrange
-    nameWithType: UIElement.InvalidateArrange
-    fullName: System.Windows.UIElement.InvalidateArrange
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.InvalidateArrange
-    name: InvalidateArrange
-    nameWithType: UIElement.InvalidateArrange
-    fullName: System.Windows.UIElement.InvalidateArrange
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.InvalidateMeasure
-  commentId: M:System.Windows.UIElement.InvalidateMeasure
-  parent: System.Windows.UIElement
-  name: InvalidateMeasure()
-  nameWithType: UIElement.InvalidateMeasure()
-  fullName: System.Windows.UIElement.InvalidateMeasure()
-  spec.csharp:
-  - uid: System.Windows.UIElement.InvalidateMeasure
-    name: InvalidateMeasure
-    nameWithType: UIElement.InvalidateMeasure
-    fullName: System.Windows.UIElement.InvalidateMeasure
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.InvalidateMeasure
-    name: InvalidateMeasure
-    nameWithType: UIElement.InvalidateMeasure
-    fullName: System.Windows.UIElement.InvalidateMeasure
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.UIElement.UpdateLayout
-  commentId: M:System.Windows.UIElement.UpdateLayout
-  parent: System.Windows.UIElement
-  name: UpdateLayout()
-  nameWithType: UIElement.UpdateLayout()
-  fullName: System.Windows.UIElement.UpdateLayout()
-  spec.csharp:
-  - uid: System.Windows.UIElement.UpdateLayout
-    name: UpdateLayout
-    nameWithType: UIElement.UpdateLayout
-    fullName: System.Windows.UIElement.UpdateLayout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.UpdateLayout
-    name: UpdateLayout
-    nameWithType: UIElement.UpdateLayout
-    fullName: System.Windows.UIElement.UpdateLayout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
   commentId: M:System.Windows.UIElement.AddHandler(System.Windows.RoutedEvent,System.Delegate,System.Boolean)
   parent: System.Windows.UIElement
@@ -3729,6 +3916,54 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.UIElement.TextInputStartEvent
+  commentId: F:System.Windows.UIElement.TextInputStartEvent
+  parent: System.Windows.UIElement
+  name: TextInputStartEvent
+  nameWithType: UIElement.TextInputStartEvent
+  fullName: System.Windows.UIElement.TextInputStartEvent
+- uid: System.Windows.UIElement.TextInputStart
+  commentId: E:System.Windows.UIElement.TextInputStart
+  parent: System.Windows.UIElement
+  name: TextInputStart
+  nameWithType: UIElement.TextInputStart
+  fullName: System.Windows.UIElement.TextInputStart
+- uid: System.Windows.UIElement.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
+  commentId: M:System.Windows.UIElement.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
+  parent: System.Windows.UIElement
+  name: OnTextInputStart(TextCompositionEventArgs)
+  nameWithType: UIElement.OnTextInputStart(TextCompositionEventArgs)
+  fullName: System.Windows.UIElement.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInputStart
+    nameWithType: UIElement.OnTextInputStart
+    fullName: System.Windows.UIElement.OnTextInputStart
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnTextInputStart(System.Windows.Input.TextCompositionEventArgs)
+    name: OnTextInputStart
+    nameWithType: UIElement.OnTextInputStart
+    fullName: System.Windows.UIElement.OnTextInputStart
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Input.TextCompositionEventArgs
+    name: TextCompositionEventArgs
+    nameWithType: TextCompositionEventArgs
+    fullName: System.Windows.Input.TextCompositionEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Windows.UIElement.TextInputEvent
   commentId: F:System.Windows.UIElement.TextInputEvent
   parent: System.Windows.UIElement
@@ -3777,24 +4012,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.UIElement.TextInputStartEvent
-  commentId: F:System.Windows.UIElement.TextInputStartEvent
-  parent: System.Windows.UIElement
-  name: TextInputStartEvent
-  nameWithType: UIElement.TextInputStartEvent
-  fullName: System.Windows.UIElement.TextInputStartEvent
 - uid: System.Windows.UIElement.TextInputUpdateEvent
   commentId: F:System.Windows.UIElement.TextInputUpdateEvent
   parent: System.Windows.UIElement
   name: TextInputUpdateEvent
   nameWithType: UIElement.TextInputUpdateEvent
   fullName: System.Windows.UIElement.TextInputUpdateEvent
-- uid: System.Windows.UIElement.TextInputStart
-  commentId: E:System.Windows.UIElement.TextInputStart
-  parent: System.Windows.UIElement
-  name: TextInputStart
-  nameWithType: UIElement.TextInputStart
-  fullName: System.Windows.UIElement.TextInputStart
 - uid: System.Windows.UIElement.TextInputUpdate
   commentId: E:System.Windows.UIElement.TextInputUpdate
   parent: System.Windows.UIElement
@@ -4005,42 +4228,6 @@ references:
   name: GotFocus
   nameWithType: UIElement.GotFocus
   fullName: System.Windows.UIElement.GotFocus
-- uid: System.Windows.UIElement.OnGotFocus(System.Windows.RoutedEventArgs)
-  commentId: M:System.Windows.UIElement.OnGotFocus(System.Windows.RoutedEventArgs)
-  parent: System.Windows.UIElement
-  name: OnGotFocus(RoutedEventArgs)
-  nameWithType: UIElement.OnGotFocus(RoutedEventArgs)
-  fullName: System.Windows.UIElement.OnGotFocus(System.Windows.RoutedEventArgs)
-  spec.csharp:
-  - uid: System.Windows.UIElement.OnGotFocus(System.Windows.RoutedEventArgs)
-    name: OnGotFocus
-    nameWithType: UIElement.OnGotFocus
-    fullName: System.Windows.UIElement.OnGotFocus
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEventArgs
-    name: RoutedEventArgs
-    nameWithType: RoutedEventArgs
-    fullName: System.Windows.RoutedEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.UIElement.OnGotFocus(System.Windows.RoutedEventArgs)
-    name: OnGotFocus
-    nameWithType: UIElement.OnGotFocus
-    fullName: System.Windows.UIElement.OnGotFocus
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.RoutedEventArgs
-    name: RoutedEventArgs
-    nameWithType: RoutedEventArgs
-    fullName: System.Windows.RoutedEventArgs
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.UIElement.LostFocusEvent
   commentId: F:System.Windows.UIElement.LostFocusEvent
   parent: System.Windows.UIElement
@@ -4053,39 +4240,45 @@ references:
   name: LostFocus
   nameWithType: UIElement.LostFocus
   fullName: System.Windows.UIElement.LostFocus
-- uid: System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
-  commentId: M:System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
+- uid: System.Windows.UIElement.LostMouseCapture
+  commentId: E:System.Windows.UIElement.LostMouseCapture
   parent: System.Windows.UIElement
-  name: OnLostFocus(RoutedEventArgs)
-  nameWithType: UIElement.OnLostFocus(RoutedEventArgs)
-  fullName: System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
+  name: LostMouseCapture
+  nameWithType: UIElement.LostMouseCapture
+  fullName: System.Windows.UIElement.LostMouseCapture
+- uid: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
+  commentId: M:System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
+  parent: System.Windows.UIElement
+  name: OnLostMouseCapture(MouseEventArgs)
+  nameWithType: UIElement.OnLostMouseCapture(MouseEventArgs)
+  fullName: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
   spec.csharp:
-  - uid: System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
-    name: OnLostFocus
-    nameWithType: UIElement.OnLostFocus
-    fullName: System.Windows.UIElement.OnLostFocus
+  - uid: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
+    name: OnLostMouseCapture
+    nameWithType: UIElement.OnLostMouseCapture
+    fullName: System.Windows.UIElement.OnLostMouseCapture
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Windows.RoutedEventArgs
-    name: RoutedEventArgs
-    nameWithType: RoutedEventArgs
-    fullName: System.Windows.RoutedEventArgs
+  - uid: System.Windows.Input.MouseEventArgs
+    name: MouseEventArgs
+    nameWithType: MouseEventArgs
+    fullName: System.Windows.Input.MouseEventArgs
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: System.Windows.UIElement.OnLostFocus(System.Windows.RoutedEventArgs)
-    name: OnLostFocus
-    nameWithType: UIElement.OnLostFocus
-    fullName: System.Windows.UIElement.OnLostFocus
+  - uid: System.Windows.UIElement.OnLostMouseCapture(System.Windows.Input.MouseEventArgs)
+    name: OnLostMouseCapture
+    nameWithType: UIElement.OnLostMouseCapture
+    fullName: System.Windows.UIElement.OnLostMouseCapture
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Windows.RoutedEventArgs
-    name: RoutedEventArgs
-    nameWithType: RoutedEventArgs
-    fullName: System.Windows.RoutedEventArgs
+  - uid: System.Windows.Input.MouseEventArgs
+    name: MouseEventArgs
+    nameWithType: MouseEventArgs
+    fullName: System.Windows.Input.MouseEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -4270,184 +4463,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetVisualStateValue(DependencyProperty)
-  nameWithType: DependencyObject.GetVisualStateValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetVisualStateValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetVisualStateValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetAnimationValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetAnimationValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetAnimationValue(DependencyProperty)
-  nameWithType: DependencyObject.GetAnimationValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -4490,6 +4505,59 @@ references:
     name: DependencyProperty
     nameWithType: DependencyProperty
     fullName: System.Windows.DependencyProperty
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetValue(DependencyPropertyKey, Object)
+  nameWithType: DependencyObject.SetValue(DependencyPropertyKey, Object)
+  fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -4576,6 +4644,42 @@ references:
     name: DependencyProperty
     nameWithType: DependencyProperty
     fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  commentId: M:System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  parent: System.Windows.DependencyObject
+  name: ClearValue(DependencyPropertyKey)
+  nameWithType: DependencyObject.ClearValue(DependencyPropertyKey)
+  fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
   - name: )
     nameWithType: )
     fullName: )
@@ -4922,441 +5026,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Interactivity.DependencyObjectHelper
-  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors()
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
-  commentId: M:System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Windows.FrameworkElement,System.Double@,System.Double@)
-  parent: System.Windows.Controls.ScrollExtensions
-  definition: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Windows.FrameworkElement,System.Double@,System.Double@)
-  name: GetTopAndBottom(FrameworkElement, Double, Double)
-  nameWithType: ScrollExtensions.GetTopAndBottom(FrameworkElement, Double, Double)
-  fullName: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement, System.Double, System.Double)
-  spec.csharp:
-  - uid: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
-    name: GetTopAndBottom
-    nameWithType: ScrollExtensions.GetTopAndBottom
-    fullName: System.Windows.Controls.ScrollExtensions.GetTopAndBottom
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Double@,System.Double@)
-    name: GetTopAndBottom
-    nameWithType: ScrollExtensions.GetTopAndBottom
-    fullName: System.Windows.Controls.ScrollExtensions.GetTopAndBottom
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors()
-  nameWithType: VisualTreeExtensions.GetVisualAncestors()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren()
-  nameWithType: VisualTreeExtensions.GetVisualChildren()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants()
-  nameWithType: VisualTreeExtensions.GetVisualDescendants()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings()
-  nameWithType: VisualTreeExtensions.GetVisualSiblings()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.FrameworkElement,System.Windows.UIElement)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.FrameworkElement,System.Windows.UIElement)
-  name: GetBoundsRelativeTo(UIElement)
-  nameWithType: VisualTreeExtensions.GetBoundsRelativeTo(UIElement)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-    name: GetBoundsRelativeTo
-    nameWithType: VisualTreeExtensions.GetBoundsRelativeTo
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.UIElement)
-    name: GetBoundsRelativeTo
-    nameWithType: VisualTreeExtensions.GetBoundsRelativeTo
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.FrameworkElement.System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
-  name: InvokeOnLayoutUpdated(Action)
-  nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
-    name: InvokeOnLayoutUpdated
-    nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Action
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Action)
-    name: InvokeOnLayoutUpdated
-    nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Action
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
@@ -5367,581 +5036,12 @@ references:
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
-- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors(DependencyObject)
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity.DependencyObjectHelper
-  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
-  parent: System.Windows.Interactivity
-  name: DependencyObjectHelper
-  nameWithType: DependencyObjectHelper
-  fullName: System.Windows.Interactivity.DependencyObjectHelper
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Windows.FrameworkElement,System.Double@,System.Double@)
-  commentId: M:System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Windows.FrameworkElement,System.Double@,System.Double@)
-  isExternal: true
-  name: GetTopAndBottom(FrameworkElement, FrameworkElement, Double, Double)
-  nameWithType: ScrollExtensions.GetTopAndBottom(FrameworkElement, FrameworkElement, Double, Double)
-  fullName: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement, System.Windows.FrameworkElement, System.Double, System.Double)
-  spec.csharp:
-  - uid: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Windows.FrameworkElement,System.Double@,System.Double@)
-    name: GetTopAndBottom
-    nameWithType: ScrollExtensions.GetTopAndBottom
-    fullName: System.Windows.Controls.ScrollExtensions.GetTopAndBottom
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.ScrollExtensions.GetTopAndBottom(System.Windows.FrameworkElement,System.Windows.FrameworkElement,System.Double@,System.Double@)
-    name: GetTopAndBottom
-    nameWithType: ScrollExtensions.GetTopAndBottom
-    fullName: System.Windows.Controls.ScrollExtensions.GetTopAndBottom
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Double
-    name: Double
-    nameWithType: Double
-    fullName: System.Double
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.ScrollExtensions
-  commentId: T:System.Windows.Controls.ScrollExtensions
+- uid: System.Windows.Controls.ChildWindow
+  commentId: T:System.Windows.Controls.ChildWindow
   parent: System.Windows.Controls
-  name: ScrollExtensions
-  nameWithType: ScrollExtensions
-  fullName: System.Windows.Controls.ScrollExtensions
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestors(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions
-  commentId: T:System.Windows.Controls.Primitives.VisualTreeExtensions
-  parent: System.Windows.Controls.Primitives
-  name: VisualTreeExtensions
-  nameWithType: VisualTreeExtensions
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildren(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendants(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblings(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.FrameworkElement,System.Windows.UIElement)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.FrameworkElement,System.Windows.UIElement)
-  name: GetBoundsRelativeTo(FrameworkElement, UIElement)
-  nameWithType: VisualTreeExtensions.GetBoundsRelativeTo(FrameworkElement, UIElement)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.FrameworkElement, System.Windows.UIElement)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.FrameworkElement,System.Windows.UIElement)
-    name: GetBoundsRelativeTo
-    nameWithType: VisualTreeExtensions.GetBoundsRelativeTo
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo(System.Windows.FrameworkElement,System.Windows.UIElement)
-    name: GetBoundsRelativeTo
-    nameWithType: VisualTreeExtensions.GetBoundsRelativeTo
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetBoundsRelativeTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Windows.UIElement
-    name: UIElement
-    nameWithType: UIElement
-    fullName: System.Windows.UIElement
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
-  isExternal: true
-  name: InvokeOnLayoutUpdated(FrameworkElement, Action)
-  nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated(FrameworkElement, Action)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement, System.Action)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
-    name: InvokeOnLayoutUpdated
-    nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Action
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated(System.Windows.FrameworkElement,System.Action)
-    name: InvokeOnLayoutUpdated
-    nameWithType: VisualTreeExtensions.InvokeOnLayoutUpdated
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.InvokeOnLayoutUpdated
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.FrameworkElement
-    name: FrameworkElement
-    nameWithType: FrameworkElement
-    fullName: System.Windows.FrameworkElement
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Action
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity
-  commentId: N:System.Windows.Interactivity
-  name: System.Windows.Interactivity
-  nameWithType: System.Windows.Interactivity
-  fullName: System.Windows.Interactivity
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives
-  commentId: N:System.Windows.Controls.Primitives
-  name: System.Windows.Controls.Primitives
-  nameWithType: System.Windows.Controls.Primitives
-  fullName: System.Windows.Controls.Primitives
+  name: ChildWindow
+  nameWithType: ChildWindow
+  fullName: System.Windows.Controls.ChildWindow
 - uid: System.Windows.Controls.ChildWindow.HasCloseButton*
   commentId: Overload:System.Windows.Controls.ChildWindow.HasCloseButton
   name: HasCloseButton
@@ -5954,6 +5054,9 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System.Windows.Controls.ChildWindow.HasCloseButton
+  commentId: P:System.Windows.Controls.ChildWindow.HasCloseButton
+  isExternal: true
 - uid: System.Windows.DependencyProperty
   commentId: T:System.Windows.DependencyProperty
   parent: System.Windows
@@ -5976,6 +5079,9 @@ references:
   name: System.Windows.Media
   nameWithType: System.Windows.Media
   fullName: System.Windows.Media
+- uid: System.Windows.Controls.ChildWindow.OverlayBrush
+  commentId: P:System.Windows.Controls.ChildWindow.OverlayBrush
+  isExternal: true
 - uid: System.Windows.Controls.ChildWindow.OverlayOpacity*
   commentId: Overload:System.Windows.Controls.ChildWindow.OverlayOpacity
   name: OverlayOpacity
@@ -5988,16 +5094,28 @@ references:
   name: Double
   nameWithType: Double
   fullName: System.Double
+- uid: System.Windows.Controls.ChildWindow.OverlayOpacity
+  commentId: P:System.Windows.Controls.ChildWindow.OverlayOpacity
+  isExternal: true
 - uid: System.Windows.Controls.ChildWindow.Title*
   commentId: Overload:System.Windows.Controls.ChildWindow.Title
   name: Title
   nameWithType: ChildWindow.Title
   fullName: System.Windows.Controls.ChildWindow.Title
+- uid: System.Windows.Controls.ChildWindow.Title
+  commentId: P:System.Windows.Controls.ChildWindow.Title
+  isExternal: true
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
 - uid: System.Windows.Controls.ChildWindow.IsModal*
   commentId: Overload:System.Windows.Controls.ChildWindow.IsModal
   name: IsModal
   nameWithType: ChildWindow.IsModal
   fullName: System.Windows.Controls.ChildWindow.IsModal
+- uid: System.Windows.Controls.ChildWindow.IsModal
+  commentId: P:System.Windows.Controls.ChildWindow.IsModal
+  isExternal: true
 - uid: System.Windows.Controls.ChildWindow.#ctor*
   commentId: Overload:System.Windows.Controls.ChildWindow.#ctor
   name: ChildWindow
@@ -6219,6 +5337,9 @@ references:
   name: OnApplyTemplate
   nameWithType: ChildWindow.OnApplyTemplate
   fullName: System.Windows.Controls.ChildWindow.OnApplyTemplate
+- uid: System.Windows.Controls.ChildWindow.Closed
+  commentId: E:System.Windows.Controls.ChildWindow.Closed
+  isExternal: true
 - uid: System.Windows.Controls.ChildWindow.OnClosed*
   commentId: Overload:System.Windows.Controls.ChildWindow.OnClosed
   name: OnClosed
@@ -6231,6 +5352,9 @@ references:
   name: EventArgs
   nameWithType: EventArgs
   fullName: System.EventArgs
+- uid: System.Windows.Controls.ChildWindow.Closing
+  commentId: E:System.Windows.Controls.ChildWindow.Closing
+  isExternal: true
 - uid: System.Windows.Controls.ChildWindow.OnClosing*
   commentId: Overload:System.Windows.Controls.ChildWindow.OnClosing
   name: OnClosing
@@ -6248,14 +5372,60 @@ references:
   name: System.ComponentModel
   nameWithType: System.ComponentModel
   fullName: System.ComponentModel
+- uid: System.Windows.Automation.Peers.ChildWindowAutomationPeer
+  commentId: T:System.Windows.Automation.Peers.ChildWindowAutomationPeer
+  name: ChildWindowAutomationPeer
+  nameWithType: ChildWindowAutomationPeer
+  fullName: System.Windows.Automation.Peers.ChildWindowAutomationPeer
+- uid: System.Windows.UIElement.OnCreateAutomationPeer
+  commentId: M:System.Windows.UIElement.OnCreateAutomationPeer
+  parent: System.Windows.UIElement
+  name: OnCreateAutomationPeer()
+  nameWithType: UIElement.OnCreateAutomationPeer()
+  fullName: System.Windows.UIElement.OnCreateAutomationPeer()
+  spec.csharp:
+  - uid: System.Windows.UIElement.OnCreateAutomationPeer
+    name: OnCreateAutomationPeer
+    nameWithType: UIElement.OnCreateAutomationPeer
+    fullName: System.Windows.UIElement.OnCreateAutomationPeer
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.UIElement.OnCreateAutomationPeer
+    name: OnCreateAutomationPeer
+    nameWithType: UIElement.OnCreateAutomationPeer
+    fullName: System.Windows.UIElement.OnCreateAutomationPeer
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Controls.ChildWindow.OnCreateAutomationPeer*
+  commentId: Overload:System.Windows.Controls.ChildWindow.OnCreateAutomationPeer
+  name: OnCreateAutomationPeer
+  nameWithType: ChildWindow.OnCreateAutomationPeer
+  fullName: System.Windows.Controls.ChildWindow.OnCreateAutomationPeer
+- uid: System.Windows.Automation.Peers.AutomationPeer
+  commentId: T:System.Windows.Automation.Peers.AutomationPeer
+  parent: System.Windows.Automation.Peers
+  name: AutomationPeer
+  nameWithType: AutomationPeer
+  fullName: System.Windows.Automation.Peers.AutomationPeer
+- uid: System.Windows.Automation.Peers
+  commentId: N:System.Windows.Automation.Peers
+  name: System.Windows.Automation.Peers
+  nameWithType: System.Windows.Automation.Peers
+  fullName: System.Windows.Automation.Peers
 - uid: System.Windows.Controls.ChildWindow.OnOpened*
   commentId: Overload:System.Windows.Controls.ChildWindow.OnOpened
   name: OnOpened
   nameWithType: ChildWindow.OnOpened
   fullName: System.Windows.Controls.ChildWindow.OnOpened
-- uid: System.InvalidOperationException
-  commentId: T:System.InvalidOperationException
-  isExternal: true
 - uid: System.Windows.Controls.ChildWindow.Show*
   commentId: Overload:System.Windows.Controls.ChildWindow.Show
   name: Show

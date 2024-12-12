@@ -8,32 +8,52 @@ items:
   - System.Windows.Rect.#ctor(System.Double,System.Double,System.Double,System.Double)
   - System.Windows.Rect.#ctor(System.Windows.Point,System.Windows.Point)
   - System.Windows.Rect.#ctor(System.Windows.Point,System.Windows.Size)
+  - System.Windows.Rect.#ctor(System.Windows.Point,System.Windows.Vector)
   - System.Windows.Rect.#ctor(System.Windows.Size)
   - System.Windows.Rect.Bottom
   - System.Windows.Rect.BottomLeft
   - System.Windows.Rect.BottomRight
+  - System.Windows.Rect.Contains(System.Double,System.Double)
   - System.Windows.Rect.Contains(System.Windows.Point)
+  - System.Windows.Rect.Contains(System.Windows.Rect)
   - System.Windows.Rect.Empty
   - System.Windows.Rect.Equals(System.Object)
   - System.Windows.Rect.Equals(System.Windows.Rect)
+  - System.Windows.Rect.Equals(System.Windows.Rect,System.Windows.Rect)
   - System.Windows.Rect.GetHashCode
   - System.Windows.Rect.Height
+  - System.Windows.Rect.Inflate(System.Double,System.Double)
+  - System.Windows.Rect.Inflate(System.Windows.Rect,System.Double,System.Double)
+  - System.Windows.Rect.Inflate(System.Windows.Rect,System.Windows.Size)
+  - System.Windows.Rect.Inflate(System.Windows.Size)
   - System.Windows.Rect.Intersect(System.Windows.Rect)
+  - System.Windows.Rect.Intersect(System.Windows.Rect,System.Windows.Rect)
+  - System.Windows.Rect.IntersectsWith(System.Windows.Rect)
   - System.Windows.Rect.IsEmpty
   - System.Windows.Rect.Left
   - System.Windows.Rect.Location
+  - System.Windows.Rect.Offset(System.Double,System.Double)
+  - System.Windows.Rect.Offset(System.Windows.Rect,System.Double,System.Double)
+  - System.Windows.Rect.Offset(System.Windows.Rect,System.Windows.Vector)
+  - System.Windows.Rect.Offset(System.Windows.Vector)
   - System.Windows.Rect.op_Equality(System.Windows.Rect,System.Windows.Rect)
   - System.Windows.Rect.op_Inequality(System.Windows.Rect,System.Windows.Rect)
   - System.Windows.Rect.Parse(System.String)
   - System.Windows.Rect.Right
+  - System.Windows.Rect.Scale(System.Double,System.Double)
   - System.Windows.Rect.Size
+  - System.Windows.Rect.System#IFormattable#ToString(System.String,System.IFormatProvider)
   - System.Windows.Rect.Top
   - System.Windows.Rect.TopLeft
   - System.Windows.Rect.TopRight
   - System.Windows.Rect.ToString
   - System.Windows.Rect.ToString(System.IFormatProvider)
+  - System.Windows.Rect.Transform(System.Windows.Media.Matrix)
+  - System.Windows.Rect.Transform(System.Windows.Rect,System.Windows.Media.Matrix)
   - System.Windows.Rect.Union(System.Windows.Point)
   - System.Windows.Rect.Union(System.Windows.Rect)
+  - System.Windows.Rect.Union(System.Windows.Rect,System.Windows.Point)
+  - System.Windows.Rect.Union(System.Windows.Rect,System.Windows.Rect)
   - System.Windows.Rect.Width
   - System.Windows.Rect.X
   - System.Windows.Rect.Y
@@ -47,25 +67,27 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Rect
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 26
+    startLine: 22
   assemblies:
   - OpenSilver
   namespace: System.Windows
   summary: "\nDescribes the width, height, and point origin of a rectangle.\n"
   example: []
   syntax:
-    content: public struct Rect
-    content.vb: Public Structure Rect
+    content: 'public struct Rect : IFormattable'
+    content.vb: >-
+      Public Structure Rect
+          Implements IFormattable
+  implements:
+  - System.IFormattable
   inheritedMembers:
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetType
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - struct
@@ -86,11 +108,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 43
+    startLine: 39
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -125,11 +147,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 62
+    startLine: 58
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -150,6 +172,45 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.Rect.#ctor(System.Windows.Point,System.Windows.Vector)
+  commentId: M:System.Windows.Rect.#ctor(System.Windows.Point,System.Windows.Vector)
+  id: '#ctor(System.Windows.Point,System.Windows.Vector)'
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Rect(Point, Vector)
+  nameWithType: Rect.Rect(Point, Vector)
+  fullName: System.Windows.Rect.Rect(System.Windows.Point, System.Windows.Vector)
+  type: Constructor
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: .ctor
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 85
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structure that is exactly\nlarge enough to contain the specified point and the sum of the specified point\nand the specified vector.\n"
+  example: []
+  syntax:
+    content: public Rect(Point point, Vector vector)
+    parameters:
+    - id: point
+      type: System.Windows.Point
+      description: "\nThe first point the rectangle must contain.\n"
+    - id: vector
+      type: System.Windows.Vector
+      description: "\nThe amount to offset the specified point. The resulting rectangle will be exactly\nlarge enough to contain both points.\n"
+    content.vb: Public Sub New(point As Point, vector As Vector)
+  overload: System.Windows.Rect.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Rect.#ctor(System.Double,System.Double,System.Double,System.Double)
   commentId: M:System.Windows.Rect.#ctor(System.Double,System.Double,System.Double,System.Double)
   id: '#ctor(System.Double,System.Double,System.Double,System.Double)'
@@ -164,11 +225,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 96
+    startLine: 109
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -213,11 +274,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 121
+    startLine: 134
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -235,94 +296,88 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.Rect.op_Inequality(System.Windows.Rect,System.Windows.Rect)
-  commentId: M:System.Windows.Rect.op_Inequality(System.Windows.Rect,System.Windows.Rect)
-  id: op_Inequality(System.Windows.Rect,System.Windows.Rect)
+- uid: System.Windows.Rect.Parse(System.String)
+  commentId: M:System.Windows.Rect.Parse(System.String)
+  id: Parse(System.String)
   parent: System.Windows.Rect
   langs:
   - csharp
   - vb
-  name: Inequality(Rect, Rect)
-  nameWithType: Rect.Inequality(Rect, Rect)
-  fullName: System.Windows.Rect.Inequality(System.Windows.Rect, System.Windows.Rect)
-  type: Operator
+  name: Parse(String)
+  nameWithType: Rect.Parse(String)
+  fullName: System.Windows.Rect.Parse(System.String)
+  type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Inequality
+    id: Parse
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 144
+    startLine: 157
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nCompares two Windows.Foundation.Rect structures for inequality.\n"
+  summary: "\nCreates a new rectangle from the specified string representation.\n"
   example: []
   syntax:
-    content: public static bool operator !=(Rect rect1, Rect rect2)
+    content: public static Rect Parse(string source)
     parameters:
-    - id: rect1
-      type: System.Windows.Rect
-      description: The first rectangle to compare.
-    - id: rect2
-      type: System.Windows.Rect
-      description: The second rectangle to compare.
+    - id: source
+      type: System.String
+      description: "\nThe string representation of the rectangle, in the form &quot;x, y, width, height&quot;.\n"
     return:
-      type: System.Boolean
-      description: "\ntrue if the Windows.Foundation.Rect structures do not have the same x,y,width,height\nproperty values; otherwise, false.\n"
-    content.vb: Public Shared Operator <>(rect1 As Rect, rect2 As Rect) As Boolean
-  overload: System.Windows.Rect.op_Inequality*
+      type: System.Windows.Rect
+      description: "\nThe resulting rectangle.\n"
+    content.vb: Public Shared Function Parse(source As String) As Rect
+  overload: System.Windows.Rect.Parse*
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: System.Windows.Rect.op_Equality(System.Windows.Rect,System.Windows.Rect)
-  commentId: M:System.Windows.Rect.op_Equality(System.Windows.Rect,System.Windows.Rect)
-  id: op_Equality(System.Windows.Rect,System.Windows.Rect)
+- uid: System.Windows.Rect.Empty
+  commentId: P:System.Windows.Rect.Empty
+  id: Empty
   parent: System.Windows.Rect
   langs:
   - csharp
   - vb
-  name: Equality(Rect, Rect)
-  nameWithType: Rect.Equality(Rect, Rect)
-  fullName: System.Windows.Rect.Equality(System.Windows.Rect, System.Windows.Rect)
-  type: Operator
+  name: Empty
+  nameWithType: Rect.Empty
+  fullName: System.Windows.Rect.Empty
+  type: Property
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: op_Equality
+    id: Empty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 159
+    startLine: 196
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nCompares two Windows.Foundation.Rect structures for equality.\n"
+  summary: "\nGets a special value that represents a rectangle with no position or area.\n"
   example: []
   syntax:
-    content: public static bool operator ==(Rect rect1, Rect rect2)
-    parameters:
-    - id: rect1
-      type: System.Windows.Rect
-      description: The first rectangle to compare.
-    - id: rect2
-      type: System.Windows.Rect
-      description: The second rectangle to compare.
+    content: public static readonly Rect Empty { get; }
+    parameters: []
     return:
-      type: System.Boolean
-      description: "\ntrue if the Windows.Foundation.Rect structures have the same x,y,width,height\nproperty values; otherwise, false.\n"
-    content.vb: Public Shared Operator =(rect1 As Rect, rect2 As Rect) As Boolean
-  overload: System.Windows.Rect.op_Equality*
+      type: System.Windows.Rect
+      description: "\nThe empty rectangle, which has <xref href=\"System.Windows.Rect.X\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Windows.Rect.Y\" data-throw-if-not-resolved=\"false\"></xref> property values \nof <xref href=\"System.Double.PositiveInfinity\" data-throw-if-not-resolved=\"false\"></xref>, and has <xref href=\"System.Windows.Rect.Width\" data-throw-if-not-resolved=\"false\"></xref> and \n<xref href=\"System.Windows.Rect.Height\" data-throw-if-not-resolved=\"false\"></xref> property values of <xref href=\"System.Double.NegativeInfinity\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Shared ReadOnly Property Empty As Rect
+  overload: System.Windows.Rect.Empty*
   modifiers.csharp:
   - public
   - static
+  - readonly
+  - get
   modifiers.vb:
   - Public
   - Shared
+  - ReadOnly
 - uid: System.Windows.Rect.Bottom
   commentId: P:System.Windows.Rect.Bottom
   id: Bottom
@@ -337,11 +392,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Bottom
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 168
+    startLine: 212
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -352,6 +407,7 @@ items:
     parameters: []
     return:
       type: System.Double
+      description: "\nThe y-axis value of the bottom of the rectangle. If the rectangle is empty, the\nvalue is <xref href=\"System.Double.NegativeInfinity\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public ReadOnly Property Bottom As Double
   overload: System.Windows.Rect.Bottom*
   modifiers.csharp:
@@ -375,15 +431,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: BottomLeft
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 183
+    startLine: 229
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets the position of the bottom-left corner of the rectangle\n"
+  summary: "\nGets the position of the bottom-left corner of the rectangle.\nIf this is the empty rectangle, the value will be positive infinity, negative infinity.\n"
   example: []
   syntax:
     content: public readonly Point BottomLeft { get; }
@@ -413,11 +469,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: BottomRight
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 194
+    startLine: 234
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -437,46 +493,6 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Windows.Rect.Empty
-  commentId: P:System.Windows.Rect.Empty
-  id: Empty
-  parent: System.Windows.Rect
-  langs:
-  - csharp
-  - vb
-  name: Empty
-  nameWithType: Rect.Empty
-  fullName: System.Windows.Rect.Empty
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Empty
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 206
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nGets a special value that represents a rectangle with\nno position or area.\n"
-  example: []
-  syntax:
-    content: public static readonly Rect Empty { get; }
-    parameters: []
-    return:
-      type: System.Windows.Rect
-    content.vb: Public Shared ReadOnly Property Empty As Rect
-  overload: System.Windows.Rect.Empty*
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  - get
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
 - uid: System.Windows.Rect.Height
   commentId: P:System.Windows.Rect.Height
   id: Height
@@ -491,11 +507,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Height
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 218
+    startLine: 245
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -506,8 +522,13 @@ items:
     parameters: []
     return:
       type: System.Double
+      description: "\nA value that represents the height of the rectangle. The default is 0.\n"
     content.vb: Public Property Height As Double
   overload: System.Windows.Rect.Height*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nSpecified a value less than 0.\n"
   modifiers.csharp:
   - public
   - get
@@ -528,21 +549,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsEmpty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 239
+    startLine: 266
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets a value that indicates whether the rectangle is\nthe Windows.Foundation.Rect.Empty rectangle.\n"
+  summary: "\nGets a value that indicates whether the rectangle is the <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref>\nrectangle.\n"
   example: []
   syntax:
     content: public readonly bool IsEmpty { get; }
     parameters: []
     return:
       type: System.Boolean
+      description: "\ntrue if the rectangle is the <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref> rectangle; otherwise, false.\n"
     content.vb: Public ReadOnly Property IsEmpty As Boolean
   overload: System.Windows.Rect.IsEmpty*
   modifiers.csharp:
@@ -566,11 +588,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Left
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 252
+    startLine: 275
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -581,6 +603,7 @@ items:
     parameters: []
     return:
       type: System.Double
+      description: "\nThe x-axis value of the left side of the rectangle.\n"
     content.vb: Public ReadOnly Property Left As Double
   overload: System.Windows.Rect.Left*
   modifiers.csharp:
@@ -590,6 +613,202 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
+- uid: System.Windows.Rect.Right
+  commentId: P:System.Windows.Rect.Right
+  id: Right
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Right
+  nameWithType: Rect.Right
+  fullName: System.Windows.Rect.Right
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Right
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 283
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the x-axis value of the right side of the rectangle.\n"
+  example: []
+  syntax:
+    content: public readonly double Right { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: "\nThe x-axis value of the right side of the rectangle.\n"
+    content.vb: Public ReadOnly Property Right As Double
+  overload: System.Windows.Rect.Right*
+  modifiers.csharp:
+  - public
+  - readonly
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Rect.Top
+  commentId: P:System.Windows.Rect.Top
+  id: Top
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Top
+  nameWithType: Rect.Top
+  fullName: System.Windows.Rect.Top
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Top
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 302
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets the y-axis position of the top of the rectangle.\n"
+  example: []
+  syntax:
+    content: public readonly double Top { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: "\nThe y-axis position of the top of the rectangle.\n"
+    content.vb: Public ReadOnly Property Top As Double
+  overload: System.Windows.Rect.Top*
+  modifiers.csharp:
+  - public
+  - readonly
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Rect.Width
+  commentId: P:System.Windows.Rect.Width
+  id: Width
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: Rect.Width
+  fullName: System.Windows.Rect.Width
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Width
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 313
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the width of the rectangle.\n"
+  example: []
+  syntax:
+    content: public double Width { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+      description: "\nA value that represents the width of the rectangle in pixels. The default is 0.\n"
+    content.vb: Public Property Width As Double
+  overload: System.Windows.Rect.Width*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: "\nSpecified a value less than 0.\n"
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.X
+  commentId: P:System.Windows.Rect.X
+  id: X
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: X
+  nameWithType: Rect.X
+  fullName: System.Windows.Rect.X
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: X
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 334
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the x-axis value of the left side of the rectangle.\n"
+  example: []
+  syntax:
+    content: public double X { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+      description: "\nThe x-axis value of the left side of the rectangle. This value is interpreted\nas pixels within the coordinate space.\n"
+    content.vb: Public Property X As Double
+  overload: System.Windows.Rect.X*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Y
+  commentId: P:System.Windows.Rect.Y
+  id: Y
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Y
+  nameWithType: Rect.Y
+  fullName: System.Windows.Rect.Y
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Y
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 347
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nGets or sets the y-axis value of the top side of the rectangle.\n"
+  example: []
+  syntax:
+    content: public double Y { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+      description: "\nThe y-axis value of the top side of the rectangle. This value is interpreted\nas pixels within the coordinate space.\n"
+    content.vb: Public Property Y As Double
+  overload: System.Windows.Rect.Y*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Rect.Location
   commentId: P:System.Windows.Rect.Location
   id: Location
@@ -604,11 +823,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Location
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 267
+    startLine: 356
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -627,44 +846,6 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Rect.Right
-  commentId: P:System.Windows.Rect.Right
-  id: Right
-  parent: System.Windows.Rect
-  langs:
-  - csharp
-  - vb
-  name: Right
-  nameWithType: Rect.Right
-  fullName: System.Windows.Rect.Right
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Right
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 283
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nGets the x-axis value of the right side of the rectangle.\n"
-  example: []
-  syntax:
-    content: public readonly double Right { get; }
-    parameters: []
-    return:
-      type: System.Double
-    content.vb: Public ReadOnly Property Right As Double
-  overload: System.Windows.Rect.Right*
-  modifiers.csharp:
-  - public
-  - readonly
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
 - uid: System.Windows.Rect.Size
   commentId: P:System.Windows.Rect.Size
   id: Size
@@ -679,11 +860,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Size
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 298
+    startLine: 369
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -702,44 +883,6 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Rect.Top
-  commentId: P:System.Windows.Rect.Top
-  id: Top
-  parent: System.Windows.Rect
-  langs:
-  - csharp
-  - vb
-  name: Top
-  nameWithType: Rect.Top
-  fullName: System.Windows.Rect.Top
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Top
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 314
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nGets the y-axis position of the top of the rectangle.\n"
-  example: []
-  syntax:
-    content: public readonly double Top { get; }
-    parameters: []
-    return:
-      type: System.Double
-    content.vb: Public ReadOnly Property Top As Double
-  overload: System.Windows.Rect.Top*
-  modifiers.csharp:
-  - public
-  - readonly
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
 - uid: System.Windows.Rect.TopLeft
   commentId: P:System.Windows.Rect.TopLeft
   id: TopLeft
@@ -754,11 +897,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TopLeft
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 329
+    startLine: 382
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -792,11 +935,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TopRight
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 340
+    startLine: 387
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -816,115 +959,420 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: System.Windows.Rect.Width
-  commentId: P:System.Windows.Rect.Width
-  id: Width
+- uid: System.Windows.Rect.Inflate(System.Windows.Rect,System.Double,System.Double)
+  commentId: M:System.Windows.Rect.Inflate(System.Windows.Rect,System.Double,System.Double)
+  id: Inflate(System.Windows.Rect,System.Double,System.Double)
   parent: System.Windows.Rect
   langs:
   - csharp
   - vb
-  name: Width
-  nameWithType: Rect.Width
-  fullName: System.Windows.Rect.Width
-  type: Property
+  name: Inflate(Rect, Double, Double)
+  nameWithType: Rect.Inflate(Rect, Double, Double)
+  fullName: System.Windows.Rect.Inflate(System.Windows.Rect, System.Double, System.Double)
+  type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Width
+    id: Inflate
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 351
+    startLine: 408
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets or sets the width of the rectangle.\n"
+  summary: "\nCreates a rectangle that results from expanding or shrinking the specified rectangle\nby the specified width and height amounts, in all directions.\n"
   example: []
   syntax:
-    content: public double Width { get; set; }
-    parameters: []
-    return:
+    content: public static Rect Inflate(Rect rect, double width, double height)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe System.Windows.Rect structure to modify.\n"
+    - id: width
       type: System.Double
-    content.vb: Public Property Width As Double
-  overload: System.Windows.Rect.Width*
+      description: "\nThe amount by which to expand or shrink the left and right sides of the rectangle.\n"
+    - id: height
+      type: System.Double
+      description: "\nThe amount by which to expand or shrink the top and bottom sides of the rectangle.\n"
+    return:
+      type: System.Windows.Rect
+      description: "\nThe resulting rectangle.\n"
+    content.vb: Public Shared Function Inflate(rect As Rect, width As Double, height As Double) As Rect
+  overload: System.Windows.Rect.Inflate*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nrect is an System.Windows.Rect.Empty rectangle.\n"
   modifiers.csharp:
   - public
-  - get
-  - set
+  - static
   modifiers.vb:
   - Public
-- uid: System.Windows.Rect.X
-  commentId: P:System.Windows.Rect.X
-  id: X
+  - Shared
+- uid: System.Windows.Rect.Inflate(System.Windows.Rect,System.Windows.Size)
+  commentId: M:System.Windows.Rect.Inflate(System.Windows.Rect,System.Windows.Size)
+  id: Inflate(System.Windows.Rect,System.Windows.Size)
   parent: System.Windows.Rect
   langs:
   - csharp
   - vb
-  name: X
-  nameWithType: Rect.X
-  fullName: System.Windows.Rect.X
-  type: Property
+  name: Inflate(Rect, Size)
+  nameWithType: Rect.Inflate(Rect, Size)
+  fullName: System.Windows.Rect.Inflate(System.Windows.Rect, System.Windows.Size)
+  type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: X
+    id: Inflate
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 374
+    startLine: 434
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets or sets the x-axis value of the left side of the\nrectangle.\n"
+  summary: "\nReturns the rectangle that results from expanding the specified rectangle by\nthe specified <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>, in all directions.\n"
   example: []
   syntax:
-    content: public double X { get; set; }
-    parameters: []
+    content: public static Rect Inflate(Rect rect, Size size)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structure to modify.\n"
+    - id: size
+      type: System.Windows.Size
+      description: "\nSpecifies the amount to expand the rectangle. The <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> structure&apos;s\n<xref href=\"System.Windows.Size.Width\" data-throw-if-not-resolved=\"false\"></xref> property specifies the amount to increase the rectangle&apos;s\n<xref href=\"System.Windows.Rect.Left\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Windows.Rect.Right\" data-throw-if-not-resolved=\"false\"></xref> properties. The <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>\nstructure&apos;s <xref href=\"System.Windows.Size.Height\" data-throw-if-not-resolved=\"false\"></xref> property specifies the amount to increase\nthe rectangle&apos;s <xref href=\"System.Windows.Rect.Top\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Windows.Rect.Bottom\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
     return:
-      type: System.Double
-    content.vb: Public Property X As Double
-  overload: System.Windows.Rect.X*
+      type: System.Windows.Rect
+      description: "\nThe resulting rectangle.\n"
+    content.vb: Public Shared Function Inflate(rect As Rect, size As Size) As Rect
+  overload: System.Windows.Rect.Inflate*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nrect is an <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref> rectangle.\n"
   modifiers.csharp:
   - public
-  - get
-  - set
+  - static
   modifiers.vb:
   - Public
-- uid: System.Windows.Rect.Y
-  commentId: P:System.Windows.Rect.Y
-  id: Y
+  - Shared
+- uid: System.Windows.Rect.Intersect(System.Windows.Rect,System.Windows.Rect)
+  commentId: M:System.Windows.Rect.Intersect(System.Windows.Rect,System.Windows.Rect)
+  id: Intersect(System.Windows.Rect,System.Windows.Rect)
   parent: System.Windows.Rect
   langs:
   - csharp
   - vb
-  name: Y
-  nameWithType: Rect.Y
-  fullName: System.Windows.Rect.Y
-  type: Property
+  name: Intersect(Rect, Rect)
+  nameWithType: Rect.Intersect(Rect, Rect)
+  fullName: System.Windows.Rect.Intersect(System.Windows.Rect, System.Windows.Rect)
+  type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Y
+    id: Intersect
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 393
+    startLine: 452
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nGets or sets the y-axis value of the top side of the\nrectangle.\n"
+  summary: "\nReturns the intersection of the specified rectangles.\n"
   example: []
   syntax:
-    content: public double Y { get; set; }
-    parameters: []
+    content: public static Rect Intersect(Rect rect1, Rect rect2)
+    parameters:
+    - id: rect1
+      type: System.Windows.Rect
+      description: "\nThe first rectangle to compare.\n"
+    - id: rect2
+      type: System.Windows.Rect
+      description: "\nThe second rectangle to compare.\n"
     return:
-      type: System.Double
-    content.vb: Public Property Y As Double
-  overload: System.Windows.Rect.Y*
+      type: System.Windows.Rect
+      description: "\nThe intersection of the two rectangles, or <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref> if no intersection exists.\n"
+    content.vb: Public Shared Function Intersect(rect1 As Rect, rect2 As Rect) As Rect
+  overload: System.Windows.Rect.Intersect*
   modifiers.csharp:
   - public
-  - get
-  - set
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Rect.Offset(System.Windows.Rect,System.Windows.Vector)
+  commentId: M:System.Windows.Rect.Offset(System.Windows.Rect,System.Windows.Vector)
+  id: Offset(System.Windows.Rect,System.Windows.Vector)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Offset(Rect, Vector)
+  nameWithType: Rect.Offset(Rect, Vector)
+  fullName: System.Windows.Rect.Offset(System.Windows.Rect, System.Windows.Vector)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Offset
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 473
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nReturns a rectangle that is offset from the specified rectangle by using the specified vector.\n"
+  example: []
+  syntax:
+    content: public static Rect Offset(Rect rect, Vector offsetVector)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe original rectangle.\n"
+    - id: offsetVector
+      type: System.Windows.Vector
+      description: "\nA vector that specifies the horizontal and vertical offsets for the new rectangle.\n"
+    return:
+      type: System.Windows.Rect
+      description: "\nThe resulting rectangle.\n"
+    content.vb: Public Shared Function Offset(rect As Rect, offsetVector As Vector) As Rect
+  overload: System.Windows.Rect.Offset*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nrect is <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Rect.Offset(System.Windows.Rect,System.Double,System.Double)
+  commentId: M:System.Windows.Rect.Offset(System.Windows.Rect,System.Double,System.Double)
+  id: Offset(System.Windows.Rect,System.Double,System.Double)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Offset(Rect, Double, Double)
+  nameWithType: Rect.Offset(Rect, Double, Double)
+  fullName: System.Windows.Rect.Offset(System.Windows.Rect, System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Offset
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 498
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nReturns a rectangle that is offset from the specified rectangle by using the\nspecified horizontal and vertical amounts.\n"
+  example: []
+  syntax:
+    content: public static Rect Offset(Rect rect, double offsetX, double offsetY)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe rectangle to move.\n"
+    - id: offsetX
+      type: System.Double
+      description: "\nThe horizontal offset for the new rectangle.\n"
+    - id: offsetY
+      type: System.Double
+      description: "\nThe vertical offset for the new rectangle.\n"
+    return:
+      type: System.Windows.Rect
+      description: "\nThe resulting rectangle.\n"
+    content.vb: Public Shared Function Offset(rect As Rect, offsetX As Double, offsetY As Double) As Rect
+  overload: System.Windows.Rect.Offset*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nrect is <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Rect.Transform(System.Windows.Rect,System.Windows.Media.Matrix)
+  commentId: M:System.Windows.Rect.Transform(System.Windows.Rect,System.Windows.Media.Matrix)
+  id: Transform(System.Windows.Rect,System.Windows.Media.Matrix)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Transform(Rect, Matrix)
+  nameWithType: Rect.Transform(Rect, Matrix)
+  fullName: System.Windows.Rect.Transform(System.Windows.Rect, System.Windows.Media.Matrix)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Transform
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 516
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nReturns the rectangle that results from applying the specified matrix to the specified rectangle.\n"
+  example: []
+  syntax:
+    content: public static Rect Transform(Rect rect, Matrix matrix)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nA rectangle that is the basis for the transformation.\n"
+    - id: matrix
+      type: System.Windows.Media.Matrix
+      description: "\nA matrix that specifies the transformation to apply.\n"
+    return:
+      type: System.Windows.Rect
+      description: "\nThe rectangle that results from the operation.\n"
+    content.vb: Public Shared Function Transform(rect As Rect, matrix As Matrix) As Rect
+  overload: System.Windows.Rect.Transform*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Rect.Union(System.Windows.Rect,System.Windows.Point)
+  commentId: M:System.Windows.Rect.Union(System.Windows.Rect,System.Windows.Point)
+  id: Union(System.Windows.Rect,System.Windows.Point)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Union(Rect, Point)
+  nameWithType: Rect.Union(Rect, Point)
+  fullName: System.Windows.Rect.Union(System.Windows.Rect, System.Windows.Point)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Union
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 534
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCreates a rectangle that is exactly large enough to include the specified rectangle and the specified point.\n"
+  example: []
+  syntax:
+    content: public static Rect Union(Rect rect, Point point)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe rectangle to include.\n"
+    - id: point
+      type: System.Windows.Point
+      description: "\nThe point to include.\n"
+    return:
+      type: System.Windows.Rect
+      description: "\nA rectangle that is exactly large enough to contain the specified rectangle and the specified point.\n"
+    content.vb: Public Shared Function Union(rect As Rect, point As Point) As Rect
+  overload: System.Windows.Rect.Union*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Rect.Union(System.Windows.Rect,System.Windows.Rect)
+  commentId: M:System.Windows.Rect.Union(System.Windows.Rect,System.Windows.Rect)
+  id: Union(System.Windows.Rect,System.Windows.Rect)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Union(Rect, Rect)
+  nameWithType: Rect.Union(Rect, Rect)
+  fullName: System.Windows.Rect.Union(System.Windows.Rect, System.Windows.Rect)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Union
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 552
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCreates a rectangle that is exactly large enough to contain the two specified rectangles.\n"
+  example: []
+  syntax:
+    content: public static Rect Union(Rect rect1, Rect rect2)
+    parameters:
+    - id: rect1
+      type: System.Windows.Rect
+      description: "\nThe first rectangle to include.\n"
+    - id: rect2
+      type: System.Windows.Rect
+      description: "\nThe second rectangle to include.\n"
+    return:
+      type: System.Windows.Rect
+      description: "\nThe resulting rectangle.\n"
+    content.vb: Public Shared Function Union(rect1 As Rect, rect2 As Rect) As Rect
+  overload: System.Windows.Rect.Union*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Rect.Contains(System.Double,System.Double)
+  commentId: M:System.Windows.Rect.Contains(System.Double,System.Double)
+  id: Contains(System.Double,System.Double)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Contains(Double, Double)
+  nameWithType: Rect.Contains(Double, Double)
+  fullName: System.Windows.Rect.Contains(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Contains
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 570
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIndicates whether the rectangle contains the specified x-coordinate and y-coordinate.\n"
+  example: []
+  syntax:
+    content: public bool Contains(double x, double y)
+    parameters:
+    - id: x
+      type: System.Double
+      description: "\nThe x-coordinate of the point to check.\n"
+    - id: y
+      type: System.Double
+      description: "\nThe y-coordinate of the point to check.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if (x, y) is contained by the rectangle; otherwise, false.\n"
+    content.vb: Public Function Contains(x As Double, y As Double) As Boolean
+  overload: System.Windows.Rect.Contains*
+  modifiers.csharp:
+  - public
   modifiers.vb:
   - Public
 - uid: System.Windows.Rect.Contains(System.Windows.Point)
@@ -941,31 +1389,502 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Contains
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 417
+    startLine: 591
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nIndicates whether the rectangle described by the Windows.Foundation.Rect\ncontains the specified point.\n"
+  summary: "\nIndicates whether the rectangle described by the <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> contains\nthe specified point.\n"
   example: []
   syntax:
     content: public bool Contains(Point point)
     parameters:
     - id: point
       type: System.Windows.Point
-      description: The point to check.
+      description: "\nThe point to check.\n"
     return:
       type: System.Boolean
-      description: "\ntrue if the rectangle described by the Windows.Foundation.Rect contains the\nspecified point; otherwise, false.\n"
+      description: "\ntrue if the rectangle described by the <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> contains the specified\npoint; otherwise, false.\n"
     content.vb: Public Function Contains(point As Point) As Boolean
   overload: System.Windows.Rect.Contains*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.Rect.Contains(System.Windows.Rect)
+  commentId: M:System.Windows.Rect.Contains(System.Windows.Rect)
+  id: Contains(System.Windows.Rect)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Contains(Rect)
+  nameWithType: Rect.Contains(Rect)
+  fullName: System.Windows.Rect.Contains(System.Windows.Rect)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Contains
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 602
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIndicates whether the rectangle contains the specified rectangle.\n"
+  example: []
+  syntax:
+    content: public bool Contains(Rect rect)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe rectangle to check.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if rect is entirely contained by the rectangle; otherwise, false.\n"
+    content.vb: Public Function Contains(rect As Rect) As Boolean
+  overload: System.Windows.Rect.Contains*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Inflate(System.Windows.Size)
+  commentId: M:System.Windows.Rect.Inflate(System.Windows.Size)
+  id: Inflate(System.Windows.Size)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Inflate(Size)
+  nameWithType: Rect.Inflate(Size)
+  fullName: System.Windows.Rect.Inflate(System.Windows.Size)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Inflate
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 628
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nExpands the rectangle by using the specified <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>, in all directions.\n"
+  example: []
+  syntax:
+    content: public void Inflate(Size size)
+    parameters:
+    - id: size
+      type: System.Windows.Size
+      description: "\nSpecifies the amount to expand the rectangle. The <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref> structure&apos;s\n<xref href=\"System.Windows.Size.Width\" data-throw-if-not-resolved=\"false\"></xref> property specifies the amount to increase the rectangle&apos;s\n<xref href=\"System.Windows.Rect.Left\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Windows.Rect.Right\" data-throw-if-not-resolved=\"false\"></xref> properties. The <xref href=\"System.Windows.Size\" data-throw-if-not-resolved=\"false\"></xref>\nstructure&apos;s <xref href=\"System.Windows.Size.Height\" data-throw-if-not-resolved=\"false\"></xref> property specifies the amount to increase\nthe rectangle&apos;s <xref href=\"System.Windows.Rect.Top\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Windows.Rect.Bottom\" data-throw-if-not-resolved=\"false\"></xref> properties.\n"
+    content.vb: Public Sub Inflate(size As Size)
+  overload: System.Windows.Rect.Inflate*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThis method is called on the <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref> rectangle.\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Inflate(System.Double,System.Double)
+  commentId: M:System.Windows.Rect.Inflate(System.Double,System.Double)
+  id: Inflate(System.Double,System.Double)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Inflate(Double, Double)
+  nameWithType: Rect.Inflate(Double, Double)
+  fullName: System.Windows.Rect.Inflate(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Inflate
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 643
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nExpands or shrinks the rectangle by using the specified width and height amounts,\nin all directions.\n"
+  example: []
+  syntax:
+    content: public void Inflate(double width, double height)
+    parameters:
+    - id: width
+      type: System.Double
+      description: "\nThe amount by which to expand or shrink the left and right sides of the rectangle.\n"
+    - id: height
+      type: System.Double
+      description: "\nThe amount by which to expand or shrink the top and bottom sides of the rectangle.\n"
+    content.vb: Public Sub Inflate(width As Double, height As Double)
+  overload: System.Windows.Rect.Inflate*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThis method is called on the <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref> rectangle.\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Intersect(System.Windows.Rect)
+  commentId: M:System.Windows.Rect.Intersect(System.Windows.Rect)
+  id: Intersect(System.Windows.Rect)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Intersect(Rect)
+  nameWithType: Rect.Intersect(Rect)
+  fullName: System.Windows.Rect.Intersect(System.Windows.Rect)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Intersect
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 680
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nFinds the intersection of the rectangle represented by the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>\nand the rectangle represented by the specified <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>, and stores\nthe result as the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Intersect(Rect rect)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe rectangle to intersect with the current rectangle.\n"
+    content.vb: Public Sub Intersect(rect As Rect)
+  overload: System.Windows.Rect.Intersect*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.IntersectsWith(System.Windows.Rect)
+  commentId: M:System.Windows.Rect.IntersectsWith(System.Windows.Rect)
+  id: IntersectsWith(System.Windows.Rect)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: IntersectsWith(Rect)
+  nameWithType: Rect.IntersectsWith(Rect)
+  fullName: System.Windows.Rect.IntersectsWith(System.Windows.Rect)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: IntersectsWith
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 708
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIndicates whether the specified rectangle intersects with the current rectangle.\n"
+  example: []
+  syntax:
+    content: public bool IntersectsWith(Rect rect)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe rectangle to check.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the specified rectangle intersects with the current rectangle; otherwise, false.\n"
+    content.vb: Public Function IntersectsWith(rect As Rect) As Boolean
+  overload: System.Windows.Rect.IntersectsWith*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Offset(System.Double,System.Double)
+  commentId: M:System.Windows.Rect.Offset(System.Double,System.Double)
+  id: Offset(System.Double,System.Double)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Offset(Double, Double)
+  nameWithType: Rect.Offset(Double, Double)
+  fullName: System.Windows.Rect.Offset(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Offset
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 733
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nMoves the rectangle by the specified horizontal and vertical amounts.\n"
+  example: []
+  syntax:
+    content: public void Offset(double offsetX, double offsetY)
+    parameters:
+    - id: offsetX
+      type: System.Double
+      description: "\nThe amount to move the rectangle horizontally.\n"
+    - id: offsetY
+      type: System.Double
+      description: "\nThe amount to move the rectangle vertically.\n"
+    content.vb: Public Sub Offset(offsetX As Double, offsetY As Double)
+  overload: System.Windows.Rect.Offset*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThis method is called on the <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref> rectangle.\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Offset(System.Windows.Vector)
+  commentId: M:System.Windows.Rect.Offset(System.Windows.Vector)
+  id: Offset(System.Windows.Vector)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Offset(Vector)
+  nameWithType: Rect.Offset(Vector)
+  fullName: System.Windows.Rect.Offset(System.Windows.Vector)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Offset
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 753
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nMoves the rectangle by the specified vector.\n"
+  example: []
+  syntax:
+    content: public void Offset(Vector offsetVector)
+    parameters:
+    - id: offsetVector
+      type: System.Windows.Vector
+      description: "\nA vector that specifies the horizontal and vertical amounts to move the rectangle.\n"
+    content.vb: Public Sub Offset(offsetVector As Vector)
+  overload: System.Windows.Rect.Offset*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThis method is called on the <xref href=\"System.Windows.Rect.Empty\" data-throw-if-not-resolved=\"false\"></xref> rectangle.\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Scale(System.Double,System.Double)
+  commentId: M:System.Windows.Rect.Scale(System.Double,System.Double)
+  id: Scale(System.Double,System.Double)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Scale(Double, Double)
+  nameWithType: Rect.Scale(Double, Double)
+  fullName: System.Windows.Rect.Scale(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Scale
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 773
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nMultiplies the size of the current rectangle by the specified x and y values.\n"
+  example: []
+  syntax:
+    content: public void Scale(double scaleX, double scaleY)
+    parameters:
+    - id: scaleX
+      type: System.Double
+      description: "\nThe scale factor in the x-direction.\n"
+    - id: scaleY
+      type: System.Double
+      description: "\nThe scale factor in the y-direction.\n"
+    content.vb: Public Sub Scale(scaleX As Double, scaleY As Double)
+  overload: System.Windows.Rect.Scale*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Transform(System.Windows.Media.Matrix)
+  commentId: M:System.Windows.Rect.Transform(System.Windows.Media.Matrix)
+  id: Transform(System.Windows.Media.Matrix)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Transform(Matrix)
+  nameWithType: Rect.Transform(Matrix)
+  fullName: System.Windows.Rect.Transform(System.Windows.Media.Matrix)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Transform
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 812
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nTransforms the rectangle by applying the specified matrix.\n"
+  example: []
+  syntax:
+    content: public void Transform(Matrix matrix)
+    parameters:
+    - id: matrix
+      type: System.Windows.Media.Matrix
+      description: "\nA matrix that specifies the transformation to apply.\n"
+    content.vb: Public Sub Transform(matrix As Matrix)
+  overload: System.Windows.Rect.Transform*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Union(System.Windows.Point)
+  commentId: M:System.Windows.Rect.Union(System.Windows.Point)
+  id: Union(System.Windows.Point)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Union(Point)
+  nameWithType: Rect.Union(Point)
+  fullName: System.Windows.Rect.Union(System.Windows.Point)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Union
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 821
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nExpands the rectangle represented by the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> exactly\nenough to contain the specified point.\n"
+  example: []
+  syntax:
+    content: public void Union(Point point)
+    parameters:
+    - id: point
+      type: System.Windows.Point
+      description: "\nThe point to include.\n"
+    content.vb: Public Sub Union(point As Point)
+  overload: System.Windows.Rect.Union*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Union(System.Windows.Rect)
+  commentId: M:System.Windows.Rect.Union(System.Windows.Rect)
+  id: Union(System.Windows.Rect)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Union(Rect)
+  nameWithType: Rect.Union(Rect)
+  fullName: System.Windows.Rect.Union(System.Windows.Rect)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Union
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 830
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nExpands the rectangle represented by the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> exactly\nenough to contain the specified rectangle.\n"
+  example: []
+  syntax:
+    content: public void Union(Rect rect)
+    parameters:
+    - id: rect
+      type: System.Windows.Rect
+      description: "\nThe rectangle to include.\n"
+    content.vb: Public Sub Union(rect As Rect)
+  overload: System.Windows.Rect.Union*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Rect.Equals(System.Windows.Rect,System.Windows.Rect)
+  commentId: M:System.Windows.Rect.Equals(System.Windows.Rect,System.Windows.Rect)
+  id: Equals(System.Windows.Rect,System.Windows.Rect)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Equals(Rect, Rect)
+  nameWithType: Rect.Equals(Rect, Rect)
+  fullName: System.Windows.Rect.Equals(System.Windows.Rect, System.Windows.Rect)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Equals
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 882
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nIndicates whether the specified rectangles are equal.\n"
+  example: []
+  syntax:
+    content: public static bool Equals(Rect rect1, Rect rect2)
+    parameters:
+    - id: rect1
+      type: System.Windows.Rect
+      description: "\nThe first rectangle to compare.\n"
+    - id: rect2
+      type: System.Windows.Rect
+      description: "\nThe second rectangle to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the rectangles have the same <xref href=\"System.Windows.Rect.Location\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Windows.Rect.Size\" data-throw-if-not-resolved=\"false\"></xref> values; otherwise, false.\n"
+    content.vb: Public Shared Function Equals(rect1 As Rect, rect2 As Rect) As Boolean
+  overload: System.Windows.Rect.Equals*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: System.Windows.Rect.Equals(System.Object)
   commentId: M:System.Windows.Rect.Equals(System.Object)
   id: Equals(System.Object)
@@ -980,25 +1899,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 433
+    startLine: 907
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nIndicates whether the specified object is equal to the\ncurrent Windows.Foundation.Rect.\n"
+  summary: "\nIndicates whether the specified object is equal to the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override bool Equals(object o)
     parameters:
     - id: o
       type: System.Object
-      description: The object to compare to the current rectangle.
+      description: "\nThe object to compare to the current rectangle.\n"
     return:
       type: System.Boolean
-      description: "\ntrue if o is a Windows.Foundation.Rect and has the same x,y,width,height\nvalues as the current Windows.Foundation.Rect; otherwise, false.\n"
+      description: "\ntrue if o is a <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> and has the same x,y,width,height values as\nthe current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, false.\n"
     content.vb: Public Overrides Function Equals(o As Object) As Boolean
   overridden: System.ValueType.Equals(System.Object)
   overload: System.Windows.Rect.Equals*
@@ -1022,25 +1941,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 454
+    startLine: 919
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nIndicates whether the specified Windows.Foundation.Rect\nis equal to the current Windows.Foundation.Rect.\n"
+  summary: "\nIndicates whether the specified <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> is equal to the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public bool Equals(Rect value)
     parameters:
     - id: value
       type: System.Windows.Rect
-      description: The rectangle to compare to the current rectangle.
+      description: "\nThe rectangle to compare to the current rectangle.\n"
     return:
       type: System.Boolean
-      description: "\ntrue if the specified Windows.Foundation.Rect has the same x,y,width,height\nproperty values as the current Windows.Foundation.Rect; otherwise, false.\n"
+      description: "\ntrue if the specified <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> has the same x,y,width,height property\nvalues as the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>; otherwise, false.\n"
     content.vb: Public Function Equals(value As Rect) As Boolean
   overload: System.Windows.Rect.Equals*
   modifiers.csharp:
@@ -1061,21 +1980,21 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetHashCode
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 463
+    startLine: 927
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nCreates a hash code for the Windows.Foundation.Rect.\n"
+  summary: "\nCreates a hash code for the <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override int GetHashCode()
     return:
       type: System.Int32
-      description: A hash code for the current Windows.Foundation.Rect structure.
+      description: "\nA hash code for the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
     content.vb: Public Overrides Function GetHashCode As Integer
   overridden: System.ValueType.GetHashCode
   overload: System.Windows.Rect.GetHashCode*
@@ -1085,79 +2004,6 @@ items:
   modifiers.vb:
   - Public
   - Overrides
-- uid: System.Windows.Rect.Intersect(System.Windows.Rect)
-  commentId: M:System.Windows.Rect.Intersect(System.Windows.Rect)
-  id: Intersect(System.Windows.Rect)
-  parent: System.Windows.Rect
-  langs:
-  - csharp
-  - vb
-  name: Intersect(Rect)
-  nameWithType: Rect.Intersect(Rect)
-  fullName: System.Windows.Rect.Intersect(System.Windows.Rect)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Intersect
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 475
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  summary: "\nFinds the intersection of the rectangle represented by the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>\nand the rectangle represented by the specified <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>,\nand stores the result as the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref>.\n"
-  example: []
-  syntax:
-    content: public void Intersect(Rect rect)
-    parameters:
-    - id: rect
-      type: System.Windows.Rect
-      description: The rectangle to intersect with the current rectangle.
-    content.vb: Public Sub Intersect(rect As Rect)
-  overload: System.Windows.Rect.Intersect*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Rect.Parse(System.String)
-  commentId: M:System.Windows.Rect.Parse(System.String)
-  id: Parse(System.String)
-  parent: System.Windows.Rect
-  langs:
-  - csharp
-  - vb
-  name: Parse(String)
-  nameWithType: Rect.Parse(String)
-  fullName: System.Windows.Rect.Parse(System.String)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Parse
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 506
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows
-  syntax:
-    content: public static Rect Parse(string source)
-    parameters:
-    - id: source
-      type: System.String
-    return:
-      type: System.Windows.Rect
-    content.vb: Public Shared Function Parse(source As String) As Rect
-  overload: System.Windows.Rect.Parse*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
 - uid: System.Windows.Rect.ToString
   commentId: M:System.Windows.Rect.ToString
   id: ToString
@@ -1172,11 +2018,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 536
+    startLine: 938
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1186,7 +2032,7 @@ items:
     content: public override string ToString()
     return:
       type: System.String
-      description: "\nA string representation of the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structure. The string\nhas the following form: &quot;<xref href=\"System.Windows.Rect.X\" data-throw-if-not-resolved=\"false\"></xref>,<xref href=\"System.Windows.Rect.Y\" data-throw-if-not-resolved=\"false\"></xref>,<xref href=\"System.Windows.Rect.Width\" data-throw-if-not-resolved=\"false\"></xref>,<xref href=\"System.Windows.Rect.Height\" data-throw-if-not-resolved=\"false\"></xref>&quot;.\n"
+      description: "\nA string representation of the current <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structure. The string\nhas the following form: &quot;<xref href=\"System.Windows.Rect.X\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Rect.Y\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Rect.Width\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Rect.Height\" data-throw-if-not-resolved=\"false\"></xref>&quot;.\n"
     content.vb: Public Overrides Function ToString As String
   overridden: System.ValueType.ToString
   overload: System.Windows.Rect.ToString*
@@ -1210,11 +2056,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 552
+    startLine: 951
   assemblies:
   - OpenSilver
   namespace: System.Windows
@@ -1235,84 +2081,148 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.Rect.Union(System.Windows.Point)
-  commentId: M:System.Windows.Rect.Union(System.Windows.Point)
-  id: Union(System.Windows.Point)
+- uid: System.Windows.Rect.System#IFormattable#ToString(System.String,System.IFormatProvider)
+  commentId: M:System.Windows.Rect.System#IFormattable#ToString(System.String,System.IFormatProvider)
+  id: System#IFormattable#ToString(System.String,System.IFormatProvider)
+  isEii: true
   parent: System.Windows.Rect
   langs:
   - csharp
   - vb
-  name: Union(Point)
-  nameWithType: Rect.Union(Point)
-  fullName: System.Windows.Rect.Union(System.Windows.Point)
+  name: IFormattable.ToString(String, IFormatProvider)
+  nameWithType: Rect.IFormattable.ToString(String, IFormatProvider)
+  fullName: System.Windows.Rect.System.IFormattable.ToString(System.String, System.IFormatProvider)
   type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Union
+    id: System.IFormattable.ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 597
+    startLine: 962
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nExpands the rectangle represented by the current Windows.Foundation.Rect\nexactly enough to contain the specified point.\n"
+  summary: "\nCreates a string representation of this object based on the format string\nand IFormatProvider passed in.\nIf the provider is null, the CurrentCulture is used.\nSee the documentation for IFormattable for more information.\n"
   example: []
   syntax:
-    content: public void Union(Point point)
+    content: string IFormattable.ToString(string format, IFormatProvider provider)
     parameters:
-    - id: point
-      type: System.Windows.Point
-      description: The point to include.
-    content.vb: Public Sub Union(point As Point)
-  overload: System.Windows.Rect.Union*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Rect.Union(System.Windows.Rect)
-  commentId: M:System.Windows.Rect.Union(System.Windows.Rect)
-  id: Union(System.Windows.Rect)
+    - id: format
+      type: System.String
+    - id: provider
+      type: System.IFormatProvider
+    return:
+      type: System.String
+      description: "\nA string representation of this object.\n"
+    content.vb: Function System.IFormattable.ToString(format As String, provider As IFormatProvider) As String Implements IFormattable.ToString
+  overload: System.Windows.Rect.System#IFormattable#ToString*
+  implements:
+  - System.IFormattable.ToString(System.String,System.IFormatProvider)
+  nameWithType.vb: Rect.System.IFormattable.ToString(String, IFormatProvider)
+  name.vb: System.IFormattable.ToString(String, IFormatProvider)
+- uid: System.Windows.Rect.op_Inequality(System.Windows.Rect,System.Windows.Rect)
+  commentId: M:System.Windows.Rect.op_Inequality(System.Windows.Rect,System.Windows.Rect)
+  id: op_Inequality(System.Windows.Rect,System.Windows.Rect)
   parent: System.Windows.Rect
   langs:
   - csharp
   - vb
-  name: Union(Rect)
-  nameWithType: Rect.Union(Rect)
-  fullName: System.Windows.Rect.Union(System.Windows.Rect)
-  type: Method
+  name: Inequality(Rect, Rect)
+  nameWithType: Rect.Inequality(Rect, Rect)
+  fullName: System.Windows.Rect.Inequality(System.Windows.Rect, System.Windows.Rect)
+  type: Operator
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows/Rect.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Union
+    id: op_Inequality
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
-    startLine: 625
+    startLine: 1004
   assemblies:
   - OpenSilver
   namespace: System.Windows
-  summary: "\nExpands the rectangle represented by the current Windows.Foundation.Rect\nexactly enough to contain the specified rectangle.\n"
+  summary: "\nCompares two <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structures for inequality.\n"
   example: []
   syntax:
-    content: public void Union(Rect rect)
+    content: public static bool operator !=(Rect rect1, Rect rect2)
     parameters:
-    - id: rect
+    - id: rect1
       type: System.Windows.Rect
-      description: The rectangle to include.
-    content.vb: Public Sub Union(rect As Rect)
-  overload: System.Windows.Rect.Union*
+      description: "\nThe first rectangle to compare.\n"
+    - id: rect2
+      type: System.Windows.Rect
+      description: "\nThe second rectangle to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structures do not have the same x,y,width,height\nproperty values; otherwise, false.\n"
+    content.vb: Public Shared Operator <>(rect1 As Rect, rect2 As Rect) As Boolean
+  overload: System.Windows.Rect.op_Inequality*
   modifiers.csharp:
   - public
+  - static
   modifiers.vb:
   - Public
+  - Shared
+- uid: System.Windows.Rect.op_Equality(System.Windows.Rect,System.Windows.Rect)
+  commentId: M:System.Windows.Rect.op_Equality(System.Windows.Rect,System.Windows.Rect)
+  id: op_Equality(System.Windows.Rect,System.Windows.Rect)
+  parent: System.Windows.Rect
+  langs:
+  - csharp
+  - vb
+  name: Equality(Rect, Rect)
+  nameWithType: Rect.Equality(Rect, Rect)
+  fullName: System.Windows.Rect.Equality(System.Windows.Rect, System.Windows.Rect)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows/Rect.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Equality
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows/Rect.cs
+    startLine: 1019
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows
+  summary: "\nCompares two <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structures for equality.\n"
+  example: []
+  syntax:
+    content: public static bool operator ==(Rect rect1, Rect rect2)
+    parameters:
+    - id: rect1
+      type: System.Windows.Rect
+      description: "\nThe first rectangle to compare.\n"
+    - id: rect2
+      type: System.Windows.Rect
+      description: "\nThe second rectangle to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if the <xref href=\"System.Windows.Rect\" data-throw-if-not-resolved=\"false\"></xref> structures have the same x,y,width,height property\nvalues; otherwise, false.\n"
+    content.vb: Public Shared Operator =(rect1 As Rect, rect2 As Rect) As Boolean
+  overload: System.Windows.Rect.op_Equality*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 references:
 - uid: System.Windows
   commentId: N:System.Windows
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
+- uid: System.IFormattable
+  commentId: T:System.IFormattable
+  parent: System
+  isExternal: true
+  name: IFormattable
+  nameWithType: IFormattable
+  fullName: System.IFormattable
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
   parent: System.Object
@@ -1458,35 +2368,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -1494,60 +2380,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: System
-  commentId: N:System
-  name: System
-  nameWithType: System
-  fullName: System
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
 - uid: System.Windows.Rect
   commentId: T:System.Windows.Rect
   parent: System.Windows
@@ -1571,6 +2403,12 @@ references:
   name: Size
   nameWithType: Size
   fullName: System.Windows.Size
+- uid: System.Windows.Vector
+  commentId: T:System.Windows.Vector
+  parent: System.Windows
+  name: Vector
+  nameWithType: Vector
+  fullName: System.Windows.Vector
 - uid: System.ArgumentException
   commentId: T:System.ArgumentException
   isExternal: true
@@ -1581,23 +2419,41 @@ references:
   name: Double
   nameWithType: Double
   fullName: System.Double
-- uid: System.Windows.Rect.op_Inequality*
-  commentId: Overload:System.Windows.Rect.op_Inequality
-  name: Inequality
-  nameWithType: Rect.Inequality
-  fullName: System.Windows.Rect.Inequality
-- uid: System.Boolean
-  commentId: T:System.Boolean
+- uid: System.Windows.Rect.Parse*
+  commentId: Overload:System.Windows.Rect.Parse
+  name: Parse
+  nameWithType: Rect.Parse
+  fullName: System.Windows.Rect.Parse
+- uid: System.String
+  commentId: T:System.String
   parent: System
   isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
-- uid: System.Windows.Rect.op_Equality*
-  commentId: Overload:System.Windows.Rect.op_Equality
-  name: Equality
-  nameWithType: Rect.Equality
-  fullName: System.Windows.Rect.Equality
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Windows.Rect.X
+  commentId: P:System.Windows.Rect.X
+  isExternal: true
+- uid: System.Windows.Rect.Y
+  commentId: P:System.Windows.Rect.Y
+  isExternal: true
+- uid: System.Double.PositiveInfinity
+  commentId: F:System.Double.PositiveInfinity
+  isExternal: true
+- uid: System.Windows.Rect.Width
+  commentId: P:System.Windows.Rect.Width
+  isExternal: true
+- uid: System.Windows.Rect.Height
+  commentId: P:System.Windows.Rect.Height
+  isExternal: true
+- uid: System.Double.NegativeInfinity
+  commentId: F:System.Double.NegativeInfinity
+  isExternal: true
+- uid: System.Windows.Rect.Empty*
+  commentId: Overload:System.Windows.Rect.Empty
+  name: Empty
+  nameWithType: Rect.Empty
+  fullName: System.Windows.Rect.Empty
 - uid: System.Windows.Rect.Bottom*
   commentId: Overload:System.Windows.Rect.Bottom
   name: Bottom
@@ -1613,56 +2469,41 @@ references:
   name: BottomRight
   nameWithType: Rect.BottomRight
   fullName: System.Windows.Rect.BottomRight
-- uid: System.Windows.Rect.Empty*
-  commentId: Overload:System.Windows.Rect.Empty
-  name: Empty
-  nameWithType: Rect.Empty
-  fullName: System.Windows.Rect.Empty
 - uid: System.Windows.Rect.Height*
   commentId: Overload:System.Windows.Rect.Height
   name: Height
   nameWithType: Rect.Height
   fullName: System.Windows.Rect.Height
+- uid: System.Windows.Rect.Empty
+  commentId: P:System.Windows.Rect.Empty
+  isExternal: true
 - uid: System.Windows.Rect.IsEmpty*
   commentId: Overload:System.Windows.Rect.IsEmpty
   name: IsEmpty
   nameWithType: Rect.IsEmpty
   fullName: System.Windows.Rect.IsEmpty
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
 - uid: System.Windows.Rect.Left*
   commentId: Overload:System.Windows.Rect.Left
   name: Left
   nameWithType: Rect.Left
   fullName: System.Windows.Rect.Left
-- uid: System.Windows.Rect.Location*
-  commentId: Overload:System.Windows.Rect.Location
-  name: Location
-  nameWithType: Rect.Location
-  fullName: System.Windows.Rect.Location
 - uid: System.Windows.Rect.Right*
   commentId: Overload:System.Windows.Rect.Right
   name: Right
   nameWithType: Rect.Right
   fullName: System.Windows.Rect.Right
-- uid: System.Windows.Rect.Size*
-  commentId: Overload:System.Windows.Rect.Size
-  name: Size
-  nameWithType: Rect.Size
-  fullName: System.Windows.Rect.Size
 - uid: System.Windows.Rect.Top*
   commentId: Overload:System.Windows.Rect.Top
   name: Top
   nameWithType: Rect.Top
   fullName: System.Windows.Rect.Top
-- uid: System.Windows.Rect.TopLeft*
-  commentId: Overload:System.Windows.Rect.TopLeft
-  name: TopLeft
-  nameWithType: Rect.TopLeft
-  fullName: System.Windows.Rect.TopLeft
-- uid: System.Windows.Rect.TopRight*
-  commentId: Overload:System.Windows.Rect.TopRight
-  name: TopRight
-  nameWithType: Rect.TopRight
-  fullName: System.Windows.Rect.TopRight
 - uid: System.Windows.Rect.Width*
   commentId: Overload:System.Windows.Rect.Width
   name: Width
@@ -1678,11 +2519,109 @@ references:
   name: Y
   nameWithType: Rect.Y
   fullName: System.Windows.Rect.Y
+- uid: System.Windows.Rect.Location*
+  commentId: Overload:System.Windows.Rect.Location
+  name: Location
+  nameWithType: Rect.Location
+  fullName: System.Windows.Rect.Location
+- uid: System.Windows.Rect.Size*
+  commentId: Overload:System.Windows.Rect.Size
+  name: Size
+  nameWithType: Rect.Size
+  fullName: System.Windows.Rect.Size
+- uid: System.Windows.Rect.TopLeft*
+  commentId: Overload:System.Windows.Rect.TopLeft
+  name: TopLeft
+  nameWithType: Rect.TopLeft
+  fullName: System.Windows.Rect.TopLeft
+- uid: System.Windows.Rect.TopRight*
+  commentId: Overload:System.Windows.Rect.TopRight
+  name: TopRight
+  nameWithType: Rect.TopRight
+  fullName: System.Windows.Rect.TopRight
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: System.Windows.Rect.Inflate*
+  commentId: Overload:System.Windows.Rect.Inflate
+  name: Inflate
+  nameWithType: Rect.Inflate
+  fullName: System.Windows.Rect.Inflate
+- uid: System.Windows.Size.Width
+  commentId: P:System.Windows.Size.Width
+  isExternal: true
+- uid: System.Windows.Rect.Left
+  commentId: P:System.Windows.Rect.Left
+  isExternal: true
+- uid: System.Windows.Rect.Right
+  commentId: P:System.Windows.Rect.Right
+  isExternal: true
+- uid: System.Windows.Size.Height
+  commentId: P:System.Windows.Size.Height
+  isExternal: true
+- uid: System.Windows.Rect.Top
+  commentId: P:System.Windows.Rect.Top
+  isExternal: true
+- uid: System.Windows.Rect.Bottom
+  commentId: P:System.Windows.Rect.Bottom
+  isExternal: true
+- uid: System.Windows.Rect.Intersect*
+  commentId: Overload:System.Windows.Rect.Intersect
+  name: Intersect
+  nameWithType: Rect.Intersect
+  fullName: System.Windows.Rect.Intersect
+- uid: System.Windows.Rect.Offset*
+  commentId: Overload:System.Windows.Rect.Offset
+  name: Offset
+  nameWithType: Rect.Offset
+  fullName: System.Windows.Rect.Offset
+- uid: System.Windows.Rect.Transform*
+  commentId: Overload:System.Windows.Rect.Transform
+  name: Transform
+  nameWithType: Rect.Transform
+  fullName: System.Windows.Rect.Transform
+- uid: System.Windows.Media.Matrix
+  commentId: T:System.Windows.Media.Matrix
+  parent: System.Windows.Media
+  name: Matrix
+  nameWithType: Matrix
+  fullName: System.Windows.Media.Matrix
+- uid: System.Windows.Media
+  commentId: N:System.Windows.Media
+  name: System.Windows.Media
+  nameWithType: System.Windows.Media
+  fullName: System.Windows.Media
+- uid: System.Windows.Rect.Union*
+  commentId: Overload:System.Windows.Rect.Union
+  name: Union
+  nameWithType: Rect.Union
+  fullName: System.Windows.Rect.Union
 - uid: System.Windows.Rect.Contains*
   commentId: Overload:System.Windows.Rect.Contains
   name: Contains
   nameWithType: Rect.Contains
   fullName: System.Windows.Rect.Contains
+- uid: System.Windows.Rect.IntersectsWith*
+  commentId: Overload:System.Windows.Rect.IntersectsWith
+  name: IntersectsWith
+  nameWithType: Rect.IntersectsWith
+  fullName: System.Windows.Rect.IntersectsWith
+- uid: System.Windows.Rect.Scale*
+  commentId: Overload:System.Windows.Rect.Scale
+  name: Scale
+  nameWithType: Rect.Scale
+  fullName: System.Windows.Rect.Scale
+- uid: System.Windows.Rect.Location
+  commentId: P:System.Windows.Rect.Location
+  isExternal: true
+- uid: System.Windows.Rect.Size
+  commentId: P:System.Windows.Rect.Size
+  isExternal: true
+- uid: System.Windows.Rect.Equals*
+  commentId: Overload:System.Windows.Rect.Equals
+  name: Equals
+  nameWithType: Rect.Equals
+  fullName: System.Windows.Rect.Equals
 - uid: System.ValueType.Equals(System.Object)
   commentId: M:System.ValueType.Equals(System.Object)
   parent: System.ValueType
@@ -1724,11 +2663,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Rect.Equals*
-  commentId: Overload:System.Windows.Rect.Equals
-  name: Equals
-  nameWithType: Rect.Equals
-  fullName: System.Windows.Rect.Equals
 - uid: System.ValueType
   commentId: T:System.ValueType
   parent: System
@@ -1779,35 +2713,6 @@ references:
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
-- uid: System.Windows.Rect.Intersect*
-  commentId: Overload:System.Windows.Rect.Intersect
-  name: Intersect
-  nameWithType: Rect.Intersect
-  fullName: System.Windows.Rect.Intersect
-- uid: System.Windows.Rect.Parse*
-  commentId: Overload:System.Windows.Rect.Parse
-  name: Parse
-  nameWithType: Rect.Parse
-  fullName: System.Windows.Rect.Parse
-- uid: System.String
-  commentId: T:System.String
-  parent: System
-  isExternal: true
-  name: String
-  nameWithType: String
-  fullName: System.String
-- uid: System.Windows.Rect.X
-  commentId: P:System.Windows.Rect.X
-  isExternal: true
-- uid: System.Windows.Rect.Y
-  commentId: P:System.Windows.Rect.Y
-  isExternal: true
-- uid: System.Windows.Rect.Width
-  commentId: P:System.Windows.Rect.Width
-  isExternal: true
-- uid: System.Windows.Rect.Height
-  commentId: P:System.Windows.Rect.Height
-  isExternal: true
 - uid: System.ValueType.ToString
   commentId: M:System.ValueType.ToString
   parent: System.ValueType
@@ -1851,8 +2756,77 @@ references:
   name: IFormatProvider
   nameWithType: IFormatProvider
   fullName: System.IFormatProvider
-- uid: System.Windows.Rect.Union*
-  commentId: Overload:System.Windows.Rect.Union
-  name: Union
-  nameWithType: Rect.Union
-  fullName: System.Windows.Rect.Union
+- uid: System.Windows.Rect.System#IFormattable#ToString*
+  commentId: Overload:System.Windows.Rect.System#IFormattable#ToString
+  name: IFormattable.ToString
+  nameWithType: Rect.IFormattable.ToString
+  fullName: System.Windows.Rect.System.IFormattable.ToString
+  nameWithType.vb: Rect.System.IFormattable.ToString
+  name.vb: System.IFormattable.ToString
+- uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+  commentId: M:System.IFormattable.ToString(System.String,System.IFormatProvider)
+  parent: System.IFormattable
+  isExternal: true
+  name: ToString(String, IFormatProvider)
+  nameWithType: IFormattable.ToString(String, IFormatProvider)
+  fullName: System.IFormattable.ToString(System.String, System.IFormatProvider)
+  spec.csharp:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    nameWithType: IFormattable.ToString
+    fullName: System.IFormattable.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    nameWithType: IFormatProvider
+    fullName: System.IFormatProvider
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    nameWithType: IFormattable.ToString
+    fullName: System.IFormattable.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    nameWithType: IFormatProvider
+    fullName: System.IFormatProvider
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Rect.op_Inequality*
+  commentId: Overload:System.Windows.Rect.op_Inequality
+  name: Inequality
+  nameWithType: Rect.Inequality
+  fullName: System.Windows.Rect.Inequality
+- uid: System.Windows.Rect.op_Equality*
+  commentId: Overload:System.Windows.Rect.op_Equality
+  name: Equality
+  nameWithType: Rect.Equality
+  fullName: System.Windows.Rect.Equality

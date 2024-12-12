@@ -10,7 +10,6 @@ items:
   - System.Windows.Media.RadialGradientBrush.#ctor(System.Windows.Media.GradientStopCollection)
   - System.Windows.Media.RadialGradientBrush.Center
   - System.Windows.Media.RadialGradientBrush.CenterProperty
-  - System.Windows.Media.RadialGradientBrush.ConvertToCSSValues(System.Windows.DependencyObject)
   - System.Windows.Media.RadialGradientBrush.GradientOrigin
   - System.Windows.Media.RadialGradientBrush.GradientOriginProperty
   - System.Windows.Media.RadialGradientBrush.RadiusX
@@ -27,39 +26,38 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: RadialGradientBrush
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 32
+    startLine: 27
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nPaints an area with a radial gradient. A focal point defines the beginning\nof the gradient, and a circle defines the end point of the gradient.\n"
+  summary: "\nPaints an area with a radial gradient. A focal point defines the beginning of\nthe gradient, and a circle defines the end point of the gradient.\n"
   example: []
   syntax:
-    content: 'public sealed class RadialGradientBrush : GradientBrush, IHasAccessToPropertiesWhereItIsUsed'
+    content: 'public sealed class RadialGradientBrush : GradientBrush, IDependencyObject'
     content.vb: >-
       Public NotInheritable Class RadialGradientBrush
           Inherits GradientBrush
-          Implements IHasAccessToPropertiesWhereItIsUsed
+          Implements IDependencyObject
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   - System.Windows.Media.Brush
   - System.Windows.Media.GradientBrush
-  implements:
-  - System.Windows.IHasAccessToPropertiesWhereItIsUsed
   inheritedMembers:
-  - System.Windows.Media.GradientBrush.GradientStops
   - System.Windows.Media.GradientBrush.GradientStopsProperty
-  - System.Windows.Media.GradientBrush.MappingMode
+  - System.Windows.Media.GradientBrush.GradientStops
   - System.Windows.Media.GradientBrush.MappingModeProperty
-  - System.Windows.Media.GradientBrush.SpreadMethod
+  - System.Windows.Media.GradientBrush.MappingMode
   - System.Windows.Media.GradientBrush.SpreadMethodProperty
-  - System.Windows.Media.Brush.Opacity
+  - System.Windows.Media.GradientBrush.SpreadMethod
+  - System.Windows.Media.GradientBrush.ColorInterpolationModeProperty
+  - System.Windows.Media.GradientBrush.ColorInterpolationMode
   - System.Windows.Media.Brush.OpacityProperty
-  - System.Windows.Media.Brush.PropertiesWhereUsed
+  - System.Windows.Media.Brush.Opacity
   - System.Windows.Media.Brush.RelativeTransformProperty
   - System.Windows.Media.Brush.RelativeTransform
   - System.Windows.Media.Brush.TransformProperty
@@ -67,16 +65,15 @@ items:
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  - System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  - System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
   - System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
   - System.Windows.DependencyObject.CheckAccess
   - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
   - System.Object.Equals(System.Object)
@@ -86,17 +83,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   modifiers.csharp:
   - public
   - sealed
@@ -119,15 +105,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 38
+    startLine: 34
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nInitializes a new instance of the System.Windows.Media.RadialGradientBrush\nclass.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Media.RadialGradientBrush\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
   example: []
   syntax:
     content: public RadialGradientBrush()
@@ -151,22 +137,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 45
+    startLine: 43
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nInitializes a new instance of the System.Windows.Media.RadialGradientBrush\nclass that has the specified gradient stops.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Media.RadialGradientBrush\" data-throw-if-not-resolved=\"false\"></xref> class\nthat has the specified gradient stops.\n"
   example: []
   syntax:
     content: public RadialGradientBrush(GradientStopCollection gradientStopCollection)
     parameters:
     - id: gradientStopCollection
       type: System.Windows.Media.GradientStopCollection
-      description: The gradient stops to set on this brush.
+      description: "\nThe gradient stops to set on this brush.\n"
     content.vb: Public Sub New(gradientStopCollection As GradientStopCollection)
   overload: System.Windows.Media.RadialGradientBrush.#ctor*
   modifiers.csharp:
@@ -187,66 +173,29 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 59
+    startLine: 69
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nInitializes a new instance of the System.Windows.Media.RadialGradientBrush\nclass with the specified start and stop colors.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Media.RadialGradientBrush\" data-throw-if-not-resolved=\"false\"></xref> class\nwith the specified start and stop colors.\n"
   example: []
   syntax:
     content: public RadialGradientBrush(Color startColor, Color endColor)
     parameters:
     - id: startColor
       type: System.Windows.Media.Color
-      description: "\nColor value at the focus (System.Windows.Media.RadialGradientBrush.GradientOrigin)\nof the radial gradient.\n"
+      description: "\nColor value at the focus (<xref href=\"System.Windows.Media.RadialGradientBrush.GradientOrigin\" data-throw-if-not-resolved=\"false\"></xref>) of the radial gradient.\n"
     - id: endColor
       type: System.Windows.Media.Color
-      description: Color value at the outer edge of the radial gradient.
+      description: "\nColor value at the outer edge of the radial gradient.\n"
     content.vb: Public Sub New(startColor As Color, endColor As Color)
   overload: System.Windows.Media.RadialGradientBrush.#ctor*
   modifiers.csharp:
   - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.RadialGradientBrush.Center
-  commentId: P:System.Windows.Media.RadialGradientBrush.Center
-  id: Center
-  parent: System.Windows.Media.RadialGradientBrush
-  langs:
-  - csharp
-  - vb
-  name: Center
-  nameWithType: RadialGradientBrush.Center
-  fullName: System.Windows.Media.RadialGradientBrush.Center
-  type: Property
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Center
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 70
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media
-  summary: "\nGets or sets the center of the outermost circle of the radial gradient.\n"
-  example: []
-  syntax:
-    content: public Point Center { get; set; }
-    parameters: []
-    return:
-      type: System.Windows.Point
-    content.vb: Public Property Center As Point
-  overload: System.Windows.Media.RadialGradientBrush.Center*
-  modifiers.csharp:
-  - public
-  - get
-  - set
   modifiers.vb:
   - Public
 - uid: System.Windows.Media.RadialGradientBrush.CenterProperty
@@ -263,21 +212,96 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: CenterProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 80
+    startLine: 81
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.Center\" data-throw-if-not-resolved=\"false\"></xref> dependency\nproperty.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.Center\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
     content: public static readonly DependencyProperty CenterProperty
     return:
       type: System.Windows.DependencyProperty
     content.vb: Public Shared ReadOnly CenterProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
+  - ReadOnly
+- uid: System.Windows.Media.RadialGradientBrush.Center
+  commentId: P:System.Windows.Media.RadialGradientBrush.Center
+  id: Center
+  parent: System.Windows.Media.RadialGradientBrush
+  langs:
+  - csharp
+  - vb
+  name: Center
+  nameWithType: RadialGradientBrush.Center
+  fullName: System.Windows.Media.RadialGradientBrush.Center
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Center
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
+    startLine: 95
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nGets or sets the center of the outer circle of the radial gradient.\n"
+  example: []
+  syntax:
+    content: public Point Center { get; set; }
+    parameters: []
+    return:
+      type: System.Windows.Point
+      description: "\nThe two-dimensional point located at the center of the radial gradient. The default\nvalue is a <xref href=\"System.Windows.Point\" data-throw-if-not-resolved=\"false\"></xref> with value 0.5,0.5.\n"
+    content.vb: Public Property Center As Point
+  overload: System.Windows.Media.RadialGradientBrush.Center*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.RadialGradientBrush.GradientOriginProperty
+  commentId: F:System.Windows.Media.RadialGradientBrush.GradientOriginProperty
+  id: GradientOriginProperty
+  parent: System.Windows.Media.RadialGradientBrush
+  langs:
+  - csharp
+  - vb
+  name: GradientOriginProperty
+  nameWithType: RadialGradientBrush.GradientOriginProperty
+  fullName: System.Windows.Media.RadialGradientBrush.GradientOriginProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GradientOriginProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
+    startLine: 104
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.GradientOrigin\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty GradientOriginProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly GradientOriginProperty As DependencyProperty
   modifiers.csharp:
   - public
   - static
@@ -300,21 +324,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GradientOrigin
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 92
+    startLine: 119
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nGets or sets the location of the two-dimensional focal point that defines\nthe beginning of the gradient.\nThe default is (0.5, 0.5).\n"
+  summary: "\nGets or sets the location of the focal point that defines the beginning of the\ngradient.\n"
   example: []
   syntax:
     content: public Point GradientOrigin { get; set; }
     parameters: []
     return:
       type: System.Windows.Point
+      description: "\nThe two-dimensional point located at the center of the radial gradient. The default\nvalue is a <xref href=\"System.Windows.Point\" data-throw-if-not-resolved=\"false\"></xref> with value 0.5,0.5.\n"
     content.vb: Public Property GradientOrigin As Point
   overload: System.Windows.Media.RadialGradientBrush.GradientOrigin*
   modifiers.csharp:
@@ -323,35 +348,35 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Media.RadialGradientBrush.GradientOriginProperty
-  commentId: F:System.Windows.Media.RadialGradientBrush.GradientOriginProperty
-  id: GradientOriginProperty
+- uid: System.Windows.Media.RadialGradientBrush.RadiusXProperty
+  commentId: F:System.Windows.Media.RadialGradientBrush.RadiusXProperty
+  id: RadiusXProperty
   parent: System.Windows.Media.RadialGradientBrush
   langs:
   - csharp
   - vb
-  name: GradientOriginProperty
-  nameWithType: RadialGradientBrush.GradientOriginProperty
-  fullName: System.Windows.Media.RadialGradientBrush.GradientOriginProperty
+  name: RadiusXProperty
+  nameWithType: RadialGradientBrush.RadiusXProperty
+  fullName: System.Windows.Media.RadialGradientBrush.RadiusXProperty
   type: Field
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GradientOriginProperty
+    id: RadiusXProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 102
+    startLine: 128
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.GradientOrigin\" data-throw-if-not-resolved=\"false\"></xref> dependency\nproperty.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.RadiusX\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty GradientOriginProperty
+    content: public static readonly DependencyProperty RadiusXProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly GradientOriginProperty As DependencyProperty
+    content.vb: Public Shared ReadOnly RadiusXProperty As DependencyProperty
   modifiers.csharp:
   - public
   - static
@@ -374,21 +399,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: RadiusX
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 113
+    startLine: 142
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nGets or sets the horizontal radius of the outermost circle of the radial\ngradient.\n"
+  summary: "\nGets or sets the horizontal radius of the outer circle of the radial gradient.\n"
   example: []
   syntax:
     content: public double RadiusX { get; set; }
     parameters: []
     return:
       type: System.Double
+      description: "\nThe horizontal radius of the outermost circle of the radial gradient. The default\nis 0.5.\n"
     content.vb: Public Property RadiusX As Double
   overload: System.Windows.Media.RadialGradientBrush.RadiusX*
   modifiers.csharp:
@@ -397,35 +423,35 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: System.Windows.Media.RadialGradientBrush.RadiusXProperty
-  commentId: F:System.Windows.Media.RadialGradientBrush.RadiusXProperty
-  id: RadiusXProperty
+- uid: System.Windows.Media.RadialGradientBrush.RadiusYProperty
+  commentId: F:System.Windows.Media.RadialGradientBrush.RadiusYProperty
+  id: RadiusYProperty
   parent: System.Windows.Media.RadialGradientBrush
   langs:
   - csharp
   - vb
-  name: RadiusXProperty
-  nameWithType: RadialGradientBrush.RadiusXProperty
-  fullName: System.Windows.Media.RadialGradientBrush.RadiusXProperty
+  name: RadiusYProperty
+  nameWithType: RadialGradientBrush.RadiusYProperty
+  fullName: System.Windows.Media.RadialGradientBrush.RadiusYProperty
   type: Field
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: RadiusXProperty
+    id: RadiusYProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 123
+    startLine: 151
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.RadiusX\" data-throw-if-not-resolved=\"false\"></xref> dependency\nproperty.\n"
+  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.RadiusY\" data-throw-if-not-resolved=\"false\"></xref> dependency property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty RadiusXProperty
+    content: public static readonly DependencyProperty RadiusYProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly RadiusXProperty As DependencyProperty
+    content.vb: Public Shared ReadOnly RadiusYProperty As DependencyProperty
   modifiers.csharp:
   - public
   - static
@@ -448,99 +474,28 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: RadiusY
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 133
+    startLine: 165
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nGets or sets the vertical radius of the outermost circle of a radial gradient.\n"
+  summary: "\nGets or sets the vertical radius of the outer circle of a radial gradient.\n"
   example: []
   syntax:
     content: public double RadiusY { get; set; }
     parameters: []
     return:
       type: System.Double
+      description: "\nThe vertical radius of the outer circle of a radial gradient. The default is\n0.5.\n"
     content.vb: Public Property RadiusY As Double
   overload: System.Windows.Media.RadialGradientBrush.RadiusY*
   modifiers.csharp:
   - public
   - get
   - set
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.RadialGradientBrush.RadiusYProperty
-  commentId: F:System.Windows.Media.RadialGradientBrush.RadiusYProperty
-  id: RadiusYProperty
-  parent: System.Windows.Media.RadialGradientBrush
-  langs:
-  - csharp
-  - vb
-  name: RadiusYProperty
-  nameWithType: RadialGradientBrush.RadiusYProperty
-  fullName: System.Windows.Media.RadialGradientBrush.RadiusYProperty
-  type: Field
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: RadiusYProperty
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 143
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media
-  summary: "\nIdentifies the <xref href=\"System.Windows.Media.RadialGradientBrush.RadiusY\" data-throw-if-not-resolved=\"false\"></xref> dependency\nproperty.\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty RadiusYProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly RadiusYProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.Media.RadialGradientBrush.ConvertToCSSValues(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Media.RadialGradientBrush.ConvertToCSSValues(System.Windows.DependencyObject)
-  id: ConvertToCSSValues(System.Windows.DependencyObject)
-  parent: System.Windows.Media.RadialGradientBrush
-  langs:
-  - csharp
-  - vb
-  name: ConvertToCSSValues(DependencyObject)
-  nameWithType: RadialGradientBrush.ConvertToCSSValues(DependencyObject)
-  fullName: System.Windows.Media.RadialGradientBrush.ConvertToCSSValues(System.Windows.DependencyObject)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ConvertToCSSValues
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/RadialGradientBrush.cs
-    startLine: 192
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media
-  syntax:
-    content: public List<object> ConvertToCSSValues(DependencyObject parent)
-    parameters:
-    - id: parent
-      type: System.Windows.DependencyObject
-    return:
-      type: System.Collections.Generic.List{System.Object}
-    content.vb: Public Function ConvertToCSSValues(parent As DependencyObject) As List(Of Object)
-  overload: System.Windows.Media.RadialGradientBrush.ConvertToCSSValues*
-  modifiers.csharp:
-  - public
   modifiers.vb:
   - Public
 references:
@@ -574,66 +529,66 @@ references:
   name: GradientBrush
   nameWithType: GradientBrush
   fullName: System.Windows.Media.GradientBrush
-- uid: System.Windows.IHasAccessToPropertiesWhereItIsUsed
-  commentId: T:System.Windows.IHasAccessToPropertiesWhereItIsUsed
-  parent: System.Windows
-  name: IHasAccessToPropertiesWhereItIsUsed
-  nameWithType: IHasAccessToPropertiesWhereItIsUsed
-  fullName: System.Windows.IHasAccessToPropertiesWhereItIsUsed
-- uid: System.Windows.Media.GradientBrush.GradientStops
-  commentId: P:System.Windows.Media.GradientBrush.GradientStops
-  parent: System.Windows.Media.GradientBrush
-  name: GradientStops
-  nameWithType: GradientBrush.GradientStops
-  fullName: System.Windows.Media.GradientBrush.GradientStops
 - uid: System.Windows.Media.GradientBrush.GradientStopsProperty
   commentId: F:System.Windows.Media.GradientBrush.GradientStopsProperty
   parent: System.Windows.Media.GradientBrush
   name: GradientStopsProperty
   nameWithType: GradientBrush.GradientStopsProperty
   fullName: System.Windows.Media.GradientBrush.GradientStopsProperty
-- uid: System.Windows.Media.GradientBrush.MappingMode
-  commentId: P:System.Windows.Media.GradientBrush.MappingMode
+- uid: System.Windows.Media.GradientBrush.GradientStops
+  commentId: P:System.Windows.Media.GradientBrush.GradientStops
   parent: System.Windows.Media.GradientBrush
-  name: MappingMode
-  nameWithType: GradientBrush.MappingMode
-  fullName: System.Windows.Media.GradientBrush.MappingMode
+  name: GradientStops
+  nameWithType: GradientBrush.GradientStops
+  fullName: System.Windows.Media.GradientBrush.GradientStops
 - uid: System.Windows.Media.GradientBrush.MappingModeProperty
   commentId: F:System.Windows.Media.GradientBrush.MappingModeProperty
   parent: System.Windows.Media.GradientBrush
   name: MappingModeProperty
   nameWithType: GradientBrush.MappingModeProperty
   fullName: System.Windows.Media.GradientBrush.MappingModeProperty
-- uid: System.Windows.Media.GradientBrush.SpreadMethod
-  commentId: P:System.Windows.Media.GradientBrush.SpreadMethod
+- uid: System.Windows.Media.GradientBrush.MappingMode
+  commentId: P:System.Windows.Media.GradientBrush.MappingMode
   parent: System.Windows.Media.GradientBrush
-  name: SpreadMethod
-  nameWithType: GradientBrush.SpreadMethod
-  fullName: System.Windows.Media.GradientBrush.SpreadMethod
+  name: MappingMode
+  nameWithType: GradientBrush.MappingMode
+  fullName: System.Windows.Media.GradientBrush.MappingMode
 - uid: System.Windows.Media.GradientBrush.SpreadMethodProperty
   commentId: F:System.Windows.Media.GradientBrush.SpreadMethodProperty
   parent: System.Windows.Media.GradientBrush
   name: SpreadMethodProperty
   nameWithType: GradientBrush.SpreadMethodProperty
   fullName: System.Windows.Media.GradientBrush.SpreadMethodProperty
-- uid: System.Windows.Media.Brush.Opacity
-  commentId: P:System.Windows.Media.Brush.Opacity
-  parent: System.Windows.Media.Brush
-  name: Opacity
-  nameWithType: Brush.Opacity
-  fullName: System.Windows.Media.Brush.Opacity
+- uid: System.Windows.Media.GradientBrush.SpreadMethod
+  commentId: P:System.Windows.Media.GradientBrush.SpreadMethod
+  parent: System.Windows.Media.GradientBrush
+  name: SpreadMethod
+  nameWithType: GradientBrush.SpreadMethod
+  fullName: System.Windows.Media.GradientBrush.SpreadMethod
+- uid: System.Windows.Media.GradientBrush.ColorInterpolationModeProperty
+  commentId: F:System.Windows.Media.GradientBrush.ColorInterpolationModeProperty
+  parent: System.Windows.Media.GradientBrush
+  name: ColorInterpolationModeProperty
+  nameWithType: GradientBrush.ColorInterpolationModeProperty
+  fullName: System.Windows.Media.GradientBrush.ColorInterpolationModeProperty
+- uid: System.Windows.Media.GradientBrush.ColorInterpolationMode
+  commentId: P:System.Windows.Media.GradientBrush.ColorInterpolationMode
+  parent: System.Windows.Media.GradientBrush
+  name: ColorInterpolationMode
+  nameWithType: GradientBrush.ColorInterpolationMode
+  fullName: System.Windows.Media.GradientBrush.ColorInterpolationMode
 - uid: System.Windows.Media.Brush.OpacityProperty
   commentId: F:System.Windows.Media.Brush.OpacityProperty
   parent: System.Windows.Media.Brush
   name: OpacityProperty
   nameWithType: Brush.OpacityProperty
   fullName: System.Windows.Media.Brush.OpacityProperty
-- uid: System.Windows.Media.Brush.PropertiesWhereUsed
-  commentId: P:System.Windows.Media.Brush.PropertiesWhereUsed
+- uid: System.Windows.Media.Brush.Opacity
+  commentId: P:System.Windows.Media.Brush.Opacity
   parent: System.Windows.Media.Brush
-  name: PropertiesWhereUsed
-  nameWithType: Brush.PropertiesWhereUsed
-  fullName: System.Windows.Media.Brush.PropertiesWhereUsed
+  name: Opacity
+  nameWithType: Brush.Opacity
+  fullName: System.Windows.Media.Brush.Opacity
 - uid: System.Windows.Media.Brush.RelativeTransformProperty
   commentId: F:System.Windows.Media.Brush.RelativeTransformProperty
   parent: System.Windows.Media.Brush
@@ -783,184 +738,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetVisualStateValue(DependencyProperty)
-  nameWithType: DependencyObject.GetVisualStateValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetVisualStateValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetVisualStateValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetAnimationValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetAnimationValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetAnimationValue(DependencyProperty)
-  nameWithType: DependencyObject.GetAnimationValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -1011,6 +788,95 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetValue(DependencyPropertyKey, Object)
+  nameWithType: DependencyObject.SetValue(DependencyPropertyKey, Object)
+  fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  commentId: M:System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  parent: System.Windows.DependencyObject
+  name: OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  nameWithType: DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  fullName: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -1145,6 +1011,42 @@ references:
     name: DependencyProperty
     nameWithType: DependencyProperty
     fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  commentId: M:System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  parent: System.Windows.DependencyObject
+  name: ClearValue(DependencyPropertyKey)
+  nameWithType: DependencyObject.ClearValue(DependencyPropertyKey)
+  fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
   - name: )
     nameWithType: )
     fullName: )
@@ -1491,296 +1393,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Interactivity.DependencyObjectHelper
-  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors()
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors()
-  nameWithType: VisualTreeExtensions.GetVisualAncestors()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren()
-  nameWithType: VisualTreeExtensions.GetVisualChildren()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants()
-  nameWithType: VisualTreeExtensions.GetVisualDescendants()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings()
-  nameWithType: VisualTreeExtensions.GetVisualSiblings()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
@@ -1791,392 +1403,11 @@ references:
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
-- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors(DependencyObject)
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity.DependencyObjectHelper
-  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
-  parent: System.Windows.Interactivity
-  name: DependencyObjectHelper
-  nameWithType: DependencyObjectHelper
-  fullName: System.Windows.Interactivity.DependencyObjectHelper
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestors(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions
-  commentId: T:System.Windows.Controls.Primitives.VisualTreeExtensions
-  parent: System.Windows.Controls.Primitives
-  name: VisualTreeExtensions
-  nameWithType: VisualTreeExtensions
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildren(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendants(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblings(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity
-  commentId: N:System.Windows.Interactivity
-  name: System.Windows.Interactivity
-  nameWithType: System.Windows.Interactivity
-  fullName: System.Windows.Interactivity
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives
-  commentId: N:System.Windows.Controls.Primitives
-  name: System.Windows.Controls.Primitives
-  nameWithType: System.Windows.Controls.Primitives
-  fullName: System.Windows.Controls.Primitives
+- uid: System.Windows.Media.RadialGradientBrush
+  commentId: T:System.Windows.Media.RadialGradientBrush
+  name: RadialGradientBrush
+  nameWithType: RadialGradientBrush
+  fullName: System.Windows.Media.RadialGradientBrush
 - uid: System.Windows.Media.RadialGradientBrush.#ctor*
   commentId: Overload:System.Windows.Media.RadialGradientBrush.#ctor
   name: RadialGradientBrush
@@ -2188,23 +1419,15 @@ references:
   name: GradientStopCollection
   nameWithType: GradientStopCollection
   fullName: System.Windows.Media.GradientStopCollection
+- uid: System.Windows.Media.RadialGradientBrush.GradientOrigin
+  commentId: P:System.Windows.Media.RadialGradientBrush.GradientOrigin
+  isExternal: true
 - uid: System.Windows.Media.Color
   commentId: T:System.Windows.Media.Color
   parent: System.Windows.Media
   name: Color
   nameWithType: Color
   fullName: System.Windows.Media.Color
-- uid: System.Windows.Media.RadialGradientBrush.Center*
-  commentId: Overload:System.Windows.Media.RadialGradientBrush.Center
-  name: Center
-  nameWithType: RadialGradientBrush.Center
-  fullName: System.Windows.Media.RadialGradientBrush.Center
-- uid: System.Windows.Point
-  commentId: T:System.Windows.Point
-  parent: System.Windows
-  name: Point
-  nameWithType: Point
-  fullName: System.Windows.Point
 - uid: System.Windows.Media.RadialGradientBrush.Center
   commentId: P:System.Windows.Media.RadialGradientBrush.Center
   isExternal: true
@@ -2214,13 +1437,24 @@ references:
   name: DependencyProperty
   nameWithType: DependencyProperty
   fullName: System.Windows.DependencyProperty
+- uid: System.Windows.Point
+  commentId: T:System.Windows.Point
+  parent: System.Windows
+  name: Point
+  nameWithType: Point
+  fullName: System.Windows.Point
+- uid: System.Windows.Media.RadialGradientBrush.Center*
+  commentId: Overload:System.Windows.Media.RadialGradientBrush.Center
+  name: Center
+  nameWithType: RadialGradientBrush.Center
+  fullName: System.Windows.Media.RadialGradientBrush.Center
 - uid: System.Windows.Media.RadialGradientBrush.GradientOrigin*
   commentId: Overload:System.Windows.Media.RadialGradientBrush.GradientOrigin
   name: GradientOrigin
   nameWithType: RadialGradientBrush.GradientOrigin
   fullName: System.Windows.Media.RadialGradientBrush.GradientOrigin
-- uid: System.Windows.Media.RadialGradientBrush.GradientOrigin
-  commentId: P:System.Windows.Media.RadialGradientBrush.GradientOrigin
+- uid: System.Windows.Media.RadialGradientBrush.RadiusX
+  commentId: P:System.Windows.Media.RadialGradientBrush.RadiusX
   isExternal: true
 - uid: System.Windows.Media.RadialGradientBrush.RadiusX*
   commentId: Overload:System.Windows.Media.RadialGradientBrush.RadiusX
@@ -2234,107 +1468,11 @@ references:
   name: Double
   nameWithType: Double
   fullName: System.Double
-- uid: System.Windows.Media.RadialGradientBrush.RadiusX
-  commentId: P:System.Windows.Media.RadialGradientBrush.RadiusX
+- uid: System.Windows.Media.RadialGradientBrush.RadiusY
+  commentId: P:System.Windows.Media.RadialGradientBrush.RadiusY
   isExternal: true
 - uid: System.Windows.Media.RadialGradientBrush.RadiusY*
   commentId: Overload:System.Windows.Media.RadialGradientBrush.RadiusY
   name: RadiusY
   nameWithType: RadialGradientBrush.RadiusY
   fullName: System.Windows.Media.RadialGradientBrush.RadiusY
-- uid: System.Windows.Media.RadialGradientBrush.RadiusY
-  commentId: P:System.Windows.Media.RadialGradientBrush.RadiusY
-  isExternal: true
-- uid: System.Windows.Media.RadialGradientBrush.ConvertToCSSValues*
-  commentId: Overload:System.Windows.Media.RadialGradientBrush.ConvertToCSSValues
-  name: ConvertToCSSValues
-  nameWithType: RadialGradientBrush.ConvertToCSSValues
-  fullName: System.Windows.Media.RadialGradientBrush.ConvertToCSSValues
-- uid: System.Collections.Generic.List{System.Object}
-  commentId: T:System.Collections.Generic.List{System.Object}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.List`1
-  name: List<Object>
-  nameWithType: List<Object>
-  fullName: System.Collections.Generic.List<System.Object>
-  nameWithType.vb: List(Of Object)
-  fullName.vb: System.Collections.Generic.List(Of System.Object)
-  name.vb: List(Of Object)
-  spec.csharp:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic.List`1
-  commentId: T:System.Collections.Generic.List`1
-  isExternal: true
-  name: List<T>
-  nameWithType: List<T>
-  fullName: System.Collections.Generic.List<T>
-  nameWithType.vb: List(Of T)
-  fullName.vb: System.Collections.Generic.List(Of T)
-  name.vb: List(Of T)
-  spec.csharp:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    nameWithType: List
-    fullName: System.Collections.Generic.List
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic

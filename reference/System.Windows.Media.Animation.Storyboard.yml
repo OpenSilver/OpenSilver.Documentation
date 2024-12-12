@@ -5,9 +5,11 @@ items:
   id: Storyboard
   parent: System.Windows.Media.Animation
   children:
+  - System.Windows.Media.Animation.Storyboard.#ctor
   - System.Windows.Media.Animation.Storyboard.Begin
   - System.Windows.Media.Animation.Storyboard.Children
   - System.Windows.Media.Animation.Storyboard.GetCurrentState
+  - System.Windows.Media.Animation.Storyboard.GetCurrentTime
   - System.Windows.Media.Animation.Storyboard.GetTarget(System.Windows.Media.Animation.Timeline)
   - System.Windows.Media.Animation.Storyboard.GetTargetName(System.Windows.Media.Animation.Timeline)
   - System.Windows.Media.Animation.Storyboard.GetTargetProperty(System.Windows.Media.Animation.Timeline)
@@ -20,7 +22,6 @@ items:
   - System.Windows.Media.Animation.Storyboard.SetTargetProperty(System.Windows.Media.Animation.Timeline,System.Windows.PropertyPath)
   - System.Windows.Media.Animation.Storyboard.SkipToFill
   - System.Windows.Media.Animation.Storyboard.Stop
-  - System.Windows.Media.Animation.Storyboard.Stop(System.Windows.FrameworkElement)
   - System.Windows.Media.Animation.Storyboard.TargetNameProperty
   - System.Windows.Media.Animation.Storyboard.TargetProperty
   - System.Windows.Media.Animation.Storyboard.TargetPropertyProperty
@@ -34,53 +35,53 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Storyboard
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 29
+    startLine: 25
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
   summary: "\nControls animations with a timeline, and provides object and property targeting\ninformation for its child animations.\n"
   example: []
   syntax:
-    content: 'public sealed class Storyboard : Timeline'
+    content: 'public sealed class Storyboard : Timeline, IDependencyObject'
     content.vb: >-
       Public NotInheritable Class Storyboard
           Inherits Timeline
+          Implements IDependencyObject
   inheritance:
   - System.Object
   - System.Windows.DependencyObject
   - System.Windows.Media.Animation.Timeline
   inheritedMembers:
-  - System.Windows.Media.Animation.Timeline.Duration
-  - System.Windows.Media.Animation.Timeline.DurationProperty
-  - System.Windows.Media.Animation.Timeline.RepeatBehavior
-  - System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
-  - System.Windows.Media.Animation.Timeline.BeginTime
-  - System.Windows.Media.Animation.Timeline.BeginTimeProperty
   - System.Windows.Media.Animation.Timeline.Completed
-  - System.Windows.Media.Animation.Timeline.GetNaturalDurationCore
-  - System.Windows.Media.Animation.Timeline.SpeedRatioProperty
-  - System.Windows.Media.Animation.Timeline.SpeedRatio
   - System.Windows.Media.Animation.Timeline.AutoReverseProperty
   - System.Windows.Media.Animation.Timeline.AutoReverse
+  - System.Windows.Media.Animation.Timeline.BeginTimeProperty
+  - System.Windows.Media.Animation.Timeline.BeginTime
+  - System.Windows.Media.Animation.Timeline.DurationProperty
+  - System.Windows.Media.Animation.Timeline.Duration
   - System.Windows.Media.Animation.Timeline.FillBehaviorProperty
   - System.Windows.Media.Animation.Timeline.FillBehavior
+  - System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
+  - System.Windows.Media.Animation.Timeline.RepeatBehavior
+  - System.Windows.Media.Animation.Timeline.SpeedRatioProperty
+  - System.Windows.Media.Animation.Timeline.SpeedRatio
+  - System.Windows.Media.Animation.Timeline.GetNaturalDurationCore
   - System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetCurrentValue(System.Windows.DependencyProperty,System.Object)
   - System.Windows.DependencyObject.ReadLocalValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  - System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  - System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
+  - System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  - System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
   - System.Windows.DependencyObject.CoerceValue(System.Windows.DependencyProperty)
   - System.Windows.DependencyObject.Dispatcher
   - System.Windows.DependencyObject.INTERNAL_OnAttachedToVisualTree
   - System.Windows.DependencyObject.INTERNAL_OnDetachedFromVisualTree
   - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyProperty)
+  - System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
   - System.Windows.DependencyObject.CheckAccess
   - System.Windows.DependencyObject.GetAnimationBaseValue(System.Windows.DependencyProperty)
   - System.Object.Equals(System.Object)
@@ -90,17 +91,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
   modifiers.csharp:
   - public
   - sealed
@@ -109,6 +99,38 @@ items:
   - Public
   - NotInheritable
   - Class
+- uid: System.Windows.Media.Animation.Storyboard.#ctor
+  commentId: M:System.Windows.Media.Animation.Storyboard.#ctor
+  id: '#ctor'
+  parent: System.Windows.Media.Animation.Storyboard
+  langs:
+  - csharp
+  - vb
+  name: Storyboard()
+  nameWithType: Storyboard.Storyboard()
+  fullName: System.Windows.Media.Animation.Storyboard.Storyboard()
+  type: Constructor
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: .ctor
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+    startLine: 34
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Media.Animation.Storyboard\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
+  example: []
+  syntax:
+    content: public Storyboard()
+    content.vb: Public Sub New
+  overload: System.Windows.Media.Animation.Storyboard.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
 - uid: System.Windows.Media.Animation.Storyboard.Children
   commentId: P:System.Windows.Media.Animation.Storyboard.Children
   id: Children
@@ -123,21 +145,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Children
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 55
+    startLine: 43
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nGets the collection of child Timeline objects.\n"
+  summary: "\nGets the collection of child <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> objects.\n"
   example: []
   syntax:
     content: public TimelineCollection Children { get; }
     parameters: []
     return:
       type: System.Windows.Media.Animation.TimelineCollection
+      description: "\nThe collection of child <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> objects. The\ndefault is an empty collection.\n"
     content.vb: Public ReadOnly Property Children As TimelineCollection
   overload: System.Windows.Media.Animation.Storyboard.Children*
   modifiers.csharp:
@@ -145,6 +168,43 @@ items:
   - get
   modifiers.vb:
   - Public
+  - ReadOnly
+- uid: System.Windows.Media.Animation.Storyboard.TargetNameProperty
+  commentId: F:System.Windows.Media.Animation.Storyboard.TargetNameProperty
+  id: TargetNameProperty
+  parent: System.Windows.Media.Animation.Storyboard
+  langs:
+  - csharp
+  - vb
+  name: TargetNameProperty
+  nameWithType: Storyboard.TargetNameProperty
+  fullName: System.Windows.Media.Animation.Storyboard.TargetNameProperty
+  type: Field
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: TargetNameProperty
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+    startLine: 48
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nIdentifies the Storyboard.TargetName attached property.\n"
+  example: []
+  syntax:
+    content: public static readonly DependencyProperty TargetNameProperty
+    return:
+      type: System.Windows.DependencyProperty
+    content.vb: Public Shared ReadOnly TargetNameProperty As DependencyProperty
+  modifiers.csharp:
+  - public
+  - static
+  - readonly
+  modifiers.vb:
+  - Public
+  - Shared
   - ReadOnly
 - uid: System.Windows.Media.Animation.Storyboard.GetTargetName(System.Windows.Media.Animation.Timeline)
   commentId: M:System.Windows.Media.Animation.Storyboard.GetTargetName(System.Windows.Media.Animation.Timeline)
@@ -160,7 +220,7 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetTargetName
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
@@ -168,17 +228,17 @@ items:
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nGets the value of the Storyboard.TargetName XAML attached property from a\ntarget element.\n"
+  summary: "\nGets the Storyboard.TargetName of the specified <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> object.\n"
   example: []
   syntax:
     content: public static string GetTargetName(Timeline element)
     parameters:
     - id: element
       type: System.Windows.Media.Animation.Timeline
-      description: The target element from which to get the value.
+      description: "\nThe <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> object to get the target name from.\n"
     return:
       type: System.String
-      description: The Storyboard.TargetName value of the target element.
+      description: "\nThe string name of the target object.\n"
     content.vb: Public Shared Function GetTargetName(element As Timeline) As String
   overload: System.Windows.Media.Animation.Storyboard.GetTargetName*
   modifiers.csharp:
@@ -201,25 +261,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetTargetName
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 78
+    startLine: 76
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nSets the value of the Storyboard.TargetName XAML attached property for a\ntarget element.\n"
+  summary: "\nCauses the specified <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> to target the object\nwith the specified name.\n"
   example: []
   syntax:
     content: public static void SetTargetName(Timeline element, string name)
     parameters:
     - id: element
       type: System.Windows.Media.Animation.Timeline
-      description: The target element to set the value for.
+      description: "\nThe timeline that targets the specified dependency object.\n"
     - id: name
       type: System.String
-      description: "\nThe Storyboard.TargetName value of the target element to set. This should\ncorrespond to an existing Name or x:Name value on the element that the animation\ntargets.\n"
+      description: "\nThe name of the object to target.\n"
     content.vb: Public Shared Sub SetTargetName(element As Timeline, name As String)
   overload: System.Windows.Media.Animation.Storyboard.SetTargetName*
   modifiers.csharp:
@@ -228,35 +288,35 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: System.Windows.Media.Animation.Storyboard.TargetNameProperty
-  commentId: F:System.Windows.Media.Animation.Storyboard.TargetNameProperty
-  id: TargetNameProperty
+- uid: System.Windows.Media.Animation.Storyboard.TargetPropertyProperty
+  commentId: F:System.Windows.Media.Animation.Storyboard.TargetPropertyProperty
+  id: TargetPropertyProperty
   parent: System.Windows.Media.Animation.Storyboard
   langs:
   - csharp
   - vb
-  name: TargetNameProperty
-  nameWithType: Storyboard.TargetNameProperty
-  fullName: System.Windows.Media.Animation.Storyboard.TargetNameProperty
+  name: TargetPropertyProperty
+  nameWithType: Storyboard.TargetPropertyProperty
+  fullName: System.Windows.Media.Animation.Storyboard.TargetPropertyProperty
   type: Field
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: TargetNameProperty
+    id: TargetPropertyProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 85
+    startLine: 81
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nIdentifies the Storyboard.TargetName XAML attached property.\n"
+  summary: "\nIdentifies the Storyboard.TargetProperty attached property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty TargetNameProperty
+    content: public static readonly DependencyProperty TargetPropertyProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly TargetNameProperty As DependencyProperty
+    content.vb: Public Shared ReadOnly TargetPropertyProperty As DependencyProperty
   modifiers.csharp:
   - public
   - static
@@ -279,27 +339,31 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetTargetProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 94
+    startLine: 100
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nGets the value of the Storyboard.TargetProperty XAML attached property from\na target element.\n"
+  summary: "\nGets the Storyboard.TargetProperty of the specified <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> object.\n"
   example: []
   syntax:
     content: public static PropertyPath GetTargetProperty(Timeline element)
     parameters:
     - id: element
       type: System.Windows.Media.Animation.Timeline
-      description: The target element from which to get the value.
+      description: "\nThe <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> object to get the target property from.\n"
     return:
       type: System.Windows.PropertyPath
-      description: The Storyboard.TargetProperty value of the target element.
+      description: "\nThe property path information for the animated property.\n"
     content.vb: Public Shared Function GetTargetProperty(element As Timeline) As PropertyPath
   overload: System.Windows.Media.Animation.Storyboard.GetTargetProperty*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nelement is null.\n"
   modifiers.csharp:
   - public
   - static
@@ -320,62 +384,66 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetTargetProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 120
+    startLine: 115
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nSets the value of the Storyboard.TargetProperty XAML attached property for\na target element.\n"
+  summary: "\nCauses the specified <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> to target the specified\ndependency property.\n"
   example: []
   syntax:
     content: public static void SetTargetProperty(Timeline element, PropertyPath value)
     parameters:
     - id: element
       type: System.Windows.Media.Animation.Timeline
-      description: The target element for which to set the value.
+      description: "\nThe timeline with which to associate the specified dependency property.\n"
     - id: value
       type: System.Windows.PropertyPath
-      description: ''
+      description: "\nA path that describe the dependency property to be animated.\n"
     content.vb: Public Shared Sub SetTargetProperty(element As Timeline, value As PropertyPath)
   overload: System.Windows.Media.Animation.Storyboard.SetTargetProperty*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nOne or more of the parameters is null.\n"
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: System.Windows.Media.Animation.Storyboard.TargetPropertyProperty
-  commentId: F:System.Windows.Media.Animation.Storyboard.TargetPropertyProperty
-  id: TargetPropertyProperty
+- uid: System.Windows.Media.Animation.Storyboard.TargetProperty
+  commentId: F:System.Windows.Media.Animation.Storyboard.TargetProperty
+  id: TargetProperty
   parent: System.Windows.Media.Animation.Storyboard
   langs:
   - csharp
   - vb
-  name: TargetPropertyProperty
-  nameWithType: Storyboard.TargetPropertyProperty
-  fullName: System.Windows.Media.Animation.Storyboard.TargetPropertyProperty
+  name: TargetProperty
+  nameWithType: Storyboard.TargetProperty
+  fullName: System.Windows.Media.Animation.Storyboard.TargetProperty
   type: Field
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: TargetPropertyProperty
+    id: TargetProperty
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 128
+    startLine: 120
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nIdentifies the Storyboard.TargetProperty XAML attached property.\n"
+  summary: "\nIdentifies the Storyboard.TargetName attached property.\n"
   example: []
   syntax:
-    content: public static readonly DependencyProperty TargetPropertyProperty
+    content: public static readonly DependencyProperty TargetProperty
     return:
       type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly TargetPropertyProperty As DependencyProperty
+    content.vb: Public Shared ReadOnly TargetProperty As DependencyProperty
   modifiers.csharp:
   - public
   - static
@@ -384,84 +452,6 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: System.Windows.Media.Animation.Storyboard.Begin
-  commentId: M:System.Windows.Media.Animation.Storyboard.Begin
-  id: Begin
-  parent: System.Windows.Media.Animation.Storyboard
-  langs:
-  - csharp
-  - vb
-  name: Begin()
-  nameWithType: Storyboard.Begin()
-  fullName: System.Windows.Media.Animation.Storyboard.Begin()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Begin
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 168
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Animation
-  summary: "\nInitiates the set of animations associated with the storyboard.\n"
-  example: []
-  syntax:
-    content: public void Begin()
-    content.vb: Public Sub Begin
-  overload: System.Windows.Media.Animation.Storyboard.Begin*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick(System.TimeSpan)
-  commentId: M:System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick(System.TimeSpan)
-  id: SeekAlignedToLastTick(System.TimeSpan)
-  parent: System.Windows.Media.Animation.Storyboard
-  langs:
-  - csharp
-  - vb
-  name: SeekAlignedToLastTick(TimeSpan)
-  nameWithType: Storyboard.SeekAlignedToLastTick(TimeSpan)
-  fullName: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick(System.TimeSpan)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: SeekAlignedToLastTick
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 294
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Animation
-  summary: "\nMoves the storyboard to the specified animation position immediately(synchronously).\n"
-  example: []
-  syntax:
-    content: >-
-      [NotImplemented]
-
-      public void SeekAlignedToLastTick(TimeSpan offset)
-    parameters:
-    - id: offset
-      type: System.TimeSpan
-      description: "\nA positive or negative time value that describes the amount by which the timeline should move\nforward or backward from the beginning of the animation. By using the TimeSpan Parse behavior,\na TimeSpan can be specified as a string in the following format (in this syntax, the [] characters\ndenote optional components of the string, but the quotes, colons, and periods are all a literal part of the syntax):\n&quot;[days.]hours:minutes:seconds[.fractionalSeconds]&quot;\n- or -\n&quot;days&quot;\n"
-    content.vb: >-
-      <NotImplemented>
-
-      Public Sub SeekAlignedToLastTick(offset As TimeSpan)
-  overload: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: System.Windows.Media.Animation.Storyboard.GetTarget(System.Windows.Media.Animation.Timeline)
   commentId: M:System.Windows.Media.Animation.Storyboard.GetTarget(System.Windows.Media.Animation.Timeline)
   id: GetTarget(System.Windows.Media.Animation.Timeline)
@@ -476,25 +466,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetTarget
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 303
+    startLine: 137
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nGets the value of the Storyboard.Target XAML attached property from a\ntarget element.\n"
+  summary: "\nGets the value of the Storyboard.Target attached property from a\ntarget element.\n"
   example: []
   syntax:
     content: public static DependencyObject GetTarget(Timeline element)
     parameters:
     - id: element
       type: System.Windows.Media.Animation.Timeline
-      description: The target element from which to get the value.
+      description: "\nThe target element from which to get the value.\n"
     return:
       type: System.Windows.DependencyObject
-      description: The Storyboard.Target value of the target element.
+      description: "\nThe Storyboard.Target value of the target element.\n"
     content.vb: Public Shared Function GetTarget(element As Timeline) As DependencyObject
   overload: System.Windows.Media.Animation.Storyboard.GetTarget*
   modifiers.csharp:
@@ -517,131 +507,65 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: SetTarget
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 312
+    startLine: 151
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nCauses the specified Timeline to target the specified object.\n"
+  summary: "\nCauses the specified <xref href=\"System.Windows.Media.Animation.Timeline\" data-throw-if-not-resolved=\"false\"></xref> to target the specified object.\n"
   example: []
   syntax:
     content: public static void SetTarget(Timeline element, DependencyObject target)
     parameters:
     - id: element
       type: System.Windows.Media.Animation.Timeline
-      description: The timeline that targets the specified dependency object.
+      description: "\nThe timeline that targets the specified dependency object.\n"
     - id: target
       type: System.Windows.DependencyObject
-      description: The actual instance of the object to target.
+      description: "\nThe actual instance of the object to target.\n"
     content.vb: Public Shared Sub SetTarget(element As Timeline, target As DependencyObject)
   overload: System.Windows.Media.Animation.Storyboard.SetTarget*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: "\nOne or more of the parameters is null.\n"
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: System.Windows.Media.Animation.Storyboard.TargetProperty
-  commentId: F:System.Windows.Media.Animation.Storyboard.TargetProperty
-  id: TargetProperty
+- uid: System.Windows.Media.Animation.Storyboard.Begin
+  commentId: M:System.Windows.Media.Animation.Storyboard.Begin
+  id: Begin
   parent: System.Windows.Media.Animation.Storyboard
   langs:
   - csharp
   - vb
-  name: TargetProperty
-  nameWithType: Storyboard.TargetProperty
-  fullName: System.Windows.Media.Animation.Storyboard.TargetProperty
-  type: Field
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: TargetProperty
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 319
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Animation
-  summary: "\nIdentifies the Storyboard.TargetName XAML attached property.\n"
-  example: []
-  syntax:
-    content: public static readonly DependencyProperty TargetProperty
-    return:
-      type: System.Windows.DependencyProperty
-    content.vb: Public Shared ReadOnly TargetProperty As DependencyProperty
-  modifiers.csharp:
-  - public
-  - static
-  - readonly
-  modifiers.vb:
-  - Public
-  - Shared
-  - ReadOnly
-- uid: System.Windows.Media.Animation.Storyboard.Stop(System.Windows.FrameworkElement)
-  commentId: M:System.Windows.Media.Animation.Storyboard.Stop(System.Windows.FrameworkElement)
-  id: Stop(System.Windows.FrameworkElement)
-  parent: System.Windows.Media.Animation.Storyboard
-  langs:
-  - csharp
-  - vb
-  name: Stop(FrameworkElement)
-  nameWithType: Storyboard.Stop(FrameworkElement)
-  fullName: System.Windows.Media.Animation.Storyboard.Stop(System.Windows.FrameworkElement)
+  name: Begin()
+  nameWithType: Storyboard.Begin()
+  fullName: System.Windows.Media.Animation.Storyboard.Begin()
   type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Stop
+    id: Begin
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 358
+    startLine: 156
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
-  summary: "\nStops the storyboard.\n"
+  summary: "\nInitiates the set of animations associated with the storyboard.\n"
   example: []
   syntax:
-    content: public void Stop(FrameworkElement frameworkElement)
-    parameters:
-    - id: frameworkElement
-      type: System.Windows.FrameworkElement
-    content.vb: Public Sub Stop(frameworkElement As FrameworkElement)
-  overload: System.Windows.Media.Animation.Storyboard.Stop*
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.Animation.Storyboard.Stop
-  commentId: M:System.Windows.Media.Animation.Storyboard.Stop
-  id: Stop
-  parent: System.Windows.Media.Animation.Storyboard
-  langs:
-  - csharp
-  - vb
-  name: Stop()
-  nameWithType: Storyboard.Stop()
-  fullName: System.Windows.Media.Animation.Storyboard.Stop()
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Stop
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 363
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Animation
-  syntax:
-    content: public void Stop()
-    content.vb: Public Sub Stop
-  overload: System.Windows.Media.Animation.Storyboard.Stop*
+    content: public void Begin()
+    content.vb: Public Sub Begin
+  overload: System.Windows.Media.Animation.Storyboard.Begin*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -660,113 +584,58 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetCurrentState
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 549
+    startLine: 183
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
+  summary: "\nGets the clock state of the storyboard.\n"
+  example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public ClockState GetCurrentState()
+    content: public ClockState GetCurrentState()
     return:
       type: System.Windows.Media.Animation.ClockState
-    content.vb: >-
-      <NotImplemented>
-
-      Public Function GetCurrentState As ClockState
+      description: "\nOne of the enumeration values: <xref href=\"System.Windows.Media.Animation.ClockState.Active\" data-throw-if-not-resolved=\"false\"></xref>,\n<xref href=\"System.Windows.Media.Animation.ClockState.Filling\" data-throw-if-not-resolved=\"false\"></xref>, or <xref href=\"System.Windows.Media.Animation.ClockState.Stopped\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function GetCurrentState As ClockState
   overload: System.Windows.Media.Animation.Storyboard.GetCurrentState*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: System.Windows.Media.Animation.Storyboard.SkipToFill
-  commentId: M:System.Windows.Media.Animation.Storyboard.SkipToFill
-  id: SkipToFill
+- uid: System.Windows.Media.Animation.Storyboard.GetCurrentTime
+  commentId: M:System.Windows.Media.Animation.Storyboard.GetCurrentTime
+  id: GetCurrentTime
   parent: System.Windows.Media.Animation.Storyboard
   langs:
   - csharp
   - vb
-  name: SkipToFill()
-  nameWithType: Storyboard.SkipToFill()
-  fullName: System.Windows.Media.Animation.Storyboard.SkipToFill()
+  name: GetCurrentTime()
+  nameWithType: Storyboard.GetCurrentTime()
+  fullName: System.Windows.Media.Animation.Storyboard.GetCurrentTime()
   type: Method
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: SkipToFill
+    id: GetCurrentTime
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 555
+    startLine: 191
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
+  summary: "\nGets the current time of the storyboard.\n"
+  example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public void SkipToFill()
-    content.vb: >-
-      <NotImplemented>
-
-      Public Sub SkipToFill
-  overload: System.Windows.Media.Animation.Storyboard.SkipToFill*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: System.Windows.Media.Animation.Storyboard.Seek(System.TimeSpan)
-  commentId: M:System.Windows.Media.Animation.Storyboard.Seek(System.TimeSpan)
-  id: Seek(System.TimeSpan)
-  parent: System.Windows.Media.Animation.Storyboard
-  langs:
-  - csharp
-  - vb
-  name: Seek(TimeSpan)
-  nameWithType: Storyboard.Seek(TimeSpan)
-  fullName: System.Windows.Media.Animation.Storyboard.Seek(System.TimeSpan)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Seek
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 561
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Media.Animation
-  syntax:
-    content: >-
-      [NotImplemented]
-
-      public void Seek(TimeSpan offset)
-    parameters:
-    - id: offset
+    content: public TimeSpan GetCurrentTime()
+    return:
       type: System.TimeSpan
-    content.vb: >-
-      <NotImplemented>
-
-      Public Sub Seek(offset As TimeSpan)
-  overload: System.Windows.Media.Animation.Storyboard.Seek*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
+      description: "\nThe current time of the storyboard, or null if the storyboard&apos;s clock is <xref href=\"System.Windows.Media.Animation.ClockState.Stopped\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function GetCurrentTime As TimeSpan
+  overload: System.Windows.Media.Animation.Storyboard.GetCurrentTime*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -785,28 +654,20 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Pause
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 567
+    startLine: 196
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
+  summary: "\nPauses the animation clock associated with the storyboard.\n"
+  example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public void Pause()
-    content.vb: >-
-      <NotImplemented>
-
-      Public Sub Pause
+    content: public void Pause()
+    content.vb: Public Sub Pause
   overload: System.Windows.Media.Animation.Storyboard.Pause*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -825,30 +686,156 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Resume
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
-    startLine: 576
+    startLine: 201
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media.Animation
   summary: "\nResumes the animation clock, or run-time state, associated with the storyboard.\n"
   example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public void Resume()
-    content.vb: >-
-      <NotImplemented>
-
-      Public Sub Resume
+    content: public void Resume()
+    content.vb: Public Sub Resume
   overload: System.Windows.Media.Animation.Storyboard.Resume*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Animation.Storyboard.Seek(System.TimeSpan)
+  commentId: M:System.Windows.Media.Animation.Storyboard.Seek(System.TimeSpan)
+  id: Seek(System.TimeSpan)
+  parent: System.Windows.Media.Animation.Storyboard
+  langs:
+  - csharp
+  - vb
+  name: Seek(TimeSpan)
+  nameWithType: Storyboard.Seek(TimeSpan)
+  fullName: System.Windows.Media.Animation.Storyboard.Seek(System.TimeSpan)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Seek
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+    startLine: 215
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nMoves the storyboard to the specified animation position. The storyboard performs\nthe requested seek when the next clock tick occurs.\n"
+  example: []
+  syntax:
+    content: public void Seek(TimeSpan offset)
+    parameters:
+    - id: offset
+      type: System.TimeSpan
+      description: "\nA positive or negative time value that describes the amount by which the timeline\nshould move forward or backward from the beginning of the animation. By using\nthe <xref href=\"System.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> Parse behavior, a <xref href=\"System.TimeSpan\" data-throw-if-not-resolved=\"false\"></xref> can be specified \nas a string in the following format (in this syntax, the [] characters denote optional \ncomponents of the string, but the quotes, colons, and periods are all a literal part of\nthe syntax):&quot;[days.]hours:minutes:seconds[.fractionalSeconds]&quot;- or -&quot;days&quot;\n"
+    content.vb: Public Sub Seek(offset As TimeSpan)
+  overload: System.Windows.Media.Animation.Storyboard.Seek*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick(System.TimeSpan)
+  commentId: M:System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick(System.TimeSpan)
+  id: SeekAlignedToLastTick(System.TimeSpan)
+  parent: System.Windows.Media.Animation.Storyboard
+  langs:
+  - csharp
+  - vb
+  name: SeekAlignedToLastTick(TimeSpan)
+  nameWithType: Storyboard.SeekAlignedToLastTick(TimeSpan)
+  fullName: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick(System.TimeSpan)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SeekAlignedToLastTick
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+    startLine: 229
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nMoves the storyboard to the specified animation position immediately(synchronously).\n"
+  example: []
+  syntax:
+    content: public void SeekAlignedToLastTick(TimeSpan offset)
+    parameters:
+    - id: offset
+      type: System.TimeSpan
+      description: "\nA positive or negative time value that describes the amount by which the timeline should move\nforward or backward from the beginning of the animation. By using the TimeSpan Parse behavior,\na TimeSpan can be specified as a string in the following format (in this syntax, the [] characters\ndenote optional components of the string, but the quotes, colons, and periods are all a literal part of the syntax):\n&quot;[days.]hours:minutes:seconds[.fractionalSeconds]&quot;\n- or -\n&quot;days&quot;\n"
+    content.vb: Public Sub SeekAlignedToLastTick(offset As TimeSpan)
+  overload: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Animation.Storyboard.SkipToFill
+  commentId: M:System.Windows.Media.Animation.Storyboard.SkipToFill
+  id: SkipToFill
+  parent: System.Windows.Media.Animation.Storyboard
+  langs:
+  - csharp
+  - vb
+  name: SkipToFill()
+  nameWithType: Storyboard.SkipToFill()
+  fullName: System.Windows.Media.Animation.Storyboard.SkipToFill()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SkipToFill
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+    startLine: 234
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nAdvances the current time of the storyboard&apos;s clock to the end of its active period.\n"
+  example: []
+  syntax:
+    content: public void SkipToFill()
+    content.vb: Public Sub SkipToFill
+  overload: System.Windows.Media.Animation.Storyboard.SkipToFill*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Animation.Storyboard.Stop
+  commentId: M:System.Windows.Media.Animation.Storyboard.Stop
+  id: Stop
+  parent: System.Windows.Media.Animation.Storyboard
+  langs:
+  - csharp
+  - vb
+  name: Stop()
+  nameWithType: Storyboard.Stop()
+  fullName: System.Windows.Media.Animation.Storyboard.Stop()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Stop
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media.Animation/Storyboard.cs
+    startLine: 239
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media.Animation
+  summary: "\nStops the storyboard.\n"
+  example: []
+  syntax:
+    content: public void Stop()
+    content.vb: Public Sub Stop
+  overload: System.Windows.Media.Animation.Storyboard.Stop*
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -878,48 +865,84 @@ references:
   name: Timeline
   nameWithType: Timeline
   fullName: System.Windows.Media.Animation.Timeline
-- uid: System.Windows.Media.Animation.Timeline.Duration
-  commentId: P:System.Windows.Media.Animation.Timeline.Duration
-  parent: System.Windows.Media.Animation.Timeline
-  name: Duration
-  nameWithType: Timeline.Duration
-  fullName: System.Windows.Media.Animation.Timeline.Duration
-- uid: System.Windows.Media.Animation.Timeline.DurationProperty
-  commentId: F:System.Windows.Media.Animation.Timeline.DurationProperty
-  parent: System.Windows.Media.Animation.Timeline
-  name: DurationProperty
-  nameWithType: Timeline.DurationProperty
-  fullName: System.Windows.Media.Animation.Timeline.DurationProperty
-- uid: System.Windows.Media.Animation.Timeline.RepeatBehavior
-  commentId: P:System.Windows.Media.Animation.Timeline.RepeatBehavior
-  parent: System.Windows.Media.Animation.Timeline
-  name: RepeatBehavior
-  nameWithType: Timeline.RepeatBehavior
-  fullName: System.Windows.Media.Animation.Timeline.RepeatBehavior
-- uid: System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
-  commentId: F:System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
-  parent: System.Windows.Media.Animation.Timeline
-  name: RepeatBehaviorProperty
-  nameWithType: Timeline.RepeatBehaviorProperty
-  fullName: System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
-- uid: System.Windows.Media.Animation.Timeline.BeginTime
-  commentId: P:System.Windows.Media.Animation.Timeline.BeginTime
-  parent: System.Windows.Media.Animation.Timeline
-  name: BeginTime
-  nameWithType: Timeline.BeginTime
-  fullName: System.Windows.Media.Animation.Timeline.BeginTime
-- uid: System.Windows.Media.Animation.Timeline.BeginTimeProperty
-  commentId: F:System.Windows.Media.Animation.Timeline.BeginTimeProperty
-  parent: System.Windows.Media.Animation.Timeline
-  name: BeginTimeProperty
-  nameWithType: Timeline.BeginTimeProperty
-  fullName: System.Windows.Media.Animation.Timeline.BeginTimeProperty
 - uid: System.Windows.Media.Animation.Timeline.Completed
   commentId: E:System.Windows.Media.Animation.Timeline.Completed
   parent: System.Windows.Media.Animation.Timeline
   name: Completed
   nameWithType: Timeline.Completed
   fullName: System.Windows.Media.Animation.Timeline.Completed
+- uid: System.Windows.Media.Animation.Timeline.AutoReverseProperty
+  commentId: F:System.Windows.Media.Animation.Timeline.AutoReverseProperty
+  parent: System.Windows.Media.Animation.Timeline
+  name: AutoReverseProperty
+  nameWithType: Timeline.AutoReverseProperty
+  fullName: System.Windows.Media.Animation.Timeline.AutoReverseProperty
+- uid: System.Windows.Media.Animation.Timeline.AutoReverse
+  commentId: P:System.Windows.Media.Animation.Timeline.AutoReverse
+  parent: System.Windows.Media.Animation.Timeline
+  name: AutoReverse
+  nameWithType: Timeline.AutoReverse
+  fullName: System.Windows.Media.Animation.Timeline.AutoReverse
+- uid: System.Windows.Media.Animation.Timeline.BeginTimeProperty
+  commentId: F:System.Windows.Media.Animation.Timeline.BeginTimeProperty
+  parent: System.Windows.Media.Animation.Timeline
+  name: BeginTimeProperty
+  nameWithType: Timeline.BeginTimeProperty
+  fullName: System.Windows.Media.Animation.Timeline.BeginTimeProperty
+- uid: System.Windows.Media.Animation.Timeline.BeginTime
+  commentId: P:System.Windows.Media.Animation.Timeline.BeginTime
+  parent: System.Windows.Media.Animation.Timeline
+  name: BeginTime
+  nameWithType: Timeline.BeginTime
+  fullName: System.Windows.Media.Animation.Timeline.BeginTime
+- uid: System.Windows.Media.Animation.Timeline.DurationProperty
+  commentId: F:System.Windows.Media.Animation.Timeline.DurationProperty
+  parent: System.Windows.Media.Animation.Timeline
+  name: DurationProperty
+  nameWithType: Timeline.DurationProperty
+  fullName: System.Windows.Media.Animation.Timeline.DurationProperty
+- uid: System.Windows.Media.Animation.Timeline.Duration
+  commentId: P:System.Windows.Media.Animation.Timeline.Duration
+  parent: System.Windows.Media.Animation.Timeline
+  name: Duration
+  nameWithType: Timeline.Duration
+  fullName: System.Windows.Media.Animation.Timeline.Duration
+- uid: System.Windows.Media.Animation.Timeline.FillBehaviorProperty
+  commentId: F:System.Windows.Media.Animation.Timeline.FillBehaviorProperty
+  parent: System.Windows.Media.Animation.Timeline
+  name: FillBehaviorProperty
+  nameWithType: Timeline.FillBehaviorProperty
+  fullName: System.Windows.Media.Animation.Timeline.FillBehaviorProperty
+- uid: System.Windows.Media.Animation.Timeline.FillBehavior
+  commentId: P:System.Windows.Media.Animation.Timeline.FillBehavior
+  parent: System.Windows.Media.Animation.Timeline
+  name: FillBehavior
+  nameWithType: Timeline.FillBehavior
+  fullName: System.Windows.Media.Animation.Timeline.FillBehavior
+- uid: System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
+  commentId: F:System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
+  parent: System.Windows.Media.Animation.Timeline
+  name: RepeatBehaviorProperty
+  nameWithType: Timeline.RepeatBehaviorProperty
+  fullName: System.Windows.Media.Animation.Timeline.RepeatBehaviorProperty
+- uid: System.Windows.Media.Animation.Timeline.RepeatBehavior
+  commentId: P:System.Windows.Media.Animation.Timeline.RepeatBehavior
+  parent: System.Windows.Media.Animation.Timeline
+  name: RepeatBehavior
+  nameWithType: Timeline.RepeatBehavior
+  fullName: System.Windows.Media.Animation.Timeline.RepeatBehavior
+- uid: System.Windows.Media.Animation.Timeline.SpeedRatioProperty
+  commentId: F:System.Windows.Media.Animation.Timeline.SpeedRatioProperty
+  parent: System.Windows.Media.Animation.Timeline
+  name: SpeedRatioProperty
+  nameWithType: Timeline.SpeedRatioProperty
+  fullName: System.Windows.Media.Animation.Timeline.SpeedRatioProperty
+- uid: System.Windows.Media.Animation.Timeline.SpeedRatio
+  commentId: P:System.Windows.Media.Animation.Timeline.SpeedRatio
+  parent: System.Windows.Media.Animation.Timeline
+  name: SpeedRatio
+  nameWithType: Timeline.SpeedRatio
+  fullName: System.Windows.Media.Animation.Timeline.SpeedRatio
 - uid: System.Windows.Media.Animation.Timeline.GetNaturalDurationCore
   commentId: M:System.Windows.Media.Animation.Timeline.GetNaturalDurationCore
   parent: System.Windows.Media.Animation.Timeline
@@ -948,42 +971,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Media.Animation.Timeline.SpeedRatioProperty
-  commentId: F:System.Windows.Media.Animation.Timeline.SpeedRatioProperty
-  parent: System.Windows.Media.Animation.Timeline
-  name: SpeedRatioProperty
-  nameWithType: Timeline.SpeedRatioProperty
-  fullName: System.Windows.Media.Animation.Timeline.SpeedRatioProperty
-- uid: System.Windows.Media.Animation.Timeline.SpeedRatio
-  commentId: P:System.Windows.Media.Animation.Timeline.SpeedRatio
-  parent: System.Windows.Media.Animation.Timeline
-  name: SpeedRatio
-  nameWithType: Timeline.SpeedRatio
-  fullName: System.Windows.Media.Animation.Timeline.SpeedRatio
-- uid: System.Windows.Media.Animation.Timeline.AutoReverseProperty
-  commentId: F:System.Windows.Media.Animation.Timeline.AutoReverseProperty
-  parent: System.Windows.Media.Animation.Timeline
-  name: AutoReverseProperty
-  nameWithType: Timeline.AutoReverseProperty
-  fullName: System.Windows.Media.Animation.Timeline.AutoReverseProperty
-- uid: System.Windows.Media.Animation.Timeline.AutoReverse
-  commentId: P:System.Windows.Media.Animation.Timeline.AutoReverse
-  parent: System.Windows.Media.Animation.Timeline
-  name: AutoReverse
-  nameWithType: Timeline.AutoReverse
-  fullName: System.Windows.Media.Animation.Timeline.AutoReverse
-- uid: System.Windows.Media.Animation.Timeline.FillBehaviorProperty
-  commentId: F:System.Windows.Media.Animation.Timeline.FillBehaviorProperty
-  parent: System.Windows.Media.Animation.Timeline
-  name: FillBehaviorProperty
-  nameWithType: Timeline.FillBehaviorProperty
-  fullName: System.Windows.Media.Animation.Timeline.FillBehaviorProperty
-- uid: System.Windows.Media.Animation.Timeline.FillBehavior
-  commentId: P:System.Windows.Media.Animation.Timeline.FillBehavior
-  parent: System.Windows.Media.Animation.Timeline
-  name: FillBehavior
-  nameWithType: Timeline.FillBehavior
-  fullName: System.Windows.Media.Animation.Timeline.FillBehavior
 - uid: System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   commentId: M:System.Windows.DependencyObject.GetValue(System.Windows.DependencyProperty)
   parent: System.Windows.DependencyObject
@@ -1109,184 +1096,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetVisualStateValue(DependencyProperty)
-  nameWithType: DependencyObject.GetVisualStateValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetVisualStateValue(System.Windows.DependencyProperty)
-    name: GetVisualStateValue
-    nameWithType: DependencyObject.GetVisualStateValue
-    fullName: System.Windows.DependencyObject.GetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetVisualStateValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetVisualStateValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetVisualStateValue(System.Windows.DependencyProperty,System.Object)
-    name: SetVisualStateValue
-    nameWithType: DependencyObject.SetVisualStateValue
-    fullName: System.Windows.DependencyObject.SetVisualStateValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  commentId: M:System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-  parent: System.Windows.DependencyObject
-  isExternal: true
-  name: SetAnimationValue(DependencyProperty, Object)
-  nameWithType: DependencyObject.SetAnimationValue(DependencyProperty, Object)
-  fullName: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty, System.Object)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.SetAnimationValue(System.Windows.DependencyProperty,System.Object)
-    name: SetAnimationValue
-    nameWithType: DependencyObject.SetAnimationValue
-    fullName: System.Windows.DependencyObject.SetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  commentId: M:System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  parent: System.Windows.DependencyObject
-  name: GetAnimationValue(DependencyProperty)
-  nameWithType: DependencyObject.GetAnimationValue(DependencyProperty)
-  fullName: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-  spec.csharp:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.DependencyObject.GetAnimationValue(System.Windows.DependencyProperty)
-    name: GetAnimationValue
-    nameWithType: DependencyObject.GetAnimationValue
-    fullName: System.Windows.DependencyObject.GetAnimationValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyProperty
-    name: DependencyProperty
-    nameWithType: DependencyProperty
-    fullName: System.Windows.DependencyProperty
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyProperty,System.Object)
   parent: System.Windows.DependencyObject
@@ -1337,6 +1146,95 @@ references:
     nameWithType: Object
     fullName: System.Object
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  commentId: M:System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+  parent: System.Windows.DependencyObject
+  isExternal: true
+  name: SetValue(DependencyPropertyKey, Object)
+  nameWithType: DependencyObject.SetValue(DependencyPropertyKey, Object)
+  fullName: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey, System.Object)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.SetValue(System.Windows.DependencyPropertyKey,System.Object)
+    name: SetValue
+    nameWithType: DependencyObject.SetValue
+    fullName: System.Windows.DependencyObject.SetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  commentId: M:System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  parent: System.Windows.DependencyObject
+  name: OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  nameWithType: DependencyObject.OnPropertyChanged(DependencyPropertyChangedEventArgs)
+  fullName: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)
+    name: OnPropertyChanged
+    nameWithType: DependencyObject.OnPropertyChanged
+    fullName: System.Windows.DependencyObject.OnPropertyChanged
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyChangedEventArgs
+    name: DependencyPropertyChangedEventArgs
+    nameWithType: DependencyPropertyChangedEventArgs
+    fullName: System.Windows.DependencyPropertyChangedEventArgs
   - name: )
     nameWithType: )
     fullName: )
@@ -1471,6 +1369,42 @@ references:
     name: DependencyProperty
     nameWithType: DependencyProperty
     fullName: System.Windows.DependencyProperty
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  commentId: M:System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  parent: System.Windows.DependencyObject
+  name: ClearValue(DependencyPropertyKey)
+  nameWithType: DependencyObject.ClearValue(DependencyPropertyKey)
+  fullName: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+  spec.csharp:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.DependencyObject.ClearValue(System.Windows.DependencyPropertyKey)
+    name: ClearValue
+    nameWithType: DependencyObject.ClearValue
+    fullName: System.Windows.DependencyObject.ClearValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.DependencyPropertyKey
+    name: DependencyPropertyKey
+    nameWithType: DependencyPropertyKey
+    fullName: System.Windows.DependencyPropertyKey
   - name: )
     nameWithType: )
     fullName: )
@@ -1817,296 +1751,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Interactivity.DependencyObjectHelper
-  definition: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors()
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors()
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors()
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors()
-  nameWithType: VisualTreeExtensions.GetVisualAncestors()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren()
-  nameWithType: VisualTreeExtensions.GetVisualChildren()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants()
-  nameWithType: VisualTreeExtensions.GetVisualDescendants()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings()
-  nameWithType: VisualTreeExtensions.GetVisualSiblings()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.DependencyObject.System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  parent: System.Windows.Controls.Primitives.VisualTreeExtensions
-  definition: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf()
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf()
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
@@ -2117,392 +1761,17 @@ references:
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
-- uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  name: GetSelfAndAncestors(DependencyObject)
-  nameWithType: DependencyObjectHelper.GetSelfAndAncestors(DependencyObject)
-  fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors(System.Windows.DependencyObject)
-    name: GetSelfAndAncestors
-    nameWithType: DependencyObjectHelper.GetSelfAndAncestors
-    fullName: System.Windows.Interactivity.DependencyObjectHelper.GetSelfAndAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity.DependencyObjectHelper
-  commentId: T:System.Windows.Interactivity.DependencyObjectHelper
-  parent: System.Windows.Interactivity
-  name: DependencyObjectHelper
-  nameWithType: DependencyObjectHelper
-  fullName: System.Windows.Interactivity.DependencyObjectHelper
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  name: GetVisualAncestors(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestors(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors(System.Windows.DependencyObject)
-    name: GetVisualAncestors
-    nameWithType: VisualTreeExtensions.GetVisualAncestors
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestors
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions
-  commentId: T:System.Windows.Controls.Primitives.VisualTreeExtensions
-  parent: System.Windows.Controls.Primitives
-  name: VisualTreeExtensions
-  nameWithType: VisualTreeExtensions
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualAncestorsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualAncestorsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualAncestorsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualAncestorsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  name: GetVisualChildren(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildren(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren(System.Windows.DependencyObject)
-    name: GetVisualChildren
-    nameWithType: VisualTreeExtensions.GetVisualChildren
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  name: GetVisualChildrenAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf(System.Windows.DependencyObject)
-    name: GetVisualChildrenAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualChildrenAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualChildrenAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  name: GetVisualDescendants(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendants(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants(System.Windows.DependencyObject)
-    name: GetVisualDescendants
-    nameWithType: VisualTreeExtensions.GetVisualDescendants
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendants
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualDescendantsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualDescendantsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualDescendantsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualDescendantsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  name: GetVisualSiblings(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblings(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings(System.Windows.DependencyObject)
-    name: GetVisualSiblings
-    nameWithType: VisualTreeExtensions.GetVisualSiblings
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  commentId: M:System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  name: GetVisualSiblingsAndSelf(DependencyObject)
-  nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf(DependencyObject)
-  fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-  spec.csharp:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf(System.Windows.DependencyObject)
-    name: GetVisualSiblingsAndSelf
-    nameWithType: VisualTreeExtensions.GetVisualSiblingsAndSelf
-    fullName: System.Windows.Controls.Primitives.VisualTreeExtensions.GetVisualSiblingsAndSelf
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Windows.DependencyObject
-    name: DependencyObject
-    nameWithType: DependencyObject
-    fullName: System.Windows.DependencyObject
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Windows.Interactivity
-  commentId: N:System.Windows.Interactivity
-  name: System.Windows.Interactivity
-  nameWithType: System.Windows.Interactivity
-  fullName: System.Windows.Interactivity
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
-- uid: System.Windows.Controls.Primitives
-  commentId: N:System.Windows.Controls.Primitives
-  name: System.Windows.Controls.Primitives
-  nameWithType: System.Windows.Controls.Primitives
-  fullName: System.Windows.Controls.Primitives
+- uid: System.Windows.Media.Animation.Storyboard
+  commentId: T:System.Windows.Media.Animation.Storyboard
+  parent: System.Windows.Media.Animation
+  name: Storyboard
+  nameWithType: Storyboard
+  fullName: System.Windows.Media.Animation.Storyboard
+- uid: System.Windows.Media.Animation.Storyboard.#ctor*
+  commentId: Overload:System.Windows.Media.Animation.Storyboard.#ctor
+  name: Storyboard
+  nameWithType: Storyboard.Storyboard
+  fullName: System.Windows.Media.Animation.Storyboard.Storyboard
 - uid: System.Windows.Media.Animation.Storyboard.Children*
   commentId: Overload:System.Windows.Media.Animation.Storyboard.Children
   name: Children
@@ -2514,6 +1783,12 @@ references:
   name: TimelineCollection
   nameWithType: TimelineCollection
   fullName: System.Windows.Media.Animation.TimelineCollection
+- uid: System.Windows.DependencyProperty
+  commentId: T:System.Windows.DependencyProperty
+  parent: System.Windows
+  name: DependencyProperty
+  nameWithType: DependencyProperty
+  fullName: System.Windows.DependencyProperty
 - uid: System.Windows.Media.Animation.Storyboard.GetTargetName*
   commentId: Overload:System.Windows.Media.Animation.Storyboard.GetTargetName
   name: GetTargetName
@@ -2531,12 +1806,9 @@ references:
   name: SetTargetName
   nameWithType: Storyboard.SetTargetName
   fullName: System.Windows.Media.Animation.Storyboard.SetTargetName
-- uid: System.Windows.DependencyProperty
-  commentId: T:System.Windows.DependencyProperty
-  parent: System.Windows
-  name: DependencyProperty
-  nameWithType: DependencyProperty
-  fullName: System.Windows.DependencyProperty
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
 - uid: System.Windows.Media.Animation.Storyboard.GetTargetProperty*
   commentId: Overload:System.Windows.Media.Animation.Storyboard.GetTargetProperty
   name: GetTargetProperty
@@ -2553,23 +1825,6 @@ references:
   name: SetTargetProperty
   nameWithType: Storyboard.SetTargetProperty
   fullName: System.Windows.Media.Animation.Storyboard.SetTargetProperty
-- uid: System.Windows.Media.Animation.Storyboard.Begin*
-  commentId: Overload:System.Windows.Media.Animation.Storyboard.Begin
-  name: Begin
-  nameWithType: Storyboard.Begin
-  fullName: System.Windows.Media.Animation.Storyboard.Begin
-- uid: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick*
-  commentId: Overload:System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick
-  name: SeekAlignedToLastTick
-  nameWithType: Storyboard.SeekAlignedToLastTick
-  fullName: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick
-- uid: System.TimeSpan
-  commentId: T:System.TimeSpan
-  parent: System
-  isExternal: true
-  name: TimeSpan
-  nameWithType: TimeSpan
-  fullName: System.TimeSpan
 - uid: System.Windows.Media.Animation.Storyboard.GetTarget*
   commentId: Overload:System.Windows.Media.Animation.Storyboard.GetTarget
   name: GetTarget
@@ -2580,17 +1835,20 @@ references:
   name: SetTarget
   nameWithType: Storyboard.SetTarget
   fullName: System.Windows.Media.Animation.Storyboard.SetTarget
-- uid: System.Windows.Media.Animation.Storyboard.Stop*
-  commentId: Overload:System.Windows.Media.Animation.Storyboard.Stop
-  name: Stop
-  nameWithType: Storyboard.Stop
-  fullName: System.Windows.Media.Animation.Storyboard.Stop
-- uid: System.Windows.FrameworkElement
-  commentId: T:System.Windows.FrameworkElement
-  parent: System.Windows
-  name: FrameworkElement
-  nameWithType: FrameworkElement
-  fullName: System.Windows.FrameworkElement
+- uid: System.Windows.Media.Animation.Storyboard.Begin*
+  commentId: Overload:System.Windows.Media.Animation.Storyboard.Begin
+  name: Begin
+  nameWithType: Storyboard.Begin
+  fullName: System.Windows.Media.Animation.Storyboard.Begin
+- uid: System.Windows.Media.Animation.ClockState.Active
+  commentId: F:System.Windows.Media.Animation.ClockState.Active
+  isExternal: true
+- uid: System.Windows.Media.Animation.ClockState.Filling
+  commentId: F:System.Windows.Media.Animation.ClockState.Filling
+  isExternal: true
+- uid: System.Windows.Media.Animation.ClockState.Stopped
+  commentId: F:System.Windows.Media.Animation.ClockState.Stopped
+  isExternal: true
 - uid: System.Windows.Media.Animation.Storyboard.GetCurrentState*
   commentId: Overload:System.Windows.Media.Animation.Storyboard.GetCurrentState
   name: GetCurrentState
@@ -2602,16 +1860,18 @@ references:
   name: ClockState
   nameWithType: ClockState
   fullName: System.Windows.Media.Animation.ClockState
-- uid: System.Windows.Media.Animation.Storyboard.SkipToFill*
-  commentId: Overload:System.Windows.Media.Animation.Storyboard.SkipToFill
-  name: SkipToFill
-  nameWithType: Storyboard.SkipToFill
-  fullName: System.Windows.Media.Animation.Storyboard.SkipToFill
-- uid: System.Windows.Media.Animation.Storyboard.Seek*
-  commentId: Overload:System.Windows.Media.Animation.Storyboard.Seek
-  name: Seek
-  nameWithType: Storyboard.Seek
-  fullName: System.Windows.Media.Animation.Storyboard.Seek
+- uid: System.Windows.Media.Animation.Storyboard.GetCurrentTime*
+  commentId: Overload:System.Windows.Media.Animation.Storyboard.GetCurrentTime
+  name: GetCurrentTime
+  nameWithType: Storyboard.GetCurrentTime
+  fullName: System.Windows.Media.Animation.Storyboard.GetCurrentTime
+- uid: System.TimeSpan
+  commentId: T:System.TimeSpan
+  parent: System
+  isExternal: true
+  name: TimeSpan
+  nameWithType: TimeSpan
+  fullName: System.TimeSpan
 - uid: System.Windows.Media.Animation.Storyboard.Pause*
   commentId: Overload:System.Windows.Media.Animation.Storyboard.Pause
   name: Pause
@@ -2622,3 +1882,23 @@ references:
   name: Resume
   nameWithType: Storyboard.Resume
   fullName: System.Windows.Media.Animation.Storyboard.Resume
+- uid: System.Windows.Media.Animation.Storyboard.Seek*
+  commentId: Overload:System.Windows.Media.Animation.Storyboard.Seek
+  name: Seek
+  nameWithType: Storyboard.Seek
+  fullName: System.Windows.Media.Animation.Storyboard.Seek
+- uid: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick*
+  commentId: Overload:System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick
+  name: SeekAlignedToLastTick
+  nameWithType: Storyboard.SeekAlignedToLastTick
+  fullName: System.Windows.Media.Animation.Storyboard.SeekAlignedToLastTick
+- uid: System.Windows.Media.Animation.Storyboard.SkipToFill*
+  commentId: Overload:System.Windows.Media.Animation.Storyboard.SkipToFill
+  name: SkipToFill
+  nameWithType: Storyboard.SkipToFill
+  fullName: System.Windows.Media.Animation.Storyboard.SkipToFill
+- uid: System.Windows.Media.Animation.Storyboard.Stop*
+  commentId: Overload:System.Windows.Media.Animation.Storyboard.Stop
+  name: Stop
+  nameWithType: Storyboard.Stop
+  fullName: System.Windows.Media.Animation.Storyboard.Stop

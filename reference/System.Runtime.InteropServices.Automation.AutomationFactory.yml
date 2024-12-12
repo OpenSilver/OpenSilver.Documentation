@@ -18,15 +18,17 @@ items:
   type: Class
   source:
     remote:
-      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: AutomationFactory
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-    startLine: 10
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+    startLine: 20
   assemblies:
   - OpenSilver
   namespace: System.Runtime.InteropServices.Automation
+  summary: "\nProvides access to registered Automation servers.\n"
+  example: []
   syntax:
     content: >-
       [NotImplemented]
@@ -70,32 +72,25 @@ items:
   type: Property
   source:
     remote:
-      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsAvailable
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-    startLine: 21
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+    startLine: 31
   assemblies:
   - OpenSilver
   namespace: System.Runtime.InteropServices.Automation
+  summary: "\nGets a value that indicates whether the Automation feature in Silverlight is\navailable to the application.\n"
+  example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public static bool IsAvailable { get; }
+    content: public static bool IsAvailable { get; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: >-
-      <NotImplemented>
-
-      Public Shared ReadOnly Property IsAvailable As Boolean
+      description: "\ntrue if the Automation feature in Silverlight is available to the application;\notherwise, false.\n"
+    content.vb: Public Shared ReadOnly Property IsAvailable As Boolean
   overload: System.Runtime.InteropServices.Automation.AutomationFactory.IsAvailable*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -117,34 +112,32 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: CreateObject
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-    startLine: 39
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+    startLine: 46
   assemblies:
   - OpenSilver
   namespace: System.Runtime.InteropServices.Automation
+  summary: "\nActivates and returns a reference to the registered Automation server with the\nspecified programmatic identifier (ProgID).\n"
+  example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public static dynamic CreateObject(string progID)
+    content: public static object CreateObject(string progID)
     parameters:
     - id: progID
       type: System.String
+      description: "\nThe ProgID of the registered automation server to activate.\n"
     return:
       type: System.Object
-    content.vb: >-
-      <NotImplemented>
-
-      Public Shared Function CreateObject(progID As String) As Object
+      description: "\nA late-bound reference to the specified automation server.\n"
+    content.vb: Public Shared Function CreateObject(progID As String) As Object
   overload: System.Runtime.InteropServices.Automation.AutomationFactory.CreateObject*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
+  exceptions:
+  - type: System.Exception
+    commentId: T:System.Exception
+    description: "\nNo object was found registered for the specified progID.\n"
   modifiers.csharp:
   - public
   - static
@@ -164,36 +157,31 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetEvent
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-    startLine: 76
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+    startLine: 72
   assemblies:
   - OpenSilver
   namespace: System.Runtime.InteropServices.Automation
+  summary: "\nGets an object that represents the specified event of the specified Automation server.\n"
+  example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public static AutomationEvent GetEvent(dynamic automationObject, string eventName)
+    content: public static AutomationEvent GetEvent(object automationObject, string eventName)
     parameters:
     - id: automationObject
       type: System.Object
+      description: "\nA reference to the Automation server to retrieve an event for.\n"
     - id: eventName
       type: System.String
+      description: "\nThe name of the event to retrieve.\n"
     return:
       type: System.Runtime.InteropServices.Automation.AutomationEvent
-    content.vb: >-
-      <NotImplemented>
-
-      Public Shared Function GetEvent(automationObject As Object, eventName As String) As AutomationEvent
+      description: "\nAn object that represents the specified event.\n"
+    content.vb: Public Shared Function GetEvent(automationObject As Object, eventName As String) As AutomationEvent
   overload: System.Runtime.InteropServices.Automation.AutomationFactory.GetEvent*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   - static
@@ -213,34 +201,32 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetObject
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/WORKINPROGRESS/AutomationFactory.cs
-    startLine: 97
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Runtime.InteropServices.Automation/AutomationFactory.cs
+    startLine: 88
   assemblies:
   - OpenSilver
   namespace: System.Runtime.InteropServices.Automation
+  summary: "\nGets a reference to the previously activated and currently running Automation\nserver with the specified programmatic identifier (ProgID).\n"
+  example: []
   syntax:
-    content: >-
-      [NotImplemented]
-
-      public static dynamic GetObject(string progID)
+    content: public static object GetObject(string progID)
     parameters:
     - id: progID
       type: System.String
+      description: "\nThe ProgID of the registered Automation server to retrieve a reference to.\n"
     return:
       type: System.Object
-    content.vb: >-
-      <NotImplemented>
-
-      Public Shared Function GetObject(progID As String) As Object
+      description: "\nA late-bound reference to the specified Automation server.\n"
+    content.vb: Public Shared Function GetObject(progID As String) As Object
   overload: System.Runtime.InteropServices.Automation.AutomationFactory.GetObject*
-  attributes:
-  - type: OpenSilver.NotImplementedAttribute
-    ctor: OpenSilver.NotImplementedAttribute.#ctor
-    arguments: []
+  exceptions:
+  - type: System.Exception
+    commentId: T:System.Exception
+    description: "\nNo object was found registered for the specified progID.\n"
   modifiers.csharp:
   - public
   - static
@@ -556,6 +542,13 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
 - uid: System.Runtime.InteropServices.Automation.AutomationFactory.CreateObject*
   commentId: Overload:System.Runtime.InteropServices.Automation.AutomationFactory.CreateObject
   name: CreateObject

@@ -6,24 +6,47 @@ items:
   parent: System.Windows.Media
   children:
   - System.Windows.Media.Matrix.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
+  - System.Windows.Media.Matrix.Append(System.Windows.Media.Matrix)
+  - System.Windows.Media.Matrix.Determinant
   - System.Windows.Media.Matrix.Equals(System.Object)
   - System.Windows.Media.Matrix.Equals(System.Windows.Media.Matrix)
+  - System.Windows.Media.Matrix.Equals(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
   - System.Windows.Media.Matrix.GetHashCode
+  - System.Windows.Media.Matrix.HasInverse
   - System.Windows.Media.Matrix.Identity
+  - System.Windows.Media.Matrix.Invert
   - System.Windows.Media.Matrix.IsIdentity
   - System.Windows.Media.Matrix.M11
   - System.Windows.Media.Matrix.M12
   - System.Windows.Media.Matrix.M21
   - System.Windows.Media.Matrix.M22
+  - System.Windows.Media.Matrix.Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
   - System.Windows.Media.Matrix.OffsetX
   - System.Windows.Media.Matrix.OffsetY
   - System.Windows.Media.Matrix.op_Equality(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
   - System.Windows.Media.Matrix.op_Inequality(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  - System.Windows.Media.Matrix.op_Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
   - System.Windows.Media.Matrix.Parse(System.String)
+  - System.Windows.Media.Matrix.Prepend(System.Windows.Media.Matrix)
+  - System.Windows.Media.Matrix.Rotate(System.Double)
+  - System.Windows.Media.Matrix.RotateAt(System.Double,System.Double,System.Double)
+  - System.Windows.Media.Matrix.RotateAtPrepend(System.Double,System.Double,System.Double)
+  - System.Windows.Media.Matrix.RotatePrepend(System.Double)
+  - System.Windows.Media.Matrix.Scale(System.Double,System.Double)
+  - System.Windows.Media.Matrix.ScaleAtPrepend(System.Double,System.Double,System.Double,System.Double)
+  - System.Windows.Media.Matrix.ScalePrepend(System.Double,System.Double)
+  - System.Windows.Media.Matrix.SetIdentity
+  - System.Windows.Media.Matrix.Skew(System.Double,System.Double)
+  - System.Windows.Media.Matrix.SkewPrepend(System.Double,System.Double)
   - System.Windows.Media.Matrix.System#IFormattable#ToString(System.String,System.IFormatProvider)
   - System.Windows.Media.Matrix.ToString
   - System.Windows.Media.Matrix.ToString(System.IFormatProvider)
   - System.Windows.Media.Matrix.Transform(System.Windows.Point)
+  - System.Windows.Media.Matrix.Transform(System.Windows.Point[])
+  - System.Windows.Media.Matrix.Transform(System.Windows.Vector)
+  - System.Windows.Media.Matrix.Transform(System.Windows.Vector[])
+  - System.Windows.Media.Matrix.Translate(System.Double,System.Double)
+  - System.Windows.Media.Matrix.TranslatePrepend(System.Double,System.Double)
   langs:
   - csharp
   - vb
@@ -34,11 +57,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Matrix
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 32
+    startLine: 23
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -55,8 +78,6 @@ items:
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetType
   - System.Object.ReferenceEquals(System.Object,System.Object)
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - struct
@@ -77,11 +98,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 62
+    startLine: 51
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -128,11 +149,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Identity
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 80
+    startLine: 69
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -168,23 +189,25 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Parse
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 90
+    startLine: 80
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nParse - returns an instance converted from the provided string using\nthe culture &quot;en-US&quot;\n<param name=\"source\"> string with Matrix data </param>\n"
+  summary: "\nConverts a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> representation of a matrix into the equivalent <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
   example: []
   syntax:
     content: public static Matrix Parse(string source)
     parameters:
     - id: source
       type: System.String
+      description: "\nThe <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> representation of the matrix.\n"
     return:
       type: System.Windows.Media.Matrix
+      description: "\nThe equivalent <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
     content.vb: Public Shared Function Parse(source As String) As Matrix
   overload: System.Windows.Media.Matrix.Parse*
   modifiers.csharp:
@@ -207,11 +230,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsIdentity
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 127
+    startLine: 117
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -245,11 +268,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: M11
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 137
+    startLine: 125
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -282,11 +305,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: M12
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 174
+    startLine: 162
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -319,11 +342,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: M21
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 208
+    startLine: 196
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -356,11 +379,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: M22
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 242
+    startLine: 230
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -393,11 +416,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OffsetX
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 279
+    startLine: 267
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -430,11 +453,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: OffsetY
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 316
+    startLine: 304
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -453,6 +476,742 @@ items:
   - set
   modifiers.vb:
   - Public
+- uid: System.Windows.Media.Matrix.Determinant
+  commentId: P:System.Windows.Media.Matrix.Determinant
+  id: Determinant
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Determinant
+  nameWithType: Matrix.Determinant
+  fullName: System.Windows.Media.Matrix.Determinant
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Determinant
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 343
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nGets the determinant of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public readonly double Determinant { get; }
+    parameters: []
+    return:
+      type: System.Double
+      description: "\nThe determinant of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public ReadOnly Property Determinant As Double
+  overload: System.Windows.Media.Matrix.Determinant*
+  modifiers.csharp:
+  - public
+  - readonly
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Media.Matrix.HasInverse
+  commentId: P:System.Windows.Media.Matrix.HasInverse
+  id: HasInverse
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: HasInverse
+  nameWithType: Matrix.HasInverse
+  fullName: System.Windows.Media.Matrix.HasInverse
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: HasInverse
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 357
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nGets a value that indicates whether this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure is invertible.\n"
+  example: []
+  syntax:
+    content: public readonly bool HasInverse { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: "\ntrue if the System.Windows.Media.Matrix has an inverse; otherwise, false. The default is true.\n"
+    content.vb: Public ReadOnly Property HasInverse As Boolean
+  overload: System.Windows.Media.Matrix.HasInverse*
+  modifiers.csharp:
+  - public
+  - readonly
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: System.Windows.Media.Matrix.Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  commentId: M:System.Windows.Media.Matrix.Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  id: Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Multiply(Matrix, Matrix)
+  nameWithType: Matrix.Multiply(Matrix, Matrix)
+  fullName: System.Windows.Media.Matrix.Multiply(System.Windows.Media.Matrix, System.Windows.Media.Matrix)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Multiply
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 371
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nMultiplies a <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure by another <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public static Matrix Multiply(Matrix trans1, Matrix trans2)
+    parameters:
+    - id: trans1
+      type: System.Windows.Media.Matrix
+      description: "\nThe first <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to multiply.\n"
+    - id: trans2
+      type: System.Windows.Media.Matrix
+      description: "\nThe second <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to multiply.\n"
+    return:
+      type: System.Windows.Media.Matrix
+      description: "\nThe result of multiplying trans1 by trans2.\n"
+    content.vb: Public Shared Function Multiply(trans1 As Matrix, trans2 As Matrix) As Matrix
+  overload: System.Windows.Media.Matrix.Multiply*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: System.Windows.Media.Matrix.Append(System.Windows.Media.Matrix)
+  commentId: M:System.Windows.Media.Matrix.Append(System.Windows.Media.Matrix)
+  id: Append(System.Windows.Media.Matrix)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Append(Matrix)
+  nameWithType: Matrix.Append(Matrix)
+  fullName: System.Windows.Media.Matrix.Append(System.Windows.Media.Matrix)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Append
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 384
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nAppends the specified <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void Append(Matrix matrix)
+    parameters:
+    - id: matrix
+      type: System.Windows.Media.Matrix
+      description: "\nThe <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to append to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+    content.vb: Public Sub Append(matrix As Matrix)
+  overload: System.Windows.Media.Matrix.Append*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Invert
+  commentId: M:System.Windows.Media.Matrix.Invert
+  id: Invert
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Invert()
+  nameWithType: Matrix.Invert()
+  fullName: System.Windows.Media.Matrix.Invert()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Invert
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 392
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nInverts this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void Invert()
+    content.vb: Public Sub Invert
+  overload: System.Windows.Media.Matrix.Invert*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure is not invertible.\n"
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Prepend(System.Windows.Media.Matrix)
+  commentId: M:System.Windows.Media.Matrix.Prepend(System.Windows.Media.Matrix)
+  id: Prepend(System.Windows.Media.Matrix)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Prepend(Matrix)
+  nameWithType: Matrix.Prepend(Matrix)
+  fullName: System.Windows.Media.Matrix.Prepend(System.Windows.Media.Matrix)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Prepend
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 445
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nPrepends the specified <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure onto this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void Prepend(Matrix matrix)
+    parameters:
+    - id: matrix
+      type: System.Windows.Media.Matrix
+      description: "\nThe <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to prepend to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+    content.vb: Public Sub Prepend(matrix As Matrix)
+  overload: System.Windows.Media.Matrix.Prepend*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Rotate(System.Double)
+  commentId: M:System.Windows.Media.Matrix.Rotate(System.Double)
+  id: Rotate(System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Rotate(Double)
+  nameWithType: Matrix.Rotate(Double)
+  fullName: System.Windows.Media.Matrix.Rotate(System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Rotate
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 453
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nApplies a rotation of the specified angle about the origin of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void Rotate(double angle)
+    parameters:
+    - id: angle
+      type: System.Double
+      description: "\nThe angle of rotation.\n"
+    content.vb: Public Sub Rotate(angle As Double)
+  overload: System.Windows.Media.Matrix.Rotate*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.RotateAt(System.Double,System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.RotateAt(System.Double,System.Double,System.Double)
+  id: RotateAt(System.Double,System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: RotateAt(Double, Double, Double)
+  nameWithType: Matrix.RotateAt(Double, Double, Double)
+  fullName: System.Windows.Media.Matrix.RotateAt(System.Double, System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RotateAt
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 471
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nRotates this matrix about the specified point.\n"
+  example: []
+  syntax:
+    content: public void RotateAt(double angle, double centerX, double centerY)
+    parameters:
+    - id: angle
+      type: System.Double
+      description: "\nThe angle, in degrees, by which to rotate this matrix.\n"
+    - id: centerX
+      type: System.Double
+      description: "\nThe x-coordinate of the point about which to rotate this matrix.\n"
+    - id: centerY
+      type: System.Double
+      description: "\nThe y-coordinate of the point about which to rotate this matrix.\n"
+    content.vb: Public Sub RotateAt(angle As Double, centerX As Double, centerY As Double)
+  overload: System.Windows.Media.Matrix.RotateAt*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.RotateAtPrepend(System.Double,System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.RotateAtPrepend(System.Double,System.Double,System.Double)
+  id: RotateAtPrepend(System.Double,System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: RotateAtPrepend(Double, Double, Double)
+  nameWithType: Matrix.RotateAtPrepend(Double, Double, Double)
+  fullName: System.Windows.Media.Matrix.RotateAtPrepend(System.Double, System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RotateAtPrepend
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 489
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nPrepends a rotation of the specified angle at the specified point to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void RotateAtPrepend(double angle, double centerX, double centerY)
+    parameters:
+    - id: angle
+      type: System.Double
+      description: "\nThe rotation angle, in degrees.\n"
+    - id: centerX
+      type: System.Double
+      description: "\nThe x-coordinate of the rotation center.\n"
+    - id: centerY
+      type: System.Double
+      description: "\nThe y-coordinate of the rotation center.\n"
+    content.vb: Public Sub RotateAtPrepend(angle As Double, centerX As Double, centerY As Double)
+  overload: System.Windows.Media.Matrix.RotateAtPrepend*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.RotatePrepend(System.Double)
+  commentId: M:System.Windows.Media.Matrix.RotatePrepend(System.Double)
+  id: RotatePrepend(System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: RotatePrepend(Double)
+  nameWithType: Matrix.RotatePrepend(Double)
+  fullName: System.Windows.Media.Matrix.RotatePrepend(System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: RotatePrepend
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 501
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nPrepends a rotation of the specified angle to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void RotatePrepend(double angle)
+    parameters:
+    - id: angle
+      type: System.Double
+      description: "\nThe angle of rotation to prepend.\n"
+    content.vb: Public Sub RotatePrepend(angle As Double)
+  overload: System.Windows.Media.Matrix.RotatePrepend*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Scale(System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.Scale(System.Double,System.Double)
+  id: Scale(System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Scale(Double, Double)
+  nameWithType: Matrix.Scale(Double, Double)
+  fullName: System.Windows.Media.Matrix.Scale(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Scale
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 516
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nAppends the specified scale vector to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void Scale(double scaleX, double scaleY)
+    parameters:
+    - id: scaleX
+      type: System.Double
+      description: "\nThe value by which to scale this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> along the x-axis.\n"
+    - id: scaleY
+      type: System.Double
+      description: "\nThe value by which to scale this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> along the y-axis.\n"
+    content.vb: Public Sub Scale(scaleX As Double, scaleY As Double)
+  overload: System.Windows.Media.Matrix.Scale*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.ScaleAtPrepend(System.Double,System.Double,System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.ScaleAtPrepend(System.Double,System.Double,System.Double,System.Double)
+  id: ScaleAtPrepend(System.Double,System.Double,System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: ScaleAtPrepend(Double, Double, Double, Double)
+  nameWithType: Matrix.ScaleAtPrepend(Double, Double, Double, Double)
+  fullName: System.Windows.Media.Matrix.ScaleAtPrepend(System.Double, System.Double, System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ScaleAtPrepend
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 551
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nPrepends the specified scale about the specified point of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void ScaleAtPrepend(double scaleX, double scaleY, double centerX, double centerY)
+    parameters:
+    - id: scaleX
+      type: System.Double
+      description: "\nThe x-axis scale factor.\n"
+    - id: scaleY
+      type: System.Double
+      description: "\nThe y-axis scale factor.\n"
+    - id: centerX
+      type: System.Double
+      description: "\nThe x-coordinate of the point about which the scale operation is performed.\n"
+    - id: centerY
+      type: System.Double
+      description: "\nThe y-coordinate of the point about which the scale operation is performed.\n"
+    content.vb: Public Sub ScaleAtPrepend(scaleX As Double, scaleY As Double, centerX As Double, centerY As Double)
+  overload: System.Windows.Media.Matrix.ScaleAtPrepend*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.ScalePrepend(System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.ScalePrepend(System.Double,System.Double)
+  id: ScalePrepend(System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: ScalePrepend(Double, Double)
+  nameWithType: Matrix.ScalePrepend(Double, Double)
+  fullName: System.Windows.Media.Matrix.ScalePrepend(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ScalePrepend
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 563
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nPrepends the specified scale vector to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void ScalePrepend(double scaleX, double scaleY)
+    parameters:
+    - id: scaleX
+      type: System.Double
+      description: "\nThe value by which to scale this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure along the x-axis.\n"
+    - id: scaleY
+      type: System.Double
+      description: "\nThe value by which to scale this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure along the y-axis.\n"
+    content.vb: Public Sub ScalePrepend(scaleX As Double, scaleY As Double)
+  overload: System.Windows.Media.Matrix.ScalePrepend*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.SetIdentity
+  commentId: M:System.Windows.Media.Matrix.SetIdentity
+  id: SetIdentity
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: SetIdentity()
+  nameWithType: Matrix.SetIdentity()
+  fullName: System.Windows.Media.Matrix.SetIdentity()
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SetIdentity
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 568
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nChanges this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure into an identity matrix.\n"
+  example: []
+  syntax:
+    content: public void SetIdentity()
+    content.vb: Public Sub SetIdentity
+  overload: System.Windows.Media.Matrix.SetIdentity*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Skew(System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.Skew(System.Double,System.Double)
+  id: Skew(System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Skew(Double, Double)
+  nameWithType: Matrix.Skew(Double, Double)
+  fullName: System.Windows.Media.Matrix.Skew(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Skew
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 579
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nAppends a skew of the specified degrees in the x and y dimensions to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void Skew(double skewX, double skewY)
+    parameters:
+    - id: skewX
+      type: System.Double
+      description: "\nThe angle in the x dimension by which to skew this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    - id: skewY
+      type: System.Double
+      description: "\nThe angle in the y dimension by which to skew this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Sub Skew(skewX As Double, skewY As Double)
+  overload: System.Windows.Media.Matrix.Skew*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.SkewPrepend(System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.SkewPrepend(System.Double,System.Double)
+  id: SkewPrepend(System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: SkewPrepend(Double, Double)
+  nameWithType: Matrix.SkewPrepend(Double, Double)
+  fullName: System.Windows.Media.Matrix.SkewPrepend(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: SkewPrepend
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 595
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nPrepends a skew of the specified degrees in the x and y dimensions to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void SkewPrepend(double skewX, double skewY)
+    parameters:
+    - id: skewX
+      type: System.Double
+      description: "\nThe angle in the x dimension by which to skew this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    - id: skewY
+      type: System.Double
+      description: "\nThe angle in the y dimension by which to skew this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Sub SkewPrepend(skewX As Double, skewY As Double)
+  overload: System.Windows.Media.Matrix.SkewPrepend*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Transform(System.Windows.Vector)
+  commentId: M:System.Windows.Media.Matrix.Transform(System.Windows.Vector)
+  id: Transform(System.Windows.Vector)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Transform(Vector)
+  nameWithType: Matrix.Transform(Vector)
+  fullName: System.Windows.Media.Matrix.Transform(System.Windows.Vector)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Transform
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 611
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nTransforms the specified vector by this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public Vector Transform(Vector vector)
+    parameters:
+    - id: vector
+      type: System.Windows.Vector
+      description: "\nThe vector to transform.\n"
+    return:
+      type: System.Windows.Vector
+      description: "\nThe result of transforming vector by this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+    content.vb: Public Function Transform(vector As Vector) As Vector
+  overload: System.Windows.Media.Matrix.Transform*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Transform(System.Windows.Vector[])
+  commentId: M:System.Windows.Media.Matrix.Transform(System.Windows.Vector[])
+  id: Transform(System.Windows.Vector[])
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Transform(Vector[])
+  nameWithType: Matrix.Transform(Vector[])
+  fullName: System.Windows.Media.Matrix.Transform(System.Windows.Vector[])
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Transform
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 624
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nTransforms the specified vectors by this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Transform(Vector[] vectors)
+    parameters:
+    - id: vectors
+      type: System.Windows.Vector[]
+      description: "\nThe vectors to transform. The original vectors in the array are replaced by their transformed values.\n"
+    content.vb: Public Sub Transform(vectors As Vector())
+  overload: System.Windows.Media.Matrix.Transform*
+  nameWithType.vb: Matrix.Transform(Vector())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: System.Windows.Media.Matrix.Transform(System.Windows.Vector())
+  name.vb: Transform(Vector())
+- uid: System.Windows.Media.Matrix.Transform(System.Windows.Point[])
+  commentId: M:System.Windows.Media.Matrix.Transform(System.Windows.Point[])
+  id: Transform(System.Windows.Point[])
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Transform(Point[])
+  nameWithType: Matrix.Transform(Point[])
+  fullName: System.Windows.Media.Matrix.Transform(System.Windows.Point[])
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Transform
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 641
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nTransforms the specified points by this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: public void Transform(Point[] points)
+    parameters:
+    - id: points
+      type: System.Windows.Point[]
+      description: "\nThe points to transform. The original points in the array are replaced by their transformed values.\n"
+    content.vb: Public Sub Transform(points As Point())
+  overload: System.Windows.Media.Matrix.Transform*
+  nameWithType.vb: Matrix.Transform(Point())
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: System.Windows.Media.Matrix.Transform(System.Windows.Point())
+  name.vb: Transform(Point())
 - uid: System.Windows.Media.Matrix.Transform(System.Windows.Point)
   commentId: M:System.Windows.Media.Matrix.Transform(System.Windows.Point)
   id: Transform(System.Windows.Point)
@@ -467,15 +1226,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Transform
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 363
+    startLine: 661
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nTransforms the specified point by the <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> and returns\nthe result.\n"
+  summary: "\nTransforms the specified point by the <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> and returns the result.\n"
   example: []
   syntax:
     content: public Point Transform(Point point)
@@ -492,6 +1251,128 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: System.Windows.Media.Matrix.Translate(System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.Translate(System.Double,System.Double)
+  id: Translate(System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Translate(Double, Double)
+  nameWithType: Matrix.Translate(Double, Double)
+  fullName: System.Windows.Media.Matrix.Translate(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Translate
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 677
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nAppends a translation of the specified offsets to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void Translate(double offsetX, double offsetY)
+    parameters:
+    - id: offsetX
+      type: System.Double
+      description: "\nThe amount to offset this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> along the x-axis.\n"
+    - id: offsetY
+      type: System.Double
+      description: "\nThe amount to offset this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> along the y-axis.\n"
+    content.vb: Public Sub Translate(offsetX As Double, offsetY As Double)
+  overload: System.Windows.Media.Matrix.Translate*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.TranslatePrepend(System.Double,System.Double)
+  commentId: M:System.Windows.Media.Matrix.TranslatePrepend(System.Double,System.Double)
+  id: TranslatePrepend(System.Double,System.Double)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: TranslatePrepend(Double, Double)
+  nameWithType: Matrix.TranslatePrepend(Double, Double)
+  fullName: System.Windows.Media.Matrix.TranslatePrepend(System.Double, System.Double)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: TranslatePrepend
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 723
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nPrepends a translation of the specified offsets to this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public void TranslatePrepend(double offsetX, double offsetY)
+    parameters:
+    - id: offsetX
+      type: System.Double
+      description: "\nThe amount to offset this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> along the x-axis.\n"
+    - id: offsetY
+      type: System.Double
+      description: "\nThe amount to offset this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> along the y-axis.\n"
+    content.vb: Public Sub TranslatePrepend(offsetX As Double, offsetY As Double)
+  overload: System.Windows.Media.Matrix.TranslatePrepend*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: System.Windows.Media.Matrix.Equals(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  commentId: M:System.Windows.Media.Matrix.Equals(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  id: Equals(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Equals(Matrix, Matrix)
+  nameWithType: Matrix.Equals(Matrix, Matrix)
+  fullName: System.Windows.Media.Matrix.Equals(System.Windows.Media.Matrix, System.Windows.Media.Matrix)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: Equals
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 737
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nDetermines whether the two specified <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structures are identical.\n"
+  example: []
+  syntax:
+    content: public static bool Equals(Matrix matrix1, Matrix matrix2)
+    parameters:
+    - id: matrix1
+      type: System.Windows.Media.Matrix
+      description: "\nThe first <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to compare.\n"
+    - id: matrix2
+      type: System.Windows.Media.Matrix
+      description: "\nThe second <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to compare.\n"
+    return:
+      type: System.Boolean
+      description: "\ntrue if matrix1 and matrix2 are identical; otherwise, false.\n"
+    content.vb: Public Shared Function Equals(matrix1 As Matrix, matrix2 As Matrix) As Boolean
+  overload: System.Windows.Media.Matrix.Equals*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: System.Windows.Media.Matrix.Equals(System.Object)
   commentId: M:System.Windows.Media.Matrix.Equals(System.Object)
   id: Equals(System.Object)
@@ -506,11 +1387,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 381
+    startLine: 750
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -548,11 +1429,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Equals
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 401
+    startLine: 762
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -587,11 +1468,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: GetHashCode
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 412
+    startLine: 770
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -625,11 +1506,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 438
+    startLine: 796
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -663,15 +1544,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 456
+    startLine: 813
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
-  summary: "\nCreates a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> representation of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure\nwith culture-specific formatting information.\n"
+  summary: "\nCreates a <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> representation of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure with \nculture-specific formatting information.\n"
   example: []
   syntax:
     content: public string ToString(IFormatProvider provider)
@@ -681,7 +1562,7 @@ items:
       description: "\nThe culture-specific formatting information.\n"
     return:
       type: System.String
-      description: "\nA <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> containing the <xref href=\"System.Windows.Media.Matrix.M11\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Media.Matrix.M12\" data-throw-if-not-resolved=\"false\"></xref>,\n<xref href=\"System.Windows.Media.Matrix.M21\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Media.Matrix.M22\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Media.Matrix.OffsetX\" data-throw-if-not-resolved=\"false\"></xref>,\nand <xref href=\"System.Windows.Media.Matrix.OffsetY\" data-throw-if-not-resolved=\"false\"></xref> values of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+      description: "\nA <xref href=\"System.String\" data-throw-if-not-resolved=\"false\"></xref> containing the <xref href=\"System.Windows.Media.Matrix.M11\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Media.Matrix.M12\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Media.Matrix.M21\" data-throw-if-not-resolved=\"false\"></xref>, \n<xref href=\"System.Windows.Media.Matrix.M22\" data-throw-if-not-resolved=\"false\"></xref>, <xref href=\"System.Windows.Media.Matrix.OffsetX\" data-throw-if-not-resolved=\"false\"></xref>, and <xref href=\"System.Windows.Media.Matrix.OffsetY\" data-throw-if-not-resolved=\"false\"></xref> values of this <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Function ToString(provider As IFormatProvider) As String
   overload: System.Windows.Media.Matrix.ToString*
   modifiers.csharp:
@@ -703,14 +1584,16 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: System.IFormattable.ToString
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 462
+    startLine: 824
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
+  summary: "\nCreates a string representation of this object based on the format string\nand IFormatProvider passed in.\nIf the provider is null, the CurrentCulture is used.\nSee the documentation for IFormattable for more information.\n"
+  example: []
   syntax:
     content: string IFormattable.ToString(string format, IFormatProvider provider)
     parameters:
@@ -720,12 +1603,57 @@ items:
       type: System.IFormatProvider
     return:
       type: System.String
+      description: "\nA string representation of this object.\n"
     content.vb: Function System.IFormattable.ToString(format As String, provider As IFormatProvider) As String Implements IFormattable.ToString
   overload: System.Windows.Media.Matrix.System#IFormattable#ToString*
   implements:
   - System.IFormattable.ToString(System.String,System.IFormatProvider)
   nameWithType.vb: Matrix.System.IFormattable.ToString(String, IFormatProvider)
   name.vb: System.IFormattable.ToString(String, IFormatProvider)
+- uid: System.Windows.Media.Matrix.op_Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  commentId: M:System.Windows.Media.Matrix.op_Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  id: op_Multiply(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
+  parent: System.Windows.Media.Matrix
+  langs:
+  - csharp
+  - vb
+  name: Multiply(Matrix, Matrix)
+  nameWithType: Matrix.Multiply(Matrix, Matrix)
+  fullName: System.Windows.Media.Matrix.Multiply(System.Windows.Media.Matrix, System.Windows.Media.Matrix)
+  type: Operator
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: op_Multiply
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
+    startLine: 838
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Media
+  summary: "\nMultiplies a <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure by another <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure.\n"
+  example: []
+  syntax:
+    content: public static Matrix operator *(Matrix trans1, Matrix trans2)
+    parameters:
+    - id: trans1
+      type: System.Windows.Media.Matrix
+      description: "\nThe first <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to multiply.\n"
+    - id: trans2
+      type: System.Windows.Media.Matrix
+      description: "\nThe second <xref href=\"System.Windows.Media.Matrix\" data-throw-if-not-resolved=\"false\"></xref> structure to multiply.\n"
+    return:
+      type: System.Windows.Media.Matrix
+      description: "\nThe result of multiplying trans1 by trans2.\n"
+    content.vb: Public Shared Operator *(trans1 As Matrix, trans2 As Matrix) As Matrix
+  overload: System.Windows.Media.Matrix.op_Multiply*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: System.Windows.Media.Matrix.op_Equality(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
   commentId: M:System.Windows.Media.Matrix.op_Equality(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
   id: op_Equality(System.Windows.Media.Matrix,System.Windows.Media.Matrix)
@@ -740,11 +1668,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: op_Equality
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 472
+    startLine: 845
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -779,11 +1707,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: op_Inequality
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Media/Matrix.cs
-    startLine: 489
+    startLine: 862
   assemblies:
   - OpenSilver
   namespace: System.Windows.Media
@@ -962,35 +1890,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
@@ -1003,55 +1902,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
 - uid: System.Windows.Media.Matrix
   commentId: T:System.Windows.Media.Matrix
   parent: System.Windows.Media
@@ -1093,11 +1943,6 @@ references:
   name: Identity
   nameWithType: Matrix.Identity
   fullName: System.Windows.Media.Matrix.Identity
-- uid: System.Windows.Media.Matrix.Parse*
-  commentId: Overload:System.Windows.Media.Matrix.Parse
-  name: Parse
-  nameWithType: Matrix.Parse
-  fullName: System.Windows.Media.Matrix.Parse
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -1105,6 +1950,11 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: System.Windows.Media.Matrix.Parse*
+  commentId: Overload:System.Windows.Media.Matrix.Parse
+  name: Parse
+  nameWithType: Matrix.Parse
+  fullName: System.Windows.Media.Matrix.Parse
 - uid: System.Windows.Media.Matrix.IsIdentity*
   commentId: Overload:System.Windows.Media.Matrix.IsIdentity
   name: IsIdentity
@@ -1147,22 +1997,174 @@ references:
   name: OffsetY
   nameWithType: Matrix.OffsetY
   fullName: System.Windows.Media.Matrix.OffsetY
+- uid: System.Windows.Media.Matrix.Determinant*
+  commentId: Overload:System.Windows.Media.Matrix.Determinant
+  name: Determinant
+  nameWithType: Matrix.Determinant
+  fullName: System.Windows.Media.Matrix.Determinant
+- uid: System.Windows.Media.Matrix.HasInverse*
+  commentId: Overload:System.Windows.Media.Matrix.HasInverse
+  name: HasInverse
+  nameWithType: Matrix.HasInverse
+  fullName: System.Windows.Media.Matrix.HasInverse
+- uid: System.Windows.Media.Matrix.Multiply*
+  commentId: Overload:System.Windows.Media.Matrix.Multiply
+  name: Multiply
+  nameWithType: Matrix.Multiply
+  fullName: System.Windows.Media.Matrix.Multiply
+- uid: System.Windows.Media.Matrix.Append*
+  commentId: Overload:System.Windows.Media.Matrix.Append
+  name: Append
+  nameWithType: Matrix.Append
+  fullName: System.Windows.Media.Matrix.Append
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: System.Windows.Media.Matrix.Invert*
+  commentId: Overload:System.Windows.Media.Matrix.Invert
+  name: Invert
+  nameWithType: Matrix.Invert
+  fullName: System.Windows.Media.Matrix.Invert
+- uid: System.Windows.Media.Matrix.Prepend*
+  commentId: Overload:System.Windows.Media.Matrix.Prepend
+  name: Prepend
+  nameWithType: Matrix.Prepend
+  fullName: System.Windows.Media.Matrix.Prepend
+- uid: System.Windows.Media.Matrix.Rotate*
+  commentId: Overload:System.Windows.Media.Matrix.Rotate
+  name: Rotate
+  nameWithType: Matrix.Rotate
+  fullName: System.Windows.Media.Matrix.Rotate
+- uid: System.Windows.Media.Matrix.RotateAt*
+  commentId: Overload:System.Windows.Media.Matrix.RotateAt
+  name: RotateAt
+  nameWithType: Matrix.RotateAt
+  fullName: System.Windows.Media.Matrix.RotateAt
+- uid: System.Windows.Media.Matrix.RotateAtPrepend*
+  commentId: Overload:System.Windows.Media.Matrix.RotateAtPrepend
+  name: RotateAtPrepend
+  nameWithType: Matrix.RotateAtPrepend
+  fullName: System.Windows.Media.Matrix.RotateAtPrepend
+- uid: System.Windows.Media.Matrix.RotatePrepend*
+  commentId: Overload:System.Windows.Media.Matrix.RotatePrepend
+  name: RotatePrepend
+  nameWithType: Matrix.RotatePrepend
+  fullName: System.Windows.Media.Matrix.RotatePrepend
+- uid: System.Windows.Media.Matrix.Scale*
+  commentId: Overload:System.Windows.Media.Matrix.Scale
+  name: Scale
+  nameWithType: Matrix.Scale
+  fullName: System.Windows.Media.Matrix.Scale
+- uid: System.Windows.Media.Matrix.ScaleAtPrepend*
+  commentId: Overload:System.Windows.Media.Matrix.ScaleAtPrepend
+  name: ScaleAtPrepend
+  nameWithType: Matrix.ScaleAtPrepend
+  fullName: System.Windows.Media.Matrix.ScaleAtPrepend
+- uid: System.Windows.Media.Matrix.ScalePrepend*
+  commentId: Overload:System.Windows.Media.Matrix.ScalePrepend
+  name: ScalePrepend
+  nameWithType: Matrix.ScalePrepend
+  fullName: System.Windows.Media.Matrix.ScalePrepend
+- uid: System.Windows.Media.Matrix.SetIdentity*
+  commentId: Overload:System.Windows.Media.Matrix.SetIdentity
+  name: SetIdentity
+  nameWithType: Matrix.SetIdentity
+  fullName: System.Windows.Media.Matrix.SetIdentity
+- uid: System.Windows.Media.Matrix.Skew*
+  commentId: Overload:System.Windows.Media.Matrix.Skew
+  name: Skew
+  nameWithType: Matrix.Skew
+  fullName: System.Windows.Media.Matrix.Skew
+- uid: System.Windows.Media.Matrix.SkewPrepend*
+  commentId: Overload:System.Windows.Media.Matrix.SkewPrepend
+  name: SkewPrepend
+  nameWithType: Matrix.SkewPrepend
+  fullName: System.Windows.Media.Matrix.SkewPrepend
 - uid: System.Windows.Media.Matrix.Transform*
   commentId: Overload:System.Windows.Media.Matrix.Transform
   name: Transform
   nameWithType: Matrix.Transform
   fullName: System.Windows.Media.Matrix.Transform
+- uid: System.Windows.Vector
+  commentId: T:System.Windows.Vector
+  parent: System.Windows
+  name: Vector
+  nameWithType: Vector
+  fullName: System.Windows.Vector
+- uid: System.Windows
+  commentId: N:System.Windows
+  name: System.Windows
+  nameWithType: System.Windows
+  fullName: System.Windows
+- uid: System.Windows.Vector[]
+  isExternal: true
+  name: Vector[]
+  nameWithType: Vector[]
+  fullName: System.Windows.Vector[]
+  nameWithType.vb: Vector()
+  fullName.vb: System.Windows.Vector()
+  name.vb: Vector()
+  spec.csharp:
+  - uid: System.Windows.Vector
+    name: Vector
+    nameWithType: Vector
+    fullName: System.Windows.Vector
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Windows.Vector
+    name: Vector
+    nameWithType: Vector
+    fullName: System.Windows.Vector
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: System.Windows.Point[]
+  isExternal: true
+  name: Point[]
+  nameWithType: Point[]
+  fullName: System.Windows.Point[]
+  nameWithType.vb: Point()
+  fullName.vb: System.Windows.Point()
+  name.vb: Point()
+  spec.csharp:
+  - uid: System.Windows.Point
+    name: Point
+    nameWithType: Point
+    fullName: System.Windows.Point
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Windows.Point
+    name: Point
+    nameWithType: Point
+    fullName: System.Windows.Point
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: System.Windows.Point
   commentId: T:System.Windows.Point
   parent: System.Windows
   name: Point
   nameWithType: Point
   fullName: System.Windows.Point
-- uid: System.Windows
-  commentId: N:System.Windows
-  name: System.Windows
-  nameWithType: System.Windows
-  fullName: System.Windows
+- uid: System.Windows.Media.Matrix.Translate*
+  commentId: Overload:System.Windows.Media.Matrix.Translate
+  name: Translate
+  nameWithType: Matrix.Translate
+  fullName: System.Windows.Media.Matrix.Translate
+- uid: System.Windows.Media.Matrix.TranslatePrepend*
+  commentId: Overload:System.Windows.Media.Matrix.TranslatePrepend
+  name: TranslatePrepend
+  nameWithType: Matrix.TranslatePrepend
+  fullName: System.Windows.Media.Matrix.TranslatePrepend
+- uid: System.Windows.Media.Matrix.Equals*
+  commentId: Overload:System.Windows.Media.Matrix.Equals
+  name: Equals
+  nameWithType: Matrix.Equals
+  fullName: System.Windows.Media.Matrix.Equals
 - uid: System.ValueType.Equals(System.Object)
   commentId: M:System.ValueType.Equals(System.Object)
   parent: System.ValueType
@@ -1204,11 +2206,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Windows.Media.Matrix.Equals*
-  commentId: Overload:System.Windows.Media.Matrix.Equals
-  name: Equals
-  nameWithType: Matrix.Equals
-  fullName: System.Windows.Media.Matrix.Equals
 - uid: System.ValueType
   commentId: T:System.ValueType
   parent: System
@@ -1366,6 +2363,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: System.Windows.Media.Matrix.op_Multiply*
+  commentId: Overload:System.Windows.Media.Matrix.op_Multiply
+  name: Multiply
+  nameWithType: Matrix.Multiply
+  fullName: System.Windows.Media.Matrix.Multiply
 - uid: System.Windows.Media.Matrix.op_Equality*
   commentId: Overload:System.Windows.Media.Matrix.op_Equality
   name: Equality

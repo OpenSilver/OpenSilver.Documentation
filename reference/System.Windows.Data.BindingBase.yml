@@ -22,7 +22,7 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: BindingBase
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
@@ -30,7 +30,7 @@ items:
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
-  summary: "\nProvides an abstract base class for the Binding class.\n"
+  summary: "\nDefines the common characteristics of the <xref href=\"System.Windows.Data.Binding\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"System.Windows.Data.MultiBinding\" data-throw-if-not-resolved=\"false\"></xref> classes.\n"
   example: []
   syntax:
     content: 'public abstract class BindingBase : MarkupExtension, IMarkupExtension<object>'
@@ -43,6 +43,7 @@ items:
   - System.Windows.Markup.MarkupExtension
   derivedClasses:
   - System.Windows.Data.Binding
+  - System.Windows.Data.MultiBinding
   implements:
   - System.Xaml.IMarkupExtension{System.Object}
   inheritedMembers:
@@ -53,8 +54,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-  extensionMethods:
-  - System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
   modifiers.csharp:
   - public
   - abstract
@@ -77,11 +76,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: _stringFormat
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-    startLine: 30
+    startLine: 68
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -108,15 +107,15 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: .ctor
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-    startLine: 35
+    startLine: 73
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
-  summary: "\nInitializes a new instance of the BindingBase class.\n"
+  summary: "\nInitializes a new instance of the <xref href=\"System.Windows.Data.BindingBase\" data-throw-if-not-resolved=\"false\"></xref> class.\n"
   example: []
   syntax:
     content: protected BindingBase()
@@ -126,45 +125,6 @@ items:
   - protected
   modifiers.vb:
   - Protected
-- uid: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
-  commentId: M:System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
-  id: ProvideValue(System.IServiceProvider)
-  parent: System.Windows.Data.BindingBase
-  langs:
-  - csharp
-  - vb
-  name: ProvideValue(IServiceProvider)
-  nameWithType: BindingBase.ProvideValue(IServiceProvider)
-  fullName: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ProvideValue
-    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-    startLine: 39
-  assemblies:
-  - OpenSilver
-  namespace: System.Windows.Data
-  example: []
-  syntax:
-    content: public override object ProvideValue(IServiceProvider serviceProvider)
-    parameters:
-    - id: serviceProvider
-      type: System.IServiceProvider
-    return:
-      type: System.Object
-    content.vb: Public Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
-  overridden: System.Windows.Markup.MarkupExtension.ProvideValue(System.IServiceProvider)
-  overload: System.Windows.Data.BindingBase.ProvideValue*
-  modifiers.csharp:
-  - public
-  - override
-  modifiers.vb:
-  - Public
-  - Overrides
 - uid: System.Windows.Data.BindingBase.FallbackValue
   commentId: P:System.Windows.Data.BindingBase.FallbackValue
   id: FallbackValue
@@ -179,11 +139,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: FallbackValue
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-    startLine: 48
+    startLine: 92
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -194,6 +154,7 @@ items:
     parameters: []
     return:
       type: System.Object
+      description: "\nThe value to use when the binding is unable to return a value. The default is null.\n"
     content.vb: Public Property FallbackValue As Object
   overload: System.Windows.Data.BindingBase.FallbackValue*
   modifiers.csharp:
@@ -216,21 +177,22 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: TargetNullValue
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-    startLine: 58
+    startLine: 104
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
-  summary: "\nGets or sets the value that is used in the target when the value of the source\nis null.\n"
+  summary: "\nGets or sets the value that is used in the target when the value of the source is null.\n"
   example: []
   syntax:
     content: public object TargetNullValue { get; set; }
     parameters: []
     return:
       type: System.Object
+      description: "\nThe value that is used in the target when the value of the source is null.\n"
     content.vb: Public Property TargetNullValue As Object
   overload: System.Windows.Data.BindingBase.TargetNullValue*
   modifiers.csharp:
@@ -253,11 +215,11 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: StringFormat
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-    startLine: 68
+    startLine: 118
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
@@ -268,6 +230,7 @@ items:
     parameters: []
     return:
       type: System.String
+      description: "\nA string that specifies how to format the binding if it displays the bound value \nas a string. The default is null.\n"
     content.vb: Public Property StringFormat As String
   overload: System.Windows.Data.BindingBase.StringFormat*
   modifiers.csharp:
@@ -290,23 +253,85 @@ items:
   source:
     remote:
       path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-      branch: releases/OpenSilver/1.1.0
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: CheckSealed
     path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
-    startLine: 74
+    startLine: 153
   assemblies:
   - OpenSilver
   namespace: System.Windows.Data
+  summary: "\nThrows an exception if the binding has already been attached to a binding target.\n"
+  example: []
   syntax:
     content: protected void CheckSealed()
     content.vb: Protected Sub CheckSealed
   overload: System.Windows.Data.BindingBase.CheckSealed*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: "\nThe binding has already been attached to a binding target.\n"
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
+- uid: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+  commentId: M:System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+  id: ProvideValue(System.IServiceProvider)
+  parent: System.Windows.Data.BindingBase
+  langs:
+  - csharp
+  - vb
+  name: ProvideValue(IServiceProvider)
+  nameWithType: BindingBase.ProvideValue(IServiceProvider)
+  fullName: System.Windows.Data.BindingBase.ProvideValue(System.IServiceProvider)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ProvideValue
+    path: ../OpenSilverGit/src/Runtime/Runtime/System.Windows.Data/BindingBase.cs
+    startLine: 172
+  assemblies:
+  - OpenSilver
+  namespace: System.Windows.Data
+  summary: "\nReturns an object that should be set on the property where this binding and extension\nare applied.\n"
+  example: []
+  syntax:
+    content: public sealed override object ProvideValue(IServiceProvider serviceProvider)
+    parameters:
+    - id: serviceProvider
+      type: System.IServiceProvider
+      description: "\nThe object that can provide services for the markup extension. May be null; see\nthe Remarks section for more information.\n"
+    return:
+      type: System.Object
+      description: "\nThe value to set on the binding target property.\n"
+    content.vb: Public NotOverridable Overrides Function ProvideValue(serviceProvider As IServiceProvider) As Object
+  overridden: System.Windows.Markup.MarkupExtension.ProvideValue(System.IServiceProvider)
+  overload: System.Windows.Data.BindingBase.ProvideValue*
+  modifiers.csharp:
+  - public
+  - sealed
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+  - NotOverridable
 references:
+- uid: System.Windows.Data.Binding
+  commentId: T:System.Windows.Data.Binding
+  parent: System.Windows.Data
+  name: Binding
+  nameWithType: Binding
+  fullName: System.Windows.Data.Binding
+- uid: System.Windows.Data.MultiBinding
+  commentId: T:System.Windows.Data.MultiBinding
+  parent: System.Windows.Data
+  name: MultiBinding
+  nameWithType: MultiBinding
+  fullName: System.Windows.Data.MultiBinding
 - uid: System.Windows.Data
   commentId: N:System.Windows.Data
   name: System.Windows.Data
@@ -646,35 +671,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  parent: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  definition: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  name: ToJavaScriptObject()
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject()
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject()
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   name: System
@@ -726,55 +722,6 @@ references:
   name: System.Xaml
   nameWithType: System.Xaml
   fullName: System.Xaml
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  commentId: M:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  isExternal: true
-  name: ToJavaScriptObject(Object)
-  nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject(Object)
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-  spec.csharp:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject(System.Object)
-    name: ToJavaScriptObject
-    nameWithType: ToJavaScriptObjectExtender.ToJavaScriptObject
-    fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.ToJavaScriptObject
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  commentId: T:ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-  parent: ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender.ToJavaScriptObjectExtender
-- uid: ToJavaScriptObjectExtender
-  commentId: N:ToJavaScriptObjectExtender
-  name: ToJavaScriptObjectExtender
-  nameWithType: ToJavaScriptObjectExtender
-  fullName: ToJavaScriptObjectExtender
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -782,11 +729,40 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
+- uid: System.Windows.Data.BindingBase
+  commentId: T:System.Windows.Data.BindingBase
+  parent: System.Windows.Data
+  name: BindingBase
+  nameWithType: BindingBase
+  fullName: System.Windows.Data.BindingBase
 - uid: System.Windows.Data.BindingBase.#ctor*
   commentId: Overload:System.Windows.Data.BindingBase.#ctor
   name: BindingBase
   nameWithType: BindingBase.BindingBase
   fullName: System.Windows.Data.BindingBase.BindingBase
+- uid: System.Windows.Data.BindingBase.FallbackValue*
+  commentId: Overload:System.Windows.Data.BindingBase.FallbackValue
+  name: FallbackValue
+  nameWithType: BindingBase.FallbackValue
+  fullName: System.Windows.Data.BindingBase.FallbackValue
+- uid: System.Windows.Data.BindingBase.TargetNullValue*
+  commentId: Overload:System.Windows.Data.BindingBase.TargetNullValue
+  name: TargetNullValue
+  nameWithType: BindingBase.TargetNullValue
+  fullName: System.Windows.Data.BindingBase.TargetNullValue
+- uid: System.Windows.Data.BindingBase.StringFormat*
+  commentId: Overload:System.Windows.Data.BindingBase.StringFormat
+  name: StringFormat
+  nameWithType: BindingBase.StringFormat
+  fullName: System.Windows.Data.BindingBase.StringFormat
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+- uid: System.Windows.Data.BindingBase.CheckSealed*
+  commentId: Overload:System.Windows.Data.BindingBase.CheckSealed
+  name: CheckSealed
+  nameWithType: BindingBase.CheckSealed
+  fullName: System.Windows.Data.BindingBase.CheckSealed
 - uid: System.Windows.Markup.MarkupExtension.ProvideValue(System.IServiceProvider)
   commentId: M:System.Windows.Markup.MarkupExtension.ProvideValue(System.IServiceProvider)
   parent: System.Windows.Markup.MarkupExtension
@@ -838,23 +814,3 @@ references:
   name: IServiceProvider
   nameWithType: IServiceProvider
   fullName: System.IServiceProvider
-- uid: System.Windows.Data.BindingBase.FallbackValue*
-  commentId: Overload:System.Windows.Data.BindingBase.FallbackValue
-  name: FallbackValue
-  nameWithType: BindingBase.FallbackValue
-  fullName: System.Windows.Data.BindingBase.FallbackValue
-- uid: System.Windows.Data.BindingBase.TargetNullValue*
-  commentId: Overload:System.Windows.Data.BindingBase.TargetNullValue
-  name: TargetNullValue
-  nameWithType: BindingBase.TargetNullValue
-  fullName: System.Windows.Data.BindingBase.TargetNullValue
-- uid: System.Windows.Data.BindingBase.StringFormat*
-  commentId: Overload:System.Windows.Data.BindingBase.StringFormat
-  name: StringFormat
-  nameWithType: BindingBase.StringFormat
-  fullName: System.Windows.Data.BindingBase.StringFormat
-- uid: System.Windows.Data.BindingBase.CheckSealed*
-  commentId: Overload:System.Windows.Data.BindingBase.CheckSealed
-  name: CheckSealed
-  nameWithType: BindingBase.CheckSealed
-  fullName: System.Windows.Data.BindingBase.CheckSealed

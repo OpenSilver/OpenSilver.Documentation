@@ -5,15 +5,24 @@ items:
   id: Interop
   parent: OpenSilver
   children:
+  - OpenSilver.Interop.CreateJavascriptCallback(System.Delegate)
+  - OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs
+  - OpenSilver.Interop.DumpAllJavascriptObjectsFilter
+  - OpenSilver.Interop.DumpAllJavascriptObjectsLogger
+  - OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount
+  - OpenSilver.Interop.DumpAllJavascriptObjectsVerbose
   - OpenSilver.Interop.ExecuteJavaScript(System.String)
   - OpenSilver.Interop.ExecuteJavaScript(System.String,System.Object[])
   - OpenSilver.Interop.ExecuteJavaScriptAsync(System.String)
   - OpenSilver.Interop.ExecuteJavaScriptAsync(System.String,System.Object[])
+  - OpenSilver.Interop.ExecuteJavaScriptGetResult``1(System.String)
+  - OpenSilver.Interop.ExecuteJavaScriptVoid(System.String)
+  - OpenSilver.Interop.ExecuteJavaScriptVoid(System.String,System.Object[])
+  - OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String)
+  - OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String,System.Object[])
   - OpenSilver.Interop.GetDiv(System.Windows.UIElement)
-  - OpenSilver.Interop.IsNull(System.Object)
   - OpenSilver.Interop.IsRunningInTheSimulator
-  - OpenSilver.Interop.IsRunningInTheSimulator_WorkAround
-  - OpenSilver.Interop.IsUndefined(System.Object)
+  - OpenSilver.Interop.IsRunningInTheXamlDesigner
   - OpenSilver.Interop.LoadCssFile(OpenSilver.Interop.ResourceFile)
   - OpenSilver.Interop.LoadCssFile(System.String)
   - OpenSilver.Interop.LoadCssFilesAsync(System.Collections.Generic.IEnumerable{OpenSilver.Interop.ResourceFile},System.Action)
@@ -22,7 +31,6 @@ items:
   - OpenSilver.Interop.LoadJavaScriptFile(System.String)
   - OpenSilver.Interop.LoadJavaScriptFilesAsync(System.Collections.Generic.IEnumerable{OpenSilver.Interop.ResourceFile},System.Action,System.Action)
   - OpenSilver.Interop.LoadJavaScriptFilesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action,System.Action)
-  - OpenSilver.Interop.Unbox(System.Object)
   langs:
   - csharp
   - vb
@@ -32,12 +40,12 @@ items:
   type: Class
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: Interop
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 30
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 32
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -63,221 +71,6 @@ items:
   modifiers.vb:
   - Public
   - Module
-- uid: OpenSilver.Interop.ExecuteJavaScript(System.String)
-  commentId: M:OpenSilver.Interop.ExecuteJavaScript(System.String)
-  id: ExecuteJavaScript(System.String)
-  parent: OpenSilver.Interop
-  langs:
-  - csharp
-  - vb
-  name: ExecuteJavaScript(String)
-  nameWithType: Interop.ExecuteJavaScript(String)
-  fullName: OpenSilver.Interop.ExecuteJavaScript(System.String)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ExecuteJavaScript
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 40
-  assemblies:
-  - OpenSilver
-  namespace: OpenSilver
-  summary: "\nAllows calling JavaScript code from within C#.\n"
-  example: []
-  syntax:
-    content: public static object ExecuteJavaScript(string javascript)
-    parameters:
-    - id: javascript
-      type: System.String
-      description: The JavaScript code to execute.
-    return:
-      type: System.Object
-      description: The result, if any, of the JavaScript call.
-    content.vb: Public Shared Function ExecuteJavaScript(javascript As String) As Object
-  overload: OpenSilver.Interop.ExecuteJavaScript*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: OpenSilver.Interop.ExecuteJavaScript(System.String,System.Object[])
-  commentId: M:OpenSilver.Interop.ExecuteJavaScript(System.String,System.Object[])
-  id: ExecuteJavaScript(System.String,System.Object[])
-  parent: OpenSilver.Interop
-  langs:
-  - csharp
-  - vb
-  name: ExecuteJavaScript(String, Object[])
-  nameWithType: Interop.ExecuteJavaScript(String, Object[])
-  fullName: OpenSilver.Interop.ExecuteJavaScript(System.String, System.Object[])
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ExecuteJavaScript
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 54
-  assemblies:
-  - OpenSilver
-  namespace: OpenSilver
-  summary: "\nAllows calling JavaScript code from within C#.\n"
-  example: []
-  syntax:
-    content: public static object ExecuteJavaScript(string javascript, params object[] variables)
-    parameters:
-    - id: javascript
-      type: System.String
-      description: The JavaScript code to execute.
-    - id: variables
-      type: System.Object[]
-      description: The objects to use inside the JavaScript call.
-    return:
-      type: System.Object
-      description: The result, if any, of the JavaScript call.
-    content.vb: Public Shared Function ExecuteJavaScript(javascript As String, ParamArray variables As Object()) As Object
-  overload: OpenSilver.Interop.ExecuteJavaScript*
-  nameWithType.vb: Interop.ExecuteJavaScript(String, Object())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: OpenSilver.Interop.ExecuteJavaScript(System.String, System.Object())
-  name.vb: ExecuteJavaScript(String, Object())
-- uid: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String)
-  commentId: M:OpenSilver.Interop.ExecuteJavaScriptAsync(System.String)
-  id: ExecuteJavaScriptAsync(System.String)
-  parent: OpenSilver.Interop
-  langs:
-  - csharp
-  - vb
-  name: ExecuteJavaScriptAsync(String)
-  nameWithType: Interop.ExecuteJavaScriptAsync(String)
-  fullName: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ExecuteJavaScriptAsync
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 66
-  assemblies:
-  - OpenSilver
-  namespace: OpenSilver
-  summary: "\nAllows calling JavaScript code from within C#. The call will be asynchronous when run in the Simulator.\n"
-  example: []
-  syntax:
-    content: public static object ExecuteJavaScriptAsync(string javascript)
-    parameters:
-    - id: javascript
-      type: System.String
-      description: The JavaScript code to execute.
-    return:
-      type: System.Object
-    content.vb: Public Shared Function ExecuteJavaScriptAsync(javascript As String) As Object
-  overload: OpenSilver.Interop.ExecuteJavaScriptAsync*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String,System.Object[])
-  commentId: M:OpenSilver.Interop.ExecuteJavaScriptAsync(System.String,System.Object[])
-  id: ExecuteJavaScriptAsync(System.String,System.Object[])
-  parent: OpenSilver.Interop
-  langs:
-  - csharp
-  - vb
-  name: ExecuteJavaScriptAsync(String, Object[])
-  nameWithType: Interop.ExecuteJavaScriptAsync(String, Object[])
-  fullName: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String, System.Object[])
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: ExecuteJavaScriptAsync
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 79
-  assemblies:
-  - OpenSilver
-  namespace: OpenSilver
-  summary: "\nAllows calling JavaScript code from within C#. The call will be asynchronous when run in the Simulator.\n"
-  example: []
-  syntax:
-    content: public static object ExecuteJavaScriptAsync(string javascript, params object[] variables)
-    parameters:
-    - id: javascript
-      type: System.String
-      description: The JavaScript code to execute.
-    - id: variables
-      type: System.Object[]
-      description: The objects to use inside the JavaScript call.
-    return:
-      type: System.Object
-    content.vb: Public Shared Function ExecuteJavaScriptAsync(javascript As String, ParamArray variables As Object()) As Object
-  overload: OpenSilver.Interop.ExecuteJavaScriptAsync*
-  nameWithType.vb: Interop.ExecuteJavaScriptAsync(String, Object())
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-  fullName.vb: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String, System.Object())
-  name.vb: ExecuteJavaScriptAsync(String, Object())
-- uid: OpenSilver.Interop.Unbox(System.Object)
-  commentId: M:OpenSilver.Interop.Unbox(System.Object)
-  id: Unbox(System.Object)
-  parent: OpenSilver.Interop
-  langs:
-  - csharp
-  - vb
-  name: Unbox(Object)
-  nameWithType: Interop.Unbox(Object)
-  fullName: OpenSilver.Interop.Unbox(System.Object)
-  type: Method
-  source:
-    remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
-      repo: https://github.com/OpenSilver/OpenSilver.git
-    id: Unbox
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 92
-  assemblies:
-  - OpenSilver
-  namespace: OpenSilver
-  summary: "\nUnboxes the value passed as a parameter. It is particularly useful for the variables of the ExecuteJavaScript Methods calls aimed at using third party libraries.\n"
-  example: []
-  syntax:
-    content: public static object Unbox(object value)
-    parameters:
-    - id: value
-      type: System.Object
-      description: The value to unbox.
-    return:
-      type: System.Object
-      description: the unboxed value if the value was boxed, the value itself otherwise.
-    content.vb: Public Shared Function Unbox(value As Object) As Object
-  overload: OpenSilver.Interop.Unbox*
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
 - uid: OpenSilver.Interop.LoadJavaScriptFile(System.String)
   commentId: M:OpenSilver.Interop.LoadJavaScriptFile(System.String)
   id: LoadJavaScriptFile(System.String)
@@ -291,12 +84,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadJavaScriptFile
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 102
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 34
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -332,12 +125,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadJavaScriptFile
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 125
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 51
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -369,12 +162,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadJavaScriptFilesAsync
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 163
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 85
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -417,12 +210,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadJavaScriptFilesAsync
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 178
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 96
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -459,12 +252,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadCssFile
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 207
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 121
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -500,12 +293,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadCssFile
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 215
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 128
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -537,12 +330,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadCssFilesAsync
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 236
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 148
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -581,12 +374,12 @@ items:
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: LoadCssFilesAsync
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 242
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.ResourceFiles.cs
+    startLine: 154
   assemblies:
   - OpenSilver
   namespace: OpenSilver
@@ -608,44 +401,188 @@ items:
   - Shared
   fullName.vb: OpenSilver.Interop.LoadCssFilesAsync(System.Collections.Generic.IEnumerable(Of OpenSilver.Interop.ResourceFile), System.Action)
   name.vb: LoadCssFilesAsync(IEnumerable(Of Interop.ResourceFile), Action)
-- uid: OpenSilver.Interop.GetDiv(System.Windows.UIElement)
-  commentId: M:OpenSilver.Interop.GetDiv(System.Windows.UIElement)
-  id: GetDiv(System.Windows.UIElement)
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs
+  commentId: P:OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs
+  id: DumpAllJavascriptObjectsEveryMs
   parent: OpenSilver.Interop
   langs:
   - csharp
   - vb
-  name: GetDiv(UIElement)
-  nameWithType: Interop.GetDiv(UIElement)
-  fullName: OpenSilver.Interop.GetDiv(System.Windows.UIElement)
-  type: Method
+  name: DumpAllJavascriptObjectsEveryMs
+  nameWithType: Interop.DumpAllJavascriptObjectsEveryMs
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs
+  type: Property
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: GetDiv
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 264
+    id: DumpAllJavascriptObjectsEveryMs
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 43
   assemblies:
   - OpenSilver
   namespace: OpenSilver
-  summary: "\nReturns the HTML Div that is associated to the specified FrameworkElement.\nNote: the FrameworkElement must be in the visual tree. Consider calling this\nmethod from the &apos;Loaded&apos; event to ensure that the element is in the visual tree.\n"
-  example: []
   syntax:
-    content: public static object GetDiv(UIElement element)
-    parameters:
-    - id: element
-      type: System.Windows.UIElement
-      description: ''
+    content: public static int DumpAllJavascriptObjectsEveryMs { get; set; }
+    parameters: []
     return:
-      type: System.Object
-      description: ''
-    content.vb: Public Shared Function GetDiv(element As UIElement) As Object
-  overload: OpenSilver.Interop.GetDiv*
+      type: System.Int32
+    content.vb: Public Shared Property DumpAllJavascriptObjectsEveryMs As Integer
+  overload: OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs*
   modifiers.csharp:
   - public
   - static
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsVerbose
+  commentId: P:OpenSilver.Interop.DumpAllJavascriptObjectsVerbose
+  id: DumpAllJavascriptObjectsVerbose
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: DumpAllJavascriptObjectsVerbose
+  nameWithType: Interop.DumpAllJavascriptObjectsVerbose
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsVerbose
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DumpAllJavascriptObjectsVerbose
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 61
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: public static bool DumpAllJavascriptObjectsVerbose { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Property DumpAllJavascriptObjectsVerbose As Boolean
+  overload: OpenSilver.Interop.DumpAllJavascriptObjectsVerbose*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount
+  commentId: P:OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount
+  id: DumpAllJavascriptObjectsStackTraceCount
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: DumpAllJavascriptObjectsStackTraceCount
+  nameWithType: Interop.DumpAllJavascriptObjectsStackTraceCount
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DumpAllJavascriptObjectsStackTraceCount
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 64
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: public static int DumpAllJavascriptObjectsStackTraceCount { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Shared Property DumpAllJavascriptObjectsStackTraceCount As Integer
+  overload: OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsFilter
+  commentId: P:OpenSilver.Interop.DumpAllJavascriptObjectsFilter
+  id: DumpAllJavascriptObjectsFilter
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: DumpAllJavascriptObjectsFilter
+  nameWithType: Interop.DumpAllJavascriptObjectsFilter
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsFilter
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DumpAllJavascriptObjectsFilter
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 70
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: public static Func<string, string, bool> DumpAllJavascriptObjectsFilter { get; set; }
+    parameters: []
+    return:
+      type: System.Func{System.String,System.String,System.Boolean}
+    content.vb: Public Shared Property DumpAllJavascriptObjectsFilter As Func(Of String, String, Boolean)
+  overload: OpenSilver.Interop.DumpAllJavascriptObjectsFilter*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsLogger
+  commentId: P:OpenSilver.Interop.DumpAllJavascriptObjectsLogger
+  id: DumpAllJavascriptObjectsLogger
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: DumpAllJavascriptObjectsLogger
+  nameWithType: Interop.DumpAllJavascriptObjectsLogger
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsLogger
+  type: Property
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: DumpAllJavascriptObjectsLogger
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 73
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: public static Action<string> DumpAllJavascriptObjectsLogger { get; set; }
+    parameters: []
+    return:
+      type: System.Action{System.String}
+    content.vb: Public Shared Property DumpAllJavascriptObjectsLogger As Action(Of String)
+  overload: OpenSilver.Interop.DumpAllJavascriptObjectsLogger*
+  modifiers.csharp:
+  - public
+  - static
+  - get
+  - set
   modifiers.vb:
   - Public
   - Shared
@@ -662,16 +599,16 @@ items:
   type: Property
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
     id: IsRunningInTheSimulator
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 279
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 78
   assemblies:
   - OpenSilver
   namespace: OpenSilver
-  summary: "\nReturns True is the app is running in C#, and False otherwise. \nTo know if you&apos;re in the simulator use IsRunningInTheSimulator_WorkAround.\n"
+  summary: "\nReturns True is the app is running in the simulator, and False otherwise. \n"
   example: []
   syntax:
     content: public static bool IsRunningInTheSimulator { get; }
@@ -688,37 +625,37 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: OpenSilver.Interop.IsRunningInTheSimulator_WorkAround
-  commentId: P:OpenSilver.Interop.IsRunningInTheSimulator_WorkAround
-  id: IsRunningInTheSimulator_WorkAround
+- uid: OpenSilver.Interop.IsRunningInTheXamlDesigner
+  commentId: P:OpenSilver.Interop.IsRunningInTheXamlDesigner
+  id: IsRunningInTheXamlDesigner
   parent: OpenSilver.Interop
   langs:
   - csharp
   - vb
-  name: IsRunningInTheSimulator_WorkAround
-  nameWithType: Interop.IsRunningInTheSimulator_WorkAround
-  fullName: OpenSilver.Interop.IsRunningInTheSimulator_WorkAround
+  name: IsRunningInTheXamlDesigner
+  nameWithType: Interop.IsRunningInTheXamlDesigner
+  fullName: OpenSilver.Interop.IsRunningInTheXamlDesigner
   type: Property
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: IsRunningInTheSimulator_WorkAround
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 297
+    id: IsRunningInTheXamlDesigner
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 83
   assemblies:
   - OpenSilver
   namespace: OpenSilver
-  summary: "\nReturns True is the app is running inside the Simulator, and False otherwise.\n"
+  summary: "\nReturns True if the app is running inside the Xaml Designer, and False otherwise.\n"
   example: []
   syntax:
-    content: public static bool IsRunningInTheSimulator_WorkAround { get; }
+    content: public static bool IsRunningInTheXamlDesigner { get; }
     parameters: []
     return:
       type: System.Boolean
-    content.vb: Public Shared ReadOnly Property IsRunningInTheSimulator_WorkAround As Boolean
-  overload: OpenSilver.Interop.IsRunningInTheSimulator_WorkAround*
+    content.vb: Public Shared ReadOnly Property IsRunningInTheXamlDesigner As Boolean
+  overload: OpenSilver.Interop.IsRunningInTheXamlDesigner*
   modifiers.csharp:
   - public
   - static
@@ -727,78 +664,447 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: OpenSilver.Interop.IsUndefined(System.Object)
-  commentId: M:OpenSilver.Interop.IsUndefined(System.Object)
-  id: IsUndefined(System.Object)
+- uid: OpenSilver.Interop.ExecuteJavaScriptGetResult``1(System.String)
+  commentId: M:OpenSilver.Interop.ExecuteJavaScriptGetResult``1(System.String)
+  id: ExecuteJavaScriptGetResult``1(System.String)
   parent: OpenSilver.Interop
   langs:
   - csharp
   - vb
-  name: IsUndefined(Object)
-  nameWithType: Interop.IsUndefined(Object)
-  fullName: OpenSilver.Interop.IsUndefined(System.Object)
+  name: ExecuteJavaScriptGetResult<T1>(String)
+  nameWithType: Interop.ExecuteJavaScriptGetResult<T1>(String)
+  fullName: OpenSilver.Interop.ExecuteJavaScriptGetResult<T1>(System.String)
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: IsUndefined
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 313
+    id: ExecuteJavaScriptGetResult
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 107
   assemblies:
   - OpenSilver
   namespace: OpenSilver
-  summary: "\nCheck if the given jsnode is undefined\n"
-  example: []
   syntax:
-    content: public static bool IsUndefined(object jsObject)
+    content: public static T1 ExecuteJavaScriptGetResult<T1>(string javascript)
     parameters:
-    - id: jsObject
-      type: System.Object
+    - id: javascript
+      type: System.String
+    typeParameters:
+    - id: T1
     return:
-      type: System.Boolean
-    content.vb: Public Shared Function IsUndefined(jsObject As Object) As Boolean
-  overload: OpenSilver.Interop.IsUndefined*
+      type: '{T1}'
+    content.vb: Public Shared Function ExecuteJavaScriptGetResult(Of T1)(javascript As String) As T1
+  overload: OpenSilver.Interop.ExecuteJavaScriptGetResult*
+  nameWithType.vb: Interop.ExecuteJavaScriptGetResult(Of T1)(String)
   modifiers.csharp:
   - public
   - static
   modifiers.vb:
   - Public
   - Shared
-- uid: OpenSilver.Interop.IsNull(System.Object)
-  commentId: M:OpenSilver.Interop.IsNull(System.Object)
-  id: IsNull(System.Object)
+  fullName.vb: OpenSilver.Interop.ExecuteJavaScriptGetResult(Of T1)(System.String)
+  name.vb: ExecuteJavaScriptGetResult(Of T1)(String)
+- uid: OpenSilver.Interop.ExecuteJavaScriptVoid(System.String,System.Object[])
+  commentId: M:OpenSilver.Interop.ExecuteJavaScriptVoid(System.String,System.Object[])
+  id: ExecuteJavaScriptVoid(System.String,System.Object[])
   parent: OpenSilver.Interop
   langs:
   - csharp
   - vb
-  name: IsNull(Object)
-  nameWithType: Interop.IsNull(Object)
-  fullName: OpenSilver.Interop.IsNull(System.Object)
+  name: ExecuteJavaScriptVoid(String, Object[])
+  nameWithType: Interop.ExecuteJavaScriptVoid(String, Object[])
+  fullName: OpenSilver.Interop.ExecuteJavaScriptVoid(System.String, System.Object[])
   type: Method
   source:
     remote:
-      path: src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-      branch: releases/OpenSilver/1.1.0
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
       repo: https://github.com/OpenSilver/OpenSilver.git
-    id: IsNull
-    path: ../OpenSilverGit/src/Runtime/Runtime/PublicAPI/Interop/Interop.cs
-    startLine: 324
+    id: ExecuteJavaScriptVoid
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 123
   assemblies:
   - OpenSilver
   namespace: OpenSilver
-  summary: "\nCheck if the given jsnode is undefined\n"
+  syntax:
+    content: public static void ExecuteJavaScriptVoid(string javascript, params object[] variables)
+    parameters:
+    - id: javascript
+      type: System.String
+    - id: variables
+      type: System.Object[]
+    content.vb: Public Shared Sub ExecuteJavaScriptVoid(javascript As String, ParamArray variables As Object())
+  overload: OpenSilver.Interop.ExecuteJavaScriptVoid*
+  nameWithType.vb: Interop.ExecuteJavaScriptVoid(String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: OpenSilver.Interop.ExecuteJavaScriptVoid(System.String, System.Object())
+  name.vb: ExecuteJavaScriptVoid(String, Object())
+- uid: OpenSilver.Interop.ExecuteJavaScriptVoid(System.String)
+  commentId: M:OpenSilver.Interop.ExecuteJavaScriptVoid(System.String)
+  id: ExecuteJavaScriptVoid(System.String)
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: ExecuteJavaScriptVoid(String)
+  nameWithType: Interop.ExecuteJavaScriptVoid(String)
+  fullName: OpenSilver.Interop.ExecuteJavaScriptVoid(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExecuteJavaScriptVoid
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 126
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: public static void ExecuteJavaScriptVoid(string javascript)
+    parameters:
+    - id: javascript
+      type: System.String
+    content.vb: Public Shared Sub ExecuteJavaScriptVoid(javascript As String)
+  overload: OpenSilver.Interop.ExecuteJavaScriptVoid*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String,System.Object[])
+  commentId: M:OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String,System.Object[])
+  id: ExecuteJavaScriptVoidAsync(System.String,System.Object[])
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: ExecuteJavaScriptVoidAsync(String, Object[])
+  nameWithType: Interop.ExecuteJavaScriptVoidAsync(String, Object[])
+  fullName: OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExecuteJavaScriptVoidAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 129
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: public static void ExecuteJavaScriptVoidAsync(string javascript, params object[] variables)
+    parameters:
+    - id: javascript
+      type: System.String
+    - id: variables
+      type: System.Object[]
+    content.vb: Public Shared Sub ExecuteJavaScriptVoidAsync(javascript As String, ParamArray variables As Object())
+  overload: OpenSilver.Interop.ExecuteJavaScriptVoidAsync*
+  nameWithType.vb: Interop.ExecuteJavaScriptVoidAsync(String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String, System.Object())
+  name.vb: ExecuteJavaScriptVoidAsync(String, Object())
+- uid: OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String)
+  commentId: M:OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String)
+  id: ExecuteJavaScriptVoidAsync(System.String)
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: ExecuteJavaScriptVoidAsync(String)
+  nameWithType: Interop.ExecuteJavaScriptVoidAsync(String)
+  fullName: OpenSilver.Interop.ExecuteJavaScriptVoidAsync(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExecuteJavaScriptVoidAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 135
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  syntax:
+    content: public static void ExecuteJavaScriptVoidAsync(string javascript)
+    parameters:
+    - id: javascript
+      type: System.String
+    content.vb: Public Shared Sub ExecuteJavaScriptVoidAsync(javascript As String)
+  overload: OpenSilver.Interop.ExecuteJavaScriptVoidAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.ExecuteJavaScript(System.String)
+  commentId: M:OpenSilver.Interop.ExecuteJavaScript(System.String)
+  id: ExecuteJavaScript(System.String)
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: ExecuteJavaScript(String)
+  nameWithType: Interop.ExecuteJavaScript(String)
+  fullName: OpenSilver.Interop.ExecuteJavaScript(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExecuteJavaScript
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 170
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nAllows calling JavaScript code from within C#.\n"
   example: []
   syntax:
-    content: public static bool IsNull(object jsObject)
+    content: public static IDisposable ExecuteJavaScript(string javascript)
     parameters:
-    - id: jsObject
-      type: System.Object
+    - id: javascript
+      type: System.String
+      description: The JavaScript code to execute.
     return:
-      type: System.Boolean
-    content.vb: Public Shared Function IsNull(jsObject As Object) As Boolean
-  overload: OpenSilver.Interop.IsNull*
+      type: System.IDisposable
+      description: The result, if any, of the JavaScript call.
+    content.vb: Public Shared Function ExecuteJavaScript(javascript As String) As IDisposable
+  overload: OpenSilver.Interop.ExecuteJavaScript*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.ExecuteJavaScript(System.String,System.Object[])
+  commentId: M:OpenSilver.Interop.ExecuteJavaScript(System.String,System.Object[])
+  id: ExecuteJavaScript(System.String,System.Object[])
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: ExecuteJavaScript(String, Object[])
+  nameWithType: Interop.ExecuteJavaScript(String, Object[])
+  fullName: OpenSilver.Interop.ExecuteJavaScript(System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExecuteJavaScript
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 179
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nAllows calling JavaScript code from within C#.\n"
+  example: []
+  syntax:
+    content: public static IDisposable ExecuteJavaScript(string javascript, params object[] variables)
+    parameters:
+    - id: javascript
+      type: System.String
+      description: The JavaScript code to execute.
+    - id: variables
+      type: System.Object[]
+      description: The objects to use inside the JavaScript call.
+    return:
+      type: System.IDisposable
+      description: The result, if any, of the JavaScript call.
+    content.vb: Public Shared Function ExecuteJavaScript(javascript As String, ParamArray variables As Object()) As IDisposable
+  overload: OpenSilver.Interop.ExecuteJavaScript*
+  nameWithType.vb: Interop.ExecuteJavaScript(String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: OpenSilver.Interop.ExecuteJavaScript(System.String, System.Object())
+  name.vb: ExecuteJavaScript(String, Object())
+- uid: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String)
+  commentId: M:OpenSilver.Interop.ExecuteJavaScriptAsync(System.String)
+  id: ExecuteJavaScriptAsync(System.String)
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: ExecuteJavaScriptAsync(String)
+  nameWithType: Interop.ExecuteJavaScriptAsync(String)
+  fullName: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExecuteJavaScriptAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 196
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nAllows calling JavaScript code from within C#. The call will be asynchronous when run in the Simulator.\n"
+  example: []
+  syntax:
+    content: public static IDisposable ExecuteJavaScriptAsync(string javascript)
+    parameters:
+    - id: javascript
+      type: System.String
+      description: The JavaScript code to execute.
+    return:
+      type: System.IDisposable
+    content.vb: Public Shared Function ExecuteJavaScriptAsync(javascript As String) As IDisposable
+  overload: OpenSilver.Interop.ExecuteJavaScriptAsync*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String,System.Object[])
+  commentId: M:OpenSilver.Interop.ExecuteJavaScriptAsync(System.String,System.Object[])
+  id: ExecuteJavaScriptAsync(System.String,System.Object[])
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: ExecuteJavaScriptAsync(String, Object[])
+  nameWithType: Interop.ExecuteJavaScriptAsync(String, Object[])
+  fullName: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String, System.Object[])
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: ExecuteJavaScriptAsync
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 204
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nAllows calling JavaScript code from within C#. The call will be asynchronous when run in the Simulator.\n"
+  example: []
+  syntax:
+    content: public static IDisposable ExecuteJavaScriptAsync(string javascript, params object[] variables)
+    parameters:
+    - id: javascript
+      type: System.String
+      description: The JavaScript code to execute.
+    - id: variables
+      type: System.Object[]
+      description: The objects to use inside the JavaScript call.
+    return:
+      type: System.IDisposable
+    content.vb: Public Shared Function ExecuteJavaScriptAsync(javascript As String, ParamArray variables As Object()) As IDisposable
+  overload: OpenSilver.Interop.ExecuteJavaScriptAsync*
+  nameWithType.vb: Interop.ExecuteJavaScriptAsync(String, Object())
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: OpenSilver.Interop.ExecuteJavaScriptAsync(System.String, System.Object())
+  name.vb: ExecuteJavaScriptAsync(String, Object())
+- uid: OpenSilver.Interop.CreateJavascriptCallback(System.Delegate)
+  commentId: M:OpenSilver.Interop.CreateJavascriptCallback(System.Delegate)
+  id: CreateJavascriptCallback(System.Delegate)
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: CreateJavascriptCallback(Delegate)
+  nameWithType: Interop.CreateJavascriptCallback(Delegate)
+  fullName: OpenSilver.Interop.CreateJavascriptCallback(System.Delegate)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: CreateJavascriptCallback
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 262
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nRegister a .NET method to allow it to be invoked from JavaScript code.\n"
+  example: []
+  syntax:
+    content: public static IDisposable CreateJavascriptCallback(Delegate d)
+    parameters:
+    - id: d
+      type: System.Delegate
+    return:
+      type: System.IDisposable
+      description: "\nAn <xref href=\"System.IDisposable\" data-throw-if-not-resolved=\"false\"></xref> object that must be disposed after it has been used.\nIf the object is not disposed, it will be leaked.\n"
+    content.vb: Public Shared Function CreateJavascriptCallback(d As  Delegate) As IDisposable
+  overload: OpenSilver.Interop.CreateJavascriptCallback*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: OpenSilver.Interop.GetDiv(System.Windows.UIElement)
+  commentId: M:OpenSilver.Interop.GetDiv(System.Windows.UIElement)
+  id: GetDiv(System.Windows.UIElement)
+  parent: OpenSilver.Interop
+  langs:
+  - csharp
+  - vb
+  name: GetDiv(UIElement)
+  nameWithType: Interop.GetDiv(UIElement)
+  fullName: OpenSilver.Interop.GetDiv(System.Windows.UIElement)
+  type: Method
+  source:
+    remote:
+      path: src/Runtime/Runtime/OpenSilver/Interop.cs
+      branch: develop
+      repo: https://github.com/OpenSilver/OpenSilver.git
+    id: GetDiv
+    path: ../OpenSilverGit/src/Runtime/Runtime/OpenSilver/Interop.cs
+    startLine: 463
+  assemblies:
+  - OpenSilver
+  namespace: OpenSilver
+  summary: "\nReturns the HTML Div that is associated to the specified FrameworkElement.\nNote: the FrameworkElement must be in the visual tree. Consider calling this\nmethod from the &apos;Loaded&apos; event to ensure that the element is in the visual tree.\n"
+  example: []
+  syntax:
+    content: public static object GetDiv(UIElement element)
+    parameters:
+    - id: element
+      type: System.Windows.UIElement
+      description: ''
+    return:
+      type: System.Object
+      description: ''
+    content.vb: Public Shared Function GetDiv(element As UIElement) As Object
+  overload: OpenSilver.Interop.GetDiv*
   modifiers.csharp:
   - public
   - static
@@ -1102,11 +1408,11 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: OpenSilver.Interop.ExecuteJavaScript*
-  commentId: Overload:OpenSilver.Interop.ExecuteJavaScript
-  name: ExecuteJavaScript
-  nameWithType: Interop.ExecuteJavaScript
-  fullName: OpenSilver.Interop.ExecuteJavaScript
+- uid: OpenSilver.Interop.LoadJavaScriptFile*
+  commentId: Overload:OpenSilver.Interop.LoadJavaScriptFile
+  name: LoadJavaScriptFile
+  nameWithType: Interop.LoadJavaScriptFile
+  fullName: OpenSilver.Interop.LoadJavaScriptFile
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -1114,47 +1420,6 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: System.Object[]
-  isExternal: true
-  name: Object[]
-  nameWithType: Object[]
-  fullName: System.Object[]
-  nameWithType.vb: Object()
-  fullName.vb: System.Object()
-  name.vb: Object()
-  spec.csharp:
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  spec.vb:
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-- uid: OpenSilver.Interop.ExecuteJavaScriptAsync*
-  commentId: Overload:OpenSilver.Interop.ExecuteJavaScriptAsync
-  name: ExecuteJavaScriptAsync
-  nameWithType: Interop.ExecuteJavaScriptAsync
-  fullName: OpenSilver.Interop.ExecuteJavaScriptAsync
-- uid: OpenSilver.Interop.Unbox*
-  commentId: Overload:OpenSilver.Interop.Unbox
-  name: Unbox
-  nameWithType: Interop.Unbox
-  fullName: OpenSilver.Interop.Unbox
-- uid: OpenSilver.Interop.LoadJavaScriptFile*
-  commentId: Overload:OpenSilver.Interop.LoadJavaScriptFile
-  name: LoadJavaScriptFile
-  nameWithType: Interop.LoadJavaScriptFile
-  fullName: OpenSilver.Interop.LoadJavaScriptFile
 - uid: System.Threading.Tasks.Task{System.Object}
   commentId: T:System.Threading.Tasks.Task{System.Object}
   parent: System.Threading.Tasks
@@ -1402,6 +1667,358 @@ references:
   name: LoadCssFilesAsync
   nameWithType: Interop.LoadCssFilesAsync
   fullName: OpenSilver.Interop.LoadCssFilesAsync
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs*
+  commentId: Overload:OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs
+  name: DumpAllJavascriptObjectsEveryMs
+  nameWithType: Interop.DumpAllJavascriptObjectsEveryMs
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsEveryMs
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsVerbose*
+  commentId: Overload:OpenSilver.Interop.DumpAllJavascriptObjectsVerbose
+  name: DumpAllJavascriptObjectsVerbose
+  nameWithType: Interop.DumpAllJavascriptObjectsVerbose
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsVerbose
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount*
+  commentId: Overload:OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount
+  name: DumpAllJavascriptObjectsStackTraceCount
+  nameWithType: Interop.DumpAllJavascriptObjectsStackTraceCount
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsStackTraceCount
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsFilter*
+  commentId: Overload:OpenSilver.Interop.DumpAllJavascriptObjectsFilter
+  name: DumpAllJavascriptObjectsFilter
+  nameWithType: Interop.DumpAllJavascriptObjectsFilter
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsFilter
+- uid: System.Func{System.String,System.String,System.Boolean}
+  commentId: T:System.Func{System.String,System.String,System.Boolean}
+  parent: System
+  definition: System.Func`3
+  name: Func<String, String, Boolean>
+  nameWithType: Func<String, String, Boolean>
+  fullName: System.Func<System.String, System.String, System.Boolean>
+  nameWithType.vb: Func(Of String, String, Boolean)
+  fullName.vb: System.Func(Of System.String, System.String, System.Boolean)
+  name.vb: Func(Of String, String, Boolean)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    nameWithType: Func
+    fullName: System.Func
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T1
+    nameWithType: T1
+    fullName: T1
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: T2
+    nameWithType: T2
+    fullName: T2
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: OpenSilver.Interop.DumpAllJavascriptObjectsLogger*
+  commentId: Overload:OpenSilver.Interop.DumpAllJavascriptObjectsLogger
+  name: DumpAllJavascriptObjectsLogger
+  nameWithType: Interop.DumpAllJavascriptObjectsLogger
+  fullName: OpenSilver.Interop.DumpAllJavascriptObjectsLogger
+- uid: System.Action{System.String}
+  commentId: T:System.Action{System.String}
+  parent: System
+  definition: System.Action`1
+  name: Action<String>
+  nameWithType: Action<String>
+  fullName: System.Action<System.String>
+  nameWithType.vb: Action(Of String)
+  fullName.vb: System.Action(Of System.String)
+  name.vb: Action(Of String)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Action`1
+  commentId: T:System.Action`1
+  isExternal: true
+  name: Action<T>
+  nameWithType: Action<T>
+  fullName: System.Action<T>
+  nameWithType.vb: Action(Of T)
+  fullName.vb: System.Action(Of T)
+  name.vb: Action(Of T)
+  spec.csharp:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Action`1
+    name: Action
+    nameWithType: Action
+    fullName: System.Action
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: OpenSilver.Interop.IsRunningInTheSimulator*
+  commentId: Overload:OpenSilver.Interop.IsRunningInTheSimulator
+  name: IsRunningInTheSimulator
+  nameWithType: Interop.IsRunningInTheSimulator
+  fullName: OpenSilver.Interop.IsRunningInTheSimulator
+- uid: OpenSilver.Interop.IsRunningInTheXamlDesigner*
+  commentId: Overload:OpenSilver.Interop.IsRunningInTheXamlDesigner
+  name: IsRunningInTheXamlDesigner
+  nameWithType: Interop.IsRunningInTheXamlDesigner
+  fullName: OpenSilver.Interop.IsRunningInTheXamlDesigner
+- uid: OpenSilver.Interop.ExecuteJavaScriptGetResult*
+  commentId: Overload:OpenSilver.Interop.ExecuteJavaScriptGetResult
+  name: ExecuteJavaScriptGetResult
+  nameWithType: Interop.ExecuteJavaScriptGetResult
+  fullName: OpenSilver.Interop.ExecuteJavaScriptGetResult
+- uid: '{T1}'
+  commentId: '!:T1'
+  definition: T1
+  name: T1
+  nameWithType: T1
+  fullName: T1
+- uid: T1
+  commentId: '!:T1'
+  name: T1
+  nameWithType: T1
+  fullName: T1
+- uid: OpenSilver.Interop.ExecuteJavaScriptVoid*
+  commentId: Overload:OpenSilver.Interop.ExecuteJavaScriptVoid
+  name: ExecuteJavaScriptVoid
+  nameWithType: Interop.ExecuteJavaScriptVoid
+  fullName: OpenSilver.Interop.ExecuteJavaScriptVoid
+- uid: System.Object[]
+  isExternal: true
+  name: Object[]
+  nameWithType: Object[]
+  fullName: System.Object[]
+  nameWithType.vb: Object()
+  fullName.vb: System.Object()
+  name.vb: Object()
+  spec.csharp:
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: OpenSilver.Interop.ExecuteJavaScriptVoidAsync*
+  commentId: Overload:OpenSilver.Interop.ExecuteJavaScriptVoidAsync
+  name: ExecuteJavaScriptVoidAsync
+  nameWithType: Interop.ExecuteJavaScriptVoidAsync
+  fullName: OpenSilver.Interop.ExecuteJavaScriptVoidAsync
+- uid: OpenSilver.Interop.ExecuteJavaScript*
+  commentId: Overload:OpenSilver.Interop.ExecuteJavaScript
+  name: ExecuteJavaScript
+  nameWithType: Interop.ExecuteJavaScript
+  fullName: OpenSilver.Interop.ExecuteJavaScript
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: OpenSilver.Interop.ExecuteJavaScriptAsync*
+  commentId: Overload:OpenSilver.Interop.ExecuteJavaScriptAsync
+  name: ExecuteJavaScriptAsync
+  nameWithType: Interop.ExecuteJavaScriptAsync
+  fullName: OpenSilver.Interop.ExecuteJavaScriptAsync
+- uid: OpenSilver.Interop.CreateJavascriptCallback*
+  commentId: Overload:OpenSilver.Interop.CreateJavascriptCallback
+  name: CreateJavascriptCallback
+  nameWithType: Interop.CreateJavascriptCallback
+  fullName: OpenSilver.Interop.CreateJavascriptCallback
+- uid: System.Delegate
+  commentId: T:System.Delegate
+  parent: System
+  isExternal: true
+  name: Delegate
+  nameWithType: Delegate
+  fullName: System.Delegate
 - uid: OpenSilver.Interop.GetDiv*
   commentId: Overload:OpenSilver.Interop.GetDiv
   name: GetDiv
@@ -1418,30 +2035,3 @@ references:
   name: System.Windows
   nameWithType: System.Windows
   fullName: System.Windows
-- uid: OpenSilver.Interop.IsRunningInTheSimulator*
-  commentId: Overload:OpenSilver.Interop.IsRunningInTheSimulator
-  name: IsRunningInTheSimulator
-  nameWithType: Interop.IsRunningInTheSimulator
-  fullName: OpenSilver.Interop.IsRunningInTheSimulator
-- uid: System.Boolean
-  commentId: T:System.Boolean
-  parent: System
-  isExternal: true
-  name: Boolean
-  nameWithType: Boolean
-  fullName: System.Boolean
-- uid: OpenSilver.Interop.IsRunningInTheSimulator_WorkAround*
-  commentId: Overload:OpenSilver.Interop.IsRunningInTheSimulator_WorkAround
-  name: IsRunningInTheSimulator_WorkAround
-  nameWithType: Interop.IsRunningInTheSimulator_WorkAround
-  fullName: OpenSilver.Interop.IsRunningInTheSimulator_WorkAround
-- uid: OpenSilver.Interop.IsUndefined*
-  commentId: Overload:OpenSilver.Interop.IsUndefined
-  name: IsUndefined
-  nameWithType: Interop.IsUndefined
-  fullName: OpenSilver.Interop.IsUndefined
-- uid: OpenSilver.Interop.IsNull*
-  commentId: Overload:OpenSilver.Interop.IsNull
-  name: IsNull
-  nameWithType: Interop.IsNull
-  fullName: OpenSilver.Interop.IsNull
