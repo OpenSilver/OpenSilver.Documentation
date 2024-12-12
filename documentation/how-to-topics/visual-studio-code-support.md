@@ -5,7 +5,7 @@ The OpenSilver extension simplifies working with XAML files within Visual Studio
 
 ## Prerequisites
 
-You need the [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) extension installed in order to use the OpenSilver Extension for VS Code.
+We highly recommend using the [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) for an enhanced development experience in Visual Studio Code.
 
 ## OpenSilver dotnet CLI templates
 
@@ -68,9 +68,8 @@ The extension relies on the following extensions provided by Microsoft:
 
 - C# Dev Toolkit
 - C# Support
-- .NET 8 SDK with WASM/Blazor workload
 
-You will also need the **.NET Framework 8 SDK and the Blazor WASM workload** (the extension will try to install these if they are not already installed).
+You will also need the **.NET SDK and the Blazor WASM workload** (the extension will try to install these if they are not already installed).
 
 A common scenario after the prerequisites are installed includes:
 
@@ -88,7 +87,7 @@ The extension for VS Code can be downloaded from: [https://opensilver.net/downlo
 
 The Visual Studio Code extension is designed to enhance productivity by simplifying the creation and coding of OpenSilver projects within Visual Studio Code.
 The built-in XAML Designer tool simplifies changing the XAML files. The extension includes OpenSilver CLI templates for C#, Visual Basic, and F#, allowing for easy project creation.
-Additionally, it offers commands to create new items such as classes and resource files, all within the Visual Studio Code workspace.
+Additionally, it offers commands to create new items such as classes and resource files, all within the Visual Studio Code workspace. The extension also includes a powerful XAML UI Designer, allowing developers to visually build XAML pages with ease.
 
 **Note:** In order to create new projects within Visual Studio Code, you need the [OpenSilver CLI Templates package](https://www.nuget.org/packages/OpenSilver.Templates).
 
@@ -113,15 +112,22 @@ The available commands are:
   - opensilver.showXamlDesigner: "Show the Xaml Designer"
   - opensilver.formatXaml: "Format the XAML file"
 
+### XAML UI Designer
+
+One of the key features of this extension is the XAML UI Designer. This tool provides a visual interface for designing XAML pages, allowing developers to drag and drop components, modify properties, and see immediate previews of their changes. The designer offers support for editing existing XAML files, building new pages from scratch, and ensures all changes are synced directly with the code, improving development efficiency.
+
+![VS Code with OpenSilver UI Designer](/images/how-to-topics/VSCodeDesigner.png "VS Code with OpenSilver UI Designer")
 
 ### Create an Application from the homepage
 
-The extension adds a new command button to the homepage.
+The extension adds a new command button to the Explorer panel homepage.
 When you open a new instance of Visual Studio Code, you'll notice a new button labeled "Create OpenSilver Application".
 Clicking this button opens the command palette, where you can choose from different templates.
 
 After selecting a project template, you'll be prompted to enter a solution name and location.
 A new solution, compatible with Visual Studio and the C# Dev Toolkit, will then be created.
+
+![VS Code Homepage with OpenSilver buttons](/images/how-to-topics/VSCodeHomepage.png "Ability to open or create an OpenSilver application from the homepage")
 
 ## What should I do if I have additional questions?
 

@@ -1,5 +1,7 @@
 # Importing TypeScript Definitions
 
+NOTE: starting from OpenSilver 3.0 you'll need to install [OpenSilver.TypeScriptDefinitionsToCSharp](https://www.nuget.org/packages/OpenSilver.TypeScriptDefinitionsToCSharp) package.
+
 ## Introduction
 This feature lets you import and use thousands of JavaScript libraries as if they were written in C#.
 
