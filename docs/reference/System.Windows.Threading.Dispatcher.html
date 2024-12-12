@@ -126,8 +126,7 @@
   
   <h1 id="System_Windows_Threading_Dispatcher" data-uid="System.Windows.Threading.Dispatcher" class="text-break">Class Dispatcher
   </h1>
-  <div class="markdown level0 summary"><p>Provides the core event message dispatcher. Instances of this type are responsible
-for processing the window messages and dispatching the events to the client.</p>
+  <div class="markdown level0 summary"><p>Provides services for managing the queue of work items for a thread.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -163,42 +162,62 @@ for processing the window messages and dispatching the events to the client.</p>
   <h6><strong>Assembly</strong>: OpenSilver.dll</h6>
   <h5 id="System_Windows_Threading_Dispatcher_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Dispatcher</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Dispatcher</code></pre>
   </div>
-  <h3 id="constructors">Constructors
+  <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Threading_Dispatcher__ctor.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_Windows_Threading_Dispatcher_CurrentDispatcher.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.CurrentDispatcher%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs/#L184">View Source</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs/#L57">View Source</a>
   </span>
-  <a id="System_Windows_Threading_Dispatcher__ctor_" data-uid="System.Windows.Threading.Dispatcher.#ctor*"></a>
-  <h4 id="System_Windows_Threading_Dispatcher__ctor" data-uid="System.Windows.Threading.Dispatcher.#ctor">Dispatcher()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Dispatcher()</code></pre>
-  </div>
-  <h3 id="methods">Methods
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Threading_Dispatcher_BeginInvoke_System_Action_.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs/#L109">View Source</a>
-  </span>
-  <a id="System_Windows_Threading_Dispatcher_BeginInvoke_" data-uid="System.Windows.Threading.Dispatcher.BeginInvoke*"></a>
-  <h4 id="System_Windows_Threading_Dispatcher_BeginInvoke_System_Action_" data-uid="System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)">BeginInvoke(Action)</h4>
-  <div class="markdown level1 summary"><p>Executes the specified delegate asynchronously on the thread that the System.Windows.Threading.Dispatcher was created on.</p>
+  <a id="System_Windows_Threading_Dispatcher_CurrentDispatcher_" data-uid="System.Windows.Threading.Dispatcher.CurrentDispatcher*"></a>
+  <h4 id="System_Windows_Threading_Dispatcher_CurrentDispatcher" data-uid="System.Windows.Threading.Dispatcher.CurrentDispatcher">CurrentDispatcher</h4>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a> for the thread currently executing
+and creates a new <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a> if one is not already associated
+with the thread.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DispatcherOperation BeginInvoke(Action method)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Dispatcher CurrentDispatcher { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a></td>
+        <td><p>The dispatcher associated with the current thread.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_Windows_Threading_Dispatcher_BeginInvoke_System_Action_.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs/#L87">View Source</a>
+  </span>
+  <a id="System_Windows_Threading_Dispatcher_BeginInvoke_" data-uid="System.Windows.Threading.Dispatcher.BeginInvoke*"></a>
+  <h4 id="System_Windows_Threading_Dispatcher_BeginInvoke_System_Action_" data-uid="System.Windows.Threading.Dispatcher.BeginInvoke(System.Action)">BeginInvoke(Action)</h4>
+  <div class="markdown level1 summary"><p>Executes the specified delegate asynchronously on the thread the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a>
+is associated with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DispatcherOperation BeginInvoke(Action a)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -212,9 +231,9 @@ for processing the window messages and dispatching the events to the client.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Action</span></td>
-        <td><span class="parametername">method</span></td>
-        <td><p>The delegate to a method, which is
-pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
+        <td><span class="parametername">a</span></td>
+        <td><p>A delegate to a method that takes no arguments and does not return a value, which
+is pushed onto the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a> event queue.</p>
 </td>
       </tr>
     </tbody>
@@ -230,20 +249,41 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="System.Windows.Threading.DispatcherOperation.html">DispatcherOperation</a></td>
-        <td></td>
+        <td><p>An object, which is returned immediately after <a class="xref" href="System.Windows.Threading.Dispatcher.html#System_Windows_Threading_Dispatcher_BeginInvoke_System_Action_">BeginInvoke(Action)</a> is
+called, that represents the operation that has been posted to the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a>
+queue.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p><code data-dev-comment-type="paramref" class="paramref">a</code> is null.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Threading_Dispatcher_BeginInvoke_System_Delegate_System_Object___.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.BeginInvoke(System.Delegate%2CSystem.Object%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_Windows_Threading_Dispatcher_BeginInvoke_System_Delegate_System_Object___.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.BeginInvoke(System.Delegate%2CSystem.Object%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs/#L262">View Source</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs/#L113">View Source</a>
   </span>
   <a id="System_Windows_Threading_Dispatcher_BeginInvoke_" data-uid="System.Windows.Threading.Dispatcher.BeginInvoke*"></a>
   <h4 id="System_Windows_Threading_Dispatcher_BeginInvoke_System_Delegate_System_Object___" data-uid="System.Windows.Threading.Dispatcher.BeginInvoke(System.Delegate,System.Object[])">BeginInvoke(Delegate, Object[])</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Executes the specified delegate asynchronously with the specified array of arguments
+on the thread the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a> is associated with.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -262,12 +302,15 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
       <tr>
         <td><span class="xref">System.Delegate</span></td>
         <td><span class="parametername">d</span></td>
-        <td></td>
+        <td><p>A delegate to a method that takes multiple arguments, which is pushed onto the
+<a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a> event queue.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Object</span>[]</td>
         <td><span class="parametername">args</span></td>
-        <td></td>
+        <td><p>An array of objects to pass as arguments to the specified method.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -282,20 +325,24 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="System.Windows.Threading.DispatcherOperation.html">DispatcherOperation</a></td>
-        <td></td>
+        <td><p>An object, which is returned immediately after <a class="xref" href="System.Windows.Threading.Dispatcher.html#System_Windows_Threading_Dispatcher_BeginInvoke_System_Delegate_System_Object___">BeginInvoke(Delegate, Object[])</a>
+is called, that represents the operation that has been posted to the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a>
+queue.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Threading_Dispatcher_CheckAccess.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.CheckAccess%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_Windows_Threading_Dispatcher_CheckAccess.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.CheckAccess%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs/#L270">View Source</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs/#L121">View Source</a>
   </span>
   <a id="System_Windows_Threading_Dispatcher_CheckAccess_" data-uid="System.Windows.Threading.Dispatcher.CheckAccess*"></a>
   <h4 id="System_Windows_Threading_Dispatcher_CheckAccess" data-uid="System.Windows.Threading.Dispatcher.CheckAccess">CheckAccess()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Determines whether the calling thread is the thread associated with this <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -312,24 +359,26 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td></td>
+        <td><p>true if the calling thread is the thread associated with this <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a>; otherwise, false.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Threading_Dispatcher_DisableProcessing.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.DisableProcessing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_Windows_Threading_Dispatcher_DisableProcessing.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.DisableProcessing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs/#L192">View Source</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs/#L165">View Source</a>
   </span>
   <a id="System_Windows_Threading_Dispatcher_DisableProcessing_" data-uid="System.Windows.Threading.Dispatcher.DisableProcessing*"></a>
   <h4 id="System_Windows_Threading_Dispatcher_DisableProcessing" data-uid="System.Windows.Threading.Dispatcher.DisableProcessing">DisableProcessing()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Disables processing of the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a> queue.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IDisposable DisableProcessing()</code></pre>
+    <pre><code class="lang-csharp hljs">public DispatcherProcessingDisabled DisableProcessing()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -341,25 +390,28 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.IDisposable</span></td>
-        <td></td>
+        <td><a class="xref" href="System.Windows.Threading.DispatcherProcessingDisabled.html">DispatcherProcessingDisabled</a></td>
+        <td><p>A structure used to re-enable dispatcher processing.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Threading_Dispatcher_InvokeAsync_System_Action_System_Windows_Threading_DispatcherPriority_.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.InvokeAsync(System.Action%2CSystem.Windows.Threading.DispatcherPriority)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_Windows_Threading_Dispatcher_InvokeAsync_System_Action_System_Windows_Threading_DispatcherPriority_.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher.InvokeAsync(System.Action%2CSystem.Windows.Threading.DispatcherPriority)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs/#L207">View Source</a>
+    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs/#L138">View Source</a>
   </span>
   <a id="System_Windows_Threading_Dispatcher_InvokeAsync_" data-uid="System.Windows.Threading.Dispatcher.InvokeAsync*"></a>
   <h4 id="System_Windows_Threading_Dispatcher_InvokeAsync_System_Action_System_Windows_Threading_DispatcherPriority_" data-uid="System.Windows.Threading.Dispatcher.InvokeAsync(System.Action,System.Windows.Threading.DispatcherPriority)">InvokeAsync(Action, DispatcherPriority)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Executes the specified <span class="xref">System.Action</span> asynchronously at the specified priority on the thread
+the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a> is associated with.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DispatcherOperation InvokeAsync(Action callback, DispatcherPriority priority = DispatcherPriority.Normal)</code></pre>
+    <pre><code class="lang-csharp hljs">public DispatcherOperation InvokeAsync(Action a, DispatcherPriority priority = DispatcherPriority.Normal)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -373,13 +425,16 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Action</span></td>
-        <td><span class="parametername">callback</span></td>
-        <td></td>
+        <td><span class="parametername">a</span></td>
+        <td><p>A delegate to invoke through the dispatcher.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="System.Windows.Threading.DispatcherPriority.html">DispatcherPriority</a></td>
         <td><span class="parametername">priority</span></td>
-        <td></td>
+        <td><p>The priority that determines the order in which the specified callback is invoked relative to the
+other pending operations in the <a class="xref" href="System.Windows.Threading.Dispatcher.html">Dispatcher</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -394,14 +449,12 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="System.Windows.Threading.DispatcherOperation.html">DispatcherOperation</a></td>
-        <td></td>
+        <td><p>An object, which is returned immediately after <a class="xref" href="System.Windows.Threading.Dispatcher.html#System_Windows_Threading_Dispatcher_InvokeAsync_System_Action_System_Windows_Threading_DispatcherPriority_">InvokeAsync(Action, DispatcherPriority)</a>
+is called, that can be used to interact with the delegate as it is pending execution in the event queue.</p>
+</td>
       </tr>
     </tbody>
   </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="ToJavaScriptObjectExtender.ToJavaScriptObjectExtender.html#ToJavaScriptObjectExtender_ToJavaScriptObjectExtender_ToJavaScriptObject_System_Object_">ToJavaScriptObjectExtender.ToJavaScriptObject(Object)</a>
-  </div>
 </article>
           </div>
           
@@ -410,10 +463,10 @@ pushed onto the System.Windows.Threading.Dispatcher event queue.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/OpenSilver/OpenSilver/new/releases/OpenSilver/1.1.0/apiSpec/new?filename=System_Windows_Threading_Dispatcher.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/OpenSilver/OpenSilver/new/develop/apiSpec/new?filename=System_Windows_Threading_Dispatcher.md&amp;value=---%0Auid%3A%20System.Windows.Threading.Dispatcher%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/OpenSilver/OpenSilver/blob/releases/OpenSilver/1.1.0/src/Runtime/Runtime/System.Windows.Threading/CoreDispatcher.cs/#L57" class="contribution-link">View Source</a>
+                    <a href="https://github.com/OpenSilver/OpenSilver/blob/develop/src/Runtime/Runtime/System.Windows.Threading/Dispatcher.cs/#L27" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
