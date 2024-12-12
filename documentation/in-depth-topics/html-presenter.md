@@ -11,7 +11,7 @@ The HtmlPresenter control lets you easily embed custom HTML/CSS code inside your
 
 - If you use it in XAML, just type the HTML code inside the HtmlPresenter tag, as shown in this example:
 ```
-    <native:HtmlPresenter xmlns:native="using:CSHTML5.Native.Html.Controls" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="native">
+    <native:HtmlPresenter xmlns:native="using:CSHTML5.Native.Html.Controls">
         <p>This is native HTML code</p>
     </native:HtmlPresenter>
 ```
@@ -40,7 +40,7 @@ See the ["Example 2"](#example-2-creating-a-numerictextbox-control-with-input-ty
 
     <ScrollViewer Background="White" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
 
-        <native:HtmlPresenter xmlns:native="using:CSHTML5.Native.Html.Controls" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="native">
+        <native:HtmlPresenter xmlns:native="using:CSHTML5.Native.Html.Controls">
 
             <style type='text/css'>
                 .sampleTable table {
