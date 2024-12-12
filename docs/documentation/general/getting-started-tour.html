@@ -122,15 +122,17 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="getting-started---guided-tour-of-the-creation-of-a-new-opensilver-application">Getting Started - Guided tour of the creation of a new OpenSilver application</h1>
 
-<p>The development experience with OpenSilver is very similar to that of Silverlight, WPF and Universal Platform. You can use Visual Studio 2019 on Windows (recommended) or VS Code on Windows, macOS, or Linux.</p>
-<h2 id="option-1-using-the-cli-and-vs-code-for-windows-macos-or-linux">Option 1: Using the CLI and VS Code (for Windows, macOS or Linux)</h2>
+<p>The development experience with OpenSilver is very similar to that of Silverlight, WPF, and Universal Platform. You can use Visual Studio on Windows (recommended) or VS Code on Windows, macOS, or Linux.</p>
+<h2 id="option-1-using-the-cli-and-vs-code-for-windows-macos-or-linux">Option 1: Using the CLI and VS Code (for Windows, macOS, or Linux)</h2>
 <p>Please refer to the <a href="/documentation/how-to-topics/visual-studio-code-support.html">VS Code Support</a> page.</p>
 <h2 id="option-2-recommended-using-visual-studio-on-windows">Option 2 (Recommended): Using Visual Studio on Windows</h2>
-<p>OpenSilver is distributed as a NuGet package (on <a href="https://www.nuget.org/packages/OpenSilver">NuGet.org</a>) and as a <a href="https://www.opensilver.net/download.aspx">VSIX extension</a> for Visual Studio 2019 (or higher) containing the project templates.</p>
-<p>To create a new OpenSilver-type project, it is recommended to download the project templates first. To do that, go to <a href="https://OpenSilver.NET">https://OpenSilver.NET</a> , click Download, log in with your Microsoft account and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.</p>
+<p>OpenSilver is distributed as a NuGet package (on <a href="https://www.nuget.org/packages/OpenSilver">NuGet.org</a>) and as a <a href="https://www.opensilver.net/download.aspx">VSIX extension</a> for Visual Studio containing the project templates.</p>
+<p>To create a new OpenSilver-type project, it is recommended to download the project templates first. To do that, go to <a href="https://OpenSilver.NET">https://OpenSilver.NET</a> , click Download, log in with your Microsoft account, and download the OpenSilver.VSIX file. This extension for Visual Studio will install project templates and other elements like the XAML editor.</p>
 <p><img src="/images/1.OpenSilverWebsite.png" alt="OpenSilver Website" title="The OpenSilver.NET site"></p>
-<p>Next, open Visual Studio and click on &quot;Create a new project&quot; and choose &quot;OpenSilver Application&quot;. Note that there is also a &quot;UWP-Compatible&quot; version of OpenSilver, which uses the XAML dialect of UWP instead of that of Silverlight, allowing increased compatibility with Universal Platform.</p>
+<p>Next, open Visual Studio and click on &quot;Create a new project&quot; and choose &quot;OpenSilver Application&quot;.</p>
 <p><img src="/images/2.NewDialogProjectWithVB.png" alt="Windows prompt for new project" title="The window for creating a new project"></p>
+<p>Next, choose the UI Theme and .NET version.</p>
+<p><img src="/images/OpenSilverConfigurationWindow.png" alt="OpenSilver Configuration Window" title="OpenSilver Configuration Window"></p>
 <p>Once the solution is created, you will see that it has three projects.</p>
 <p><img src="/images/3.solutionExplorer.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for C#">
 <img src="/images/3.solutionExplorerWithVB.png" alt="Solution explorer" title="The Solution Explorer showing newly created projects for VB.NET">
@@ -142,17 +144,18 @@
 </code></pre>
 <p>The second project, named with the suffix &quot;.Browser&quot;, is the one you will have to launch to test your application in the browser. It plays a role similar to the &quot;.Web&quot; project that existed for Silverlight applications. This is an ASP.NET Blazor Client-Side project. This project references the first project and serves as an entry point to launch the application in WebAssembly.</p>
 <p>Finally the third project, named with the suffix &quot;.Simulator&quot; is the one that you will have to launch to test your application in the Simulator. We will talk more about the Simulator later. Its main interest is to allow debugging with the very powerful tools of the .NET Framework, such as the possibility of moving the execution point or executing C# (or VB.NET or F#) code at runtime in the &quot;Immediate&quot; window, things that are not possible in the browser.</p>
-<h4 id="as-a-test-lets-create-a-button-in-out-xaml-application">As a test, let's create a Button in out Xaml application:</h4>
+<h4 id="as-a-test-lets-create-a-button-in-our-opensilver-application">As a test, let's create a Button in our OpenSilver application:</h4>
 <ol>
-<li>Add the following XAML code inside the MainPage.xaml file, replacing the <code>&lt;Canvas&gt;</code> element:</li>
+<li>Add the following XAML code inside the MainPage.xaml file, replacing the <code>&lt;Grid&gt;</code> element:</li>
 </ol>
-<pre><code>&lt;StackPanel HorizontalAlignment=&quot;Left&quot;&gt;
-  &lt;TextBlock Text=&quot;Enter some text below:&quot;/&gt;
-  &lt;TextBox x:Name=&quot;MyTextBox1&quot;/&gt;
-  &lt;Button Content=&quot;Click me&quot; Click=&quot;Button_Click&quot;/&gt;
-&lt;/StackPanel&gt;
+<pre><code>    &lt;StackPanel HorizontalAlignment=&quot;Left&quot; Margin=&quot;10&quot;&gt;
+        &lt;TextBlock Text=&quot;Enter some text below:&quot; FontSize=&quot;14&quot;/&gt;
+        &lt;TextBox x:Name=&quot;MyTextBox1&quot; Margin=&quot;5&quot;/&gt;
+        &lt;Button Content=&quot;Click me&quot; Click=&quot;Button_Click&quot;/&gt;
+    &lt;/StackPanel&gt;
 </code></pre>
 <p><img src="/images/4.MainPage.xaml.png" alt="MainPage.xaml" title="The modified MainPage.xaml page"></p>
+<p>Note: OpenSilver 3.0 <a href="https://opensilver.net/announcements/3-0/">introduced</a> an enhanced drag-and-drop UI designer that shows a preview of XAML pages and allows to develop your app quickly.</p>
 <ol start="2">
 <li>Add the following code:</li>
 </ol>
@@ -171,9 +174,8 @@
 </ul>
 <p>Inside the MainPage.xaml.vb file:</p>
 <pre><code>			Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
-			{
 			    MessageBox.Show(&quot;You entered the following text: &quot; + MyTextBox1.Text)
-			}
+			End Sub
 </code></pre>
 <p><img src="/images/5.MainPage.xaml.vb.png" alt="MainPage.xaml.vb" title="The modified MainPage.xaml.vb page"></p>
 <ul>
@@ -192,8 +194,7 @@
 <p>To see that the application runs in WebAssembly (currently in interpreted mode), we can go to the browser development tools (Chrome in this example) by pressing the F12 key, then go to the &quot;Network&quot; tab and refresh the page by pressing F5. Microsoft .NET assemblies (such as &quot;mscorlib.dll&quot; and &quot;System.dll&quot;) are downloaded by the browser instead of JavaScript files.</p>
 <p><img src="/images/8.NetworkTab.png" alt="Network tab" title="Network tab in Chrome's development tools"></p>
 <p>Now let's go back to Visual Studio and launch the project with the suffix &quot;.Simulator&quot;</p>
-<p>Note: if a message indicates that the Simulator is not configured, simply open the &quot;Package Manager Console&quot; and wait for the Simulator to be automatically configured, then restart the project.</p>
-<p>The simulator appears and shows the application. Like before, we can enter some text and click the button to make a idalog box appear.</p>
+<p>The simulator appears and shows the application. Like before, we can enter some text and click the button to make a dialog box appear.</p>
 <p><img src="/images/9.AppSimulator.png" alt="Application in the Simulator" title="The application running in the Simulator"></p>
 <p>Let's put a breakpoint inside the Button_Click method, then press the button. It is possible to inspect the variables and to do step-by-step debugging.</p>
 <p><img src="/images/10.Breakpoint.png" alt="Breakpoint" title="C# code Variables inspection at a Breakpoint">
