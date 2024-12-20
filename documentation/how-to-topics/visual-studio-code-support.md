@@ -63,11 +63,7 @@ dotnet new opensilverapp --help
 ### Running the project
 
 After creating your project, you can run it and debug in VS Code.
-Please note that some manual steps may be required depending on your configuration.
-The extension relies on the following extensions provided by Microsoft:
-
-- C# Dev Toolkit
-- C# Support
+The extension relies on the [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) provided by Microsoft.
 
 You will also need the **.NET SDK and the Blazor WASM workload** (the extension will try to install these if they are not already installed).
 
@@ -77,6 +73,27 @@ A common scenario after the prerequisites are installed includes:
 2. Click the run button.
 3. VS Code will ask which debug adapter to use; select C#.
 4. The build will start, and you should see a browser opening.
+
+### Running without the C# Dev Kit
+
+Although the C# Dev Kit is recommended, you can run the project without it.
+When you open your project, you might see a notification suggesting adding the required assets to build and debug. Click "Yes".
+
+![VS Code Missing Assets Notification](/images/how-to-topics/VSCodeMissingAssets.png)
+
+> **Note:** If this notification doesn't appear, delete all files under the `.vscode` folder, then close and re-open VS Code.
+
+After clicking Yes, some options appear. Select the project with the ".Browser" suffix.
+
+![VS Code Select Project to Launch](/images/how-to-topics/VSCodeSelectProject.png)
+
+Now the debugging and running menu command works.
+
+![VS Code Run Menu](/images/how-to-topics/VSCodeRunMenu.png)
+
+If you need to re-launch the app, make sure to stop the debugger first, otherwise it will complain with "Unable to connect to the remote server".
+
+![VS Code Stop Debugging Button](/images/how-to-topics/VSCodeStopDebugging.png)
 
 Depending on your specific configuration and environment, more steps may be necessary.
 If you need help, you can contact us at: [https://opensilver.net/contact.aspx](https://opensilver.net/contact.aspx).
