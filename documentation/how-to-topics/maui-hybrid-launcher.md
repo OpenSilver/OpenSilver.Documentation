@@ -76,7 +76,7 @@ To run your OpenSilver application using the MAUI Hybrid Launcher, follow these 
 - **Set the Startup Project:** Choose the `.MauiHybrid` launcher as the startup project in your solution.
 - **Select the Target Platform:** Ensure you have selected the appropriate target platform before running the application.
 - **IDE Recommendations:**
-  - For **macOS and Linux**, we recommend using **Visual Studio Code** with the OpenSilver extension.
+  - For **macOS**, we recommend using **Visual Studio Code** with the OpenSilver extension, along with .NET Meteor or .NET MAUI extensions for enhanced development experience.
   - For **Windows**, we recommend using **Visual Studio 2022** with the OpenSilver extension.
 
 ### Running on Windows (Example)
@@ -96,6 +96,8 @@ To run your generated application as a native Windows desktop app:
 ## Leveraging MAUI Native Features
 
 One of the strengths of the MAUI Hybrid Launcher is that it gives you access to native features via .NET MAUI. For example, the **Microsoft.Maui.Essentials** package provides APIs for accessing device hardware and native functions.
+
+> **Note:** Ensure that the package version aligns with your .NET version. For example, if your application targets **.NET 8**, use **Microsoft.Maui.Essentials 8.0.100**.
 
 ### Thread Considerations
 
