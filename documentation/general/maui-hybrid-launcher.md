@@ -1,15 +1,19 @@
 # MAUI Hybrid Launcher for OpenSilver
 
-Starting with **OpenSilver 3.2**, you can now run your OpenSilver applications not only in the browser but also as native apps on **macOS, Windows, Android, and iOS**. Additionally, you can publish these apps to major app stores: **Google Play, Apple App Store, and Windows Store**. This multi-platform capability is enabled by our support for the new **MAUI Hybrid Launcher**.
+Starting with **OpenSilver 3.2**, you can now run your OpenSilver applications not only in the browser but also as semi-native apps on **macOS, Windows, Android, and iOS**. Additionally, you can publish these apps to major app stores, including: **Google Play, Apple App Store, and Windows Store**. This multi-platform capability is enabled by our support for the new **MAUI Hybrid Launcher**.
 
 ---
 
 ## Overview
 
-The MAUI Hybrid Launcher bridges OpenSilver with the native capabilities provided by .NET MAUI. This means you get the best of both worlds:
+The MAUI Hybrid Launcher bridges OpenSilver with the native capabilities provided by .NET MAUI.
 
-- **Web-based UI:** Develop with familiar OpenSilver paradigms.
-- **Native integration:** Leverage platform-specific features and publish to app stores.
+This means you get the best of both worlds:
+
+- **Web-based UI:** Develop with familiar OpenSilver paradigms. The UI is rendered via a WebView, ensuring pixel-perfect consistency accross all platforms. An additional benefit of the WebView is the ability to mix and match XAML and HTML/JS-based UI components, allowing to leverage the large JS ecosystem in addition to the C#/XAML one.
+- **Native integration:** Leverage platform-specific features and publish to app stores. The C# code is compiled to native, allowing to call native platform APIs without the need for interops.
+
+It is the same approach that is used by Blazor Hybrid, except that the UI code is XAML/C# instead of HTML/CSS/C#.
 
 ---
 
@@ -182,5 +186,5 @@ Since OpenSilver leverages the official MAUI Hybrid technology, you can follow t
 
 ## Conclusion
 
-The MAUI Hybrid Launcher extends OpenSilver applications into fully native experiences across multiple platforms. Whether you’re building for Windows, macOS, Android, or iOS, you now have a streamlined way to leverage both OpenSilver’s rich UI capabilities and MAUI’s native functionalities.
+The MAUI Hybrid Launcher extends OpenSilver applications into semi-native experiences across multiple platforms. Whether you’re building for Windows, macOS, Android, or iOS, you now have a streamlined way to leverage both OpenSilver’s rich UI capabilities and MAUI’s native functionalities.
 
