@@ -1,6 +1,6 @@
-# Deploying an OpenSilver Application
+# Deploying an OpenSilver Application (Web)
 
-This guide provides detailed instructions on how to deploy OpenSilver applications to various hosting environments. Since OpenSilver apps are static, they're **compatible with any file server**. Deployment primarily involves the `.Browser` project, which functions as a standard Blazor WebAssembly application, meaning general Blazor WebAssembly deployment instructions apply and can enhance your deployment strategy.
+This guide provides detailed instructions on how to deploy OpenSilver web applications to various hosting environments. Since OpenSilver web apps are static, they're **compatible with any file server**. Deployment primarily involves the `.Browser` project, which functions as a standard Blazor WebAssembly application, meaning general Blazor WebAssembly deployment instructions apply and can enhance your deployment strategy.
 
 ## Understanding the Deployment Process
 
@@ -14,7 +14,7 @@ The `.Browser` project within your OpenSilver application is essentially a Blazo
 
 ### Deployment Targets
 
-OpenSilver applications can be deployed to various environments, including cloud services, dedicated servers, and static file hosting services. The choice of environment depends on your specific requirements, such as scalability, availability, and cost.
+OpenSilver web applications can be deployed to various environments, including cloud services, dedicated servers, and static file hosting services. The choice of environment depends on your specific requirements, such as scalability, availability, and cost.
 
 #### 1. Azure
 
