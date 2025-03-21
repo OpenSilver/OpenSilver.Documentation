@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to manage themes </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to manage themes ">
+    <meta name="generator" content="docfx 2.59.4.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <div class="header-top">
+        
+        <header id="header">
+                    <div class="wrapper">
+                        <div class="header_in">
+                            <div id="hamb_menu" class="hamb show_sm"></div>
+                            <a class="logo" href="https://opensilver.net/">
+                                <img src="/images/OpenSilver_3_2_Logo_HighRes.png">
+                            </a>
+                            <!--<nav class="hide_sm">
+                                <ul>
+                                    <li><a href="https://opensilver.net/download.aspx">Download</a></li>
+                                    <li><a href="/documentation/general/overview.html">Doc</a></li>
+                                    <li><a href="https://opensilver.net/gallery">Gallery</a></li>
+                                    <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+        
+                                    <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                    <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    <li id="nav_more">More...</li>
+                                </ul>
+                            </nav>
+        
+                            <div class="header_UserSignin">
+                                <p id="UserInformations"></p>
+        
+                            </div>-->
+                        </div>
+                    </div>
+                    <!--<div class="additional_nav_out">
+                        <div id="close_nav" class="close_btn hide_sm"></div>
+                        <div class="wrapper">
+        
+                            <div class="additional_nav">
+                                <div class="additional_nav-col">
+                                    <h4>Product:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/download.aspx">Download </a></li>
+                                        <li><a href="/documentation/general/overview.html">Documentation</a></li>
+                                        <li><a href="https://opensilver.net/gallery/"</a></li>
+                                        <li><a href="https://opensilver.net/gallery#success-stories">Success Stories</a></li>
+                                        <li><a href="https://opensilver.net/links/whatsnew.aspx">What's New</a></li>
+                                        <li><a href="https://github.com/OpenSilver/OpenSilver">Source code on GitHub</a></li>
+                                        <li><a href="https://opensilver.net/">Home</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col">
+                                    <h4>Services:</h4>
+                                    <ul>
+                                        <li><a href="https://opensilver.net/links/migration-package.aspx">SL Migration Package</a></li>
+                                        <li><a href="https://opensilver.net/migrate/upload-xap.aspx">Upload Your .XAP</a></li>
+        
+                                    </ul>
+                                </div>
+        
+                                <div class="additional_nav-col">
+                                    <h4>Company:</h4>
+                                    <ul>
+        
+                                        <li><a href="https://opensilver.net/contact.aspx">Contact</a></li>
+                                    </ul>
+                                </div>
+                                <div class="additional_nav-col social">
+                                    <a class="additional_nav-social" href="https://twitter.com/OpenSilverTeam">
+                                        <img src="/images/follow-us-on-twitter-light.png">
+                                        <small>follow us on</small>
+                                        twitter
+                                    </a>
+        
+                                    <a class="additional_nav-social" href="https://github.com/OpenSilver/OpenSilver">
+                                        <img src="/images/follow-us-on-github-light.png">
+                                        <small>view source on</small>
+                                        GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </header>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-8">
+            <article class="content wrap" id="_content" data-uid="">
+<h2 id="how-to-manage-themes">How to manage themes</h2>
+
+<h3 id="what-do-themes-do">What do Themes do?</h3>
+<p>Themes are a set of styles that will replace those originally associated with the DefaultStyleKey of Controls. This means that these styles will not be treated as implicit but as default. This way, if you want to later create implicit styles to only change some properties defined in your theme styles, you can simply do it normally.</p>
+<h3 id="using-a-theme">Using a theme</h3>
+<p>You can easily apply a theme on your application in two steps (we will take the example of OpenSilver's Modern theme available on GitHub here: <a href="https://github.com/OpenSilver/OpenSilver.Themes.Modern">https://github.com/OpenSilver/OpenSilver.Themes.Modern</a>):</p>
+<ol>
+<li>Add a reference to the project or package which defines the theme</li>
+<li>Set your theme as the value of Application.Theme:</li>
+</ol>
+<ul>
+<li>In C#:</li>
+</ul>
+<pre><code>Application.Current.Theme = new ModernTheme();
+</code></pre>
+<ul>
+<li><p>Or in Xaml:</p>
+<p>In your OpenSilver application, add to App.xaml:</p>
+<pre><code>&lt;Application.Theme&gt; 
+    &lt;mt:ModernTheme /&gt; 
+&lt;/Application.Theme&gt; 
+</code></pre>
+<p>And the corresponding namespace definition: xmlns:mt=&quot;http://opensilver.net/themes/modern&quot;</p>
+</li>
+</ul>
+<h3 id="how-to-create-a-theme">How to create a Theme</h3>
+<h4 id="requirements">Requirements:</h4>
+<p>For a theme to be used, we strictly need to have:</p>
+<ul>
+<li>A Xaml Resource Dictionary with the theme's resources (styles)</li>
+<li>A class for the theme which:
+<ul>
+<li>Inherits from OpenSilver.Theming.Theme.</li>
+<li>Implements the GenerateResources method.</li>
+</ul>
+</li>
+</ul>
+<h4 id="quick-theme-creation-steps">Quick theme creation steps:</h4>
+<p>For a quick creation of a Theme, follow these steps in the OpenSilver Project that should hold your theme definition.</p>
+<h5 id="add-theme-styles">Add theme styles</h5>
+<p>First, you need to define resources that will be used by your theme. You can do so by adding  Xaml Resource Dictionaries to your project.</p>
+<p>Create a Xaml Resource Dictionary file for each assembly that defines at least one of the controls for which there is a style in your theme and place the style for each control in its corresponding assembly's file.</p>
+<p>To simplify the code that will be required to load these files, it would be a good idea to give these files a name that only changes by the assembly name.</p>
+<h5 id="add-a-class-for-the-theme">Add a class for the theme</h5>
+<p>This class will be your theme instance.
+It needs to inherit from OpenSilver.Theming.Theme, and override the GenerateResources method.</p>
+<p>The role of that method is to load the theme resources, limited to those related to the assembly passed as parameter.</p>
+<p>Here is an example of implementation for this method:</p>
+<pre><code>protected override ResourceDictionary GenerateResources(Assembly assembly) 
+{ 
+    string assemblyName = assembly.GetName().Name; 
+    if (IsSupportedAssembly(assemblyName)) 
+    { 
+        return CreateDictionary(assemblyName); 
+    } 
+    return null; 
+} 
+
+private ResourceDictionary CreateDictionary(string assemblyName) 
+{ 
+    var resources = new ResourceDictionary(); 
+    resources.Source = new Uri($&quot;/SomeTheme;component/Themes/{assemblyName}.xaml&quot;, UriKind.Relative); 
+    Application.LoadComponent(resources, resources.Source); 
+    return resources; 
+} 
+ 
+private static bool IsSupportedAssembly(string assemblyName) 
+{ 
+    // Keep only assemblies handled by your theme:
+    return assemblyName is 
+        &quot;OpenSilver&quot; or 
+        &quot;OpenSilver.Controls&quot; or 
+        &quot;OpenSilver.Controls.Toolkit&quot; or 
+        &quot;OpenSilver.Controls.Layout.Toolkit&quot; or 
+        &quot;OpenSilver.Controls.Data.Input&quot; or 
+        &quot;OpenSilver.Controls.Input&quot; or 
+        &quot;OpenSilver.Controls.Input.Toolkit&quot; or 
+        &quot;OpenSilver.Controls.Data&quot; or 
+        &quot;OpenSilver.Controls.DataVisualization.Toolkit&quot; or 
+        &quot;OpenSilver.Controls.Data.DataForm.Toolkit&quot;; 
+}
+</code></pre>
+<p>As you can see, this will only load the resource files for the assemblies that are used.</p>
+<p>That's it! Your theme can now be used.</p>
+<h3 id="going-further">Going further</h3>
+<h4 id="the-basedon-property">The BasedOn Property</h4>
+<p>By using the BasedOn property, you can enrich an already existing Theme by adding styles and resources for Controls located in a different assembly, or by redefining the styles already defined in the base Theme.</p>
+<p>Please note that if GenerateResources returns a non-null value for an Assembly in your theme, that same method will not be called for that assembly on the themes it is based on.</p>
+<p>Key considerations when using the BasedOn property:</p>
+<ul>
+<li>Ensure that the GenerateResources method of your theme returns a non-null value only for assemblies it is specifically responsible for handling.</li>
+<li>Returning a non-null value will prevent resource generation from BasedOn themes for the same assemblies, potentially leading to missing resources.</li>
+<li>If you only intend to modify specific styles from a BasedOn theme, you must either copy all other required styles into your own theme or define the new styles as implicit styles instead of including them directly in your theme.</li>
+<li>The order in which themes are linked through the BasedOn property determines their priority. The theme set in Application.Theme has the highest priority, followed by its BasedOn theme, then that theme's BasedOn, and so on in a cascading manner.</li>
+</ul>
+<h4 id="the-resources-property">The Resources property</h4>
+<p>The Resources property allows you to add ressources that are non assembly-specific and can therefore be used by all your theme�s resources. You can for example use this property to define a palette of colors or some converters that you can then use throughout your theme.</p>
+<p>You can find an example of using this property in the ModernTheme on GitHub: <a href="https://github.com/OpenSilver/OpenSilver.Themes.Modern">https://github.com/OpenSilver/OpenSilver.Themes.Modern</a> (see the ModernTheme and the Palette classes).</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OpenSilver/OpenSilver.Documentation/blob/master/documentation/how-to-topics/theme-handling.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+          </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>
