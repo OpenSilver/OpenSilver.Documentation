@@ -141,7 +141,7 @@
 </li>
 <li><p>One of the following OpenSilver tools:</p>
 <ul>
-<li><a href="https://forms.opensilver.net/download.aspx">OpenSilver VSIX for Visual Studio 2022 (or later)</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=userware.OpenSilverSDK">OpenSilver VSIX for Visual Studio 2022 (or later)</a></li>
 <li><a href="https://marketplace.visualstudio.com/items?itemName=userware.vscode-opensilver">OpenSilver VSIX for Visual Studio Code</a></li>
 <li><a href="https://www.nuget.org/packages/OpenSilver.Templates">CLI OpenSilver.Templates package</a></li>
 </ul>
@@ -171,7 +171,8 @@
 <li>Install the OpenSilver extension.</li>
 <li>Start by creating a new OpenSilver project.</li>
 <li>In the project creation wizard, you will see an additional configuration panel to select the desired MAUI Platforms.</li>
-<li>Choose the platforms you wish to target and complete the wizard.</li>
+<li>Choose the platforms you wish to target and complete the wizard.
+<img src="/images/new-project-wizard.png" alt="New Project Wizard"></li>
 </ol>
 <h3 id="3-via-visual-studio-code">3. Via Visual Studio Code</h3>
 <ol>
@@ -267,15 +268,433 @@ MainThread.BeginInvokeOnMainThread(async () =&gt;
 <li><code>ACCESS_FINE_LOCATION</code></li>
 </ul>
 </blockquote>
-<h2 id="location-permissions-for-android"><img src="/images/how-to-topics/android-location-permissions.png" alt="Location permissions for Android"></h2>
+<p><img src="/images/how-to-topics/android-location-permissions.png" alt="Location permissions for Android"></p>
+<hr>
 <h2 id="publishing-to-app-stores">Publishing to App Stores</h2>
-<p>Since OpenSilver leverages the official MAUI Hybrid technology, you can follow the standard publishing processes provided by Microsoft. For detailed steps, refer to the official MAUI deployment guides:</p>
+<p>Since OpenSilver leverages the official MAUI Hybrid technology, you can follow the standard publishing processes provided by Microsoft. Below are detailed steps and hints for publishing to each platform.</p>
+<h3 id="android">Android</h3>
+<h4 id="step-1-rebuild-the-solution">Step 1: <strong>Rebuild the solution:</strong></h4>
 <ul>
-<li><strong>Android:</strong> <a href="https://learn.microsoft.com/en-us/dotnet/maui/android/deployment/?view=net-maui-9.0">MAUI Android Deployment</a></li>
-<li><strong>iOS:</strong> <a href="https://learn.microsoft.com/en-us/dotnet/maui/ios/deployment/?view=net-maui-9.0">MAUI iOS Deployment</a></li>
-<li><strong>macOS:</strong> <a href="https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/?view=net-maui-9.0">MAUI Mac Catalyst Deployment</a></li>
-<li><strong>Windows:</strong> <a href="https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/overview?view=net-maui-9.0">MAUI Windows Deployment Overview</a></li>
+<li>Make sure your solution builds correctly before starting the publish process.</li>
 </ul>
+<h4 id="step-2-choose-the-android-emulator-target-set-the-configuration-to-release-and-invoke-the-publish-command-via-the-context-menu">Step 2: <strong>Choose the Android Emulator target, set the configuration to <code>Release</code>, and invoke the publish command via the context menu:</strong></h4>
+<ul>
+<li>In Solution Explorer, right-click the <code>.MauiHybrid</code> project.</li>
+<li>Select <code>Publish</code>.</li>
+<li>The process may take several minutes. No worries—this is expected.</li>
+</ul>
+<p><img src="/images/android-publish.png" alt="Publish Android"></p>
+<h4 id="step-3-check-the-result">Step 3: <strong>Check the result:</strong></h4>
+<ul>
+<li>Once complete, Visual Studio will generate an <code>.aab</code> (Android App Bundle) file in the <code>bin\Release\net8.0-android\publish</code> folder (or similar path).</li>
+</ul>
+<p><img src="/images/android-distribute.png" alt="Distribute Android"></p>
+<h4 id="step-4-distribute-manually-the-first-time">Step 4: <strong>Distribute manually the first time:</strong></h4>
+<ul>
+<li>Click the <strong>Distribute</strong> button and choose <strong>Ad Hoc</strong>.</li>
+</ul>
+<p><img src="/images/android-adhoc.png" alt="Choose Ad Hoc"></p>
+<h4 id="step-5-create-a-new-signing-identity">Step 5: <strong>Create a new Signing Identity:</strong></h4>
+<ul>
+<li>Click the <code>+</code> button in the signing dialog.</li>
+<li>Fill in the form with your keystore information (name, password, alias, etc.).</li>
+</ul>
+<p><img src="/images/android-keystore.png" alt="Create Android Keystore"></p>
+<h4 id="step-6-sign-the-bundle">Step 6: <strong>Sign the bundle:</strong></h4>
+<ul>
+<li>After the signing identity is created, click <strong>Save As</strong> and wait while Visual Studio signs the <code>.aab</code> file.</li>
+</ul>
+<h4 id="step-7-upload-to-google-play">Step 7: <strong>Upload to Google Play:</strong></h4>
+<ul>
+<li>The signed <code>.aab</code> file is now ready for upload via the <a href="https://play.google.com/console/">Google Play Console</a>.</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Reminder:</strong> Don't forget to <strong>back up your signing identity</strong>. Losing it may prevent you from updating your app in the future.</p>
+</blockquote>
+<p>For more information, refer to the official Microsoft documentation: <a href="https://learn.microsoft.com/en-us/dotnet/maui/android/deployment/?view=net-maui-9.0">MAUI Android Deployment</a></p>
+<h3 id="ios">iOS</h3>
+<p>We recommend using <strong>macOS</strong> to publish the iOS version of your OpenSilver app.</p>
+<h4 id="step-1-set-up-your-apple-developer-account">Step 1: Set up your Apple Developer Account</h4>
+<ul>
+<li>Enroll in the <a href="https://developer.apple.com/programs/">Apple Developer Program</a>.</li>
+<li>Follow <a href="https://learn.microsoft.com/en-us/dotnet/maui/ios/deployment/publish-app-store?view=net-maui-9.0">Microsoft's official guide</a> to generate your <strong>provisioning profile</strong> and <strong>distribution certificate</strong>.</li>
+</ul>
+<h4 id="step-2-build-the-ipa-file">Step 2: Build the IPA file</h4>
+<p>To simplify the build process, we provide a helper script.</p>
+<p>This script builds your <code>.MauiHybrid</code> project and packages it as an <code>.ipa</code> file ready for submission.</p>
+<pre><code class="lang-bash">#!/bin/bash
+# MAUI iOS Build Script
+# This script builds a MAUI Hybrid application for iOS and packages it as an IPA file
+# Configuration variables - adapt to your project structure
+APP_NAME=&quot;MY_APPLICATION&quot;
+PROJECT_NAME=&quot;$APP_NAME.MauiHybrid&quot;
+PROJECT_PATH=&quot;$(pwd)&quot;
+SOLUTION_FILE=&quot;$APP_NAME.sln&quot;
+CONFIGURATION=&quot;Release&quot;
+TARGET_FRAMEWORK=&quot;net8.0-ios&quot;
+PLATFORM=&quot;iPhone&quot;
+# Certificate and provisioning profile information
+PROVISIONING_PROFILE_NAME=&quot;MY_PROVISIONING_PROFILE_NAME&quot;
+# The ceritifcate name should look like this: Apple Distribution: Company Name (Number)
+CERTIFICATE_NAME=&quot;MY_CERTIFICATE_NAME&quot;
+# Output paths
+BUILD_OUTPUT=&quot;$PROJECT_PATH/$PROJECT_NAME/bin/$CONFIGURATION/$PLATFORM&quot;
+IPA_OUTPUT=&quot;$PROJECT_PATH/$PROJECT_NAME/bin/ipa&quot;
+# Colors for terminal output
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e &quot;${YELLOW}Starting build process for $PROJECT_NAME...${NC}&quot;
+
+# Clean all bin and obj folders in the solution
+echo -e &quot;${YELLOW}Removing all bin and obj folders...${NC}&quot;
+find &quot;$PROJECT_PATH&quot; -type d -name &quot;bin&quot; -o -name &quot;obj&quot; | xargs rm -rf
+echo -e &quot;${GREEN}All bin and obj folders removed${NC}&quot;
+
+# Create output directory if it doesn't exist
+mkdir -p &quot;$IPA_OUTPUT&quot;
+
+# Clean the project
+echo -e &quot;${YELLOW}Cleaning previous build...${NC}&quot;
+dotnet clean &quot;$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME.csproj&quot; --configuration &quot;$CONFIGURATION&quot; || { echo -e &quot;${RED}Failed to clean project${NC}&quot;; exit 1; }
+
+# Restore NuGet packages
+echo -e &quot;${YELLOW}Restoring NuGet packages...${NC}&quot;
+dotnet restore &quot;$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME.csproj&quot; || { echo -e &quot;${RED}Failed to restore packages${NC}&quot;; exit 1; }
+
+# Build the project for iOS
+echo -e &quot;${YELLOW}Building project for iOS...${NC}&quot;
+dotnet build &quot;$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME.csproj&quot; --configuration &quot;$CONFIGURATION&quot; -f:$TARGET_FRAMEWORK || { echo -e &quot;${RED}Failed to build project${NC}&quot;; exit 1; }
+
+# Publish the iOS app
+echo -e &quot;${YELLOW}Publishing iOS app...${NC}&quot;
+dotnet publish &quot;$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME.csproj&quot; \
+  --configuration &quot;$CONFIGURATION&quot; \
+  -f:$TARGET_FRAMEWORK \
+  /p:ArchiveOnBuild=true \
+  /p:CodesignKey=&quot;$CERTIFICATE_NAME&quot; \
+  /p:CodesignProvision=&quot;$PROVISIONING_PROFILE_NAME&quot; \
+  /p:RuntimeIdentifier=ios-arm64 \
+  /p:BuildIpa=true \
+  /p:IpaPackageDir=&quot;$IPA_OUTPUT&quot; || { echo -e &quot;${RED}Failed to publish and archive app${NC}&quot;; exit 1; }
+
+# Check if IPA was created
+if [ -f &quot;$IPA_OUTPUT/$APP_NAME.ipa&quot; ]; then
+    echo -e &quot;${GREEN}Successfully created IPA at: $IPA_OUTPUT/$APP_NAME.ipa${NC}&quot;
+else
+    echo -e &quot;${RED}IPA file was not created. Please check the build logs for errors.${NC}&quot;
+    exit 1
+fi
+
+echo -e &quot;${GREEN}Build process completed!${NC}&quot;
+</code></pre>
+<blockquote>
+<p>✅ Make sure to update the <code>APP_NAME</code>, <code>CERTIFICATE_NAME</code>, <code>PROVISIONING_PROFILE_NAME</code>, and <code>TARGET_FRAMEWORK</code>(optional) in the script.</p>
+</blockquote>
+<h4 id="step-3-upload-the-ipa">Step 3: Upload the IPA</h4>
+<p>Use our second helper script to upload the IPA file via Apple's <code>altool</code>.</p>
+<p>This script validates and uploads your IPA file to App Store Connect using your Apple ID.</p>
+<pre><code class="lang-bash">#!/bin/bash
+
+# Upload IPA to App Store Connect Script
+# This script uploads a MAUI Hybrid iOS app to App Store Connect using altool
+
+# Colors for terminal output
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Configuration
+APP_NAME=&quot;MY_APPLICATION&quot;
+PROJECT_NAME=&quot;$APP_NAME.MauiHybrid&quot;
+IPA_PATH=&quot;$(pwd)/$PROJECT_NAME/bin/ipa/$APP_NAME.ipa&quot;
+
+# Check if IPA file exists
+if [ ! -f &quot;$IPA_PATH&quot; ]; then
+    echo -e &quot;${RED}Error: IPA file not found at $IPA_PATH${NC}&quot;
+    echo -e &quot;${YELLOW}Please build the IPA first using build-ios.sh${NC}&quot;
+    exit 1
+fi
+
+# Display information
+echo -e &quot;${YELLOW}===============================================${NC}&quot;
+echo -e &quot;${YELLOW}Upload IPA to App Store Connect${NC}&quot;
+echo -e &quot;${YELLOW}===============================================${NC}&quot;
+echo -e &quot;${GREEN}IPA file: $IPA_PATH${NC}&quot;
+echo &quot;&quot;
+
+# Prompt for Apple ID
+read -p &quot;Enter your Apple ID (email): &quot; APPLE_ID
+if [ -z &quot;$APPLE_ID&quot; ]; then
+    echo -e &quot;${RED}Error: Apple ID is required${NC}&quot;
+    exit 1
+fi
+
+# Validation step
+echo -e &quot;${YELLOW}Step 1: Validating IPA file...${NC}&quot;
+echo -e &quot;${YELLOW}You will be prompted to enter your app-specific password.${NC}&quot;
+echo -e &quot;${YELLOW}(Generate one at appleid.apple.com &gt; Security &gt; App-Specific Passwords)${NC}&quot;
+echo &quot;&quot;
+
+xcrun altool --validate-app -f &quot;$IPA_PATH&quot; -t ios -u &quot;$APPLE_ID&quot;
+VALIDATION_RESULT=$?
+
+if [ $VALIDATION_RESULT -ne 0 ]; then
+    echo -e &quot;${RED}Validation failed. Do you want to continue with upload anyway? (y/n)${NC}&quot;
+    read CONTINUE
+    if [ &quot;$CONTINUE&quot; != &quot;y&quot; ] &amp;&amp; [ &quot;$CONTINUE&quot; != &quot;Y&quot; ]; then
+        echo -e &quot;${YELLOW}Upload canceled.${NC}&quot;
+        exit 1
+    fi
+fi
+
+# Upload step
+echo -e &quot;${YELLOW}Step 2: Uploading IPA to App Store Connect...${NC}&quot;
+echo -e &quot;${YELLOW}You will be prompted to enter your app-specific password again.${NC}&quot;
+echo &quot;&quot;
+
+xcrun altool --upload-app -f &quot;$IPA_PATH&quot; -t ios -u &quot;$APPLE_ID&quot;
+UPLOAD_RESULT=$?
+
+if [ $UPLOAD_RESULT -eq 0 ]; then
+    echo -e &quot;${GREEN}Upload completed successfully!${NC}&quot;
+    echo -e &quot;${YELLOW}Next steps:${NC}&quot;
+    echo -e &quot;1. Go to App Store Connect (https://appstoreconnect.apple.com)&quot;
+    echo -e &quot;2. Navigate to Your App &gt; iOS App &gt; TestFlight or App Store&quot;
+    echo -e &quot;3. Complete any required information and submit for review&quot;
+else
+    echo -e &quot;${RED}Upload failed. Please check the error message above.${NC}&quot;
+    exit 1
+fi
+</code></pre>
+<blockquote>
+<p>✅ Make sure to update the <code>APP_NAME</code> in the script.<br>
+🔐 You will need an <strong>app-specific password</strong> from your Apple ID for validation and upload.</p>
+</blockquote>
+<h4 id="step-4-finalize-in-app-store-connect">Step 4: Finalize in App Store Connect</h4>
+<p>Once the upload is successful:</p>
+<ol>
+<li>Visit <a href="https://appstoreconnect.apple.com/login">App Store Connect</a>.</li>
+<li>Go to <strong>Apps</strong>, select your app.</li>
+<li>Fill out any required information and submit your app for review.</li>
+</ol>
+<blockquote>
+<p>💡 <strong>Reminder:</strong> Always test your app on a physical device before uploading to the App Store.</p>
+</blockquote>
+<p>For full guidance, refer to the official docs: <a href="https://learn.microsoft.com/en-us/dotnet/maui/ios/deployment/?view=net-maui-9.0">MAUI iOS Deployment</a></p>
+<h3 id="macos">macOS</h3>
+<p>We recommend using <strong>macOS</strong> to publish the macOS version of your OpenSilver app.</p>
+<h4 id="step-1-set-up-your-apple-developer-account-1">Step 1: Set up your Apple Developer Account</h4>
+<ul>
+<li>Enroll in the <a href="https://developer.apple.com/programs/">Apple Developer Program</a>.</li>
+<li>Follow <a href="https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/publish-app-store?view=net-maui-9.0">Microsoft's guide for macOS</a> to generate your <strong>provisioning profile</strong>, <strong>distribution certificate</strong>, and <strong>Installer Certificate</strong>. You can reuse your iOS distribution certificate and provisioning profile, but the Installer Certificate is still required for macOS apps.</li>
+</ul>
+<h4 id="step-2-build-the-macos-app">Step 2: Build the macOS app</h4>
+<p>Use the <code>build-mac.sh</code> script to build and package your <code>.MauiHybrid</code> project for macOS:</p>
+<pre><code class="lang-bash">#!/bin/bash
+# MAUI macOS Build Script
+# This script builds a MAUI Hybrid application for macOS and packages it for the Mac App Store
+# Configuration variables - adapt to your project structure
+APP_NAME=&quot;MY_APPLICATION&quot;
+PROJECT_NAME=&quot;$APP_NAME.MauiHybrid&quot;
+PROJECT_PATH=&quot;$(pwd)&quot;
+SOLUTION_FILE=&quot;$APP_NAME.sln&quot;
+CONFIGURATION=&quot;Release&quot;
+TARGET_FRAMEWORK=&quot;net8.0-maccatalyst&quot;
+
+# Certificates and provisioning profile information
+PROVISIONING_PROFILE_NAME=&quot;MY_PROVISIONING_PROFILE_NAME&quot;
+CERTIFICATE_NAME=&quot;MY_CERTIFICATE_NAME&quot;
+INSTALLER_CERTIFICATE_NAME=&quot;MY_INSTALLER_CERTIFICATE_NAME&quot;
+
+# Output paths
+PKG_OUTPUT=&quot;$PROJECT_PATH/$PROJECT_NAME/bin/pkg&quot;
+
+# Colors for terminal output
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e &quot;${YELLOW}Starting build process for $PROJECT_NAME (macOS)...${NC}&quot;
+
+# Step 0: Clean all bin and obj folders in the solution
+echo -e &quot;${YELLOW}Removing all bin and obj folders...${NC}&quot;
+find &quot;$PROJECT_PATH&quot; -type d -name &quot;bin&quot; -o -name &quot;obj&quot; | xargs rm -rf
+echo -e &quot;${GREEN}All bin and obj folders removed${NC}&quot;
+
+# Create output directory if it doesn't exist
+mkdir -p &quot;$PKG_OUTPUT&quot;
+
+# Build MacCatalyst version
+echo -e &quot;${YELLOW}Building for MacCatalyst...${NC}&quot;
+dotnet build &quot;$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME.csproj&quot; -c:$CONFIGURATION -f:$TARGET_FRAMEWORK
+
+# Publish for Mac App Store
+echo -e &quot;${YELLOW}Publishing for Mac App Store...${NC}&quot;
+dotnet publish &quot;$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME.csproj&quot; \
+  -f:$TARGET_FRAMEWORK \
+  -c:$CONFIGURATION \
+  -p:ApplicationTitle=$APP_NAME \
+  -p:MtouchLink=SdkOnly \
+  -p:CreatePackage=true \
+  -p:EnableCodeSigning=true \
+  -p:EnablePackageSigning=true \
+  -p:CodesignKey=&quot;$CERTIFICATE_NAME&quot; \
+  -p:CodesignProvision=&quot;$PROVISIONING_PROFILE_NAME&quot; \
+  -p:CodesignEntitlements=&quot;$PROJECT_PATH/$PROJECT_NAME/Platforms/MacCatalyst/Entitlements.plist&quot; \
+  -p:PackageSigningKey=&quot;$INSTALLER_CERTIFICATE_NAME&quot; \
+  -p:PkgPackagePath=&quot;$PKG_OUTPUT/$PROJECT_NAME.pkg&quot;
+
+# Find the app bundle
+APP_DIR=&quot;$PROJECT_PATH/$PROJECT_NAME/bin/$CONFIGURATION/$TARGET_FRAMEWORK&quot;
+APP_BUNDLE=&quot;$APP_DIR/$APP_NAME.app&quot;
+PKG_FILE=&quot;$PKG_OUTPUT/$PROJECT_NAME.pkg&quot;
+
+# Check if the app bundle exists
+if [ -d &quot;$APP_BUNDLE&quot; ]; then
+    echo -e &quot;${GREEN}Successfully built the app bundle: $APP_BUNDLE${NC}&quot;
+else
+    echo -e &quot;${RED}Failed to find the app bundle at: $APP_BUNDLE${NC}&quot;
+    echo -e &quot;${YELLOW}Searching for app bundle elsewhere...${NC}&quot;
+    find &quot;$PROJECT_PATH/$PROJECT_NAME/bin&quot; -name &quot;*.app&quot; -type d
+    exit 1
+fi
+
+# Check if the PKG was created in the specified output directory
+if [ -f &quot;$PKG_FILE&quot; ]; then
+    echo -e &quot;${GREEN}Successfully created PKG at: $PKG_FILE${NC}&quot;
+    echo -e &quot;${GREEN}Your app is ready for submission to the Mac App Store!${NC}&quot;
+else
+    echo -e &quot;${RED}Failed to find PKG file at: $PKG_FILE${NC}&quot;
+    echo -e &quot;${YELLOW}Searching for PKG file elsewhere...${NC}&quot;
+    find &quot;$PROJECT_PATH/$PROJECT_NAME/bin&quot; -name &quot;*.pkg&quot; -type f
+    exit 1
+fi
+
+echo -e &quot;${GREEN}Build process completed!${NC}&quot;
+</code></pre>
+<blockquote>
+<p>✅ Make sure to update the <code>APP_NAME</code>, <code>CERTIFICATE_NAME</code>, <code>INSTALLER_CERTIFICATE_NAME</code>, <code>PROVISIONING_PROFILE_NAME</code>, and <code>TARGET_FRAMEWORK</code>(optional) in the script.</p>
+</blockquote>
+<h4 id="step-3-upload-the-package">Step 3: Upload the package</h4>
+<p>Use the <code>upload-mac.sh</code> script to upload the built app to App Store Connect:</p>
+<pre><code class="lang-bash">#!/bin/bash
+# Upload macOS app to App Store Connect Script
+# This script uploads a MAUI Hybrid macOS app to App Store Connect using notarytool and altool
+
+# Colors for terminal output
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Configuration
+APP_NAME=&quot;MY_APPLICATION&quot;
+PROJECT_NAME=&quot;$APP_NAME.MauiHybrid&quot;
+PKG_PATH=&quot;$(pwd)/$PROJECT_NAME/bin/pkg/$PROJECT_NAME.pkg&quot;
+
+# Check if PKG file exists
+if [ ! -f &quot;$PKG_PATH&quot; ]; then
+    echo -e &quot;${RED}Error: PKG file not found at $PKG_PATH${NC}&quot;
+    echo -e &quot;${YELLOW}Please build the macOS app first using build-mac.sh${NC}&quot;
+    exit 1
+fi
+
+# Display information
+echo -e &quot;${YELLOW}===============================================${NC}&quot;
+echo -e &quot;${YELLOW}Upload macOS App to App Store Connect${NC}&quot;
+echo -e &quot;${YELLOW}===============================================${NC}&quot;
+echo -e &quot;${GREEN}PKG file: $PKG_PATH${NC}&quot;
+echo &quot;&quot;
+
+# Prompt for Apple ID
+read -p &quot;Enter your Apple ID (email): &quot; APPLE_ID
+if [ -z &quot;$APPLE_ID&quot; ]; then
+    echo -e &quot;${RED}Error: Apple ID is required${NC}&quot;
+    exit 1
+fi
+
+# Validation step
+echo -e &quot;${YELLOW}Step 1: Validating macOS app package...${NC}&quot;
+echo -e &quot;${YELLOW}You will be prompted to enter your app-specific password.${NC}&quot;
+echo -e &quot;${YELLOW}(Generate one at appleid.apple.com &gt; Security &gt; App-Specific Passwords)${NC}&quot;
+echo &quot;&quot;
+
+xcrun altool --validate-app -f &quot;$PKG_PATH&quot; -t macos -u &quot;$APPLE_ID&quot;
+VALIDATION_RESULT=$?
+
+if [ $VALIDATION_RESULT -ne 0 ]; then
+    echo -e &quot;${RED}Validation failed. Do you want to continue with upload anyway? (y/n)${NC}&quot;
+    read CONTINUE
+    if [ &quot;$CONTINUE&quot; != &quot;y&quot; ] &amp;&amp; [ &quot;$CONTINUE&quot; != &quot;Y&quot; ]; then
+        echo -e &quot;${YELLOW}Upload canceled.${NC}&quot;
+        exit 1
+    fi
+fi
+
+# Upload step
+echo -e &quot;${YELLOW}Step 2: Uploading macOS app to App Store Connect...${NC}&quot;
+echo -e &quot;${YELLOW}You will be prompted to enter your app-specific password again.${NC}&quot;
+echo &quot;&quot;
+
+xcrun altool --upload-app -f &quot;$PKG_PATH&quot; -t macos -u &quot;$APPLE_ID&quot;
+UPLOAD_RESULT=$?
+
+if [ $UPLOAD_RESULT -eq 0 ]; then
+    echo -e &quot;${GREEN}Upload completed successfully!${NC}&quot;
+    echo -e &quot;${YELLOW}Next steps:${NC}&quot;
+    echo -e &quot;1. Go to App Store Connect (https://appstoreconnect.apple.com)&quot;
+    echo -e &quot;2. Navigate to Your App &gt; macOS App &gt; TestFlight or App Store&quot;
+    echo -e &quot;3. Complete any required information and submit for review&quot;
+else
+    echo -e &quot;${RED}Upload failed. Please check the error message above.${NC}&quot;
+    exit 1
+fi
+</code></pre>
+<blockquote>
+<p>✅ Make sure to update the <code>APP_NAME</code> in the script.<br>
+🔐 You will need an <strong>app-specific password</strong> from your Apple ID for validation and upload.</p>
+</blockquote>
+<h4 id="step-4-finalize-in-app-store-connect-1">Step 4: Finalize in App Store Connect</h4>
+<p>Once the upload is successful:</p>
+<ol>
+<li>Visit <a href="https://appstoreconnect.apple.com/login">App Store Connect</a>.</li>
+<li>Go to <strong>Apps</strong>, select your app.</li>
+<li>Fill out any required information and submit your app for review.</li>
+</ol>
+<blockquote>
+<p>💡 <strong>Reminder:</strong> Always test your macOS app locally before uploading it to the App Store.</p>
+</blockquote>
+<p>For full guidance, refer to the official docs: <a href="https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/?view=net-maui-9.0">MAUI macOS Deployment</a></p>
+<h3 id="windows">Windows</h3>
+<p>To publish your OpenSilver MAUI Hybrid app to the Microsoft Store:</p>
+<h4 id="step-1-create-the-app-in-partner-center">Step 1: Create the app in Partner Center</h4>
+<ul>
+<li>Navigate to the <a href="https://aka.ms/submitwindowsapp">Microsoft Partner Center Apps dashboard</a>.</li>
+<li>Create a new app submission.</li>
+<li>Go to <strong>Product Identity</strong> and copy the <code>Package/Identity/Publisher</code> value. You’ll need it in the next step.</li>
+</ul>
+<p><img src="/images/microsoft-app-identity.png" alt="Microsoft Partner Center. Product identity"></p>
+<h4 id="step-2-create-a-self-signed-certificate">Step 2: Create a self-signed certificate</h4>
+<p>In PowerShell, run the following command, replacing <code>&lt;PublisherName&gt;</code> with the exact value copied from the previous step:</p>
+<pre><code class="lang-powershell">New-SelfSignedCertificate -Type Custom -Subject &quot;CN=&lt;PublisherName&gt;&quot; -KeyUsage DigitalSignature -FriendlyName &quot;My temp dev cert&quot; -CertStoreLocation &quot;Cert:\CurrentUser\My&quot; -TextExtension @(&quot;2.5.29.37={text}1.3.6.1.5.5.7.3.3&quot;, &quot;2.5.29.19={text}&quot;)
+</code></pre>
+<p>Take note of the generated <strong>Thumbprint</strong>—you’ll need it for the publish command.</p>
+<h4 id="step-3-publish-the-app">Step 3: Publish the app</h4>
+<p>We recommend using the command line to publish. Run the following command in <strong>Command Prompt</strong>, replacing placeholders with your actual values:</p>
+<pre><code class="lang-bash">dotnet publish &quot;YOUR_APP_NAME.MauiHybrid\YOUR_APP_NAME.MauiHybrid.csproj&quot; -f &lt;DOTNET_VERSION&gt;-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64 -p:WindowsPackageType=MSIX -p:AppxPackageSigningEnabled=true -p:PackageCertificateThumbprint=&lt;THUMBPRINT_FROM_PREVIOUS_STEP&gt;
+</code></pre>
+<p>This will generate a <code>.msix</code> file in the output folder.</p>
+<h4 id="step-4-upload-to-partner-center">Step 4: Upload to Partner Center</h4>
+<ul>
+<li>Upload the <code>.msix</code> file to your app submission in Partner Center.</li>
+<li>Complete all required fields and submit your app for review.</li>
+</ul>
+<p>For detailed instructions, see the official docs: <a href="https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/overview?view=net-maui-9.0">MAUI Windows Deployment Overview</a></p>
 <hr>
 <h2 id="known-issues">Known Issues</h2>
 <h3 id="path-length-limitations">Path Length Limitations</h3>
@@ -288,6 +707,23 @@ MainThread.BeginInvokeOnMainThread(async () =&gt;
 <li>Sometimes, when attempting to run the application on Windows, it may fail with exit code <strong>3221226356 (0xc0000374)</strong>.
 <strong>More details:</strong> <a href="https://github.com/dotnet/maui/issues/25837">Official issue on GitHub</a>.<br>
 <strong>Workaround:</strong> Try running the application again.</li>
+</ul>
+<h3 id="missing-target-in-assets-file">Missing Target in Assets File</h3>
+<ul>
+<li>You may encounter the following error:
+<pre><code>Assets file 'YourProject\YourProject.MauiHybrid\obj\project.assets.json' doesn't have a target for 'TARGET_NAME'. Ensure that restore has run and that you have included 'TARGET_NAME' in the TargetFrameworks for your project.
+</code></pre>
+<strong>Solution:</strong> Run <code>dotnet restore</code> to regenerate the assets file.</li>
+</ul>
+<h3 id="general-troubleshooting-tips">General Troubleshooting Tips</h3>
+<ul>
+<li>If you encounter strange or inconsistent behavior:
+<ul>
+<li>Try <strong>manually deleting all <code>bin</code> and <code>obj</code> folders</strong> in your solution.</li>
+<li><strong>Rebuild</strong> the solution several times.</li>
+<li>If the issue persists, <strong>switch the .NET version</strong> being used (e.g., switching from <strong>.NET 9 to .NET 8</strong> has resolved issues in some cases).</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h2 id="conclusion">Conclusion</h2>
