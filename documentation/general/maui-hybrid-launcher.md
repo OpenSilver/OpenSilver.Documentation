@@ -62,7 +62,7 @@ After running the command, a new OpenSilver application will be generated with a
 2. Start by creating a new OpenSilver project.
 3. In the project creation wizard, you will see an additional configuration panel to select the desired MAUI Platforms.
 4. Choose the platforms you wish to target and complete the wizard.
-   ![New Project Wizard](/images/new-project-wizard.png)
+   ![New Project Wizard](/images/new-app-wizard.png)
 ### 3. Via Visual Studio Code
 
 1. Install the OpenSilver extension.
