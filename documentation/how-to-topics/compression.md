@@ -8,7 +8,9 @@ Here is the case where the compression is not used.
 
 <img src="/images/how-to-topics/compression2.png" alt="Content-Encoding" title="Content-Encoding" style="border: 2px solid #555;" /><br />
 
-For usual OpenSilver application the following `web.config` will work without any modifications.
+For usual OpenSilver application the following `web.config` will work without any modifications. If your application uses more resource types, you should add the corresponding mime types to the `staticContent` section of the `web.config` file.
+
+>Starting from OpenSilver 3.1, make sure to include the `<add input="{QUERY_STRING}" pattern=".+?" negate="true" />` lines in the `Rewrite gzip file` and `Rewrite brotli file` rules. This is important to serve OpenSilver files with a query string in the URL.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -98,6 +100,7 @@ For usual OpenSilver application the following `web.config` will work without an
           <conditions>
             <add input="{HTTP_ACCEPT_ENCODING}" pattern="br" />
             <add input="{REQUEST_FILENAME}" pattern="\.(js|dat|dll|json|wasm|blat|htm|html|css|ico|svg)$" />
+            <add input="{QUERY_STRING}" pattern=".+?" negate="true" />
             <add input="{REQUEST_FILENAME}.br" matchType="IsFile" />
           </conditions>
           <action type="Rewrite" url="{R:1}.br" />
@@ -107,6 +110,7 @@ For usual OpenSilver application the following `web.config` will work without an
           <conditions>
             <add input="{HTTP_ACCEPT_ENCODING}" pattern="gzip" />
             <add input="{REQUEST_FILENAME}" pattern="\.(js|dat|dll|json|wasm|blat|htm|html|css|ico|svg)$" />
+            <add input="{QUERY_STRING}" pattern=".+?" negate="true" />
             <add input="{REQUEST_FILENAME}.gz" matchType="IsFile" />
           </conditions>
           <action type="Rewrite" url="{R:1}.gz" />
@@ -125,6 +129,10 @@ For usual OpenSilver application the following `web.config` will work without an
 ```
 
 Here is a more detailed explanation [How to Host and deploy ASP.NET Core Blazor WebAssembly](https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-6.0)
+
+#### Publish web.config
+
+If you need to publish custom `web.config` file automatically, you can add it to .Browser project and set `<PublishIISAssets>true</PublishIISAssets>` in the project file.
 
 #### Make sure compression is enabled from IIS
 
