@@ -126,7 +126,10 @@
 <p><img src="/images/how-to-topics/compression1.png" alt="Content-Encoding" title="Content-Encoding" style="border: 2px solid #555;"><br></p>
 <p>Here is the case where the compression is not used.</p>
 <p><img src="/images/how-to-topics/compression2.png" alt="Content-Encoding" title="Content-Encoding" style="border: 2px solid #555;"><br></p>
-<p>For usual OpenSilver application the following <code>web.config</code> will work without any modifications.</p>
+<p>For usual OpenSilver application the following <code>web.config</code> will work without any modifications. If your application uses more resource types, you should add the corresponding mime types to the <code>staticContent</code> section of the <code>web.config</code> file.</p>
+<blockquote>
+<p>Starting from OpenSilver 3.1, make sure to include the <code>&lt;add input=&quot;{QUERY_STRING}&quot; pattern=&quot;.+?&quot; negate=&quot;true&quot; /&gt;</code> lines in the <code>Rewrite gzip file</code> and <code>Rewrite brotli file</code> rules. This is important to serve OpenSilver files with a query string in the URL.</p>
+</blockquote>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;configuration&gt;
   &lt;system.webServer&gt;
@@ -214,6 +217,7 @@
           &lt;conditions&gt;
             &lt;add input=&quot;{HTTP_ACCEPT_ENCODING}&quot; pattern=&quot;br&quot; /&gt;
             &lt;add input=&quot;{REQUEST_FILENAME}&quot; pattern=&quot;\.(js|dat|dll|json|wasm|blat|htm|html|css|ico|svg)$&quot; /&gt;
+            &lt;add input=&quot;{QUERY_STRING}&quot; pattern=&quot;.+?&quot; negate=&quot;true&quot; /&gt;
             &lt;add input=&quot;{REQUEST_FILENAME}.br&quot; matchType=&quot;IsFile&quot; /&gt;
           &lt;/conditions&gt;
           &lt;action type=&quot;Rewrite&quot; url=&quot;{R:1}.br&quot; /&gt;
@@ -223,6 +227,7 @@
           &lt;conditions&gt;
             &lt;add input=&quot;{HTTP_ACCEPT_ENCODING}&quot; pattern=&quot;gzip&quot; /&gt;
             &lt;add input=&quot;{REQUEST_FILENAME}&quot; pattern=&quot;\.(js|dat|dll|json|wasm|blat|htm|html|css|ico|svg)$&quot; /&gt;
+            &lt;add input=&quot;{QUERY_STRING}&quot; pattern=&quot;.+?&quot; negate=&quot;true&quot; /&gt;
             &lt;add input=&quot;{REQUEST_FILENAME}.gz&quot; matchType=&quot;IsFile&quot; /&gt;
           &lt;/conditions&gt;
           &lt;action type=&quot;Rewrite&quot; url=&quot;{R:1}.gz&quot; /&gt;
@@ -240,6 +245,8 @@
 &lt;/configuration&gt;
 </code></pre>
 <p>Here is a more detailed explanation <a href="https://docs.microsoft.com/en-us/aspnet/core/blazor/host-and-deploy/webassembly?view=aspnetcore-6.0">How to Host and deploy ASP.NET Core Blazor WebAssembly</a></p>
+<h4 id="publish-webconfig">Publish web.config</h4>
+<p>If you need to publish custom <code>web.config</code> file automatically, you can add it to .Browser project and set <code>&lt;PublishIISAssets&gt;true&lt;/PublishIISAssets&gt;</code> in the project file.</p>
 <h4 id="make-sure-compression-is-enabled-from-iis">Make sure compression is enabled from IIS</h4>
 <p>Double click on compression in IIS.</p>
 <p><img src="/images/how-to-topics/compression4.png" alt="Compression" title="Compression" style="border: 2px solid #555;"><br></p>
