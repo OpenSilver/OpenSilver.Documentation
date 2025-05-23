@@ -715,6 +715,24 @@ fi
 </code></pre>
 <strong>Solution:</strong> Run <code>dotnet restore</code> to regenerate the assets file.</li>
 </ul>
+<h3 id="app-resources-not-found">App Resources Not Found</h3>
+<ul>
+<li>If you encounter issues with missing resources (like images) in your app, ensure that the paths of resources do not contain any special characters or whitespaces. In general, due to <a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/image#load-a-local-image">Android resource naming rules</a>, the filenames must start and end with a letter character, and can contain only numbers or underscores (_).</li>
+</ul>
+<h3 id="cookies-are-not-being-sent">Cookies Are Not Being Sent</h3>
+<ul>
+<li>Android WebView does not send cookies by default. To enable cookies, you need to <a href="https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/webview#set-cookies">adjust the CookieManager</a>. For example, in your custom WebView handler:</li>
+</ul>
+<pre><code class="lang-csharp">    public class AndroidWebViewHandler : BlazorWebViewHandler
+    {
+        protected override void ConnectHandler(global::Android.Webkit.WebView webView)
+        {
+            CookieManager.Instance?.SetAcceptThirdPartyCookies(webView, true);
+
+            base.ConnectHandler(webView);
+        }
+    }
+</code></pre>
 <h3 id="general-troubleshooting-tips">General Troubleshooting Tips</h3>
 <ul>
 <li>If you encounter strange or inconsistent behavior:

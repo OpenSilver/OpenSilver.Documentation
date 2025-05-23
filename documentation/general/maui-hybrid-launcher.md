@@ -648,6 +648,24 @@ For detailed instructions, see the official docs: [MAUI Windows Deployment Overv
   ```
   **Solution:** Run `dotnet restore` to regenerate the assets file.
 
+### App Resources Not Found
+- If you encounter issues with missing resources (like images) in your app, ensure that the paths of resources do not contain any special characters or whitespaces. In general, due to [Android resource naming rules](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/image#load-a-local-image), the filenames must start and end with a letter character, and can contain only numbers or underscores (_).
+
+### Cookies Are Not Being Sent
+- Android WebView does not send cookies by default. To enable cookies, you need to [adjust the CookieManager](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/webview#set-cookies). For example, in your custom WebView handler:
+
+```csharp
+    public class AndroidWebViewHandler : BlazorWebViewHandler
+    {
+        protected override void ConnectHandler(global::Android.Webkit.WebView webView)
+        {
+            CookieManager.Instance?.SetAcceptThirdPartyCookies(webView, true);
+
+            base.ConnectHandler(webView);
+        }
+    }
+```
+
 ### General Troubleshooting Tips
 
 - If you encounter strange or inconsistent behavior:
