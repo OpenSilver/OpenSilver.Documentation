@@ -283,10 +283,23 @@ dotnet publish "$PROJECT_PATH/$PROJECT_NAME/$PROJECT_NAME.csproj" \
   /p:IpaPackageDir="$IPA_OUTPUT" || { echo -e "${RED}Failed to publish and archive app${NC}"; exit 1; }
 
 # Check if IPA was created
-if [ -f "$IPA_OUTPUT/$APP_NAME.ipa" ]; then
-    echo -e "${GREEN}Successfully created IPA at: $IPA_OUTPUT/$APP_NAME.ipa${NC}"
+IPA_FILES=("$IPA_OUTPUT"/*.ipa)
+IPA_COUNT=$(find "$IPA_OUTPUT" -name "*.ipa" -type f | wc -l)
+
+if [ $IPA_COUNT -eq 0 ]; then
+    echo -e "${RED}No IPA file was created. Please check the build logs for errors.${NC}"
+    exit 1
+elif [ $IPA_COUNT -eq 1 ]; then
+    IPA_FILE="${IPA_FILES[0]}"
+    IPA_FILENAME=$(basename "$IPA_FILE")
+    echo -e "${GREEN}Successfully created IPA: $IPA_FILENAME${NC}"
+    echo -e "${GREEN}Full path: $IPA_FILE${NC}"
 else
-    echo -e "${RED}IPA file was not created. Please check the build logs for errors.${NC}"
+    echo -e "${RED}Multiple IPA files found in the output directory:${NC}"
+    for ipa in "${IPA_FILES[@]}"; do
+        echo -e "${RED}  - $(basename "$ipa")${NC}"
+    done
+    echo -e "${RED}Expected only one IPA file. Please clean the output directory and rebuild.${NC}"
     exit 1
 fi
 
@@ -316,20 +329,34 @@ NC='\033[0m' # No Color
 # Configuration
 APP_NAME="MY_APPLICATION"
 PROJECT_NAME="$APP_NAME.MauiHybrid"
-IPA_PATH="$(pwd)/$PROJECT_NAME/bin/ipa/$APP_NAME.ipa"
+IPA_DIR="$(pwd)/$PROJECT_NAME/bin/ipa"
 
-# Check if IPA file exists
-if [ ! -f "$IPA_PATH" ]; then
-    echo -e "${RED}Error: IPA file not found at $IPA_PATH${NC}"
+# Find IPA file in directory
+IPA_COUNT=$(find "$IPA_DIR" -name "*.ipa" -type f 2>/dev/null | wc -l)
+
+if [ $IPA_COUNT -eq 0 ]; then
+    echo -e "${RED}Error: No IPA file found in $IPA_DIR${NC}"
     echo -e "${YELLOW}Please build the IPA first using build-ios.sh${NC}"
     exit 1
+elif [ $IPA_COUNT -gt 1 ]; then
+    echo -e "${RED}Error: Multiple IPA files found in $IPA_DIR:${NC}"
+    find "$IPA_DIR" -name "*.ipa" -type f -exec basename {} \; | while read -r ipa; do
+        echo -e "${RED}  - $ipa${NC}"
+    done
+    echo -e "${YELLOW}Please ensure only one IPA file exists in the directory${NC}"
+    exit 1
 fi
+
+# Get the IPA file path
+IPA_PATH=$(find "$IPA_DIR" -name "*.ipa" -type f)
+IPA_FILENAME=$(basename "$IPA_PATH")
 
 # Display information
 echo -e "${YELLOW}===============================================${NC}"
 echo -e "${YELLOW}Upload IPA to App Store Connect${NC}"
 echo -e "${YELLOW}===============================================${NC}"
-echo -e "${GREEN}IPA file: $IPA_PATH${NC}"
+echo -e "${GREEN}IPA file: $IPA_FILENAME${NC}"
+echo -e "${GREEN}Full path: $IPA_PATH${NC}"
 echo ""
 
 # Prompt for Apple ID
@@ -377,7 +404,7 @@ else
 fi
 ```
 > ✅ Make sure to update the `APP_NAME` in the script.  
-> 🔐 You will need an **app-specific password** from your Apple ID for validation and upload.
+> 🔐 You will need an [app-specific password](https://support.apple.com/en-us/102654) from your Apple ID for validation and upload.
 
 #### Step 4: Finalize in App Store Connect
 
