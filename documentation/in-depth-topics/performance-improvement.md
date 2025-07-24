@@ -48,12 +48,6 @@ Performance gains are roughly proportional to the % of visible items that you re
 
 If it is acceptable to lose minor functionality in the app, or if it is acceptable to slightly change the look of the app, we can remove minor UI elements in the styles (such as elements for mouse hover, elements for keyboard focus, storyboard, etc.), reduce the depth of the visual tree, use "flat" design instead of gradients and shades, etc. 
 
-## Replace Telerik UI controls with the built-in ones
-
-Usually, built-in controls are more performant than Telerik controls. But keep in mind that some features might be missing.
-
-For example, replace the `RadGridView` with the built-in `DataGrid`, `RadTabControl` with `TabControl`, `RadTileView` with just a simple `Grid`. 
-
 ## Replace some controls with native HTML controls 
 
 You can try to replace the OpenSilver controls with the html elements and use css+javascript to style them, so they look/work like the original controls. This requires more works and html/css/js knowledge, but the performance gain will be very huge (like 30x better performance in some cases).  
