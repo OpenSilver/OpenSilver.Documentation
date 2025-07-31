@@ -136,10 +136,10 @@ This example demonstrates how to use a Radzen Blazor button inside a XAML UI, in
 
     <StackPanel>
         <razor:RazorComponent Margin="0,20,0,0" Height="70">
-@using Radzen
-@using Radzen.Blazor
+            @using Radzen
+            @using Radzen.Blazor
 
-<RadzenButton Text="Click me!" Click="{Binding ButtonClickDel, Type=Action}" />
+            <RadzenButton Text="Click me!" Click="{Binding ButtonClickDel, Type=Action}" />
         </razor:RazorComponent>
     </StackPanel>
 </UserControl>
@@ -270,9 +270,6 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 
 * **Designer Support:**
   The XAML Designer may not reliably preview Razor components.
-
-* **Usings:**
-  Place all `@using` directives at the beginning of the line in Razor code blocks.
 
 * **Component Naming:**
   Each XAML component that uses the Razor feature must have a unique name within the project.
