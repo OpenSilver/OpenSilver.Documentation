@@ -271,9 +271,6 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 * **Designer Support:**
   The XAML Designer may not reliably preview Razor components.
 
-* **Component Naming:**
-  Each XAML component that uses the Razor feature must have a unique name within the project.
-
 * **Stability:**
   Breaking changes are expected in this Preview.
 
