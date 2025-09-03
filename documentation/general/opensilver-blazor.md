@@ -271,6 +271,10 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 * **Designer Support:**
   The XAML Designer may not reliably preview Razor components.
 
+* **Language Support:**
+  Currently, **OpenSilver.Blazor works only for C# projects**.  
+  Support for other languages such as **VB.NET** and **F#** is planned for future releases.
+
 * **Stability:**
   Breaking changes are expected in this Preview.
 
