@@ -72,7 +72,17 @@
    <Project Sdk="Microsoft.NET.Sdk.Razor">
    ```
 
-4. **Add 3rd Party Blazor Libraries (Optional):**
+4. **Initialize Blazor for OpenSilver:**  
+   - Add the following to the `Program.Main()` method in the **.Browser** project:
+     ```csharp
+     Initializer.UseBlazorForOpenSilver(WebAssemblyHostBuilder);
+     ```
+   - Add the following at the **end of the `MainPage.xaml.cs` constructor** in the **.MauiHybrid** project (if applicable):
+     ```csharp
+     Initializer.UseBlazorForOpenSilver(blazorWebView.RootComponents);
+     ```
+
+5. **Add 3rd Party Blazor Libraries (Optional):**  
    Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen) following their own installation instructions.
 
 ---

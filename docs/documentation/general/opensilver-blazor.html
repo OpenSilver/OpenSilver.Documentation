@@ -179,7 +179,19 @@ In your <code>.csproj</code>, change:</p>
 <pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Razor&quot;&gt;
 </code></pre>
 </li>
-<li><p><strong>Add 3rd Party Blazor Libraries (Optional):</strong>
+<li><p><strong>Initialize Blazor for OpenSilver:</strong></p>
+<ul>
+<li>Add the following to the <code>Program.Main()</code> method in the <strong>.Browser</strong> project:
+<pre><code class="lang-csharp">Initializer.UseBlazorForOpenSilver(WebAssemblyHostBuilder);
+</code></pre>
+</li>
+<li>Add the following at the <strong>end of the <code>MainPage.xaml.cs</code> constructor</strong> in the <strong>.MauiHybrid</strong> project (if applicable):
+<pre><code class="lang-csharp">Initializer.UseBlazorForOpenSilver(blazorWebView.RootComponents);
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>Add 3rd Party Blazor Libraries (Optional):</strong><br>
 Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen) following their own installation instructions.</p>
 </li>
 </ol>
