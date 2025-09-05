@@ -294,7 +294,7 @@ dynamic datePicker = ((dynamic)DatePickerHolder).Instance.myDatePicker;
 datePicker.DateFormat = "MM/dd/yyyy";
 ```
 
-#### **4. Notes**
+#### **3. Notes**
 
 * By naming the RazorComponent (here DatePickerHolder), you can access it from the code-behind.
 * You can then access the Razor component (defined here by the contents of DatePickerHolder) via the "Instance" property.
