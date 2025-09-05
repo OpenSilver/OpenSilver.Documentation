@@ -203,6 +203,18 @@ To use Radzen components, some additional setup is required in your `.Browser` p
   builder.Services.AddRadzenComponents();
   ```
 
+* **c. Apply Radzen Styles**
+
+  In one of your XAML files which will be loaded with or before the Radzen Component, add the following:
+
+  ```xml
+  <razor:RazorComponent>
+    @using Radzen
+    @using Radzen.Blazor
+    <RadzenTheme Theme="material" />
+  </razor:RazorComponent>
+  ```
+
 #### **4. Notes**
 
 * Ensure you’ve installed the `Radzen.Blazor` NuGet package in your project.
