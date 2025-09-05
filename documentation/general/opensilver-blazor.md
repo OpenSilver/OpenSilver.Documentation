@@ -257,6 +257,50 @@ To use Radzen components, some additional setup is required in your `.Browser` p
 }
 ```
 
+
+### **D. Accessing Blazor Component via code**
+
+#### **1. XAML Integration (`MyControl.xaml`)**
+
+```xml
+<UserControl
+    x:Class="MyApp.Message_Demo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:razor="clr-namespace:OpenSilver.Blazor;assembly=OpenSilver.Blazor"
+    xmlns:local="clr-namespace:MyApp">
+
+  <razor:RazorComponent x:Name="DatePickerHolder" Margin="0,20,0,0" Height="60">
+    @using Radzen
+    @using Radzen.Blazor
+    
+    <RadzenStack Orientation="global::Radzen.Orientation.Horizontal" JustifyContent="global::Radzen.JustifyContent.Center" AlignItems="global::Radzen.AlignItems.Center" Gap="0.5rem">
+      <RadzenLabel Text="Select Date" Component="RadzenDatePickerBindValue" />
+      <RadzenDatePicker @ref="myDatePicker" TValue="DateTime?"  Name="RadzenDatePickerBindValue" ShowCalendarWeek />
+    </RadzenStack>
+    
+    @code {
+      public RadzenDatePicker<DateTime?> myDatePicker { get; set; }
+    }
+  </razor:RazorComponent>
+</UserControl>
+```
+
+#### **2. Code-behind (`MyControl.xaml.cs`)**
+
+In your code-behind, you can then access the Blazor Component:
+```csharp
+dynamic datePicker = ((dynamic)DatePickerHolder).Instance.myDatePicker;
+datePicker.DateFormat = "MM/dd/yyyy";
+```
+
+#### **4. Notes**
+
+* By naming the RazorComponent (here DatePickerHolder), you can access it from the code-behind.
+* You can then access the Razor component (defined here by the contents of DatePickerHolder) via the "Instance" property.
+* Having ```@ref="myDatePicker"``` on the RadzenDatePicker then lets us access it from the Razor Component through the myDatePicker property defined in the @code section.
+
+
 ---
 
 ## 5. Threading Considerations
