@@ -97,6 +97,12 @@ To run your generated application as a native Windows desktop app:
   ![Running MAUI Hybrid in Visual Studio 2022](/images/how-to-topics/vs-2022-run-maui-hybrid.png)
 ---
 
+### Running on mobile devices (Android/iOS)
+
+You can run your application on a connected Android device or in emulator.
+
+To run a MAUI app on a local iOS device from Visual Studio on Windows, follow the steps in [this Microsoft doc](https://learn.microsoft.com/en-us/dotnet/maui/ios/hot-restart). Please note that publishing iOS apps still requires a Mac.
+
 ## Leveraging MAUI Native Features
 
 One of the strengths of the MAUI Hybrid Launcher is that it gives you access to native features via .NET MAUI. For example, the **Microsoft.Maui.Essentials** package provides APIs for accessing device hardware and native functions.
