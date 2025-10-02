@@ -4,7 +4,7 @@ This guide demonstrates how to deploy an OpenSilver app to the root and the serv
 
 1. In the Azure Web App settings, add a virtual directory for the backend. For example, set the virtual path to `/api` and the physical path to `site\api`, with the type set as `Application`.
 
-2. If your `.Browser` project does not have a `web.config` file, add it (you can use an example from [this article](enable-trimming.md)). Then set `<PublishIISAssets>true</PublishIISAssets>` in the `.csproj` file.
+2. If your `.Browser` project does not have a `web.config` file, add it (you can use an example from [this article](compression.md)). Then set `<PublishIISAssets>true</PublishIISAssets>` in the `.csproj` file.
 
 3. Insert the following rule in your `web.config` file, to bypass `/api` calls, allowing them to be handled by the backend app:
 ```
