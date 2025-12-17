@@ -139,6 +139,9 @@ OpenSilver.Blazor is currently released as a <strong>Preview</strong>. Expect br
 <p>Use Razor components defined in separate <code>.razor</code> files via the <code>ComponentType</code> attribute:</p>
 <pre><code class="lang-xml">&lt;RazorComponent ComponentType=&quot;{x:Type local:Counter}&quot; /&gt;
 </code></pre>
+<blockquote>
+<p><strong>Note:</strong> Make sure the Build Action of the <code>.razor</code> file is set to <code>Content</code>.</p>
+</blockquote>
 </li>
 <li><p><strong>Support for 3rd Party Blazor Libraries</strong></p>
 <p>Integrate popular Blazor UI libraries (such as <strong>Blazorise</strong>, <strong>MudBlazor</strong>, and <strong>Radzen</strong>) seamlessly into your OpenSilver app.</p>
@@ -158,7 +161,7 @@ OpenSilver.Blazor is currently released as a <strong>Preview</strong>. Expect br
 <h3 id="prerequisites">Prerequisites</h3>
 <ul>
 <li>Latest <strong>Preview</strong> versions of OpenSilver and OpenSilver.Blazor packages</li>
-<li>.NET 8 or .NET 9</li>
+<li>.NET 8, .NET 9, or .NET 10</li>
 </ul>
 <h3 id="installation-steps">Installation Steps</h3>
 <ol>
@@ -230,6 +233,10 @@ public class Context
     public string Message { get; set; } = &quot;Hi!&quot;;
 }
 </code></pre>
+<h4 id="3-notes"><strong>3. Notes</strong></h4>
+<ul>
+<li>Please note that the <code>Type</code> is required to be set for the binding to work.</li>
+</ul>
 <h3 id="b-using-a-3rd-party-blazor-button-radzen-example"><strong>B. Using a 3rd Party Blazor Button (Radzen Example)</strong></h3>
 <p>This example demonstrates how to use a Radzen Blazor button inside a XAML UI, including the required setup for 3rd-party Blazor libraries.</p>
 <h4 id="1-xaml-integration-radzenbutton_demoxaml"><strong>1. XAML Integration (<code>RadzenButton_Demo.xaml</code>)</strong></h4>
@@ -288,6 +295,15 @@ public class TestButtonClickClass
 <pre><code class="lang-csharp">builder.Services.AddRadzenComponents();
 </code></pre>
 </li>
+<li><p><strong>c. Apply Radzen Styles</strong></p>
+<p>In one of your XAML files which will be loaded with or before the Radzen Component, add the following:</p>
+<pre><code class="lang-xml">&lt;razor:RazorComponent&gt;
+  @using Radzen
+  @using Radzen.Blazor
+  &lt;RadzenTheme Theme=&quot;material&quot; /&gt;
+&lt;/razor:RazorComponent&gt;
+</code></pre>
+</li>
 </ul>
 <h4 id="4-notes"><strong>4. Notes</strong></h4>
 <ul>
@@ -323,6 +339,45 @@ public class TestButtonClickClass
     }
 }
 </code></pre>
+<h4 id="3-notes-1"><strong>3. Notes</strong></h4>
+<ul>
+<li>Make sure the Build Action of the <code>.razor</code> file is set to <code>Content</code>.</li>
+</ul>
+<h3 id="d-accessing-blazor-component-via-code"><strong>D. Accessing Blazor Component via code</strong></h3>
+<h4 id="1-xaml-integration-mycontrolxaml-1"><strong>1. XAML Integration (<code>MyControl.xaml</code>)</strong></h4>
+<pre><code class="lang-xml">&lt;UserControl
+    x:Class=&quot;MyApp.Message_Demo&quot;
+    xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+    xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+    xmlns:razor=&quot;clr-namespace:OpenSilver.Blazor;assembly=OpenSilver.Blazor&quot;
+    xmlns:local=&quot;clr-namespace:MyApp&quot;&gt;
+
+  &lt;razor:RazorComponent x:Name=&quot;DatePickerHolder&quot; Margin=&quot;0,20,0,0&quot; Height=&quot;60&quot;&gt;
+    @using Radzen
+    @using Radzen.Blazor
+    
+    &lt;RadzenStack Orientation=&quot;global::Radzen.Orientation.Horizontal&quot; JustifyContent=&quot;global::Radzen.JustifyContent.Center&quot; AlignItems=&quot;global::Radzen.AlignItems.Center&quot; Gap=&quot;0.5rem&quot;&gt;
+      &lt;RadzenLabel Text=&quot;Select Date&quot; Component=&quot;RadzenDatePickerBindValue&quot; /&gt;
+      &lt;RadzenDatePicker @ref=&quot;myDatePicker&quot; TValue=&quot;DateTime?&quot;  Name=&quot;RadzenDatePickerBindValue&quot; ShowCalendarWeek /&gt;
+    &lt;/RadzenStack&gt;
+    
+    @code {
+      public RadzenDatePicker&lt;DateTime?&gt; myDatePicker { get; set; }
+    }
+  &lt;/razor:RazorComponent&gt;
+&lt;/UserControl&gt;
+</code></pre>
+<h4 id="2-code-behind-mycontrolxamlcs"><strong>2. Code-behind (<code>MyControl.xaml.cs</code>)</strong></h4>
+<p>In your code-behind, you can then access the Blazor Component:</p>
+<pre><code class="lang-csharp">dynamic datePicker = ((dynamic)DatePickerHolder).Instance.myDatePicker;
+datePicker.DateFormat = &quot;MM/dd/yyyy&quot;;
+</code></pre>
+<h4 id="3-notes-2"><strong>3. Notes</strong></h4>
+<ul>
+<li>By naming the RazorComponent (here DatePickerHolder), you can access it from the code-behind.</li>
+<li>You can then access the Razor component (defined here by the contents of DatePickerHolder) via the &quot;Instance&quot; property.</li>
+<li>Having <code>@ref=&quot;myDatePicker&quot;</code> on the RadzenDatePicker then lets us access it from the Razor Component through the myDatePicker property defined in the @code section.</li>
+</ul>
 <hr>
 <h2 id="5-threading-considerations">5. Threading Considerations</h2>
 <h3 id="running-blazor-code-on-the-correct-thread">Running Blazor Code on the Correct Thread</h3>
@@ -361,7 +416,7 @@ Please <a href="https://github.com/OpenSilver/OpenSilver/issues">report issues</
 </ul>
 <hr>
 <h2 id="7-roadmap">7. Roadmap</h2>
-<p>The first official release of OpenSilver.Blazor is planned for <strong>Autumn 2025</strong>. Expect further features and improved stability.</p>
+<p>The first version of OpenSilver.Blazor is released with OpenSilver 3.3.0. Expect further features and improved stability.</p>
 <hr>
 </article>
           </div>

@@ -180,8 +180,32 @@
 <p>In some scenarios, caching of the application files will work only if the application is hosted in HTTPS.</p>
 <h2 id="enable-wasm-simd">Enable WASM SIMD</h2>
 <p>If you are sure that your users have an up-to-date browser (read note below), you can improve the performance of your application by enabling WASM SIMD.</p>
-<p>To do so, edit the &quot;.CSPROJ&quot; file of the project that has the &quot;.Browser&quot; suffix, and replace the line <wasmenablesimd>false</wasmenablesimd> with <wasmenablesimd>true</wasmenablesimd></p>
+<p>To do so, edit the &quot;.CSPROJ&quot; file of the project that has the &quot;.Browser&quot; suffix, and replace the line <code>&lt;WasmEnableSIMD&gt;false&lt;/WasmEnableSIMD&gt;</code> with <code>&lt;WasmEnableSIMD&gt;true&lt;/WasmEnableSIMD&gt;</code></p>
 <p>Note that this setting will prevent the application from running on older browsers. Specifically, the application will not run on old versions of Edge, Chrome or Firefox released prior to 2021, and Safari versions released prior to 2023.</p>
+<h2 id="enable-aot-compilation">Enable AOT Compilation</h2>
+<p>Enable AOT compilation to improve the performance of the app. See <a href="../how-to-topics/aot-compilation.html">Enabling AOT Compilation</a> for more details.</p>
+<h2 id="reduce-the-app-size">Reduce the App Size</h2>
+<p>By reducing the size of the downloaded files, you can boost the loading time of the app.</p>
+<h3 id="globalization">Globalization</h3>
+<p>If your app doesn't use globalization, you can exclude the localization and timezone data from the published app with the following settings in the <code>.Browser.csproj</code> file:</p>
+<pre><code class="lang-xml">&lt;PropertyGroup&gt;
+  &lt;InvariantGlobalization&gt;true&lt;/InvariantGlobalization&gt;
+  &lt;InvariantTimezone&gt;true&lt;/InvariantTimezone&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<p>If localization is required, you can specify the languages, so only the required satellite assemblies are included in the published app. Set the following setting in the <code>.Browser.csproj</code> file:</p>
+<pre><code class="lang-xml">&lt;PropertyGroup&gt;
+  &lt;SatelliteResourceLanguages&gt;en;ru&lt;/SatelliteResourceLanguages&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<h3 id="trimming">Trimming</h3>
+<p>Enable trimming to reduce the size of the app. See <a href="../how-to-topics/enable-trimming.html">Enabling Application Trimming</a> for more details.</p>
+<h3 id="compression">Compression</h3>
+<p>Enable compression to reduce the size of the downloaded files. See <a href="../how-to-topics/compression.html">Compression</a> for more details.</p>
+<h3 id="resource-files">Resource Files</h3>
+<p>Review the resource files in app, if you can remove some of them or optimize the size. For example, compress the images using <a href="https://tinypng.com">https://tinypng.com</a>.</p>
+<h3 id="lazy-loading">Lazy Loading</h3>
+<p>Defer the loading of some components of the app. See <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/webassembly-lazy-load-assemblies">Lazy Loading</a> for more details.</p>
 </article>
           </div>
           

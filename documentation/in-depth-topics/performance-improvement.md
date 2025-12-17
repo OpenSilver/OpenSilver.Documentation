@@ -90,8 +90,49 @@ In some scenarios, caching of the application files will work only if the applic
 
 If you are sure that your users have an up-to-date browser (read note below), you can improve the performance of your application by enabling WASM SIMD.
 
-To do so, edit the ".CSPROJ" file of the project that has the ".Browser" suffix, and replace the line <WasmEnableSIMD>false</WasmEnableSIMD> with <WasmEnableSIMD>true</WasmEnableSIMD>
+To do so, edit the ".CSPROJ" file of the project that has the ".Browser" suffix, and replace the line `<WasmEnableSIMD>false</WasmEnableSIMD>` with `<WasmEnableSIMD>true</WasmEnableSIMD>`
 
 Note that this setting will prevent the application from running on older browsers. Specifically, the application will not run on old versions of Edge, Chrome or Firefox released prior to 2021, and Safari versions released prior to 2023.
 
+## Enable AOT Compilation
 
+Enable AOT compilation to improve the performance of the app. See [Enabling AOT Compilation](../how-to-topics/aot-compilation.md) for more details.
+
+## Reduce the App Size
+
+By reducing the size of the downloaded files, you can boost the loading time of the app.
+
+### Globalization
+
+If your app doesn't use globalization, you can exclude the localization and timezone data from the published app with the following settings in the `.Browser.csproj` file:
+
+```xml
+<PropertyGroup>
+  <InvariantGlobalization>true</InvariantGlobalization>
+  <InvariantTimezone>true</InvariantTimezone>
+</PropertyGroup>
+```
+
+If localization is required, you can specify the languages, so only the required satellite assemblies are included in the published app. Set the following setting in the `.Browser.csproj` file:
+
+```xml
+<PropertyGroup>
+  <SatelliteResourceLanguages>en;ru</SatelliteResourceLanguages>
+</PropertyGroup>
+```
+
+### Trimming
+
+Enable trimming to reduce the size of the app. See [Enabling Application Trimming](../how-to-topics/enable-trimming.md) for more details.
+
+### Compression
+
+Enable compression to reduce the size of the downloaded files. See [Compression](../how-to-topics/compression.md) for more details.
+
+### Resource Files
+
+Review the resource files in app, if you can remove some of them or optimize the size. For example, compress the images using https://tinypng.com.
+
+### Lazy Loading
+
+Defer the loading of some components of the app. See [Lazy Loading](https://learn.microsoft.com/en-us/aspnet/core/blazor/webassembly-lazy-load-assemblies) for more details.

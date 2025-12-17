@@ -25,6 +25,8 @@
   <RazorComponent ComponentType="{x:Type local:Counter}" />
   ```
 
+  > **Note:** Make sure the Build Action of the `.razor` file is set to `Content`.
+
 * **Support for 3rd Party Blazor Libraries**
 
   Integrate popular Blazor UI libraries (such as **Blazorise**, **MudBlazor**, and **Radzen**) seamlessly into your OpenSilver app.
@@ -46,7 +48,7 @@
 ### Prerequisites
 
 * Latest **Preview** versions of OpenSilver and OpenSilver.Blazor packages
-* .NET 8 or .NET 9
+* .NET 8, .NET 9, or .NET 10
 
 ### Installation Steps
 
@@ -130,6 +132,10 @@ public class Context
 }
 ```
 
+#### **3. Notes**
+
+* Please note that the `Type` is required to be set for the binding to work.
+  
 ### **B. Using a 3rd Party Blazor Button (Radzen Example)**
 
 This example demonstrates how to use a Radzen Blazor button inside a XAML UI, including the required setup for 3rd-party Blazor libraries.
@@ -257,6 +263,9 @@ To use Radzen components, some additional setup is required in your `.Browser` p
 }
 ```
 
+#### **3. Notes**
+
+* Make sure the Build Action of the `.razor` file is set to `Content`.
 
 ### **D. Accessing Blazor Component via code**
 
@@ -351,6 +360,6 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 
 ## 7. Roadmap
 
-The first official release of OpenSilver.Blazor is planned for **Autumn 2025**. Expect further features and improved stability.
+The first version of OpenSilver.Blazor is released with OpenSilver 3.3.0. Expect further features and improved stability.
 
 ---
