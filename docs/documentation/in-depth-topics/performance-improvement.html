@@ -202,8 +202,36 @@
 <p>Enable trimming to reduce the size of the app. See <a href="../how-to-topics/enable-trimming.html">Enabling Application Trimming</a> for more details.</p>
 <h3 id="compression">Compression</h3>
 <p>Enable compression to reduce the size of the downloaded files. See <a href="../how-to-topics/compression.html">Compression</a> for more details.</p>
-<h3 id="resource-files">Resource Files</h3>
+<h3 id="resource-files-size">Resource Files Size</h3>
 <p>Review the resource files in app, if you can remove some of them or optimize the size. For example, compress the images using <a href="https://tinypng.com">https://tinypng.com</a>.</p>
+<h3 id="disable-embedding-of-resources">Disable Embedding of Resources</h3>
+<p>By default, OpenSilver embeds all the resource files (images, fonts, etc.) in the application assemblies and copies them to the <code>wwwroot/resources</code> folder. It leads to larger app size. Set <code>&lt;OpenSilverEnableDefaultResourceEmbedding&gt;false&lt;/OpenSilverEnableDefaultResourceEmbedding&gt;</code> in your project file that contains resources, so the files will not be embedded in the assemblies, only copied to the <code>wwwroot/resources</code> folder, which is enough for most scenarios.
+Or control resource embedding on a per-file basis using the <code>IsEmbedded</code> metadata:</p>
+<pre><code class="lang-xml">		&lt;Content Include=&quot;Assets\LargeImage.png&quot;&gt;
+			&lt;IsEmbedded&gt;false&lt;/IsEmbedded&gt;
+		&lt;/Content&gt;
+</code></pre>
+<p>However, note that disabling resource embedding may lead to null results of the following API calls :</p>
+<pre><code class="lang-csharp">Application.GetResourceStream(new Uri(&quot;assets/image.png&quot;, UriKind.Relative));
+new ResourceManager(&quot;MyApp.g&quot;, assembly).GetStream(&quot;assets/image.png&quot;);
+</code></pre>
+<p>Instead, use the following code:</p>
+<pre><code class="lang-csharp">    private async Task&lt;Stream&gt; GetStream(string path)
+    {
+        var uri = INTERNAL_UriHelper.ConvertToHtml5Path(path, this);
+        if (Interop.IsRunningInTheSimulator)
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, &quot;wwwroot&quot;, uri);
+            return File.OpenRead(filePath);
+        }
+        else
+        {
+            var httpClient = new HttpClient { BaseAddress = new Uri(Interop.ExecuteJavaScriptGetResult&lt;string&gt;(&quot;document.baseURI&quot;)) };
+            return await _httpClient.GetStreamAsync(uri);
+        }
+    }
+</code></pre>
+<p>NOTE: the feature is available starting from OpenSilver <code>3.4.0-preview-2026-01-05-144938-feb2cabd</code>.</p>
 <h3 id="lazy-loading">Lazy Loading</h3>
 <p>Defer the loading of some components of the app. See <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/webassembly-lazy-load-assemblies">Lazy Loading</a> for more details.</p>
 </article>

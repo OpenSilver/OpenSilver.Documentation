@@ -129,9 +129,43 @@ Enable trimming to reduce the size of the app. See [Enabling Application Trimmin
 
 Enable compression to reduce the size of the downloaded files. See [Compression](../how-to-topics/compression.md) for more details.
 
-### Resource Files
+### Resource Files Size
 
 Review the resource files in app, if you can remove some of them or optimize the size. For example, compress the images using https://tinypng.com.
+
+### Disable Embedding of Resources
+
+By default, OpenSilver embeds all the resource files (images, fonts, etc.) in the application assemblies and copies them to the `wwwroot/resources` folder. It leads to larger app size. Set `<OpenSilverEnableDefaultResourceEmbedding>false</OpenSilverEnableDefaultResourceEmbedding>` in your project file that contains resources, so the files will not be embedded in the assemblies, only copied to the `wwwroot/resources` folder, which is enough for most scenarios.
+Or control resource embedding on a per-file basis using the `IsEmbedded` metadata:
+```xml
+		<Content Include="Assets\LargeImage.png">
+			<IsEmbedded>false</IsEmbedded>
+		</Content>
+```
+However, note that disabling resource embedding may lead to null results of the following API calls :
+```csharp
+Application.GetResourceStream(new Uri("assets/image.png", UriKind.Relative));
+new ResourceManager("MyApp.g", assembly).GetStream("assets/image.png");
+```
+Instead, use the following code:
+```csharp
+    private async Task<Stream> GetStream(string path)
+    {
+        var uri = INTERNAL_UriHelper.ConvertToHtml5Path(path, this);
+        if (Interop.IsRunningInTheSimulator)
+        {
+            var filePath = Path.Combine(AppContext.BaseDirectory, "wwwroot", uri);
+            return File.OpenRead(filePath);
+        }
+        else
+        {
+            var httpClient = new HttpClient { BaseAddress = new Uri(Interop.ExecuteJavaScriptGetResult<string>("document.baseURI")) };
+            return await _httpClient.GetStreamAsync(uri);
+        }
+    }
+```
+
+NOTE: the feature is available starting from OpenSilver `3.4.0-preview-2026-01-05-144938-feb2cabd`.
 
 ### Lazy Loading
 
