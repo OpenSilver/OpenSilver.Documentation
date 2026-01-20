@@ -62,16 +62,10 @@
 
 ### Installation Steps
 
-1. **Add the MyGet feed** (if not already present):
-   All newly created OpenSilver projects include
-   `https://www.myget.org/F/opensilver/api/v3/index.json`
-   by default.
-   [Read more about preview feeds here.](../how-to-topics/get-latest-preview-version.md)
-
-2. **Install the NuGet Package:**
+1. **Install the NuGet Package:**
    Add the `OpenSilver.Blazor` NuGet package to any project where you want to use Blazor components.
 
-3. **Update your project SDK:**
+2. **Update your project SDK:**
    In your `.csproj`, change:
 
    ```xml
@@ -84,15 +78,18 @@
    <Project Sdk="Microsoft.NET.Sdk.Razor">
    ```
 
-4. **Initialize Blazor for OpenSilver:**  
-   - Add the following to the `Program.Main()` method in the **.Browser** project:
-     ```csharp
-     Initializer.UseBlazorForOpenSilver(WebAssemblyHostBuilder);
-     ```
-   - Add the following at the **end of the `MainPage.xaml.cs` constructor** in the **.MauiHybrid** project (if applicable):
-     ```csharp
-     Initializer.UseBlazorForOpenSilver(blazorWebView.RootComponents);
-     ```
+3. **Initialize Blazor for OpenSilver:**  
+   Add the following to the `Program.Main()` method in the **.Browser** project:
+   ```csharp
+   Initializer.UseBlazorForOpenSilver(builder);
+   ```
+   ![Initialize Blazor for OpenSilver](/images/blazor-in-opensilver-init.png)
+
+4. **If you use [MAUI-Hybrid](/documentation/how-to-topics/maui-hybrid-launcher.html) (to deploy to iOS, Android, Windows, macOS):**  
+   Add the following at the **end of the `MainPage.xaml.cs` constructor** in the **.MauiHybrid** project (if applicable):
+   ```csharp
+   Initializer.UseBlazorForOpenSilver(blazorWebView.RootComponents);
+   ```
 
 5. **Add 3rd Party Blazor Libraries (Optional):**  
    Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazor, Syncfusion Blazor) following their own installation instructions.
@@ -105,11 +102,11 @@ Below are a few usage examples.
 
 ### **A. Simple Embedded Razor Code with Data Binding**
 
-#### **1. XAML Integration (`Message_Demo.xaml`)**
+#### **1. XAML Integration (`MainPage.xaml`)**
 
 ```xml
 <UserControl
-    x:Class="MyApp.Message_Demo"
+    x:Class="MyApp.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:razor="clr-namespace:OpenSilver.Blazor;assembly=OpenSilver.Blazor"
@@ -123,12 +120,12 @@ Below are a few usage examples.
 </UserControl>
 ```
 
-#### **2. Code-behind (`Message_Demo.xaml.cs`)**
+#### **2. Code-behind (`MainPage.xaml.cs`)**
 
 ```csharp
-public partial class Message_Demo : UserControl
+public partial class MainPage : UserControl
 {
-    public Message_Demo()
+    public MainPage()
     {
         this.InitializeComponent();
 

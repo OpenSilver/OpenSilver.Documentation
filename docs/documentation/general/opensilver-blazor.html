@@ -173,12 +173,6 @@ Razor code embedded inside XAML will show errors in Visual Studio at design-time
 </ul>
 <h3 id="installation-steps">Installation Steps</h3>
 <ol>
-<li><p><strong>Add the MyGet feed</strong> (if not already present):
-All newly created OpenSilver projects include
-<code>https://www.myget.org/F/opensilver/api/v3/index.json</code>
-by default.
-<a href="../how-to-topics/get-latest-preview-version.html">Read more about preview feeds here.</a></p>
-</li>
 <li><p><strong>Install the NuGet Package:</strong>
 Add the <code>OpenSilver.Blazor</code> NuGet package to any project where you want to use Blazor components.</p>
 </li>
@@ -190,17 +184,16 @@ In your <code>.csproj</code>, change:</p>
 <pre><code class="lang-xml">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Razor&quot;&gt;
 </code></pre>
 </li>
-<li><p><strong>Initialize Blazor for OpenSilver:</strong></p>
-<ul>
-<li>Add the following to the <code>Program.Main()</code> method in the <strong>.Browser</strong> project:
-<pre><code class="lang-csharp">Initializer.UseBlazorForOpenSilver(WebAssemblyHostBuilder);
+<li><p><strong>Initialize Blazor for OpenSilver:</strong><br>
+Add the following to the <code>Program.Main()</code> method in the <strong>.Browser</strong> project:</p>
+<pre><code class="lang-csharp">Initializer.UseBlazorForOpenSilver(builder);
 </code></pre>
+<p><img src="/images/blazor-in-opensilver-init.png" alt="Initialize Blazor for OpenSilver"></p>
 </li>
-<li>Add the following at the <strong>end of the <code>MainPage.xaml.cs</code> constructor</strong> in the <strong>.MauiHybrid</strong> project (if applicable):
+<li><p><strong>If you use <a href="/documentation/how-to-topics/maui-hybrid-launcher.html">MAUI-Hybrid</a> (to deploy to iOS, Android, Windows, macOS):</strong><br>
+Add the following at the <strong>end of the <code>MainPage.xaml.cs</code> constructor</strong> in the <strong>.MauiHybrid</strong> project (if applicable):</p>
 <pre><code class="lang-csharp">Initializer.UseBlazorForOpenSilver(blazorWebView.RootComponents);
 </code></pre>
-</li>
-</ul>
 </li>
 <li><p><strong>Add 3rd Party Blazor Libraries (Optional):</strong><br>
 Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazor, Syncfusion Blazor) following their own installation instructions.</p>
@@ -210,9 +203,9 @@ Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazo
 <h2 id="4-usage-examples">4. Usage Examples</h2>
 <p>Below are a few usage examples.</p>
 <h3 id="a-simple-embedded-razor-code-with-data-binding"><strong>A. Simple Embedded Razor Code with Data Binding</strong></h3>
-<h4 id="1-xaml-integration-message_demoxaml"><strong>1. XAML Integration (<code>Message_Demo.xaml</code>)</strong></h4>
+<h4 id="1-xaml-integration-mainpagexaml"><strong>1. XAML Integration (<code>MainPage.xaml</code>)</strong></h4>
 <pre><code class="lang-xml">&lt;UserControl
-    x:Class=&quot;MyApp.Message_Demo&quot;
+    x:Class=&quot;MyApp.MainPage&quot;
     xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
     xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
     xmlns:razor=&quot;clr-namespace:OpenSilver.Blazor;assembly=OpenSilver.Blazor&quot;
@@ -225,10 +218,10 @@ Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazo
     &lt;/razor:RazorComponent&gt;
 &lt;/UserControl&gt;
 </code></pre>
-<h4 id="2-code-behind-message_demoxamlcs"><strong>2. Code-behind (<code>Message_Demo.xaml.cs</code>)</strong></h4>
-<pre><code class="lang-csharp">public partial class Message_Demo : UserControl
+<h4 id="2-code-behind-mainpagexamlcs"><strong>2. Code-behind (<code>MainPage.xaml.cs</code>)</strong></h4>
+<pre><code class="lang-csharp">public partial class MainPage : UserControl
 {
-    public Message_Demo()
+    public MainPage()
     {
         this.InitializeComponent();
 
