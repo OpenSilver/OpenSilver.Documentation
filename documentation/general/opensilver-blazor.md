@@ -1,13 +1,20 @@
-# OpenSilver.Blazor (Preview)
+# OpenSilver.Blazor
 
+---
+
+### Table of Contents
+
+- [Introduction](#1-introduction)
+- [Key Features](#2-key-features)
+- [Getting Started & Project Configuration](#3-getting-started--project-configuration)
+- [Usage Examples](#4-usage-examples)
+- [Threading Considerations](#5-threading-considerations)
+- [Known Limitations & Release Notes](#6-known-limitations--release-notes)
 ---
 
 ## 1. Introduction
 
-**OpenSilver.Blazor** is a new library that enables you to seamlessly embed [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor) components within your OpenSilver applications. Blazor is a powerful framework with a vibrant community and a rich ecosystem of ready-made components. By integrating Blazor into OpenSilver, we unlock the ability to reuse existing Blazor assets while leveraging the shared .NET technology stack.
-
-> **Note:**
-> OpenSilver.Blazor is currently released as a **Preview**. Expect breaking changes, evolving APIs, and incomplete features as we work towards the first stable release. Feedback is welcome!
+**OpenSilver.Blazor** is a library that enables you to seamlessly embed [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor) components within your OpenSilver applications. Blazor is a powerful framework with a vibrant community and a rich ecosystem of ready-made components. By integrating Blazor into OpenSilver, we unlock the ability to reuse existing Blazor assets while leveraging the shared .NET technology stack.
 
 ---
 
@@ -16,6 +23,9 @@
 * **Embed Razor Code Directly in XAML**
 
   Place Razor code blocks directly within XAML using the `<RazorComponent>` tag.
+
+  **Note:**
+  Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. Read more in the [Known Limitations](#known-limitations-release-notes) section.
 
 * **Reference External Razor Components**
 
@@ -29,7 +39,7 @@
 
 * **Support for 3rd Party Blazor Libraries**
 
-  Integrate popular Blazor UI libraries (such as **Blazorise**, **MudBlazor**, and **Radzen**) seamlessly into your OpenSilver app.
+  Integrate popular Blazor UI libraries (such as **Blazorise**, **MudBlazor**, **Radzen**, **DevExpress Blazor UI**, and **Syncfusion Blazor Components**) seamlessly into your OpenSilver app.
 
 * **XAML Bindings in Razor Code**
 
@@ -47,8 +57,8 @@
 
 ### Prerequisites
 
-* Latest **Preview** versions of OpenSilver and OpenSilver.Blazor packages
-* .NET 8, .NET 9, or .NET 10
+* Version 3.3 or newer of the OpenSilver and OpenSilver.Blazor packages
+* .NET 8, .NET 9, .NET 10 or newer
 
 ### Installation Steps
 
@@ -85,7 +95,7 @@
      ```
 
 5. **Add 3rd Party Blazor Libraries (Optional):**  
-   Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen) following their own installation instructions.
+   Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazor, Syncfusion Blazor) following their own installation instructions.
 
 ---
 
@@ -338,7 +348,21 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 
 ---
 
-## 6. Known Limitations & Preview Notes
+## 6. Known Limitations & Release Notes
+
+* **Design-Time Errors:**
+  Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. You can work around this issue by:
+    * Putting your embedded razor code inside a [CDATA section](https://en.wikipedia.org/wiki/CDATA), such as:
+      ```xml
+      <razor:RazorComponent>
+        <![CDATA[
+          Put your razor code here
+        ]]>
+      </razor:RazorComponent>
+      ```
+    * Or placing Razor code in separate `.razor` files and referencing them via the `ComponentType` attribute (see [Key Features](#key-features))
+    * Or hiding design-time errors in Visual Studio by choosing "Build only" in the "Error List" window, as shown in this screenshot:
+![Select 'Build Only' to see only real errors](/images/view-only-build-errors-small.png "Select 'Build Only' to see only real errors")
 
 * **Launcher Support:**
   `.Photino` launcher is **not supported**. Behavior may differ across `.Browser`, `.MauiHybrid`, and `.Simulator`.
@@ -348,18 +372,10 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 
 * **Language Support:**
   Currently, **OpenSilver.Blazor works only for C# projects**.  
-  Support for other languages such as **VB.NET** and **F#** is planned for future releases.
-
-* **Stability:**
-  Breaking changes are expected in this Preview.
+  If you have a **VB.NET** or **F#** project, you can work around this limitation by creating and referencing a separate C#-based OpenSilver class library project, and placing your Razor files inside that class library.
 
 * **Troubleshooting:**
-  Please [report issues](https://github.com/OpenSilver/OpenSilver/issues) on GitHub.
+  Please [report issues](https://github.com/OpenSilver/OpenSilver/issues) on GitHub, or [contact us](https://opensilver.net/contact/).
 
 ---
 
-## 7. Roadmap
-
-The first version of OpenSilver.Blazor is released with OpenSilver 3.3.0. Expect further features and improved stability.
-
----

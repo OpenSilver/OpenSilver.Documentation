@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>OpenSilver.Blazor (Preview) </title>
+    <title>OpenSilver.Blazor </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="OpenSilver.Blazor (Preview) ">
+    <meta name="title" content="OpenSilver.Blazor ">
     <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
@@ -120,20 +120,28 @@
         <div class="article row grid-right">
           <div class="col-md-8">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="opensilverblazor-preview">OpenSilver.Blazor (Preview)</h1>
+<h1 id="opensilverblazor">OpenSilver.Blazor</h1>
 
 <hr>
+<h3 id="table-of-contents">Table of Contents</h3>
+<ul>
+<li><a href="#1-introduction">Introduction</a></li>
+<li><a href="#2-key-features">Key Features</a></li>
+<li><a href="#3-getting-started--project-configuration">Getting Started &amp; Project Configuration</a></li>
+<li><a href="#4-usage-examples">Usage Examples</a></li>
+<li><a href="#5-threading-considerations">Threading Considerations</a></li>
+<li><a href="#6-known-limitations--release-notes">Known Limitations &amp; Release Notes</a></li>
+</ul>
+<hr>
 <h2 id="1-introduction">1. Introduction</h2>
-<p><strong>OpenSilver.Blazor</strong> is a new library that enables you to seamlessly embed <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor">Blazor</a> components within your OpenSilver applications. Blazor is a powerful framework with a vibrant community and a rich ecosystem of ready-made components. By integrating Blazor into OpenSilver, we unlock the ability to reuse existing Blazor assets while leveraging the shared .NET technology stack.</p>
-<blockquote>
-<p><strong>Note:</strong>
-OpenSilver.Blazor is currently released as a <strong>Preview</strong>. Expect breaking changes, evolving APIs, and incomplete features as we work towards the first stable release. Feedback is welcome!</p>
-</blockquote>
+<p><strong>OpenSilver.Blazor</strong> is a library that enables you to seamlessly embed <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor">Blazor</a> components within your OpenSilver applications. Blazor is a powerful framework with a vibrant community and a rich ecosystem of ready-made components. By integrating Blazor into OpenSilver, we unlock the ability to reuse existing Blazor assets while leveraging the shared .NET technology stack.</p>
 <hr>
 <h2 id="2-key-features">2. Key Features</h2>
 <ul>
 <li><p><strong>Embed Razor Code Directly in XAML</strong></p>
 <p>Place Razor code blocks directly within XAML using the <code>&lt;RazorComponent&gt;</code> tag.</p>
+<p><strong>Note:</strong>
+Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. Read more in the <a href="#known-limitations-release-notes">Known Limitations</a> section.</p>
 </li>
 <li><p><strong>Reference External Razor Components</strong></p>
 <p>Use Razor components defined in separate <code>.razor</code> files via the <code>ComponentType</code> attribute:</p>
@@ -144,7 +152,7 @@ OpenSilver.Blazor is currently released as a <strong>Preview</strong>. Expect br
 </blockquote>
 </li>
 <li><p><strong>Support for 3rd Party Blazor Libraries</strong></p>
-<p>Integrate popular Blazor UI libraries (such as <strong>Blazorise</strong>, <strong>MudBlazor</strong>, and <strong>Radzen</strong>) seamlessly into your OpenSilver app.</p>
+<p>Integrate popular Blazor UI libraries (such as <strong>Blazorise</strong>, <strong>MudBlazor</strong>, <strong>Radzen</strong>, <strong>DevExpress Blazor UI</strong>, and <strong>Syncfusion Blazor Components</strong>) seamlessly into your OpenSilver app.</p>
 </li>
 <li><p><strong>XAML Bindings in Razor Code</strong></p>
 <p>Use XAML data bindings within Razor code.</p>
@@ -160,8 +168,8 @@ OpenSilver.Blazor is currently released as a <strong>Preview</strong>. Expect br
 <h2 id="3-getting-started--project-configuration">3. Getting Started &amp; Project Configuration</h2>
 <h3 id="prerequisites">Prerequisites</h3>
 <ul>
-<li>Latest <strong>Preview</strong> versions of OpenSilver and OpenSilver.Blazor packages</li>
-<li>.NET 8, .NET 9, or .NET 10</li>
+<li>Version 3.3 or newer of the OpenSilver and OpenSilver.Blazor packages</li>
+<li>.NET 8, .NET 9, .NET 10 or newer</li>
 </ul>
 <h3 id="installation-steps">Installation Steps</h3>
 <ol>
@@ -195,7 +203,7 @@ In your <code>.csproj</code>, change:</p>
 </ul>
 </li>
 <li><p><strong>Add 3rd Party Blazor Libraries (Optional):</strong><br>
-Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen) following their own installation instructions.</p>
+Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazor, Syncfusion Blazor) following their own installation instructions.</p>
 </li>
 </ol>
 <hr>
@@ -395,8 +403,24 @@ To safely call the Blazor <code>StateHasChanged</code> method, use:</p>
 For best results and future compatibility, always use <code>BlazorThread</code> for any code that updates or interacts with Blazor components from outside of their normal lifecycle methods.</p>
 </blockquote>
 <hr>
-<h2 id="6-known-limitations--preview-notes">6. Known Limitations &amp; Preview Notes</h2>
+<h2 id="6-known-limitations--release-notes">6. Known Limitations &amp; Release Notes</h2>
 <ul>
+<li><p><strong>Design-Time Errors:</strong>
+Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. You can work around this issue by:</p>
+<ul>
+<li>Putting your embedded razor code inside a <a href="https://en.wikipedia.org/wiki/CDATA">CDATA section</a>, such as:
+<pre><code class="lang-xml">&lt;razor:RazorComponent&gt;
+  &lt;![CDATA[
+    Put your razor code here
+  ]]&gt;
+&lt;/razor:RazorComponent&gt;
+</code></pre>
+</li>
+<li>Or placing Razor code in separate <code>.razor</code> files and referencing them via the <code>ComponentType</code> attribute (see <a href="#key-features">Key Features</a>)</li>
+<li>Or hiding design-time errors in Visual Studio by choosing &quot;Build only&quot; in the &quot;Error List&quot; window, as shown in this screenshot:
+<img src="/images/view-only-build-errors-small.png" alt="Select 'Build Only' to see only real errors" title="Select 'Build Only' to see only real errors"></li>
+</ul>
+</li>
 <li><p><strong>Launcher Support:</strong>
 <code>.Photino</code> launcher is <strong>not supported</strong>. Behavior may differ across <code>.Browser</code>, <code>.MauiHybrid</code>, and <code>.Simulator</code>.</p>
 </li>
@@ -405,18 +429,12 @@ The XAML Designer may not reliably preview Razor components.</p>
 </li>
 <li><p><strong>Language Support:</strong>
 Currently, <strong>OpenSilver.Blazor works only for C# projects</strong>.<br>
-Support for other languages such as <strong>VB.NET</strong> and <strong>F#</strong> is planned for future releases.</p>
-</li>
-<li><p><strong>Stability:</strong>
-Breaking changes are expected in this Preview.</p>
+If you have a <strong>VB.NET</strong> or <strong>F#</strong> project, you can work around this limitation by creating and referencing a separate C#-based OpenSilver class library project, and placing your Razor files inside that class library.</p>
 </li>
 <li><p><strong>Troubleshooting:</strong>
-Please <a href="https://github.com/OpenSilver/OpenSilver/issues">report issues</a> on GitHub.</p>
+Please <a href="https://github.com/OpenSilver/OpenSilver/issues">report issues</a> on GitHub, or <a href="https://opensilver.net/contact/">contact us</a>.</p>
 </li>
 </ul>
-<hr>
-<h2 id="7-roadmap">7. Roadmap</h2>
-<p>The first version of OpenSilver.Blazor is released with OpenSilver 3.3.0. Expect further features and improved stability.</p>
 <hr>
 </article>
           </div>
