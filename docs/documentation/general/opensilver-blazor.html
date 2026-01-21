@@ -129,19 +129,24 @@
 <li><a href="#2-key-features">Key Features</a></li>
 <li><a href="#3-getting-started--project-configuration">Getting Started &amp; Project Configuration</a></li>
 <li><a href="#4-usage-examples">Usage Examples</a></li>
-<li><a href="#5-threading-considerations">Threading Considerations</a></li>
-<li><a href="#6-known-limitations--release-notes">Known Limitations &amp; Release Notes</a></li>
+<li><a href="#5-tips--best-practices">Tips &amp; Best Practices</a></li>
+<li><a href="#6-threading-considerations">Threading Considerations</a></li>
+<li><a href="#7-known-limitations--release-notes">Known Limitations &amp; Release Notes</a></li>
 </ul>
 <hr>
 <h2 id="1-introduction">1. Introduction</h2>
 <p><strong>OpenSilver.Blazor</strong> is a library that enables you to seamlessly embed <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor">Blazor</a> components within your OpenSilver applications. Blazor is a powerful framework with a vibrant community and a rich ecosystem of ready-made components. By integrating Blazor into OpenSilver, we unlock the ability to reuse existing Blazor assets while leveraging the shared .NET technology stack.</p>
+<h3 id="sample-project">Sample Project</h3>
+<p>A complete sample project demonstrating all key concepts is available on GitHub:</p>
+<p><strong><a href="https://github.com/OpenSilver/OpenSilver_Blazor_QuickStart">OpenSilver_Blazor_QuickStart</a></strong></p>
+<p>This sample includes six progressive examples: inline Razor, data binding, external <code>.razor</code> files, editable data tables, Radzen DataGrid, and event handling.</p>
 <hr>
 <h2 id="2-key-features">2. Key Features</h2>
 <ul>
 <li><p><strong>Embed Razor Code Directly in XAML</strong></p>
 <p>Place Razor code blocks directly within XAML using the <code>&lt;RazorComponent&gt;</code> tag.</p>
 <p><strong>Note:</strong>
-Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. Read more in the <a href="#known-limitations-release-notes">Known Limitations</a> section.</p>
+Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. Read more in the <a href="#7-known-limitations--release-notes">Known Limitations</a> section.</p>
 </li>
 <li><p><strong>Reference External Razor Components</strong></p>
 <p>Use Razor components defined in separate <code>.razor</code> files via the <code>ComponentType</code> attribute:</p>
@@ -152,10 +157,10 @@ Razor code embedded inside XAML will show errors in Visual Studio at design-time
 </blockquote>
 </li>
 <li><p><strong>Support for 3rd Party Blazor Libraries</strong></p>
-<p>Integrate popular Blazor UI libraries (such as <strong>Blazorise</strong>, <strong>MudBlazor</strong>, <strong>Radzen</strong>, <strong>DevExpress Blazor UI</strong>, and <strong>Syncfusion Blazor Components</strong>) seamlessly into your OpenSilver app.</p>
+<p>Integrate popular Blazor UI libraries (such as <strong>Blazorise</strong>, <strong>MudBlazor</strong>, <strong>Radzen</strong>, <strong>DevExpress Blazor UI</strong>, <strong>Syncfusion Blazor Components</strong>, and <strong>Microsoft QuickGrid</strong>) seamlessly into your OpenSilver app.</p>
 </li>
 <li><p><strong>XAML Bindings in Razor Code</strong></p>
-<p>Use XAML data bindings within Razor code.</p>
+<p>Use XAML data bindings within Razor code. The <code>Type</code> attribute is required for bindings to work.</p>
 </li>
 <li><p><strong>Multi-Launcher Compatibility</strong></p>
 <p>Works with <code>.Browser</code>, <code>.MauiHybrid</code>, and <code>.Simulator</code> launchers.</p>
@@ -195,13 +200,17 @@ Add the following at the <strong>end of the <code>MainPage.xaml.cs</code> constr
 <pre><code class="lang-csharp">Initializer.UseBlazorForOpenSilver(blazorWebView.RootComponents);
 </code></pre>
 </li>
+<li><p><strong>Add the Razor namespace to your XAML:</strong></p>
+<pre><code class="lang-xml">xmlns:razor=&quot;clr-namespace:OpenSilver.Blazor;assembly=OpenSilver.Blazor&quot;
+</code></pre>
+</li>
 <li><p><strong>Add 3rd Party Blazor Libraries (Optional):</strong><br>
 Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazor, Syncfusion Blazor) following their own installation instructions.</p>
 </li>
 </ol>
 <hr>
 <h2 id="4-usage-examples">4. Usage Examples</h2>
-<p>Below are a few usage examples.</p>
+<p>Below are a few usage examples. For a complete working project with all examples, see the <a href="https://github.com/OpenSilver/OpenSilver_Blazor_QuickStart">OpenSilver_Blazor_QuickStart</a> repository on GitHub.</p>
 <h3 id="a-simple-embedded-razor-code-with-data-binding"><strong>A. Simple Embedded Razor Code with Data Binding</strong></h3>
 <h4 id="1-xaml-integration-mainpagexaml"><strong>1. XAML Integration (<code>MainPage.xaml</code>)</strong></h4>
 <pre><code class="lang-xml">&lt;UserControl
@@ -236,7 +245,7 @@ public class Context
 </code></pre>
 <h4 id="3-notes"><strong>3. Notes</strong></h4>
 <ul>
-<li>Please note that the <code>Type</code> is required to be set for the binding to work.</li>
+<li>The <code>Type</code> attribute is <strong>required</strong> for the binding to work.</li>
 </ul>
 <h3 id="b-using-a-3rd-party-blazor-button-radzen-example"><strong>B. Using a 3rd Party Blazor Button (Radzen Example)</strong></h3>
 <p>This example demonstrates how to use a Radzen Blazor button inside a XAML UI, including the required setup for 3rd-party Blazor libraries.</p>
@@ -304,11 +313,14 @@ public class TestButtonClickClass
   &lt;RadzenTheme Theme=&quot;material&quot; /&gt;
 &lt;/razor:RazorComponent&gt;
 </code></pre>
+<blockquote>
+<p><strong>Tip:</strong> Use <code>Theme=&quot;material-dark&quot;</code> for dark-themed applications.</p>
+</blockquote>
 </li>
 </ul>
 <h4 id="4-notes"><strong>4. Notes</strong></h4>
 <ul>
-<li>Ensure you’ve installed the <code>Radzen.Blazor</code> NuGet package in your project.</li>
+<li>Ensure you've installed the <code>Radzen.Blazor</code> NuGet package in your project.</li>
 <li>The example uses XAML data binding to connect the button click event to a C# handler via <code>ButtonClickDel</code>.</li>
 <li>If you use other 3rd-party Blazor libraries (e.g., MudBlazor, Blazorise), consult their documentation for similar setup requirements.</li>
 </ul>
@@ -343,6 +355,7 @@ public class TestButtonClickClass
 <h4 id="3-notes-1"><strong>3. Notes</strong></h4>
 <ul>
 <li>Make sure the Build Action of the <code>.razor</code> file is set to <code>Content</code>.</li>
+<li>Use <code>onclick=&quot;@MethodName&quot;</code> syntax (HTML attribute with Razor expression) for event handlers in <code>.razor</code> files.</li>
 </ul>
 <h3 id="d-accessing-blazor-component-via-code"><strong>D. Accessing Blazor Component via code</strong></h3>
 <h4 id="1-xaml-integration-mycontrolxaml-1"><strong>1. XAML Integration (<code>MyControl.xaml</code>)</strong></h4>
@@ -380,7 +393,58 @@ datePicker.DateFormat = &quot;MM/dd/yyyy&quot;;
 <li>Having <code>@ref=&quot;myDatePicker&quot;</code> on the RadzenDatePicker then lets us access it from the Razor Component through the myDatePicker property defined in the @code section.</li>
 </ul>
 <hr>
-<h2 id="5-threading-considerations">5. Threading Considerations</h2>
+<h2 id="5-tips--best-practices">5. Tips &amp; Best Practices</h2>
+<h3 id="call-statehaschanged-after-modifying-data">Call StateHasChanged() After Modifying Data</h3>
+<p>When you modify data in your <code>@code</code> block that should trigger a UI update, call <code>StateHasChanged()</code>:</p>
+<pre><code class="lang-razor">@code {
+    private List&lt;Item&gt; _items = new();
+
+    private void AddItem()
+    {
+        _items.Add(new Item { Name = &quot;New item&quot; });
+        StateHasChanged();  // Required to refresh the UI
+    }
+
+    private void DeleteItem(Item item)
+    {
+        _items.Remove(item);
+        StateHasChanged();  // Required to refresh the UI
+    }
+}
+</code></pre>
+<h3 id="use-inline-styles-instead-of-scoped-style-tags">Use Inline Styles Instead of Scoped <code>&lt;style&gt;</code> Tags</h3>
+<p>For more predictable styling in OpenSilver.Blazor, prefer inline styles on elements rather than scoped <code>&lt;style&gt;</code> tags within <code>.razor</code> files:</p>
+<pre><code class="lang-razor">&lt;!-- Recommended: inline styles --&gt;
+&lt;button style=&quot;background: #0E639C; color: white; padding: 8px 16px;&quot;&gt;
+    Click me
+&lt;/button&gt;
+
+&lt;!-- May have inconsistent behavior --&gt;
+&lt;style&gt;
+    .my-button { background: #0E639C; }
+&lt;/style&gt;
+&lt;button class=&quot;my-button&quot;&gt;Click me&lt;/button&gt;
+</code></pre>
+<h3 id="event-handler-syntax">Event Handler Syntax</h3>
+<p>For event handlers in <code>.razor</code> files, use the HTML attribute syntax with a Razor expression:</p>
+<pre><code class="lang-razor">&lt;!-- Recommended syntax --&gt;
+&lt;button onclick=&quot;@HandleClick&quot;&gt;Click me&lt;/button&gt;
+
+@code {
+    void HandleClick()
+    {
+        // Handle the click
+    }
+}
+</code></pre>
+<h3 id="binding-events-to-viewmodel-methods">Binding Events to ViewModel Methods</h3>
+<p>When binding Blazor events to ViewModel methods from inline XAML, use the <code>Type</code> attribute:</p>
+<pre><code class="lang-xml">&lt;razor:RazorComponent&gt;
+    &lt;button onclick=&quot;{Binding OnClick, Type=Action}&quot;&gt;Click me&lt;/button&gt;
+&lt;/razor:RazorComponent&gt;
+</code></pre>
+<hr>
+<h2 id="6-threading-considerations">6. Threading Considerations</h2>
 <h3 id="running-blazor-code-on-the-correct-thread">Running Blazor Code on the Correct Thread</h3>
 <p>When running OpenSilver.Blazor in certain environments, specifically <strong>MAUI Hybrid</strong>, the <strong>Simulator</strong>, and the <strong>XAML Designer</strong>, Blazor components and logic must be executed on a dedicated Blazor thread. This is required due to differences in the threading models of these platforms.</p>
 <p>To ensure <strong>maximum compatibility and a consistent experience</strong> across all launchers, we highly recommend that any code interacting with Blazor components is always executed on the Blazor thread. This approach avoids threading issues and ensures your UI updates work reliably everywhere.</p>
@@ -396,7 +460,7 @@ To safely call the Blazor <code>StateHasChanged</code> method, use:</p>
 For best results and future compatibility, always use <code>BlazorThread</code> for any code that updates or interacts with Blazor components from outside of their normal lifecycle methods.</p>
 </blockquote>
 <hr>
-<h2 id="6-known-limitations--release-notes">6. Known Limitations &amp; Release Notes</h2>
+<h2 id="7-known-limitations--release-notes">7. Known Limitations &amp; Release Notes</h2>
 <ul>
 <li><p><strong>Design-Time Errors:</strong>
 Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. You can work around this issue by:</p>
@@ -409,7 +473,7 @@ Razor code embedded inside XAML will show errors in Visual Studio at design-time
 &lt;/razor:RazorComponent&gt;
 </code></pre>
 </li>
-<li>Or placing Razor code in separate <code>.razor</code> files and referencing them via the <code>ComponentType</code> attribute (see <a href="#key-features">Key Features</a>)</li>
+<li>Or placing Razor code in separate <code>.razor</code> files and referencing them via the <code>ComponentType</code> attribute (see <a href="#2-key-features">Key Features</a>)</li>
 <li>Or hiding design-time errors in Visual Studio by choosing &quot;Build only&quot; in the &quot;Error List&quot; window, as shown in this screenshot:
 <img src="/images/view-only-build-errors-small.png" alt="Select 'Build Only' to see only real errors" title="Select 'Build Only' to see only real errors"></li>
 </ul>
@@ -429,6 +493,12 @@ Please <a href="https://github.com/OpenSilver/OpenSilver/issues">report issues</
 </li>
 </ul>
 <hr>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><strong>Sample Project:</strong> <a href="https://github.com/OpenSilver/OpenSilver_Blazor_QuickStart">OpenSilver_Blazor_QuickStart on GitHub</a></li>
+<li><strong>Live Examples:</strong> <a href="https://opensilvershowcase.com">OpenSilverShowcase.com</a> (includes MudBlazor, Radzen, Blazorise, DevExpress, and Syncfusion demos)</li>
+<li><strong>Showcase Source Code:</strong> <a href="https://github.com/OpenSilver/OpenSilver.Samples.Showcase">github.com/OpenSilver/OpenSilver.Samples.Showcase</a></li>
+</ul>
 </article>
           </div>
           

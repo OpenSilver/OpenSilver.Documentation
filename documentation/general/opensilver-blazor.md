@@ -8,13 +8,23 @@
 - [Key Features](#2-key-features)
 - [Getting Started & Project Configuration](#3-getting-started--project-configuration)
 - [Usage Examples](#4-usage-examples)
-- [Threading Considerations](#5-threading-considerations)
-- [Known Limitations & Release Notes](#6-known-limitations--release-notes)
+- [Tips & Best Practices](#5-tips--best-practices)
+- [Threading Considerations](#6-threading-considerations)
+- [Known Limitations & Release Notes](#7-known-limitations--release-notes)
+
 ---
 
 ## 1. Introduction
 
 **OpenSilver.Blazor** is a library that enables you to seamlessly embed [Blazor](https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor) components within your OpenSilver applications. Blazor is a powerful framework with a vibrant community and a rich ecosystem of ready-made components. By integrating Blazor into OpenSilver, we unlock the ability to reuse existing Blazor assets while leveraging the shared .NET technology stack.
+
+### Sample Project
+
+A complete sample project demonstrating all key concepts is available on GitHub:
+
+**[OpenSilver_Blazor_QuickStart](https://github.com/OpenSilver/OpenSilver_Blazor_QuickStart)**
+
+This sample includes six progressive examples: inline Razor, data binding, external `.razor` files, editable data tables, Radzen DataGrid, and event handling.
 
 ---
 
@@ -25,7 +35,7 @@
   Place Razor code blocks directly within XAML using the `<RazorComponent>` tag.
 
   **Note:**
-  Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. Read more in the [Known Limitations](#known-limitations-release-notes) section.
+  Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. Read more in the [Known Limitations](#7-known-limitations--release-notes) section.
 
 * **Reference External Razor Components**
 
@@ -39,11 +49,11 @@
 
 * **Support for 3rd Party Blazor Libraries**
 
-  Integrate popular Blazor UI libraries (such as **Blazorise**, **MudBlazor**, **Radzen**, **DevExpress Blazor UI**, and **Syncfusion Blazor Components**) seamlessly into your OpenSilver app.
+  Integrate popular Blazor UI libraries (such as **Blazorise**, **MudBlazor**, **Radzen**, **DevExpress Blazor UI**, **Syncfusion Blazor Components**, and **Microsoft QuickGrid**) seamlessly into your OpenSilver app.
 
 * **XAML Bindings in Razor Code**
 
-  Use XAML data bindings within Razor code.
+  Use XAML data bindings within Razor code. The `Type` attribute is required for bindings to work.
 
 * **Multi-Launcher Compatibility**
 
@@ -91,14 +101,19 @@
    Initializer.UseBlazorForOpenSilver(blazorWebView.RootComponents);
    ```
 
-5. **Add 3rd Party Blazor Libraries (Optional):**  
+5. **Add the Razor namespace to your XAML:**
+   ```xml
+   xmlns:razor="clr-namespace:OpenSilver.Blazor;assembly=OpenSilver.Blazor"
+   ```
+
+6. **Add 3rd Party Blazor Libraries (Optional):**  
    Install any Blazor library (e.g., Blazorise, MudBlazor, Radzen, DevExpress Blazor, Syncfusion Blazor) following their own installation instructions.
 
 ---
 
 ## 4. Usage Examples
 
-Below are a few usage examples.
+Below are a few usage examples. For a complete working project with all examples, see the [OpenSilver_Blazor_QuickStart](https://github.com/OpenSilver/OpenSilver_Blazor_QuickStart) repository on GitHub.
 
 ### **A. Simple Embedded Razor Code with Data Binding**
 
@@ -141,7 +156,7 @@ public class Context
 
 #### **3. Notes**
 
-* Please note that the `Type` is required to be set for the binding to work.
+* The `Type` attribute is **required** for the binding to work.
   
 ### **B. Using a 3rd Party Blazor Button (Radzen Example)**
 
@@ -228,9 +243,11 @@ To use Radzen components, some additional setup is required in your `.Browser` p
   </razor:RazorComponent>
   ```
 
+  > **Tip:** Use `Theme="material-dark"` for dark-themed applications.
+
 #### **4. Notes**
 
-* Ensure you’ve installed the `Radzen.Blazor` NuGet package in your project.
+* Ensure you've installed the `Radzen.Blazor` NuGet package in your project.
 * The example uses XAML data binding to connect the button click event to a C# handler via `ButtonClickDel`.
 * If you use other 3rd-party Blazor libraries (e.g., MudBlazor, Blazorise), consult their documentation for similar setup requirements.
 
@@ -273,6 +290,7 @@ To use Radzen components, some additional setup is required in your `.Browser` p
 #### **3. Notes**
 
 * Make sure the Build Action of the `.razor` file is set to `Content`.
+* Use `onclick="@MethodName"` syntax (HTML attribute with Razor expression) for event handlers in `.razor` files.
 
 ### **D. Accessing Blazor Component via code**
 
@@ -319,7 +337,76 @@ datePicker.DateFormat = "MM/dd/yyyy";
 
 ---
 
-## 5. Threading Considerations
+## 5. Tips & Best Practices
+
+### Call StateHasChanged() After Modifying Data
+
+When you modify data in your `@code` block that should trigger a UI update, call `StateHasChanged()`:
+
+```razor
+@code {
+    private List<Item> _items = new();
+
+    private void AddItem()
+    {
+        _items.Add(new Item { Name = "New item" });
+        StateHasChanged();  // Required to refresh the UI
+    }
+
+    private void DeleteItem(Item item)
+    {
+        _items.Remove(item);
+        StateHasChanged();  // Required to refresh the UI
+    }
+}
+```
+
+### Use Inline Styles Instead of Scoped `<style>` Tags
+
+For more predictable styling in OpenSilver.Blazor, prefer inline styles on elements rather than scoped `<style>` tags within `.razor` files:
+
+```razor
+<!-- Recommended: inline styles -->
+<button style="background: #0E639C; color: white; padding: 8px 16px;">
+    Click me
+</button>
+
+<!-- May have inconsistent behavior -->
+<style>
+    .my-button { background: #0E639C; }
+</style>
+<button class="my-button">Click me</button>
+```
+
+### Event Handler Syntax
+
+For event handlers in `.razor` files, use the HTML attribute syntax with a Razor expression:
+
+```razor
+<!-- Recommended syntax -->
+<button onclick="@HandleClick">Click me</button>
+
+@code {
+    void HandleClick()
+    {
+        // Handle the click
+    }
+}
+```
+
+### Binding Events to ViewModel Methods
+
+When binding Blazor events to ViewModel methods from inline XAML, use the `Type` attribute:
+
+```xml
+<razor:RazorComponent>
+    <button onclick="{Binding OnClick, Type=Action}">Click me</button>
+</razor:RazorComponent>
+```
+
+---
+
+## 6. Threading Considerations
 
 ### Running Blazor Code on the Correct Thread
 
@@ -345,7 +432,7 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 
 ---
 
-## 6. Known Limitations & Release Notes
+## 7. Known Limitations & Release Notes
 
 * **Design-Time Errors:**
   Razor code embedded inside XAML will show errors in Visual Studio at design-time, but will compile and run correctly. You can work around this issue by:
@@ -357,7 +444,7 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
         ]]>
       </razor:RazorComponent>
       ```
-    * Or placing Razor code in separate `.razor` files and referencing them via the `ComponentType` attribute (see [Key Features](#key-features))
+    * Or placing Razor code in separate `.razor` files and referencing them via the `ComponentType` attribute (see [Key Features](#2-key-features))
     * Or hiding design-time errors in Visual Studio by choosing "Build only" in the "Error List" window, as shown in this screenshot:
 ![Select 'Build Only' to see only real errors](/images/view-only-build-errors-small.png "Select 'Build Only' to see only real errors")
 
@@ -376,3 +463,8 @@ This guarantees that `StateHasChanged` runs on the Blazor thread, preventing cro
 
 ---
 
+## See Also
+
+* **Sample Project:** [OpenSilver_Blazor_QuickStart on GitHub](https://github.com/OpenSilver/OpenSilver_Blazor_QuickStart)
+* **Live Examples:** [OpenSilverShowcase.com](https://opensilvershowcase.com) (includes MudBlazor, Radzen, Blazorise, DevExpress, and Syncfusion demos)
+* **Showcase Source Code:** [github.com/OpenSilver/OpenSilver.Samples.Showcase](https://github.com/OpenSilver/OpenSilver.Samples.Showcase)
