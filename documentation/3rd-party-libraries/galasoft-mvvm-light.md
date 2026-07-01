@@ -6,7 +6,7 @@ Excellent support in OpenSilver
 
 ## NuGet Packages
 
-https://www.nuget.org/packages/OpenSilver.MvvmLightLibs/
+https://www.nuget.org/packages/OpenSilver.MvvmLight/
 
 ## Source code
 
