@@ -37,7 +37,17 @@ Finally, select the newly-added feed and install the package:
 ![Manage NuGet Packages](https://github.com/OpenSilver/OpenSilver.Documentation/assets/13891601/7cd2e903-cf92-4534-8c0e-380d0f4248bf)
 
 
-4. Add the license file to your project. The license file is the file named "OpenSilver.Compatibility.TelerikUI.license.json" which had been sent to you by Userware when you obtained the Trial or Perpetual license. This file should be added as an "Embedded Resource" into the OpenSilver project, as show in the screenshot below.
+3. Add the license file to your project.
+
+The license file is named `OpenSilver.Compatibility.TelerikUI.license.json` and was sent to you by Userware when you obtained the Trial or Perpetual license.
+This file must be added as an `EmbeddedResource` to the root of the OpenSilver project, as shown in the screenshot below.
+
+Note that the file must not be renamed and that the compatibility pack assumes that the project's `RootNamespace` uses its default value, i.e., the assembly name. If that is not the case, the compatibility pack will not be able to locate the license file. To fix this, you need to explicitly define the logical name of the embedded resource in your `.csproj` file, like this:
+```
+<EmbeddedResource Include="OpenSilver.Compatibility.TelerikUI.license.json">
+  <LogicalName>$(AssemblyName).OpenSilver.Compatibility.TelerikUI.license.json</LogicalName>
+</EmbeddedResource>
+```
 
 Follow the red borders on the picture to check that everything is done correctly:
 
